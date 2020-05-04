@@ -1,0 +1,7 @@
+{
+  "name": "digitact",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
