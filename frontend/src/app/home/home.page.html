@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Digitact
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,20 +9,40 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large" style="color: grey;">Digitact</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>
-      Start with Ionic
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://ionicframework.com/docs/components"
-        >UI Components</a
-      >
+    <span style="color: red;">
+      Hello World!
+    </span>
+    <p style="color: black;">
+      Welcome to our new app
     </p>
+    <hr />
+    <form [formGroup]="checkOutForm">
+      <ion-item>
+        <ion-label>Name</ion-label>
+        <ion-input
+          required
+          type="text"
+          formControlName="firstName"
+          style="color: gray;"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Last Name</ion-label>
+        <ion-input
+          style="color: gray;"
+          type="text"
+          formControlName="lastName"
+        ></ion-input>
+      </ion-item>
+      <hr />
+      <ion-button (click)="myS()">
+        Send
+      </ion-button>
+    </form>
   </div>
 </ion-content>
