@@ -8,6 +8,8 @@ When developing code for the frontend, the following tools are recommended:
 
 # VSCode 
 
+> Important: You should always directly open the "frontend" directory with VSCode, not the root. Only in this way the frontend VSCode configuration is applied.
+
 For VSCode, please install at least the following extensions:
 - Angular Language Service (https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)
 - Prettier (https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
