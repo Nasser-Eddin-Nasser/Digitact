@@ -10,6 +10,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
+    "prettier-check": "prettier --check src/**/*.{html,scss,ts}",
+    "all-checks": "npm run lint && npm run prettier-check",
     "e2e": "ng e2e"
   },
   "private": true,
@@ -49,9 +51,10 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
+    "prettier": "^2.0.5",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
-    "tslint": "~5.15.0",
+    "tslint": "~6.1.2",
     "typescript": "~3.8.3"
   }
 }
