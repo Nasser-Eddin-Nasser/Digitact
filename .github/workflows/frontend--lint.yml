@@ -1,0 +1,23 @@
+name: Lint the frontend
+
+on:
+  push:
+    paths:
+      - frontend/**
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: npm -v
+      - run: node -v
+      - run: npm install
+      - run: npm run all-checks
