@@ -17,6 +17,7 @@ This project also includes some VSCode settings. To test if they work properly: 
 
 
 # NPM
+
 It is recommended to install the global Angular and Ionic packages:
 
 ```
@@ -38,3 +39,13 @@ Before pushing a commit, make sure all of your files pass all linter and Prettie
 ```
 npm run all-checks
 ```
+
+> Important: When using the CLI to generate Ionic pages, components or similar, always remember to lint + Prettierify these files as well!
+
+**We currently don't perform any testing. So make sure you don't (accidentally) create and commit a `*.spec.ts` file!**
+
+# Tips
+
+You don't want to create pages (or similar) manually? The Ionic CLI can generate them for you! See https://ionicframework.com/docs/cli/commands/generate
+
+Angular is also able to generate some files, but since we are using Ionic, you should first check whether the Ionic CLI provides an equivalent command for that.
