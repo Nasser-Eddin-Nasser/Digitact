@@ -25,9 +25,7 @@ jobs:
         java-version: 1.8
     - name: Grant execute permission for gradlew
       run: chmod +x  Backend/gradle/
-	  
     - name: clean
       run: ./Backend/gradlew clean
-	  
     - name: Build with Gradle
       run: ./Backend/gradlew build
