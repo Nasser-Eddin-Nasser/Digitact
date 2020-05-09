@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This class is used (at the moment) as dummy DB
@@ -21,15 +22,32 @@ public class Storage {
 
     /**
      * Add new User to the DB
-     * @param element
+     *
+     * @param user
      */
-    public static void addUserToDB(User element) {
-        if(!isUserExist(element))
-        DB.add(element);
+    public static void addUserToDB(User user) {
+        if (!isUserExist(user))
+            DB.add(user);
     }
 
-    private static boolean isUserExist(User element) {
-        return DB.contains(element);
+    /**
+     * Remove User to the DB
+     *
+     * @param user
+     */
+    public static void removeUserFromDB(User user) {
+        //     if (isUserExist(user))
+        DB = DB.stream().filter(x -> (!x.getLastName().equals(user.getLastName()) && !x.getFirstName().equals(user.getFirstName()))).collect(Collectors.toList());
+    }
+
+
+    public static List<User> getAllUsersByLastName(String lastName) {
+        return DB.stream().filter(x -> x.getLastName().equals(lastName)).collect(Collectors.toList());
+    }
+
+
+    private static boolean isUserExist(User user) {
+        return DB.stream().filter(x -> (x.getLastName().equals(user.getLastName()) && x.getFirstName().equals(user.getFirstName()))).collect(Collectors.toList()).size() > 0;
     }
 
     public static List<User> getDB() {
