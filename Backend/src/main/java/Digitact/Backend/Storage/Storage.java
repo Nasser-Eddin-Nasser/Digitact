@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * This class is used (at the moment) as dummy DB
  */
-@Repository
+
 public class Storage {
     private static List<User> DB;
 
