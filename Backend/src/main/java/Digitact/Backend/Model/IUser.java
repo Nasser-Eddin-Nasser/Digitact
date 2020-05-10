@@ -5,6 +5,6 @@ public interface IUser {
 
     String getLastName();
 
-    UserRight getRight();
+    //UserRight getRight();
 //
 }

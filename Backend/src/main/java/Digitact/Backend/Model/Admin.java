@@ -2,33 +2,29 @@ package Digitact.Backend.Model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Column;
+
 public class Admin extends User {
 
-    private final String FirstName;
-    private final String LastName;
 
-    /**
-     * @param firstName
-     * @param lastName
-     */
-    public Admin(@JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName) {
+   // @Column(name = "firstname")
+    private String firstName;
+
+   // @Column(name = "lastname")
+    private String lastName;
+    public Admin(String firstName, String lastName) {
         super(firstName, lastName);
-        this.FirstName = firstName;
-        this.LastName = lastName;
     }
 
     @Override
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
     @Override
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
-    @Override
-    public UserRight getRight() {
-        return UserRight.Admin;
-    }
+
 }
