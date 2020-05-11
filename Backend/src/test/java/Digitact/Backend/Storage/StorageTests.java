@@ -25,7 +25,7 @@ public class StorageTests {
     // test method to add user to DB
     @Test
     public void testAddUserToDB() {
-        /*
+
         setUp();
         Storage.addUserToDB(u1);
         assertThat(1).isEqualTo(Storage.getDB().size());
@@ -39,6 +39,6 @@ public class StorageTests {
             assertThat(2).isEqualTo(Storage.getDB().size());
         }
 
-         */
+       
     }
 }
