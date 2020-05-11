@@ -1,7 +1,6 @@
 # Development
 
 The following tools were used for development.
-
 - Java Development kit(software development environment used for developing Java applications and applets): Recommended to use JDK 11+ 
 - IDE: Eclipse or IntelliJ 
 - Java Framework: Springboot
@@ -34,26 +33,27 @@ Download the project framework from [Spring Initializer](https://start.spring.io
 # How to use
 
 - Install the below in-order
-  - Install JDK 
-  - Install IDE
+  - JDK and set envioronment varriables
+  - Install IDE and [set the JDK path](https://www.jetbrains.com/help/idea/sdk.html) if need. 
   - Install Gradle
-  - Install PostgreSQL
-  - Install Postman
+  - Install PostgreSQL and [set up a simple database](https://www.postgresqltutorial.com/)
+  - Install Postman 
 - Clone and pull the code
-- Apply neccesary settings
-  - Open the file in Backend/src/main/resources/application.properties 
+- Apply neccesary settingscin the application.properties file
+  - Open the file in Digitact\Backend/src/main/resources/application.properties 
 ```
-server.port=XXXX
-spring.jpa.database=POSTGRESQL
-spring.datasource.platform=postgres
-spring.datasource.url=jdbc:postgresql://localhost:5432/<Database Name>
-spring.datasource.username=<Username of the database>
-spring.datasource.password=<Password of the database>
-spring.jpa.show-sql=true
-spring.jpa.generate-ddl=true
-spring.jpa.hibernate.ddl-auto=<Options: create, create-drop, validate, and update>
-spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+    server.port=<Specify a port>
+    spring.jpa.database=POSTGRESQL
+    spring.datasource.platform=postgres
+    spring.datasource.url=jdbc:postgresql://localhost:5432/<Database Name>
+    spring.datasource.username=<Username of the database>
+    spring.datasource.password=<Password of the database>
+    spring.jpa.show-sql=true
+    spring.jpa.generate-ddl=true
+    spring.jpa.hibernate.ddl-auto=<Options: create, create-drop, validate, and update>
+    spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
 ```
-  
+- Run the Digitact\Backend\Application.java file
+
 
 
