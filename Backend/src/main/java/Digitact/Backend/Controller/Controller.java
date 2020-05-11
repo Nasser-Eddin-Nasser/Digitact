@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is the controller class of the entire app
+ */
 @RequestMapping("api/controller")
 @RestController
 public class Controller {
@@ -17,6 +20,9 @@ public class Controller {
     @Autowired
     DataRepository repository;
 
+    /**
+     * @return JSON object of the user
+     */
     @GetMapping("/getusers")
     public List<UserUI> getAll(){
 
@@ -28,29 +34,18 @@ public class Controller {
         return usersUI;
     }
 
+    /**
+     * @param userUI - JSON request's user object
+     *
+     * save the user in the DB using repository
+     *
+     * @return "Applicant is created in the database"
+     */
     @PostMapping("/createapplicant")
     public String create(@RequestBody UserUI userUI){
         Applicant appli = new Applicant(userUI.getFirstName(), userUI.getLastName());
         repository.save(appli);
         return "Applicant is created in the database";
     }
-/*
-    @PostMapping("/createadmin")
-    public String create(@RequestBody UserUI userUI){
-        Applicant appli = new Applicant(userUI.getFirstName(), userUI.getLastName());
-        repository.save(appli);
-        return "Applicant is created in the database";
-    }
 
-    @PostMapping
-    public void createAdmin(@RequestBody @Valid Admin admin) {
-        Storage.addUserToDB(admin);
-    }
-
-    @DeleteMapping
-    public void deleteAdmin(@RequestBody @Valid Admin admin) {
-        Storage.removeUserFromDB(admin);
-    }
-
- */
 }

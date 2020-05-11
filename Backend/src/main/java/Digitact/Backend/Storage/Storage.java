@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * This class is used (at the moment) as dummy DB
+ * This class is used (at the moment) as Storage cache
  */
 
 public class Storage {
@@ -31,7 +31,7 @@ public class Storage {
     }
 
     /**
-     * Remove User to the DB
+     * Remove User fro the DB
      *
      * @param user
      */
@@ -41,6 +41,11 @@ public class Storage {
     }
 
 
+    /**
+     * Get user by last name
+     *
+     * @param lastName
+     */
     public static List<User> getAllUsersByLastName(String lastName) {
         return DB.stream().filter(x -> x.getLastName().equals(lastName)).collect(Collectors.toList());
     }
