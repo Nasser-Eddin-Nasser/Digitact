@@ -21,3 +21,11 @@ Download and install JDK (https://www.oracle.com/java/technologies/javase-downlo
 Install either one listed below
 - Eclipse: Eclipse IDE for Java Developers (https://www.eclipse.org/downloads/packages/release/luna/sr2/eclipse-ide-java-developers)
 - IntelliJ: Community, Education or ultimate editions (https://www.jetbrains.com/idea/download/#section=windows)
+
+# Java Framework: Spring boot
+
+Download the project framework from Spring Initializer(https://start.spring.io/) : Initializr offers a fast way to pull in all the dependencies you need for an application and does a lot of the setup.
+
+# Gradle
+
+https://gradle.org/install/
