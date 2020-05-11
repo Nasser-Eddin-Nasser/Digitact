@@ -14,7 +14,7 @@ The following tools were used for development.
 
 It is recommended to use JDK 11+ version.
 
-Download and install JDK (https://www.oracle.com/java/technologies/javase-downloads.html)
+Download and [install JDK](https://www.oracle.com/java/technologies/javase-downloads.html)
 > Important: Make sure to set up the environmental variables (https://www.java.com/en/download/help/path.xml)
 
 # IDE: Eclipse or IntelliJ
