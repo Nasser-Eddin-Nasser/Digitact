@@ -40,20 +40,43 @@ Download the project framework from [Spring Initializer](https://start.spring.io
   - Install Postman 
 - Clone and pull the code
 - Apply neccesary settingscin the application.properties file
-  - Open the file in Digitact\Backend/src/main/resources/application.properties 
-```
-    server.port=<Specify a port>
-    spring.jpa.database=POSTGRESQL
-    spring.datasource.platform=postgres
-    spring.datasource.url=jdbc:postgresql://localhost:5432/<Database Name>
-    spring.datasource.username=<Username of the database>
-    spring.datasource.password=<Password of the database>
-    spring.jpa.show-sql=true
-    spring.jpa.generate-ddl=true
-    spring.jpa.hibernate.ddl-auto=<Options: create, create-drop, validate, and update>
-    spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
-```
-- Run the Digitact\Backend\Application.java file
-
+  - Open the file in Digitact/Backend/src/main/resources/application.properties 
+      ```
+      server.port=<Specify a port>
+      spring.jpa.database=POSTGRESQL
+      spring.datasource.platform=postgres
+      spring.datasource.url=jdbc:postgresql://localhost:5432/<Database Name>
+      spring.datasource.username=<Username of the database>
+      spring.datasource.password=<Password of the database>
+      spring.jpa.show-sql=true
+      spring.jpa.generate-ddl=true
+      spring.jpa.hibernate.ddl-auto=<Options: create, create-drop, validate, and update>
+      spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+     ```
+- Run the Digitact/Backend/Application.java file
+- Execute the below commands in the postman
+  - Post request
+    ```
+    http://localhost:<port specified>/api/controller/createapplicant
+    ```
+    In the body:
+    ```
+    {
+    "firstName":"Lionel",
+    "lastName":"Messi"
+    }
+    ```
+  - Get request
+    ```
+    http://localhost:9090/api/controller/getusers
+    ```
+    ```
+    [
+      {
+        "firstName": "Lionel",
+        "lastName": "Messi"
+      }
+    ]
+    ```
 
 
