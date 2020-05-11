@@ -33,7 +33,7 @@ Download the project framework from [Spring Initializer](https://start.spring.io
 
 # How to use
 
--
+-Install the below in-order
 -- Install JDK 
 - Install IDE
 - Install Gradle
