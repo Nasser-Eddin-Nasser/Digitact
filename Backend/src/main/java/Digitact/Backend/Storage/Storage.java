@@ -19,14 +19,13 @@ public class Storage {
             DB = new LinkedList<User>();
     }
 
-
     /**
      * Add new User to the DB
      *
      * @param user
      */
     public static void addUserToDB(User user) {
-        if (!isUserExist(user))
+       // if (!isUserExist(user))
             DB.add(user);
     }
 
@@ -50,11 +49,11 @@ public class Storage {
         return DB.stream().filter(x -> x.getLastName().equals(lastName)).collect(Collectors.toList());
     }
 
-
+/*
     private static boolean isUserExist(User user) {
         return DB.stream().filter(x -> (x.getLastName().equals(user.getLastName()) && x.getFirstName().equals(user.getFirstName()))).collect(Collectors.toList()).size() > 0;
     }
-
+*/
     public static List<User> getDB() {
         return DB;
     }
