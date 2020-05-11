@@ -70,6 +70,7 @@ Download the project framework from [Spring Initializer](https://start.spring.io
     ```
     http://localhost:9090/api/controller/getusers
     ```
+    The receiving message:
     ```
     [
       {
