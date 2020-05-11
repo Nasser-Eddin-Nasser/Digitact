@@ -12,18 +12,18 @@ The following tools were used for development.
 # Java Development Kit(JDK)
 It is recommended to use JDK 11+ version.
 Download and [install JDK](https://www.oracle.com/java/technologies/javase-downloads.html)
-> Important: Make sure to [set up the environmental variables] (https://www.java.com/en/download/help/path.xml)
+> Important: Make sure to [set up the environmental variables](https://www.java.com/en/download/help/path.xml)
 
 # IDE: Eclipse or IntelliJ
 Install either one listed below
-- [Eclipse]: Eclipse IDE for Java Developers (https://www.eclipse.org/downloads/packages/release/luna/sr2/eclipse-ide-java-developers)
-- [IntelliJ]: Community, Education or ultimate editions (https://www.jetbrains.com/idea/download/#section=windows)
+- [Eclipse](https://www.eclipse.org/downloads/packages/release/luna/sr2/eclipse-ide-java-developers): Eclipse IDE for Java Developers 
+- [IntelliJ](https://www.jetbrains.com/idea/download/#section=windows): Community, Education or ultimate editions 
 
 # Java Framework: Spring boot
 Download the project framework from [Spring Initializer](https://start.spring.io/) : Initializr offers a fast way to pull in all the dependencies you need for an application and does a lot of the setup.
 
 # Gradle
-[Install gradle]:(https://gradle.org/install/) Gradle is a build automation tool
+[Install gradle](https://gradle.org/install/): Gradle is a build automation tool
 
 # Postman
 [Install Postman](https://www.postman.com/downloads/): Postman is a popular API client that makes it easy for developers to create, share, test and document APIs
@@ -32,5 +32,10 @@ Download the project framework from [Spring Initializer](https://start.spring.io
 [Download](https://www.postgresql.org/download/) and install postgre.
 
 # How to use
-- Install all the software mentioned
-- 
+
+-
+-- Install JDK 
+- Install IDE
+- Install Gradle
+- Install PostgreSQL
+- Install Postman
