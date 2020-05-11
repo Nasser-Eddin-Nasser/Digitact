@@ -33,7 +33,7 @@ Download the project framework from [Spring Initializer](https://start.spring.io
 # How to use
 
 - Install the below in-order
-  - JDK and set envioronment varriables
+  - JDK and set environment variables
   - Install IDE and [set the JDK path](https://www.jetbrains.com/help/idea/sdk.html) if need. 
   - Install Gradle
   - Install PostgreSQL and [set up a simple database](https://www.postgresqltutorial.com/)
