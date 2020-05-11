@@ -1,17 +1,17 @@
 package Digitact.Backend.Model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.Column;
-
+/**
+ * Class for the controllers
+ */
 public class Admin extends User {
 
-
-   // @Column(name = "firstname")
     private String firstName;
-
-   // @Column(name = "lastname")
     private String lastName;
+
+    /**
+     * @param firstName
+     * @param lastName
+     */
     public Admin(String firstName, String lastName) {
         super(firstName, lastName);
     }
@@ -25,6 +25,5 @@ public class Admin extends User {
     public String getLastName() {
         return lastName;
     }
-
 
 }

@@ -3,6 +3,9 @@ package Digitact.Backend.Model;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Abstract class user which will be used to define applicants and controllers
+ */
 @Entity
 @Table(name = "users")
 public abstract class User implements IUser, Serializable {
@@ -22,8 +25,11 @@ public abstract class User implements IUser, Serializable {
     protected User() {
     }
 
+    /**
+     * @param firstName
+     * @param lastName
+     */
     public User(String firstName, String lastName) {
-        //super(firstName, lastName);
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -36,14 +42,6 @@ public abstract class User implements IUser, Serializable {
     @Override
     public String getLastName() {
         return lastName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     /* Returns the string representation of the User.*/

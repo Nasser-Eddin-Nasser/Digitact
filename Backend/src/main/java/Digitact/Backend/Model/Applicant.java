@@ -2,6 +2,9 @@ package Digitact.Backend.Model;
 
 import javax.persistence.*;
 
+/**
+ * Class for the applicants
+ */
 @Entity
 @Table(name = "users")
 public class Applicant extends User{
@@ -12,6 +15,10 @@ public class Applicant extends User{
         super();
     }
 
+    /**
+     * @param firstName
+     * @param lastName
+     */
     public Applicant(String firstName, String lastName) {
         super(firstName, lastName);
         this.firstName = firstName;
