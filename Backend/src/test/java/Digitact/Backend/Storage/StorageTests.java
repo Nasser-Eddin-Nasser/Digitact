@@ -39,6 +39,6 @@ public class StorageTests {
             assertThat(2).isEqualTo(Storage.getDB().size());
         }
 
-       
+
     }
 }
