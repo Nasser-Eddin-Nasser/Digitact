@@ -10,7 +10,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "prettier-check": "prettier --check src/**/*.{html,scss,ts}",
+    "prettier-check": "prettier --check src/**/*.{html,scss,ts} --end-of-line auto",
     "all-checks": "npm run lint && npm run prettier-check",
     "e2e": "ng e2e"
   },
