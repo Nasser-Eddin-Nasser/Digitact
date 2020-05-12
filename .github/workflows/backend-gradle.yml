@@ -27,5 +27,3 @@ jobs:
       run: chmod +x  ./Backend/gradlew
     - name: Build with Gradle
       run: ./Backend/gradlew build
-    - name: Test //commented for issue - Backend fix CI
-      run: ./Backend/gradlew test
