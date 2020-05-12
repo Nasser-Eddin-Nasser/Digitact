@@ -1,29 +1,47 @@
 package Digitact.Backend.Controller;
 
-import Digitact.Backend.Model.Admin;
-import Digitact.Backend.Model.User;
-import Digitact.Backend.Storage.Storage;
+import Digitact.Backend.Model.*;
+import Digitact.Backend.Storage.DataRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is the controller class of the entire app
+ */
 @RequestMapping("api/controller")
 @RestController
 public class Controller {
 
-    @GetMapping
-    public List<User> getUserByLastName(@RequestBody @Valid String lastName) {
-        return Storage.getAllUsersByLastName(lastName);
+    @Autowired
+    DataRepository repository;
+
+    /**
+     * @return JSON object of the user
+     */
+    @GetMapping("/getusers")
+    public List<User> getAll() {
+        return repository.findAll();
     }
 
-    @PostMapping
-    public void createAdmin(@RequestBody @Valid Admin admin) {
-        Storage.addUserToDB(admin);
+    /**
+     * @param userUI - JSON request's user object
+     *               <p>
+     *               save the user in the DB using repository
+     * @return "Applicant is created in the database"
+     */
+    @PostMapping("/createApplicant")
+    public String createApplicant(@RequestBody UserUI userUI) {
+        repository.save(new Applicant(userUI.getFirstName(), userUI.getLastName()));
+        return "Applicant is created in the database";
     }
 
-    @DeleteMapping
-    public void deleteAdmin(@RequestBody @Valid Admin admin) {
-        Storage.removeUserFromDB(admin);
+    @PostMapping("/createAdmin")
+    public String createAdmin(@RequestBody UserUI userUI) {
+        repository.save(new Admin(userUI.getFirstName(), userUI.getLastName()));
+        return "Applicant is created in the database";
     }
+
 }
