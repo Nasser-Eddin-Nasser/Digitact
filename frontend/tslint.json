@@ -122,6 +122,9 @@
       "app",
       "page",
       "kebab-case"
-    ]
+    ],
+    "no-conditional-assignment": true,
+    "no-sparse-arrays": true,
+    "no-boolean-literal-compare": true
   }
 }
