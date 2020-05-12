@@ -1,0 +1,12 @@
+# Inspired by the frontend gitignore
+
+*.sw[mnpcod]
+.tmp
+*.tmp
+*.tmp.*
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+UserInterfaceState.xcuserstate
+$RECYCLE.BIN/

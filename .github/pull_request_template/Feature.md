@@ -1,4 +1,4 @@
-Merge request Check-list:
+Pull request Check-list:
 
 * [ ] New unit tests for new functions
 * [ ] All unit tests run without errors
