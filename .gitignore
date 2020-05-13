@@ -9,5 +9,4 @@
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
-$RECYCLE.BIN/
-Backend/src/main/resources/application.properties
+
