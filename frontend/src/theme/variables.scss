@@ -1,6 +1,9 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+// Include some custom global stylings for our app.
+@import './custom.scss';
+
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
