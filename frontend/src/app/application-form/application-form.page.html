@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>application-form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- The following buttons are only used for testing any may later be removed. -->
+  <ion-button (click)="navigateToStep(APPLICATION_STEP.BasicInformation)"
+    >Basic Information</ion-button
+  >
+  <ion-button (click)="navigateToStep(APPLICATION_STEP.ContactInformation)"
+    >Contact Information</ion-button
+  >
+
+  <!-- A really simple way to load the different form steps. -->
+  <ng-container [ngSwitch]="currentStep">
+    <app-af-basic-information
+      *ngSwitchCase="APPLICATION_STEP.BasicInformation"
+    ></app-af-basic-information>
+
+    <app-af-contact-information
+      *ngSwitchCase="APPLICATION_STEP.ContactInformation"
+    ></app-af-contact-information>
+  </ng-container>
+</ion-content>

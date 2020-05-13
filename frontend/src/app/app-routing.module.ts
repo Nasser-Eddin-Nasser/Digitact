@@ -12,6 +12,13 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'application-form',
+    loadChildren: () =>
+      import('./application-form/application-form.module').then(
+        (m) => m.ApplicationFormPageModule
+      ),
+  },
 ];
 
 @NgModule({
