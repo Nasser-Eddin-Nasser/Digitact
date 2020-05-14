@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { NavController } from '@ionic/angular';
+
+import { FormControl, FormGroup } from '../common/forms/forms';
 
 @Component({
   selector: 'app-home',
@@ -8,18 +9,25 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  checkOutForm = this.formBuilder.group({ firstName: [''], lastName: [''] });
+  checkOutForm = new FormGroup<CheckOutFormModel>({
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+  });
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private navController: NavController
-  ) {}
+  constructor(private navController: NavController) {}
+
   myS(): void {
-    console.log('firstName', this.checkOutForm.value);
+    console.log('firstName', this.checkOutForm.controls.firstName.value);
+
     this.navController.navigateForward([
       '/home',
       'done',
-      this.checkOutForm.get('firstName').value,
+      this.checkOutForm.controls.firstName.value,
     ]);
   }
+}
+
+interface CheckOutFormModel {
+  firstName: string;
+  lastName: string;
 }
