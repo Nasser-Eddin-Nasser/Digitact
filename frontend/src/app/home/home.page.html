@@ -27,7 +27,7 @@
         <ion-input
           required
           type="text"
-          formControlName="firstName"
+          [formControl]="checkOutForm.controls.firstName"
           style="color: gray;"
         ></ion-input>
       </ion-item>
@@ -36,7 +36,7 @@
         <ion-input
           style="color: gray;"
           type="text"
-          formControlName="lastName"
+          [formControl]="checkOutForm.controls.lastName"
         ></ion-input>
       </ion-item>
       <hr />
