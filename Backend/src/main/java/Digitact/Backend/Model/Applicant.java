@@ -17,10 +17,10 @@ public class Applicant extends User {
      * @param lastName
      */
     public Applicant(String firstName, String lastName) {
-        super(firstName, lastName, UserRight.Applicant)
+        super(firstName, lastName, UserRight.Applicant);
     }
 
     public UserRight getUserRight() {
-        return UserRight.Applicant
+        return UserRight.Applicant;
     }
 }
