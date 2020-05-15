@@ -1,0 +1,19 @@
+h1 {
+  font-size: 39px;
+  letter-spacing: 4px;
+}
+
+h2 {
+  font-size: 27px;
+  letter-spacing: 2px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--ion-color-primary);
+}

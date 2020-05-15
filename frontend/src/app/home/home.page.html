@@ -1,48 +1,8 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Digitact
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large" style="color: grey;">Digitact</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <span style="color: red;">
-      Hello World!
-    </span>
-    <p style="color: black;">
-      Welcome to our new app
-    </p>
-    <hr />
-    <form [formGroup]="checkOutForm">
-      <ion-item>
-        <ion-label>Name</ion-label>
-        <ion-input
-          required
-          type="text"
-          [formControl]="checkOutForm.controls.firstName"
-          style="color: gray;"
-        ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Last Name</ion-label>
-        <ion-input
-          style="color: gray;"
-          type="text"
-          [formControl]="checkOutForm.controls.lastName"
-        ></ion-input>
-      </ion-item>
-      <hr />
-      <ion-button (click)="myS()">
-        Send
-      </ion-button>
-    </form>
+<ion-content>
+  <div class="container">
+    <img class="logo" src="assets/logo/Consileon-Logo.svg" />
+    <h1>Welcome to Consileon</h1>
+    <h3>We make the difference</h3>
+    <button class="fancy-button">Apply now</button>
   </div>
 </ion-content>
