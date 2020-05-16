@@ -19,10 +19,10 @@ public class Admin extends User {
      * @param lastName
      */
     public Admin(String firstName, String lastName) {
-        super(firstName, lastName, UserRight.Admin)
+        super(firstName, lastName, UserRight.Admin);
     }
 
     public UserRight getUserRight() {
-        return UserRight.Admin
+        
     }
 }
