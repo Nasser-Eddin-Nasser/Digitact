@@ -1,0 +1,65 @@
+<ion-header class="ion-no-border">
+
+  <ion-toolbar>
+
+    <ion-row>
+      <ion-col>
+        <ion-icon name="close" (click)="onClose()"></ion-icon>
+      </ion-col>
+
+      <ion-title>Step {{completedStep}}/ {{totalSteps}} </ion-title>
+
+      <ion-col>
+        <ion-menu-button class="ion-float-right" autoHide="false" id="main">
+
+          <ion-icon name="list"></ion-icon>
+        </ion-menu-button>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-progress-bar value="progressPercentage"></ion-progress-bar>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-menu side="end" lines="none" menuId="first" contentId="main">
+  <ion-header lines="none">
+    <ion-toolbar lines="none">
+      <ion-list>
+        <ion-item lines="none">
+          <h1>Progress</h1>
+        </ion-item>
+
+      </ion-list>
+    </ion-toolbar>
+
+  </ion-header>
+  <ion-content>
+    <ion-item lines="none" class="ion-text-justify">
+      <h3> If you want to go to a previous step, just click on the element in the list! </h3>
+    </ion-item>
+    <ion-list lines="none">
+      <ion-item class="ion-padding-top" selected="true">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+        <ion-label class="ion-padding-horizontal">Basic information</ion-label>
+      </ion-item>
+      <ion-item class="ion-padding-top">
+        <ion-icon name="ellipse-outline"></ion-icon>
+        <ion-label class="ion-padding-horizontal">Contact information</ion-label>
+      </ion-item>
+
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-content class="ion-padding">
+  <form-basic-info></form-basic-info>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-toolbar class="ion-text-center">
+    <button class="fancy-button align center">Continue</button>
+  </ion-toolbar>
+
+</ion-footer>
