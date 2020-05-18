@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-//import { Subscription } from 'rxjs';
-import { BehaviorSubject } from 'rxjs';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+//import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'form-basic-info',
@@ -9,23 +8,35 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class BasicInfoComponent implements OnInit {
 
+  @Input() menuObject: { id: number, displayName: string, isCompleted: boolean, isActive: boolean, selecteor: string };
+  @Input() basicInfoObject: any;
+
   @Output() pageProgressStatusCallBack = new EventEmitter();
 
   salutationsArray = [{ value: "mr", displayName: "Mr" }, { value: "mrs", displayName: "Mrs" }, { value: "ms", displayName: "Ms" }]
-  chosenSalutation = this.salutationsArray[0];
-  basicInfoObject = { salutation: this.chosenSalutation.value, firstName: '', lastName: '' };
-  fn = '';
-  private behave = new BehaviorSubject<string>(this.fn);
-  constructor() { }
+
+  constructor(/*private Observable: Observable*/) { }
 
   ngOnInit() {
-    this.behave.subscribe((val) => {
-      console.log("change", val);
-    });
+    // this.Observable.combineLatest(
+    //   this.basicInfoObject.controls.firstName.valueChanges,
+    //   this.basicInfoObject.controls.lastName.valueChanges,
+    // ).subscribe(() => {
+    //   console.log("In");
+    //   if (this.basicInfoObject.controls.salutation.value.length && this.basicInfoObject.controls.firstName.value.length && this.basicInfoObject.controls.lastName.value.length)
+    //     this.menuObject.isCompleted = true;
+    //   else
+    //     this.menuObject.isCompleted = false;
+    //   this.basicInfoObject.controls.firstName.valueChanges.subscribe();
+    // });
   }
 
-  onValChange(ev: any) {
-    console.log(ev)
+  onValChange() {
+    if (this.basicInfoObject.controls.salutation.value.length && this.basicInfoObject.controls.firstName.value.length && this.basicInfoObject.controls.lastName.value.length)
+      this.menuObject.isCompleted = true;
+    else
+      this.menuObject.isCompleted = false;
+    this.pageProgressStatusCallBack.emit(this.menuObject);
   }
 
 }
