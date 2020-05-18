@@ -5,8 +5,20 @@
   margin-left: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   min-height: 100%;
+}
+.logo-and-message,
+.button-container {
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+.logo-and-message {
+  justify-content: flex-end;
+}
+.button-container {
+  justify-content: center;
 }
 
 h1,
@@ -22,10 +34,21 @@ h3 {
   border-radius: 1000px 0 1000px 1000px;
   font-weight: 500;
   letter-spacing: 4px;
-  margin-top: 5rem;
+  width: 100%;
+  outline: none;
+
+  // Add some spacing so that the button is not "pressed" against the above content when the screen has a small height.
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .logo {
   margin-bottom: 1rem;
-  height: 4rem;
+  height: 5rem;
+}
+.logo-triangles {
+  fill: var(--ion-color-primary);
+}
+.logo-square {
+  fill: var(--ion-color-secondary);
 }
