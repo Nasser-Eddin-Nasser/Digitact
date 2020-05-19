@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+
 import { FormsPageRoutingModule } from './forms-routing.module';
 import { FormsPage } from './forms.page';
 import { SideMenuComponent } from './side-menu/side-menu.component';

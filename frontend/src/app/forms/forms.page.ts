@@ -2,8 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { FormControl, FormGroup } from './../common/forms/forms';
+
 import { BasicInfo } from '../interfaces/basic-info';
+
+import { FormControl, FormGroup } from './../common/forms/forms';
 
 @Component({
   selector: 'app-forms',
@@ -94,4 +96,3 @@ export class FormsPage implements OnInit, OnDestroy {
   }
 
 }
-
