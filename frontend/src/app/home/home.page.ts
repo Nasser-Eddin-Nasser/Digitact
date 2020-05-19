@@ -10,7 +10,7 @@ export class HomePage {
 
   constructor(private router: Router) { }
 
-  onStartApplication() {
+  onStartApplication(): void {
     this.router.navigate(['/forms'], { queryParams: { step: 1 } });
 
   }
