@@ -32,8 +32,8 @@ Download the project framework from [Spring Initializer](https://start.spring.io
 [Download](https://www.postgresql.org/download/) and install postgre.
 
 # Docker 
-[Download] (https://docs.docker.com/docker-for-windows/install/) for windows 
-[Download] (https://docs.docker.com/docker-for-mac/install/) for mac
+[Download](https://docs.docker.com/docker-for-windows/install/) for windows 
+[Download](https://docs.docker.com/docker-for-mac/install/) for mac
 
 # How to use
 
@@ -44,7 +44,7 @@ Download the project framework from [Spring Initializer](https://start.spring.io
   - Install PostgreSQL and [set up a simple database](https://www.postgresqltutorial.com/) or Install Docker.
 	- Instructions on how to use docker [commands](https://docs.docker.com/engine/reference/commandline/docker/)
 	- pull
-		[Find tag here](https://hub.docker.com/repository/docker/vishwasanavatti/digitact/tags?page=1) . 
+		[Find tags here](https://hub.docker.com/repository/docker/vishwasanavatti/digitact/tags?page=1) . 
 		```
 		docker pull vishwasanavatti/digitact:<tag>
 		```
@@ -59,6 +59,7 @@ Download the project framework from [Spring Initializer](https://start.spring.io
 		```
 		docker run --name <name> -e POSTGRES_USER=digitact -e POSTGRES_PASSWORD=digitact -d -p 5432:5432 <image id:tag>
 		```
+	To view and make changes in database (only collaborators)
 	- exec
 		```
 		docker ps -a
@@ -70,7 +71,7 @@ Download the project framework from [Spring Initializer](https://start.spring.io
 		```
 		psql -U digitact
 		```
-		Make changes accordingly
+	To push the changes back to the repository
 	- tag
 		```
 		docker tag <existing-image> vishwasanavatti/digitact:<tag>
