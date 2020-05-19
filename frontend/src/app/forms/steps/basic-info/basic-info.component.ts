@@ -1,8 +1,8 @@
 /*
-@Author 
+@Author
 Bharathwaj Ravi
 
-Add modifiers under @Modifie
+Add modifiers under @Modifiers
 @Modifiers
 
 @Purpose
