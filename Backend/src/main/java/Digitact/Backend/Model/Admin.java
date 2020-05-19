@@ -23,6 +23,6 @@ public class Admin extends User {
     }
 
     public UserRight getUserRight() {
-        
+        return UserRight.Admin;
     }
 }
