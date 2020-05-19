@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-
 @Component({
   selector: 'form-contact-info',
   templateUrl: './contact-info.component.html',
@@ -35,20 +34,4 @@ export class ContactInfoComponent implements OnInit {
     }
     this.pageProgressStatusCallBack.emit(this.menuObject);
   }
-
-  // tslint:disable-next-line: typedef
-  /*
-  phoneNumberValidate(event: any) {
-    // const newValue = event.target.value;
-    const regExp = new RegExp('^[0-9]+$');
-    if (
-      !regExp.test(this.contactInfoObject.controls.phoneNumber.value) &&
-      !(this.contactInfoObject.controls.phoneNumber.value.length == 0)
-    ) {
-      alert('Please use only digits');
-    }
-  }
-
-  (keyup)="phoneNumberValidate($event)"
-  */
 }
