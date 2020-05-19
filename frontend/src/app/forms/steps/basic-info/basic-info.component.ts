@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormGroup } from './../../../common/forms/forms';
+import { BasicInfo } from './../../../interfaces/basic-info';
 
 @Component({
   selector: 'form-basic-info',
@@ -8,7 +10,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class BasicInfoComponent implements OnInit {
 
   @Input() menuObject: { id: number, displayName: string, isCompleted: boolean, isActive: boolean, selecteor: string };
-  @Input() basicInfoObject: any;
+  @Input() basicInfoObject: FormGroup<BasicInfo>;
 
   @Output() pageProgressStatusCallBack = new EventEmitter();
 
