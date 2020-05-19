@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
-=======
 /*
 @Author
 Bharathwaj Ravi
@@ -17,31 +13,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from './../../../common/forms/forms';
 import { BasicInfo } from './../../../interfaces/basic-info';
 
->>>>>>> a40cdd678f8684ffbf0ed13799cb2e793f90f684
 @Component({
   selector: 'form-basic-info',
   templateUrl: './basic-info.component.html',
   styleUrls: ['./basic-info.component.scss'],
 })
 export class BasicInfoComponent implements OnInit {
-<<<<<<< HEAD
-
-  @Input() menuObject: { id: number, displayName: string, isCompleted: boolean, isActive: boolean, selecteor: string };
-  @Input() basicInfoObject: any;
-
-  @Output() pageProgressStatusCallBack = new EventEmitter();
-
-  salutationsArray = [{ value: 'mr', displayName: 'Mr' }, { value: 'mrs', displayName: 'Mrs' }, { value: 'ms', displayName: 'Ms' }]
-
-  constructor(/*private Observable: Observable*/) { }
-
-  ngOnInit(): void { }
-
-  onValChange(): void {
-    if (this.basicInfoObject.controls.salutation.value.length &&
-      this.basicInfoObject.controls.firstName.value.length &&
-      this.basicInfoObject.controls.lastName.value.length) {
-=======
   /*
   @Usage It holds the current menu object from parent
   */
@@ -85,17 +62,10 @@ export class BasicInfoComponent implements OnInit {
       this.basicInfoObject.controls.firstName.value.length &&
       this.basicInfoObject.controls.lastName.value.length
     ) {
->>>>>>> a40cdd678f8684ffbf0ed13799cb2e793f90f684
       this.menuObject.isCompleted = true;
     } else {
       this.menuObject.isCompleted = false;
     }
     this.pageProgressStatusCallBack.emit(this.menuObject);
-<<<<<<< HEAD
-
   }
-
-=======
-  }
->>>>>>> a40cdd678f8684ffbf0ed13799cb2e793f90f684
 }

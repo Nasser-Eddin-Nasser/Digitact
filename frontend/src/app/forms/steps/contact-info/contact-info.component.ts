@@ -1,8 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { FormGroup } from '@angular/forms';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { computeStackId } from '@ionic/angular/directives/navigation/stack-utils';
+
 
 @Component({
   selector: 'form-contact-info',
@@ -21,25 +18,7 @@ export class ContactInfoComponent implements OnInit {
 
   @Output() pageProgressStatusCallBack = new EventEmitter();
 
-  formBuilder: FormBuilder;
-  /*
-  slideOneForm = this.formBuilder.group({
-    fName: [
-      '',
-      Validators.compose([
-        Validators.maxLength(12),
-        Validators.pattern('^[0-9]+$'),
-        Validators.required,
-      ]),
-    ],
-  });
-*/
-  constructor() {
-    this.contactInfoObject.controls.phoneNumber = new FormControl(
-      '',
-      Validators.required
-    );
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 
