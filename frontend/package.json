@@ -10,9 +10,12 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "prettier-check": "prettier --check src/**/*.{html,scss,ts}",
+    "prettier-check": "prettier --check src/**/*.{html,scss,ts} --end-of-line auto",
     "all-checks": "npm run lint && npm run prettier-check",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "npm-i": "npm install",
+    "i-serve": "ionic serve",
+    "npm-i-serve": "npm run npm-i && npm run i-serve"
   },
   "private": true,
   "dependencies": {
@@ -40,6 +43,7 @@
     "@angular/language-service": "~9.1.4",
     "@capacitor/cli": "2.0.2",
     "@ionic/angular-toolkit": "^2.2.0",
+    "@ionic/lab": "3.1.6",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",

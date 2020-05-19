@@ -1,27 +1,54 @@
-#container {
+.container {
+  padding: 1.5rem;
+  max-width: 500px;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+.logo-and-message,
+.button-container {
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+.logo-and-message {
+  justify-content: flex-end;
+}
+.button-container {
+  justify-content: center;
+}
+
+h1,
+h3 {
   text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.fancy-button {
+  font-size: 26px;
+  color: var(--ion-color-secondary-contrast);
+  background: var(--ion-color-secondary);
+  padding: 1rem;
+  border-radius: 1000px 0 1000px 1000px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  width: 100%;
+  outline: none;
+
+  // Add some spacing so that the button is not "pressed" against the above content when the screen has a small height.
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.logo {
+  margin-bottom: 1rem;
+  height: 5rem;
 }
-
-#container a {
-  text-decoration: none;
+.logo-triangles {
+  fill: var(--ion-color-primary);
+}
+.logo-square {
+  fill: var(--ion-color-secondary);
 }

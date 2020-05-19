@@ -57,7 +57,7 @@ Download the project framework from [Spring Initializer](https://start.spring.io
 - Execute the below commands in the postman
   - Post request
     ```
-    http://localhost:<port specified>/api/controller/createapplicant
+    http://localhost:<port specified>/api/controller/createApplicant
     ```
     In the body:
     ```
