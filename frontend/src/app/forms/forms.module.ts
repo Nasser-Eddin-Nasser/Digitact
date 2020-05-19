@@ -1,3 +1,14 @@
+/*
+@Author 
+Bharathwaj Ravi
+
+Add modifiers under @Modifie
+@Modifiers
+
+@Purpose
+  - This module serves as a common place where the form related pages, componets are handled.
+*/
+
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
