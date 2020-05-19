@@ -25,8 +25,8 @@ import { BasicInfoComponent } from './steps/basic-info/basic-info.component';
     FormsModule,
     FormsPageRoutingModule,
     IonicModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  declarations: [FormsPage, BasicInfoComponent, SideMenuComponent]
+  declarations: [FormsPage, BasicInfoComponent, SideMenuComponent],
 })
-export class FormsPageModule { }
+export class FormsPageModule {}
