@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.AcModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -33,6 +34,7 @@ public class AcController {
 
     @FXML
     private TextField myUserNameTextField;
+    private AcModel model;
 
     /**
      * This method starts the {@link /View/login.fxml }
@@ -40,6 +42,7 @@ public class AcController {
      * @throws IOException Loading of corresponding FXML files failed
      */
     public AcController() throws IOException {
+        model = new AcModel();
         FXMLLoader loader =
                 new FXMLLoader(getClass().getResource("/View/login.fxml"));
         loader.setController(this);
@@ -67,9 +70,12 @@ public class AcController {
     private void onLogin() {
         try {
             System.out.println("onLogin " + myUserNameTextField.getText() + " " + myPasswordField.getText());
-        } catch (IllegalArgumentException e) {
+            if (model.checkAuthentication(myUserNameTextField.getText(), myPasswordField.getText())) {
+                new StandardController(stage);
+            }
+
+        } catch (IllegalArgumentException | IOException e) {
             System.err.println(e);
         }
     }
-
 }
