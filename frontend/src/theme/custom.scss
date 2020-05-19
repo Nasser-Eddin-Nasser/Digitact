@@ -1,15 +1,24 @@
+// Use Roboto both for Android and iOS.
+html.md,
+html.ios {
+  --ion-default-font: 'Roboto', sans-serif;
+}
+
 h1 {
   font-size: 39px;
   letter-spacing: 4px;
+  font-weight: 400;
 }
 
 h2 {
   font-size: 27px;
   letter-spacing: 2px;
+  font-weight: 400;
 }
 
 h3 {
   font-size: 18px;
+  font-weight: 300;
 }
 
 h1,

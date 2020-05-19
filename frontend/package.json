@@ -12,7 +12,10 @@
     "lint": "ng lint",
     "prettier-check": "prettier --check src/**/*.{html,scss,ts} --end-of-line auto",
     "all-checks": "npm run lint && npm run prettier-check",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "npm-i": "npm install",
+    "i-serve": "ionic serve",
+    "npm-i-serve": "npm run npm-i && npm run i-serve"
   },
   "private": true,
   "dependencies": {
