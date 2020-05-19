@@ -8,11 +8,6 @@ const routes: Routes = [
     path: '',
     component: HomePage,
   },
-  {
-    path: 'done/:name',
-    loadChildren: () =>
-      import('./done/done.module').then((m) => m.DonePageModule),
-  },
 ];
 
 @NgModule({

@@ -2,33 +2,27 @@ package Digitact.Backend.Model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Admin extends User {
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-    private final String FirstName;
-    private final String LastName;
+@Entity
+@Table(name = "users")
+public class Admin extends User {
+    private static final long serialVersionUID = -2343243243242432341L;
+
+    protected Admin() {
+        super();
+    }
 
     /**
      * @param firstName
      * @param lastName
      */
-    public Admin(@JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName) {
-        super(firstName, lastName);
-        this.FirstName = firstName;
-        this.LastName = lastName;
+    public Admin(String firstName, String lastName) {
+        super(firstName, lastName, UserRight.Admin);
     }
 
-    @Override
-    public String getFirstName() {
-        return FirstName;
-    }
-
-    @Override
-    public String getLastName() {
-        return LastName;
-    }
-
-    @Override
-    public UserRight getRight() {
+    public UserRight getUserRight() {
         return UserRight.Admin;
     }
 }

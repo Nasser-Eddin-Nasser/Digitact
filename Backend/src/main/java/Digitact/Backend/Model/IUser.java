@@ -4,7 +4,4 @@ public interface IUser {
     String getFirstName();
 
     String getLastName();
-
-    UserRight getRight();
-//
 }
