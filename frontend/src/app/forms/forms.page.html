@@ -1,23 +1,5 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-<<<<<<< HEAD
-    <ion-row>
-      <ion-col>
-        <ion-icon name="close" (click)="onClose()"></ion-icon>
-      </ion-col>
-      <ion-title>Step {{currentMenu.id}}/ {{totalSteps}} </ion-title>
-      <ion-col>
-        <ion-menu-button
-          class="ion-float-right"
-          autoHide="true"
-          menuClose
-          id="main"
-        >
-          <ion-icon name="list"></ion-icon>
-        </ion-menu-button>
-      </ion-col>
-    </ion-row>
-=======
     <ion-grid>
       <ion-row>
         <ion-col class="font30">
@@ -39,7 +21,6 @@
       </ion-row>
     </ion-grid>
 
->>>>>>> a40cdd678f8684ffbf0ed13799cb2e793f90f684
     <ion-progress-bar value="{{progressPercentage}}"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
@@ -59,29 +40,15 @@
       *ngSwitchCase="'form-basic-info'"
     >
     </form-basic-info>
-<<<<<<< HEAD
-    <form-contact-info
-      (pageProgressStatusCallBack)="pageProgressStatusCallBack($event)"
-      [menuObject]="currentMenu"
-      [contactInfoObject]="contactInfoObj"
-      *ngSwitchCase="'form-contact-info'"
-    >
-    </form-contact-info>
-=======
->>>>>>> a40cdd678f8684ffbf0ed13799cb2e793f90f684
   </ng-container>
 </ion-content>
 
 <ion-footer class="ion-no-border">
   <ion-toolbar class="ion-text-center">
-<<<<<<< HEAD
-    <button class="fancy-button align center" (click)="navigateToNextForm()">
-=======
     <button
       class="fancy-button align center width90"
       (click)="navigateToNextForm()"
     >
->>>>>>> a40cdd678f8684ffbf0ed13799cb2e793f90f684
       Continue
     </button>
   </ion-toolbar>
