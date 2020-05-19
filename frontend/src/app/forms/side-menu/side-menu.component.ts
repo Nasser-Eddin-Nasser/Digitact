@@ -17,24 +17,34 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./side-menu.component.scss'],
 })
 export class SideMenuComponent {
-
   /*
   @Usage this array holds the list of different steps information.
   */
-  @Input() sideMenuList: Array<{ id: number, displayName: string, isCompleted: boolean, isActive: boolean, selector: string }>
+  @Input() sideMenuList: Array<{
+    id: number;
+    displayName: string;
+    isCompleted: boolean;
+    isActive: boolean;
+    selector: string;
+  }>;
 
   /*
   @Usage this takes care of emitting event to parent.
   */
   @Output() private pageProgressStatusCallBack = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
   /*
   @Usage this method emits the event for progrss call back.
   */
-  onMenuChange(menu: { id: number, displayName: string, isCompleted: boolean, isActive: boolean, selector: string }): void {
+  onMenuChange(menu: {
+    id: number;
+    displayName: string;
+    isCompleted: boolean;
+    isActive: boolean;
+    selector: string;
+  }): void {
     this.pageProgressStatusCallBack.emit(menu);
   }
-
 }

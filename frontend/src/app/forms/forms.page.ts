@@ -25,16 +25,29 @@ import { FormControl, FormGroup } from './../common/forms/forms';
   styleUrls: ['./forms.page.scss'],
 })
 export class FormsPage implements OnInit, OnDestroy {
-
   /*
   @Usage this array holds the object with   information required for different views.
   */
-  sideMenuList = [{ id: 1, displayName: 'Personal info', selector: 'form-basic-info', isActive: false, isCompleted: false }];
+  sideMenuList = [
+    {
+      id: 1,
+      displayName: 'Personal info',
+      selector: 'form-basic-info',
+      isActive: false,
+      isCompleted: false,
+    },
+  ];
 
   /*
   @Usage this  object holds current view information.
   */
-  currentMenu: { id: number, displayName: string, isCompleted: boolean, isActive: boolean, selector: string };
+  currentMenu: {
+    id: number;
+    displayName: string;
+    isCompleted: boolean;
+    isActive: boolean;
+    selector: string;
+  };
 
   /*
   @Usage  holds total steps in the form.
@@ -51,8 +64,11 @@ export class FormsPage implements OnInit, OnDestroy {
   */
   private subscriptions: Subscription[] = [];
 
-  constructor(private activeRoute: ActivatedRoute, private navigationController: NavController, private router: Router) {
-  }
+  constructor(
+    private activeRoute: ActivatedRoute,
+    private navigationController: NavController,
+    private router: Router
+  ) {}
 
   /*
   @Usage  This property holds the type safe form group fields for basic information view.
@@ -60,7 +76,7 @@ export class FormsPage implements OnInit, OnDestroy {
   basicInfoObj = new FormGroup<BasicInfo>({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
-    salutation: new FormControl('mr')
+    salutation: new FormControl('mr'),
   });
 
   /*
@@ -75,15 +91,17 @@ export class FormsPage implements OnInit, OnDestroy {
     const subscription = this.activeRoute.queryParams.subscribe((params) => {
       const step = Number(params.step);
       if (step > 0 && step <= this.totalSteps) {
-        this.sideMenuList.filter(obj => obj.isActive = false);
-        this.currentMenu = this.sideMenuList.filter(obj => obj.id === Number(params.step))[0];
+        this.sideMenuList.filter((obj) => (obj.isActive = false));
+        this.currentMenu = this.sideMenuList.filter(
+          (obj) => obj.id === Number(params.step)
+        )[0];
         this.currentMenu.isActive = true;
       } else {
         console.warn('Invalid query param');
         this.sideMenuList[0].isActive = true;
         this.currentMenu = this.sideMenuList[0];
       }
-    })
+    });
     this.subscriptions.push(subscription);
   }
 
@@ -109,7 +127,7 @@ export class FormsPage implements OnInit, OnDestroy {
     this.basicInfoObj = new FormGroup<BasicInfo>({
       firstName: new FormControl(''),
       lastName: new FormControl(''),
-      salutation: new FormControl('mr')
+      salutation: new FormControl('mr'),
     });
   }
 
@@ -117,20 +135,24 @@ export class FormsPage implements OnInit, OnDestroy {
   @Usage In this method navigation to home page is handled.
   */
   onClose(): void {
-    this.navigationController.navigateForward([
-      '/home'
-    ]);
+    this.navigationController.navigateForward(['/home']);
   }
 
   /*
   @Usage In this method navigation to respective step is handled.
   */
-  onFormStepsNavigation(event: { id: number, displayName: string, isCompleted: boolean, isActive: boolean, selector: string }): void {
+  onFormStepsNavigation(event: {
+    id: number;
+    displayName: string;
+    isCompleted: boolean;
+    isActive: boolean;
+    selector: string;
+  }): void {
     const param = event.id;
     this.router.navigate([], {
       relativeTo: this.activeRoute,
       queryParams: {
-        step: param
+        step: param,
       },
     });
   }
@@ -138,10 +160,16 @@ export class FormsPage implements OnInit, OnDestroy {
   /*
   @Usage In this methos progress values are updated.
   */
-  pageProgressStatusCallBack(event: { id: number, displayName: string, isCompleted: boolean, isActive: boolean, selector: string }): void {
+  pageProgressStatusCallBack(event: {
+    id: number;
+    displayName: string;
+    isCompleted: boolean;
+    isActive: boolean;
+    selector: string;
+  }): void {
     console.log(event);
-    const completedStep = this.sideMenuList.filter(obj => obj.isCompleted).length;
+    const completedStep = this.sideMenuList.filter((obj) => obj.isCompleted)
+      .length;
     this.progressPercentage = completedStep / this.totalSteps;
   }
-
 }
