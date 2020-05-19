@@ -7,6 +7,7 @@ The following tools were used for development.
 - Gradle
 - Postman: Generate JSON requests (For testing purposes)
 - PostgreSQL: Data storage
+- Docker: contains image of postgresql
 
 # Java Development Kit(JDK)
 It is recommended to use JDK 11+ version.
@@ -30,13 +31,59 @@ Download the project framework from [Spring Initializer](https://start.spring.io
 # PostgreSQL
 [Download](https://www.postgresql.org/download/) and install postgre.
 
+# Docker 
+[Download](https://docs.docker.com/docker-for-windows/install/) for windows 
+[Download](https://docs.docker.com/docker-for-mac/install/) for mac
+
 # How to use
 
 - Install the below in-order
   - JDK and set environment variables
   - Install IDE and [set the JDK path](https://www.jetbrains.com/help/idea/sdk.html) if need. 
   - Install Gradle
-  - Install PostgreSQL and [set up a simple database](https://www.postgresqltutorial.com/)
+  - Install PostgreSQL and [set up a simple database](https://www.postgresqltutorial.com/) or Install Docker.
+	- Instructions on how to use docker [commands](https://docs.docker.com/engine/reference/commandline/docker/)
+	- pull
+		[Find tags here](https://hub.docker.com/repository/docker/vishwasanavatti/digitact/tags?page=1) . 
+		```
+		docker pull vishwasanavatti/digitact:<tag>
+		```
+	- run
+		```
+		docker images
+		```
+		```
+		docker run <image id:tag>
+		```
+		or
+		```
+		docker run --name <name> -e POSTGRES_USER=digitact -e POSTGRES_PASSWORD=digitact -d -p 5432:5432 <image id:tag>
+		```
+	To view and make changes in database (only collaborators)
+	- exec
+		```
+		docker ps -a
+		```
+		```
+		docker exec -it <container id> bash
+		```
+		login to postgresql:
+		```
+		psql -U digitact
+		```
+	To push the changes back to the repository
+	- tag
+		```
+		docker tag <existing-image> vishwasanavatti/digitact:<tag>
+		```
+	- commit
+		```
+		docker commit <existing-container> vishwasanavatti/digitact:<tag>
+		```
+	- push
+		```
+		docker push vishwasanavatti/digitact:<tag>
+		```		
   - Install Postman 
 - Clone and pull the code
 - Apply neccesary settingscin the application.properties file
