@@ -19,11 +19,16 @@ import { BasicInfo } from './../../../interfaces/basic-info';
   styleUrls: ['./basic-info.component.scss'],
 })
 export class BasicInfoComponent implements OnInit {
-
   /*
   @Usage It holds the current menu object from parent
   */
-  @Input() menuObject: { id: number, displayName: string, isCompleted: boolean, isActive: boolean, selecteor: string };
+  @Input() menuObject: {
+    id: number;
+    displayName: string;
+    isCompleted: boolean;
+    isActive: boolean;
+    selecteor: string;
+  };
 
   /*
   @Usage It holds typesafe form group property fields.
@@ -38,25 +43,29 @@ export class BasicInfoComponent implements OnInit {
   /*
   @Usage It holds the array objects of drop down menu.
   */
-  salutationsArray = [{ value: 'mr', displayName: 'Mr' }, { value: 'mrs', displayName: 'Mrs' }, { value: 'ms', displayName: 'Ms' }]
+  salutationsArray = [
+    { value: 'mr', displayName: 'Mr' },
+    { value: 'mrs', displayName: 'Mrs' },
+    { value: 'ms', displayName: 'Ms' },
+  ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   /*
   @Usage It handles the on change event for the fields and send emit call back event to parent.
   */
   onValChange(): void {
-    if (this.basicInfoObject.controls.salutation.value.length &&
+    if (
+      this.basicInfoObject.controls.salutation.value.length &&
       this.basicInfoObject.controls.firstName.value.length &&
-      this.basicInfoObject.controls.lastName.value.length) {
+      this.basicInfoObject.controls.lastName.value.length
+    ) {
       this.menuObject.isCompleted = true;
     } else {
       this.menuObject.isCompleted = false;
     }
     this.pageProgressStatusCallBack.emit(this.menuObject);
-
   }
-
 }
