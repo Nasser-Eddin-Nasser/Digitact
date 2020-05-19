@@ -9,4 +9,28 @@
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+$RECYCLE.BIN/
 
+# Inspired by the Backend gitignore
+
+### Java ###
+*.class
+
+### IntelliJ ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### Eclipse ###
+.settings/
+.classpath
+.project
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
