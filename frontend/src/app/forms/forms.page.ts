@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup } from './../common/forms/forms';
+import { BasicInfo } from '../interfaces/basic-info';
 
 @Component({
   selector: 'app-forms',
@@ -94,8 +95,3 @@ export class FormsPage implements OnInit, OnDestroy {
 
 }
 
-interface BasicInfo {
-  firstName: string,
-  lastName: string,
-  salutation: string
-}

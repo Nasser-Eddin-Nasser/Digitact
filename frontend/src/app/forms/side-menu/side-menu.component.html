@@ -1,6 +1,6 @@
 <ion-menu side="end" lines="none" menuId="first" contentId="main">
 
-  <ion-header lines="none">
+  <ion-header class="ion-no-border">
     <ion-toolbar lines="none">
       <ion-list>
         <ion-item lines="none">
@@ -22,8 +22,9 @@
         <ion-item class="ion-padding-top font25" (click)="onMenuChange(menu)" auto-hide="true">
 
           <ion-icon [name]="menu.isCompleted? 'checkmark-circle-outline' : 'ellipse-outline' "
-            [color]="menu.isActive?'tertiary' : 'medium'"></ion-icon>
-          <ion-label class="ion-padding-horizontal" [color]="menu.isActive?'tertiary' : 'medium'">{{menu.displayName}}
+            [color]="menu.isActive ? 'tertiary' : 'medium'"></ion-icon>
+          <ion-label class="ion-padding-horizontal" [color]="menu.isActive ? 'tertiary' : 'medium'">
+            {{menu.displayName}}
           </ion-label>
         </ion-item>
       </ion-menu-toggle>

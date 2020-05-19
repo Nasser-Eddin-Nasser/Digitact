@@ -1,16 +1,21 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-row>
-      <ion-col>
-        <ion-icon name="close" (click)="onClose()"></ion-icon>
-      </ion-col>
-      <ion-title>Step {{currentMenu.id}}/ {{totalSteps}} </ion-title>
-      <ion-col>
-        <ion-menu-button class="ion-float-right" autoHide="true" menuClose id="main">
-          <ion-icon name="list"></ion-icon>
-        </ion-menu-button>
-      </ion-col>
-    </ion-row>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="font30">
+          <ion-icon name="close" (click)="onClose()"></ion-icon>
+        </ion-col>
+        <ion-col class="ion-text-center ion-float-center progresstext">
+          Step {{currentMenu.id}}/ {{totalSteps}}
+        </ion-col>
+        <ion-col>
+          <ion-menu-button class="ion-float-right font30" autoHide="true" menuClose id="main">
+            <ion-icon name="list"></ion-icon>
+          </ion-menu-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
     <ion-progress-bar value={{progressPercentage}}></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
@@ -28,6 +33,6 @@
 
 <ion-footer class="ion-no-border">
   <ion-toolbar class="ion-text-center">
-    <button class="fancy-button align center" (click)="navigateToNextForm()">Continue</button>
+    <button class="fancy-button align center width90" (click)="navigateToNextForm()">Continue</button>
   </ion-toolbar>
 </ion-footer>
