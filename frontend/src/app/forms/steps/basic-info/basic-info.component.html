@@ -1,29 +1,69 @@
 <ion-list>
+<<<<<<< HEAD
 
+=======
+>>>>>>> a40cdd678f8684ffbf0ed13799cb2e793f90f684
   <ion-item lines="none" class="ion-no-border">
     <h1>Welcome!</h1>
   </ion-item>
 
   <ion-item lines="none">
+<<<<<<< HEAD
     <h2 class="ion-text-justify">So that we can get to know you better, please provide your first and last name.</h2>
+=======
+    <h2 class="ion-text-justify">
+      So that we can get to know you better, please provide your first and last
+      name.
+    </h2>
+>>>>>>> a40cdd678f8684ffbf0ed13799cb2e793f90f684
   </ion-item>
 
   <ion-item>
     <ion-label color="medium">Title</ion-label>
+<<<<<<< HEAD
     <ion-select [formControl]="basicInfoObject.controls.salutation" interface="popover" (ionChange)='onValChange()'>
       <ion-select-option *ngFor="let salutation of salutationsArray" [value]="salutation.value">
         {{salutation.displayName}}</ion-select-option>
+=======
+    <ion-select
+      [formControl]="basicInfoObject.controls.salutation"
+      interface="popover"
+      (ionChange)="onValChange()"
+    >
+      <ion-select-option
+        *ngFor="let salutation of salutationsArray"
+        [value]="salutation.value"
+      >
+        {{ salutation.displayName }}</ion-select-option
+      >
+>>>>>>> a40cdd678f8684ffbf0ed13799cb2e793f90f684
     </ion-select>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating" color="medium">First name</ion-label>
+<<<<<<< HEAD
     <ion-input [formControl]="basicInfoObject.controls.firstName" (ionChange)='onValChange()'></ion-input>
+=======
+    <ion-input
+      [formControl]="basicInfoObject.controls.firstName"
+      (ionChange)="onValChange()"
+    ></ion-input>
+>>>>>>> a40cdd678f8684ffbf0ed13799cb2e793f90f684
   </ion-item>
 
   <ion-item>
     <ion-label position="floating" color="medium">Last name</ion-label>
+<<<<<<< HEAD
     <ion-input [formControl]="basicInfoObject.controls.lastName" (ionChange)='onValChange()'></ion-input>
   </ion-item>
 
 </ion-list>
+=======
+    <ion-input
+      [formControl]="basicInfoObject.controls.lastName"
+      (ionChange)="onValChange()"
+    ></ion-input>
+  </ion-item>
+</ion-list>
+>>>>>>> a40cdd678f8684ffbf0ed13799cb2e793f90f684

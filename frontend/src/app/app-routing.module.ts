@@ -14,8 +14,9 @@ const routes: Routes = [
   },
   {
     path: 'forms',
-    loadChildren: () => import('./forms/forms.module').then(m => m.FormsPageModule)
-  }
+    loadChildren: () =>
+      import('./forms/forms.module').then((m) => m.FormsPageModule),
+  },
 ];
 
 @NgModule({
@@ -24,4 +25,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
