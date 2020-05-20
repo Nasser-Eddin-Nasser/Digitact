@@ -1,12 +1,12 @@
-/*	
-@Author	
-Bharathwaj Ravi	
+/*
+@Author
+Bharathwaj Ravi
 
-Add modifiers under @Modifier	
-@Modifiers	
+Add modifiers under @Modifier
+@Modifiers
 
-@Purpose	
-  - This page has the route path configuration in forms module.	
+@Purpose
+  - This page has the route path configuration in forms module.
 */
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
