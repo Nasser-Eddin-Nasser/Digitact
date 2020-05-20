@@ -1,10 +1,9 @@
 <ion-list>
   <ion-item>
-    
     <ion-label position="floating" color="medium">Phone Number</ion-label>
     <ion-input
       type="text"
-      maxlength=12
+      maxlength="12"
       [formControl]="contactInfoObject.controls.phoneNumber"
       (ionChange)="onValChange()"
     ></ion-input>
