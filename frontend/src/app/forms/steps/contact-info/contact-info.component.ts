@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+import { FormGroup } from './../../../common/forms/forms';
+import { ContactInfo } from './../../../interfaces/contact-info';
+
 @Component({
   selector: 'form-contact-info',
   templateUrl: './contact-info.component.html',
@@ -13,7 +16,7 @@ export class ContactInfoComponent implements OnInit {
     isActive: boolean;
     selecteor: string;
   };
-  @Input() contactInfoObject: any;
+  @Input() contactInfoObject: FormGroup<ContactInfo>;
 
   @Output() pageProgressStatusCallBack = new EventEmitter();
 
