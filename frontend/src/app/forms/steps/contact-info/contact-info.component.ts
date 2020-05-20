@@ -1,3 +1,13 @@
+/*
+@Author
+Alex, Don
+
+Add modifiers under @Modifiers
+@Modifiers
+
+@Purpose
+  - This component renders the basic information step view and it's actions.
+*/
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { FormGroup } from './../../../common/forms/forms';
