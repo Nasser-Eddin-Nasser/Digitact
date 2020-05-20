@@ -6,7 +6,7 @@ Add modifiers under @Modifiers
 @Modifiers
 
 @Purpose
-  - This component renders the basic information step view and it's actions.
+  - This component renders the contact information step view and it's actions.
 */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
