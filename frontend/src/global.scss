@@ -24,3 +24,22 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+@import './theme/custom.scss';
+@import './theme/fonts.scss';
+
+.fancy-button {
+  font-size: 26px;
+  color: var(--ion-color-secondary-contrast);
+  background: var(--ion-color-secondary);
+  padding: 1rem;
+  border-radius: 1000px 0 1000px 1000px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  width: 100%;
+  outline: none;
+
+  // Add some spacing so that the button is not "pressed" against the above content when the screen has a small height.
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}

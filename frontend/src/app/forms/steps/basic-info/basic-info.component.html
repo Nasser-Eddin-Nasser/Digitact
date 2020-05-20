@@ -1,0 +1,44 @@
+<ion-list>
+  <ion-item lines="none" class="ion-no-border">
+    <h1>Welcome!</h1>
+  </ion-item>
+
+  <ion-item lines="none">
+    <h2 class="ion-text-justify">
+      So that we can get to know you better, please provide your first and last
+      name.
+    </h2>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="medium">Title</ion-label>
+    <ion-select
+      [formControl]="basicInfoObject.controls.salutation"
+      interface="popover"
+      (ionChange)="onValChange()"
+    >
+      <ion-select-option
+        *ngFor="let salutation of salutationsArray"
+        [value]="salutation.value"
+      >
+        {{ salutation.displayName }}</ion-select-option
+      >
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" color="medium">First name</ion-label>
+    <ion-input
+      [formControl]="basicInfoObject.controls.firstName"
+      (ionChange)="onValChange()"
+    ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" color="medium">Last name</ion-label>
+    <ion-input
+      [formControl]="basicInfoObject.controls.lastName"
+      (ionChange)="onValChange()"
+    ></ion-input>
+  </ion-item>
+</ion-list>

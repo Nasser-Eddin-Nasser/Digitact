@@ -15,12 +15,14 @@
   "rules": {
     "array-type": false,
     "arrow-parens": false,
+    "curly": true,
     "deprecation": {
       "severity": "warn"
     },
     "import-blacklist": [
       true,
-      "rxjs/Rx"
+      "rxjs/Rx",
+      {"@angular/forms": ["FormArray", "FormControl", "FormGroup"]}
     ],
     "interface-name": false,
     "jsdoc-format": [
@@ -47,6 +49,7 @@
         ]
       }
     ],
+    "no-any": true,
     "no-consecutive-blank-lines": [
       true,
       1
@@ -66,8 +69,10 @@
       "ignore-params"
     ],
     "no-non-null-assertion": true,
+    "no-null-keyword": true,
     "no-redundant-jsdoc": true,
     "no-switch-case-fall-through": true,
+    "no-this-assignment": true,
     "no-var-requires": false,
     "object-literal-key-quotes": [
       true,
@@ -80,16 +85,22 @@
         "grouped-imports":true
       }
     ],
+    "prefer-object-spread": true,
     "quotemark": [
       true,
       "single"
     ],
     "trailing-comma": false,
+    "triple-equals": [
+      true,
+      "allow-undefined-check"
+    ],
     "typedef": [
       true,
       "call-signature",
       "parameter"
     ],
+    "unnecessary-else": true,
     "no-output-on-prefix": true,
     "no-inputs-metadata-property": true,
     "no-host-metadata-property": true,
@@ -112,6 +123,9 @@
       "app",
       "page",
       "kebab-case"
-    ]
+    ],
+    "no-conditional-assignment": true,
+    "no-sparse-arrays": true,
+    "no-boolean-literal-compare": true
   }
 }
