@@ -1,10 +1,5 @@
 <ion-menu side="end" lines="none" menuId="first" contentId="main">
-<<<<<<< HEAD
-
-  <ion-header lines="none">
-=======
   <ion-header class="ion-no-border">
->>>>>>> a40cdd678f8684ffbf0ed13799cb2e793f90f684
     <ion-toolbar lines="none">
       <ion-list>
         <ion-item lines="none">
@@ -15,38 +10,15 @@
   </ion-header>
 
   <ion-content>
-<<<<<<< HEAD
-
-    <ion-item lines="none" class="ion-text-justify">
-      <h3> If you want to go to a previous step, just click on the element in the list! </h3>
-=======
     <ion-item lines="none" class="ion-text-justify">
       <h3>
         If you want to go to a previous step, just click on the element in the
         list!
       </h3>
->>>>>>> a40cdd678f8684ffbf0ed13799cb2e793f90f684
     </ion-item>
 
     <ion-list lines="none" *ngFor="let menu of sideMenuList">
       <ion-menu-toggle auto-hide="true">
-<<<<<<< HEAD
-
-        <ion-item class="ion-padding-top font25" (click)="onMenuChange(menu)" auto-hide="true">
-
-          <ion-icon [name]="menu.isCompleted? 'checkmark-circle-outline' : 'ellipse-outline' "
-            [color]="menu.isActive?'tertiary' : 'medium'"></ion-icon>
-          <ion-label class="ion-padding-horizontal" [color]="menu.isActive?'tertiary' : 'medium'">{{menu.displayName}}
-          </ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-
-    </ion-list>
-
-  </ion-content>
-
-</ion-menu>
-=======
         <ion-item
           class="ion-padding-top font25"
           (click)="onMenuChange(menu)"
@@ -69,4 +41,3 @@
     </ion-list>
   </ion-content>
 </ion-menu>
->>>>>>> a40cdd678f8684ffbf0ed13799cb2e793f90f684
