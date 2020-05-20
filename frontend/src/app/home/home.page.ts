@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,18 +7,9 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  checkOutForm = this.formBuilder.group({ firstName: [''], lastName: [''] });
+  constructor(private router: Router) {}
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private navController: NavController
-  ) {}
-  myS(): void {
-    console.log('firstName', this.checkOutForm.value);
-    this.navController.navigateForward([
-      '/home',
-      'done',
-      this.checkOutForm.get('firstName').value,
-    ]);
+  onStartApplication(): void {
+    this.router.navigate(['/forms'], { queryParams: { step: 1 } });
   }
 }

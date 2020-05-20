@@ -1,23 +1,25 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+// Martins Mixin
+@mixin color-variables($name, $base-color, $contrast-color) {
+  --ion-color-#{$name}: #{$base-color};
+  --ion-color-#{$name}-rgb: #{red($base-color)}, #{green($base-color)},
+    #{blue($base-color)};
+  --ion-color-#{$name}-contrast: #{$contrast-color};
+  --ion-color-#{$name}-contrast-rgb: #{red($contrast-color)},
+    #{green($contrast-color)}, #{blue($contrast-color)};
+  --ion-color-#{$name}-shade: #{mix($base-color, #000000, $weight: 88%)};
+  --ion-color-#{$name}-tint: #{mix($base-color, #ffffff, $weight: 90%)};
+}
+
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
-  --ion-color-primary: #3880ff;
-  --ion-color-primary-rgb: 56, 128, 255;
-  --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
-  --ion-color-primary-tint: #4c8dff;
+  @include color-variables(primary, #1a233b, #ffffff);
 
   /** secondary **/
-  --ion-color-secondary: #3dc2ff;
-  --ion-color-secondary-rgb: 61, 194, 255;
-  --ion-color-secondary-contrast: #ffffff;
-  --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #36abe0;
-  --ion-color-secondary-tint: #50c8ff;
+  @include color-variables(secondary, #cc0033, #ffffff);
 
   /** tertiary **/
   --ion-color-tertiary: #5260ff;
@@ -83,19 +85,11 @@
    */
 
   body {
-    --ion-color-primary: #428cff;
-    --ion-color-primary-rgb: 66, 140, 255;
-    --ion-color-primary-contrast: #ffffff;
-    --ion-color-primary-contrast-rgb: 255, 255, 255;
-    --ion-color-primary-shade: #3a7be0;
-    --ion-color-primary-tint: #5598ff;
+    /** primary **/
+    @include color-variables(primary, #c5c5c5, #000000);
 
-    --ion-color-secondary: #50c8ff;
-    --ion-color-secondary-rgb: 80, 200, 255;
-    --ion-color-secondary-contrast: #ffffff;
-    --ion-color-secondary-contrast-rgb: 255, 255, 255;
-    --ion-color-secondary-shade: #46b0e0;
-    --ion-color-secondary-tint: #62ceff;
+    /** secondary **/
+    @include color-variables(secondary, #cc0033, #000000);
 
     --ion-color-tertiary: #6a64ff;
     --ion-color-tertiary-rgb: 106, 100, 255;
