@@ -1,8 +1,10 @@
 /*	
 @Author	
 Bharathwaj Ravi	
+
 Add modifiers under @Modifier	
 @Modifiers	
+
 @Purpose	
   - This page has the route path configuration in forms module.	
 */
@@ -14,12 +16,12 @@ import { FormsPage } from './forms.page';
 const routes: Routes = [
   {
     path: '',
-    component: FormsPage
-  }
+    component: FormsPage,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class FormsPageRoutingModule { }
+export class FormsPageRoutingModule {}
