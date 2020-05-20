@@ -8,7 +8,6 @@ Add modifiers under @Modifiers
 @Purpose
   - This module serves as a common place where the form related pages, componets are handled.
 */
-
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,6 +27,11 @@ import { ContactInfoComponent } from './steps/contact-info/contact-info.componen
     IonicModule,
     ReactiveFormsModule,
   ],
-  declarations: [FormsPage, BasicInfoComponent, ContactInfoComponent, SideMenuComponent],
+  declarations: [
+    FormsPage,
+    BasicInfoComponent,
+    ContactInfoComponent,
+    SideMenuComponent,
+  ],
 })
 export class FormsPageModule {}
