@@ -43,7 +43,7 @@ export class FormsPage implements OnInit, OnDestroy {
       selector: 'form-contact-info',
       isActive: false,
       isCompleted: false,
-    }
+    },
   ];
 
   /*
@@ -87,6 +87,9 @@ export class FormsPage implements OnInit, OnDestroy {
     salutation: new FormControl('mr'),
   });
 
+  /*
+  @Usage  This property holds the type safe form group fields for contact information view.
+  */
   contactInfoObj = new FormGroup<ContactInfo>({
     phoneNumber: new FormControl(''),
     eMail: new FormControl(''),
