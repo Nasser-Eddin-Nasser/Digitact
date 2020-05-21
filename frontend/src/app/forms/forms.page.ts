@@ -64,6 +64,8 @@ export class FormsPage implements OnInit, OnDestroy {
   */
   private subscriptions: Subscription[] = [];
 
+  hideButton = false;
+
   constructor(
     private activeRoute: ActivatedRoute,
     private navigationController: NavController,
@@ -171,5 +173,11 @@ export class FormsPage implements OnInit, OnDestroy {
     const completedStep = this.sideMenuList.filter((obj) => obj.isCompleted)
       .length;
     this.progressPercentage = completedStep / this.totalSteps;
+    this.hideButton = completedStep === 1 ;
   }
+
+  hideContinueButton(): boolean {
+    return this.hideButton;
+  }
+
 }
