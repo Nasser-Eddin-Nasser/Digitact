@@ -108,10 +108,10 @@ export class FormsPage implements OnInit, OnDestroy {
   /*
   @Usage In this method navigation to next step is handled.
   */
-  navigateToNextForm(): void {
+  navigateToNextStep(): void {
     if (this.currentMenu.id !== this.totalSteps) {
       const nextMenuIndex = this.sideMenuList.indexOf(this.currentMenu) + 1;
-      this.onFormStepsNavigation(this.sideMenuList[nextMenuIndex]);
+      this.navigateToStep(this.sideMenuList[nextMenuIndex]);
     } else {
       alert('Next is submit page which is yet to be implmented');
     }
@@ -134,14 +134,14 @@ export class FormsPage implements OnInit, OnDestroy {
   /*
   @Usage In this method navigation to home page is handled.
   */
-  onClose(): void {
+  closeForm(): void {
     this.navigationController.navigateForward(['/home']);
   }
 
   /*
   @Usage In this method navigation to respective step is handled.
   */
-  onFormStepsNavigation(event: {
+  navigateToStep(event: {
     id: number;
     displayName: string;
     isCompleted: boolean;
@@ -160,14 +160,7 @@ export class FormsPage implements OnInit, OnDestroy {
   /*
   @Usage In this methos progress values are updated.
   */
-  pageProgressStatusCallBack(event: {
-    id: number;
-    displayName: string;
-    isCompleted: boolean;
-    isActive: boolean;
-    selector: string;
-  }): void {
-    console.log(event);
+  updateProgessStatus(): void {
     const completedStep = this.sideMenuList.filter((obj) => obj.isCompleted)
       .length;
     this.progressPercentage = completedStep / this.totalSteps;
