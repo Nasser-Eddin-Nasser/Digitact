@@ -49,23 +49,15 @@ export class BasicInfoComponent implements OnInit {
     { value: 'ms', displayName: 'Ms' },
   ];
 
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  /*
-  @Usage It handles the on change event for the fields and send emit call back event to parent.
-  */
-  onValChange(): void {
-    if (
-      this.basicInfoObject.controls.salutation.value.length &&
-      this.basicInfoObject.controls.firstName.value.length &&
-      this.basicInfoObject.controls.lastName.value.length
-    ) {
-      this.menuObject.isCompleted = true;
-    } else {
-      this.menuObject.isCompleted = false;
-    }
-    this.updatedProgressStatus.emit();
+  ngOnInit(): void {
+    this.basicInfoObject.valueChanges.subscribe((changedValue) => {
+      this.menuObject.isCompleted =
+        changedValue.salutation.length &&
+        changedValue.firstName.length &&
+        changedValue.lastName.length
+          ? true
+          : false;
+      this.updatedProgressStatus.emit();
+    });
   }
 }
