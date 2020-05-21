@@ -31,20 +31,18 @@ export class SideMenuComponent {
   /*
   @Usage this takes care of emitting event to parent.
   */
-  @Output() private pageProgressStatusCallBack = new EventEmitter();
-
-  constructor() {}
+  @Output() private chosenStep = new EventEmitter();
 
   /*
   @Usage this method emits the event for progrss call back.
   */
-  onMenuChange(menu: {
+  changeStep(menu: {
     id: number;
     displayName: string;
     isCompleted: boolean;
     isActive: boolean;
     selector: string;
   }): void {
-    this.pageProgressStatusCallBack.emit(menu);
+    this.chosenStep.emit(menu);
   }
 }

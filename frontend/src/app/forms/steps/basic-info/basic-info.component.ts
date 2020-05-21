@@ -38,7 +38,7 @@ export class BasicInfoComponent implements OnInit {
   /*
   @Usage It emits the progress callback on this step.
   */
-  @Output() pageProgressStatusCallBack = new EventEmitter();
+  @Output() updatedProgressStatus = new EventEmitter();
 
   /*
   @Usage It holds the array objects of drop down menu.
@@ -66,6 +66,6 @@ export class BasicInfoComponent implements OnInit {
     } else {
       this.menuObject.isCompleted = false;
     }
-    this.pageProgressStatusCallBack.emit(this.menuObject);
+    this.updatedProgressStatus.emit();
   }
 }

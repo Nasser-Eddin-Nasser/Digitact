@@ -3,7 +3,7 @@
     <ion-grid>
       <ion-row>
         <ion-col class="font30">
-          <ion-icon name="close" (click)="onClose()"></ion-icon>
+          <ion-icon name="close" (click)="closeForm()"></ion-icon>
         </ion-col>
         <ion-col class="ion-text-center ion-float-center progresstext">
           Step {{currentMenu.id}}/ {{totalSteps}}
@@ -27,14 +27,14 @@
 
 <app-side-menu
   [sideMenuList]="sideMenuList"
-  (pageProgressStatusCallBack)="onFormStepsNavigation($event)"
+  (chosenStep)="navigateToStep($event)"
 >
 </app-side-menu>
 
 <ion-content class="ion-padding">
   <ng-container [ngSwitch]="currentMenu.selector">
     <form-basic-info
-      (pageProgressStatusCallBack)="pageProgressStatusCallBack($event)"
+      (updatedProgressStatus)="updateProgessStatus()"
       [menuObject]="currentMenu"
       [basicInfoObject]="basicInfoObj"
       *ngSwitchCase="'form-basic-info'"
@@ -47,7 +47,7 @@
   <ion-toolbar class="ion-text-center">
     <button
       class="fancy-button align center width90"
-      (click)="navigateToNextForm()"
+      (click)="navigateToNextStep()"
     >
       Continue
     </button>
