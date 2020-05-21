@@ -1,18 +1,20 @@
-.width90 {
-  width: 90%;
-}
-
-.font30 {
-  font-size: 30px;
-}
-
 ion-progress-bar {
   height: 10px;
 }
 
-.progresstext {
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 20px;
-  padding-top: 10px;
+.forms-cantainer {
+  padding: 2rem;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.footer-container {
+  padding: 2rem;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
 }
