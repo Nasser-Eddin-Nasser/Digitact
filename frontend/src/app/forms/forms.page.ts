@@ -35,8 +35,13 @@ export class FormsPage implements OnInit, OnDestroy {
       selector: 'form-basic-info',
       isActive: false,
       isCompleted: false,
-    },
-  ];
+    },{
+    id: 2,
+    displayName: 'Submit',
+    selector: 'app-submit-page',
+    isActive: false,
+    isCompleted: false,
+  }  ];
 
   /*
   @Usage this  object holds current view information.
@@ -48,7 +53,7 @@ export class FormsPage implements OnInit, OnDestroy {
     isActive: boolean;
     selector: string;
   };
-
+  buttonText:string;
   /*
   @Usage  holds total steps in the form.
   */
@@ -110,11 +115,12 @@ export class FormsPage implements OnInit, OnDestroy {
   /*
   @Usage In this method navigation to next step is handled.
   */
-  navigateToNextForm(): void {
+  navigateToNextFormOrSubmit(): void {
     if (this.currentMenu.id !== this.totalSteps) {
       const nextMenuIndex = this.sideMenuList.indexOf(this.currentMenu) + 1;
       this.onFormStepsNavigation(this.sideMenuList[nextMenuIndex]);
     } else {
+      console.log('submit');
       alert('Next is submit page which is yet to be implmented');
     }
   }
@@ -173,11 +179,9 @@ export class FormsPage implements OnInit, OnDestroy {
     const completedStep = this.sideMenuList.filter((obj) => obj.isCompleted)
       .length;
     this.progressPercentage = completedStep / this.totalSteps;
-    this.hideButton = completedStep === 1 ;
   }
 
-  hideContinueButton(): boolean {
-    return this.hideButton;
+  getButtonText():string{
+    return (this.currentMenu.id === this.totalSteps) ? 'Submit':'continue';
   }
-
 }
