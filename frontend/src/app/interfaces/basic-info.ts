@@ -1,11 +1,8 @@
 /*
-@Author
+@author
 Bharathwaj Ravi
 
-Add modifiers under @Modifiers
-@Modifiers
-
-@Purpose
+@description
   - This interface holds the basic informtion view related fields.
 */
 export interface BasicInfo {
