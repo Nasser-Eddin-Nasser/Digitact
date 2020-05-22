@@ -1,10 +1,7 @@
 /*
-@author
-Bharathwaj Ravi
-
-@description
-  - This page has the route path configuration in forms module.
-*/
+ * @description
+ *   This page has the route path configuration in forms module.
+ */
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 

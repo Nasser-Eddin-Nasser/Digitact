@@ -1,11 +1,8 @@
 /*
-@author
-Bharathwaj Ravi
-
-@description
-  This page handles the basic operation of tracking progress, navigation, close menu, continue button,
-  event handlers for child to parent communication and parent to child data down.
-*/
+ * @description
+ *   This page handles the basic operation of tracking progress, navigation, close menu, continue button,
+ *   event handlers for child to parent communication and parent to child data down.
+ */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';

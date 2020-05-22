@@ -1,10 +1,7 @@
 /*
-@author
-Bharathwaj Ravi
-
-@description
-  - This component renders the basic information step view and it's actions.
-*/
+ * @description
+ *  This component renders the basic information step view and it's actions.
+ */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { FormGroup } from './../../../common/forms/forms';
@@ -35,7 +32,7 @@ export class BasicInfoComponent implements OnInit {
   /*
    * It emits the progress callback on this step.
    */
-  @Output() updatedProgressStatus = new EventEmitter();
+  @Output() updatedMenuCompletionStatus = new EventEmitter();
 
   /*
    * It holds the array objects of drop down menu.
@@ -57,7 +54,7 @@ export class BasicInfoComponent implements OnInit {
         changedValue.lastName.length
           ? true
           : false;
-      this.updatedProgressStatus.emit();
+      this.updatedMenuCompletionStatus.emit();
     });
   }
 }
