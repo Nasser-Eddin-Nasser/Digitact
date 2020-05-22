@@ -77,5 +77,12 @@ The response should look like this:
 
 # pgAdmin4
 
-In order to view the content of the database, we ship pgAdmin4 with our docker-compose file. Open `localhost:8080` to open pgAdmin4. If you want to access the database, you are most likely prompted for a password. It is set to `postgres` by default.
+In order to view the content of the database, we ship pgAdmin4 with our docker-compose file. Open `localhost:8080` to open pgAdmin4. 
+
+Log in using:
+- Email Address: `example@example.com`
+- Password: `example`
+
+
+If you want to access the database, you are most likely prompted for a password. It is set to `postgres` by default.
 
