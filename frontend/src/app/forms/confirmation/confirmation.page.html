@@ -1,0 +1,27 @@
+<ion-content>
+  <div class="main-cantainer">
+    <div class="message-content">
+      <ion-item lines="none" class="ion-no-border ion-no-padding">
+        <h1>Done</h1>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-no-padding">
+        <h2 class="ion-text-justify">
+          The application has been submitted. The following steps need to be
+          perofrmed by the HR staff(either now or later).
+        </h2>
+      </ion-item>
+    </div>
+    <div class="button-container">
+      <button class="fancy-button align center" (click)="navigateToNextPage()">
+        Continue
+      </button>
+      <button
+        class="fancy-button align center secondary-color"
+        (click)="quitForm()"
+      >
+        Quit
+      </button>
+    </div>
+  </div>
+</ion-content>
