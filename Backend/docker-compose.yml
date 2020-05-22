@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:12
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+
+  pgadmin:
+    image: dpage/pgadmin4:4
+    ports: 
+      - '8080:80'
+    environment:
+      PGADMIN_DEFAULT_EMAIL: example@example.com
+      PGADMIN_DEFAULT_PASSWORD: example
+    volumes:
+      - ./pgadmin4/servers.json:/pgadmin4/servers.json
