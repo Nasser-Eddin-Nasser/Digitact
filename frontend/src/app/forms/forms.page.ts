@@ -1,13 +1,10 @@
 /*
-@Author
+@author
 Bharathwaj Ravi
 
-Add modifiers under @Modifiers
-@Modifiers
-
-@Purpose
-  - This page handles the basic operation of tracking progress, navigation, close menu, continue button,
-   event handlers for child to parent communication and parent to child data down.
+@description
+  This page handles the basic operation of tracking progress, navigation, close menu, continue button,
+  event handlers for child to parent communication and parent to child data down.
 */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -26,8 +23,8 @@ import { FormControl, FormGroup } from './../common/forms/forms';
 })
 export class FormsPage implements OnInit, OnDestroy {
   /*
-  @Usage this array holds the object with   information required for different views.
-  */
+   * This array holds the object with   information required for different views.
+   */
   sideMenuList = [
     {
       id: 1,
@@ -39,8 +36,8 @@ export class FormsPage implements OnInit, OnDestroy {
   ];
 
   /*
-  @Usage this  object holds current view information.
-  */
+   * This object holds current view information.
+   */
   currentMenu: {
     id: number;
     displayName: string;
@@ -50,18 +47,18 @@ export class FormsPage implements OnInit, OnDestroy {
   };
 
   /*
-  @Usage  holds total steps in the form.
-  */
+   * Holds total steps in the form.
+   */
   totalSteps: number;
 
   /*
-  @Usage  holds progress value.
-  */
+   * Holds progress value.
+   */
   progressPercentage: number;
 
   /*
-  @Usage  holds all the subscription which will be useful for un subscribing on destroy.
-  */
+   * Holds all the subscription which will be useful for un subscribing on destroy.
+   */
   private subscriptions: Subscription[] = [];
 
   constructor(
@@ -71,8 +68,8 @@ export class FormsPage implements OnInit, OnDestroy {
   ) {}
 
   /*
-  @Usage  This property holds the type safe form group fields for basic information view.
-  */
+   * This property holds the type safe form group fields for basic information view.
+   */
   basicInfoObj = new FormGroup<BasicInfo>({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
@@ -80,8 +77,8 @@ export class FormsPage implements OnInit, OnDestroy {
   });
 
   /*
-  @Usage In this method route change is observed and handling is done.
-  */
+   * In this method route change is observed and handling is done.
+   */
   ngOnInit(): void {
     this.totalSteps = this.sideMenuList.length;
     this.progressPercentage = 0;
@@ -106,8 +103,8 @@ export class FormsPage implements OnInit, OnDestroy {
   }
 
   /*
-  @Usage In this method navigation to next step is handled.
-  */
+   * In this method navigation to next step is handled.
+   */
   navigateToNextStep(): void {
     if (this.currentMenu.id !== this.totalSteps) {
       const nextMenuIndex = this.sideMenuList.indexOf(this.currentMenu) + 1;
@@ -118,8 +115,8 @@ export class FormsPage implements OnInit, OnDestroy {
   }
 
   /*
-  @Usage In this method un subscribe event and restore to default values are handled.
-  */
+   * In this method un subscribe event and restore to default values are handled.
+   */
   ngOnDestroy(): void {
     for (const subscription of this.subscriptions) {
       subscription.unsubscribe();
@@ -132,23 +129,29 @@ export class FormsPage implements OnInit, OnDestroy {
   }
 
   /*
-  @Usage In this method navigation to home page is handled.
-  */
+   * In this method navigation to home page is handled.
+   */
   closeForm(): void {
     this.navigationController.navigateForward(['/home']);
   }
 
   /*
-  @Usage In this method navigation to respective step is handled.
-  */
-  navigateToStep(event: {
+   * In this method navigation to respective step is handled.
+   * @param {Object} menu - Contains the menu to navigate
+   * @param {number} menu.id - The unique id for the menu. Used in query params.
+   * @param {string} menu.displayName - The name to be displayed.
+   * @param {boolean} menu.isCompleted - The completion status of a step menu.
+   * @param {boolean} menu.isActive - The active status of a step menu.
+   * @param {string} menu.selector - The selector name of the step menu component.
+   */
+  navigateToStep(menu: {
     id: number;
     displayName: string;
     isCompleted: boolean;
     isActive: boolean;
     selector: string;
   }): void {
-    const param = event.id;
+    const param = menu.id;
     this.router.navigate([], {
       relativeTo: this.activeRoute,
       queryParams: {
@@ -158,8 +161,8 @@ export class FormsPage implements OnInit, OnDestroy {
   }
 
   /*
-  @Usage In this methos progress values are updated.
-  */
+   * In this methos progress values are updated.
+   */
   updateProgessStatus(): void {
     const completedStep = this.sideMenuList.filter((obj) => obj.isCompleted)
       .length;

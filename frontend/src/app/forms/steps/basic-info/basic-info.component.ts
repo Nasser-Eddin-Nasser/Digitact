@@ -1,11 +1,8 @@
 /*
-@Author
+@author
 Bharathwaj Ravi
 
-Add modifiers under @Modifiers
-@Modifiers
-
-@Purpose
+@description
   - This component renders the basic information step view and it's actions.
 */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -20,8 +17,8 @@ import { BasicInfo } from './../../../interfaces/basic-info';
 })
 export class BasicInfoComponent implements OnInit {
   /*
-  @Usage It holds the current menu object from parent
-  */
+   * It holds the current menu object from parent
+   */
   @Input() menuObject: {
     id: number;
     displayName: string;
@@ -31,24 +28,27 @@ export class BasicInfoComponent implements OnInit {
   };
 
   /*
-  @Usage It holds typesafe form group property fields.
-  */
+   * It holds typesafe form group property fields.
+   */
   @Input() basicInfoObject: FormGroup<BasicInfo>;
 
   /*
-  @Usage It emits the progress callback on this step.
-  */
+   * It emits the progress callback on this step.
+   */
   @Output() updatedProgressStatus = new EventEmitter();
 
   /*
-  @Usage It holds the array objects of drop down menu.
-  */
+   * It holds the array objects of drop down menu.
+   */
   salutationsArray = [
     { value: 'mr', displayName: 'Mr' },
     { value: 'mrs', displayName: 'Mrs' },
     { value: 'ms', displayName: 'Ms' },
   ];
 
+  /*
+   * Value changes are observed to update completion status and event is emitted.
+   */
   ngOnInit(): void {
     this.basicInfoObject.valueChanges.subscribe((changedValue) => {
       this.menuObject.isCompleted =

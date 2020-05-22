@@ -1,11 +1,9 @@
 /*
-@Author
+@author
 Bharathwaj Ravi
 
-Add modifiers under @Modifiers
-@Modifiers
-
-@Purpose
+@module
+@description
   - This module serves as a common place where the form related pages, componets are handled.
 */
 

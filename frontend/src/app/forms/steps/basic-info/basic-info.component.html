@@ -1,16 +1,16 @@
 <ion-list>
-  <ion-item lines="none" class="ion-no-border">
+  <ion-item lines="none" class="ion-no-border ion-no-padding">
     <h1>Welcome!</h1>
   </ion-item>
 
-  <ion-item lines="none">
+  <ion-item lines="none" class="ion-no-padding">
     <h2 class="ion-text-justify">
       So that we can get to know you better, please provide your first and last
       name.
     </h2>
   </ion-item>
 
-  <ion-item>
+  <ion-item class="ion-no-padding">
     <ion-label color="medium">Title</ion-label>
     <ion-select
       [formControl]="basicInfoObject.controls.salutation"
@@ -25,12 +25,12 @@
     </ion-select>
   </ion-item>
 
-  <ion-item>
+  <ion-item class="ion-no-padding">
     <ion-label position="floating" color="medium">First name</ion-label>
     <ion-input [formControl]="basicInfoObject.controls.firstName"></ion-input>
   </ion-item>
 
-  <ion-item>
+  <ion-item class="ion-no-padding">
     <ion-label position="floating" color="medium">Last name</ion-label>
     <ion-input [formControl]="basicInfoObject.controls.lastName"></ion-input>
   </ion-item>
