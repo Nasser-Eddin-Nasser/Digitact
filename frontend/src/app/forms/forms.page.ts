@@ -35,13 +35,15 @@ export class FormsPage implements OnInit, OnDestroy {
       selector: 'form-basic-info',
       isActive: false,
       isCompleted: false,
-    },{
-    id: 2,
-    displayName: 'Submit',
-    selector: 'app-submit-page',
-    isActive: false,
-    isCompleted: false,
-  }  ];
+    },
+    {
+      id: 2,
+      displayName: 'Submit',
+      selector: 'app-submit-page',
+      isActive: false,
+      isCompleted: false,
+    },
+  ];
 
   /*
   @Usage this  object holds current view information.
@@ -53,7 +55,7 @@ export class FormsPage implements OnInit, OnDestroy {
     isActive: boolean;
     selector: string;
   };
-  buttonText:string;
+  buttonText: string;
   /*
   @Usage  holds total steps in the form.
   */
@@ -181,7 +183,7 @@ export class FormsPage implements OnInit, OnDestroy {
     this.progressPercentage = completedStep / this.totalSteps;
   }
 
-  getButtonText():string{
-    return (this.currentMenu.id === this.totalSteps) ? 'Submit':'continue';
+  getButtonText(): string {
+    return this.currentMenu.id === this.totalSteps ? 'Submit' : 'continue';
   }
 }
