@@ -28,13 +28,20 @@
     <form-basic-info (pageProgressStatusCallBack)="pageProgressStatusCallBack($event)" [menuObject]="currentMenu"
       [basicInfoObject]="basicInfoObj" *ngSwitchCase="'form-basic-info'">
     </form-basic-info>
+
+  </ng-container>
+  <ng-container [ngSwitch]="currentMenu.selector">
+    <app-submit-page (pageProgressStatusCallBack)="pageProgressStatusCallBack($event)"
+      *ngSwitchCase="'app-submit-page'">
+    </app-submit-page>
   </ng-container>
 </ion-content>
 
-<ion-footer class="ion-no-border" *ngIf="hideContinueButton()">
+
+<ion-footer class="ion-no-border">
   <ion-toolbar class="ion-text-center">
-    <button class="fancy-button align center width90" (click)="navigateToNextForm()">
-      Continue
+    <button class="fancy-button align center width90" (click)="navigateToNextFormOrSubmit()">
+      {{this.getButtonText()}}
     </button>
   </ion-toolbar>
 </ion-footer>

@@ -12,33 +12,19 @@
 
   <ion-item>
     <ion-label color="medium">Title</ion-label>
-    <ion-select
-      [formControl]="basicInfoObject.controls.salutation"
-      interface="popover"
-      (ionChange)="onValChange()"
-    >
-      <ion-select-option
-        *ngFor="let salutation of salutationsArray"
-        [value]="salutation.value"
-      >
-        {{ salutation.displayName }}</ion-select-option
-      >
+    <ion-select [formControl]="basicInfoObject.controls.salutation" interface="popover" (ionChange)="onValChange()">
+      <ion-select-option *ngFor="let salutation of salutationsArray" [value]="salutation.value">
+        {{ salutation.displayName }}</ion-select-option>
     </ion-select>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating" color="medium">First name</ion-label>
-    <ion-input
-      [formControl]="basicInfoObject.controls.firstName"
-      (ionChange)="onValChange()"
-    ></ion-input>
+    <ion-input [formControl]="basicInfoObject.controls.firstName" (ionChange)="onValChange()"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating" color="medium">Last name</ion-label>
-    <ion-input
-      [formControl]="basicInfoObject.controls.lastName"
-      (ionChange)="onValChange()"
-    ></ion-input>
+    <ion-input [formControl]="basicInfoObject.controls.lastName" (ionChange)="onValChange()"></ion-input>
   </ion-item>
 </ion-list>
