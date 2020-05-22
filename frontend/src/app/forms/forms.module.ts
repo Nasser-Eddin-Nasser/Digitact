@@ -28,6 +28,11 @@ import { SubmitPageComponent } from './steps/submit-page/submit-page.component';
     IonicModule,
     ReactiveFormsModule,
   ],
-  declarations: [FormsPage, BasicInfoComponent, SideMenuComponent, SubmitPageComponent],
+  declarations: [
+    FormsPage,
+    BasicInfoComponent,
+    SideMenuComponent,
+    SubmitPageComponent,
+  ],
 })
 export class FormsPageModule {}
