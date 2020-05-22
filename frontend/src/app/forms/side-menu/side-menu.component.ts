@@ -1,10 +1,7 @@
 /*
-@author
-Bharathwaj Ravi
-
-@description
-  - This component renders the hamburger side menu and its actions.
-*/
+ * @description
+ *  This component renders the hamburger side menu and its actions.
+ */
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 

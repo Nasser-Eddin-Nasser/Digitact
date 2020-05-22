@@ -30,7 +30,7 @@
   <div class="forms-cantainer">
     <ng-container [ngSwitch]="currentMenu.selector">
       <form-basic-info
-        (updatedProgressStatus)="updateProgessStatus()"
+        (updatedMenuCompletionStatus)="updateProgessStatus()"
         [menuObject]="currentMenu"
         [basicInfoObject]="basicInfoObj"
         *ngSwitchCase="'form-basic-info'"

@@ -1,11 +1,7 @@
 /*
-@author
-Bharathwaj Ravi
-
-@module
-@description
-  - This module serves as a common place where the form related pages, componets are handled.
-*/
+ * @description
+ *  This module serves as a common place where the form related pages, componets are handled.
+ */
 
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
