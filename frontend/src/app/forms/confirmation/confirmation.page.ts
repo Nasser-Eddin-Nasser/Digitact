@@ -1,11 +1,5 @@
 /*
-@Author
-Vishwas Anavatti
-
-Add modifiers under @Modifiers
-@Modifiers
-
-@Purpose
+@description
   - This component renders the confirmation view and it's actions.
 */
 import { Component } from '@angular/core';
@@ -19,13 +13,13 @@ import { Router } from '@angular/router';
 export class ConfirmationPage {
   constructor(private router: Router) {}
   /*
-  @Usage In this method navigation to HR form is handled.
+  In this method navigation to HR form is handled.
   */
   navigateToNextPage(): void {
     alert('HR form yet to be implemented');
   }
   /*
-   * In this method navigation to home page is handled.
+   In this method navigation to home page is handled.
    */
   quitPage(): void {
     this.router.navigate(['/home']);
