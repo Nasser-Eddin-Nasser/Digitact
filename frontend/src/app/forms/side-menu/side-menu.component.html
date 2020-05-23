@@ -21,10 +21,11 @@
       <ion-menu-toggle auto-hide="true">
         <ion-item
           class="ion-padding-top font25"
-          (click)="onMenuChange(menu)"
+          (click)="changeStep(menu)"
           auto-hide="true"
         >
           <ion-icon
+            size="large"
             [name]="
               menu.isCompleted ? 'checkmark-circle-outline' : 'ellipse-outline'
             "

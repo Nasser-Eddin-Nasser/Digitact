@@ -1,14 +1,16 @@
-/*
-@Author
-Bharathwaj Ravi
-
-Add modifiers under @Modifiers
-@Modifiers
-
-@Purpose
-  - This component renders the basic information step view and it's actions.
-*/
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+/**
+ * @description
+ *  This component renders the basic information step view and it's actions.
+ */
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { FormGroup } from './../../../common/forms/forms';
 import { BasicInfo } from './../../../interfaces/basic-info';
@@ -18,10 +20,10 @@ import { BasicInfo } from './../../../interfaces/basic-info';
   templateUrl: './basic-info.component.html',
   styleUrls: ['./basic-info.component.scss'],
 })
-export class BasicInfoComponent implements OnInit {
-  /*
-  @Usage It holds the current menu object from parent
-  */
+export class BasicInfoComponent implements OnInit, OnDestroy {
+  /**
+   * It holds the current menu object from parent
+   */
   @Input() menuObject: {
     id: number;
     displayName: string;
@@ -30,42 +32,54 @@ export class BasicInfoComponent implements OnInit {
     selecteor: string;
   };
 
-  /*
-  @Usage It holds typesafe form group property fields.
-  */
+  /**
+   * It holds typesafe form group property fields.
+   */
   @Input() basicInfoObject: FormGroup<BasicInfo>;
 
-  /*
-  @Usage It emits the progress callback on this step.
-  */
-  @Output() pageProgressStatusCallBack = new EventEmitter();
+  /**
+   * It emits the progress callback on this step.
+   */
+  @Output() updatedMenuCompletionStatus = new EventEmitter();
 
-  /*
-  @Usage It holds the array objects of drop down menu.
-  */
+  /**
+   * It holds the array objects of drop down menu.
+   */
   salutationsArray = [
     { value: 'mr', displayName: 'Mr' },
     { value: 'mrs', displayName: 'Mrs' },
     { value: 'ms', displayName: 'Ms' },
   ];
 
-  constructor() {}
+  /**
+   * Holds all the subscription which will be useful for un subscribing on destroy.
+   */
+  private subscriptions: Subscription[] = [];
 
-  ngOnInit(): void {}
+  /**
+   * Value changes are observed to update completion status and event is emitted.
+   */
+  ngOnInit(): void {
+    const subscription = this.basicInfoObject.valueChanges.subscribe(
+      (changedValue) => {
+        this.menuObject.isCompleted =
+          changedValue.salutation.length &&
+          changedValue.firstName.length &&
+          changedValue.lastName.length
+            ? true
+            : false;
+        this.updatedMenuCompletionStatus.emit();
+      }
+    );
+    this.subscriptions.push(subscription);
+  }
 
-  /*
-  @Usage It handles the on change event for the fields and send emit call back event to parent.
-  */
-  onValChange(): void {
-    if (
-      this.basicInfoObject.controls.salutation.value.length &&
-      this.basicInfoObject.controls.firstName.value.length &&
-      this.basicInfoObject.controls.lastName.value.length
-    ) {
-      this.menuObject.isCompleted = true;
-    } else {
-      this.menuObject.isCompleted = false;
+  /**
+   * In this method un subscribe event is handled.
+   */
+  ngOnDestroy(): void {
+    for (const subscription of this.subscriptions) {
+      subscription.unsubscribe();
     }
-    this.pageProgressStatusCallBack.emit(this.menuObject);
   }
 }

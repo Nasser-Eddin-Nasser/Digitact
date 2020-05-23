@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class HomePage {
   constructor(private router: Router) {}
 
-  onStartApplication(): void {
+  startApplication(): void {
     this.router.navigate(['/forms'], { queryParams: { step: 1 } });
   }
 }
