@@ -17,6 +17,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./forms/forms.module').then((m) => m.FormsPageModule),
   },
+  {
+    path: 'rating',
+    loadChildren: () =>
+      import('./rating/rating.module').then((m) => m.RatingPageModule),
+  },
 ];
 
 @NgModule({
