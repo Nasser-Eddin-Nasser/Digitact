@@ -1,4 +1,4 @@
-/*
+/**
  * @description
  *   This page handles the basic operation of tracking progress, navigation, close menu, continue button,
  *   event handlers for child to parent communication and parent to child data down.
@@ -19,7 +19,7 @@ import { FormControl, FormGroup } from './../common/forms/forms';
   styleUrls: ['./forms.page.scss'],
 })
 export class FormsPage implements OnInit, OnDestroy {
-  /*
+  /**
    * This array holds the object with   information required for different views.
    */
   sideMenuList = [
@@ -32,7 +32,7 @@ export class FormsPage implements OnInit, OnDestroy {
     },
   ];
 
-  /*
+  /**
    * This object holds current view information.
    */
   currentMenu: {
@@ -43,17 +43,17 @@ export class FormsPage implements OnInit, OnDestroy {
     selector: string;
   };
 
-  /*
+  /**
    * Holds total steps in the form.
    */
   totalSteps: number;
 
-  /*
+  /**
    * Holds progress value.
    */
   progressPercentage: number;
 
-  /*
+  /**
    * Holds all the subscription which will be useful for un subscribing on destroy.
    */
   private subscriptions: Subscription[] = [];
@@ -64,7 +64,7 @@ export class FormsPage implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
-  /*
+  /**
    * This property holds the type safe form group fields for basic information view.
    */
   basicInfoObj = new FormGroup<BasicInfo>({
@@ -73,7 +73,7 @@ export class FormsPage implements OnInit, OnDestroy {
     salutation: new FormControl('mr'),
   });
 
-  /*
+  /**
    * In this method route change is observed and handling is done.
    */
   ngOnInit(): void {
@@ -99,7 +99,7 @@ export class FormsPage implements OnInit, OnDestroy {
     this.subscriptions.push(subscription);
   }
 
-  /*
+  /**
    * In this method navigation to next step is handled.
    */
   navigateToNextStep(): void {
@@ -111,7 +111,7 @@ export class FormsPage implements OnInit, OnDestroy {
     }
   }
 
-  /*
+  /**
    * In this method un subscribe event and restore to default values are handled.
    */
   ngOnDestroy(): void {
@@ -125,14 +125,14 @@ export class FormsPage implements OnInit, OnDestroy {
     });
   }
 
-  /*
+  /**
    * In this method navigation to home page is handled.
    */
   closeForm(): void {
     this.navigationController.navigateForward(['/home']);
   }
 
-  /*
+  /**
    * In this method navigation to respective step is handled.
    * @param {Object} menu - Contains the menu to navigate
    * @param {number} menu.id - The unique id for the menu. Used in query params.
@@ -157,7 +157,7 @@ export class FormsPage implements OnInit, OnDestroy {
     });
   }
 
-  /*
+  /**
    * In this methos progress values are updated.
    */
   updateProgessStatus(): void {
