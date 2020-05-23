@@ -5,7 +5,6 @@
       type="text"
       maxlength="12"
       [formControl]="contactInfoObject.controls.phoneNumber"
-      (ionChange)="onValChange()"
     ></ion-input>
   </ion-item>
 
@@ -14,7 +13,6 @@
     <ion-input
       type="text"
       [formControl]="contactInfoObject.controls.eMail"
-      (ionChange)="onValChange()"
     ></ion-input>
   </ion-item>
 
@@ -23,7 +21,6 @@
     <ion-input
       type="url"
       [formControl]="contactInfoObject.controls.linkedIn"
-      (ionChange)="onValChange()"
     ></ion-input>
   </ion-item>
 
@@ -32,7 +29,6 @@
     <ion-input
       type="url"
       [formControl]="contactInfoObject.controls.xing"
-      (ionChange)="onValChange()"
     ></ion-input>
   </ion-item>
 </ion-list>
