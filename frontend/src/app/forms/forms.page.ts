@@ -81,8 +81,8 @@ export class FormsPage implements OnInit, OnDestroy {
     salutation: new FormControl('mr'),
   });
 
-  /*
-  @Usage  This property holds the type safe form group fields for contact information view.
+  /**
+  * This property holds the type safe form group fields for contact information view.
   */
   contactInfoObj = new FormGroup<ContactInfo>({
     phoneNumber: new FormControl(''),
@@ -91,9 +91,9 @@ export class FormsPage implements OnInit, OnDestroy {
     xing: new FormControl(''),
   });
 
-  /*
-  @Usage In this method route change is observed and handling is done.
-  */
+  /**
+   * In this method route change is observed and handling is done.
+   */
   ngOnInit(): void {
     this.totalSteps = this.sideMenuList.length;
     this.progressPercentage = 0;
