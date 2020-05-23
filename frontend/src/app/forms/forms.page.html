@@ -37,7 +37,7 @@
       >
       </form-basic-info>
       <form-contact-info
-        (pageProgressStatusCallBack)="updateProgessStatus()"
+        (updatedMenuCompletionStatus)="updateProgessStatus()"
         [menuObject]="currentMenu"
         [contactInfoObject]="contactInfoObj"
         *ngSwitchCase="'form-contact-info'"

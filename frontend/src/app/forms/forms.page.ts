@@ -82,8 +82,8 @@ export class FormsPage implements OnInit, OnDestroy {
   });
 
   /**
-  * This property holds the type safe form group fields for contact information view.
-  */
+   * This property holds the type safe form group fields for contact information view.
+   */
   contactInfoObj = new FormGroup<ContactInfo>({
     phoneNumber: new FormControl(''),
     eMail: new FormControl(''),
