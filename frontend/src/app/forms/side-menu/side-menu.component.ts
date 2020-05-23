@@ -29,12 +29,7 @@ export class SideMenuComponent {
 
   /**
    * This method emits the event for step navigation.
-   * @param {Object} menu - Contains the menu to navigate
-   * @param {number} menu.id - The unique id for the menu. Used in query params.
-   * @param {string} menu.displayName - The name to be displayed.
-   * @param {boolean} menu.isCompleted - The completion status of a step menu.
-   * @param {boolean} menu.isActive - The active status of a step menu.
-   * @param {string} menu.selector - The selector name of the step menu component.
+   * @param  menu - Contains the menu to navigate
    */
   changeStep(menu: {
     id: number;
