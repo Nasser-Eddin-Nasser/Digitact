@@ -22,12 +22,7 @@
   @include color-variables(secondary, #cc0033, #ffffff);
 
   /** tertiary **/
-  --ion-color-tertiary: #5260ff;
-  --ion-color-tertiary-rgb: 82, 96, 255;
-  --ion-color-tertiary-contrast: #ffffff;
-  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
-  --ion-color-tertiary-shade: #4854e0;
-  --ion-color-tertiary-tint: #6370ff;
+  @include color-variables(tertiary, #5260ff, #ffffff);
 
   /** success **/
   --ion-color-success: #2dd36f;
@@ -91,12 +86,8 @@
     /** secondary **/
     @include color-variables(secondary, #cc0033, #000000);
 
-    --ion-color-tertiary: #6a64ff;
-    --ion-color-tertiary-rgb: 106, 100, 255;
-    --ion-color-tertiary-contrast: #ffffff;
-    --ion-color-tertiary-contrast-rgb: 255, 255, 255;
-    --ion-color-tertiary-shade: #5d58e0;
-    --ion-color-tertiary-tint: #7974ff;
+    /** tertiary **/
+    @include color-variables(tertiary, #5260ff, #000000);
 
     --ion-color-success: #2fdf75;
     --ion-color-success-rgb: 47, 223, 117;

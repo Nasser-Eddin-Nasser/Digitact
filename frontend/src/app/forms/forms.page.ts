@@ -1,14 +1,8 @@
-/*
-@Author
-Bharathwaj Ravi
-
-Add modifiers under @Modifiers
-@Modifiers
-
-@Purpose
-  - This page handles the basic operation of tracking progress, navigation, close menu, continue button,
-   event handlers for child to parent communication and parent to child data down.
-*/
+/**
+ * @description
+ *   This page handles the basic operation of tracking progress, navigation, close menu, continue button,
+ *   event handlers for child to parent communication and parent to child data down.
+ */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,9 +19,9 @@ import { FormControl, FormGroup } from './../common/forms/forms';
   styleUrls: ['./forms.page.scss'],
 })
 export class FormsPage implements OnInit, OnDestroy {
-  /*
-  @Usage this array holds the object with   information required for different views.
-  */
+  /**
+   * This array holds the object with   information required for different views.
+   */
   sideMenuList = [
     {
       id: 1,
@@ -38,9 +32,9 @@ export class FormsPage implements OnInit, OnDestroy {
     },
   ];
 
-  /*
-  @Usage this  object holds current view information.
-  */
+  /**
+   * This object holds current view information.
+   */
   currentMenu: {
     id: number;
     displayName: string;
@@ -49,19 +43,19 @@ export class FormsPage implements OnInit, OnDestroy {
     selector: string;
   };
 
-  /*
-  @Usage  holds total steps in the form.
-  */
+  /**
+   * Holds total steps in the form.
+   */
   totalSteps: number;
 
-  /*
-  @Usage  holds progress value.
-  */
+  /**
+   * Holds progress value.
+   */
   progressPercentage: number;
 
-  /*
-  @Usage  holds all the subscription which will be useful for un subscribing on destroy.
-  */
+  /**
+   * Holds all the subscription which will be useful for un subscribing on destroy.
+   */
   private subscriptions: Subscription[] = [];
 
   constructor(
@@ -70,18 +64,18 @@ export class FormsPage implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
-  /*
-  @Usage  This property holds the type safe form group fields for basic information view.
-  */
+  /**
+   * This property holds the type safe form group fields for basic information view.
+   */
   basicInfoObj = new FormGroup<BasicInfo>({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     salutation: new FormControl('mr'),
   });
 
-  /*
-  @Usage In this method route change is observed and handling is done.
-  */
+  /**
+   * In this method route change is observed and handling is done.
+   */
   ngOnInit(): void {
     this.totalSteps = this.sideMenuList.length;
     this.progressPercentage = 0;
@@ -105,21 +99,21 @@ export class FormsPage implements OnInit, OnDestroy {
     this.subscriptions.push(subscription);
   }
 
-  /*
-  @Usage In this method navigation to next step is handled.
-  */
-  navigateToNextForm(): void {
+  /**
+   * In this method navigation to next step is handled.
+   */
+  navigateToNextStep(): void {
     if (this.currentMenu.id !== this.totalSteps) {
       const nextMenuIndex = this.sideMenuList.indexOf(this.currentMenu) + 1;
-      this.onFormStepsNavigation(this.sideMenuList[nextMenuIndex]);
+      this.navigateToStep(this.sideMenuList[nextMenuIndex]);
     } else {
       alert('Next is submit page which is yet to be implmented');
     }
   }
 
-  /*
-  @Usage In this method un subscribe event and restore to default values are handled.
-  */
+  /**
+   * In this method un subscribe event and restore to default values are handled.
+   */
   ngOnDestroy(): void {
     for (const subscription of this.subscriptions) {
       subscription.unsubscribe();
@@ -131,24 +125,25 @@ export class FormsPage implements OnInit, OnDestroy {
     });
   }
 
-  /*
-  @Usage In this method navigation to home page is handled.
-  */
-  onClose(): void {
+  /**
+   * In this method navigation to home page is handled.
+   */
+  closeForm(): void {
     this.navigationController.navigateForward(['/home']);
   }
 
-  /*
-  @Usage In this method navigation to respective step is handled.
-  */
-  onFormStepsNavigation(event: {
+  /**
+   * In this method navigation to respective step is handled.
+   * @param  menu - Contains the menu to navigate
+   */
+  navigateToStep(menu: {
     id: number;
     displayName: string;
     isCompleted: boolean;
     isActive: boolean;
     selector: string;
   }): void {
-    const param = event.id;
+    const param = menu.id;
     this.router.navigate([], {
       relativeTo: this.activeRoute,
       queryParams: {
@@ -157,17 +152,10 @@ export class FormsPage implements OnInit, OnDestroy {
     });
   }
 
-  /*
-  @Usage In this methos progress values are updated.
-  */
-  pageProgressStatusCallBack(event: {
-    id: number;
-    displayName: string;
-    isCompleted: boolean;
-    isActive: boolean;
-    selector: string;
-  }): void {
-    console.log(event);
+  /**
+   * In this methos progress values are updated.
+   */
+  updateProgessStatus(): void {
     const completedStep = this.sideMenuList.filter((obj) => obj.isCompleted)
       .length;
     this.progressPercentage = completedStep / this.totalSteps;
