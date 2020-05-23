@@ -1,4 +1,4 @@
-/*
+/**
  * @description
  *  This component renders the basic information step view and it's actions.
  */
@@ -21,7 +21,7 @@ import { BasicInfo } from './../../../interfaces/basic-info';
   styleUrls: ['./basic-info.component.scss'],
 })
 export class BasicInfoComponent implements OnInit, OnDestroy {
-  /*
+  /**
    * It holds the current menu object from parent
    */
   @Input() menuObject: {
@@ -32,17 +32,17 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
     selecteor: string;
   };
 
-  /*
+  /**
    * It holds typesafe form group property fields.
    */
   @Input() basicInfoObject: FormGroup<BasicInfo>;
 
-  /*
+  /**
    * It emits the progress callback on this step.
    */
   @Output() updatedMenuCompletionStatus = new EventEmitter();
 
-  /*
+  /**
    * It holds the array objects of drop down menu.
    */
   salutationsArray = [
@@ -51,12 +51,12 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
     { value: 'ms', displayName: 'Ms' },
   ];
 
-  /*
+  /**
    * Holds all the subscription which will be useful for un subscribing on destroy.
    */
   private subscriptions: Subscription[] = [];
 
-  /*
+  /**
    * Value changes are observed to update completion status and event is emitted.
    */
   ngOnInit(): void {
@@ -74,7 +74,7 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
     this.subscriptions.push(subscription);
   }
 
-  /*
+  /**
    * In this method un subscribe event is handled.
    */
   ngOnDestroy(): void {

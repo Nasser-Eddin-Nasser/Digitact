@@ -1,4 +1,4 @@
-/*
+/**
  * @description
  *    This interface holds the basic informtion view related fields.
  */

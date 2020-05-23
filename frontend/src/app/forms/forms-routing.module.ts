@@ -1,4 +1,4 @@
-/*
+/**
  * @description
  *   This page has the route path configuration in forms module.
  */
