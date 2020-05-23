@@ -1,3 +1,7 @@
+/*
+ * @description
+ *   This page has the route path configuration for confirmation page.
+ */
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
