@@ -1,5 +1,6 @@
 package Controller;
 
+import Database.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,6 +23,8 @@ public class StandardController {
 
     public StandardController(Stage stage) throws IOException {
 
+        Connector connector = new Connector();
+        connector.connect();
         this.stage = stage;
         FXMLLoader loader =
                 new FXMLLoader(getClass().getResource("/View/standard.fxml"));

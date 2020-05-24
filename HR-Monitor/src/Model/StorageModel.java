@@ -6,11 +6,13 @@ import Storage.Dummy;
 
 import java.util.List;
 
+import static java.lang.Boolean.TRUE;
+
 
 public class StorageModel {
 
     public List<User> getDB() {
-        if (App.DEVELOPMENT_ENVIRONMENT) {
+        if (TRUE) {
             return Dummy.DB;
         }
         return null;
