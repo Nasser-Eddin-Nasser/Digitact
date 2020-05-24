@@ -7,6 +7,7 @@ import Storage.Dummy;
 public class Util {
     public static void fillDB() {
         new Dummy();
+        /*
         int i = 0;
         while (i < 10000) {
             User user = new Applicant(
@@ -15,5 +16,7 @@ public class Util {
             Dummy.DB.add(user);
             i++;
         }
+        */
+
     }
 }

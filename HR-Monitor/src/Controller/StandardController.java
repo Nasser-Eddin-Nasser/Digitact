@@ -23,8 +23,6 @@ public class StandardController {
 
     public StandardController(Stage stage) throws IOException {
 
-        Connector connector = new Connector();
-        connector.connect();
         this.stage = stage;
         FXMLLoader loader =
                 new FXMLLoader(getClass().getResource("/View/standard.fxml"));

@@ -1,5 +1,6 @@
 package Controller;
 
+import Database.Connector;
 import Model.StorageModel;
 import Model.User.User;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -28,6 +29,8 @@ public class StorageController {
     Pane root;
 
     public StorageController(Stage parentStage) throws IOException {
+        Connector connector = new Connector();
+        connector.connect();
         model = new StorageModel();
         stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/storageView.fxml"));

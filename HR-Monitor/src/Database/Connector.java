@@ -37,10 +37,11 @@ public class Connector {
 
                 //map(firstName,secondName);
                 User user = new Applicant(firstName, secondName);
-                StorageModel storagemodel = new StorageModel();
+                System.out.println(user.getFirstName()+" "+user.getLastName());
+                //StorageModel storagemodel = new StorageModel();
                 //users.add(user);
                 //Storage.Dummy.DB.add(user);
-                //Dummy.DB.add(user);
+                Dummy.DB.add(user);
             }
 
         } catch (Exception throwables) {
