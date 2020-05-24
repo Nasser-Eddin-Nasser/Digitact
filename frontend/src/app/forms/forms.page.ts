@@ -141,6 +141,12 @@ export class FormsPage implements OnInit, OnDestroy {
       lastName: new FormControl(''),
       salutation: new FormControl('mr'),
     });
+    this.contactInfoObj = new FormGroup<ContactInfo>({
+      phoneNumber: new FormControl(''),
+      eMail: new FormControl(''),
+      linkedIn: new FormControl(''),
+      xing: new FormControl(''),
+    });
   }
 
   /**
