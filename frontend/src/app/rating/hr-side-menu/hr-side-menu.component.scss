@@ -1,6 +1,12 @@
-ion-list-header,
+.side-menu-container {
+  padding: 2rem;
+}
+.side-menu-heading {
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
 ion-item {
   // A "hack" to make sure the element is aligned completely to the left.
   --ion-safe-area-left: 0;
-  --ion-safe-area-right: 0;
 }

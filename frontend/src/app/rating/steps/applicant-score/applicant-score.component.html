@@ -1,12 +1,10 @@
-<ion-list lines="none">
-  <ion-item>
-    <h1>Applicant Rating</h1>
-  </ion-item>
+<h1>Applicant Rating</h1>
 
-  <ion-item>
+<ion-list lines="none">
+  <ion-list-header>
     Rhetoric:
     {{ ratingForm.controls.applicantScore.controls.rhetoric.value }}
-  </ion-item>
+  </ion-list-header>
   <ion-item class="rating">
     <ion-range
       min="1"
@@ -18,10 +16,10 @@
     ></ion-range>
   </ion-item>
 
-  <ion-item>
+  <ion-list-header>
     Motivation:
     {{ ratingForm.controls.applicantScore.controls.motivation.value }}
-  </ion-item>
+  </ion-list-header>
   <ion-item class="rating">
     <ion-range
       min="1"
@@ -33,10 +31,10 @@
     ></ion-range>
   </ion-item>
 
-  <ion-item>
+  <ion-list-header>
     Self-Assurance:
     {{ ratingForm.controls.applicantScore.controls.selfAssurance.value }}
-  </ion-item>
+  </ion-list-header>
   <ion-item class="rating">
     <ion-range
       min="1"
@@ -48,10 +46,10 @@
     ></ion-range>
   </ion-item>
 
-  <ion-item>
+  <ion-list-header>
     Personal Impression:
     {{ ratingForm.controls.applicantScore.controls.personalImpression.value }}
-  </ion-item>
+  </ion-list-header>
   <ion-item class="rating">
     <ion-range
       min="1"

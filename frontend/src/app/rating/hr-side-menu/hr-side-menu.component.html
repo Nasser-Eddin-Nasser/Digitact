@@ -1,0 +1,32 @@
+<ion-menu side="end" contentId="hr-side-menu">
+  <ion-content>
+    <div class="side-menu-container">
+      <h1 class="side-menu-heading">Progress</h1>
+
+      <ion-list lines="none">
+        <ion-item>
+          <ion-icon
+            size="large"
+            slot="start"
+            [name]="
+              ratingForm.controls.applicantScore.valid
+                ? 'checkmark-circle-outline'
+                : 'ellipse-outline'
+            "
+            [color]="
+              ratingForm.controls.applicantScore.valid ? 'tertiary' : 'medium'
+            "
+          ></ion-icon>
+
+          <ion-label
+            [color]="
+              ratingForm.controls.applicantScore.valid ? 'tertiary' : 'medium'
+            "
+          >
+            Applicant Score
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+</ion-menu>

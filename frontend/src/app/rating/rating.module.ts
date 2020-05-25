@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
+import { HrSideMenuComponent } from './hr-side-menu/hr-side-menu.component';
 import { RatingPageRoutingModule } from './rating-routing.module';
 import { RatingPage } from './rating.page';
 import { ApplicantScoreComponent } from './steps/applicant-score/applicant-score.component';
@@ -15,6 +16,6 @@ import { ApplicantScoreComponent } from './steps/applicant-score/applicant-score
     IonicModule,
     RatingPageRoutingModule,
   ],
-  declarations: [RatingPage, ApplicantScoreComponent],
+  declarations: [RatingPage, ApplicantScoreComponent, HrSideMenuComponent],
 })
 export class RatingPageModule {}
