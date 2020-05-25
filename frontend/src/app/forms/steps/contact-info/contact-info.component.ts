@@ -1,6 +1,6 @@
 /**
  * @description
- *  This component renders the basic information step view and it's actions.
+ *  This component renders the contact information step view and it's actions.
  */
 import {
   Component,
@@ -13,14 +13,14 @@ import {
 import { Subscription } from 'rxjs';
 
 import { FormGroup } from './../../../common/forms/forms';
-import { BasicInfo } from './../../../interfaces/basic-info';
+import { ContactInfo } from './../../../interfaces/contact-info';
 
 @Component({
-  selector: 'form-basic-info',
-  templateUrl: './basic-info.component.html',
-  styleUrls: ['./basic-info.component.scss'],
+  selector: 'form-contact-info',
+  templateUrl: './contact-info.component.html',
+  styleUrls: ['./contact-info.component.scss'],
 })
-export class BasicInfoComponent implements OnInit, OnDestroy {
+export class ContactInfoComponent implements OnInit, OnDestroy {
   /**
    * It holds the current menu object from parent
    */
@@ -35,37 +35,26 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
   /**
    * It holds typesafe form group property fields.
    */
-  @Input() basicInfoObject: FormGroup<BasicInfo>;
-
-  /**
-   * It emits the progress callback on this step.
-   */
-  @Output() updatedMenuCompletionStatus = new EventEmitter();
+  @Input() contactInfoObject: FormGroup<ContactInfo>;
 
   /**
    * It holds the array objects of drop down menu.
    */
-  salutationsArray = [
-    { value: 'mr', displayName: 'Mr' },
-    { value: 'mrs', displayName: 'Mrs' },
-    { value: 'ms', displayName: 'Ms' },
-  ];
+  @Output() updatedMenuCompletionStatus = new EventEmitter();
 
   /**
    * Holds all the subscription which will be useful for un subscribing on destroy.
    */
   private subscriptions: Subscription[] = [];
 
-  /**
-   * Value changes are observed to update completion status and event is emitted.
-   */
   ngOnInit(): void {
-    const subscription = this.basicInfoObject.valueChanges.subscribe(
+    const subscription = this.contactInfoObject.valueChanges.subscribe(
       (changedValue) => {
         this.menuObject.isCompleted =
-          changedValue.salutation.length &&
-          changedValue.firstName.length &&
-          changedValue.lastName.length
+          changedValue.phoneNumber.length &&
+          changedValue.eMail.length &&
+          changedValue.linkedIn.length &&
+          changedValue.xing.length
             ? true
             : false;
         this.updatedMenuCompletionStatus.emit();
