@@ -1,25 +1,33 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button>
+      <ion-button (click)="goToHomePage()">
         <ion-icon name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
 
-    <ion-title>hr-step 1/1</ion-title>
-
     <ion-buttons slot="end">
       <ion-button>
-        <ion-icon name="list"></ion-icon>
+        <ion-menu-button slot="end" id="hr-side-menu">
+          <ion-icon name="list-outline"></ion-icon>
+        </ion-menu-button>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <app-applicant-score [ratingForm]="ratingForm"></app-applicant-score>
+<app-hr-side-menu [ratingForm]="ratingForm"></app-hr-side-menu>
 
-  <button class="fancy-button">
-    Continue
-  </button>
+<ion-content>
+  <div class="main-container with-bottom-buttons">
+    <div class="content">
+      <app-applicant-score [ratingForm]="ratingForm"></app-applicant-score>
+    </div>
+
+    <div class="buttons-container">
+      <button class="fancy-button">
+        Continue
+      </button>
+    </div>
+  </div>
 </ion-content>
