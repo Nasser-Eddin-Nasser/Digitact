@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { FormControl, FormGroup } from '../common/forms/forms';
+
+import { ApplicantScore, RatingForm } from './model/rating-form.model';
 
 @Component({
   selector: 'app-rating',
@@ -7,14 +10,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./rating.page.scss'],
 })
 export class RatingPage {
-  constructor(private router: Router) {}
-
-  rhetoricScale = 1;
-  motivationScale = 1;
-  selfAssuranceScale = 1;
-  personalImpressionScale = 1;
-
-  startApplication(): void {
-    this.router.navigate(['/rating'], { queryParams: { step: 1 } });
-  }
+  ratingForm = new FormGroup<RatingForm>({
+    applicantScore: new FormGroup<ApplicantScore>({
+      rhetoric: new FormControl(),
+      motivation: new FormControl(),
+      selfAssurance: new FormControl(),
+      personalImpression: new FormControl(),
+    }),
+  });
 }

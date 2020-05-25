@@ -1,62 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>hr-step 1/1</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="list"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <div class="container">
-    <ion-list lines="none">
-      <ion-item>
-        <h1>Applicant Rating</h1>
-      </ion-item>
+  <app-applicant-score [ratingForm]="ratingForm"></app-applicant-score>
 
-      <ion-item>Rhetoric: {{rhetoricScale}}</ion-item>
-      <ion-item class="rating">
-        <ion-range
-          min="1"
-          max="6"
-          step="1"
-          snaps="true"
-          color="secondary"
-          [(ngModel)]="rhetoricScale"
-        ></ion-range>
-      </ion-item>
-
-      <ion-item>Motivation: {{motivationScale}}</ion-item>
-      <ion-item class="rating">
-        <ion-range
-          min="1"
-          max="6"
-          step="1"
-          snaps="true"
-          color="secondary"
-          [(ngModel)]="motivationScale"
-        ></ion-range>
-      </ion-item>
-
-      <ion-item>Self-assurance: {{selfAssuranceScale}}</ion-item>
-      <ion-item class="rating">
-        <ion-range
-          min="1"
-          max="6"
-          step="1"
-          snaps="true"
-          color="secondary"
-          [(ngModel)]="selfAssuranceScale"
-        ></ion-range>
-      </ion-item>
-
-      <ion-item>Personal Impression: {{personalImpressionScale}}</ion-item>
-      <ion-item class="rating">
-        <ion-range
-          min="1"
-          max="6"
-          step="1"
-          snaps="true"
-          color="secondary"
-          [(ngModel)]="personalImpressionScale"
-        ></ion-range>
-      </ion-item>
-    </ion-list>
-    <div class="button-container">
-      <button class="fancy-button" (click)="startApplication()">
-        Continue
-      </button>
-    </div>
-  </div>
+  <button class="fancy-button">
+    Continue
+  </button>
 </ion-content>
