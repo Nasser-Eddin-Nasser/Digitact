@@ -99,7 +99,6 @@ export class FormsPage implements OnInit, OnDestroy {
     const subscription = this.activeRoute.queryParams.subscribe((params) => {
       const step = Number(params.step);
       if (step > 0 && step <= this.totalSteps) {
-        console.log('CM' + this.currentMenu.id + '  - ' + this.totalSteps);
         this.buttonText = step === this.totalSteps ? 'Submit' : 'Continue';
         this.sideMenuList.filter((obj) => (obj.isActive = false));
         this.currentMenu = this.sideMenuList.filter(
