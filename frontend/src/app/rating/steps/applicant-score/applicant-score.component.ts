@@ -1,3 +1,8 @@
+/**
+ * @description
+ *  This component renders the applicant-score view and it's actions.
+ */
+
 import { Component, Input } from '@angular/core';
 
 import { FormGroup } from '../../../common/forms/forms';
