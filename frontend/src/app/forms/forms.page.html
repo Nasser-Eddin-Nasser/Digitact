@@ -42,11 +42,11 @@
     </form-basic-info>
   </ng-container>
   <ng-container [ngSwitch]="currentMenu.selector">
-    <app-submit-page
+    <form-submit-page
       (pageProgressStatusCallBack)="pageProgressStatusCallBack($event)"
-      *ngSwitchCase="'app-submit-page'"
+      *ngSwitchCase="'form-submit-page'"
     >
-    </app-submit-page>
+    </form-submit-page>
   </ng-container>
 </ion-content>
 
@@ -56,7 +56,7 @@
       class="fancy-button align center width90"
       (click)="navigateToNextFormOrSubmit()"
     >
-      {{this.getButtonText()}}
+      {{buttonText}}
     </button>
   </ion-toolbar>
 </ion-footer>

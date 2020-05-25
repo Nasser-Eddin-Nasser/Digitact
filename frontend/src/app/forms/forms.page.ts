@@ -39,7 +39,7 @@ export class FormsPage implements OnInit, OnDestroy {
     {
       id: 2,
       displayName: 'Submit',
-      selector: 'app-submit-page',
+      selector: 'form-submit-page',
       isActive: false,
       isCompleted: false,
     },
@@ -55,7 +55,8 @@ export class FormsPage implements OnInit, OnDestroy {
     isActive: boolean;
     selector: string;
   };
-  buttonText: string;
+
+  buttonText = 'Continue';
   /*
   @Usage  holds total steps in the form.
   */
@@ -70,8 +71,6 @@ export class FormsPage implements OnInit, OnDestroy {
   @Usage  holds all the subscription which will be useful for un subscribing on destroy.
   */
   private subscriptions: Subscription[] = [];
-
-  hideButton = false;
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -100,6 +99,8 @@ export class FormsPage implements OnInit, OnDestroy {
     const subscription = this.activeRoute.queryParams.subscribe((params) => {
       const step = Number(params.step);
       if (step > 0 && step <= this.totalSteps) {
+        console.log('CM' + this.currentMenu.id + '  - ' + this.totalSteps);
+        this.buttonText = step === this.totalSteps ? 'Submit' : 'Continue';
         this.sideMenuList.filter((obj) => (obj.isActive = false));
         this.currentMenu = this.sideMenuList.filter(
           (obj) => obj.id === Number(params.step)
@@ -122,8 +123,7 @@ export class FormsPage implements OnInit, OnDestroy {
       const nextMenuIndex = this.sideMenuList.indexOf(this.currentMenu) + 1;
       this.onFormStepsNavigation(this.sideMenuList[nextMenuIndex]);
     } else {
-      console.log('submit');
-      alert('Next is submit page which is yet to be implmented');
+      alert('Next is yet to be implmented');
     }
   }
 
@@ -181,9 +181,5 @@ export class FormsPage implements OnInit, OnDestroy {
     const completedStep = this.sideMenuList.filter((obj) => obj.isCompleted)
       .length;
     this.progressPercentage = completedStep / this.totalSteps;
-  }
-
-  getButtonText(): string {
-    return this.currentMenu.id === this.totalSteps ? 'Submit' : 'continue';
   }
 }
