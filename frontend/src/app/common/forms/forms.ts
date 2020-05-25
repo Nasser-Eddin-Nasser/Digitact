@@ -52,11 +52,11 @@ type MyFormControls<T> = {
 
 type MyGenericFormControl<T> =
   // First, handle Arrays.
-  T extends string[] | File[]
+  T extends string[] | number[] | File[]
     ? FormArray<UnpackTypeFromArray<T>>
     : T extends unknown[] // Make sure any other kind of Array may not be used.
     ? never
-    : T extends string | File // Second, handle basic strings and files
+    : T extends string | number | File // Second, handle basic strings and files
     ? FormControl<T>
     : T extends {} // If it is an Object, it is (most likely) a group.
     ? FormGroup<T>
@@ -88,7 +88,9 @@ type InitialValueOrInitialValueAndDisabled<T> =
  * A wrapper around Angular's FormControl.
  * For an example, see comment on the FormGroup wrapper class.
  */
-export class FormControl<T extends string | File> extends AngularFormControl {
+export class FormControl<
+  T extends string | number | File
+> extends AngularFormControl {
   readonly value: T;
   readonly valueChanges: Observable<T>;
 
