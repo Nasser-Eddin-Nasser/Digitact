@@ -10,6 +10,7 @@ import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 import { BasicInfo } from '../interfaces/basic-info';
+import { ContactInfo } from '../interfaces/contact-info';
 
 import { FormControl, FormGroup } from './../common/forms/forms';
 
@@ -27,6 +28,13 @@ export class FormsPage implements OnInit, OnDestroy {
       id: 1,
       displayName: 'Personal info',
       selector: 'form-basic-info',
+      isActive: false,
+      isCompleted: false,
+    },
+    {
+      id: 2,
+      displayName: 'Contact info',
+      selector: 'form-contact-info',
       isActive: false,
       isCompleted: false,
     },
@@ -71,6 +79,16 @@ export class FormsPage implements OnInit, OnDestroy {
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     salutation: new FormControl('mr'),
+  });
+
+  /**
+   * This property holds the type safe form group fields for contact information view.
+   */
+  contactInfoObj = new FormGroup<ContactInfo>({
+    phoneNumber: new FormControl(''),
+    eMail: new FormControl(''),
+    linkedIn: new FormControl(''),
+    xing: new FormControl(''),
   });
 
   /**
@@ -122,6 +140,12 @@ export class FormsPage implements OnInit, OnDestroy {
       firstName: new FormControl(''),
       lastName: new FormControl(''),
       salutation: new FormControl('mr'),
+    });
+    this.contactInfoObj = new FormGroup<ContactInfo>({
+      phoneNumber: new FormControl(''),
+      eMail: new FormControl(''),
+      linkedIn: new FormControl(''),
+      xing: new FormControl(''),
     });
   }
 
