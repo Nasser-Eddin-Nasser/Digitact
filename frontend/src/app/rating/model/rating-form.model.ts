@@ -1,3 +1,8 @@
+/**
+ * @description
+ *    This model hold the applicant score view related fields.
+ */
+
 export interface RatingForm {
   applicantScore: ApplicantScore;
 }

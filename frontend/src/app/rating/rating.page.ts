@@ -1,3 +1,9 @@
+/**
+ * @description
+ *   This page handles the basic operation of navigation, close menu and validating of the rating pages.
+ *
+ */
+
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
@@ -14,6 +20,9 @@ import { ApplicantScore, RatingForm } from './model/rating-form.model';
 export class RatingPage {
   constructor(private navController: NavController) {}
 
+  /**
+   * This property holds the type safe form group fields for applicant-score view.
+   */
   ratingForm = new FormGroup<RatingForm>({
     applicantScore: new FormGroup<ApplicantScore>({
       rhetoric: new FormControl(undefined, Validators.required),
@@ -23,6 +32,9 @@ export class RatingPage {
     }),
   });
 
+  /**
+   * In this method navigation to home page is handled.
+   */
   goToHomePage(): void {
     this.navController.navigateBack('/home');
   }

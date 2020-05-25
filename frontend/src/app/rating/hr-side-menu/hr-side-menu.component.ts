@@ -1,3 +1,8 @@
+/**
+ * @description
+ *  This component renders the hamburger hr-side menu and its actions.
+ */
+
 import { Component, Input } from '@angular/core';
 
 import { FormGroup } from '../../common/forms/forms';

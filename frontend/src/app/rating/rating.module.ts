@@ -1,3 +1,8 @@
+/**
+ * @description
+ *  This module serves as a common place where the rating related pages, componets are handled.
+ */
+
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
