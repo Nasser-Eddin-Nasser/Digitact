@@ -9,8 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
-import { ContactInfo } from '../interfaces/contact-info';
-import { BasicInfo, FormsData } from '../model/forms-data.model';
+import { BasicInfo, ContactInfo, FormsData } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
 
 import { FormControl, FormGroup } from './../common/forms/forms';
@@ -83,16 +82,12 @@ export class FormsPage implements OnInit, OnDestroy {
       lastName: new FormControl(''),
       salutation: new FormControl('mr'),
     }),
-  });
-
-  /**
-   * This property holds the type safe form group fields for contact information view.
-   */
-  contactInfoObj = new FormGroup<ContactInfo>({
-    phoneNumber: new FormControl(''),
-    eMail: new FormControl(''),
-    linkedIn: new FormControl(''),
-    xing: new FormControl(''),
+    contactInfo: new FormGroup<ContactInfo>({
+      phoneNumber: new FormControl(''),
+      eMail: new FormControl(''),
+      linkedIn: new FormControl(''),
+      xing: new FormControl(''),
+    }),
   });
 
   /**
@@ -149,16 +144,18 @@ export class FormsPage implements OnInit, OnDestroy {
     for (const subscription of this.subscriptions) {
       subscription.unsubscribe();
     }
-    this.overallObject.controls.basicInfo = new FormGroup<BasicInfo>({
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      salutation: new FormControl('mr'),
-    });
-    this.contactInfoObj = new FormGroup<ContactInfo>({
-      phoneNumber: new FormControl(''),
-      eMail: new FormControl(''),
-      linkedIn: new FormControl(''),
-      xing: new FormControl(''),
+    this.overallObject = new FormGroup<FormsData>({
+      basicInfo: new FormGroup<BasicInfo>({
+        firstName: new FormControl(''),
+        lastName: new FormControl(''),
+        salutation: new FormControl('mr'),
+      }),
+      contactInfo: new FormGroup<ContactInfo>({
+        phoneNumber: new FormControl(''),
+        eMail: new FormControl(''),
+        linkedIn: new FormControl(''),
+        xing: new FormControl(''),
+      }),
     });
   }
 

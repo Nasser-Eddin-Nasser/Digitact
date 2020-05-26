@@ -39,7 +39,7 @@
       <form-contact-info
         (updatedMenuCompletionStatus)="updateProgessStatus()"
         [menuObject]="currentMenu"
-        [contactInfoObject]="contactInfoObj"
+        [contactInfoObject]="overallObject.controls.contactInfo"
         *ngSwitchCase="'form-contact-info'"
       >
       </form-contact-info>
