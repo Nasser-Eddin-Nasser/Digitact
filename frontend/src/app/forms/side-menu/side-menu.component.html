@@ -1,44 +1,40 @@
 <ion-menu side="end" lines="none" menuId="first" contentId="main">
-  <ion-header class="ion-no-border">
-    <ion-toolbar lines="none">
-      <ion-list>
-        <ion-item lines="none">
-          <h1>Progress</h1>
-        </ion-item>
-      </ion-list>
-    </ion-toolbar>
-  </ion-header>
-
   <ion-content>
-    <ion-item lines="none" class="ion-text-justify">
-      <h3>
-        If you want to go to a previous step, just click on the element in the
-        list!
-      </h3>
-    </ion-item>
+    <div class="side-menu-container">
+      <div class="side-menu-headline">
+        <h1>Progress</h1>
+        <div class="description">
+          If you want to go to a previous step, just click on the element in the
+          list!
+        </div>
+      </div>
 
-    <ion-list lines="none" *ngFor="let menu of sideMenuList">
-      <ion-menu-toggle auto-hide="true">
-        <ion-item
-          class="ion-padding-top font25"
-          (click)="changeStep(menu)"
-          auto-hide="true"
-        >
-          <ion-icon
-            size="large"
-            [name]="
-              menu.isCompleted ? 'checkmark-circle-outline' : 'ellipse-outline'
-            "
-            [color]="menu.isActive ? 'tertiary' : 'medium'"
-          ></ion-icon>
-          <ion-label
-            class="ion-padding-horizontal"
-            [color]="menu.isActive ? 'tertiary' : 'medium'"
+      <ion-list lines="none" *ngFor="let menu of sideMenuList">
+        <ion-menu-toggle auto-hide="true">
+          <ion-item
+            (click)="changeStep(menu)"
+            auto-hide="true"
+            class="ion-margin-top"
           >
-            {{ menu.displayName }}
-          </ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-    </ion-list>
+            <ion-icon
+              size="large"
+              [name]="
+                menu.isCompleted
+                  ? 'checkmark-circle-outline'
+                  : 'ellipse-outline'
+              "
+              [color]="menu.isActive ? 'tertiary' : 'medium'"
+            ></ion-icon>
+
+            <ion-label
+              class="ion-padding-horizontal"
+              [color]="menu.isActive ? 'tertiary' : 'medium'"
+            >
+              {{ menu.displayName }}
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </div>
   </ion-content>
 </ion-menu>

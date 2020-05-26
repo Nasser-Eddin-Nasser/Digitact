@@ -175,7 +175,7 @@ export class FormsPage implements OnInit, OnDestroy {
    * In this method navigation to home page is handled.
    */
   closeForm(): void {
-    this.navigationController.navigateForward(['/home']);
+    this.navigationController.navigateBack(['/home']);
   }
 
   /**
