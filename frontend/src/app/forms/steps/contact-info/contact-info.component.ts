@@ -13,7 +13,7 @@ import {
 import { Subscription } from 'rxjs';
 
 import { FormGroup } from './../../../common/forms/forms';
-import { ContactInfo } from './../../../interfaces/contact-info';
+import { ContactInfo } from './../../../model/forms-data.model';
 
 @Component({
   selector: 'form-contact-info',

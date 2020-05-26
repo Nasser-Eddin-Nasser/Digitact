@@ -33,14 +33,14 @@
       <form-basic-info
         (updatedMenuCompletionStatus)="updateProgessStatus()"
         [menuObject]="currentMenu"
-        [basicInfoObject]="basicInfoObj"
+        [basicInfoObject]="overallInfo.controls.basicInfo"
         *ngSwitchCase="'form-basic-info'"
       >
       </form-basic-info>
       <form-contact-info
         (updatedMenuCompletionStatus)="updateProgessStatus()"
         [menuObject]="currentMenu"
-        [contactInfoObject]="contactInfoObj"
+        [contactInfoObject]="overallInfo.controls.contactInfo"
         *ngSwitchCase="'form-contact-info'"
       >
       </form-contact-info>
