@@ -13,6 +13,7 @@ import { FormsPage } from './forms.page';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { BasicInfoComponent } from './steps/basic-info/basic-info.component';
 import { ContactInfoComponent } from './steps/contact-info/contact-info.component';
+import { SubmitPageComponent } from './steps/submit-page/submit-page.component';
 
 @NgModule({
   imports: [
@@ -25,8 +26,9 @@ import { ContactInfoComponent } from './steps/contact-info/contact-info.componen
   declarations: [
     FormsPage,
     BasicInfoComponent,
-    ContactInfoComponent,
     SideMenuComponent,
+    SubmitPageComponent,
+    ContactInfoComponent,
   ],
 })
 export class FormsPageModule {}
