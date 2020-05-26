@@ -138,7 +138,7 @@ export class FormsPage implements OnInit, OnDestroy {
       const nextMenuIndex = this.sideMenuList.indexOf(this.currentMenu) + 1;
       this.navigateToStep(this.sideMenuList[nextMenuIndex]);
     } else {
-      alert('Next is yet to be implmented');
+      this.router.navigate(['/forms/confirmation']);
     }
   }
 
