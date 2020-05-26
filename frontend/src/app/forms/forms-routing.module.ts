@@ -12,6 +12,13 @@ const routes: Routes = [
     path: '',
     component: FormsPage,
   },
+  {
+    path: 'confirmation',
+    loadChildren: () =>
+      import('./confirmation/confirmation.module').then(
+        (m) => m.ConfirmationPageModule
+      ),
+  },
 ];
 
 @NgModule({
