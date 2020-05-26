@@ -29,6 +29,7 @@ import { SubmitPageComponent } from './steps/submit-page/submit-page.component';
     ContactInfoComponent,
     SideMenuComponent,
     SubmitPageComponent,
+    ContactInfoComponent,
   ],
 })
 export class FormsPageModule {}

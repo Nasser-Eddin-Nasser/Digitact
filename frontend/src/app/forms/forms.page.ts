@@ -58,10 +58,14 @@ export class FormsPage implements OnInit, OnDestroy {
     selector: string;
   };
 
+  /**
+   * @Usage  holds buttent text name.
+   */
   buttonText = 'Continue';
-  /*
-  @Usage  holds total steps in the form.
-  */
+
+  /**
+   * Holds total steps in the form.
+   */
   totalSteps: number;
 
   /**
@@ -149,6 +153,12 @@ export class FormsPage implements OnInit, OnDestroy {
       firstName: new FormControl(''),
       lastName: new FormControl(''),
       salutation: new FormControl('mr'),
+    });
+    this.contactInfoObj = new FormGroup<ContactInfo>({
+      phoneNumber: new FormControl(''),
+      eMail: new FormControl(''),
+      linkedIn: new FormControl(''),
+      xing: new FormControl(''),
     });
   }
 
