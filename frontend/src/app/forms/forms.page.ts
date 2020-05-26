@@ -202,16 +202,15 @@ export class FormsPage implements OnInit, OnDestroy {
    * In this methos progress values are updated.
    */
   updateProgessStatus(): void {
-  // Logic can be implemented in better way just temporary now.
-    const completedStep = this.sideMenuList.filter((obj,index) => {
-        if(index === this.totalSteps-1){
-          return false;
-        }
-          return obj.isCompleted;
-      })
-      .length; // completed step without last step Submit as it static page without any fields.
+    // Logic can be implemented in better way just temporary now.
+    const completedStep = this.sideMenuList.filter((obj, index) => {
+      if (index === this.totalSteps - 1) {
+        return false;
+      }
+      return obj.isCompleted;
+    }).length; // completed step without last step Submit as it static page without any fields.
     this.sideMenuList[this.totalSteps - 1].isCompleted =
-      completedStep === (this.totalSteps - 1) ? true : false; // Submit page isCompleted should be true only if  other views are completed.
+      completedStep === this.totalSteps - 1 ? true : false; // Submit page isCompleted should be true only if  other views are completed.
     this.progressPercentage = completedStep / (this.totalSteps - 1);
   }
 }
