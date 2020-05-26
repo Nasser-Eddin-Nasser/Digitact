@@ -26,6 +26,7 @@
   (chosenStep)="navigateToStep($event)"
 >
 </app-side-menu>
+
 <ion-content class="ion-no-padding">
   <div class="forms-container">
     <ng-container [ngSwitch]="currentMenu.selector">
@@ -43,6 +44,8 @@
         *ngSwitchCase="'form-contact-info'"
       >
       </form-contact-info>
+
+      <form-submit-page *ngSwitchCase="'form-submit-page'"> </form-submit-page>
     </ng-container>
   </div>
 </ion-content>
@@ -50,7 +53,7 @@
 <ion-footer class="ion-no-border">
   <ion-toolbar class="ion-text-center ion-no-padding footer-container">
     <button class="fancy-button align center" (click)="navigateToNextStep()">
-      Continue
+      {{buttonText}}
     </button>
   </ion-toolbar>
 </ion-footer>
