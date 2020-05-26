@@ -22,7 +22,7 @@
   @include color-variables(secondary, #cc0033, #ffffff);
 
   /** tertiary **/
-  @include color-variables(tertiary, #5260ff, #ffffff);
+  @include color-variables(tertiary, #5875c7, #ffffff);
 
   /** success **/
   --ion-color-success: #2dd36f;
@@ -87,7 +87,7 @@
     @include color-variables(secondary, #cc0033, #000000);
 
     /** tertiary **/
-    @include color-variables(tertiary, #5260ff, #000000);
+    @include color-variables(tertiary, #5875c7, #000000);
 
     --ion-color-success: #2fdf75;
     --ion-color-success-rgb: 47, 223, 117;

@@ -8,10 +8,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
+
+import { ContactInfo } from '../interfaces/contact-info';
+import { BasicInfo, FormsData } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
 
 import { FormControl, FormGroup } from './../common/forms/forms';
-import { FormsData, BasicInfo } from '../model/forms-data.model';
 
 @Component({
   selector: 'app-forms',
@@ -27,6 +29,13 @@ export class FormsPage implements OnInit, OnDestroy {
       id: 1,
       displayName: 'Personal info',
       selector: 'form-basic-info',
+      isActive: false,
+      isCompleted: false,
+    },
+    {
+      id: 2,
+      displayName: 'Contact info',
+      selector: 'form-contact-info',
       isActive: false,
       isCompleted: false,
     },
@@ -77,6 +86,16 @@ export class FormsPage implements OnInit, OnDestroy {
   });
 
   /**
+   * This property holds the type safe form group fields for contact information view.
+   */
+  contactInfoObj = new FormGroup<ContactInfo>({
+    phoneNumber: new FormControl(''),
+    eMail: new FormControl(''),
+    linkedIn: new FormControl(''),
+    xing: new FormControl(''),
+  });
+
+  /**
    * In this method route change is observed and handling is done.
    */
   ngOnInit(): void {
@@ -110,7 +129,7 @@ export class FormsPage implements OnInit, OnDestroy {
       const nextMenuIndex = this.sideMenuList.indexOf(this.currentMenu) + 1;
       this.navigateToStep(this.sideMenuList[nextMenuIndex]);
     } else {
-      let key =
+      const key =
         this.overallObject.value.basicInfo.firstName +
         '-' +
         this.overallObject.value.basicInfo.lastName +
@@ -134,6 +153,12 @@ export class FormsPage implements OnInit, OnDestroy {
       firstName: new FormControl(''),
       lastName: new FormControl(''),
       salutation: new FormControl('mr'),
+    });
+    this.contactInfoObj = new FormGroup<ContactInfo>({
+      phoneNumber: new FormControl(''),
+      eMail: new FormControl(''),
+      linkedIn: new FormControl(''),
+      xing: new FormControl(''),
     });
   }
 

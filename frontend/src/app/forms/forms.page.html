@@ -36,6 +36,13 @@
         *ngSwitchCase="'form-basic-info'"
       >
       </form-basic-info>
+      <form-contact-info
+        (updatedMenuCompletionStatus)="updateProgessStatus()"
+        [menuObject]="currentMenu"
+        [contactInfoObject]="contactInfoObj"
+        *ngSwitchCase="'form-contact-info'"
+      >
+      </form-contact-info>
     </ng-container>
   </div>
 </ion-content>
