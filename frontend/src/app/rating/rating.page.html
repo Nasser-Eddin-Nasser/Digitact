@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goToHomePage()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-menu-button slot="end" id="hr-side-menu">
+          <ion-icon name="list-outline"></ion-icon>
+        </ion-menu-button>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<app-hr-side-menu [ratingForm]="ratingForm"></app-hr-side-menu>
+
+<ion-content>
+  <div class="main-container with-bottom-buttons">
+    <div class="content">
+      <app-applicant-score [ratingForm]="ratingForm"></app-applicant-score>
+    </div>
+
+    <div class="buttons-container">
+      <button class="fancy-button">
+        Continue
+      </button>
+    </div>
+  </div>
+</ion-content>

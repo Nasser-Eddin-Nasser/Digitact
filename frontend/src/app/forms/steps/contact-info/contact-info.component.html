@@ -1,0 +1,34 @@
+<ion-list>
+  <ion-item class="ion-no-padding">
+    <ion-label position="floating" color="medium">Phone Number</ion-label>
+    <ion-input
+      type="text"
+      maxlength="12"
+      [formControl]="contactInfoObject.controls.phoneNumber"
+    ></ion-input>
+  </ion-item>
+
+  <ion-item class="ion-no-padding">
+    <ion-label position="floating" color="medium">E-mail</ion-label>
+    <ion-input
+      type="text"
+      [formControl]="contactInfoObject.controls.eMail"
+    ></ion-input>
+  </ion-item>
+
+  <ion-item class="ion-no-padding">
+    <ion-label position="floating" color="medium">LinkedIn Account</ion-label>
+    <ion-input
+      type="url"
+      [formControl]="contactInfoObject.controls.linkedIn"
+    ></ion-input>
+  </ion-item>
+
+  <ion-item class="ion-no-padding">
+    <ion-label position="floating" color="medium">Xing Account</ion-label>
+    <ion-input
+      type="url"
+      [formControl]="contactInfoObject.controls.xing"
+    ></ion-input>
+  </ion-item>
+</ion-list>
