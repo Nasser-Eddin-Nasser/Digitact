@@ -145,7 +145,7 @@ export class FormsPage implements OnInit, OnDestroy {
         Math.floor(Math.random() * 1000000).toString()
       ).replace(/\s+/g, '_');
       this.storage.addItem(key, this.overallInfo.value).then(() => {});
-      alert('Next is yet to be implmented');
+      this.router.navigate(['/forms/confirmation']);
     }
   }
 

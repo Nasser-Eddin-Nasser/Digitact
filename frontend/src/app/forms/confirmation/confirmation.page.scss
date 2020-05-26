@@ -1,0 +1,22 @@
+.button-container {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+}
+
+.secondary-color {
+  background: var(--ion-color-medium-tint);
+}
+.main-cantainer {
+  padding: 2rem;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.message-content {
+  flex-grow: 1;
+}
