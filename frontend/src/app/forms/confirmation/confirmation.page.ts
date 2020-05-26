@@ -3,7 +3,7 @@
  * - This component renders the confirmation view and it's actions.
  */
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-confirmation',
@@ -11,17 +11,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./confirmation.page.scss'],
 })
 export class ConfirmationPage {
-  constructor(private router: Router) {}
+  constructor(private navController: NavController) {}
+
   /**
    * In this method navigation to HR form is handled.
    */
   navigateToNextPage(): void {
-    alert('HR form yet to be implemented');
+    // Clear the whole navigation stack, but still show a "forward" animation.
+    this.navController.navigateRoot(['/rating'], {
+      animationDirection: 'forward',
+    });
   }
+
   /**
    * In this method navigation to home page is handled.
    */
   quitPage(): void {
-    this.router.navigate(['/home']);
+    this.navController.navigateBack(['/home']);
   }
 }

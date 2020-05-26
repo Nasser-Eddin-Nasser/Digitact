@@ -78,10 +78,8 @@ ion-item.item-has-focus {
   letter-spacing: 4px;
   width: 100%;
   outline: none;
-
-  // Add some spacing so that the button is not "pressed" against the above content when the screen has a small height.
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 /*
@@ -121,4 +119,5 @@ ion-item.item-has-focus {
 }
 .buttons-container {
   flex-grow: 0;
+  padding-top: 1rem;
 }
