@@ -10,6 +10,7 @@ import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 import { BasicInfo } from '../interfaces/basic-info';
+import { ContactInfo } from '../interfaces/contact-info';
 
 import { FormControl, FormGroup } from './../common/forms/forms';
 
@@ -30,6 +31,20 @@ export class FormsPage implements OnInit, OnDestroy {
       isActive: false,
       isCompleted: false,
     },
+    {
+      id: 2,
+      displayName: 'Contact info',
+      selector: 'form-contact-info',
+      isActive: false,
+      isCompleted: false,
+    },
+    {
+      id: 3,
+      displayName: 'Submit',
+      selector: 'form-submit-page',
+      isActive: false,
+      isCompleted: false,
+    },
   ];
 
   /**
@@ -42,6 +57,11 @@ export class FormsPage implements OnInit, OnDestroy {
     isActive: boolean;
     selector: string;
   };
+
+  /**
+   * @Usage  holds buttent text name.
+   */
+  buttonText = 'Continue';
 
   /**
    * Holds total steps in the form.
@@ -74,6 +94,16 @@ export class FormsPage implements OnInit, OnDestroy {
   });
 
   /**
+   * This property holds the type safe form group fields for contact information view.
+   */
+  contactInfoObj = new FormGroup<ContactInfo>({
+    phoneNumber: new FormControl(''),
+    eMail: new FormControl(''),
+    linkedIn: new FormControl(''),
+    xing: new FormControl(''),
+  });
+
+  /**
    * In this method route change is observed and handling is done.
    */
   ngOnInit(): void {
@@ -85,6 +115,7 @@ export class FormsPage implements OnInit, OnDestroy {
     const subscription = this.activeRoute.queryParams.subscribe((params) => {
       const step = Number(params.step);
       if (step > 0 && step <= this.totalSteps) {
+        this.buttonText = step === this.totalSteps ? 'Submit' : 'Continue';
         this.sideMenuList.filter((obj) => (obj.isActive = false));
         this.currentMenu = this.sideMenuList.filter(
           (obj) => obj.id === Number(params.step)
@@ -107,7 +138,7 @@ export class FormsPage implements OnInit, OnDestroy {
       const nextMenuIndex = this.sideMenuList.indexOf(this.currentMenu) + 1;
       this.navigateToStep(this.sideMenuList[nextMenuIndex]);
     } else {
-      alert('Next is submit page which is yet to be implmented');
+      alert('Next is yet to be implmented');
     }
   }
 
@@ -122,6 +153,12 @@ export class FormsPage implements OnInit, OnDestroy {
       firstName: new FormControl(''),
       lastName: new FormControl(''),
       salutation: new FormControl('mr'),
+    });
+    this.contactInfoObj = new FormGroup<ContactInfo>({
+      phoneNumber: new FormControl(''),
+      eMail: new FormControl(''),
+      linkedIn: new FormControl(''),
+      xing: new FormControl(''),
     });
   }
 
