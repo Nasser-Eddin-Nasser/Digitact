@@ -8,10 +8,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-
-import { BasicInfo } from '../interfaces/basic-info';
+import { StorageHandlerService } from '../services/storage-handler.service';
 
 import { FormControl, FormGroup } from './../common/forms/forms';
+import { FormsData, BasicInfo } from '../model/forms-data.model';
 
 @Component({
   selector: 'app-forms',
@@ -61,16 +61,19 @@ export class FormsPage implements OnInit, OnDestroy {
   constructor(
     private activeRoute: ActivatedRoute,
     private navigationController: NavController,
-    private router: Router
+    private router: Router,
+    private storage: StorageHandlerService
   ) {}
 
   /**
    * This property holds the type safe form group fields for basic information view.
    */
-  basicInfoObj = new FormGroup<BasicInfo>({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    salutation: new FormControl('mr'),
+  overallObject = new FormGroup<FormsData>({
+    basicInfo: new FormGroup<BasicInfo>({
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+      salutation: new FormControl('mr'),
+    }),
   });
 
   /**
@@ -107,6 +110,15 @@ export class FormsPage implements OnInit, OnDestroy {
       const nextMenuIndex = this.sideMenuList.indexOf(this.currentMenu) + 1;
       this.navigateToStep(this.sideMenuList[nextMenuIndex]);
     } else {
+      let key =
+        this.overallObject.value.basicInfo.firstName +
+        '-' +
+        this.overallObject.value.basicInfo.lastName +
+        '-' +
+        Math.floor(Math.random() * 1000000).toString();
+      this.storage.addItem(key, this.overallObject.value).then((item) => {
+        console.log(item);
+      });
       alert('Next is submit page which is yet to be implmented');
     }
   }
@@ -118,7 +130,7 @@ export class FormsPage implements OnInit, OnDestroy {
     for (const subscription of this.subscriptions) {
       subscription.unsubscribe();
     }
-    this.basicInfoObj = new FormGroup<BasicInfo>({
+    this.overallObject.controls.basicInfo = new FormGroup<BasicInfo>({
       firstName: new FormControl(''),
       lastName: new FormControl(''),
       salutation: new FormControl('mr'),

@@ -32,7 +32,7 @@
       <form-basic-info
         (updatedMenuCompletionStatus)="updateProgessStatus()"
         [menuObject]="currentMenu"
-        [basicInfoObject]="basicInfoObj"
+        [basicInfoObject]="overallObject.controls.basicInfo"
         *ngSwitchCase="'form-basic-info'"
       >
       </form-basic-info>

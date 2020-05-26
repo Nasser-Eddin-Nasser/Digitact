@@ -13,7 +13,7 @@ import {
 import { Subscription } from 'rxjs';
 
 import { FormGroup } from './../../../common/forms/forms';
-import { BasicInfo } from './../../../interfaces/basic-info';
+import { BasicInfo } from './../../../model/forms-data.model';
 
 @Component({
   selector: 'form-basic-info',
