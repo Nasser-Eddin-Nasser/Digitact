@@ -74,9 +74,9 @@ export class FormsPage implements OnInit, OnDestroy {
   ) {}
 
   /**
-   * This property holds the type safe form group fields for basic information view.
+   * This property holds the type safe form group fields for all the steps.
    */
-  overallObject = new FormGroup<FormsData>({
+  overallInfo = new FormGroup<FormsData>({
     basicInfo: new FormGroup<BasicInfo>({
       firstName: new FormControl(''),
       lastName: new FormControl(''),
@@ -124,15 +124,14 @@ export class FormsPage implements OnInit, OnDestroy {
       const nextMenuIndex = this.sideMenuList.indexOf(this.currentMenu) + 1;
       this.navigateToStep(this.sideMenuList[nextMenuIndex]);
     } else {
-      const key =
-        this.overallObject.value.basicInfo.firstName +
+      const key = (
+        this.overallInfo.value.basicInfo.firstName +
         '-' +
-        this.overallObject.value.basicInfo.lastName +
+        this.overallInfo.value.basicInfo.lastName +
         '-' +
-        Math.floor(Math.random() * 1000000).toString();
-      this.storage.addItem(key, this.overallObject.value).then((item) => {
-        console.log(item);
-      });
+        Math.floor(Math.random() * 1000000).toString()
+      ).replace(/\s+/g, '_');
+      this.storage.addItem(key, this.overallInfo.value).then(() => {});
       alert('Next is submit page which is yet to be implmented');
     }
   }
@@ -144,7 +143,7 @@ export class FormsPage implements OnInit, OnDestroy {
     for (const subscription of this.subscriptions) {
       subscription.unsubscribe();
     }
-    this.overallObject = new FormGroup<FormsData>({
+    this.overallInfo = new FormGroup<FormsData>({
       basicInfo: new FormGroup<BasicInfo>({
         firstName: new FormControl(''),
         lastName: new FormControl(''),
