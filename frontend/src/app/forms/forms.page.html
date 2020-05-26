@@ -1,61 +1,58 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-grid>
-      <ion-row>
-        <ion-col class="font30">
-          <ion-icon name="close" (click)="onClose()"></ion-icon>
-        </ion-col>
-        <ion-col class="ion-text-center ion-float-center progresstext">
-          Step {{currentMenu.id}}/ {{totalSteps}}
-        </ion-col>
-        <ion-col>
-          <ion-menu-button
-            class="ion-float-right font30"
-            autoHide="true"
-            menuClose
-            id="main"
-          >
-            <ion-icon name="list"></ion-icon>
-          </ion-menu-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <ion-progress-bar value="{{progressPercentage}}"></ion-progress-bar>
+    <ion-buttons>
+      <ion-button slot="start" (click)="closeForm()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center"
+      >Step {{currentMenu.id}}/ {{totalSteps}}</ion-title
+    >
+    <ion-menu-button
+      slot="end"
+      class="ion-float-right"
+      autoHide="true"
+      menuClose
+      id="main"
+    >
+      <ion-icon name="list-outline"></ion-icon>
+    </ion-menu-button>
   </ion-toolbar>
+  <ion-progress-bar value="{{progressPercentage}}"></ion-progress-bar>
 </ion-header>
 
 <app-side-menu
   [sideMenuList]="sideMenuList"
-  (pageProgressStatusCallBack)="onFormStepsNavigation($event)"
+  (chosenStep)="navigateToStep($event)"
 >
 </app-side-menu>
 
-<ion-content class="ion-padding">
-  <ng-container [ngSwitch]="currentMenu.selector">
-    <form-basic-info
-      (pageProgressStatusCallBack)="pageProgressStatusCallBack($event)"
-      [menuObject]="currentMenu"
-      [basicInfoObject]="basicInfoObj"
-      *ngSwitchCase="'form-basic-info'"
-    >
-    </form-basic-info>
-  </ng-container>
-  <ng-container [ngSwitch]="currentMenu.selector">
-    <form-submit-page
-      (pageProgressStatusCallBack)="pageProgressStatusCallBack($event)"
-      *ngSwitchCase="'form-submit-page'"
-    >
-    </form-submit-page>
-  </ng-container>
+<ion-content class="ion-no-padding">
+  <div class="forms-container">
+    <ng-container [ngSwitch]="currentMenu.selector">
+      <form-basic-info
+        (updatedMenuCompletionStatus)="updateProgessStatus()"
+        [menuObject]="currentMenu"
+        [basicInfoObject]="basicInfoObj"
+        *ngSwitchCase="'form-basic-info'"
+      >
+      </form-basic-info>
+      <form-contact-info
+        (updatedMenuCompletionStatus)="updateProgessStatus()"
+        [menuObject]="currentMenu"
+        [contactInfoObject]="contactInfoObj"
+        *ngSwitchCase="'form-contact-info'"
+      >
+      </form-contact-info>
+
+      <form-submit-page *ngSwitchCase="'form-submit-page'"> </form-submit-page>
+    </ng-container>
+  </div>
 </ion-content>
 
 <ion-footer class="ion-no-border">
-  <ion-toolbar class="ion-text-center">
-    <button
-      class="fancy-button align center width90"
-      (click)="navigateToNextFormOrSubmit()"
-    >
+  <ion-toolbar class="ion-text-center ion-no-padding footer-container">
+    <button class="fancy-button align center" (click)="navigateToNextStep()">
       {{buttonText}}
     </button>
   </ion-toolbar>
