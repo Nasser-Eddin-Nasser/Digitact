@@ -38,6 +38,13 @@ export class FormsPage implements OnInit, OnDestroy {
       isActive: false,
       isCompleted: false,
     },
+    {
+      id: 3,
+      displayName: 'Submit',
+      selector: 'form-submit-page',
+      isActive: false,
+      isCompleted: false,
+    },
   ];
 
   /**
@@ -50,6 +57,11 @@ export class FormsPage implements OnInit, OnDestroy {
     isActive: boolean;
     selector: string;
   };
+
+  /**
+   * @Usage  holds buttent text name.
+   */
+  buttonText = 'Continue';
 
   /**
    * Holds total steps in the form.
@@ -102,6 +114,7 @@ export class FormsPage implements OnInit, OnDestroy {
     const subscription = this.activeRoute.queryParams.subscribe((params) => {
       const step = Number(params.step);
       if (step > 0 && step <= this.totalSteps) {
+        this.buttonText = step === this.totalSteps ? 'Submit' : 'Continue';
         this.sideMenuList.filter((obj) => (obj.isActive = false));
         this.currentMenu = this.sideMenuList.filter(
           (obj) => obj.id === Number(params.step)
@@ -132,7 +145,7 @@ export class FormsPage implements OnInit, OnDestroy {
         Math.floor(Math.random() * 1000000).toString()
       ).replace(/\s+/g, '_');
       this.storage.addItem(key, this.overallInfo.value).then(() => {});
-      alert('Next is submit page which is yet to be implmented');
+      alert('Next is yet to be implmented');
     }
   }
 
@@ -189,8 +202,16 @@ export class FormsPage implements OnInit, OnDestroy {
    * In this methos progress values are updated.
    */
   updateProgessStatus(): void {
-    const completedStep = this.sideMenuList.filter((obj) => obj.isCompleted)
-      .length;
-    this.progressPercentage = completedStep / this.totalSteps;
+  // Logic can be implemented in better way just temporary now.
+    const completedStep = this.sideMenuList.filter((obj,index) => {
+        if(index === this.totalSteps-1){
+          return false;
+        }
+          return obj.isCompleted;
+      })
+      .length; // completed step without last step Submit as it static page without any fields.
+    this.sideMenuList[this.totalSteps - 1].isCompleted =
+      completedStep === (this.totalSteps - 1) ? true : false; // Submit page isCompleted should be true only if  other views are completed.
+    this.progressPercentage = completedStep / (this.totalSteps - 1);
   }
 }
