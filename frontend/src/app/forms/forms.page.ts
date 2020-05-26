@@ -9,8 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
-import { BasicInfo } from '../interfaces/basic-info';
-import { ContactInfo } from '../interfaces/contact-info';
+import { BasicInfo, ContactInfo, FormsData } from '../model/forms-data.model';
+import { StorageHandlerService } from '../services/storage-handler.service';
 
 import { FormControl, FormGroup } from './../common/forms/forms';
 
@@ -81,26 +81,25 @@ export class FormsPage implements OnInit, OnDestroy {
   constructor(
     private activeRoute: ActivatedRoute,
     private navigationController: NavController,
-    private router: Router
+    private router: Router,
+    private storage: StorageHandlerService
   ) {}
 
   /**
-   * This property holds the type safe form group fields for basic information view.
+   * This property holds the type safe form group fields for all the steps.
    */
-  basicInfoObj = new FormGroup<BasicInfo>({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    salutation: new FormControl('mr'),
-  });
-
-  /**
-   * This property holds the type safe form group fields for contact information view.
-   */
-  contactInfoObj = new FormGroup<ContactInfo>({
-    phoneNumber: new FormControl(''),
-    eMail: new FormControl(''),
-    linkedIn: new FormControl(''),
-    xing: new FormControl(''),
+  overallInfo = new FormGroup<FormsData>({
+    basicInfo: new FormGroup<BasicInfo>({
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+      salutation: new FormControl('mr'),
+    }),
+    contactInfo: new FormGroup<ContactInfo>({
+      phoneNumber: new FormControl(''),
+      eMail: new FormControl(''),
+      linkedIn: new FormControl(''),
+      xing: new FormControl(''),
+    }),
   });
 
   /**
@@ -138,6 +137,14 @@ export class FormsPage implements OnInit, OnDestroy {
       const nextMenuIndex = this.sideMenuList.indexOf(this.currentMenu) + 1;
       this.navigateToStep(this.sideMenuList[nextMenuIndex]);
     } else {
+      const key = (
+        this.overallInfo.value.basicInfo.firstName +
+        '-' +
+        this.overallInfo.value.basicInfo.lastName +
+        '-' +
+        Math.floor(Math.random() * 1000000).toString()
+      ).replace(/\s+/g, '_');
+      this.storage.addItem(key, this.overallInfo.value).then(() => {});
       this.router.navigate(['/forms/confirmation']);
     }
   }
@@ -149,16 +156,18 @@ export class FormsPage implements OnInit, OnDestroy {
     for (const subscription of this.subscriptions) {
       subscription.unsubscribe();
     }
-    this.basicInfoObj = new FormGroup<BasicInfo>({
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      salutation: new FormControl('mr'),
-    });
-    this.contactInfoObj = new FormGroup<ContactInfo>({
-      phoneNumber: new FormControl(''),
-      eMail: new FormControl(''),
-      linkedIn: new FormControl(''),
-      xing: new FormControl(''),
+    this.overallInfo = new FormGroup<FormsData>({
+      basicInfo: new FormGroup<BasicInfo>({
+        firstName: new FormControl(''),
+        lastName: new FormControl(''),
+        salutation: new FormControl('mr'),
+      }),
+      contactInfo: new FormGroup<ContactInfo>({
+        phoneNumber: new FormControl(''),
+        eMail: new FormControl(''),
+        linkedIn: new FormControl(''),
+        xing: new FormControl(''),
+      }),
     });
   }
 
@@ -193,8 +202,15 @@ export class FormsPage implements OnInit, OnDestroy {
    * In this methos progress values are updated.
    */
   updateProgessStatus(): void {
-    const completedStep = this.sideMenuList.filter((obj) => obj.isCompleted)
-      .length;
-    this.progressPercentage = completedStep / this.totalSteps;
+    // Logic can be implemented in better way just temporary now.
+    const completedStep = this.sideMenuList.filter((obj, index) => {
+      if (index === this.totalSteps - 1) {
+        return false;
+      }
+      return obj.isCompleted;
+    }).length; // completed step without last step Submit as it static page without any fields.
+    this.sideMenuList[this.totalSteps - 1].isCompleted =
+      completedStep === this.totalSteps - 1 ? true : false; // Submit page isCompleted should be true only if  other views are completed.
+    this.progressPercentage = completedStep / (this.totalSteps - 1);
   }
 }
