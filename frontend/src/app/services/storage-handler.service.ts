@@ -44,8 +44,8 @@ export class StorageHandlerService {
     return this.storage.ready().then(() => {
       return this.storage.get(key).then((item) => {
         if (item) {
-          return this.storage.remove(key).then((item) => {
-            return item;
+          return this.storage.remove(key).then((data) => {
+            return data;
           });
         }
         return undefined;
@@ -70,8 +70,8 @@ export class StorageHandlerService {
         if (!item) {
           return undefined;
         }
-        return this.storage.set(key, value).then((item) => {
-          return item;
+        return this.storage.set(key, value).then((data) => {
+          return data;
         });
       });
     });
