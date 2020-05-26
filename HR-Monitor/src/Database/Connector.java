@@ -1,26 +1,19 @@
 package Database;
 
-import Model.StorageModel;
-import Model.User.Applicant;
-import Model.User.User;
-import Storage.Dummy;
-import javafx.util.Pair;
-
-import java.sql.*;
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Connector {
 
-	private final String url = "jdbc:postgresql://localhost:5432/postgres";
-	private final String user = "postgres";
-	private final String password = "postgres";
+
 	private Connection connection = null;
 
 	public Connection getConnection() {
 		try {
 			closeConnection();
 			Class.forName("org.postgresql.Driver");
-			connection = DriverManager.getConnection(url, user, password);
+			connection = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
 			System.out.println("Connection Established Successfull and the DATABASE NAME IS:"
 					+ connection.getMetaData().getDatabaseProductName());
 		} catch (SQLException e) {

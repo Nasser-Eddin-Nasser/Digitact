@@ -3,7 +3,7 @@ package Model;
 import Main.App;
 import Model.User.User;
 import Storage.Dummy;
-import dao.UserDao;
+import Storage.DBStorage;
 
 import java.util.List;
 
@@ -13,9 +13,7 @@ public class StorageModel {
 		if (App.DEVELOPMENT_ENVIRONMENT) {
 			return Dummy.DB;
 		} else {
-			UserDao dao = new UserDao();
-			return dao.getUsers();
+			return DBStorage.getStorage();
 		}
-		// return null;
 	}
 }
