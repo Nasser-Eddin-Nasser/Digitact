@@ -1,22 +1,20 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-buttons>
-      <ion-button slot="start" (click)="closeForm()">
-        <ion-icon slot="icon-only" name="close"></ion-icon>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeForm()">
+        <ion-icon name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
+
     <ion-title class="ion-text-center"
       >Step {{currentMenu.id}}/ {{totalSteps}}</ion-title
     >
-    <ion-menu-button
-      slot="end"
-      class="ion-float-right"
-      autoHide="true"
-      menuClose
-      id="main"
-    >
-      <ion-icon name="list-outline"></ion-icon>
-    </ion-menu-button>
+
+    <ion-buttons slot="end">
+      <ion-menu-button autoHide="true" menuClose id="main">
+        <ion-icon name="list-outline"></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
   <ion-progress-bar value="{{progressPercentage}}"></ion-progress-bar>
 </ion-header>
@@ -27,33 +25,34 @@
 >
 </app-side-menu>
 
-<ion-content class="ion-no-padding">
-  <div class="forms-container">
-    <ng-container [ngSwitch]="currentMenu.selector">
-      <form-basic-info
-        (updatedMenuCompletionStatus)="updateProgessStatus()"
-        [menuObject]="currentMenu"
-        [basicInfoObject]="overallInfo.controls.basicInfo"
-        *ngSwitchCase="'form-basic-info'"
-      >
-      </form-basic-info>
-      <form-contact-info
-        (updatedMenuCompletionStatus)="updateProgessStatus()"
-        [menuObject]="currentMenu"
-        [contactInfoObject]="overallInfo.controls.contactInfo"
-        *ngSwitchCase="'form-contact-info'"
-      >
-      </form-contact-info>
+<ion-content>
+  <div class="main-container with-bottom-buttons">
+    <div class="content">
+      <ng-container [ngSwitch]="currentMenu.selector">
+        <form-basic-info
+          (updatedMenuCompletionStatus)="updateProgessStatus()"
+          [menuObject]="currentMenu"
+          [basicInfoObject]="overallInfo.controls.basicInfo"
+          *ngSwitchCase="'form-basic-info'"
+        >
+        </form-basic-info>
+        <form-contact-info
+          (updatedMenuCompletionStatus)="updateProgessStatus()"
+          [menuObject]="currentMenu"
+          [contactInfoObject]="overallInfo.controls.contactInfo"
+          *ngSwitchCase="'form-contact-info'"
+        >
+        </form-contact-info>
 
-      <form-submit-page *ngSwitchCase="'form-submit-page'"> </form-submit-page>
-    </ng-container>
+        <form-submit-page *ngSwitchCase="'form-submit-page'">
+        </form-submit-page>
+      </ng-container>
+    </div>
+
+    <div class="buttons-container">
+      <button class="fancy-button" (click)="navigateToNextStep()">
+        {{buttonText}}
+      </button>
+    </div>
   </div>
 </ion-content>
-
-<ion-footer class="ion-no-border">
-  <ion-toolbar class="ion-text-center ion-no-padding footer-container">
-    <button class="fancy-button align center" (click)="navigateToNextStep()">
-      {{buttonText}}
-    </button>
-  </ion-toolbar>
-</ion-footer>
