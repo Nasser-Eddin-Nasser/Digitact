@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class AcController {
      *
      * @throws IOException Loading of corresponding FXML files failed
      */
-    public AcController() throws IOException {
+    public AcController() throws IOException { //todo bad code!!
         model = new AcModel();
         FXMLLoader loader =
                 new FXMLLoader(getClass().getResource("/View/login.fxml"));
@@ -53,12 +54,13 @@ public class AcController {
         stage.setTitle("Login");
         stage.setScene(viewLogin);
         stage.setResizable(false);
+        stage.getIcons().add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
         stage.show();
     }
 
 
     @FXML
-    public void onShowView() {
+    public void onShowView() {//todo bad code!!
         stage.setHeight(viewLoginHeight);
         stage.setWidth(viewLoginWidth);
         stage.setScene(viewLogin);
