@@ -6,9 +6,15 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title class="ion-text-center"
-      >Step {{currentMenu.id}}/ {{totalSteps}}</ion-title
-    >
+    <ion-title class="ion-text-center">
+      <ng-container *ngIf="currentStep !== APPLICATION_STEP.Submit">
+        Step {{currentStepIndex + 1}} / {{APPLICATION_STEP_ARR.length - 1}}
+      </ng-container>
+
+      <ng-container *ngIf="currentStep === APPLICATION_STEP.Submit">
+        Submit
+      </ng-container>
+    </ion-title>
 
     <ion-buttons slot="end">
       <ion-menu-button autoHide="true" menuClose id="main">
@@ -20,38 +26,50 @@
 </ion-header>
 
 <app-side-menu
-  [sideMenuList]="sideMenuList"
-  (chosenStep)="navigateToStep($event)"
->
-</app-side-menu>
+  [formsData]="formsData"
+  [currentStep]="currentStep"
+></app-side-menu>
 
 <ion-content>
   <div class="main-container with-bottom-buttons">
     <div class="content">
-      <ng-container [ngSwitch]="currentMenu.selector">
+      <ng-container [ngSwitch]="currentStep">
         <form-basic-info
-          (updatedMenuCompletionStatus)="updateProgessStatus()"
-          [menuObject]="currentMenu"
-          [basicInfoObject]="overallInfo.controls.basicInfo"
-          *ngSwitchCase="'form-basic-info'"
+          [formsData]="formsData"
+          *ngSwitchCase="APPLICATION_STEP.BasicInformation"
         >
         </form-basic-info>
         <form-contact-info
-          (updatedMenuCompletionStatus)="updateProgessStatus()"
-          [menuObject]="currentMenu"
-          [contactInfoObject]="overallInfo.controls.contactInfo"
-          *ngSwitchCase="'form-contact-info'"
+          [formsData]="formsData"
+          *ngSwitchCase="APPLICATION_STEP.ContactInformation"
         >
         </form-contact-info>
 
-        <form-submit-page *ngSwitchCase="'form-submit-page'">
+        <form-submit-page
+          [formsData]="formsData"
+          *ngSwitchCase="APPLICATION_STEP.Submit"
+        >
         </form-submit-page>
       </ng-container>
     </div>
 
     <div class="buttons-container">
-      <button class="fancy-button" (click)="navigateToNextStep()">
-        {{buttonText}}
+      <ng-container *ngIf="currentStep === APPLICATION_STEP.Submit">
+        <button
+          class="fancy-button"
+          [disabled]="!formsData.valid"
+          (click)="submit()"
+        >
+          Submit
+        </button>
+      </ng-container>
+
+      <button
+        class="fancy-button"
+        (click)="navigateToNextStep()"
+        *ngIf="currentStep !== APPLICATION_STEP.Submit"
+      >
+        Continue
       </button>
     </div>
   </div>
