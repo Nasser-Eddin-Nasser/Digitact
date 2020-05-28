@@ -163,7 +163,7 @@ export class FormsPage implements OnInit, OnDestroy {
   }
 
   /**
-   * Update the "step" query paremeter.
+   * Update the "step" query parameter.
    * You can use this to navigate between the different form steps!
    */
   navigateToStep(step: ApplicationStep): void {
