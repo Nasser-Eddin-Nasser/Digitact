@@ -6,6 +6,7 @@
 export interface FormsData {
   basicInfo: BasicInfo;
   contactInfo: ContactInfo;
+  fieldDesignationInfo: FieldDesignationInfo;
 }
 
 export interface BasicInfo {
@@ -19,4 +20,9 @@ export interface ContactInfo {
   eMail: string;
   linkedIn: string;
   xing: string;
+}
+
+export interface FieldDesignationInfo {
+  field: any;
+  designation: any;
 }
