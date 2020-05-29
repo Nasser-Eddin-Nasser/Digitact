@@ -11,7 +11,12 @@ import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 import { FormControl, FormGroup } from '../common/forms/forms';
-import { BasicInfo, ContactInfo, FormsData } from '../model/forms-data.model';
+import {
+  BasicInfo,
+  ContactInfo,
+  FormsData,
+  FieldDesignationInfo,
+} from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
 
 import { ApplicationStep, ApplicationStepsArr } from './model/steps.model';
@@ -52,6 +57,10 @@ export class FormsPage implements OnInit, OnDestroy {
       eMail: new FormControl('', Validators.required),
       linkedIn: new FormControl(''),
       xing: new FormControl(''),
+    }),
+    fieldDesignationInfo: new FormGroup<FieldDesignationInfo>({
+      field: new FormControl([], Validators.required),
+      designation: new FormControl([], Validators.required),
     }),
   });
 

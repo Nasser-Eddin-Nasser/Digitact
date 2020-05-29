@@ -89,7 +89,7 @@ type InitialValueOrInitialValueAndDisabled<T> =
  * For an example, see comment on the FormGroup wrapper class.
  */
 export class FormControl<
-  T extends string | number | File
+  T extends string | number | File | []
 > extends AngularFormControl {
   readonly value: T;
   readonly valueChanges: Observable<T>;
