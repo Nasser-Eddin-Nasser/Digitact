@@ -1,74 +1,21 @@
-/**
- * @description
- *  This component renders the contact information step view and it's actions.
- */
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { Subscription } from 'rxjs';
+/*
+  @description
+    This component renders the contact information step view and its actions.
+*/
+import { Component, Input } from '@angular/core';
 
-import { FormGroup } from './../../../common/forms/forms';
-import { ContactInfo } from './../../../model/forms-data.model';
+import { FormGroup } from '../../../common/forms/forms';
+import { FormsData } from '../../../model/forms-data.model';
 
 @Component({
   selector: 'form-contact-info',
   templateUrl: './contact-info.component.html',
   styleUrls: ['./contact-info.component.scss'],
 })
-export class ContactInfoComponent implements OnInit, OnDestroy {
+export class ContactInfoComponent {
   /**
-   * It holds the current menu object from parent
+   * Data of the entire form.
    */
-  @Input() menuObject: {
-    id: number;
-    displayName: string;
-    isCompleted: boolean;
-    isActive: boolean;
-    selecteor: string;
-  };
-
-  /**
-   * It holds typesafe form group property fields.
-   */
-  @Input() contactInfoObject: FormGroup<ContactInfo>;
-
-  /**
-   * It holds the array objects of drop down menu.
-   */
-  @Output() updatedMenuCompletionStatus = new EventEmitter();
-
-  /**
-   * Holds all the subscription which will be useful for un subscribing on destroy.
-   */
-  private subscriptions: Subscription[] = [];
-
-  ngOnInit(): void {
-    const subscription = this.contactInfoObject.valueChanges.subscribe(
-      (changedValue) => {
-        this.menuObject.isCompleted =
-          changedValue.phoneNumber.length &&
-          changedValue.eMail.length &&
-          changedValue.linkedIn.length &&
-          changedValue.xing.length
-            ? true
-            : false;
-        this.updatedMenuCompletionStatus.emit();
-      }
-    );
-    this.subscriptions.push(subscription);
-  }
-
-  /**
-   * In this method un subscribe event is handled.
-   */
-  ngOnDestroy(): void {
-    for (const subscription of this.subscriptions) {
-      subscription.unsubscribe();
-    }
-  }
+  @Input()
+  formsData: FormGroup<FormsData>;
 }

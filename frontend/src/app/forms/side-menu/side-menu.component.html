@@ -9,28 +9,47 @@
         </div>
       </div>
 
-      <ion-list lines="none" *ngFor="let menu of sideMenuList">
-        <ion-menu-toggle auto-hide="true">
+      <ion-list lines="none">
+        <ng-container
+          [ngTemplateOutlet]="menuItem"
+          [ngTemplateOutletContext]="{
+            step: APPLICATION_STEP.BasicInformation,
+            displayName: 'Basic Information',
+            isValid: formsData.controls.basicInfo.valid,
+            isActive: currentStep === APPLICATION_STEP.BasicInformation
+          }"
+        ></ng-container>
+
+        <ng-container
+          [ngTemplateOutlet]="menuItem"
+          [ngTemplateOutletContext]="{
+            step: APPLICATION_STEP.ContactInformation,
+            displayName: 'Contact Information',
+            isValid: formsData.controls.contactInfo.valid,
+            isActive: currentStep === APPLICATION_STEP.ContactInformation
+          }"
+        ></ng-container>
+
+        <ion-menu-toggle>
           <ion-item
-            (click)="changeStep(menu)"
-            auto-hide="true"
+            (click)="navigateToStep(APPLICATION_STEP.Submit)"
             class="ion-margin-top"
           >
             <ion-icon
               size="large"
-              [name]="
-                menu.isCompleted
-                  ? 'checkmark-circle-outline'
-                  : 'ellipse-outline'
+              name="arrow-redo-outline"
+              [color]="
+                currentStep === APPLICATION_STEP.Submit ? 'tertiary' : 'medium'
               "
-              [color]="menu.isActive ? 'tertiary' : 'medium'"
             ></ion-icon>
 
             <ion-label
-              class="ion-padding-horizontal"
-              [color]="menu.isActive ? 'tertiary' : 'medium'"
+              class="ion-padding-start"
+              [color]="
+                currentStep === APPLICATION_STEP.Submit ? 'tertiary' : 'medium'
+              "
             >
-              {{ menu.displayName }}
+              Submit
             </ion-label>
           </ion-item>
         </ion-menu-toggle>
@@ -38,3 +57,29 @@
     </div>
   </ion-content>
 </ion-menu>
+
+<!-- This template is used to simplify the rendering of the menu items. -->
+<ng-template
+  #menuItem
+  let-step="step"
+  let-displayName="displayName"
+  let-isValid="isValid"
+  let-isActive="isActive"
+>
+  <ion-menu-toggle>
+    <ion-item (click)="navigateToStep(step)" class="ion-margin-top">
+      <ion-icon
+        size="large"
+        [name]="isValid ? 'checkmark-circle-outline' : 'ellipse-outline'"
+        [color]="isActive ? 'tertiary' : 'medium'"
+      ></ion-icon>
+
+      <ion-label
+        class="ion-padding-start"
+        [color]="isActive ? 'tertiary' : 'medium'"
+      >
+        {{ displayName }}
+      </ion-label>
+    </ion-item>
+  </ion-menu-toggle>
+</ng-template>
