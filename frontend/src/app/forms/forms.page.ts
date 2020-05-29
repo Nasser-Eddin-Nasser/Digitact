@@ -14,8 +14,8 @@ import { FormControl, FormGroup } from '../common/forms/forms';
 import {
   BasicInfo,
   ContactInfo,
-  FormsData,
   FieldDesignationInfo,
+  FormsData,
 } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
 
