@@ -81,6 +81,9 @@ ion-item.item-has-focus {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+.fancy-button[disabled] {
+  opacity: 0.2;
+}
 
 /*
   Containers and Layout

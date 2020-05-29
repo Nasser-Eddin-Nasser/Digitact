@@ -9,7 +9,7 @@
   <ion-item class="ion-no-padding">
     <ion-label color="medium">Title</ion-label>
     <ion-select
-      [formControl]="basicInfoObject.controls.salutation"
+      [formControl]="formsData.controls.basicInfo.controls.salutation"
       interface="popover"
     >
       <ion-select-option
@@ -23,11 +23,15 @@
 
   <ion-item class="ion-no-padding">
     <ion-label position="floating" color="medium">First name</ion-label>
-    <ion-input [formControl]="basicInfoObject.controls.firstName"></ion-input>
+    <ion-input
+      [formControl]="formsData.controls.basicInfo.controls.firstName"
+    ></ion-input>
   </ion-item>
 
   <ion-item class="ion-no-padding">
     <ion-label position="floating" color="medium">Last name</ion-label>
-    <ion-input [formControl]="basicInfoObject.controls.lastName"></ion-input>
+    <ion-input
+      [formControl]="formsData.controls.basicInfo.controls.lastName"
+    ></ion-input>
   </ion-item>
 </ion-list>
