@@ -1,6 +1,5 @@
 package Digitact.Backend.Model;
 
-import Digitact.Backend.Model.User.Applicant;
 import Digitact.Backend.Model.User.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -14,15 +13,15 @@ public class Education {
     private Long id;
 
     @Column(name = "university")
-    public String university;
+    private String university;
     @Column(name = "subject")
-    public String subject;
+    private String subject;
     @Column(name = "degree")
-    public Degree degree; // Master/Bachelor/PhD
+    private Degree degree;
     @Column(name = "grade")
-    public double grade;
+    private double grade;
     @Column(name = "date")
-    public String graduation_date;
+    private String graduation_date;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)

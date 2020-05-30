@@ -1,7 +1,8 @@
 package Digitact.Backend.Model.User;
 
 import Digitact.Backend.Model.Education;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import Digitact.Backend.Model.Industries;
+import Digitact.Backend.Model.Positions;
 import com.google.common.collect.Lists;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -17,13 +18,21 @@ import java.util.Set;
 public class Applicant extends User {
     private static final long serialVersionUID = -2343243243242432341L;
 
-//    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     private Set<Education> educations;
 
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
+    private Industries industries;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
+    private Positions positions;
+
     protected Applicant() {
-//        super();
+        super();
     }
 
 
@@ -50,5 +59,21 @@ public class Applicant extends User {
 
     public List<Education> getEducations() {
         return Lists.newArrayList(educations);
+    }
+
+    public void setIndustries(Industries industries) {
+        this.industries = industries;
+    }
+
+    public void setPositions(Positions positions) {
+        this.positions = positions;
+    }
+
+    public Industries getIndustries() {
+        return industries;
+    }
+
+    public Positions getPositions() {
+        return positions;
     }
 }

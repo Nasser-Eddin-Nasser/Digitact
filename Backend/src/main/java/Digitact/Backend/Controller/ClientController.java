@@ -26,14 +26,20 @@ public class ClientController {
     }
 
     /**
-     * @param userUI - JSON request's user object
-     *               <p>
-     *               save the user in the DB using repository
+     * @param user - JSON request's user object
+     *             <p>
+     *             save the user in the DB using repository
      * @return "Applicant is created in the database"
      */
     @PostMapping("/createApplicant")
-    public String createApplicant(@RequestBody UserUI userUI) {
-        repository.save(new Applicant(userUI.getFirstName(), userUI.getLastName()));
+    public String createAdmin(@RequestBody ApplicantUI user) {
+        Applicant app = new Applicant(user.getFirstName(), user.getLastName());
+        user.getEducations().forEach(x -> x.setUser(app));
+        user.getIndustries().setUser(app);
+        user.getPositions().setUser(app);
+        app.setEducations(user.getEducations());
+        app.setIndustries(user.getIndustries());
+        repository.save(app);
         return "Applicant is created in the database";
     }
 
@@ -42,15 +48,4 @@ public class ClientController {
         repository.save(new Admin(userUI.getFirstName(), userUI.getLastName()));
         return "Admin is created in the database";
     }
-
-    @PostMapping("/createApplicantWithEducation")
-    public String createAdmin(@RequestBody ApplicantUI userUI) {
-        Applicant app = new Applicant(userUI.getFirstName(), userUI.getLastName());
-        userUI.getEducations().forEach(x -> x.setUser(app));
-        app.setEducations(userUI.getEducations());
-        repository.save(app);
-        return "Applicant is created in the database";
-    }
-
-
 }
