@@ -28,7 +28,7 @@ public abstract class User implements IUser, Serializable {
 
     @Column(name = "userRole")
     protected UserRight userRight;
- 
+
     protected User() {
     }
 
