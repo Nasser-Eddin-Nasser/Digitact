@@ -1,38 +1,46 @@
+<div class="main-description">
+  <h1>Contact Information</h1>
+
+  <span *ngIf="formsData.controls.basicInfo.controls.firstName.valid">
+    Nice to meet you,
+    {{ formsData.controls.basicInfo.controls.firstName.value }}!<br />
+  </span>
+  <span>
+    So that we can get in touch with you, please fill out the following contact
+    information fields.
+  </span>
+</div>
+
 <ion-list>
-  <ion-item>
+  <ion-item class="ion-no-padding">
     <ion-label position="floating" color="medium">Phone Number</ion-label>
     <ion-input
-      type="text"
-      maxlength="12"
-      [formControl]="contactInfoObject.controls.phoneNumber"
-      (ionChange)="onValChange()"
+      type="tel"
+      [formControl]="formsData.controls.contactInfo.controls.phoneNumber"
     ></ion-input>
   </ion-item>
 
-  <ion-item>
-    <ion-label position="floating" color="medium">E-mail</ion-label>
+  <ion-item class="ion-no-padding">
+    <ion-label position="floating" color="medium">Email</ion-label>
     <ion-input
-      type="text"
-      [formControl]="contactInfoObject.controls.eMail"
-      (ionChange)="onValChange()"
+      type="email"
+      [formControl]="formsData.controls.contactInfo.controls.eMail"
     ></ion-input>
   </ion-item>
 
-  <ion-item>
+  <ion-item class="ion-no-padding">
     <ion-label position="floating" color="medium">LinkedIn Account</ion-label>
     <ion-input
       type="url"
-      [formControl]="contactInfoObject.controls.linkedIn"
-      (ionChange)="onValChange()"
+      [formControl]="formsData.controls.contactInfo.controls.linkedIn"
     ></ion-input>
   </ion-item>
 
-  <ion-item>
+  <ion-item class="ion-no-padding">
     <ion-label position="floating" color="medium">Xing Account</ion-label>
     <ion-input
       type="url"
-      [formControl]="contactInfoObject.controls.xing"
-      (ionChange)="onValChange()"
+      [formControl]="formsData.controls.contactInfo.controls.xing"
     ></ion-input>
   </ion-item>
 </ion-list>

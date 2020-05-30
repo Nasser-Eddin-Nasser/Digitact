@@ -4,10 +4,14 @@ html.ios {
   --ion-default-font: 'Roboto', sans-serif;
 }
 
+/*
+  Typography
+*/
 h1 {
   font-size: 39px;
   letter-spacing: 4px;
-  font-weight: 400;
+  font-weight: 500;
+  margin-bottom: 16px;
 }
 
 h2 {
@@ -25,4 +29,98 @@ h1,
 h2,
 h3 {
   color: var(--ion-color-primary);
+}
+
+/*
+  .description is for inline text,
+  .main-description is for a block element (e.g. div) that holds multiple headings, span elements, etc.
+*/
+.description,
+.main-description {
+  font-size: 18px;
+  line-height: 1.618;
+  color: var(--ion-color-primary);
+}
+.main-description {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+/*
+  Lists
+*/
+
+ion-list-header {
+  font-size: 23px;
+  font-weight: 400;
+  margin-top: 2rem;
+  --color: var(--ion-color-primary);
+}
+
+/*
+  Items
+*/
+ion-item.item-has-focus {
+  --border-color: var(--ion-color-primary);
+}
+
+/*
+  Buttons
+*/
+
+.fancy-button {
+  font-size: 26px;
+  color: var(--ion-color-secondary-contrast);
+  background: var(--ion-color-secondary);
+  padding: 1rem;
+  border-radius: 1000px 0 1000px 1000px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  width: 100%;
+  outline: none;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.fancy-button[disabled] {
+  opacity: 0.2;
+}
+
+/*
+  Containers and Layout
+*/
+
+.main-container {
+  width: 100%;
+  max-width: 475px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 1.5rem;
+}
+@media (min-width: 450px) {
+  .main-container .main-description {
+    text-align: center;
+  }
+}
+
+/*
+  If you want to have some buttons at the bottom of the page, use the following structure:
+
+  ```
+  <div class="main-container with-bottom-buttons">
+    <div class="content">Your content here</div>
+    <div class="buttons-container">The buttons here</div>
+  </div>
+  ```
+*/
+.main-container.with-bottom-buttons {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+.content {
+  flex-grow: 1;
+}
+.buttons-container {
+  flex-grow: 0;
+  padding-top: 1rem;
 }

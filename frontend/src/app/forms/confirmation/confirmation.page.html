@@ -1,0 +1,25 @@
+<ion-content>
+  <div class="main-container with-bottom-buttons">
+    <div class="content">
+      <div class="main-description">
+        <h1>Done</h1>
+
+        The application has been submitted. The following steps need to be
+        performed by the HR staff (either now or later).
+      </div>
+    </div>
+
+    <div class="buttons-container">
+      <button class="fancy-button align center" (click)="navigateToNextPage()">
+        Continue
+      </button>
+
+      <button
+        class="fancy-button align center second-button"
+        (click)="quitPage()"
+      >
+        Quit
+      </button>
+    </div>
+  </div>
+</ion-content>
