@@ -1,9 +1,11 @@
-package Digitact.Backend.Model;
+package Digitact.Backend.Model.User;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import Digitact.Backend.Model.Education;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Abstract class user which will be used to define applicants and controllers
@@ -26,7 +28,7 @@ public abstract class User implements IUser, Serializable {
 
     @Column(name = "userRole")
     protected UserRight userRight;
-
+ 
     protected User() {
     }
 
@@ -35,6 +37,7 @@ public abstract class User implements IUser, Serializable {
         this.lastName = lastName;
         this.userRight = userRight;
     }
+
 
     /**
      * @param firstName
@@ -53,6 +56,10 @@ public abstract class User implements IUser, Serializable {
     @Override
     public String getLastName() {
         return lastName;
+    }
+
+    public long getId() {
+        return id;
     }
 
     /* Returns the string representation of the User.*/

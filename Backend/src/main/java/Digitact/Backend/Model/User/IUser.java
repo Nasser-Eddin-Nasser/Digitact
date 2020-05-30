@@ -1,4 +1,4 @@
-package Digitact.Backend.Model;
+package Digitact.Backend.Model.User;
 
 public interface IUser {
     String getFirstName();

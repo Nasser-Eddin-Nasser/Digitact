@@ -2,25 +2,54 @@ plugins {
 	id 'org.springframework.boot' version '2.2.6.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
+	id 'org.asciidoctor.convert' version '1.5.3'
+	id 'org.hidetake.swagger.generator' version '1.4.0'
 }
 
 group = 'Digitact'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+ext {
+
+	springFoxArtifacts = ["springfox-swagger2", "springfox-swagger-ui"]
+
+	springFoxVersion = "2.6.0"
+	swaggerCodeGenVersion = "2.2.1"
+}
+
 repositories {
 	mavenCentral()
 }
 
 dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
 // testing dependencies
 	testCompile 'junit:junit:4.+'
+}
+
+
+generateSwaggerCode {
+
+	configFile = file('src/main/resources/swagger/config.json')
+	components = ['models', 'apis']
+	inputFile = file('src/main/resources/swagger/petstore-api.json')
+	language = 'spring'
+}
+
+
+
+generateSwaggerDoc {
+	inputFile = file('src/main/resources/swagger/petstore-api.json')
 }
 
 test {
