@@ -6,6 +6,7 @@
 export interface FormsData {
   basicInfo: BasicInfo;
   contactInfo: ContactInfo;
+  // educationInfo: EducationInfo;
 }
 
 export interface BasicInfo {
@@ -20,3 +21,8 @@ export interface ContactInfo {
   linkedIn: string;
   xing: string;
 }
+/*
+export interface EducationInfo {
+  education: string;
+}
+*/
