@@ -1,5 +1,15 @@
 <div class="main-description">
-  <h1>Education Info page</h1>
+  <h1>Education Information</h1>
 
-  This page is still in construction
+  Here, you can add your information regarding your education. So: What is your
+  educational background
 </div>
+<ion-list>
+  <script type="module">
+    import { modalController } from 'https://cdn.jsdelivr.net/npm/@ionic/core@next/dist/ionic/index.esm.js';
+    window.modalController = modalController;
+  </script>
+  <ion-item class="ion-no-padding">
+    <ion-button class="plus-button" (click)="presentEduInfo()"> +</ion-button>
+  </ion-item>
+</ion-list>
