@@ -1,0 +1,29 @@
+
+.table-view .column-header{
+-fx-background-color: #2980b9;
+
+}
+
+.table-view .column-header .label{
+-fx-text-fill: white;
+-fx-border-radius: 0;
+
+}
+
+.tool-bar {
+    -fx-background-color: #75757B;
+    -fx-font-color: white;
+
+}
+
+Text {
+-fx-fill: white;
+}
+
+GridPane {
+    -fx-background-color: #222D41;
+}
+
+BorderPane {
+    -fx-background-color: #222D41;
+}

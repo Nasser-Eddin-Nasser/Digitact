@@ -27,6 +27,7 @@ public class StandardController {
                 new FXMLLoader(getClass().getResource("/View/standard.fxml"));
         loader.setController(this);
         viewHRStandard = new Scene(loader.load());
+        viewHRStandard.getStylesheets().add("./Style/stylesheet.css"); //todo
         this.stage.setHeight(viewHRStandard.getHeight());
         this.stage.setWidth(viewHRStandard.getWidth());
         this.stage.setTitle("HR Monitor");

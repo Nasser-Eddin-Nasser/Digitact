@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 public class App extends javafx.application.Application {
 
-    public final static boolean DEVELOPMENT_ENVIRONMENT = false;
+    public final static boolean DEVELOPMENT_ENVIRONMENT = true;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
