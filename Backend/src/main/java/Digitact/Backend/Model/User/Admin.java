@@ -1,6 +1,4 @@
-package Digitact.Backend.Model;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package Digitact.Backend.Model.User;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

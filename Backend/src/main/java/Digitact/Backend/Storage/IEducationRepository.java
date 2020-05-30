@@ -1,5 +1,6 @@
 package Digitact.Backend.Storage;
 
+import Digitact.Backend.Model.Education;
 import Digitact.Backend.Model.User.Applicant;
 import Digitact.Backend.Model.User.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,16 +12,13 @@ import java.util.List;
 
 import static Digitact.Backend.Storage.DB.Query.*;
 
-/**
- * Java Persistence API for the integration between the Database and the App
- */
 @Repository
-public interface IDataRepository extends JpaRepository<User, Long> {
-    List<User> findAll();
+public interface IEducationRepository extends JpaRepository<Education, Long> {
+    List<Education> findAll();
 
-    @Query(value = getApplicantQuery, nativeQuery = true)
-    Collection<Applicant> getApplicants();
+    @Query(value = getEducationsByUserID, nativeQuery = true)
+    Collection<Education> getEducationsByUser(Long applicantID);
 
-    @Query(value = getFullApplicantsInfoQuery, nativeQuery = true)
-    Collection<Applicant> getFullApplicantsInfo();
+    @Query(value = getAllEducationsQuery, nativeQuery = true)
+    Collection<Education> getAllEducationsInfo();
 }
