@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is the controller class of the entire app
+ * This is the controller class of the Clients
  */
 @RequestMapping("api/controller")
 @RestController
-public class Controller {
+public class ClientController {
 
     @Autowired
     IDataRepository repository;
