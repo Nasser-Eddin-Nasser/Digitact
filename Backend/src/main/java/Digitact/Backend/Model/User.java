@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Abstract class user which will be used to define applicants and controllers
  */
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "public")
 public abstract class User implements IUser, Serializable {
 
     private static final long serialVersionUID = -2343243243242432341L;
