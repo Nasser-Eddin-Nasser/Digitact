@@ -10,6 +10,6 @@ import java.util.List;
  * Java Persistence API for the integration between the Database and the App
  */
 @Repository
-public interface DataRepository extends JpaRepository<User, Long> {
+public interface IDataRepository extends JpaRepository<User, Long> {
     List<User> findAll();
 }

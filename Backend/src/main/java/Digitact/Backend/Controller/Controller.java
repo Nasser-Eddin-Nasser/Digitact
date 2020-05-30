@@ -1,7 +1,7 @@
 package Digitact.Backend.Controller;
 
 import Digitact.Backend.Model.*;
-import Digitact.Backend.Storage.DataRepository;
+import Digitact.Backend.Storage.IDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class Controller {
 
     @Autowired
-    DataRepository repository;
+    IDataRepository repository;
 
     /**
      * @return JSON object of the user
