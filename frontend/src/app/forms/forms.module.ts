@@ -1,13 +1,8 @@
-/*
-@Author
-Bharathwaj Ravi
+/**
+ * @description
+ *  This module serves as a common place where the form related pages, componets are handled.
+ */
 
-Add modifiers under @Modifiers
-@Modifiers
-
-@Purpose
-  - This module serves as a common place where the form related pages, componets are handled.
-*/
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +13,7 @@ import { FormsPage } from './forms.page';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { BasicInfoComponent } from './steps/basic-info/basic-info.component';
 import { ContactInfoComponent } from './steps/contact-info/contact-info.component';
+import { SubmitPageComponent } from './steps/submit-page/submit-page.component';
 
 @NgModule({
   imports: [
@@ -30,8 +26,9 @@ import { ContactInfoComponent } from './steps/contact-info/contact-info.componen
   declarations: [
     FormsPage,
     BasicInfoComponent,
-    ContactInfoComponent,
     SideMenuComponent,
+    SubmitPageComponent,
+    ContactInfoComponent,
   ],
 })
 export class FormsPageModule {}

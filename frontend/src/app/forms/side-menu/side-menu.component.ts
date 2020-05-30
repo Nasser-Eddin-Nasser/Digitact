@@ -1,15 +1,14 @@
 /*
-@Author
-Bharathwaj Ravi
-
-Add modifiers under @Modifiers
-@Modifiers
-
-@Purpose
-  - This component renders the hamburger side menu and its actions.
+  @description
+    This component renders the hamburger side menu and its actions.
 */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { FormGroup } from '../../common/forms/forms';
+import { FormsData } from '../../model/forms-data.model';
+import { ApplicationStep, ApplicationStepsArr } from '../model/steps.model';
 
 @Component({
   selector: 'app-side-menu',
@@ -17,34 +16,46 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./side-menu.component.scss'],
 })
 export class SideMenuComponent {
-  /*
-  @Usage this array holds the list of different steps information.
-  */
-  @Input() sideMenuList: Array<{
-    id: number;
-    displayName: string;
-    isCompleted: boolean;
-    isActive: boolean;
-    selector: string;
-  }>;
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
-  /*
-  @Usage this takes care of emitting event to parent.
-  */
-  @Output() private pageProgressStatusCallBack = new EventEmitter();
+  /**
+   * Make the Steps available in the template.
+   *
+   * Only access this property in the template.
+   * In the TS file, you can directly refer to the underlying element.
+   */
+  readonly APPLICATION_STEP = ApplicationStep;
 
-  constructor() {}
+  /**
+   * Make the Steps Array available in the template.
+   *
+   * Only access this property in the template.
+   * In the TS file, you can directly refer to the underlying element.
+   */
+  readonly APPLICATION_STEP_ARR = ApplicationStepsArr;
 
-  /*
-  @Usage this method emits the event for progrss call back.
-  */
-  onMenuChange(menu: {
-    id: number;
-    displayName: string;
-    isCompleted: boolean;
-    isActive: boolean;
-    selector: string;
-  }): void {
-    this.pageProgressStatusCallBack.emit(menu);
+  /**
+   * Data of the entire form.
+   */
+  @Input()
+  formsData: FormGroup<FormsData>;
+
+  /**
+   * Which step is currently displayed?
+   */
+  @Input()
+  currentStep: ApplicationStep;
+
+  /**
+   * Update the "step" query paremeter.
+   * You can use this to navigate between the different form steps!
+   */
+  navigateToStep(step: ApplicationStep): void {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        step,
+      },
+    });
   }
 }

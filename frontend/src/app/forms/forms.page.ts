@@ -1,24 +1,20 @@
 /*
-@Author
-Bharathwaj Ravi
-
-Add modifiers under @Modifiers
-@Modifiers
-
-@Purpose
-  - This page handles the basic operation of tracking progress, navigation, close menu, continue button,
-   event handlers for child to parent communication and parent to child data down.
+  @description
+    This page handles the basic operation of tracking progress, navigation, close menu, continue button,
+    event handlers for child to parent communication and parent to child data down.
 */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
-import { BasicInfo } from '../interfaces/basic-info';
-import { ContactInfo } from '../interfaces/contact-info';
+import { FormControl, FormGroup } from '../common/forms/forms';
+import { BasicInfo, ContactInfo, FormsData } from '../model/forms-data.model';
+import { StorageHandlerService } from '../services/storage-handler.service';
 
-import { FormControl, FormGroup } from './../common/forms/forms';
+import { ApplicationStep, ApplicationStepsArr } from './model/steps.model';
 
 @Component({
   selector: 'app-forms',
@@ -26,168 +22,209 @@ import { FormControl, FormGroup } from './../common/forms/forms';
   styleUrls: ['./forms.page.scss'],
 })
 export class FormsPage implements OnInit, OnDestroy {
-  /*
-  @Usage this array holds the object with   information required for different views.
-  */
-  sideMenuList = [
-    {
-      id: 1,
-      displayName: 'Personal info',
-      selector: 'form-basic-info',
-      isActive: false,
-      isCompleted: false,
-    },
-    {
-      id: 2,
-      displayName: 'Contact info',
-      selector: 'form-contact-info',
-      isActive: false,
-      isCompleted: false,
-    },
-  ];
+  /**
+   * Make the Steps available in the template.
+   *
+   * This property is really only used to make the Steps available in the template.
+   * In the TS file, you can directly refer to the underlying element.
+   */
+  readonly APPLICATION_STEP = ApplicationStep;
 
-  /*
-  @Usage this  object holds current view information.
-  */
-  currentMenu: {
-    id: number;
-    displayName: string;
-    isCompleted: boolean;
-    isActive: boolean;
-    selector: string;
-  };
+  /**
+   * Make the Steps Array available in the template.
+   *
+   * This property is really only used to make the Steps available in the template.
+   * In the TS file, you can directly refer to the underlying element.
+   */
+  readonly APPLICATION_STEP_ARR = ApplicationStepsArr;
 
-  /*
-  @Usage  holds total steps in the form.
-  */
-  totalSteps: number;
+  /**
+   * Data of the entire form.
+   */
+  formsData = new FormGroup<FormsData>({
+    basicInfo: new FormGroup<BasicInfo>({
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      salutation: new FormControl(undefined, Validators.required),
+    }),
+    contactInfo: new FormGroup<ContactInfo>({
+      phoneNumber: new FormControl('', Validators.required),
+      eMail: new FormControl('', Validators.required),
+      linkedIn: new FormControl(''),
+      xing: new FormControl(''),
+    }),
+  });
 
-  /*
-  @Usage  holds progress value.
-  */
-  progressPercentage: number;
+  /**
+   * Which step is currently displayed?
+   *
+   * **Important! Do not modify this value directly! Use `setCurrentStep()` instead!**
+   */
+  currentStep: ApplicationStep;
+  /**
+   * Which step is currently displayed?
+   * This is the index in our array of steps.
+   *
+   * **Important! Do not modify this value directly! Use `setCurrentStep()` instead!**
+   */
+  currentStepIndex: number;
 
-  /*
-  @Usage  holds all the subscription which will be useful for un subscribing on destroy.
-  */
+  /**
+   * The current progress (between 0 and 1).
+   */
+  progressPercentage = 0;
+
+  /**
+   * Holds all the subscription which will be useful for un subscribing on destroy.
+   */
   private subscriptions: Subscription[] = [];
 
   constructor(
-    private activeRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private navigationController: NavController,
-    private router: Router
+    private router: Router,
+    private storage: StorageHandlerService
   ) {}
 
-  /*
-  @Usage  This property holds the type safe form group fields for basic information view.
-  */
-  basicInfoObj = new FormGroup<BasicInfo>({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    salutation: new FormControl('mr'),
-  });
-
-  /*
-  @Usage  This property holds the type safe form group fields for contact information view.
-  */
-  contactInfoObj = new FormGroup<ContactInfo>({
-    phoneNumber: new FormControl(''),
-    eMail: new FormControl(''),
-    linkedIn: new FormControl(''),
-    xing: new FormControl(''),
-  });
-
-  /*
-  @Usage In this method route change is observed and handling is done.
-  */
+  /**
+   * In this method route change is observed and handling is done.
+   */
   ngOnInit(): void {
-    this.totalSteps = this.sideMenuList.length;
-    this.progressPercentage = 0;
-    this.sideMenuList[0].isActive = true;
-    this.currentMenu = this.sideMenuList[0];
-
-    const subscription = this.activeRoute.queryParams.subscribe((params) => {
-      const step = Number(params.step);
-      if (step > 0 && step <= this.totalSteps) {
-        this.sideMenuList.filter((obj) => (obj.isActive = false));
-        this.currentMenu = this.sideMenuList.filter(
-          (obj) => obj.id === Number(params.step)
-        )[0];
-        this.currentMenu.isActive = true;
-      } else {
-        console.warn('Invalid query param');
-        this.sideMenuList[0].isActive = true;
-        this.currentMenu = this.sideMenuList[0];
+    const routerSubscription = this.activatedRoute.queryParams.subscribe(
+      (params) => {
+        /*
+          This Observable will also fire when the page is loaded.
+          So, it allows us not only to react to changes of the query parameter,
+          but also to set the initial query parameter.
+       */
+        this.handleStep(params.step);
       }
-    });
-    this.subscriptions.push(subscription);
+    );
+    this.subscriptions.push(routerSubscription);
+
+    const formStatusChangesSubscriptions = this.formsData.statusChanges.subscribe(
+      () => {
+        /*
+          This Observable fires every time the validity status recalculates.
+          So, it will basically fire whenever someone enters some data somewhere.
+          (To be more precise: It might fire even more often than that.)
+          So, we can use it to update our progress bar.
+          Of course, there is still room for performance improvement (since we will call the following method really often).
+          But for now, it should be fine.
+        */
+        this.updateProgessStatus();
+      }
+    );
+    this.subscriptions.push(formStatusChangesSubscriptions);
   }
 
-  /*
-  @Usage In this method navigation to next step is handled.
-  */
-  navigateToNextForm(): void {
-    if (this.currentMenu.id !== this.totalSteps) {
-      const nextMenuIndex = this.sideMenuList.indexOf(this.currentMenu) + 1;
-      this.onFormStepsNavigation(this.sideMenuList[nextMenuIndex]);
-    } else {
-      alert('Next is submit page which is yet to be implmented');
-    }
-  }
-
-  /*
-  @Usage In this method un subscribe event and restore to default values are handled.
-  */
+  /**
+   * Unsubscribe from all of our Subscriptions.
+   */
   ngOnDestroy(): void {
     for (const subscription of this.subscriptions) {
       subscription.unsubscribe();
     }
-    this.basicInfoObj = new FormGroup<BasicInfo>({
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      salutation: new FormControl('mr'),
-    });
   }
 
-  /*
-  @Usage In this method navigation to home page is handled.
-  */
-  onClose(): void {
-    this.navigationController.navigateForward(['/home']);
+  /**
+   * Handle a Step as provided by the Router.
+   *
+   * The string provided by the Router could contain anything.
+   * So: If the Step is not known, we simply show the Basic Information step.
+   *
+   * (When navigating to the URL without providing a query parameter, we will also redirect to the Basic Information step).
+   *
+   * @param step The "step" query parameter we got from the Router.
+   */
+  private handleStep(step: unknown): void {
+    // tslint:disable-next-line: no-any
+    if (ApplicationStepsArr.includes(step as any)) {
+      this.setCurrentStep(step as ApplicationStep);
+      return;
+    }
+
+    if (step) {
+      console.warn('The following Step is unknown:', step);
+    }
+
+    // A fallback: If a step was requested that we don't know, we simply show the Basic Information page.
+    this.navigateToStep(ApplicationStep.BasicInformation);
   }
 
-  /*
-  @Usage In this method navigation to respective step is handled.
-  */
-  onFormStepsNavigation(event: {
-    id: number;
-    displayName: string;
-    isCompleted: boolean;
-    isActive: boolean;
-    selector: string;
-  }): void {
-    const param = event.id;
+  /**
+   * Set the currentStep and currentStepIndex property.
+   *
+   * Usually, if you want to change the Step, you should use the Router.
+   */
+  private setCurrentStep(step: ApplicationStep): void {
+    this.currentStep = step;
+    this.currentStepIndex = ApplicationStepsArr.indexOf(step);
+  }
+
+  /**
+   * Update the "step" query parameter.
+   * You can use this to navigate between the different form steps!
+   */
+  navigateToStep(step: ApplicationStep): void {
     this.router.navigate([], {
-      relativeTo: this.activeRoute,
+      relativeTo: this.activatedRoute,
       queryParams: {
-        step: param,
+        step,
       },
     });
   }
 
-  /*
-  @Usage In this methos progress values are updated.
-  */
-  pageProgressStatusCallBack(event: {
-    id: number;
-    displayName: string;
-    isCompleted: boolean;
-    isActive: boolean;
-    selector: string;
-  }): void {
-    console.log(event);
-    const completedStep = this.sideMenuList.filter((obj) => obj.isCompleted)
-      .length;
-    this.progressPercentage = completedStep / this.totalSteps;
+  /**
+   * In this method navigation to next step is handled.
+   */
+  navigateToNextStep(): void {
+    if (this.currentStepIndex < ApplicationStepsArr.length - 1) {
+      const step = ApplicationStepsArr[this.currentStepIndex + 1];
+      this.navigateToStep(step);
+
+      return;
+    }
+
+    console.warn('There is no next step.');
+  }
+
+  /**
+   * "Submit" the form: Store the value in our persistent storage and navigate to the confirmation page.
+   */
+  submit(): void {
+    const key = (
+      this.formsData.value.basicInfo.firstName +
+      '-' +
+      this.formsData.value.basicInfo.lastName +
+      '-' +
+      Math.floor(Math.random() * 1000000).toString()
+    ).replace(/\s+/g, '_');
+    this.storage.addItem(key, this.formsData.value);
+    this.router.navigate(['/forms', 'confirmation']);
+  }
+
+  /**
+   * Go to the Home page.
+   */
+  closeForm(): void {
+    this.navigationController.navigateBack(['/home']);
+  }
+
+  /**
+   * Update the value of our progress counter.
+   */
+  updateProgessStatus(): void {
+    // Don't count the submit page.
+    const totalNumberOfSteps = ApplicationStepsArr.length - 1;
+
+    let validSteps = 0;
+    for (const control of Object.values(this.formsData.controls)) {
+      if (control.valid) {
+        validSteps++;
+      }
+    }
+
+    this.progressPercentage = validSteps / totalNumberOfSteps;
   }
 }
