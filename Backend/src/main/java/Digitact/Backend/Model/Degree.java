@@ -1,7 +1,7 @@
 package Digitact.Backend.Model;
 
 public enum Degree {
-  Master,
-  Bachelor,
-  PhD
+    Master,
+    Bachelor,
+    PhD
 }

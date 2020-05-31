@@ -1,7 +1,7 @@
 package Digitact.Backend.Model.User;
 
 public interface IUser {
-  String getFirstName();
+    String getFirstName();
 
-  String getLastName();
+    String getLastName();
 }
