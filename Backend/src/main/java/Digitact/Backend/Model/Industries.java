@@ -8,85 +8,91 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Industries")
 public class Industries {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+  @JsonIgnore
+  @OneToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "userId")
+  public User user;
 
-    @Column(name = "automotive")
-    private boolean automotive = false;
-    @Column(name = "finance")
-    private boolean finance = false;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
-    @Column(name = "commerce")
-    private boolean commerce = false;
-    @Column(name = "pharma_Helthcare")
-    private boolean pharma_Helthcare = false;
-    @Column(name = "public_Sector")
-    private boolean public_Sector = false;
+  @Column(name = "automotive")
+  private boolean automotive = false;
 
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userId")
-    public User user;
+  @Column(name = "finance")
+  private boolean finance = false;
 
-    public Industries() {
-    }
+  @Column(name = "commerce")
+  private boolean commerce = false;
 
-    public Industries(User user) {
-        super();
-        this.user = user;
-    }
+  @Column(name = "pharma_Helthcare")
+  private boolean pharma_Helthcare = false;
 
-    public Industries(boolean automotive, boolean finance, boolean commerce, boolean pharma_Helthcare, boolean public_Sector) {
-        this.automotive = automotive;
-        this.finance = finance;
-        this.commerce = commerce;
-        this.pharma_Helthcare = pharma_Helthcare;
-        this.public_Sector = public_Sector;
-    }
+  @Column(name = "public_Sector")
+  private boolean public_Sector = false;
 
-    public boolean isAutomotive() {
-        return automotive;
-    }
+  public Industries() {}
 
-    public boolean isFinance() {
-        return finance;
-    }
+  public Industries(User user) {
+    super();
+    this.user = user;
+  }
 
-    public boolean isCommerce() {
-        return commerce;
-    }
+  public Industries(
+      boolean automotive,
+      boolean finance,
+      boolean commerce,
+      boolean pharma_Helthcare,
+      boolean public_Sector) {
+    this.automotive = automotive;
+    this.finance = finance;
+    this.commerce = commerce;
+    this.pharma_Helthcare = pharma_Helthcare;
+    this.public_Sector = public_Sector;
+  }
 
-    public boolean isPharma_Helthcare() {
-        return pharma_Helthcare;
-    }
+  public boolean isAutomotive() {
+    return automotive;
+  }
 
-    public boolean isPublic_Sector() {
-        return public_Sector;
-    }
+  public void setAutomotive(boolean automotive) {
+    this.automotive = automotive;
+  }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+  public boolean isFinance() {
+    return finance;
+  }
 
-    public void setAutomotive(boolean automotive) {
-        this.automotive = automotive;
-    }
+  public void setFinance(boolean finance) {
+    this.finance = finance;
+  }
 
-    public void setFinance(boolean finance) {
-        this.finance = finance;
-    }
+  public boolean isCommerce() {
+    return commerce;
+  }
 
-    public void setCommerce(boolean commerce) {
-        this.commerce = commerce;
-    }
+  public void setCommerce(boolean commerce) {
+    this.commerce = commerce;
+  }
 
-    public void setPharma_Helthcare(boolean pharma_Helthcare) {
-        this.pharma_Helthcare = pharma_Helthcare;
-    }
+  public boolean isPharma_Helthcare() {
+    return pharma_Helthcare;
+  }
 
-    public void setPublic_Sector(boolean public_Sector) {
-        this.public_Sector = public_Sector;
-    }
+  public void setPharma_Helthcare(boolean pharma_Helthcare) {
+    this.pharma_Helthcare = pharma_Helthcare;
+  }
 
+  public boolean isPublic_Sector() {
+    return public_Sector;
+  }
+
+  public void setPublic_Sector(boolean public_Sector) {
+    this.public_Sector = public_Sector;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
 }

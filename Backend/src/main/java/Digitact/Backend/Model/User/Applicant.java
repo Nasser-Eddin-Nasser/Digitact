@@ -12,68 +12,65 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 @Entity
 @Table(name = "users")
 public class Applicant extends User {
-    private static final long serialVersionUID = -2343243243242432341L;
+  private static final long serialVersionUID = -2343243243242432341L;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Fetch(FetchMode.JOIN)
-    private Set<Education> educations;
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @Fetch(FetchMode.JOIN)
+  private Set<Education> educations;
 
+  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @Fetch(FetchMode.JOIN)
+  private Industries industries;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Fetch(FetchMode.JOIN)
-    private Industries industries;
+  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @Fetch(FetchMode.JOIN)
+  private Positions positions;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Fetch(FetchMode.JOIN)
-    private Positions positions;
+  protected Applicant() {
+    super();
+  }
 
-    protected Applicant() {
-        super();
-    }
+  /**
+   * @param firstName
+   * @param lastName
+   */
+  public Applicant(String firstName, String lastName) {
+    super(firstName, lastName, UserRight.Applicant);
+    educations = new HashSet<Education>();
+  }
 
+  public UserRight getUserRight() {
+    return UserRight.Applicant;
+  }
 
-    /**
-     * @param firstName
-     * @param lastName
-     */
-    public Applicant(String firstName, String lastName) {
-        super(firstName, lastName, UserRight.Applicant);
-        educations = new HashSet<Education>();
-    }
+  public void setEducation(Education education) {
+    educations.add(education);
+  }
 
-    public UserRight getUserRight() {
-        return UserRight.Applicant;
-    }
+  public List<Education> getEducations() {
+    return Lists.newArrayList(educations);
+  }
 
-    public void setEducation(Education education) {
-        educations.add(education);
-    }
+  public void setEducations(List<Education> education) {
+    education.forEach(edd -> educations.add(edd));
+  }
 
-    public void setEducations(List<Education> education) {
-        education.forEach(edd -> educations.add(edd));
-    }
+  public Industries getIndustries() {
+    return industries;
+  }
 
-    public List<Education> getEducations() {
-        return Lists.newArrayList(educations);
-    }
+  public void setIndustries(Industries industries) {
+    this.industries = industries;
+  }
 
-    public void setIndustries(Industries industries) {
-        this.industries = industries;
-    }
+  public Positions getPositions() {
+    return positions;
+  }
 
-    public void setPositions(Positions positions) {
-        this.positions = positions;
-    }
-
-    public Industries getIndustries() {
-        return industries;
-    }
-
-    public Positions getPositions() {
-        return positions;
-    }
+  public void setPositions(Positions positions) {
+    this.positions = positions;
+  }
 }
