@@ -1,12 +1,8 @@
 package Model.User;
 
-
 import java.io.Serializable;
 
-/**
- * Abstract class user which will be used to define applicants and controllers
- */
-
+/** Abstract class user which will be used to define applicants and controllers */
 public abstract class User implements IUser, Serializable {
 
     private static final long serialVersionUID = -2343243243242432341L;
@@ -19,8 +15,7 @@ public abstract class User implements IUser, Serializable {
 
     protected UserRight userRight;
 
-    protected User() {
-    }
+    protected User() {}
 
     protected User(String firstName, String lastName, UserRight userRight) {
         this.firstName = firstName;
@@ -50,7 +45,6 @@ public abstract class User implements IUser, Serializable {
     /* Returns the string representation of the User.*/
     @Override
     public String toString() {
-        return String.format("User[id=%d, firstname=%s, lastname=%s]",
-                id, firstName, lastName);
+        return String.format("User[id=%d, firstname=%s, lastname=%s]", id, firstName, lastName);
     }
 }
