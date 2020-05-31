@@ -14,7 +14,8 @@ import { FormControl, FormGroup } from '../common/forms/forms';
 import {
   BasicInfo,
   ContactInfo,
-  // EducationInfo,
+  EducationInfo,
+  EducationInfoEntry,
   FormsData,
 } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
@@ -58,9 +59,15 @@ export class FormsPage implements OnInit, OnDestroy {
       linkedIn: new FormControl(''),
       xing: new FormControl(''),
     }),
-    /* educationInfo: new FormGroup<EducationInfo>({
-      education: new FormControl(''),
-    }),*/
+    educationInfo: new FormGroup<EducationInfo>({
+      eduInfo: new FormGroup<EducationInfoEntry>({
+        university: new FormControl(''),
+        degree: new FormControl(''),
+        typeOfDegree: new FormControl(''),
+        grade: new FormControl(''),
+        gradDate: new FormControl(''),
+      }),
+    }),
   });
 
   /**
