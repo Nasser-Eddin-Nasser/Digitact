@@ -23,11 +23,11 @@ public class HRController {
   /** @return JSON object of the applicants */
   @GetMapping("/getApplicants")
   public List<User> getApplicants() {
-    return new ArrayList(dataRepository.getApplicants());
+    return new ArrayList<User>(dataRepository.getApplicants());
   }
 
   @GetMapping("/getAllEducationsInfo")
   public List<Education> getFullEducationsInfo() {
-    return new ArrayList(educationRepository.getAllEducationsInfo());
+    return new ArrayList<Education>(educationRepository.getAllEducationsInfo());
   }
 }
