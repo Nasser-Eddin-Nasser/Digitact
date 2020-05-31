@@ -27,6 +27,12 @@ import { ApplicationStep, ApplicationStepsArr } from './model/steps.model';
   styleUrls: ['./forms.page.scss'],
 })
 export class FormsPage implements OnInit, OnDestroy {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private navigationController: NavController,
+    private router: Router,
+    private storage: StorageHandlerService
+  ) {}
   /**
    * Make the Steps available in the template.
    *
@@ -59,8 +65,8 @@ export class FormsPage implements OnInit, OnDestroy {
       xing: new FormControl(''),
     }),
     fieldDesignationInfo: new FormGroup<FieldDesignationInfo>({
-      field: new FormControl([], Validators.required),
-      designation: new FormControl([], Validators.required),
+      field: new FormControl('', Validators.required),
+      designation: new FormControl('', Validators.required),
     }),
   });
 
@@ -87,13 +93,6 @@ export class FormsPage implements OnInit, OnDestroy {
    * Holds all the subscription which will be useful for un subscribing on destroy.
    */
   private subscriptions: Subscription[] = [];
-
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private navigationController: NavController,
-    private router: Router,
-    private storage: StorageHandlerService
-  ) {}
 
   /**
    * In this method route change is observed and handling is done.
