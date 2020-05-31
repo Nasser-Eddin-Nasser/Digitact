@@ -79,11 +79,27 @@ type MyGenericFormControl<T> = T extends UseControl<infer U>
   : never; // Anything else is not permitted.
 
 /**
- * A recursive Partial.
+ * A recursive "Required".
+ * (It makes all properties non-optional.)
+ *
+ * Example:
+ *
+ * ```
+ * interface Model {
+ *   foo?: {
+ *     bar?: string;
+ *   }
+ * }
+ *
+ * DeepRequired<Model> is now:
+ * {
+ *   foo: {
+ *     bar: string;
+ *   }
+ * }
+ * ```
  */
-type DeepPartial<T> = {
-  [key in keyof T]?: DeepPartial<T[key]>;
-};
+type DeepRequired<T> = { [key in keyof T]-?: DeepRequired<T[key]> };
 
 /**
  * In some methods of the Form Controls, you can either pass a raw value, or a value and a disabled state.
@@ -263,7 +279,7 @@ export class FormGroup<T> extends AngularFormGroup {
   /**
    * Important: The data passed in the Observable only includes currently not disabled elements.
    */
-  readonly valueChanges: Observable<DeepPartial<T>>;
+  readonly valueChanges: Observable<FormValue<T>>;
 
   constructor(
     public controls: MyFormControls<T>,
@@ -278,7 +294,7 @@ export class FormGroup<T> extends AngularFormGroup {
   }
 
   setValue(
-    value: T,
+    value: DeepRequired<FormValue<T>>,
     options?: {
       onlySelf?: boolean;
       emitEvent?: boolean;
@@ -288,7 +304,7 @@ export class FormGroup<T> extends AngularFormGroup {
   }
 
   patchValue(
-    value: DeepPartial<T>,
+    value: FormValue<T>,
     options?: {
       onlySelf?: boolean;
       emitEvent?: boolean;
@@ -300,7 +316,7 @@ export class FormGroup<T> extends AngularFormGroup {
   // It is actually also possible to pass an object containing, for each item, both the value and the disabled state.
   // Currently, we don't support this.
   reset(
-    value?: T,
+    value?: DeepRequired<FormValue<T>>,
     options?: {
       onlySelf?: boolean;
       emitEvent?: boolean;
