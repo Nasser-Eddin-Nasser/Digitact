@@ -1,13 +1,11 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-icon name="Save"></ion-icon>
-    </ion-buttons>
-    <ion-buttons slot="start">
-      <ion-icon name="Save"></ion-icon>
+    <ion-buttons slot="end">
+      <ion-button>Save</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <div class="main-container with-bottom-buttons">
   <div class="content">
     <ng-container>
@@ -20,12 +18,23 @@
             <ion-input type="text"></ion-input>
           </ion-item>
           <ion-item class="ion-no-padding">
-            <ion-label position="floating" color="medium">Subject</ion-label>
+            <ion-label position="floating" color="medium"
+              >Subject/Degree</ion-label
+            >
             <ion-input type="text"></ion-input>
           </ion-item>
           <ion-item class="ion-no-padding">
-            <ion-label position="floating" color="medium">Degree</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-label position="floating" color="medium"
+              >Type of Education</ion-label
+            >
+            <ion-select interface="popover">
+              <ion-select-option
+                *ngFor="let degree of degreeTypeArray"
+                [value]="degree.value"
+              >
+                {{ degree.displayName }}</ion-select-option
+              >
+            </ion-select>
           </ion-item>
           <ion-item class="ion-no-padding">
             <ion-label position="floating" color="medium">Grade</ion-label>

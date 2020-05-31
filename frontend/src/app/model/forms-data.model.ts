@@ -3,10 +3,12 @@
     This model holds the all the interfaces related to forms data.
  */
 
+import { Variable } from '@angular/compiler/src/render3/r3_ast';
+
 export interface FormsData {
   basicInfo: BasicInfo;
   contactInfo: ContactInfo;
-  // educationInfo: EducationInfo;
+  educationInfo: EducationInfo;
 }
 
 export interface BasicInfo {
@@ -21,8 +23,15 @@ export interface ContactInfo {
   linkedIn: string;
   xing: string;
 }
-/*
+
 export interface EducationInfo {
-  education: string;
+  eduInfo: EducationInfoEntry;
 }
-*/
+
+export interface EducationInfoEntry {
+  university: string;
+  degree: string;
+  typeOfDegree: string;
+  grade: string;
+  gradDate: string;
+}

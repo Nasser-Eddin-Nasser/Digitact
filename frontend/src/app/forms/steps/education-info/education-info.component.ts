@@ -21,9 +21,7 @@ export class EducationInfoComponent {
   /**
    * Constructor
    */
-  constructor(public modalController: ModalController) {
-    console.log('This is EducationInfoComponent');
-  }
+  constructor(public modalController: ModalController) {}
 
   /**
    * Open education info entry
