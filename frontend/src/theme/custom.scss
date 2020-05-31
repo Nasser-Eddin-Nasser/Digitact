@@ -124,3 +124,24 @@ ion-item.item-has-focus {
   flex-grow: 0;
   padding-top: 1rem;
 }
+
+/*
+  Customization of the Popover in the dropdownmenu of the field-designation.page
+*/
+.custom-popover {
+  [aria-checked='true'].sc-ion-alert-ios .alert-checkbox-icon.sc-ion-alert-ios {
+    border-color: var(--ion-color-tertiary);
+    background-color: var(--ion-color-contrast);
+  }
+
+  .alert-checkbox-label.sc-ion-alert-ios,
+  .alert-checkbox-label.sc-ion-alert-md {
+    //font-size: 18px;
+    white-space: pre-wrap;
+  }
+
+  [aria-checked='true'].sc-ion-alert-ios
+    .alert-checkbox-inner.sc-ion-alert-ios {
+    border-color: var(--ion-color-tertiary);
+  }
+}
