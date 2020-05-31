@@ -86,3 +86,39 @@ Log in using:
 
 If you want to access the database, you are most likely prompted for a password. It is set to `postgres` by default.
 
+
+
+# Create Applicant Restful API
+
+```json
+{
+  "firstName": String,
+  "lastName": String,
+  "industries": {
+    "automotive": boolean,
+    "finance": boolean,
+    "commerce": boolean,
+    "pharma_Helthcare": boolean,
+    "public_Sector": boolean
+  },
+  "positions": {
+    "consultant_Business_Consultant": boolean,
+    "iT_Consultant_Informationsmanagement": boolean,
+    "iT_Consultant_Java_JEE": boolean,
+    "iT_Consultant_Data_Science": boolean,
+    "iT_Consultant_Artificial_Intelligence": boolean,
+    "internship_Working_Student": boolean,
+    "consultant_SAP": boolean
+  },
+  "educations": [
+    {
+      "university": String,
+      "subject": String,
+      "degree": String,
+      "grade": double,
+      "graduation_date": String
+    }
+  ]
+}
+```
+
