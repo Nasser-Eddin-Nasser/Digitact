@@ -24,7 +24,7 @@ export interface ContactInfo {
 
 export interface FieldDesignationInfo {
   // tslint:disable-next-line: no-any
-  field: any;
+  field: string;
   // tslint:disable-next-line: no-any
-  designation: any;
+  designation: string;
 }
