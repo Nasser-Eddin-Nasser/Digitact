@@ -50,25 +50,33 @@ type MyFormControls<T> = {
   [key in keyof T]: MyGenericFormControl<T[key]>;
 };
 
-type MyGenericFormControl<T> =
-  // First, handle Arrays.
-  T extends string[] | number[] | File[]
-    ? FormArray<UnpackTypeFromArray<T>>
-    : T extends unknown[] // Make sure any other kind of Array may not be used.
-    ? never
-    : T extends string | number | File // Second, handle basic strings and files
-    ? FormControl<T>
-    : T extends {} // If it is an Object, it is (most likely) a group.
-    ? FormGroup<T>
-    : never; // Anything else is not permitted.
-
+interface ControlUniquenessItem {
+  /**
+   * This element is used to allow the typechecker to distinguish "UseControl" elements from other ones.
+   * Pretty "hacky", but it works...
+   */
+  __el: 'ctrl';
+}
 /**
- * This allows you to retrieve the type X for an Array of X. So:
- * ```
- * UnpackTypeFromArray<string[]> --> string
- * ```
+ * A hint for the typechecker that we want to use a FormControl instead of a FormArray here.
  */
-type UnpackTypeFromArray<T> = T extends (infer U)[] ? U : never;
+export type UseControl<T extends string[] | number[]> = T &
+  ControlUniquenessItem;
+
+type FormValue<T> = {
+  // Remove the "ControlUniquenessItem" and make everything optional.
+  [key in keyof T]?: T[key] extends UseControl<infer U> ? U : FormValue<T[key]>;
+};
+
+type MyGenericFormControl<T> = T extends UseControl<infer U>
+  ? FormControl<U>
+  : T extends string | number
+  ? FormControl<T>
+  : T extends (infer V)[]
+  ? FormArray<V>
+  : T extends {} // If it is an Object, it is (most likely) a group.
+  ? FormGroup<T>
+  : never; // Anything else is not permitted.
 
 /**
  * A recursive Partial.
@@ -89,7 +97,7 @@ type InitialValueOrInitialValueAndDisabled<T> =
  * For an example, see comment on the FormGroup wrapper class.
  */
 export class FormControl<
-  T extends string | number | File
+  T extends string | string[] | number | number[]
 > extends AngularFormControl {
   readonly value: T;
   readonly valueChanges: Observable<T>;
@@ -149,7 +157,7 @@ export class FormArray<T> extends AngularFormArray {
   /**
    * Important: The "value" only includes currently not disabled elements.
    */
-  readonly value: T[];
+  readonly value: FormValue<T>[];
 
   constructor(
     public controls: MyGenericFormControl<T>[],
@@ -217,7 +225,7 @@ export class FormArray<T> extends AngularFormArray {
  * ``` ts
  * interface MyModel {
  *  address: Address;
- *  userFiles: UserFiles;
+ *  order: Order[];
  * }
  *
  * interface Address {
@@ -228,11 +236,9 @@ export class FormArray<T> extends AngularFormArray {
  *  lastName: string;
  * }
  *
- * interface UserFiles {
- *  // Even though we support Files, keep in mind that separate handling for this kind of data type needs to be implemented
- * // (you cannot just add the assign the Form Control to the HTML file input).
- *  picture: File;
- *  documents: File[];
+ * interface Order {
+ *   itemName: string;
+ *   amount: number;
  * }
  *
  * const test = new FormGroup<MyModel>({
@@ -242,20 +248,18 @@ export class FormArray<T> extends AngularFormArray {
  *       lastName: new FormControl(''),
  *    }),
  *  }),
- *  userFiles: new FormGroup<UserFiles>({
- *     picture: new FormControl(),
- *     documents: new FormArray([]),
- *  }),
+ *
+ *  order: new FormArray<Order>([]),
  * });
  *
- * console.log(test.controls.userFiles.controls.documents);
+ * console.log(test.controls.address.controls.name.controls.firstName.value);
  * ```
  */
 export class FormGroup<T> extends AngularFormGroup {
   /**
    * Important: The "value" only includes currently not disabled elements.
    */
-  readonly value: DeepPartial<T>;
+  readonly value: FormValue<T>;
   /**
    * Important: The data passed in the Observable only includes currently not disabled elements.
    */
@@ -284,7 +288,7 @@ export class FormGroup<T> extends AngularFormGroup {
   }
 
   patchValue(
-    value: Partial<T>,
+    value: DeepPartial<T>,
     options?: {
       onlySelf?: boolean;
       emitEvent?: boolean;
