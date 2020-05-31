@@ -2,6 +2,8 @@ package Controller;
 
 import Model.StorageModel;
 import Model.User.User;
+import java.io.IOException;
+import java.util.List;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,20 +13,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.List;
-
 public class StorageController {
     StorageModel model;
     // Create a TableView with a list of persons
-    @FXML
-    TableView<User> userTable;
+    @FXML TableView<User> userTable;
     private ObservableList<User> observableListTableView;
     Stage stage;
-    @FXML
-    TableColumn<User, String> firstNameCol = new TableColumn<>("firstName");
-    @FXML
-    TableColumn<User, String> lastNameCol = new TableColumn<>("lastName");
+    @FXML TableColumn<User, String> firstNameCol = new TableColumn<>("firstName");
+    @FXML TableColumn<User, String> lastNameCol = new TableColumn<>("lastName");
     Pane root;
 
     public StorageController(Stage parentStage) throws IOException {
@@ -56,5 +52,4 @@ public class StorageController {
         setFactoriesAndComparatorsForTableColumns();
         return observableListTableView;
     }
-
 }
