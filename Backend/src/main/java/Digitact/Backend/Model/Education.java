@@ -8,87 +8,91 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Education")
 public class Education {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+  @JsonIgnore
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "userId")
+  public User user;
 
-    @Column(name = "university")
-    private String university;
-    @Column(name = "subject")
-    private String subject;
-    @Column(name = "degree")
-    private Degree degree;
-    @Column(name = "grade")
-    private double grade;
-    @Column(name = "date")
-    private String graduation_date;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userId")
-    public User user;
+  @Column(name = "university")
+  private String university;
 
-    public Education() {
-    }
+  @Column(name = "subject")
+  private String subject;
 
-    public Education(User user) {
-        super();
-        this.user = user;
-    }
+  @Column(name = "degree")
+  private Degree degree;
 
-    public Education(String university, String subject, Degree degree, double grade, String graduation_Date) {
-        this.university = university;
-        this.subject = subject;
-        this.degree = degree;
-        this.grade = grade;
-        this.graduation_date = graduation_Date;
-    }
+  @Column(name = "grade")
+  private double grade;
 
-    public String getUniversity() {
-        return university;
-    }
+  @Column(name = "date")
+  private String graduation_date;
 
-    public void setUniversity(String university) {
-        this.university = university;
-    }
+  public Education() {}
 
-    public String getSubject() {
-        return subject;
-    }
+  public Education(User user) {
+    super();
+    this.user = user;
+  }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
+  public Education(
+      String university, String subject, Degree degree, double grade, String graduation_Date) {
+    this.university = university;
+    this.subject = subject;
+    this.degree = degree;
+    this.grade = grade;
+    this.graduation_date = graduation_Date;
+  }
 
-    public Degree getDegree() {
-        return degree;
-    }
+  public String getUniversity() {
+    return university;
+  }
 
-    public void setDegree(Degree degree) {
-        this.degree = degree;
-    }
+  public void setUniversity(String university) {
+    this.university = university;
+  }
 
-    public double getGrade() {
-        return grade;
-    }
+  public String getSubject() {
+    return subject;
+  }
 
-    public void setGrade(double grade) {
-        this.grade = grade;
-    }
+  public void setSubject(String subject) {
+    this.subject = subject;
+  }
 
-    public String getGraduation_date() {
-        return graduation_date;
-    }
+  public Degree getDegree() {
+    return degree;
+  }
 
-    public void setGraduation_date(String graduation_date) {
-        this.graduation_date = graduation_date;
-    }
+  public void setDegree(Degree degree) {
+    this.degree = degree;
+  }
 
-    public User getUser() {
-        return user;
-    }
+  public double getGrade() {
+    return grade;
+  }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+  public void setGrade(double grade) {
+    this.grade = grade;
+  }
+
+  public String getGraduation_date() {
+    return graduation_date;
+  }
+
+  public void setGraduation_date(String graduation_date) {
+    this.graduation_date = graduation_date;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
 }
