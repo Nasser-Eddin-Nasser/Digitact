@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 import { FormGroup } from '../../../common/forms/forms';
@@ -9,7 +9,7 @@ import { EducationInfoEntry } from '../../../model/forms-data.model';
   templateUrl: './education-info-entry.component.html',
   styleUrls: ['./education-info-entry.component.scss'],
 })
-export class EducationInfoEntryComponent implements OnInit {
+export class EducationInfoEntryComponent {
   constructor(public modalController: ModalController) {}
 
   degreeTypeArray = [
@@ -32,7 +32,7 @@ export class EducationInfoEntryComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    console.log(this.edu);
-  }
+  // ngOnInit(): void {
+  //   console.log(this.edu);
+  // }
 }
