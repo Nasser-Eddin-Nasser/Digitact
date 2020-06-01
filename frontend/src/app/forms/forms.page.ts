@@ -15,7 +15,6 @@ import {
   BasicInfo,
   ContactInfo,
   EducationInfo,
-  EducationInfoEntry,
   FormsData,
 } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
@@ -60,7 +59,7 @@ export class FormsPage implements OnInit, OnDestroy {
       xing: new FormControl(''),
     }),
     educationInfo: new FormGroup<EducationInfo>({
-      eduInfo: new FormArray([]),
+      eduInfo: new FormArray([], Validators.required),
     }),
   });
 
