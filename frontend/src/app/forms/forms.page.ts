@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
-import { FormControl, FormGroup } from '../common/forms/forms';
+import { FormArray, FormControl, FormGroup } from '../common/forms/forms';
 import {
   BasicInfo,
   ContactInfo,
@@ -60,13 +60,7 @@ export class FormsPage implements OnInit, OnDestroy {
       xing: new FormControl(''),
     }),
     educationInfo: new FormGroup<EducationInfo>({
-      eduInfo: new FormGroup<EducationInfoEntry>({
-        university: new FormControl(''),
-        degree: new FormControl(''),
-        typeOfDegree: new FormControl(''),
-        grade: new FormControl(''),
-        gradDate: new FormControl(''),
-      }),
+      eduInfo: new FormArray([]),
     }),
   });
 
