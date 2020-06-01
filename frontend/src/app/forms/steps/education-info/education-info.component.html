@@ -6,7 +6,11 @@
 </div>
 
 <ion-item class="ion-no-padding">
-  <ion-button class="plus-button" (click)="presentEduInfo()"> +</ion-button>
+  <ion-buttons class="plus-button">
+    <ion-button round (click)="presentEduInfo()"
+      ><ion-icon name="add-circle"></ion-icon
+    ></ion-button>
+  </ion-buttons>
 </ion-item>
 <ion-list>
   <!-- Sliding item with text options on both sides -->
