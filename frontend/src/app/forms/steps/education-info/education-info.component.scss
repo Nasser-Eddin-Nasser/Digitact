@@ -1,0 +1,11 @@
+.plus-button {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80px;
+  height: 80px;
+}
+.plus-button[disabled] {
+  opacity: 0.2;
+}
