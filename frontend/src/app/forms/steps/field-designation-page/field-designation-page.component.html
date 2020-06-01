@@ -1,5 +1,5 @@
 <div class="main-description">
-  <h1>Industries and Positions</h1>
+  <h1>Field and Designation</h1>
   <span>
     So that we can know in which industries and positions you are intrested,
     please choose from the following.
@@ -11,8 +11,7 @@
   <ion-select
     multiple
     [formControl]="formsData.controls.fieldDesignationInfo.controls.field"
-    [interfaceOptions]="{ cssClass: 'custom-popover' }"
-    interface="popover"
+    [interfaceOptions]="{ cssClass: 'custom-alert' }"
   >
     <ion-select-option
       *ngFor="let field of industryArray"
@@ -28,8 +27,7 @@
   <ion-select
     multiple
     [formControl]="formsData.controls.fieldDesignationInfo.controls.designation"
-    [interfaceOptions]="{ cssClass: 'custom-popover' }"
-    interface="interface"
+    [interfaceOptions]="{ cssClass: 'custom-alert' }"
   >
     <ion-select-option
       *ngFor="let designation of positionsArray"
