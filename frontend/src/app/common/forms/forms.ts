@@ -270,6 +270,64 @@ export class FormArray<T> extends AngularFormArray {
  *
  * console.log(test.controls.address.controls.name.controls.firstName.value);
  * ```
+ *
+ * The structure of the form is defined by the Generics you see above.
+ *
+ * If the interface contains an object, then this leads to a FormGroup:
+ *
+ * ```
+ * interface MyModel {
+ *   bar: SomeObject;
+ * }
+ * interface SomeObject {
+ *   baz: (whatever);
+ *   frub: (whatever);
+ * }
+ *
+ * const form = new FormGroup<MyModel>({
+ *   bar: new FormGroup<SomeObject>({...})
+ * });
+ * ```
+ *
+ * If the interface contains a string or number, then this leads to a FormControl:
+ *
+ * ```
+ * interface MyModel {
+ *   bar: string;
+ *   baz: number;
+ * }
+ *
+ * const form = new FormGroup<MyModel>({
+ *   bar: new FormControl('hello'),
+ *   baz: new FormControl(123),
+ * });
+ * ```
+ *
+ * If the interface contains an array, then this leads to a FormArray:
+ *
+ * ```
+ * interface MyModel {
+ *   bar: string[];
+ * }
+ *
+ * const form = new FormGroup<MyModel>({
+ *   bar: new FormArray<string>([]);
+ * })
+ * ```
+ *
+ * But what if you want to use an array inside a FormControl? For this edge case, you can use the `UseControl` "hint":
+ *
+ * ```
+ * interface MyModel {
+ *   bar: string[];
+ *   baz: UseControl<string[]>;
+ * }
+ *
+ * const form = new FormGroup<MyModel>({
+ *   bar: new FormArray<string>([]),
+ *   baz: new FormControl<string[]>([]),
+ * })
+ * ```
  */
 export class FormGroup<T> extends AngularFormGroup {
   /**
