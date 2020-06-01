@@ -1,7 +1,10 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button>Save</ion-button>
+      <ion-button [disabled]="!edu.valid" (click)="save()">Save</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -15,19 +18,26 @@
             <ion-label position="floating" color="medium"
               >School/University</ion-label
             >
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" [formControl]="edu.controls.university">
+            </ion-input>
           </ion-item>
           <ion-item class="ion-no-padding">
             <ion-label position="floating" color="medium"
               >Subject/Degree</ion-label
             >
-            <ion-input type="text"></ion-input>
+            <ion-input
+              type="text"
+              [formControl]="edu.controls.degree"
+            ></ion-input>
           </ion-item>
           <ion-item class="ion-no-padding">
             <ion-label position="floating" color="medium"
               >Type of Education</ion-label
             >
-            <ion-select interface="popover">
+            <ion-select
+              interface="popover"
+              [formControl]="edu.controls.typeOfDegree"
+            >
               <ion-select-option
                 *ngFor="let degree of degreeTypeArray"
                 [value]="degree.value"
@@ -38,13 +48,19 @@
           </ion-item>
           <ion-item class="ion-no-padding">
             <ion-label position="floating" color="medium">Grade</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input
+              type="text"
+              [formControl]="edu.controls.grade"
+            ></ion-input>
           </ion-item>
           <ion-item class="ion-no-padding">
             <ion-label position="floating" color="medium"
               >Graduation date</ion-label
             >
-            <ion-input type="text"></ion-input>
+            <ion-input
+              type="text"
+              [formControl]="edu.controls.gradDate"
+            ></ion-input>
           </ion-item>
         </ion-list>
       </ion-content>
