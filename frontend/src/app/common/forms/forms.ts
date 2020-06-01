@@ -46,36 +46,60 @@ import { Observable } from 'rxjs';
   So, here comes a really simple attempt to fix this issue on our own.
 */
 
+interface ControlUniquenessItem {
+  /**
+   * This element is used to allow the typechecker to distinguish "UseControl" elements from other ones.
+   * Pretty "hacky", but it works...
+   */
+  __el: 'ctrl';
+}
+/**
+ * A hint for the typechecker that we want to use a FormControl instead of a FormArray here.
+ */
+export type UseControl<T extends string[] | number[]> = T &
+  ControlUniquenessItem;
+
+export type FormValue<T> = {
+  // Remove the "ControlUniquenessItem" and make everything optional.
+  [key in keyof T]?: T[key] extends UseControl<infer U> ? U : FormValue<T[key]>;
+};
+
 type MyFormControls<T> = {
   [key in keyof T]: MyGenericFormControl<T[key]>;
 };
 
-type MyGenericFormControl<T> =
-  // First, handle Arrays.
-  T extends string[] | number[] | File[]
-    ? FormArray<UnpackTypeFromArray<T>>
-    : T extends unknown[] // Make sure any other kind of Array may not be used.
-    ? never
-    : T extends string | number | File // Second, handle basic strings and files
-    ? FormControl<T>
-    : T extends {} // If it is an Object, it is (most likely) a group.
-    ? FormGroup<T>
-    : never; // Anything else is not permitted.
+type MyGenericFormControl<T> = T extends UseControl<infer U>
+  ? FormControl<U>
+  : T extends string | number
+  ? FormControl<T>
+  : T extends (infer V)[]
+  ? FormArray<V>
+  : T extends {} // If it is an Object, it is (most likely) a group.
+  ? FormGroup<T>
+  : never; // Anything else is not permitted.
 
 /**
- * This allows you to retrieve the type X for an Array of X. So:
+ * A recursive "Required".
+ * (It makes all properties non-optional.)
+ *
+ * Example:
+ *
  * ```
- * UnpackTypeFromArray<string[]> --> string
+ * interface Model {
+ *   foo?: {
+ *     bar?: string;
+ *   }
+ * }
+ *
+ * DeepRequired<Model> is now:
+ * {
+ *   foo: {
+ *     bar: string;
+ *   }
+ * }
  * ```
  */
-type UnpackTypeFromArray<T> = T extends (infer U)[] ? U : never;
-
-/**
- * A recursive Partial.
- */
-type DeepPartial<T> = {
-  [key in keyof T]?: DeepPartial<T[key]>;
-};
+type DeepRequired<T> = { [key in keyof T]-?: DeepRequired<T[key]> };
 
 /**
  * In some methods of the Form Controls, you can either pass a raw value, or a value and a disabled state.
@@ -89,7 +113,7 @@ type InitialValueOrInitialValueAndDisabled<T> =
  * For an example, see comment on the FormGroup wrapper class.
  */
 export class FormControl<
-  T extends string | number | File
+  T extends string | string[] | number | number[]
 > extends AngularFormControl {
   readonly value: T;
   readonly valueChanges: Observable<T>;
@@ -149,7 +173,7 @@ export class FormArray<T> extends AngularFormArray {
   /**
    * Important: The "value" only includes currently not disabled elements.
    */
-  readonly value: T[];
+  readonly value: FormValue<T>[];
 
   constructor(
     public controls: MyGenericFormControl<T>[],
@@ -217,7 +241,7 @@ export class FormArray<T> extends AngularFormArray {
  * ``` ts
  * interface MyModel {
  *  address: Address;
- *  userFiles: UserFiles;
+ *  order: Order[];
  * }
  *
  * interface Address {
@@ -228,11 +252,9 @@ export class FormArray<T> extends AngularFormArray {
  *  lastName: string;
  * }
  *
- * interface UserFiles {
- *  // Even though we support Files, keep in mind that separate handling for this kind of data type needs to be implemented
- * // (you cannot just add the assign the Form Control to the HTML file input).
- *  picture: File;
- *  documents: File[];
+ * interface Order {
+ *   itemName: string;
+ *   amount: number;
  * }
  *
  * const test = new FormGroup<MyModel>({
@@ -242,24 +264,80 @@ export class FormArray<T> extends AngularFormArray {
  *       lastName: new FormControl(''),
  *    }),
  *  }),
- *  userFiles: new FormGroup<UserFiles>({
- *     picture: new FormControl(),
- *     documents: new FormArray([]),
- *  }),
+ *
+ *  order: new FormArray<Order>([]),
  * });
  *
- * console.log(test.controls.userFiles.controls.documents);
+ * console.log(test.controls.address.controls.name.controls.firstName.value);
+ * ```
+ *
+ * The structure of the form is defined by the Generics you see above.
+ *
+ * If the interface contains an object, then this leads to a FormGroup:
+ *
+ * ```
+ * interface MyModel {
+ *   bar: SomeObject;
+ * }
+ * interface SomeObject {
+ *   baz: (whatever);
+ *   frub: (whatever);
+ * }
+ *
+ * const form = new FormGroup<MyModel>({
+ *   bar: new FormGroup<SomeObject>({...})
+ * });
+ * ```
+ *
+ * If the interface contains a string or number, then this leads to a FormControl:
+ *
+ * ```
+ * interface MyModel {
+ *   bar: string;
+ *   baz: number;
+ * }
+ *
+ * const form = new FormGroup<MyModel>({
+ *   bar: new FormControl('hello'),
+ *   baz: new FormControl(123),
+ * });
+ * ```
+ *
+ * If the interface contains an array, then this leads to a FormArray:
+ *
+ * ```
+ * interface MyModel {
+ *   bar: string[];
+ * }
+ *
+ * const form = new FormGroup<MyModel>({
+ *   bar: new FormArray<string>([]);
+ * })
+ * ```
+ *
+ * But what if you want to use an array inside a FormControl? For this edge case, you can use the `UseControl` "hint":
+ *
+ * ```
+ * interface MyModel {
+ *   bar: string[];
+ *   baz: UseControl<string[]>;
+ * }
+ *
+ * const form = new FormGroup<MyModel>({
+ *   bar: new FormArray<string>([]),
+ *   baz: new FormControl<string[]>([]),
+ * })
  * ```
  */
 export class FormGroup<T> extends AngularFormGroup {
   /**
    * Important: The "value" only includes currently not disabled elements.
    */
-  readonly value: DeepPartial<T>;
+  readonly value: FormValue<T>;
   /**
    * Important: The data passed in the Observable only includes currently not disabled elements.
    */
-  readonly valueChanges: Observable<DeepPartial<T>>;
+  readonly valueChanges: Observable<FormValue<T>>;
 
   constructor(
     public controls: MyFormControls<T>,
@@ -274,7 +352,7 @@ export class FormGroup<T> extends AngularFormGroup {
   }
 
   setValue(
-    value: T,
+    value: DeepRequired<FormValue<T>>,
     options?: {
       onlySelf?: boolean;
       emitEvent?: boolean;
@@ -284,7 +362,7 @@ export class FormGroup<T> extends AngularFormGroup {
   }
 
   patchValue(
-    value: Partial<T>,
+    value: FormValue<T>,
     options?: {
       onlySelf?: boolean;
       emitEvent?: boolean;
@@ -296,7 +374,7 @@ export class FormGroup<T> extends AngularFormGroup {
   // It is actually also possible to pass an object containing, for each item, both the value and the disabled state.
   // Currently, we don't support this.
   reset(
-    value?: T,
+    value?: DeepRequired<FormValue<T>>,
     options?: {
       onlySelf?: boolean;
       emitEvent?: boolean;
