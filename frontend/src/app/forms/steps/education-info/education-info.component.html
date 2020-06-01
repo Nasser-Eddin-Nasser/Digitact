@@ -5,11 +5,11 @@
   educational background
 </div>
 <ion-list>
-  <script type="module">
-    import { modalController } from 'https://cdn.jsdelivr.net/npm/@ionic/core@next/dist/ionic/index.esm.js';
-    window.modalController = modalController;
-  </script>
   <ion-item class="ion-no-padding">
-    <ion-button class="plus-button" (click)="presentEduInfo()"> +</ion-button>
+    <ion-buttons class="plus-button">
+      <ion-button (click)="presentEduInfo()">
+        <ion-icon ios="ios-add-circle" md="md-add-circle">Hey</ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-item>
 </ion-list>
