@@ -48,6 +48,7 @@ export class EducationInfoComponent {
     });
     modal.onDidDismiss().then((val) => {
       if (val.data.canSubmitData) {
+        eduInfo.markAsPristine();
         this.formsData.controls.educationInfo.controls.eduInfo.push(eduInfo);
       }
     });
@@ -57,32 +58,44 @@ export class EducationInfoComponent {
     eduStored: FormGroup<EducationInfoEntry>,
     index: number
   ): Promise<void> {
-    // const e = new FormGroup<EducationInfoEntry>({
-    //   university: new FormControl(eduStored.university, Validators.required),
-    //   degree: new FormControl(eduStored.degree, Validators.required),
-    //   typeOfDegree: new FormControl(
-    //     eduStored.typeOfDegree,
-    //     Validators.required
-    //   ),
-    //   grade: new FormControl(eduStored.grade, Validators.required),
-    //   gradDate: new FormControl(eduStored.gradDate, Validators.required),
-    // });
-    console.log(index);
+    let eduInfo = new FormGroup<EducationInfoEntry>({
+      university: new FormControl(
+        eduStored.controls.university.value,
+        Validators.required
+      ),
+      degree: new FormControl(
+        eduStored.controls.degree.value,
+        Validators.required
+      ),
+      typeOfDegree: new FormControl(
+        eduStored.controls.typeOfDegree.value,
+        Validators.required
+      ),
+      grade: new FormControl(
+        eduStored.controls.grade.value,
+        Validators.required
+      ),
+      gradDate: new FormControl(
+        eduStored.controls.gradDate.value,
+        Validators.required
+      ),
+    });
+
     const modal = await this.modalController.create({
       component: EducationInfoEntryComponent,
       componentProps: {
-        edu: eduStored,
+        edu: eduInfo,
       },
       swipeToClose: true,
       presentingElement: await this.modalController.getTop(),
     });
-    // modal.onDidDismiss().then((val) => {
-    //   if (val.data.canSubmitData) {
-    //     //this.formsData.controls.educationInfo.controls.eduInfo[index] = e;
-    //     //    this.eduInfoArr[index] = e.value;
-    //   }
-    //   // console.log(val.data.canSubmitData, val, e, this.eduInfoArr);
-    // });
+    modal.onDidDismiss().then((val) => {
+      if (val.data.canSubmitData) {
+        this.formsData.controls.educationInfo.controls.eduInfo
+          .at(index)
+          .patchValue(eduInfo.value);
+      }
+    });
     return await modal.present();
   }
 
