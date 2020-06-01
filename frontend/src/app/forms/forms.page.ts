@@ -65,8 +65,8 @@ export class FormsPage implements OnInit, OnDestroy {
       xing: new FormControl(''),
     }),
     fieldDesignationInfo: new FormGroup<FieldDesignationInfo>({
-      field: new FormControl('', Validators.required),
-      designation: new FormControl('', Validators.required),
+      field: new FormControl<string[]>([], Validators.required),
+      designation: new FormControl<string[]>([], Validators.required),
     }),
   });
 
@@ -232,7 +232,6 @@ export class FormsPage implements OnInit, OnDestroy {
         validSteps++;
       }
     }
-
     this.progressPercentage = validSteps / totalNumberOfSteps;
   }
 }
