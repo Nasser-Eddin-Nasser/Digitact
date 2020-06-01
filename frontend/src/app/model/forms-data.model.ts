@@ -23,7 +23,7 @@ export interface ContactInfo {
 }
 
 export interface EducationInfo {
-  eduInfo: EducationInfoEntry;
+  eduInfo: EducationInfoEntry[];
 }
 
 export interface EducationInfoEntry {
