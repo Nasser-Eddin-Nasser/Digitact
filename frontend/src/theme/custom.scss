@@ -126,9 +126,9 @@ ion-item.item-has-focus {
 }
 
 /*
-  Customization of the Popover in the dropdownmenu of the field-designation.page
+  Customization of the alert in the dropdownmenu of the field-designation.page
 */
-.custom-popover {
+.custom-alert {
   [aria-checked='true'].sc-ion-alert-ios .alert-checkbox-icon.sc-ion-alert-ios,
   [aria-checked='true'].sc-ion-alert-md .alert-checkbox-icon.sc-ion-alert-md {
     border-color: var(--ion-color-tertiary);
@@ -137,7 +137,6 @@ ion-item.item-has-focus {
 
   .alert-checkbox-label.sc-ion-alert-ios,
   .alert-checkbox-label.sc-ion-alert-md {
-    //font-size: 18px;
     white-space: pre-wrap;
   }
 
