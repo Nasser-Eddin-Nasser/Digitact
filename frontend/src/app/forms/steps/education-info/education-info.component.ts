@@ -67,6 +67,7 @@ export class EducationInfoComponent {
     //   grade: new FormControl(eduStored.grade, Validators.required),
     //   gradDate: new FormControl(eduStored.gradDate, Validators.required),
     // });
+    console.log(index);
     const modal = await this.modalController.create({
       component: EducationInfoEntryComponent,
       componentProps: {
