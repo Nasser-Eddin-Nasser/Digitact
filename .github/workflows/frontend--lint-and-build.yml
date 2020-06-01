@@ -1,4 +1,4 @@
-name: Lint the frontend
+name: Lint and build the frontend
 
 on:
   push:
@@ -24,3 +24,9 @@ jobs:
         run: npm install
       - name: Run all frontend checks
         run: npm run all-checks
+      - name: Build the frontend
+        run: npm run build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build-result
+          path: www/
