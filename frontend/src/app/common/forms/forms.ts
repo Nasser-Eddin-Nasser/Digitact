@@ -46,10 +46,6 @@ import { Observable } from 'rxjs';
   So, here comes a really simple attempt to fix this issue on our own.
 */
 
-type MyFormControls<T> = {
-  [key in keyof T]: MyGenericFormControl<T[key]>;
-};
-
 interface ControlUniquenessItem {
   /**
    * This element is used to allow the typechecker to distinguish "UseControl" elements from other ones.
@@ -63,9 +59,13 @@ interface ControlUniquenessItem {
 export type UseControl<T extends string[] | number[]> = T &
   ControlUniquenessItem;
 
-type FormValue<T> = {
+export type FormValue<T> = {
   // Remove the "ControlUniquenessItem" and make everything optional.
   [key in keyof T]?: T[key] extends UseControl<infer U> ? U : FormValue<T[key]>;
+};
+
+type MyFormControls<T> = {
+  [key in keyof T]: MyGenericFormControl<T[key]>;
 };
 
 type MyGenericFormControl<T> = T extends UseControl<infer U>
