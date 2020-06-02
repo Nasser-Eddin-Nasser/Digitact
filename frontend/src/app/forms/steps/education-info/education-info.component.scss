@@ -1,14 +1,7 @@
-.plus-button {
-  width: 80px;
-  height: 80px;
-  --border-radius: 50%;
-
-  --padding-start: 10px;
-  --padding-end: 10px;
-  font-size: 50px;
+.plus-icon {
+  font-size: 80px;
 }
-.button-container {
-  flex-grow: 1;
+.add-container {
   flex-direction: column;
   align-items: center;
   display: flex;

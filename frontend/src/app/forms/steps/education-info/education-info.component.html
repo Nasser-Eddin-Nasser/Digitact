@@ -3,49 +3,50 @@
 
   Here, you can add your information regarding your education. So: What is your
   educational background
-</div>
 
-<ion-item>
-  <div class="button-container">
-    <ion-button class="plus-button" (click)="addEducationInfo()">
-      <ion-icon name="add"></ion-icon>
-    </ion-button>
+  <div class="add-container">
+    <ion-icon
+      name="add-circle"
+      color="primary"
+      (click)="addEducationInfo()"
+      class="plus-icon"
+    ></ion-icon>
   </div>
-</ion-item>
 
-<ion-list>
-  <!-- Sliding item with education information -->
-  <ion-item-sliding
-    *ngFor="
-      let data of this.formsData.controls.educationInfo.controls
-        .educationInfoForm.controls;
-      let i = index
-    "
-  >
-    <ion-item (click)="modifyEducationInfo(data, i)">
-      <ion-label>
-        <h1>{{ data.controls.university.value }}</h1>
-        <p>
-          <ion-icon name="easel-outline"></ion-icon>
-          {{ data.controls.subject.value }}
-        </p>
-        <p>
-          <ion-icon name="school-outline"></ion-icon>
-          {{ data.controls.degree.value }}'s degree ({{
-            data.controls.graduationYear.value
-          }}, {{ data.controls.grade.value }})
-        </p>
-      </ion-label>
-    </ion-item>
+  <ion-list>
+    <!-- Sliding item with education information -->
+    <ion-item-sliding
+      *ngFor="
+        let data of this.formsData.controls.educationInfo.controls
+          .educationInfoForm.controls;
+        let i = index
+      "
+    >
+      <ion-item (click)="modifyEducationInfo(data, i)">
+        <ion-label>
+          <h1>{{ data.controls.university.value }}</h1>
+          <p>
+            <ion-icon name="easel-outline"></ion-icon>
+            {{ data.controls.subject.value }}
+          </p>
+          <p>
+            <ion-icon name="school-outline"></ion-icon>
+            {{ data.controls.degree.value }}'s degree ({{
+              data.controls.graduationYear.value
+            }}, {{ data.controls.grade.value }})
+          </p>
+        </ion-label>
+      </ion-item>
 
-    <ion-item-options side="end">
-      <ion-item-option
-        color="danger"
-        expandable
-        (click)="deleteEducationInfo(i)"
-      >
-        <ion-icon name="trash" size="large"></ion-icon>
-      </ion-item-option>
-    </ion-item-options>
-  </ion-item-sliding>
-</ion-list>
+      <ion-item-options side="end">
+        <ion-item-option
+          color="danger"
+          expandable
+          (click)="deleteEducationInfo(i)"
+        >
+          <ion-icon name="trash" size="large"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</div>
