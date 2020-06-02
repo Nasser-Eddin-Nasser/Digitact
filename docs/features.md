@@ -24,7 +24,7 @@ There is only one prominent button: "Apply now", which directly starts the job a
 
 Once the user has pressed the "Apply now" button, he gets redirected to the actual job application form.
 
-In the top bar, the number of the current "Step" is shown. Since we are showing the "Welcome" Step here (which is the very first one), it says "Step 1 / 2". On the right, a hamburger-esque menu icon is shown. Clicking on it will reveal an overview of the Steps (more about that later).
+In the top bar, the number of the current "Step" is shown. Since we are showing the "Welcome" Step here (which is the very first one), it says "Step 1 / 4". On the right, a hamburger-esque menu icon is shown. Clicking on it will reveal an overview of the Steps (more about that later).
 
 Directly underneath the top bar, there is a progress bar. Once you have filled out all required data of a particular Step, it will instantly move to the right. If the progress bar has reached the right border, it means that all Steps have successfully been filled out and the form may be submitted.
 
@@ -40,7 +40,25 @@ Also, the currently visible Step is highlighted in a different color.
 
 <img src="images/form--contact-information--empty.png" width="250px" style="border: 1px solid #e0e0e0;">
 
-In the second Step, the user shall enter contact information.
+In the second Step, the user shall enter contact information. This is especially useful to allow the HR agent to later contact the applicant.
+
+### "Education Information" Step
+
+<img src="images/form--education-information--empty.png" width="250px" style="border: 1px solid #e0e0e0;">
+
+<img src="images/form--education-information--2-entries.png" width="250px" style="border: 1px solid #e0e0e0;">
+
+<img src="images/form--education-information-modal--empty.png" width="250px" style="border: 1px solid #e0e0e0;">
+
+The third step allows the user to provide details regarding the schools/universities he has visited. Once the user clicks on the "plus" icon, an overlay is displayed asking for the details. Once all fields have been entered and "Save" is clicked, this item will be added to the list on already added items. If one entry shall be deleted, this can be done using a swipe gesture.
+
+### "Industries and Positions" Step
+
+<img src="images/form--industries-and-positions--empty.png" width="250px" style="border: 1px solid #e0e0e0;">
+
+<img src="images/form--industries-and-positions-select-menu.png" width="250px" style="border: 1px solid #e0e0e0;">
+
+Of course, it is also really important to know which industries and positions the applicant is interested in. This is handled in the "Industries and Positions" step.
 
 ### Submit
 
