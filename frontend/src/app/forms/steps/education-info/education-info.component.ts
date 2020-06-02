@@ -48,12 +48,11 @@ export class EducationInfoComponent {
      */
     modal.onDidDismiss().then((val) => {
       if (val.data && val.data.canSubmitData) {
-        educationInfoAdd.markAsPristine();
         const year = educationInfoAdd.controls.graduationYear.value.substr(
           0,
           4
         );
-        educationInfoAdd.value.graduationYear = year;
+        educationInfoAdd.controls.graduationYear.setValue(year);
         this.formsData.controls.educationInfo.controls.educationInfoForm.push(
           educationInfoAdd
         );
@@ -104,6 +103,11 @@ export class EducationInfoComponent {
      */
     modal.onDidDismiss().then((val) => {
       if (val.data && val.data.canSubmitData) {
+        const year = educationInfoMod.controls.graduationYear.value.substr(
+          0,
+          4
+        );
+        educationInfoMod.controls.graduationYear.setValue(year);
         this.formsData.controls.educationInfo.controls.educationInfoForm
           .at(index)
           .patchValue(educationInfoMod.value);
