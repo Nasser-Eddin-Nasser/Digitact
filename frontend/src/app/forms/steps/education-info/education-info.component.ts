@@ -1,7 +1,7 @@
-/*
-  @description
-    This component renders the education information step view and its actions.
-*/
+/**
+ *  @description
+ *   This component renders the education information step view and its actions.
+ */
 import { Component, Input } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
@@ -19,64 +19,74 @@ export class EducationInfoComponent {
   @Input()
   formsData: FormGroup<FormsData>;
 
-  //eduInfoArr: DeepPartial<EducationInfoEntry>[];
-
   /**
    * Constructor
    */
   constructor(public modalController: ModalController) {}
 
   /**
-   * Open education info entry
+   * add education info entry
    */
-  // tslint:disable-next-line: typedef
-  async presentEduInfo(): Promise<void> {
-    let eduInfo = new FormGroup<EducationInfoEntry>({
+  async addEducationInfo(): Promise<void> {
+    const educationInfoAdd = new FormGroup<EducationInfoEntry>({
       university: new FormControl('', Validators.required),
+      subject: new FormControl('', Validators.required),
       degree: new FormControl('', Validators.required),
-      typeOfDegree: new FormControl('', Validators.required),
       grade: new FormControl('', Validators.required),
-      gradDate: new FormControl('', Validators.required),
+      graduationYear: new FormControl('', Validators.required),
     });
     const modal = await this.modalController.create({
       component: EducationInfoEntryComponent,
       componentProps: {
-        edu: eduInfo,
+        education: educationInfoAdd,
       },
       swipeToClose: true,
       presentingElement: await this.modalController.getTop(),
     });
+    /**
+     * save and cancel of education info form
+     */
     modal.onDidDismiss().then((val) => {
-      if (val.data.canSubmitData) {
-        eduInfo.markAsPristine();
-        this.formsData.controls.educationInfo.controls.eduInfo.push(eduInfo);
+      if (val.data && val.data.canSubmitData) {
+        educationInfoAdd.markAsPristine();
+        const year = educationInfoAdd.controls.graduationYear.value.substr(
+          0,
+          4
+        );
+        educationInfoAdd.value.graduationYear = year;
+        this.formsData.controls.educationInfo.controls.educationInfoForm.push(
+          educationInfoAdd
+        );
       }
     });
     return await modal.present();
   }
-  async presentStoredInfo(
-    eduStored: FormGroup<EducationInfoEntry>,
+  /**
+   * modify education info entry
+   */
+  async modifyEducationInfo(
+    educationData: FormGroup<EducationInfoEntry>,
     index: number
   ): Promise<void> {
-    let eduInfo = new FormGroup<EducationInfoEntry>({
+    const educationInfoMod = new FormGroup<EducationInfoEntry>({
       university: new FormControl(
-        eduStored.controls.university.value,
+        educationData.controls.university.value,
+        Validators.required
+      ),
+      subject: new FormControl(
+        educationData.controls.subject.value,
         Validators.required
       ),
       degree: new FormControl(
-        eduStored.controls.degree.value,
-        Validators.required
-      ),
-      typeOfDegree: new FormControl(
-        eduStored.controls.typeOfDegree.value,
+        educationData.controls.degree.value,
         Validators.required
       ),
       grade: new FormControl(
-        eduStored.controls.grade.value,
+        educationData.controls.grade.value,
         Validators.required
       ),
-      gradDate: new FormControl(
-        eduStored.controls.gradDate.value,
+      graduationYear: new FormControl(
+        educationData.controls.graduationYear.value,
         Validators.required
       ),
     });
@@ -84,22 +94,29 @@ export class EducationInfoComponent {
     const modal = await this.modalController.create({
       component: EducationInfoEntryComponent,
       componentProps: {
-        edu: eduInfo,
+        education: educationInfoMod,
       },
       swipeToClose: true,
       presentingElement: await this.modalController.getTop(),
     });
+    /**
+     * save and cancel of education info form
+     */
     modal.onDidDismiss().then((val) => {
-      if (val.data.canSubmitData) {
-        this.formsData.controls.educationInfo.controls.eduInfo
+      if (val.data && val.data.canSubmitData) {
+        this.formsData.controls.educationInfo.controls.educationInfoForm
           .at(index)
-          .patchValue(eduInfo.value);
+          .patchValue(educationInfoMod.value);
       }
     });
     return await modal.present();
   }
-
-  deleteInfo(index: number): void {
-    this.formsData.controls.educationInfo.controls.eduInfo.removeAt(index);
+  /**
+   * delete education info entry
+   */
+  deleteEducationInfo(index: number): void {
+    this.formsData.controls.educationInfo.controls.educationInfoForm.removeAt(
+      index
+    );
   }
 }

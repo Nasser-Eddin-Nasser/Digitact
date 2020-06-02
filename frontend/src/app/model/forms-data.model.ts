@@ -23,13 +23,13 @@ export interface ContactInfo {
 }
 
 export interface EducationInfo {
-  eduInfo: EducationInfoEntry[];
+  educationInfoForm: EducationInfoEntry[];
 }
 
 export interface EducationInfoEntry {
   university: string;
+  subject: string;
   degree: string;
-  typeOfDegree: string;
   grade: string;
-  gradDate: string;
+  graduationYear: string;
 }

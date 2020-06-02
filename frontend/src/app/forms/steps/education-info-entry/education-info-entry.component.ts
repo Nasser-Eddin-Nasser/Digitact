@@ -1,3 +1,7 @@
+/**
+ *  @description
+ *   This component renders the education information form add and modify.
+ */
 import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
@@ -18,21 +22,23 @@ export class EducationInfoEntryComponent {
     { value: 'school', displayName: 'School' },
   ];
 
-  @Input() edu: FormGroup<EducationInfoEntry>;
+  @Input() education: FormGroup<EducationInfoEntry>;
 
+  /**
+   *  save and close the education info form
+   */
   save(): void {
     this.modalController.dismiss({
       canSubmitData: true,
     });
   }
 
+  /**
+   * not save and close the education info form
+   */
   cancel(): void {
     this.modalController.dismiss({
       canSubmitData: false,
     });
   }
-
-  // ngOnInit(): void {
-  //   console.log(this.edu);
-  // }
 }
