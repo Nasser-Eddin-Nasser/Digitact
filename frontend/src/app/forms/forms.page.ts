@@ -59,7 +59,7 @@ export class FormsPage implements OnInit, OnDestroy {
       xing: new FormControl(''),
     }),
     educationInfo: new FormGroup<EducationInfo>({
-      eduInfo: new FormArray([], Validators.required),
+      educationInfoForm: new FormArray([], Validators.required),
     }),
   });
 

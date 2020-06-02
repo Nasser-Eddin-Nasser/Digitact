@@ -5,40 +5,45 @@
   educational background
 </div>
 
-<ion-item class="ion-no-padding">
-  <ion-buttons class="plus-button">
-    <ion-button round (click)="presentEduInfo()"
-      ><ion-icon name="add-circle"></ion-icon
-    ></ion-button>
-  </ion-buttons>
+<ion-item>
+  <div class="button-container">
+    <ion-button class="plus-button" (click)="addEducationInfo()">
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+  </div>
 </ion-item>
+
 <ion-list>
-  <!-- Sliding item with text options on both sides -->
+  <!-- Sliding item with education information -->
   <ion-item-sliding
     *ngFor="
-      let data of this.formsData.controls.educationInfo.controls.eduInfo
-        .controls;
+      let data of this.formsData.controls.educationInfo.controls
+        .educationInfoForm.controls;
       let i = index
     "
   >
-    <ion-item (click)="presentStoredInfo(data, i)">
+    <ion-item (click)="modifyEducationInfo(data, i)">
       <ion-label>
         <h1>{{ data.controls.university.value }}</h1>
         <p>
           <ion-icon name="easel-outline"></ion-icon>
-          {{ data.controls.degree.value }}
+          {{ data.controls.subject.value }}
         </p>
         <p>
           <ion-icon name="school-outline"></ion-icon>
-          {{ data.controls.typeOfDegree.value }}'s degree ({{
-            data.controls.gradDate.value
+          {{ data.controls.degree.value }}'s degree ({{
+            data.controls.graduationYear.value.substr(0, 4)
           }}, {{ data.controls.grade.value }})
         </p>
       </ion-label>
     </ion-item>
 
     <ion-item-options side="end">
-      <ion-item-option color="danger" expandable (click)="deleteInfo(i)">
+      <ion-item-option
+        color="danger"
+        expandable
+        (click)="deleteEducationInfo(i)"
+      >
         <ion-icon name="trash" size="large"></ion-icon>
       </ion-item-option>
     </ion-item-options>
