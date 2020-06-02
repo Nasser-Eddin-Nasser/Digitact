@@ -29,6 +29,16 @@
             isActive: currentStep === APPLICATION_STEP.ContactInformation
           }"
         ></ng-container>
+        <ng-container
+          [ngTemplateOutlet]="menuItem"
+          [ngTemplateOutletContext]="{
+            step: APPLICATION_STEP.FieldDesignationPreference,
+            displayName: 'Industries and Positions',
+            isValid: formsData.controls.fieldDesignationInfo.valid,
+            isActive:
+              currentStep === APPLICATION_STEP.FieldDesignationPreference
+          }"
+        ></ng-container>
 
         <ng-container
           [ngTemplateOutlet]="menuItem"
