@@ -4,7 +4,7 @@
   Here, you can add your information regarding your education. So: What is your
   educational background
 
-  <div class="add-container">
+  <div class="add-container ion-padding">
     <ion-icon
       name="add-circle"
       color="primary"
@@ -22,7 +22,7 @@
         let i = index
       "
     >
-      <ion-item (click)="modifyEducationInfo(data, i)">
+      <ion-item (click)="modifyEducationInfo(data, i)" class="ion-no-padding">
         <ion-label>
           <h1>{{ data.controls.university.value }}</h1>
           <p>
