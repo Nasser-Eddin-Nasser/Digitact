@@ -42,7 +42,7 @@
          </effect></ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="39.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Style/welcomescreen.png" />
+            <Image url="@../Style/Logo/Logo-idea-2-blackbg--logo.png" />
          </image>
       </ImageView>
 
