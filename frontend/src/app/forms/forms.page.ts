@@ -10,10 +10,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
-import { FormControl, FormGroup } from '../common/forms/forms';
+import { FormArray, FormControl, FormGroup } from '../common/forms/forms';
 import {
   BasicInfo,
   ContactInfo,
+  EducationInfo,
   FieldDesignationInfo,
   FormsData,
 } from '../model/forms-data.model';
@@ -63,6 +64,9 @@ export class FormsPage implements OnInit, OnDestroy {
       eMail: new FormControl('', Validators.required),
       linkedIn: new FormControl(''),
       xing: new FormControl(''),
+    }),
+    educationInfo: new FormGroup<EducationInfo>({
+      educationInfoForm: new FormArray([], Validators.required),
     }),
     fieldDesignationInfo: new FormGroup<FieldDesignationInfo>({
       field: new FormControl<string[]>([], Validators.required),
