@@ -1,0 +1,76 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="!education.valid" (click)="save()"
+        >Save</ion-button
+      >
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="main-container">
+    <ion-list>
+      <ion-item class="ion-no-padding entry-item">
+        <ion-icon slot="start" name="business-outline" size="large"></ion-icon>
+        <ion-input
+          type="text"
+          placeholder="School/University"
+          [formControl]="education.controls.university"
+        >
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="ion-no-padding entry-item">
+        <ion-icon slot="start" name="book-outline" size="large"></ion-icon>
+        <ion-input
+          type="text"
+          placeholder="Subject"
+          [formControl]="education.controls.subject"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-no-padding entry-item">
+        <ion-icon slot="start" name="school-outline" size="large"></ion-icon>
+        <ion-label color="medium">Degree</ion-label>
+        <ion-select
+          slot="end"
+          interface="popover"
+          placeholder="Master"
+          [formControl]="education.controls.degree"
+        >
+          <ion-select-option
+            *ngFor="let degree of degreeTypeArray"
+            [value]="degree.value"
+          >
+            {{ degree.displayName }}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="ion-no-padding entry-item">
+        <ion-icon slot="start" name="ribbon-outline" size="large"></ion-icon>
+        <ion-input
+          type="number"
+          placeholder="Grade"
+          [formControl]="education.controls.grade"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-no-padding entry-item">
+        <ion-icon slot="start" name="time-outline" size="large"></ion-icon>
+        <ion-datetime
+          displayFormat="YYYY"
+          max="2030"
+          min="1980"
+          placeholder="Graduation Year"
+          [formControl]="education.controls.graduationYear"
+          class="ion-no-padding"
+        ></ion-datetime>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

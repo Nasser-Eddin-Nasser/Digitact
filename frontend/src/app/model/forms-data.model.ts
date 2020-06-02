@@ -8,6 +8,7 @@ import { UseControl } from '../common/forms/forms';
 export interface FormsData {
   basicInfo: BasicInfo;
   contactInfo: ContactInfo;
+  educationInfo: EducationInfo;
   fieldDesignationInfo: FieldDesignationInfo;
 }
 
@@ -24,6 +25,17 @@ export interface ContactInfo {
   xing: string;
 }
 
+export interface EducationInfo {
+  educationInfoForm: EducationInfoEntry[];
+}
+
+export interface EducationInfoEntry {
+  university: string;
+  subject: string;
+  degree: string;
+  grade: string;
+  graduationYear: string;
+}
 export interface FieldDesignationInfo {
   field: UseControl<string[]>;
   designation: UseControl<string[]>;
