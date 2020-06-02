@@ -1,12 +1,12 @@
 <div class="main-description">
-  <h1>Field and Designation</h1>
+  <h1>Industries and Positions</h1>
   <span>
     So that we can know in which industries and positions you are intrested,
     please choose from the following.
   </span>
 </div>
 
-<ion-item class="ion-no-padding">
+<ion-item class="ion-no-padding form-item">
   <ion-label color="medium">Industry</ion-label>
   <ion-select
     multiple
@@ -17,12 +17,12 @@
       *ngFor="let field of industryArray"
       [value]="field.value"
     >
-      {{ field.displayName }}</ion-select-option
-    >
+      {{ field.displayName }}
+    </ion-select-option>
   </ion-select>
 </ion-item>
 
-<ion-item class="ion-no-padding">
+<ion-item class="ion-no-padding form-item">
   <ion-label color="medium">Position</ion-label>
   <ion-select
     multiple
@@ -33,7 +33,7 @@
       *ngFor="let designation of positionsArray"
       [value]="designation.value"
     >
-      {{ designation.displayName }}</ion-select-option
-    >
+      {{ designation.displayName }}
+    </ion-select-option>
   </ion-select>
 </ion-item>
