@@ -50,6 +50,12 @@
           *ngSwitchCase="APPLICATION_STEP.Submit"
         >
         </form-submit-page>
+
+        <form-field-designation-page
+          [formsData]="formsData"
+          *ngSwitchCase="APPLICATION_STEP.FieldDesignationPreference"
+        >
+        </form-field-designation-page>
       </ng-container>
     </div>
 
