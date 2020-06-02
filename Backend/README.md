@@ -90,7 +90,7 @@ If you want to access the database, you are most likely prompted for a password.
 
 # Create Applicant Restful API
 
-```json
+```
 {
   "firstName": String,
   "lastName": String,
