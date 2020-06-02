@@ -14,7 +14,7 @@
 <ion-content>
   <div class="main-container">
     <ion-list>
-      <ion-item class="ion-no-padding">
+      <ion-item class="ion-no-padding entry-item">
         <ion-icon slot="start" name="business-outline" size="large"></ion-icon>
         <ion-input
           type="text"
@@ -24,7 +24,7 @@
         </ion-input>
       </ion-item>
 
-      <ion-item class="ion-no-padding">
+      <ion-item class="ion-no-padding entry-item">
         <ion-icon slot="start" name="book-outline" size="large"></ion-icon>
         <ion-input
           type="text"
@@ -33,7 +33,7 @@
         ></ion-input>
       </ion-item>
 
-      <ion-item class="ion-no-padding">
+      <ion-item class="ion-no-padding entry-item">
         <ion-icon slot="start" name="school-outline" size="large"></ion-icon>
         <ion-label color="medium">Degree</ion-label>
         <ion-select
@@ -51,7 +51,7 @@
         </ion-select>
       </ion-item>
 
-      <ion-item class="ion-no-padding">
+      <ion-item class="ion-no-padding entry-item">
         <ion-icon slot="start" name="ribbon-outline" size="large"></ion-icon>
         <ion-input
           type="number"
@@ -60,7 +60,7 @@
         ></ion-input>
       </ion-item>
 
-      <ion-item class="ion-no-padding">
+      <ion-item class="ion-no-padding entry-item">
         <ion-icon slot="start" name="time-outline" size="large"></ion-icon>
         <ion-datetime
           displayFormat="YYYY"
@@ -68,6 +68,7 @@
           min="1980"
           placeholder="Graduation Year"
           [formControl]="education.controls.graduationYear"
+          class="ion-no-padding"
         ></ion-datetime>
       </ion-item>
     </ion-list>
