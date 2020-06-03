@@ -17,6 +17,8 @@ import {
   EducationInfo,
   FieldDesignationInfo,
   FormsData,
+  TechnicalKnowledge,
+  TechnicalKnowledgeEntry,
 } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
 
@@ -71,6 +73,14 @@ export class FormsPage implements OnInit, OnDestroy {
     fieldDesignationInfo: new FormGroup<FieldDesignationInfo>({
       field: new FormControl<string[]>([], Validators.required),
       designation: new FormControl<string[]>([], Validators.required),
+    }),
+    technicalKnowledge: new FormGroup<TechnicalKnowledge>({
+      professionalSoftware: new FormArray<TechnicalKnowledgeEntry>(
+        [],
+        Validators.required
+      ),
+      databases: new FormArray<TechnicalKnowledgeEntry>([]),
+      programmingLanguages: new FormArray<TechnicalKnowledgeEntry>([]),
     }),
   });
 

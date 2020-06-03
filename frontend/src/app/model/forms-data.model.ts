@@ -10,6 +10,7 @@ export interface FormsData {
   contactInfo: ContactInfo;
   educationInfo: EducationInfo;
   fieldDesignationInfo: FieldDesignationInfo;
+  technicalKnowledge: TechnicalKnowledge;
 }
 
 export interface BasicInfo {
@@ -39,4 +40,14 @@ export interface EducationInfoEntry {
 export interface FieldDesignationInfo {
   field: UseControl<string[]>;
   designation: UseControl<string[]>;
+}
+
+export interface TechnicalKnowledge {
+  professionalSoftware: TechnicalKnowledgeEntry[];
+  databases: TechnicalKnowledgeEntry[];
+  programmingLanguages: TechnicalKnowledgeEntry[];
+}
+export interface TechnicalKnowledgeEntry {
+  name: string;
+  rating: number;
 }
