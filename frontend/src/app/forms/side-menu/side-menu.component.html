@@ -50,6 +50,16 @@
           }"
         ></ng-container>
 
+        <ng-container
+          [ngTemplateOutlet]="menuItem"
+          [ngTemplateOutletContext]="{
+            step: APPLICATION_STEP.TechnicalKnowledge,
+            displayName: 'Technical Knowledge',
+            isValid: formsData.controls.technicalKnowledge.valid,
+            isActive: currentStep === APPLICATION_STEP.TechnicalKnowledge
+          }"
+        ></ng-container>
+
         <ion-menu-toggle>
           <ion-item
             (click)="navigateToStep(APPLICATION_STEP.Submit)"
