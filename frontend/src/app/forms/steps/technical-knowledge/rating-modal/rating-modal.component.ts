@@ -53,16 +53,16 @@ export class RatingModalComponent
 
   ngOnInit(): void {
     // Initialize the list.
-    this.filterFormItems();
+    this.buildItemsList();
 
     const searchSubscription = this.searchInput.valueChanges.subscribe(() => {
-      this.filterFormItems();
+      this.buildItemsList();
     });
     this.subscriptions.push(searchSubscription);
 
     const segmentSubscription = this.segmentFilter.valueChanges.subscribe(
       () => {
-        this.filterFormItems();
+        this.buildItemsList();
       }
     );
     this.subscriptions.push(segmentSubscription);
@@ -82,13 +82,18 @@ export class RatingModalComponent
   }
 
   /**
-   * Filter the items in our list, based on the current search value.
+   * Build the list of form items we want to display now.
+   * The list will:
+   * - be filtered based on whether the user wants to see all or only the selected values
+   * - be filtered based on the current search value
+   * - get ordered alphabetically.
    *
    * You can also call this method in order to initialize the list.
    */
-  filterFormItems(): void {
+  buildItemsList(): void {
     let result = [...this.formArray.controls];
 
+    // Does the user want to see only the selected items?
     if (this.segmentFilter.value === SegmentFilterValue.Selected) {
       result = result.filter((item) => {
         if (item.enabled) {
@@ -98,6 +103,7 @@ export class RatingModalComponent
       });
     }
 
+    // Handle the search value.
     if (this.searchInput.value !== '') {
       const searchedFor = this.searchInput.value.toLowerCase();
 
@@ -121,6 +127,12 @@ export class RatingModalComponent
     this.filteredFormItems = result;
   }
 
+  /**
+   * Show the popover for an item the user has clicked on.
+   *
+   * @param formItem The item from the form array corresponding to the element the user has clicked on.
+   * @param Event The (click) event that triggered this method.
+   */
   async showItemPopover(
     formItem: FormGroup<TechnicalKnowledgeEntry>,
     event: Event
@@ -144,6 +156,9 @@ export class RatingModalComponent
   }
 }
 
+/**
+ * Data to be sent to the Rating Modal when it gets initialized.
+ */
 export interface RatingModalProps {
   formArray: FormArray<TechnicalKnowledgeEntry>;
 }
