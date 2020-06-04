@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { ValidationErrors, Validators } from '@angular/forms';
 
 import { FormArray, FormControl, FormGroup } from '../../../common/forms/forms';
 import {
@@ -53,21 +53,53 @@ export class TechnicalKnowledgeFormItemsService {
     'Vue',
   ];
 
+  /**
+   * A Validator that checks if there is at least one entry in the "professional Software" slot.
+   *
+   * This Validator is needed because we disable all form elements by default.
+   * And this would lead to the parent being seen as "valid" in some cases.
+   */
+  private validateRootFormGroup(
+    formGroup: FormGroup<TechnicalKnowledge>
+  ): ValidationErrors | undefined {
+    /*
+       We use the FormArray children in the following way: If they are disabled, then we also don't want them to be part of the result.
+       If 0 items are enabled within the FormArray, then the parent also becomes disabled.
+       So: If the FormArray is disabled, then we know that 0 items have been selected.
+
+       (To be really safe about this, we also check for the length of the value here.)
+    */
+    if (
+      formGroup.controls.professionalSoftware.disabled ||
+      formGroup.controls.professionalSoftware.value.length < 1
+    ) {
+      return {
+        required: true,
+      };
+    }
+
+    return undefined;
+  }
+
   generateAllFormItems(): FormGroup<TechnicalKnowledge> {
-    const result = new FormGroup<TechnicalKnowledge>({
-      professionalSoftware: new FormArray<TechnicalKnowledgeEntry>(
-        this.generateItemsFromArray(this.PROFESSIONAL_SOFTWARE_ITEMS),
-        Validators.required
-      ),
-      databases: new FormArray<TechnicalKnowledgeEntry>(
-        this.generateItemsFromArray(this.DATABASE_ITEMS)
-      ),
-      programmingLanguagesAndFrameworks: new FormArray<TechnicalKnowledgeEntry>(
-        this.generateItemsFromArray(
-          this.PROGRAMMING_LANGUAGE_AND_FRAMEWORKS_ITEMS
-        )
-      ),
-    });
+    const result = new FormGroup<TechnicalKnowledge>(
+      {
+        professionalSoftware: new FormArray<TechnicalKnowledgeEntry>(
+          this.generateItemsFromArray(this.PROFESSIONAL_SOFTWARE_ITEMS)
+        ),
+        databases: new FormArray<TechnicalKnowledgeEntry>(
+          this.generateItemsFromArray(this.DATABASE_ITEMS)
+        ),
+        programmingLanguagesAndFrameworks: new FormArray<
+          TechnicalKnowledgeEntry
+        >(
+          this.generateItemsFromArray(
+            this.PROGRAMMING_LANGUAGE_AND_FRAMEWORKS_ITEMS
+          )
+        ),
+      },
+      this.validateRootFormGroup
+    );
 
     return result;
   }
