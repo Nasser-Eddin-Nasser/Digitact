@@ -3,4 +3,28 @@
 
   Now, please select and rate your technical skills. We expect you to add at
   least one entry to "Professional Software" in order to complete this step.
+
+  <ion-list class="ion-margin-top">
+    <ion-item
+      class="ion-no-padding"
+      (click)="showRatingModal(item.formItem)"
+      *ngFor="let item of listItems"
+    >
+      <ion-label>
+        <span class="list-item-label">{{ item.displayName }}</span>
+      </ion-label>
+      <ion-badge slot="end">
+        <!--
+          We use the "value" and "disabled" properties like so:
+
+          If 0 items are enabled within the FormArray, then the parent also becomes disabled.
+          In this case, we know that we need to display "0".
+
+          If there is at least one enabled item, then "value" includes the list of these enabled items.
+          So: We can simply count them in order to know how many items were enabled in the FormArray.
+        -->
+        {{ item.formItem.disabled ? 0 : item.formItem.value.length }}
+      </ion-badge>
+    </ion-item>
+  </ion-list>
 </div>
