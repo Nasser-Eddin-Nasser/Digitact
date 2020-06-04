@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 
 import { FormArray, FormGroup } from '../../../../common/forms/forms';
 import { TechnicalKnowledgeEntry } from '../../../../model/forms-data.model';
@@ -17,7 +17,17 @@ export class RatingModalComponent implements RatingModalProps {
   @Input()
   formArray: FormArray<TechnicalKnowledgeEntry>;
 
-  constructor(private popoverController: PopoverController) {}
+  constructor(
+    private modalController: ModalController,
+    private popoverController: PopoverController
+  ) {}
+
+  /**
+   * Close this modal.
+   */
+  closeModal(): void {
+    this.modalController.dismiss();
+  }
 
   async showItemPopover(
     formItem: FormGroup<TechnicalKnowledgeEntry>,
