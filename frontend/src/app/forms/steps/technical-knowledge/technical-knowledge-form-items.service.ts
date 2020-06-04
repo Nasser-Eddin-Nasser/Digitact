@@ -59,4 +59,16 @@ export class TechnicalKnowledgeFormItemsService {
 
     return result;
   }
+
+  /**
+   * Reset a single item of our FormArray to its initial state.
+   * (The items are disabled by default, so this method will also disable the item.)
+   */
+  resetFormItem(item: FormGroup<TechnicalKnowledgeEntry>): void {
+    item.reset({
+      name: item.controls.name.value,
+      rating: 1,
+    });
+    item.disable();
+  }
 }
