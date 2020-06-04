@@ -57,7 +57,7 @@ export class TechnicalKnowledgeComponent implements OnInit {
       {
         displayName: 'Programming Languages and Frameworks',
         formItem: this.formsData.controls.technicalKnowledge.controls
-          .programmingLanguages,
+          .programmingLanguagesAndFrameworks,
       },
     ];
   }
