@@ -72,6 +72,9 @@ export class TechnicalKnowledgeFormItemsService {
     return result;
   }
 
+  /**
+   * A helper method to generate all items for a FormArray, based on an array of strings that will be used for the names.
+   */
   private generateItemsFromArray(
     arr: string[]
   ): FormGroup<TechnicalKnowledgeEntry>[] {
@@ -85,6 +88,9 @@ export class TechnicalKnowledgeFormItemsService {
     return result;
   }
 
+  /**
+   * Generate a single form item that can later be used in the FormArray.
+   */
   generateFormItem(name: string): FormGroup<TechnicalKnowledgeEntry> {
     const result = new FormGroup<TechnicalKnowledgeEntry>({
       name: new FormControl(name),
