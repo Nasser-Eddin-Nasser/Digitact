@@ -1,3 +1,7 @@
+/*
+  @description
+    This Component renders the content of a modal where the user may rate his skills.
+*/
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
