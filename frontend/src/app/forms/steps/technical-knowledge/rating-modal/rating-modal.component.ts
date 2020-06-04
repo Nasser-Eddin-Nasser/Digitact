@@ -159,6 +159,16 @@ export class RatingModalComponent
     // We need to wait until the Popover has been presented.
     // Otherwise, the Popover might get positioned poorly since calling "enable" changes our view.
     formItem.enable();
+
+    /*
+      In the popover, the current item may be deleted.
+      If we are currently displaying the "selected" items, the item would still be shown.
+      So: Update the list.
+
+      (In the future, we might think about how we can make this process more generalized. But it should be fine like this for now.)
+    */
+    await popover.onDidDismiss();
+    this.buildItemsList();
   }
 
   /**
@@ -166,7 +176,19 @@ export class RatingModalComponent
    * If so, the term will be added.
    */
   async addSearchTermToList(): Promise<void> {
-    const searchTerm = this.searchInput.value;
+    const searchTerm = this.searchInput.value.trim();
+
+    const mayAdd = this.mayAddItemToList(searchTerm);
+
+    if (!mayAdd) {
+      const toast = await this.toastController.create({
+        message: `"${searchTerm}" cannot be added because it is already part of the list or it is not a valid name.`,
+        color: 'danger',
+        duration: 4000,
+      });
+      toast.present();
+      return;
+    }
 
     const alert = await this.alertController.create({
       header: 'Add to list',
@@ -186,6 +208,30 @@ export class RatingModalComponent
     });
 
     alert.present();
+  }
+
+  /**
+   * May an item with the provided name be added to the list?
+   *
+   * This method checks whether:
+   * - The name contains at least one alphabetical character.
+   * - The name is not already part of the list.
+   */
+  private mayAddItemToList(name: string): boolean {
+    const regex = new RegExp('[a-z]', 'i');
+    if (!regex.test(name)) {
+      return false;
+    }
+
+    // Make sure no other item with the same name exists.
+    const preparedName = name.toLowerCase();
+    for (const item of this.formArray.controls) {
+      if (preparedName === item.controls.name.value.toLowerCase()) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   /**
