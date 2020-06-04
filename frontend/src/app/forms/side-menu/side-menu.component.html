@@ -29,6 +29,17 @@
             isActive: currentStep === APPLICATION_STEP.ContactInformation
           }"
         ></ng-container>
+
+        <ng-container
+          [ngTemplateOutlet]="menuItem"
+          [ngTemplateOutletContext]="{
+            step: APPLICATION_STEP.PicturesEntry,
+            displayName: 'Picture Entry',
+            isValid: formsData.controls.contactInfo.valid,
+            isActive: currentStep === APPLICATION_STEP.PicturesEntry
+          }"
+        ></ng-container>
+
         <ng-container
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
