@@ -1,10 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import {
-  AlertController,
-  ModalController,
-  PopoverController,
-  ToastController,
-} from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 import {
@@ -12,6 +7,8 @@ import {
   FormControl,
   FormGroup,
 } from '../../../../common/forms/forms';
+import { AlertController } from '../../../../common/ion-wrappers/alert-controller';
+import { ToastController } from '../../../../common/ion-wrappers/toast-controller';
 import { TechnicalKnowledgeEntry } from '../../../../model/forms-data.model';
 import { TechnicalKnowledgeFormItemsService } from '../technical-knowledge-form-items.service';
 
