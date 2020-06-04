@@ -6,7 +6,9 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title color="primary">{{ formItem.controls.name.value }}</ion-title>
+    <ion-title color="primary">
+      {{ formItem.controls.name.value }}
+    </ion-title>
 
     <ion-buttons slot="end">
       <ion-button (click)="closePopover()">
@@ -19,6 +21,10 @@
 <ion-content class="ion-padding">
   <div class="description">
     Please rate your skills from 1 (not good) to 5 (excellent).
+  </div>
+
+  <div class="description ion-margin-top">
+    Rating: {{ formItem.controls.rating.value }}
   </div>
 
   <ion-range
