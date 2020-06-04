@@ -11,6 +11,17 @@
 </ion-header>
 
 <ion-content>
+  <ion-toolbar>
+    <ion-segment [formControl]="segmentFilter">
+      <ion-segment-button [value]="SEGMENT_FILTER_VALUES.All">
+        All
+      </ion-segment-button>
+      <ion-segment-button [value]="SEGMENT_FILTER_VALUES.Selected">
+        Selected
+      </ion-segment-button>
+    </ion-segment></ion-toolbar
+  >
+
   <ion-list>
     <ion-item
       *ngFor="let formItem of filteredFormItems"
