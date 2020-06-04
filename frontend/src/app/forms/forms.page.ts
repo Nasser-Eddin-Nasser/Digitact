@@ -17,12 +17,11 @@ import {
   EducationInfo,
   FieldDesignationInfo,
   FormsData,
-  TechnicalKnowledge,
-  TechnicalKnowledgeEntry,
 } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
 
 import { ApplicationStep, ApplicationStepsArr } from './model/steps.model';
+import { TechnicalKnowledgeFormItemsService } from './steps/technical-knowledge/technical-knowledge-form-items.service';
 
 @Component({
   selector: 'app-forms',
@@ -34,7 +33,8 @@ export class FormsPage implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private navigationController: NavController,
     private router: Router,
-    private storage: StorageHandlerService
+    private storage: StorageHandlerService,
+    private technicalKnowledgeFormItemsService: TechnicalKnowledgeFormItemsService
   ) {}
   /**
    * Make the Steps available in the template.
@@ -74,14 +74,7 @@ export class FormsPage implements OnInit, OnDestroy {
       field: new FormControl<string[]>([], Validators.required),
       designation: new FormControl<string[]>([], Validators.required),
     }),
-    technicalKnowledge: new FormGroup<TechnicalKnowledge>({
-      professionalSoftware: new FormArray<TechnicalKnowledgeEntry>(
-        [],
-        Validators.required
-      ),
-      databases: new FormArray<TechnicalKnowledgeEntry>([]),
-      programmingLanguages: new FormArray<TechnicalKnowledgeEntry>([]),
-    }),
+    technicalKnowledge: this.technicalKnowledgeFormItemsService.generateFormItems(),
   });
 
   /**
