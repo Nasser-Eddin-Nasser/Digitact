@@ -26,6 +26,16 @@ export class RatingModalComponent
   searchInput = new FormControl<string>('');
 
   /**
+   * Make the possible Segment values available in the template.
+   *
+   * This property is really only used to make the Segment values available in the template.
+   * In the TS file, you can directly refer to the enum.
+   */
+  readonly SEGMENT_FILTER_VALUES = SegmentFilterValue;
+
+  segmentFilter = new FormControl<SegmentFilterValue>(SegmentFilterValue.All);
+
+  /**
    * The form items (children of the FormArray) we want to display at the moment.
    * This list gets modified, for instance, when a search term is entered.
    */
@@ -45,10 +55,17 @@ export class RatingModalComponent
     // Initialize the list.
     this.filterFormItems();
 
-    const subscription = this.searchInput.valueChanges.subscribe(() => {
+    const searchSubscription = this.searchInput.valueChanges.subscribe(() => {
       this.filterFormItems();
     });
-    this.subscriptions.push(subscription);
+    this.subscriptions.push(searchSubscription);
+
+    const segmentSubscription = this.segmentFilter.valueChanges.subscribe(
+      () => {
+        this.filterFormItems();
+      }
+    );
+    this.subscriptions.push(segmentSubscription);
   }
 
   ngOnDestroy(): void {
@@ -71,6 +88,15 @@ export class RatingModalComponent
    */
   filterFormItems(): void {
     let result = [...this.formArray.controls];
+
+    if (this.segmentFilter.value === SegmentFilterValue.Selected) {
+      result = result.filter((item) => {
+        if (item.enabled) {
+          return true;
+        }
+        return false;
+      });
+    }
 
     if (this.searchInput.value !== '') {
       const searchedFor = this.searchInput.value.toLowerCase();
@@ -120,4 +146,9 @@ export class RatingModalComponent
 
 export interface RatingModalProps {
   formArray: FormArray<TechnicalKnowledgeEntry>;
+}
+
+enum SegmentFilterValue {
+  All = 'all',
+  Selected = 'selected',
 }
