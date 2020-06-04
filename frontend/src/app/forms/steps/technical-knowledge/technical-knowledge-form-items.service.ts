@@ -25,7 +25,7 @@ export class TechnicalKnowledgeFormItemsService {
     'Python',
   ];
 
-  generateFormItems(): FormGroup<TechnicalKnowledge> {
+  generateAllFormItems(): FormGroup<TechnicalKnowledge> {
     const result = new FormGroup<TechnicalKnowledge>({
       professionalSoftware: new FormArray<TechnicalKnowledgeEntry>(
         this.generateItemsFromArray(this.PROFESSIONAL_SOFTWARE_ITEMS),
@@ -47,15 +47,21 @@ export class TechnicalKnowledgeFormItemsService {
   ): FormGroup<TechnicalKnowledgeEntry>[] {
     const result: FormGroup<TechnicalKnowledgeEntry>[] = [];
 
-    for (const item of arr) {
-      const control = new FormGroup<TechnicalKnowledgeEntry>({
-        name: new FormControl(item),
-        rating: new FormControl(1),
-      });
-
-      control.disable();
+    for (const name of arr) {
+      const control = this.generateFormItem(name);
       result.push(control);
     }
+
+    return result;
+  }
+
+  generateFormItem(name: string): FormGroup<TechnicalKnowledgeEntry> {
+    const result = new FormGroup<TechnicalKnowledgeEntry>({
+      name: new FormControl(name),
+      rating: new FormControl(1),
+    });
+
+    result.disable();
 
     return result;
   }

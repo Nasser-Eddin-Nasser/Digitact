@@ -1,5 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ModalController, PopoverController } from '@ionic/angular';
+import {
+  AlertController,
+  ModalController,
+  PopoverController,
+  ToastController,
+} from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 import {
@@ -8,6 +13,7 @@ import {
   FormGroup,
 } from '../../../../common/forms/forms';
 import { TechnicalKnowledgeEntry } from '../../../../model/forms-data.model';
+import { TechnicalKnowledgeFormItemsService } from '../technical-knowledge-form-items.service';
 
 import {
   ItemPopoverComponent,
@@ -47,8 +53,11 @@ export class RatingModalComponent
   private readonly subscriptions: Subscription[] = [];
 
   constructor(
+    private alertController: AlertController,
     private modalController: ModalController,
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
+    private technicalKnowledgeFormItemsService: TechnicalKnowledgeFormItemsService,
+    private toastController: ToastController
   ) {}
 
   ngOnInit(): void {
@@ -153,6 +162,56 @@ export class RatingModalComponent
     // We need to wait until the Popover has been presented.
     // Otherwise, the Popover might get positioned poorly since calling "enable" changes our view.
     formItem.enable();
+  }
+
+  /**
+   * Show an alert message asking if the user really wants to add the current search term to the list.
+   * If so, the term will be added.
+   */
+  async addSearchTermToList(): Promise<void> {
+    const searchTerm = this.searchInput.value;
+
+    const alert = await this.alertController.create({
+      header: 'Add to list',
+      message: `Do you really want to add "${searchTerm}" to the list?`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Add',
+          handler: () => {
+            this._addSearchTermToList(searchTerm);
+          },
+        },
+      ],
+    });
+
+    alert.present();
+  }
+
+  /**
+   * If the user wants to add the search term to the list (he has confirmed the alert), then this method will be invoked.
+   * Here, the actual logic for adding the item can be found.
+   *
+   * Once the item has been added, a toast message will be displayed, informing that the item has been added.
+   */
+  private async _addSearchTermToList(searchTerm: string): Promise<void> {
+    const newFormItem = this.technicalKnowledgeFormItemsService.generateFormItem(
+      searchTerm
+    );
+    this.formArray.push(newFormItem);
+
+    // Re-build the list so that the new element is shown.
+    this.buildItemsList();
+
+    // Display a success message.
+    const toast = await this.toastController.create({
+      message: `"${searchTerm}" has been added to the list.`,
+      duration: 3000,
+    });
+    toast.present();
   }
 }
 
