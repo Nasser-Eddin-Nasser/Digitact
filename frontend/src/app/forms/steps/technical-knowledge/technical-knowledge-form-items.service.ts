@@ -7,6 +7,9 @@ import {
   TechnicalKnowledgeEntry,
 } from '../../../model/forms-data.model';
 
+/**
+ * This Service can/should be used to generate and reset form items for the Technical Knowledge step.
+ */
 @Injectable()
 export class TechnicalKnowledgeFormItemsService {
   private readonly PROFESSIONAL_SOFTWARE_ITEMS = [
@@ -17,12 +20,37 @@ export class TechnicalKnowledgeFormItemsService {
     'Microsoft Word',
   ];
 
-  private readonly DATABASE_ITEMS = ['MySQL', 'PostgreSQL'];
+  private readonly DATABASE_ITEMS = [
+    'MariaDB',
+    'MongoDB',
+    'MySQL',
+    'PostgreSQL',
+  ];
 
-  private readonly PROGRAMMING_LANGUAGE_ITEMS = [
+  private readonly PROGRAMMING_LANGUAGE_AND_FRAMEWORKS_ITEMS = [
+    // Programming languages
+    'C',
+    'C++',
+    'C#',
+    'Go',
     'Java',
     'JavaScript',
+    'Kotlin',
+    'Objective-C',
+    'PHP',
     'Python',
+    'Swift',
+    'TypeScript',
+    'R',
+
+    // Frameworks
+    'Angular',
+    'Cordova/PhoneGap',
+    'Ionic',
+    'NativeScript',
+    'React',
+    'React Native',
+    'Vue',
   ];
 
   generateAllFormItems(): FormGroup<TechnicalKnowledge> {
@@ -34,8 +62,10 @@ export class TechnicalKnowledgeFormItemsService {
       databases: new FormArray<TechnicalKnowledgeEntry>(
         this.generateItemsFromArray(this.DATABASE_ITEMS)
       ),
-      programmingLanguages: new FormArray<TechnicalKnowledgeEntry>(
-        this.generateItemsFromArray(this.PROGRAMMING_LANGUAGE_ITEMS)
+      programmingLanguagesAndFrameworks: new FormArray<TechnicalKnowledgeEntry>(
+        this.generateItemsFromArray(
+          this.PROGRAMMING_LANGUAGE_AND_FRAMEWORKS_ITEMS
+        )
       ),
     });
 
