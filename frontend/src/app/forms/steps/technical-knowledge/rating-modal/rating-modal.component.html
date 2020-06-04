@@ -20,7 +20,12 @@
           color="secondary"
         ></ion-icon>
         <ion-label color="secondary">
-          {{ formItem.controls.name.value }}
+          <span>{{ formItem.controls.name.value }}</span>
+          <div>
+            <app-stars
+              [filledStars]="formItem.controls.rating.value"
+            ></app-stars>
+          </div>
         </ion-label>
       </ng-container>
     </ion-item>
