@@ -167,7 +167,7 @@ export class RatingModalComponent
 
       (In the future, we might think about how we can make this process more generalized. But it should be fine like this for now.)
     */
-    await popover.onDidDismiss();
+    await popover.onWillDismiss();
     this.buildItemsList();
   }
 
