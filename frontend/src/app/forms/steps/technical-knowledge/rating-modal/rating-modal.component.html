@@ -24,7 +24,12 @@
         </ion-segment></ion-toolbar
       >
 
-      <ion-list>
+      <div class="no-items ion-padding" *ngIf="filteredFormItems.length < 1">
+        <ion-icon name="search-outline"></ion-icon>
+        <p>No items match your selection</p>
+      </div>
+
+      <ion-list *ngIf="filteredFormItems.length > 0">
         <ion-item
           *ngFor="let formItem of filteredFormItems"
           (click)="showItemPopover(formItem, $event)"
