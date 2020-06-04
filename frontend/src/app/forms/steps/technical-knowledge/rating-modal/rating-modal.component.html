@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar></ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item
+      *ngFor="let formItem of formArray.controls"
+      (click)="showItemPopover(formItem, $event)"
+    >
+      <ng-container *ngIf="formItem.disabled">
+        <ion-icon slot="start" name="ellipse-outline" color="medium"></ion-icon>
+        <ion-label color="medium">{{ formItem.controls.name.value }}</ion-label>
+      </ng-container>
+
+      <ng-container *ngIf="!formItem.disabled">
+        <ion-icon
+          slot="start"
+          name="checkmark-circle-outline"
+          color="secondary"
+        ></ion-icon>
+        <ion-label color="secondary">
+          {{ formItem.controls.name.value }}
+        </ion-label>
+      </ng-container>
+    </ion-item>
+  </ion-list>
+</ion-content>

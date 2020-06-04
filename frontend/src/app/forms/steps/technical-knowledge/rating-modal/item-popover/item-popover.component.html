@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar></ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="description">
+    Please rate your skills from 1 (not good) to 5 (excellent).
+  </div>
+
+  <ion-range
+    color="secondary"
+    snaps="true"
+    min="1"
+    max="5"
+    [formControl]="formItem.controls.rating"
+  ></ion-range>
+</ion-content>
