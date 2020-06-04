@@ -1,3 +1,7 @@
+/*
+  @description
+    This Component displays the content of the popover that is shown when clicking on an item in the list shown in the rating modal.
+*/
 import { Component, Input } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 

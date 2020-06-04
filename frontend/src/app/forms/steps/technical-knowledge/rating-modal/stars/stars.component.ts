@@ -1,3 +1,8 @@
+/*
+  @description
+    This Component displays star icons next to each other - some of them filled, some not filled.
+*/
+
 import { Component, Input } from '@angular/core';
 
 @Component({
