@@ -74,7 +74,7 @@ export class FormsPage implements OnInit, OnDestroy {
       field: new FormControl<string[]>([], Validators.required),
       designation: new FormControl<string[]>([], Validators.required),
     }),
-    technicalKnowledge: this.technicalKnowledgeFormItemsService.generateFormItems(),
+    technicalKnowledge: this.technicalKnowledgeFormItemsService.generateAllFormItems(),
   });
 
   /**

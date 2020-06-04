@@ -1,0 +1,18 @@
+.container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.main-items {
+  flex-grow: 1;
+}
+.bottom-content {
+  flex-grow: 0;
+  margin-top: 2rem;
+  padding: 0.5rem 1.5rem;
+}
+
+.add-to-list-button-container {
+  display: flex;
+  justify-content: center;
+}
