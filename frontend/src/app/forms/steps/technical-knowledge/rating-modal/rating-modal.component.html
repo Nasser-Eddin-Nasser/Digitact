@@ -4,12 +4,16 @@
       <ion-button (click)="closeModal()">Close</ion-button>
     </ion-buttons>
   </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-searchbar [formControl]="searchInput"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
     <ion-item
-      *ngFor="let formItem of formArray.controls"
+      *ngFor="let formItem of filteredFormItems"
       (click)="showItemPopover(formItem, $event)"
     >
       <ng-container *ngIf="formItem.disabled">
