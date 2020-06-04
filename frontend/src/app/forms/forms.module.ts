@@ -16,6 +16,7 @@ import { ContactInfoComponent } from './steps/contact-info/contact-info.componen
 import { EducationInfoEntryComponent } from './steps/education-info-entry/education-info-entry.component';
 import { EducationInfoComponent } from './steps/education-info/education-info.component';
 import { FieldDesignationPageComponent } from './steps/field-designation-page/field-designation-page.component';
+import { PicturesEntryComponent } from './steps/pictures-entry/pictures-entry.component';
 import { SubmitPageComponent } from './steps/submit-page/submit-page.component';
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { SubmitPageComponent } from './steps/submit-page/submit-page.component';
     EducationInfoComponent,
     EducationInfoEntryComponent,
     FieldDesignationPageComponent,
+    PicturesEntryComponent,
   ],
 })
 export class FormsPageModule {}

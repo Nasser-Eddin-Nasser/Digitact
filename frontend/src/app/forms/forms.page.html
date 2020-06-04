@@ -44,6 +44,11 @@
           *ngSwitchCase="APPLICATION_STEP.ContactInformation"
         >
         </form-contact-info>
+        <form-pictures-entry
+          [formsData]="formsData"
+          *ngSwitchCase="APPLICATION_STEP.PicturesEntry"
+        >
+        </form-pictures-entry>
         <form-education-info
           [formsData]="formsData"
           *ngSwitchCase="APPLICATION_STEP.EducationInformation"
