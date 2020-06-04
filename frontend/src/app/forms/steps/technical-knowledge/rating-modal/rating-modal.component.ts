@@ -249,6 +249,9 @@ export class RatingModalComponent
     // Re-build the list so that the new element is shown.
     this.buildItemsList();
 
+    // Change the filter to "All" so that the new item can actually be seen.
+    this.segmentFilter.setValue(SegmentFilterValue.All);
+
     // Display a success message.
     const toast = await this.toastController.create({
       message: `"${searchTerm}" has been added to the list.`,

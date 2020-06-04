@@ -29,7 +29,7 @@
         <p>No items match your selection</p>
       </div>
 
-      <ion-list *ngIf="filteredFormItems.length > 0">
+      <ion-list class="ion-margin-bottom" *ngIf="filteredFormItems.length > 0">
         <ion-item
           *ngFor="let formItem of filteredFormItems"
           (click)="showItemPopover(formItem, $event)"
