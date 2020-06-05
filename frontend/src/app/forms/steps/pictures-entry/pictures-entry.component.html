@@ -1,16 +1,38 @@
 <div class="main-description">
   <h1>Picture</h1>
-  <span>
-    Add a picture of yourself by tapping on the image icon.
-  </span>
 
-  <ion-button
-    (click)="takePicture()"
-    class="custom-button"
-    fill="clear"
-    size="large"
-  >
-    <ion-icon name="person-circle"></ion-icon>
-  </ion-button>
-  <ion-img [src]="photo"></ion-img>
+  <!--<ion-img [src]="photo"></ion-img>-->
+  <div *ngIf="condition; else elseBlock">
+    <span>
+      Add a picture of yourself by tapping on the image icon.
+    </span>
+    <ion-button
+      (click)="takePicture()"
+      class="custom-button"
+      fill="clear"
+      size="large"
+    >
+      <ion-icon name="person-circle"></ion-icon>
+    </ion-button>
+  </div>
+  <ng-template #elseBlock>
+    <span>
+      Good job! If you want to take another picture, just delete the actual
+      picture by sliding on it and take another one.
+    </span>
+    <ion-item-sliding class="ion-no-padding custom-sliding">
+      <ion-item-options side="end">
+        <ion-item-option
+          color="danger"
+          expandable
+          (click)="deleteEducationInfo()"
+        >
+          <ion-icon name="trash" size="large"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item class="ion-no-padding">
+        <ion-img [src]="photo"></ion-img>
+      </ion-item>
+    </ion-item-sliding>
+  </ng-template>
 </div>

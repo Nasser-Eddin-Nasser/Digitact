@@ -20,6 +20,7 @@ export class PicturesEntryComponent {
   formsData: FormGroup<FormsData>;
 
   photo: SafeResourceUrl;
+  condition = true;
 
   async takePicture(): Promise<void> {
     const image = await Plugins.Camera.getPhoto({
@@ -27,7 +28,6 @@ export class PicturesEntryComponent {
       allowEditing: false,
       resultType: CameraResultType.Base64,
       source: CameraSource.Camera,
-      // saveToGallery: true,
     });
 
     /*this.photo = this.sanitizer.bypassSecurityTrustResourceUrl(
@@ -35,5 +35,14 @@ export class PicturesEntryComponent {
     );
     */
     this.photo = 'data:image/jpeg;base64,' + image.base64String;
+    this.condition = false;
+    this.formsData.controls.pictureEntry.controls.condition.setValue('s');
+  }
+  /**
+   * delete education info entry
+   */
+  deleteEducationInfo(): void {
+    this.condition = true;
+    this.formsData.controls.pictureEntry.controls.condition.setValue('');
   }
 }
