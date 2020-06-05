@@ -17,9 +17,7 @@ import { EducationInfoEntryComponent } from './steps/education-info-entry/educat
 import { EducationInfoComponent } from './steps/education-info/education-info.component';
 import { FieldDesignationPageComponent } from './steps/field-designation-page/field-designation-page.component';
 import { SubmitPageComponent } from './steps/submit-page/submit-page.component';
-import { RatingModalModule } from './steps/technical-knowledge/rating-modal/rating-modal.module';
-import { TechnicalKnowledgeFormItemsService } from './steps/technical-knowledge/technical-knowledge-form-items.service';
-import { TechnicalKnowledgeComponent } from './steps/technical-knowledge/technical-knowledge.component';
+import { TechnicalKnowledgeModule } from './steps/technical-knowledge/technical-knowledge.module';
 
 @NgModule({
   imports: [
@@ -28,7 +26,7 @@ import { TechnicalKnowledgeComponent } from './steps/technical-knowledge/technic
     FormsPageRoutingModule,
     IonicModule,
     ReactiveFormsModule,
-    RatingModalModule,
+    TechnicalKnowledgeModule,
   ],
   declarations: [
     FormsPage,
@@ -39,8 +37,6 @@ import { TechnicalKnowledgeComponent } from './steps/technical-knowledge/technic
     EducationInfoComponent,
     EducationInfoEntryComponent,
     FieldDesignationPageComponent,
-    TechnicalKnowledgeComponent,
   ],
-  providers: [TechnicalKnowledgeFormItemsService],
 })
 export class FormsPageModule {}
