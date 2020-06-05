@@ -10,6 +10,7 @@ export interface FormsData {
   contactInfo: ContactInfo;
   educationInfo: EducationInfo;
   fieldDesignationInfo: FieldDesignationInfo;
+  pictureEntry: PictureEntry;
 }
 
 export interface BasicInfo {
@@ -39,4 +40,8 @@ export interface EducationInfoEntry {
 export interface FieldDesignationInfo {
   field: UseControl<string[]>;
   designation: UseControl<string[]>;
+}
+
+export interface PictureEntry {
+  condition: string;
 }

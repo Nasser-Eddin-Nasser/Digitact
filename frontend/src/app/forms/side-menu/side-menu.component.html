@@ -35,7 +35,7 @@
           [ngTemplateOutletContext]="{
             step: APPLICATION_STEP.PicturesEntry,
             displayName: 'Picture Entry',
-            isValid: formsData.controls.contactInfo.valid,
+            isValid: formsData.controls.pictureEntry.controls.condition.valid,
             isActive: currentStep === APPLICATION_STEP.PicturesEntry
           }"
         ></ng-container>
