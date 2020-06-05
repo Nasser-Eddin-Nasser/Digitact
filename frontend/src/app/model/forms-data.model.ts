@@ -43,12 +43,9 @@ export interface FieldDesignationInfo {
 }
 
 export interface TechnicalKnowledge {
-  professionalSoftware: TechnicalKnowledgeEntry[];
-  databases: TechnicalKnowledgeEntry[];
-  /**
-   * Not only programming languages, but also frameworks are permitted here.
-   */
-  programmingLanguagesAndFrameworks: TechnicalKnowledgeEntry[];
+  professionalSoftware: UseControl<TechnicalKnowledgeEntry[]>;
+  databases: UseControl<TechnicalKnowledgeEntry[]>;
+  programmingLanguagesAndFrameworks: UseControl<TechnicalKnowledgeEntry[]>;
 }
 export interface TechnicalKnowledgeEntry {
   name: string;

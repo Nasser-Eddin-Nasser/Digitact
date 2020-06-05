@@ -245,7 +245,7 @@ export class RatingModalComponent
    * Once the item has been added, a toast message will be displayed, informing that the item has been added.
    */
   private async _addSearchTermToList(searchTerm: string): Promise<void> {
-    const newFormItem = this.technicalKnowledgeFormItemsService.generateFormItem(
+    const newFormItem = this.technicalKnowledgeFormItemsService.generateDefaultFormItem(
       searchTerm
     );
     this.formArray.push(newFormItem);
