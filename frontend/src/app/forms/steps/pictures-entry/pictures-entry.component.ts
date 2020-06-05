@@ -39,9 +39,9 @@ export class PicturesEntryComponent {
     this.formsData.controls.pictureEntry.controls.condition.setValue('s');
   }
   /**
-   * delete education info entry
+   * delete picture entry and reset page so you can add a new picture.
    */
-  deleteEducationInfo(): void {
+  deletePictureEntry(): void {
     this.condition = true;
     this.formsData.controls.pictureEntry.controls.condition.setValue('');
   }
