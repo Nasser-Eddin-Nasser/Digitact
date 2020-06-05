@@ -43,5 +43,5 @@ export interface FieldDesignationInfo {
 }
 
 export interface PictureEntry {
-  condition: string;
+  picString: string;
 }

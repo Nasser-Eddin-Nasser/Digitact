@@ -20,7 +20,6 @@ export class PicturesEntryComponent {
   formsData: FormGroup<FormsData>;
 
   photo: SafeResourceUrl;
-  condition = true;
 
   async takePicture(): Promise<void> {
     const image = await Plugins.Camera.getPhoto({
@@ -35,14 +34,14 @@ export class PicturesEntryComponent {
     );
     */
     this.photo = 'data:image/jpeg;base64,' + image.base64String;
-    this.condition = false;
-    this.formsData.controls.pictureEntry.controls.condition.setValue('s');
+    this.formsData.controls.pictureEntry.controls.picString.setValue(
+      'data:image/jpeg;base64,' + image.base64String
+    );
   }
   /**
    * delete picture entry and reset page so you can add a new picture.
    */
   deletePictureEntry(): void {
-    this.condition = true;
-    this.formsData.controls.pictureEntry.controls.condition.setValue('');
+    this.formsData.controls.pictureEntry.controls.picString.setValue('');
   }
 }
