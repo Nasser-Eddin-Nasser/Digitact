@@ -2,7 +2,12 @@
   <h1>Picture</h1>
 
   <!--<ion-img [src]="photo"></ion-img>-->
-  <div *ngIf="condition; else elseBlock">
+  <div
+    *ngIf="
+      formsData.controls.pictureEntry.controls.picString.invalid;
+      else elseBlock
+    "
+  >
     <span>
       Add a picture of yourself by tapping on the image icon.
     </span>
@@ -31,7 +36,9 @@
         </ion-item-option>
       </ion-item-options>
       <ion-item class="ion-no-padding">
-        <ion-img [src]="photo"></ion-img>
+        <ion-img
+          [src]="formsData.controls.pictureEntry.controls.picString.value"
+        ></ion-img>
       </ion-item>
     </ion-item-sliding>
   </ng-template>

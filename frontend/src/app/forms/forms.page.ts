@@ -74,7 +74,7 @@ export class FormsPage implements OnInit, OnDestroy {
       designation: new FormControl<string[]>([], Validators.required),
     }),
     pictureEntry: new FormGroup<PictureEntry>({
-      condition: new FormControl('', Validators.required),
+      picString: new FormControl('', Validators.required),
     }),
   });
 
