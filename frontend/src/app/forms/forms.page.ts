@@ -10,10 +10,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
-import { FormControl, FormGroup } from '../common/forms/forms';
+import { FormArray, FormControl, FormGroup } from '../common/forms/forms';
 import {
   BasicInfo,
   ContactInfo,
+  EducationInfo,
   FieldDesignationInfo,
   FormsData,
 } from '../model/forms-data.model';
@@ -27,6 +28,12 @@ import { ApplicationStep, ApplicationStepsArr } from './model/steps.model';
   styleUrls: ['./forms.page.scss'],
 })
 export class FormsPage implements OnInit, OnDestroy {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private navigationController: NavController,
+    private router: Router,
+    private storage: StorageHandlerService
+  ) {}
   /**
    * Make the Steps available in the template.
    *
@@ -58,9 +65,12 @@ export class FormsPage implements OnInit, OnDestroy {
       linkedIn: new FormControl(''),
       xing: new FormControl(''),
     }),
+    educationInfo: new FormGroup<EducationInfo>({
+      educationInfoForm: new FormArray([], Validators.required),
+    }),
     fieldDesignationInfo: new FormGroup<FieldDesignationInfo>({
-      field: new FormControl([], Validators.required),
-      designation: new FormControl([], Validators.required),
+      field: new FormControl<string[]>([], Validators.required),
+      designation: new FormControl<string[]>([], Validators.required),
     }),
   });
 
@@ -87,13 +97,6 @@ export class FormsPage implements OnInit, OnDestroy {
    * Holds all the subscription which will be useful for un subscribing on destroy.
    */
   private subscriptions: Subscription[] = [];
-
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private navigationController: NavController,
-    private router: Router,
-    private storage: StorageHandlerService
-  ) {}
 
   /**
    * In this method route change is observed and handling is done.
@@ -233,7 +236,6 @@ export class FormsPage implements OnInit, OnDestroy {
         validSteps++;
       }
     }
-
     this.progressPercentage = validSteps / totalNumberOfSteps;
   }
 }

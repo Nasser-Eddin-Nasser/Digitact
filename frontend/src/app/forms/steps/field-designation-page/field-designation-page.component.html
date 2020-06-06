@@ -1,1 +1,39 @@
-<p>Add fields and designation multi slect menus</p>
+<div class="main-description">
+  <h1>Industries and Positions</h1>
+  <span>
+    So that we can know in which industries and positions you are intrested,
+    please choose from the following.
+  </span>
+</div>
+
+<ion-item class="ion-no-padding form-item">
+  <ion-label color="medium">Industry</ion-label>
+  <ion-select
+    multiple
+    [formControl]="formsData.controls.fieldDesignationInfo.controls.field"
+    [interfaceOptions]="{ cssClass: 'custom-alert' }"
+  >
+    <ion-select-option
+      *ngFor="let field of industryArray"
+      [value]="field.value"
+    >
+      {{ field.displayName }}
+    </ion-select-option>
+  </ion-select>
+</ion-item>
+
+<ion-item class="ion-no-padding form-item">
+  <ion-label color="medium">Position</ion-label>
+  <ion-select
+    multiple
+    [formControl]="formsData.controls.fieldDesignationInfo.controls.designation"
+    [interfaceOptions]="{ cssClass: 'custom-alert' }"
+  >
+    <ion-select-option
+      *ngFor="let designation of positionsArray"
+      [value]="designation.value"
+    >
+      {{ designation.displayName }}
+    </ion-select-option>
+  </ion-select>
+</ion-item>
