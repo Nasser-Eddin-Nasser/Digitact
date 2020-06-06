@@ -212,7 +212,11 @@ export class FormsPage implements OnInit, OnDestroy {
       '-' +
       Math.floor(Math.random() * 1000000).toString()
     ).replace(/\s+/g, '_');
-    this.storage.addItem(key, this.formsData.value);
+    this.storage.addItem(
+      this.storage.applicantDetailsDb,
+      key,
+      this.formsData.value
+    );
     this.router.navigate(['/forms', 'confirmation']);
   }
 
