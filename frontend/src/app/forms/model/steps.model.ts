@@ -12,7 +12,15 @@ export enum ApplicationStep {
   Submit = 'submit',
 }
 
+export enum hrRatingStep {
+  ApplicantRating = 'applicant-rating',
+  ImpressionInformation = 'impression-information',
+  Finalize = 'finalize',
+}
+
 /**
  * All of the possible steps as an array.
  */
 export const ApplicationStepsArr = Object.values(ApplicationStep);
+
+export const hrRatingStepArr = Object.values(hrRatingStep);
