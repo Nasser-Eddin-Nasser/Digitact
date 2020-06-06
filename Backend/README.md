@@ -122,7 +122,8 @@ If you want to access the database, you are most likely prompted for a password.
   "keyCompetencies": [
     {
       "category: KeyCompetenciesCategory,
-      "value": String,
+      "name": String,
+      "rating": int
     }
   ]
 }
