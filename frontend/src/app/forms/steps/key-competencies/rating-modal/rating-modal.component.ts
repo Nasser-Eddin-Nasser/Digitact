@@ -13,8 +13,8 @@ import {
 } from '../../../../common/forms/forms';
 import { AlertController } from '../../../../common/ion-wrappers/alert-controller';
 import { ToastController } from '../../../../common/ion-wrappers/toast-controller';
-import { TechnicalKnowledgeEntry } from '../../../../model/forms-data.model';
-import { TechnicalKnowledgeFormItemsService } from '../technical-knowledge-form-items.service';
+import { KeyCompetenciesEntry } from '../../../../model/forms-data.model';
+import { KeyCompetenciesFormItemsService } from '../key-competencies-form-items.service';
 
 import {
   ItemPopoverComponent,
@@ -28,7 +28,7 @@ import {
 export class RatingModalComponent
   implements RatingModalProps, OnInit, OnDestroy {
   @Input()
-  formArray: FormArray<TechnicalKnowledgeEntry>;
+  formArray: FormArray<KeyCompetenciesEntry>;
 
   searchInput = new FormControl<string>('');
 
@@ -46,7 +46,7 @@ export class RatingModalComponent
    * The form items (children of the FormArray) we want to display at the moment.
    * This list gets modified, for instance, when a search term is entered.
    */
-  filteredFormItems: FormGroup<TechnicalKnowledgeEntry>[];
+  filteredFormItems: FormGroup<KeyCompetenciesEntry>[];
 
   /**
    * Subscriptions we need to unsubscribe from when this Component is getting destroyed.
@@ -57,7 +57,7 @@ export class RatingModalComponent
     private alertController: AlertController,
     private modalController: ModalController,
     private popoverController: PopoverController,
-    private technicalKnowledgeFormItemsService: TechnicalKnowledgeFormItemsService,
+    private keyCompetenciesFormItemsService: KeyCompetenciesFormItemsService,
     private toastController: ToastController
   ) {}
 
@@ -144,7 +144,7 @@ export class RatingModalComponent
    * @param Event The (click) event that triggered this method.
    */
   async showItemPopover(
-    formItem: FormGroup<TechnicalKnowledgeEntry>,
+    formItem: FormGroup<KeyCompetenciesEntry>,
     event: Event
   ): Promise<void> {
     const popoverProps: ItemPopoverProps = {
@@ -245,7 +245,7 @@ export class RatingModalComponent
    * Once the item has been added, a toast message will be displayed, informing that the item has been added.
    */
   private async _addSearchTermToList(searchTerm: string): Promise<void> {
-    const newFormItem = this.technicalKnowledgeFormItemsService.generateDefaultFormItem(
+    const newFormItem = this.keyCompetenciesFormItemsService.generateDefaultFormItem(
       searchTerm
     );
     this.formArray.push(newFormItem);
@@ -269,7 +269,7 @@ export class RatingModalComponent
  * Data to be sent to the Rating Modal when it gets initialized.
  */
 export interface RatingModalProps {
-  formArray: FormArray<TechnicalKnowledgeEntry>;
+  formArray: FormArray<KeyCompetenciesEntry>;
 }
 
 enum SegmentFilterValue {

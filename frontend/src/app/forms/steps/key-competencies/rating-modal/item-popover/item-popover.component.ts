@@ -6,8 +6,8 @@ import { Component, Input } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 
 import { FormGroup } from '../../../../../common/forms/forms';
-import { TechnicalKnowledgeEntry } from '../../../../../model/forms-data.model';
-import { TechnicalKnowledgeFormItemsService } from '../../technical-knowledge-form-items.service';
+import { KeyCompetenciesEntry } from '../../../../../model/forms-data.model';
+import { KeyCompetenciesFormItemsService } from '../../key-competencies-form-items.service';
 
 @Component({
   templateUrl: './item-popover.component.html',
@@ -15,11 +15,11 @@ import { TechnicalKnowledgeFormItemsService } from '../../technical-knowledge-fo
 })
 export class ItemPopoverComponent implements ItemPopoverProps {
   @Input()
-  formItem: FormGroup<TechnicalKnowledgeEntry>;
+  formItem: FormGroup<KeyCompetenciesEntry>;
 
   constructor(
     private popoverController: PopoverController,
-    private techicalKnowledgeFormItemsService: TechnicalKnowledgeFormItemsService
+    private keyCompetenciesFormItemsService: KeyCompetenciesFormItemsService
   ) {}
 
   closePopover(): void {
@@ -27,11 +27,11 @@ export class ItemPopoverComponent implements ItemPopoverProps {
   }
 
   deleteItem(): void {
-    this.techicalKnowledgeFormItemsService.resetFormItem(this.formItem);
+    this.keyCompetenciesFormItemsService.resetFormItem(this.formItem);
     this.closePopover();
   }
 }
 
 export interface ItemPopoverProps {
-  formItem: FormGroup<TechnicalKnowledgeEntry>;
+  formItem: FormGroup<KeyCompetenciesEntry>;
 }
