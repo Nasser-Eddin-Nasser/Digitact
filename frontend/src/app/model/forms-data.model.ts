@@ -3,9 +3,12 @@
     This model holds the all the interfaces related to forms data.
  */
 
+import { UseControl } from '../common/forms/forms';
+
 export interface FormsData {
   basicInfo: BasicInfo;
   contactInfo: ContactInfo;
+  educationInfo: EducationInfo;
   fieldDesignationInfo: FieldDesignationInfo;
 }
 
@@ -22,9 +25,18 @@ export interface ContactInfo {
   xing: string;
 }
 
+export interface EducationInfo {
+  educationInfoForm: EducationInfoEntry[];
+}
+
+export interface EducationInfoEntry {
+  university: string;
+  subject: string;
+  degree: string;
+  grade: string;
+  graduationYear: string;
+}
 export interface FieldDesignationInfo {
-  // tslint:disable-next-line: no-any
-  field: any;
-  // tslint:disable-next-line: no-any
-  designation: any;
+  field: UseControl<string[]>;
+  designation: UseControl<string[]>;
 }

@@ -7,6 +7,7 @@
 export enum ApplicationStep {
   BasicInformation = 'basic-information',
   ContactInformation = 'contact-information',
+  EducationInformation = 'education-information',
   FieldDesignationPreference = 'field-designation-preference',
   Submit = 'submit',
 }

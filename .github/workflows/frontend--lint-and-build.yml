@@ -1,0 +1,32 @@
+name: Lint and build the frontend
+
+on:
+  push:
+    paths:
+      - .github/workflows/**
+      - frontend/**
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Install all frontend dependencies
+        run: npm install
+      - name: Run all frontend checks
+        run: npm run all-checks
+      - name: Build the frontend
+        run: npm run build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build-result
+          path: frontend/www/
