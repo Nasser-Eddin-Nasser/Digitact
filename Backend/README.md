@@ -118,6 +118,12 @@ If you want to access the database, you are most likely prompted for a password.
       "grade": double,
       "graduation_date": String
     }
+  ],
+  "keyCompetencies": [
+    {
+      "category: KeyCompetenciesCategory,
+      "value": String,
+    }
   ]
 }
 ```
