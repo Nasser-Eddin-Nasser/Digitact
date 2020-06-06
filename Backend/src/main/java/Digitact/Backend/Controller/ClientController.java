@@ -25,14 +25,16 @@ public class ClientController {
      * @return "Applicant is created in the database"
      */
     @PostMapping("/createApplicant")
-    public String createAdmin(@RequestBody ApplicantUI user) {
+    public String createApplicant(@RequestBody ApplicantUI user) {
         Applicant app = new Applicant(user.getFirstName(), user.getLastName());
         user.getEducations().forEach(x -> x.setUser(app));
         user.getIndustries().setUser(app);
         user.getPositions().setUser(app);
+        user.getKeyCompetencies().forEach(x -> x.setUser(app));
         app.setEducations(user.getEducations());
         app.setIndustries(user.getIndustries());
         app.setPositions(user.getPositions());
+        app.addKeyCompetencies(user.getKeyCompetencies());
         repository.save(app);
         return "Applicant is created in the database";
     }
