@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
+import { KeyCompetenciesFormItemsService } from './key-competencies-form-items.service';
+import { KeyCompetenciesComponent } from './key-competencies.component';
 import { ItemPopoverComponent } from './rating-modal/item-popover/item-popover.component';
 import { RatingModalComponent } from './rating-modal/rating-modal.component';
 import { RangeToPipe } from './rating-modal/stars/range-to.pipe';
 import { StarsComponent } from './rating-modal/stars/stars.component';
-import { TechnicalKnowledgeFormItemsService } from './technical-knowledge-form-items.service';
-import { TechnicalKnowledgeComponent } from './technical-knowledge.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, ReactiveFormsModule],
@@ -17,9 +17,9 @@ import { TechnicalKnowledgeComponent } from './technical-knowledge.component';
     ItemPopoverComponent,
     RangeToPipe,
     StarsComponent,
-    TechnicalKnowledgeComponent,
+    KeyCompetenciesComponent,
   ],
-  providers: [TechnicalKnowledgeFormItemsService],
-  exports: [TechnicalKnowledgeComponent],
+  providers: [KeyCompetenciesFormItemsService],
+  exports: [KeyCompetenciesComponent],
 })
-export class TechnicalKnowledgeModule {}
+export class KeyCompetenciesModule {}

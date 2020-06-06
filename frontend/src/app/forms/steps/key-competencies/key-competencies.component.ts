@@ -1,6 +1,6 @@
 /*
   @description
-    This component renders the technical knowledge step view and its actions.
+    This component renders the key competencies step view and its actions.
 
   Important! Internally, we use FormArrays instead of FormControls.
   For the detailed explanation, please have a look at the form items service.
@@ -12,25 +12,25 @@ import { Subscription } from 'rxjs';
 import { FormArray, FormGroup, FormValue } from '../../../common/forms/forms';
 import {
   FormsData,
-  TechnicalKnowledge,
-  TechnicalKnowledgeEntry,
+  KeyCompetencies,
+  KeyCompetenciesEntry,
 } from '../../../model/forms-data.model';
 
+import {
+  KeyCompetenciesFormItemsService,
+  KeyCompetenciesInternal,
+} from './key-competencies-form-items.service';
 import {
   RatingModalComponent,
   RatingModalProps,
 } from './rating-modal/rating-modal.component';
-import {
-  TechnicalKnowledgeFormItemsService,
-  TechnicalKnowledgeInternal,
-} from './technical-knowledge-form-items.service';
 
 @Component({
-  selector: 'form-technical-knowledge',
-  templateUrl: './technical-knowledge.component.html',
-  styleUrls: ['./technical-knowledge.component.scss'],
+  selector: 'form-key-competencies',
+  templateUrl: './key-competencies.component.html',
+  styleUrls: ['./key-competencies.component.scss'],
 })
-export class TechnicalKnowledgeComponent implements OnInit, OnDestroy {
+export class KeyCompetenciesComponent implements OnInit, OnDestroy {
   /**
    * Data of the entire form.
    *
@@ -45,7 +45,7 @@ export class TechnicalKnowledgeComponent implements OnInit, OnDestroy {
    * "Internally", we use FormArrays instead of FormControls.
    * So: This object holds everything we need to deal with our data.
    */
-  internalFormsData: FormGroup<TechnicalKnowledgeInternal>;
+  internalFormsData: FormGroup<KeyCompetenciesInternal>;
 
   /**
    * The items we will later render in the template.
@@ -63,14 +63,14 @@ export class TechnicalKnowledgeComponent implements OnInit, OnDestroy {
   constructor(
     private ionRouterOutlet: IonRouterOutlet,
     private modalController: ModalController,
-    private technicalKnowledgeFormItemsService: TechnicalKnowledgeFormItemsService
+    private keyCompetenciesFormItemsService: KeyCompetenciesFormItemsService
   ) {}
 
   ngOnInit(): void {
     // All of the following might lead to bugs if the form controls (their references) get changed. But let's ignore that for now.
 
-    this.internalFormsData = this.technicalKnowledgeFormItemsService.generateAllFormItems(
-      this.formsData.controls.technicalKnowledge
+    this.internalFormsData = this.keyCompetenciesFormItemsService.generateAllFormItems(
+      this.formsData.controls.keyCompetencies
     );
 
     this.listItems = [
@@ -95,7 +95,7 @@ export class TechnicalKnowledgeComponent implements OnInit, OnDestroy {
       () => {
         // First, clear all controls.
         for (const control of Object.values(
-          this.formsData.controls.technicalKnowledge.controls
+          this.formsData.controls.keyCompetencies.controls
         )) {
           control.setValue([]);
         }
@@ -106,8 +106,8 @@ export class TechnicalKnowledgeComponent implements OnInit, OnDestroy {
         }
 
         // The "internal" form has pretty much the same structure as the "external" one.
-        this.formsData.controls.technicalKnowledge.patchValue(
-          this.internalFormsData.value as FormValue<TechnicalKnowledge>
+        this.formsData.controls.keyCompetencies.patchValue(
+          this.internalFormsData.value as FormValue<KeyCompetencies>
         );
       }
     );
@@ -121,7 +121,7 @@ export class TechnicalKnowledgeComponent implements OnInit, OnDestroy {
   }
 
   async showRatingModal(
-    formItem: FormArray<TechnicalKnowledgeEntry>
+    formItem: FormArray<KeyCompetenciesEntry>
   ): Promise<void> {
     const ratingModalProps: RatingModalProps = {
       formArray: formItem,
@@ -141,6 +141,6 @@ export class TechnicalKnowledgeComponent implements OnInit, OnDestroy {
 }
 
 interface ListItem {
-  formItem: FormArray<TechnicalKnowledgeEntry>;
+  formItem: FormArray<KeyCompetenciesEntry>;
   displayName: string;
 }

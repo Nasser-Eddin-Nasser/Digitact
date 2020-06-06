@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 
 import { FormArray, FormControl, FormGroup } from '../../../common/forms/forms';
 import {
-  TechnicalKnowledge,
-  TechnicalKnowledgeEntry,
+  KeyCompetencies,
+  KeyCompetenciesEntry,
 } from '../../../model/forms-data.model';
 
 /**
- * This Service can/should be used to generate and reset form items for the Technical Knowledge step.
+ * This Service can/should be used to generate and reset form items for the Key Competencies step.
  * It should only be used within this module.
  *
  * ## Important!
@@ -22,7 +22,7 @@ import {
  * so that people can use our form without having to think about the details of this module.
  */
 @Injectable()
-export class TechnicalKnowledgeFormItemsService {
+export class KeyCompetenciesFormItemsService {
   private readonly PROFESSIONAL_SOFTWARE_ITEMS = [
     'Adobe Photoshop',
     'Adobe InDesign',
@@ -69,21 +69,21 @@ export class TechnicalKnowledgeFormItemsService {
    * based on the "basis" provided as parameter.
    */
   generateAllFormItems(
-    basis: FormGroup<TechnicalKnowledge>
-  ): FormGroup<TechnicalKnowledgeInternal> {
+    basis: FormGroup<KeyCompetencies>
+  ): FormGroup<KeyCompetenciesInternal> {
     // No need to set any Validators here. This needs to be done on the "external" form.
 
-    const result = new FormGroup<TechnicalKnowledgeInternal>({
-      professionalSoftware: new FormArray<TechnicalKnowledgeEntry>(
+    const result = new FormGroup<KeyCompetenciesInternal>({
+      professionalSoftware: new FormArray<KeyCompetenciesEntry>(
         this.generateItems(
           this.PROFESSIONAL_SOFTWARE_ITEMS,
           basis.controls.professionalSoftware
         )
       ),
-      databases: new FormArray<TechnicalKnowledgeEntry>(
+      databases: new FormArray<KeyCompetenciesEntry>(
         this.generateItems(this.DATABASE_ITEMS, basis.controls.databases)
       ),
-      programmingLanguagesAndFrameworks: new FormArray<TechnicalKnowledgeEntry>(
+      programmingLanguagesAndFrameworks: new FormArray<KeyCompetenciesEntry>(
         this.generateItems(
           this.PROGRAMMING_LANGUAGE_AND_FRAMEWORKS_ITEMS,
           basis.controls.programmingLanguagesAndFrameworks
@@ -99,9 +99,9 @@ export class TechnicalKnowledgeFormItemsService {
    */
   private generateItems(
     defaultEntries: string[],
-    alreadyKnownItems: FormControl<TechnicalKnowledgeEntry[]>
-  ): FormGroup<TechnicalKnowledgeEntry>[] {
-    const result: FormGroup<TechnicalKnowledgeEntry>[] = [];
+    alreadyKnownItems: FormControl<KeyCompetenciesEntry[]>
+  ): FormGroup<KeyCompetenciesEntry>[] {
+    const result: FormGroup<KeyCompetenciesEntry>[] = [];
 
     const alreadyAddedNames: { [key: string]: true } = {};
     for (const item of alreadyKnownItems.value) {
@@ -131,8 +131,8 @@ export class TechnicalKnowledgeFormItemsService {
   private generateEnabledFormItem(
     name: string,
     rating: number
-  ): FormGroup<TechnicalKnowledgeEntry> {
-    const result = new FormGroup<TechnicalKnowledgeEntry>({
+  ): FormGroup<KeyCompetenciesEntry> {
+    const result = new FormGroup<KeyCompetenciesEntry>({
       name: new FormControl(name),
       rating: new FormControl(rating),
     });
@@ -143,8 +143,8 @@ export class TechnicalKnowledgeFormItemsService {
   /**
    * Generate a single form item that can later be used in the FormArray.
    */
-  generateDefaultFormItem(name: string): FormGroup<TechnicalKnowledgeEntry> {
-    const result = new FormGroup<TechnicalKnowledgeEntry>({
+  generateDefaultFormItem(name: string): FormGroup<KeyCompetenciesEntry> {
+    const result = new FormGroup<KeyCompetenciesEntry>({
       name: new FormControl(name),
       rating: new FormControl(1),
     });
@@ -158,7 +158,7 @@ export class TechnicalKnowledgeFormItemsService {
    * Reset a single item of our FormArray to its initial state.
    * (The items are disabled by default, so this method will also disable the item.)
    */
-  resetFormItem(item: FormGroup<TechnicalKnowledgeEntry>): void {
+  resetFormItem(item: FormGroup<KeyCompetenciesEntry>): void {
     item.reset({
       name: item.controls.name.value,
       rating: 1,
@@ -171,6 +171,6 @@ export class TechnicalKnowledgeFormItemsService {
  * "Externally" (outside this module), we use a FormControl that holds the values.
  * "Internally" (within this module), we use a FormArray.
  */
-export type TechnicalKnowledgeInternal = {
-  [key in keyof TechnicalKnowledge]: TechnicalKnowledgeEntry[];
+export type KeyCompetenciesInternal = {
+  [key in keyof KeyCompetencies]: KeyCompetenciesEntry[];
 };
