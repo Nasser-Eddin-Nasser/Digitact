@@ -5,6 +5,7 @@
 
 export interface RatingForm {
   applicantScore: ApplicantScore;
+  impressionInfo: ImpressionInfo;
 }
 
 export interface ApplicantScore {
@@ -12,4 +13,8 @@ export interface ApplicantScore {
   motivation: number;
   selfAssurance: number;
   personalImpression: number;
+}
+
+export interface ImpressionInfo {
+  impression: string;
 }

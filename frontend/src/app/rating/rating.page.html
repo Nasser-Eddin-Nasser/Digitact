@@ -14,18 +14,31 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+  <ion-progress-bar value="{{progressPercentage}}"></ion-progress-bar>
 </ion-header>
 
-<app-hr-side-menu [ratingForm]="ratingForm"></app-hr-side-menu>
+<app-hr-side-menu
+  [ratingForm]="ratingForm"
+  [currentStep]="currentStep"
+></app-hr-side-menu>
 
 <ion-content>
   <div class="main-container with-bottom-buttons">
     <div class="content">
-      <app-applicant-score [ratingForm]="ratingForm"></app-applicant-score>
+      <ng-container [ngSwitch]="currentStep">
+        <app-applicant-score
+          [ratingForm]="ratingForm"
+          *ngSwitchCase="HR_RATING_STEP.ApplicantRating"
+        ></app-applicant-score>
+        <app-impression-page
+          [ratingForm]="ratingForm"
+          *ngSwitchCase="HR_RATING_STEP.ImpressionInformation"
+        ></app-impression-page>
+      </ng-container>
     </div>
 
     <div class="buttons-container">
-      <button class="fancy-button">
+      <button class="fancy-button" (click)="navigateToNextStep()">
         Continue
       </button>
     </div>

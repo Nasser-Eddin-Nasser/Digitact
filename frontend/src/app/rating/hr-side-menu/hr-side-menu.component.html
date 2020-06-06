@@ -4,29 +4,50 @@
       <h1 class="side-menu-heading">Progress</h1>
 
       <ion-list lines="none">
-        <ion-item>
-          <ion-icon
-            size="large"
-            slot="start"
-            [name]="
-              ratingForm.controls.applicantScore.valid
-                ? 'checkmark-circle-outline'
-                : 'ellipse-outline'
-            "
-            [color]="
-              ratingForm.controls.applicantScore.valid ? 'tertiary' : 'medium'
-            "
-          ></ion-icon>
-
-          <ion-label
-            [color]="
-              ratingForm.controls.applicantScore.valid ? 'tertiary' : 'medium'
-            "
-          >
-            Applicant Score
-          </ion-label>
-        </ion-item>
+        <ng-container
+          [ngTemplateOutlet]="menuItem"
+          [ngTemplateOutletContext]="{
+            step: HR_RATING_STEP.ApplicantRating,
+            displayName: 'Applicant Rating',
+            isValid: ratingForm.controls.applicantScore.valid,
+            isActive: currentStep === HR_RATING_STEP.ApplicantRating
+          }"
+        ></ng-container>
+        <ng-container
+          [ngTemplateOutlet]="menuItem"
+          [ngTemplateOutletContext]="{
+            step: HR_RATING_STEP.ImpressionInformation,
+            displayName: 'Impression',
+            isValid: ratingForm.controls.impressionInfo.valid,
+            isActive: currentStep === HR_RATING_STEP.ImpressionInformation
+          }"
+        ></ng-container>
       </ion-list>
     </div>
   </ion-content>
 </ion-menu>
+<!-- This template is used to simplify the rendering of the menu items. -->
+<ng-template
+  #menuItem
+  let-step="step"
+  let-displayName="displayName"
+  let-isValid="isValid"
+  let-isActive="isActive"
+>
+  <ion-menu-toggle>
+    <ion-item (click)="navigateToStep(step)" class="ion-margin-top">
+      <ion-icon
+        size="large"
+        [name]="isValid ? 'checkmark-circle-outline' : 'ellipse-outline'"
+        [color]="isActive ? 'tertiary' : 'medium'"
+      ></ion-icon>
+
+      <ion-label
+        class="ion-padding-start"
+        [color]="isActive ? 'tertiary' : 'medium'"
+      >
+        {{ displayName }}
+      </ion-label>
+    </ion-item>
+  </ion-menu-toggle>
+</ng-template>
