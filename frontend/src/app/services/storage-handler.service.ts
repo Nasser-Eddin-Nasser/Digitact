@@ -11,18 +11,18 @@ import { FormsData } from '../model/forms-data.model';
   providedIn: 'root',
 })
 export class StorageHandlerService {
-  public applicantDetailsDb: Storage;
-  public apllicantRatingsDb: Storage;
+  applicantDetailsDb: Storage;
+  apllicantRatingsDb: Storage;
 
   constructor() {
     this.applicantDetailsDb = new Storage({
       name: 'digitact',
-      storeName: 'user',
+      storeName: 'applicants-details',
       driverOrder: ['indexeddb', 'localstorage'],
     });
     this.apllicantRatingsDb = new Storage({
       name: 'digitact',
-      storeName: 'details',
+      storeName: 'applicants-rating',
       driverOrder: ['indexeddb', 'localstorage'],
     });
   }
