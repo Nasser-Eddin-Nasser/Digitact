@@ -8,6 +8,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 import { FormControl, FormGroup } from '../common/forms/forms';
@@ -29,7 +30,8 @@ export class RatingPage implements OnDestroy, OnInit {
   constructor(
     private navController: NavController,
     private activatedRoute: ActivatedRoute,
-    private router: Router // private storage: StorageHandlerService
+    private router: Router,
+    private alertController: AlertController // private storage: StorageHandlerService
   ) {}
 
   /**
@@ -131,9 +133,9 @@ export class RatingPage implements OnDestroy, OnInit {
    * Handle a Step as provided by the Router.
    *
    * The string provided by the Router could contain anything.
-   * So: If the Step is not known, we simply show the Basic Information step.
+   * So: If the Step is not known, we simply show the Applicant rating step.
    *
-   * (When navigating to the URL without providing a query parameter, we will also redirect to the Basic Information step).
+   * (When navigating to the URL without providing a query parameter, we will also redirect to the Applicant rating step).
    *
    * @param step The "step" query parameter we got from the Router.
    */
@@ -148,7 +150,7 @@ export class RatingPage implements OnDestroy, OnInit {
       console.warn('The following Step is unknown:', step);
     }
 
-    // A fallback: If a step was requested that we don't know, we simply show the Basic Information page.
+    // A fallback: If a step was requested that we don't know, we simply show the Applicant rating page.
     this.navigateToStep(hrRatingStep.ApplicantRating);
   }
 
@@ -194,16 +196,62 @@ export class RatingPage implements OnDestroy, OnInit {
   goToHomePage(): void {
     this.navController.navigateBack('/home');
   }
+  /**
+   * In this method popup is displayed to confirm finalize the applicant information
+   */
+  async finalize(): Promise<void> {
+    const alert = await this.alertController.create({
+      header: 'Finalize',
+      message:
+        'Do you really want to finalize this form? it wont be possible to edit later.',
+      cssClass: 'custom-class',
+      buttons: [
+        {
+          text: 'Cancel',
+          cssClass: 'cancel-button',
+        },
 
-  finalize(): void {
+        {
+          text: 'Finalize',
+          cssClass: 'finalize-button',
+          handler: () =>
+            this.finalizeApplicant().then(() => {
+              this.router.navigate(['/home']);
+            }),
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+  /**
+   * In this method information is stored in persistent storage
+   */
+  finalizeApplicant(): Promise<boolean> {
     // this.storage.addItem(key, this.ratingForm.value);
-    this.router.navigate(['/home']);
+    const val = this.completionAlert();
+    return val;
+  }
+  /**
+   * In this method confirmation alert is displayed to notify the application completion
+   */
+  async completionAlert(): Promise<boolean> {
+    const alert = await this.alertController.create({
+      header: 'Done',
+      message:
+        'The applicant information is processed successfully and is ready to be sent to HR monitor',
+      cssClass: 'ok-button',
+      buttons: ['OK'],
+    });
+    await alert.present();
+    await alert.onDidDismiss();
+    return true;
   }
   /**
    * Update the value of our progress counter.
    */
   updateProgessStatus(): void {
-    // Don't count the submit page.
+    // finalize page is skipped
     const totalNumberOfSteps = hrRatingStepArr.length - 1;
 
     let validSteps = 0;
