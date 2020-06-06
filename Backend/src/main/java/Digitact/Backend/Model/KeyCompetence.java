@@ -19,8 +19,11 @@ public class KeyCompetence {
   @Column(name = "category")
   private KeyCompetenciesCategory category;
 
-  @Column(name = "value")
-  private String value;
+  @Column(name = "name")
+  private String name;
+
+  @Column(name = "rating")
+  private int rating;
 
   public KeyCompetence() {}
 
@@ -41,8 +44,12 @@ public class KeyCompetence {
     return this.category;
   }
 
-  public String getValue() {
-    return this.value;
+  public String getName() {
+    return this.name;
+  }
+
+  public int getRating() {
+    return this.rating;
   }
 }
 
