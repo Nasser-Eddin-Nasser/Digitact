@@ -74,7 +74,8 @@ export class FormsPage implements OnInit, OnDestroy {
       designation: new FormControl<string[]>([], Validators.required),
     }),
     keyCompetencies: new FormGroup<KeyCompetencies>({
-      professionalSoftware: new FormControl([], Validators.required),
+      languages: new FormControl([], Validators.required),
+      professionalSoftware: new FormControl([]),
       databases: new FormControl([]),
       programmingLanguagesAndFrameworks: new FormControl([]),
     }),

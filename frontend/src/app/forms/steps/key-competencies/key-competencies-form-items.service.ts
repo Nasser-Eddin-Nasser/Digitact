@@ -23,6 +23,28 @@ import {
  */
 @Injectable()
 export class KeyCompetenciesFormItemsService {
+  private readonly LANGUAGE_ITEMS = [
+    'Arabic',
+    'Chinese',
+    'Czech',
+    'English',
+    'Finnish',
+    'French',
+    'German',
+    'Greek',
+    'Hungarian',
+    'Italian',
+    'Japanese',
+    'Korean',
+    'Norwegian',
+    'Polish',
+    'Portuguese',
+    'Russian',
+    'Spanish',
+    'Swedish',
+    'Turkish',
+  ];
+
   private readonly PROFESSIONAL_SOFTWARE_ITEMS = [
     'Adobe Photoshop',
     'Adobe InDesign',
@@ -74,6 +96,9 @@ export class KeyCompetenciesFormItemsService {
     // No need to set any Validators here. This needs to be done on the "external" form.
 
     const result = new FormGroup<KeyCompetenciesInternal>({
+      languages: new FormArray<KeyCompetenciesEntry>(
+        this.generateItems(this.LANGUAGE_ITEMS, basis.controls.languages)
+      ),
       professionalSoftware: new FormArray<KeyCompetenciesEntry>(
         this.generateItems(
           this.PROFESSIONAL_SOFTWARE_ITEMS,

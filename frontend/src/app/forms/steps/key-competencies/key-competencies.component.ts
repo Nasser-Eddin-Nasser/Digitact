@@ -75,6 +75,10 @@ export class KeyCompetenciesComponent implements OnInit, OnDestroy {
 
     this.listItems = [
       {
+        displayName: 'Languages',
+        formItem: this.internalFormsData.controls.languages,
+      },
+      {
         displayName: 'Professional Software',
         formItem: this.internalFormsData.controls.professionalSoftware,
       },
