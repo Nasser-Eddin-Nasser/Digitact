@@ -76,18 +76,22 @@ export class KeyCompetenciesComponent implements OnInit, OnDestroy {
     this.listItems = [
       {
         displayName: 'Languages',
+        iconName: 'language-outline',
         formItem: this.internalFormsData.controls.languages,
       },
       {
         displayName: 'Professional Software',
+        iconName: 'desktop-outline',
         formItem: this.internalFormsData.controls.professionalSoftware,
       },
       {
         displayName: 'Databases',
+        iconName: 'server-outline',
         formItem: this.internalFormsData.controls.databases,
       },
       {
         displayName: 'Programming Languages and Frameworks',
+        iconName: 'hardware-chip-outline',
         formItem: this.internalFormsData.controls
           .programmingLanguagesAndFrameworks,
       },
@@ -147,4 +151,5 @@ export class KeyCompetenciesComponent implements OnInit, OnDestroy {
 interface ListItem {
   formItem: FormArray<KeyCompetenciesEntry>;
   displayName: string;
+  iconName: string;
 }
