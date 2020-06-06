@@ -1,6 +1,6 @@
 /**
  * @description
- *    This model hold the applicant score view related fields.
+ *    This model holds the HR rating related fields.
  */
 
 export interface RatingForm {

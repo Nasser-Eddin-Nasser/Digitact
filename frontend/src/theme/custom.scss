@@ -145,3 +145,20 @@ ion-item.item-has-focus {
     border-color: var(--ion-color-tertiary);
   }
 }
+/**
+ * Customization of the alert in the dropdownmenu of the finalize-page
+*/
+.custom-class {
+  .cancel-button {
+    color: blue;
+  }
+  .finalize-button {
+    color: red;
+  }
+}
+
+.ok-button {
+  button {
+    color: blue !important;
+  }
+}

@@ -22,6 +22,29 @@
             isActive: currentStep === HR_RATING_STEP.ImpressionInformation
           }"
         ></ng-container>
+        <ion-menu-toggle>
+          <ion-item
+            (click)="navigateToStep(HR_RATING_STEP.Finalize)"
+            class="ion-margin-top"
+          >
+            <ion-icon
+              size="large"
+              name="arrow-redo-outline"
+              [color]="
+                currentStep === HR_RATING_STEP.Finalize ? 'tertiary' : 'medium'
+              "
+            ></ion-icon>
+
+            <ion-label
+              class="ion-padding-start"
+              [color]="
+                currentStep === HR_RATING_STEP.Finalize ? 'tertiary' : 'medium'
+              "
+            >
+              Finalize
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
       </ion-list>
     </div>
   </ion-content>
