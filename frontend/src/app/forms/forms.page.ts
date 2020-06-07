@@ -223,7 +223,7 @@ export class FormsPage implements OnInit, OnDestroy {
     this.storage.addItem(
       this.storage.applicantDetailsDb,
       key,
-      this.formsData.value
+      this.formsData.getRawValue()
     );
     this.router.navigate(['/forms', 'confirmation'], { state: { id: key } });
   }
