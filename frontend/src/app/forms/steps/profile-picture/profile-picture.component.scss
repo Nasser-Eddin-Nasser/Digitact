@@ -1,15 +1,38 @@
 .custom-button {
-  flex-grow: 1;
-  flex-direction: column;
-  align-items: center;
+  border-radius: 100%;
+  background: var(--ion-color-primary);
+  height: 125px;
+  width: 125px;
+  margin-top: 3rem;
+  margin-right: auto;
+  margin-left: auto;
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
-  margin-top: 2rem;
-  height: 10rem;
-  font-size: 100px;
+  align-items: center;
+  justify-content: center;
+  color: var(--ion-color-primary-contrast);
+  font-size: 80px;
+  outline: none;
 }
 
-.custom-sliding {
-  margin-top: 2.5rem;
+.trash-button {
+  background: var(--ion-color-secondary-contrast);
+  height: 75px;
+  width: 75x;
+  margin-top: 0rem;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ion-color-secondary);
+  font-size: 35px;
+}
+
+.profile-picture {
+  height: 255px;
+  width: 255px;
+  margin-top: 1.5rem;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 0rem;
 }
