@@ -57,7 +57,6 @@ export class RatingPage implements OnDestroy, OnInit {
    */
   ratingForm = new FormGroup<RatingForm>({
     id: new FormControl(''),
-    isRated: new FormControl(0),
     applicantScore: new FormGroup<ApplicantScore>({
       rhetoric: new FormControl(undefined, Validators.required),
       motivation: new FormControl(undefined, Validators.required),
@@ -97,6 +96,8 @@ export class RatingPage implements OnDestroy, OnInit {
    * In this method route change is observed and handling is done.
    */
   ngOnInit(): void {
+    this.ratingForm.controls.id.disable();
+
     const routerSubscription = this.activatedRoute.queryParams.subscribe(
       (params) => {
         /*
