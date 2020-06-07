@@ -60,7 +60,8 @@ export class StorageHandlerService {
    * Used to get all items from the storage
    * @returns Promise of array of forms data object
    */
-  async getAllItems(dbObject: Storage): Promise<FormsData[] | RatingForm[]> {
+  // tslint:disable-next-line
+  async getAllItems(dbObject: Storage): Promise<any> {
     const items: Array<FormsData> | Array<RatingForm> = [];
     await dbObject.ready();
     await dbObject.forEach((value) => {
