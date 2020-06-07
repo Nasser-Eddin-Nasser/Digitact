@@ -54,6 +54,7 @@ export class FormsPage implements OnInit, OnDestroy {
    * Data of the entire form.
    */
   formsData = new FormGroup<FormsData>({
+    id: new FormControl(''),
     basicInfo: new FormGroup<BasicInfo>({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
@@ -211,7 +212,10 @@ export class FormsPage implements OnInit, OnDestroy {
       this.formsData.value.basicInfo.lastName +
       '-' +
       Math.floor(Math.random() * 1000000).toString()
-    ).replace(/\s+/g, '_');
+    )
+      .replace(/\s+/g, '_')
+      .toLowerCase();
+    this.formsData.controls.id.setValue(key);
     this.storage.addItem(
       this.storage.applicantDetailsDb,
       key,
