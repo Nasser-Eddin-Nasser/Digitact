@@ -55,6 +55,7 @@ export class FormsPage implements OnInit, OnDestroy {
    */
   formsData = new FormGroup<FormsData>({
     id: new FormControl(''),
+    isRated: new FormControl(0),
     basicInfo: new FormGroup<BasicInfo>({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
@@ -103,6 +104,9 @@ export class FormsPage implements OnInit, OnDestroy {
    * In this method route change is observed and handling is done.
    */
   ngOnInit(): void {
+    this.formsData.controls.id.disable();
+    this.formsData.controls.isRated.disable();
+
     const routerSubscription = this.activatedRoute.queryParams.subscribe(
       (params) => {
         /*
