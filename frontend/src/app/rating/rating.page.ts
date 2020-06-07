@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 
 import { FormControl, FormGroup } from '../common/forms/forms';
 import { hrRatingStep, hrRatingStepArr } from '../forms/model/steps.model';
-// import { StorageHandlerService } from '../services/storage-handler.service';
+import { StorageHandlerService } from '../services/storage-handler.service';
 
 import {
   ApplicantScore,
@@ -33,7 +33,8 @@ export class RatingPage implements OnDestroy, OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private alertController: AlertController,
-    private toastController: ToastController // private storage: StorageHandlerService
+    private toastController: ToastController,
+    private storage: StorageHandlerService
   ) {}
 
   /**
@@ -230,7 +231,25 @@ export class RatingPage implements OnDestroy, OnInit {
    * In this method information is stored in persistent storage
    */
   finalizeApplicant(): void {
-    // this.storage.addItem(key, this.ratingForm.value);
+    this.storage
+      .getItem(
+        this.storage.applicantDetailsDb,
+        this.ratingForm.controls.id.value
+      )
+      .then((applicantData) => {
+        applicantData.isRated = 1;
+        this.storage.updateItem(
+          this.storage.applicantDetailsDb,
+          this.ratingForm.controls.id.value,
+          applicantData
+        );
+        this.storage.addItem(
+          this.storage.apllicantRatingsDb,
+          this.ratingForm.controls.id.value,
+          this.ratingForm.value
+        );
+      });
+
     this.completionAlert();
   }
   /**
