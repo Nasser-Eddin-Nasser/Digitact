@@ -54,6 +54,8 @@ export class RatingPage implements OnDestroy, OnInit {
    * This property holds the type safe form group fields for applicant-score view.
    */
   ratingForm = new FormGroup<RatingForm>({
+    id: new FormControl(''),
+    isRated: new FormControl(0),
     applicantScore: new FormGroup<ApplicantScore>({
       rhetoric: new FormControl(undefined, Validators.required),
       motivation: new FormControl(undefined, Validators.required),

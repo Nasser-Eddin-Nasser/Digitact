@@ -4,6 +4,8 @@
  */
 
 export interface RatingForm {
+  id: string;
+  isRated: number;
   applicantScore: ApplicantScore;
   impressionInfo: ImpressionInfo;
 }
