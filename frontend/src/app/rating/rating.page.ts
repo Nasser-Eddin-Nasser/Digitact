@@ -9,6 +9,7 @@ import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 import { FormControl, FormGroup } from '../common/forms/forms';
@@ -31,7 +32,8 @@ export class RatingPage implements OnDestroy, OnInit {
     private navController: NavController,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private alertController: AlertController // private storage: StorageHandlerService
+    private alertController: AlertController,
+    private toastController: ToastController // private storage: StorageHandlerService
   ) {}
 
   /**
@@ -66,6 +68,7 @@ export class RatingPage implements OnDestroy, OnInit {
       impression: new FormControl(undefined, Validators.required),
     }),
   });
+
   /**
    * Which step is currently displayed?
    *
@@ -216,10 +219,7 @@ export class RatingPage implements OnDestroy, OnInit {
         {
           text: 'Finalize',
           cssClass: 'finalize-button',
-          handler: () =>
-            this.finalizeApplicant().then(() => {
-              this.router.navigate(['/home']);
-            }),
+          handler: () => this.finalizeApplicant(),
         },
       ],
     });
@@ -229,25 +229,22 @@ export class RatingPage implements OnDestroy, OnInit {
   /**
    * In this method information is stored in persistent storage
    */
-  finalizeApplicant(): Promise<boolean> {
+  finalizeApplicant(): void {
     // this.storage.addItem(key, this.ratingForm.value);
-    const val = this.completionAlert();
-    return val;
+    this.completionAlert();
   }
   /**
    * In this method confirmation alert is displayed to notify the application completion
    */
-  async completionAlert(): Promise<boolean> {
-    const alert = await this.alertController.create({
-      header: 'Done',
-      message:
-        'The applicant information is processed successfully and is ready to be sent to HR monitor',
-      cssClass: 'ok-button',
-      buttons: ['OK'],
+  async completionAlert(): Promise<void> {
+    const toast = await this.toastController.create({
+      message: 'Applicant information is finalized',
+      color: 'success',
+      position: 'top',
+      duration: 2000,
     });
-    await alert.present();
-    await alert.onDidDismiss();
-    return true;
+    toast.present();
+    this.router.navigate(['/home']);
   }
   /**
    * Update the value of our progress counter.

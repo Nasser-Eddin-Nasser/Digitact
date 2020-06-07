@@ -1,8 +1,12 @@
 <div class="main-description">
-  <p>
-    All changes are saved automatically . So, you can simply leave this form and
-    continue editing it later. If you want to send the data to the HR monitor,
-    you have to finalize this form. That means that it wont be possible to edit
-    the content anymore.
-  </p>
+  <span *ngIf="ratingForm.valid">
+    All the information about the applicant is taken. You need to finalize this
+    form to send data to the HR monitor and it will not be possible to edit
+    information later.
+  </span>
+
+  <span *ngIf="!ratingForm.valid">
+    You can finalize this form as soon as you fill all the required fields. By
+    opening the right menu, you can see where you still need to fill the form.
+  </span>
 </div>
