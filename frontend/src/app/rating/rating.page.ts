@@ -263,7 +263,7 @@ export class RatingPage implements OnDestroy, OnInit {
       duration: 2000,
     });
     toast.present();
-    this.router.navigate(['/home']);
+    this.navController.navigateBack(['/home']);
   }
   /**
    * Update the value of our progress counter.
