@@ -49,10 +49,8 @@ export class StorageHandlerService {
    * @param key Unique key for the item
    * @returns Promise of forms data object
    */
-  async getItem(
-    dbObject: Storage,
-    key: string
-  ): Promise<FormsData | RatingForm> {
+  // tslint:disable-next-line
+  async getItem(dbObject: Storage, key: string): Promise<any> {
     await dbObject.ready();
     const item = await dbObject.get(key);
     return item;
