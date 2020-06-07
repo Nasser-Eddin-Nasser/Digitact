@@ -6,6 +6,7 @@
 import { UseControl } from '../common/forms/forms';
 
 export interface FormsData {
+  id: string;
   basicInfo: BasicInfo;
   contactInfo: ContactInfo;
   educationInfo: EducationInfo;

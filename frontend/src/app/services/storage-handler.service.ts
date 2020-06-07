@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
 import { FormsData } from '../model/forms-data.model';
+import { RatingForm } from '../rating/model/rating-form.model';
 
 @Injectable({
   providedIn: 'root',
@@ -36,8 +37,8 @@ export class StorageHandlerService {
   async addItem(
     dbObject: Storage,
     key: string,
-    value: DeepPartial<FormsData> | string
-  ): Promise<FormsData | string> {
+    value: DeepPartial<FormsData> | DeepPartial<RatingForm>
+  ): Promise<FormsData | RatingForm> {
     await dbObject.ready();
     const item = await dbObject.set(key, value);
     return item;
@@ -48,7 +49,10 @@ export class StorageHandlerService {
    * @param key Unique key for the item
    * @returns Promise of forms data object
    */
-  async getItem(dbObject: Storage, key: string): Promise<FormsData | string> {
+  async getItem(
+    dbObject: Storage,
+    key: string
+  ): Promise<FormsData | RatingForm> {
     await dbObject.ready();
     const item = await dbObject.get(key);
     return item;
@@ -58,8 +62,8 @@ export class StorageHandlerService {
    * Used to get all items from the storage
    * @returns Promise of array of forms data object
    */
-  async getAllItems(dbObject: Storage): Promise<FormsData[] | string[]> {
-    const items: Array<FormsData> | Array<string> = [];
+  async getAllItems(dbObject: Storage): Promise<FormsData[] | RatingForm[]> {
+    const items: Array<FormsData> | Array<RatingForm> = [];
     await dbObject.ready();
     await dbObject.forEach((value) => {
       items.push(value);
@@ -99,8 +103,8 @@ export class StorageHandlerService {
   async updateItem(
     dbObject: Storage,
     key: string,
-    value: DeepPartial<FormsData>
-  ): Promise<FormsData> {
+    value: DeepPartial<FormsData | RatingForm>
+  ): Promise<FormsData | RatingForm> {
     await dbObject.ready();
     const item = await dbObject.get(key);
     if (!item) {
