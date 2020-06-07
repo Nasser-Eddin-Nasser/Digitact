@@ -16,8 +16,6 @@
 
 .trash-button {
   background: var(--ion-color-secondary-contrast);
-  height: 75px;
-  width: 75x;
   margin-top: 0rem;
   margin-right: auto;
   margin-left: auto;
@@ -26,6 +24,11 @@
   justify-content: center;
   color: var(--ion-color-secondary);
   font-size: 35px;
+}
+
+.trash-icon {
+  height: 50px;
+  width: 50px;
 }
 
 .profile-picture {
