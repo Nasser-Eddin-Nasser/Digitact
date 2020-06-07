@@ -1,5 +1,52 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>applications</ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-content>
+  <div class="main-container info">
+    <div class="content">
+      <div class="main-description info-content">
+        <h1>Finalized</h1>
+        The applications has been finalized finalized by HR staff to be sent to
+        HR monitor.
+      </div>
+
+      <div class="ion-no-padding">
+        <button class="fancy-button align center" (click)="sendToHrMonitor()">
+          Send to server
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-container info">
+    <div class="content">
+      <div class="main-description info-content">
+        <h1>Not Finished</h1>
+        This list includes all the applications that have been submitted by the
+        applicant but not been rated by HR staff.
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 1.5rem; padding-top: 0.5rem !important;">
+    <ion-list>
+      <ion-item (click)="goToRating()" class="ion-no-padding">
+        <ion-label>
+          <h1>FirstName LatName</h1>
+          <p>
+            <ion-icon name="time-outline"></ion-icon>
+            time
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

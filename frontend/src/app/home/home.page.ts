@@ -13,6 +13,6 @@ export class HomePage {
     this.navController.navigateForward(['/forms']);
   }
   goToApplications(): void {
-    this.navController.navigateForward(['/applications']);
+    this.navController.navigateRoot(['/applications']);
   }
 }
