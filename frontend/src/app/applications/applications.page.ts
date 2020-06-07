@@ -27,6 +27,6 @@ export class ApplicationsPage {
   }
 
   sendToHrMonitor(): void {
-    console.log('to be implemented');
+    alert('to be implemented');
   }
 }
