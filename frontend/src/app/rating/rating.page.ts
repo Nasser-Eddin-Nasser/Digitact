@@ -253,7 +253,6 @@ export class RatingPage implements OnDestroy, OnInit {
   updateProgessStatus(): void {
     // finalize page is skipped
     const totalNumberOfSteps = hrRatingStepArr.length - 1;
-
     let validSteps = 0;
     for (const control of Object.values(this.ratingForm.controls)) {
       if (control.valid) {
