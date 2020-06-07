@@ -14,16 +14,24 @@ export class HomePage implements OnInit {
     private navController: NavController,
     private storage: StorageHandlerService
   ) {}
-
-  startApplication(): void {
-    this.navController.navigateForward(['/forms']);
-  }
-  goToApplications(): void {
-    this.navController.navigateRoot(['/applications']);
-  }
+  /**
+   * In this method size of the applications is fetched
+   */
   ngOnInit(): void {
     this.storage.getAllItems(this.storage.applicantDetailsDb).then((data) => {
       this.applicationSize = data.length;
     });
+  }
+  /**
+   * In this method navigation to application form is handled.
+   */
+  startApplication(): void {
+    this.navController.navigateForward(['/forms']);
+  }
+  /**
+   * In this method navigation to operation on submitted and finalized applications is handled.
+   */
+  goToApplications(): void {
+    this.navController.navigateRoot(['/applications']);
   }
 }
