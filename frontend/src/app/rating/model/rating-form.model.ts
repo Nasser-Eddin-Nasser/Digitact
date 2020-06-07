@@ -1,6 +1,6 @@
 /**
  * @description
- *    This model holds the HR rating related fields.
+ *    This model holds the HR rating related fields with id
  */
 
 export interface RatingForm {
