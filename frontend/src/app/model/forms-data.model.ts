@@ -10,7 +10,7 @@ export interface FormsData {
   contactInfo: ContactInfo;
   educationInfo: EducationInfo;
   fieldDesignationInfo: FieldDesignationInfo;
-  pictureEntry: PictureEntry;
+  profilePicture: ProfilePicture;
 }
 
 export interface BasicInfo {
@@ -42,6 +42,6 @@ export interface FieldDesignationInfo {
   designation: UseControl<string[]>;
 }
 
-export interface PictureEntry {
-  picString: string;
+export interface ProfilePicture {
+  pictureBase64: string;
 }

@@ -17,7 +17,7 @@ import {
   EducationInfo,
   FieldDesignationInfo,
   FormsData,
-  PictureEntry,
+  ProfilePicture,
 } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
 
@@ -73,8 +73,8 @@ export class FormsPage implements OnInit, OnDestroy {
       field: new FormControl<string[]>([], Validators.required),
       designation: new FormControl<string[]>([], Validators.required),
     }),
-    pictureEntry: new FormGroup<PictureEntry>({
-      picString: new FormControl('', Validators.required),
+    profilePicture: new FormGroup<ProfilePicture>({
+      pictureBase64: new FormControl('', Validators.required),
     }),
   });
 
