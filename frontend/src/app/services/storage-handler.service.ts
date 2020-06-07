@@ -33,16 +33,14 @@ export class StorageHandlerService {
    * @param value Conatains the FormsData field objects
    * @returns Promise of forms data object
    */
-  addItem(
+  async addItem(
     dbObject: Storage,
     key: string,
     value: DeepPartial<FormsData> | string
-  ): Promise<FormsData> {
-    return dbObject.ready().then(() => {
-      return dbObject.set(key, value).then((item) => {
-        return item;
-      });
-    });
+  ): Promise<FormsData | string> {
+    await dbObject.ready();
+    const item = await dbObject.set(key, value);
+    return item;
   }
 
   /**
@@ -50,29 +48,23 @@ export class StorageHandlerService {
    * @param key Unique key for the item
    * @returns Promise of forms data object
    */
-  getItem(dbObject: Storage, key: string): Promise<FormsData> {
-    return dbObject.ready().then(() => {
-      return dbObject.get(key).then((item) => {
-        return item;
-      });
-    });
+  async getItem(dbObject: Storage, key: string): Promise<FormsData | string> {
+    await dbObject.ready();
+    const item = await dbObject.get(key);
+    return item;
   }
 
   /**
    * Used to get all items from the storage
    * @returns Promise of array of forms data object
    */
-  getAllItems(dbObject: Storage): Promise<FormsData[]> {
-    const items: Array<FormsData> = [];
-    return dbObject.ready().then(() => {
-      return dbObject
-        .forEach((value) => {
-          items.push(value);
-        })
-        .then(() => {
-          return items;
-        });
+  async getAllItems(dbObject: Storage): Promise<FormsData[] | string[]> {
+    const items: Array<FormsData> | Array<string> = [];
+    await dbObject.ready();
+    await dbObject.forEach((value) => {
+      items.push(value);
     });
+    return items;
   }
 
   /**
@@ -80,25 +72,22 @@ export class StorageHandlerService {
    * @param key Unique key for the item
    * @returns Promise of void
    */
-  deleteItem(dbObject: Storage, key: string): Promise<void> {
-    return dbObject.ready().then(() => {
-      return dbObject.get(key).then((item) => {
-        if (!item) {
-          return undefined;
-        }
-        return dbObject.remove(key);
-      });
-    });
+  async deleteItem(dbObject: Storage, key: string): Promise<void> {
+    await dbObject.ready();
+    const item = await dbObject.get(key);
+    if (!item) {
+      return undefined;
+    }
+    return dbObject.remove(key);
   }
 
   /**
    * Used to delete all items in the storage
    * @returns Promise of void
    */
-  deleteAllItems(dbObject: Storage): Promise<void> {
-    return dbObject.ready().then(() => {
-      return dbObject.clear();
-    });
+  async deleteAllItems(dbObject: Storage): Promise<void> {
+    await dbObject.ready();
+    return dbObject.clear();
   }
 
   /**
@@ -107,21 +96,18 @@ export class StorageHandlerService {
    * @param value Conatains the FormsData field objects to update
    * @returns Promise of forms data object
    */
-  updateItem(
+  async updateItem(
     dbObject: Storage,
     key: string,
     value: DeepPartial<FormsData>
   ): Promise<FormsData> {
-    return dbObject.ready().then(() => {
-      return dbObject.get(key).then((item) => {
-        if (!item) {
-          return undefined;
-        }
-        return dbObject.set(key, value).then((data) => {
-          return data;
-        });
-      });
-    });
+    await dbObject.ready();
+    const item = await dbObject.get(key);
+    if (!item) {
+      return undefined;
+    }
+    const data = await dbObject.set(key, value);
+    return data;
   }
 }
 
