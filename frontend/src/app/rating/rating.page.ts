@@ -54,7 +54,7 @@ export class RatingPage implements OnDestroy, OnInit {
    * This property holds the type safe form group fields for applicant-score view.
    */
   ratingForm = new FormGroup<RatingForm>({
-    id: new FormControl(''),
+    id: new FormControl(this.router.getCurrentNavigation().extras.state.id),
     applicantScore: new FormGroup<ApplicantScore>({
       rhetoric: new FormControl(undefined, Validators.required),
       motivation: new FormControl(undefined, Validators.required),
@@ -94,7 +94,6 @@ export class RatingPage implements OnDestroy, OnInit {
    */
   ngOnInit(): void {
     this.ratingForm.controls.id.disable();
-
     const routerSubscription = this.activatedRoute.queryParams.subscribe(
       (params) => {
         /*

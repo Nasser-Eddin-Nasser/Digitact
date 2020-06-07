@@ -225,7 +225,7 @@ export class FormsPage implements OnInit, OnDestroy {
       key,
       this.formsData.value
     );
-    this.router.navigate(['/forms', 'confirmation']);
+    this.router.navigate(['/forms', 'confirmation'], { state: { id: key } });
   }
 
   /**
