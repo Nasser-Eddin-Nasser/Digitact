@@ -1,10 +1,9 @@
 <div class="main-description">
   <h1>Picture</h1>
 
-  <!--<ion-img [src]="photo"></ion-img>-->
   <div
     *ngIf="
-      formsData.controls.pictureEntry.controls.picString.invalid;
+      formsData.controls.profilePicture.controls.pictureBase64.invalid;
       else elseBlock
     "
   >
@@ -36,9 +35,9 @@
         </ion-item-option>
       </ion-item-options>
       <ion-item class="ion-no-padding">
-        <ion-img
-          [src]="formsData.controls.pictureEntry.controls.picString.value"
-        ></ion-img>
+        <img
+          [src]="formsData.controls.profilePicture.controls.pictureBase64.value"
+        />
       </ion-item>
     </ion-item-sliding>
   </ng-template>
