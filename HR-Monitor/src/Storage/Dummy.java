@@ -1,13 +1,13 @@
 package Storage;
 
-import Model.User.User;
+import Model.User.ApplicantUI;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Dummy {
-    public static List<User> DB;
+    public static List<ApplicantUI> DB;
 
     public Dummy() {
-        DB = new LinkedList<User>();
+        DB = new LinkedList<ApplicantUI>();
     }
 }
