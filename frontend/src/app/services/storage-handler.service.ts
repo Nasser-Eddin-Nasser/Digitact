@@ -14,6 +14,7 @@ import { RatingForm } from '../rating/model/rating-form.model';
 export class StorageHandlerService {
   applicantDetailsDb: Storage;
   apllicantRatingsDb: Storage;
+  commonPropertiesDb: Storage;
 
   constructor() {
     this.applicantDetailsDb = new Storage({
@@ -26,6 +27,23 @@ export class StorageHandlerService {
       storeName: 'applicants-rating',
       driverOrder: ['indexeddb', 'localstorage'],
     });
+    this.commonPropertiesDb = new Storage({
+      name: 'digitact',
+      storeName: 'common-properties',
+      driverOrder: ['indexeddb', 'localstorage'],
+    });
+  }
+
+  /**
+   * Used to generate next Id
+   * @returns Promise of string containing next id
+   */
+
+  async getNextId(): Promise<string> {
+    const val = await this.commonPropertiesDb.get('recentId');
+    const nextId: number = val ? val + 1 : 1;
+    this.commonPropertiesDb.set('recentId', nextId);
+    return nextId.toString();
   }
 
   /**
