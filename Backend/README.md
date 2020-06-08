@@ -118,7 +118,16 @@ If you want to access the database, you are most likely prompted for a password.
       "grade": double,
       "graduation_date": String
     }
+  ],
+  "keyCompetencies": [
+    {
+      "category": KeyCompetenciesCategory,
+      "name": String,
+      "rating": int
+    }
   ]
 }
 ```
+
+`KeyCompetenciesCategory` is either `languages`, `professionalSoftware`, `databases` or `programmingLanguagesAndFrameworks`.
 
