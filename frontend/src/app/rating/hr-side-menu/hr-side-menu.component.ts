@@ -5,10 +5,10 @@
 
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { hrRatingStep, hrRatingStepArr } from 'src/app/forms/model/steps.model';
 
 import { FormGroup } from '../../common/forms/forms';
 import { RatingForm } from '../model/rating-form.model';
+import { hrRatingStep, hrRatingStepArr } from '../model/steps.model';
 
 @Component({
   selector: 'app-hr-side-menu',
