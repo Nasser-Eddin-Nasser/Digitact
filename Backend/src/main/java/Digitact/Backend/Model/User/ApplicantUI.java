@@ -2,6 +2,7 @@ package Digitact.Backend.Model.User;
 
 import Digitact.Backend.Model.Education;
 import Digitact.Backend.Model.Industries;
+import Digitact.Backend.Model.KeyCompetence;
 import Digitact.Backend.Model.Positions;
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class ApplicantUI implements IUser {
     private List<Education> educations;
     private Industries industries;
     private Positions positions;
+    private List<KeyCompetence> keyCompetencies;
 
     protected ApplicantUI() {}
 
@@ -20,12 +22,14 @@ public class ApplicantUI implements IUser {
             String lastName,
             List<Education> educations,
             Industries industries,
-            Positions positions) {
+            Positions positions,
+            List<KeyCompetence> keyCompetencies) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.educations = educations;
         this.industries = industries;
         this.positions = positions;
+        this.keyCompetencies = keyCompetencies;
     }
 
     public Industries getIndustries() {
@@ -38,6 +42,10 @@ public class ApplicantUI implements IUser {
 
     public List<Education> getEducations() {
         return educations;
+    }
+
+    public List<KeyCompetence> getKeyCompetencies() {
+        return keyCompetencies;
     }
 
     @Override
