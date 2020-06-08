@@ -121,11 +121,13 @@ If you want to access the database, you are most likely prompted for a password.
   ],
   "keyCompetencies": [
     {
-      "category: KeyCompetenciesCategory,
+      "category": KeyCompetenciesCategory,
       "name": String,
       "rating": int
     }
   ]
 }
 ```
+
+`KeyCompetenciesCategory` is either `languages`, `professionalSoftware`, `databases` or `programmingLanguagesAndFrameworks`.
 
