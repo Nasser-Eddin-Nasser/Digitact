@@ -81,9 +81,15 @@ public class Applicant extends User {
         this.positions = positions;
     }
 
-    public void addKeyCompetence(KeyCompetence keyCompetence) { keyCompetencies.add(keyCompetence); }
+    public void addKeyCompetence(KeyCompetence keyCompetence) {
+        keyCompetencies.add(keyCompetence);
+    }
 
-    public List<KeyCompetence> getKeyCompetencies() { return new ArrayList<KeyCompetence>(keyCompetencies); }
+    public List<KeyCompetence> getKeyCompetencies() {
+        return new ArrayList<KeyCompetence>(keyCompetencies);
+    }
 
-    public void addKeyCompetencies(List<KeyCompetence> keyCompetencies) { keyCompetencies.forEach(comp -> this.keyCompetencies.add(comp)); }
+    public void setKeyCompetencies(List<KeyCompetence> keyCompetencies) {
+        keyCompetencies.forEach(comp -> this.keyCompetencies.add(comp));
+    }
 }

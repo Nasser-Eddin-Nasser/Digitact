@@ -7,49 +7,49 @@ import javax.persistence.*;
 @Entity
 @Table(name = "KeyCompetence")
 public class KeyCompetence {
-  @JsonIgnore
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "userId")
-  public User user;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userId")
+    public User user;
 
-  @Column(name = "category")
-  private KeyCompetenciesCategory category;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-  @Column(name = "name")
-  private String name;
+    @Column(name = "category")
+    private KeyCompetenciesCategory category;
 
-  @Column(name = "rating")
-  private int rating;
+    @Column(name = "name")
+    private String name;
 
-  public KeyCompetence() {}
+    @Column(name = "rating")
+    private int rating;
 
-  public KeyCompetence(User user) {
-    super();
-    this.user = user;
-  }
+    public KeyCompetence() {}
 
-  public User getUser() {
-    return this.user;
-  }
+    public KeyCompetence(User user) {
+        super();
+        this.user = user;
+    }
 
-  public void setUser(User user) {
-    this.user = user;
-  }
+    public User getUser() {
+        return this.user;
+    }
 
-  public KeyCompetenciesCategory getCategory() {
-    return this.category;
-  }
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-  public String getName() {
-    return this.name;
-  }
+    public KeyCompetenciesCategory getCategory() {
+        return this.category;
+    }
 
-  public int getRating() {
-    return this.rating;
-  }
+    public String getName() {
+        return this.name;
+    }
+
+    public int getRating() {
+        return this.rating;
+    }
 }
-

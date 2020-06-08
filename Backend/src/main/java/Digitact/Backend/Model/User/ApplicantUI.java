@@ -44,7 +44,9 @@ public class ApplicantUI implements IUser {
         return educations;
     }
 
-    public List<KeyCompetence> getKeyCompetencies() { return keyCompetencies; }
+    public List<KeyCompetence> getKeyCompetencies() {
+        return keyCompetencies;
+    }
 
     @Override
     public String getFirstName() {
