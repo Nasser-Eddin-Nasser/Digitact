@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 import { FormsData } from '../model/forms-data.model';
@@ -13,17 +14,20 @@ export class HomePage implements OnInit {
   applicationSize: number;
   constructor(
     private navController: NavController,
-    private storage: StorageHandlerService
+    private storage: StorageHandlerService,
+    private router: ActivatedRoute
   ) {}
   /**
    * In this method size of the applications is fetched
    */
   ngOnInit(): void {
-    this.storage
-      .getAllItems<FormsData>(this.storage.applicantDetailsDb)
-      .then((data) => {
-        this.applicationSize = data.length;
-      });
+    this.router.params.subscribe(() => {
+      this.storage
+        .getAllItems<FormsData>(this.storage.applicantDetailsDb)
+        .then((data) => {
+          this.applicationSize = data.length;
+        });
+    });
   }
   /**
    * In this method navigation to application form is handled.
