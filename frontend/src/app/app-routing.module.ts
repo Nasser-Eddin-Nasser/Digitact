@@ -23,10 +23,10 @@ const routes: Routes = [
       import('./rating/rating.module').then((m) => m.RatingPageModule),
   },
   {
-    path: 'applications',
+    path: 'applicants',
     loadChildren: () =>
-      import('./applications/applications.module').then(
-        (m) => m.ApplicationsPageModule
+      import('./applicants/applicants.module').then(
+        (m) => m.ApplicantsPageModule
       ),
   },
 ];
