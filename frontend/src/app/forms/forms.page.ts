@@ -212,29 +212,23 @@ export class FormsPage implements OnInit, OnDestroy {
    * "Submit" the form: Store the value in our persistent storage and navigate to the confirmation page.
    */
   submit(): void {
-    const key = (
-      this.formsData.value.basicInfo.firstName +
-      '-' +
-      this.formsData.value.basicInfo.lastName +
-      '-' +
-      Math.floor(Math.random() * 1000000).toString()
-    )
-      .replace(/\s+/g, '_')
-      .toLowerCase();
     const time = new Date().toLocaleTimeString('en-US', {
       hour12: false,
       hour: 'numeric',
       minute: 'numeric',
     });
-    this.formsData.controls.id.setValue(key);
     this.formsData.controls.submittedTime.setValue(time);
 
-    this.storage.addItem(
-      this.storage.applicantDetailsDb,
-      key,
-      this.formsData.getRawValue()
-    );
-    this.router.navigate(['/forms', 'confirmation'], { state: { id: key } });
+    this.storage.getNextId().then((key) => {
+      this.formsData.controls.id.setValue(key);
+
+      this.storage.addItem<FormsData>(
+        this.storage.applicantDetailsDb,
+        key,
+        this.formsData.getRawValue()
+      );
+      this.router.navigate(['/forms', 'confirmation'], { state: { id: key } });
+    });
   }
 
   /**
