@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
+import { FormsData } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
 
 @Component({
@@ -18,9 +19,11 @@ export class HomePage implements OnInit {
    * In this method size of the applications is fetched
    */
   ngOnInit(): void {
-    this.storage.getAllItems(this.storage.applicantDetailsDb).then((data) => {
-      this.applicationSize = data.length;
-    });
+    this.storage
+      .getAllItems<FormsData>(this.storage.applicantDetailsDb)
+      .then((data) => {
+        this.applicationSize = data.length;
+      });
   }
   /**
    * In this method navigation to application form is handled.
