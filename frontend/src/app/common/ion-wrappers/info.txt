@@ -1,0 +1,7 @@
+Some elements from Ionic aren't directly placed in the ng template, but called inside the component's TS code.
+
+An example is the Loading Controller.
+
+Unfortunately, the texts that are displayed inside the elements are often only sanitized and not completely escaped. Because of this, user input (e.g. <b>Test</b>) can create unwanted behavior. It should not be possible to do XSS with this, but this depends on how safe Ionic's sanitization is.
+
+To solve this issue, we introduce wrapper classes around the original ones. They have the same API as the original ones, but escape the input first.
