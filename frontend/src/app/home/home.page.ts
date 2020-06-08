@@ -39,6 +39,6 @@ export class HomePage implements OnInit {
    * In this method navigation to operation on submitted and finalized applications is handled.
    */
   goToApplications(): void {
-    this.navController.navigateRoot(['/applications']);
+    this.navController.navigateRoot(['/applicants']);
   }
 }
