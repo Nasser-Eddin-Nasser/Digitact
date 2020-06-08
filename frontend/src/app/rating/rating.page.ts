@@ -92,8 +92,7 @@ export class RatingPage implements OnDestroy, OnInit {
   /**
    * Holds all the subscription which will be useful for un subscribing on destroy.
    */
-  private subscriptions: 
-  [] = [];
+  private subscriptions: Subscription[] = [];
 
   /**
    * In this method route change is observed and handling is done.
