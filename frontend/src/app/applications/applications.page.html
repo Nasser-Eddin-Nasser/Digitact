@@ -1,9 +1,72 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>applications</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <span *ngIf="countFinalized !== 0">
+    <div class="main-container info">
+      <div class="content">
+        <div class="main-description info-content">
+          <h1>Finalized</h1>
+          {{countFinalized}} applications has been finalized by HR staff to be
+          sent to HR monitor.
+        </div>
+        <div class="ion-no-padding">
+          <button
+            class="fancy-button align center"
+            [disabled]="countFinalized===0"
+            (click)="sendToHrMonitor()"
+          >
+            Send to server
+          </button>
+        </div>
+      </div>
+    </div>
+  </span>
 
+  <span *ngIf="countNotFInalized!==0">
+    <div class="main-container info">
+      <div class="content">
+        <div class="main-description info-content">
+          <h1>Not Finished</h1>
+          This list includes all the applications that have been submitted by
+          the applicant but not been rated by HR staff.
+        </div>
+      </div>
+    </div>
+
+    <div style="padding: 1.5rem; padding-top: 0.5rem !important;">
+      <ion-list
+        *ngFor="
+    let data of notFinishedEntry"
+      >
+        <ion-item (click)="goToRating(data.id)" class="ion-no-padding">
+          <ion-label>
+            <h1>{{data.firstName }} {{ data.lastName}}</h1>
+            <p>
+              <ion-icon name="time-outline"></ion-icon>
+              time
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </span>
+
+  <span *ngIf="countNotFInalized === 0 && countFinalized === 0">
+    <div class="main-container info">
+      <div class="content">
+        <div class="main-description info-content">
+          No application is submitted or finalized
+        </div>
+      </div>
+    </div>
+  </span>
 </ion-content>
