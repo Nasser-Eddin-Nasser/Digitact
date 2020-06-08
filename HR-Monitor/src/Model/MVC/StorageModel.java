@@ -1,14 +1,14 @@
-package Model;
+package Model.MVC;
 
 import Main.App;
-import Model.User.User;
+import Model.User.ApplicantUI;
 import Storage.DBStorage;
 import Storage.Dummy;
 import java.util.List;
 
 public class StorageModel {
 
-    public List<User> getDB() {
+    public List<ApplicantUI> getDB() {
         if (App.DEVELOPMENT_ENVIRONMENT) {
             return Dummy.DB;
         } else {
