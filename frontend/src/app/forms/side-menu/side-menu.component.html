@@ -29,6 +29,7 @@
             isActive: currentStep === APPLICATION_STEP.ContactInformation
           }"
         ></ng-container>
+
         <ng-container
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
@@ -38,6 +39,17 @@
             isActive: currentStep === APPLICATION_STEP.EducationInformation
           }"
         ></ng-container>
+
+        <ng-container
+          [ngTemplateOutlet]="menuItem"
+          [ngTemplateOutletContext]="{
+            step: APPLICATION_STEP.EducationInformation,
+            displayName: 'Education Information',
+            isValid: formsData.controls.educationInfo.valid,
+            isActive: currentStep === APPLICATION_STEP.EducationInformation
+          }"
+        ></ng-container>
+
         <ng-container
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
@@ -46,6 +58,16 @@
             isValid: formsData.controls.fieldDesignationInfo.valid,
             isActive:
               currentStep === APPLICATION_STEP.FieldDesignationPreference
+          }"
+        ></ng-container>
+
+        <ng-container
+          [ngTemplateOutlet]="menuItem"
+          [ngTemplateOutletContext]="{
+            step: APPLICATION_STEP.KeyCompetencies,
+            displayName: 'Key Competencies',
+            isValid: formsData.controls.keyCompetencies.valid,
+            isActive: currentStep === APPLICATION_STEP.KeyCompetencies
           }"
         ></ng-container>
 
