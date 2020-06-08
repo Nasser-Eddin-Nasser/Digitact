@@ -8,7 +8,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
+import { Subscription } from 'rxjs'
 
 import { FormControl, FormGroup } from '../common/forms/forms';
 import { AlertController } from '../common/ion-wrappers/alert-controller';
@@ -92,7 +92,8 @@ export class RatingPage implements OnDestroy, OnInit {
   /**
    * Holds all the subscription which will be useful for un subscribing on destroy.
    */
-  private subscriptions: Subscription[] = [];
+  private subscriptions: 
+  [] = [];
 
   /**
    * In this method route change is observed and handling is done.
