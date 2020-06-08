@@ -8,7 +8,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { Subscription } from 'rxjs'
+import { Subscription } from 'rxjs';
 
 import { FormControl, FormGroup } from '../common/forms/forms';
 import { AlertController } from '../common/ion-wrappers/alert-controller';
