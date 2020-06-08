@@ -44,20 +44,21 @@ h3 {
 }
 
 .custom-icon {
-  font-size: 64px;
-  color: lightgray;
+  font-size: 40px;
+  color: var(--ion-color-light-shade);
 }
 
-#notification-button {
+.notification-button {
   position: relative;
   overflow: visible !important;
+  min-height: 40px;
 }
 
-#notifications-badge {
-  background-color: red;
+.notifications-badge {
+  background-color: var(--ion-color-secondary);
   position: absolute;
-  top: 15px;
+  top: 0px;
   right: -5px;
-  border-radius: 100%;
-  font-size: 25px;
+  border-radius: 50%;
+  font-size: 15px;
 }
