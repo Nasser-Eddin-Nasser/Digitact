@@ -34,7 +34,7 @@ public class ClientController {
         app.setEducations(user.getEducations());
         app.setIndustries(user.getIndustries());
         app.setPositions(user.getPositions());
-        app.addKeyCompetencies(user.getKeyCompetencies());
+        app.setKeyCompetencies(user.getKeyCompetencies());
         repository.save(app);
         return "Applicant is created in the database";
     }
