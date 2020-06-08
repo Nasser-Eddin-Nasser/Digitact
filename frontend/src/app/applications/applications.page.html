@@ -31,7 +31,7 @@
     </div>
   </span>
 
-  <span *ngIf="countNotFInalized!==0">
+  <span *ngIf="countNotFinalized !== 0">
     <div class="main-container info">
       <div class="content">
         <div class="main-description info-content">
@@ -49,7 +49,7 @@
       >
         <ion-item (click)="goToRating(data.id)" class="ion-no-padding">
           <ion-label>
-            <h1>{{data.firstName }} {{ data.lastName}}</h1>
+            <h1>{{data.basicInfo.firstName }} {{ data.basicInfo.lastName}}</h1>
             <p>
               <ion-icon name="time-outline"></ion-icon>
               {{data.submittedTime}}
@@ -60,7 +60,7 @@
     </div>
   </span>
 
-  <span *ngIf="countNotFInalized === 0 && countFinalized === 0">
+  <span *ngIf="countNotFinalized === 0 && countFinalized === 0">
     <div class="main-container info">
       <div class="content">
         <div class="main-description info-content">

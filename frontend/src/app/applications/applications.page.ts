@@ -15,9 +15,8 @@ import { StorageHandlerService } from '../services/storage-handler.service';
 })
 export class ApplicationsPage implements OnInit {
   countFinalized = 0;
-  countNotFInalized = 0;
-  // tslint:disable-next-line
-  notFinishedEntry: any[] = [];
+  countNotFinalized = 0;
+  notFinishedEntry: FormsData[];
 
   constructor(
     private navController: NavController,
@@ -38,20 +37,14 @@ export class ApplicationsPage implements OnInit {
   /**
    * In this method finalized and not finalized application are rendered seperately
    */
-  fetchApplications(val: Array<FormsData>): void {
-    for (const a of val) {
-      if (a.isRated === 1) {
-        this.countFinalized += 1;
-      } else {
-        this.countNotFInalized += 1;
-        this.notFinishedEntry.push({
-          firstName: a.basicInfo.firstName,
-          lastName: a.basicInfo.lastName,
-          submittedTime: a.submittedTime,
-          id: a.id,
-        });
-      }
-    }
+  fetchApplications(inp: Array<FormsData>): void {
+    this.countFinalized = inp.filter((val) => {
+      return val.isRated === 1;
+    }).length;
+
+    this.notFinishedEntry = inp.filter((x) => x.isRated === 0);
+
+    this.countNotFinalized = this.notFinishedEntry.length;
   }
   /**
    * In this method navigation to HR rating is handled.
