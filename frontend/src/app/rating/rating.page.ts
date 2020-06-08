@@ -8,11 +8,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
-import { ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 import { FormControl, FormGroup } from '../common/forms/forms';
+import { AlertController } from '../common/ion-wrappers/alert-controller';
+import { ToastController } from '../common/ion-wrappers/toast-controller';
 import { FormsData } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
 
@@ -210,17 +210,17 @@ export class RatingPage implements OnDestroy, OnInit {
     const alert = await this.alertController.create({
       header: 'Finalize',
       message:
-        'Do you really want to finalize this form? it wont be possible to edit later.',
-      cssClass: 'custom-class',
+        'Do you really want to finalize this form? It wont be possible to edit later.',
+      cssClass: 'custom-alert-button-colors',
       buttons: [
         {
           text: 'Cancel',
-          cssClass: 'cancel-button',
+          cssClass: 'color-primary',
         },
 
         {
           text: 'Finalize',
-          cssClass: 'finalize-button',
+          cssClass: 'color-secondary',
           handler: () => this.finalizeApplicant(),
         },
       ],
