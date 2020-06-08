@@ -245,7 +245,7 @@ export class RatingPage implements OnDestroy, OnInit {
           applicantData
         );
         this.storage.addItem<RatingForm>(
-          this.storage.apllicantRatingsDb,
+          this.storage.applicantRatingsDb,
           this.ratingForm.controls.id.value,
           this.ratingForm.getRawValue()
         );

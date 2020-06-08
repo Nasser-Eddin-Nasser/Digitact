@@ -9,11 +9,11 @@ import { FormsData } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
 
 @Component({
-  selector: 'app-applications',
-  templateUrl: './applications.page.html',
-  styleUrls: ['./applications.page.scss'],
+  selector: 'app-applicants',
+  templateUrl: './applicants.page.html',
+  styleUrls: ['./applicants.page.scss'],
 })
-export class ApplicationsPage implements OnInit {
+export class ApplicantsPage implements OnInit {
   countFinalized = 0;
   countNotFinalized = 0;
   notFinishedEntry: FormsData[];
