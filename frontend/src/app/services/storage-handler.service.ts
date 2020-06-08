@@ -13,7 +13,7 @@ import { RatingForm } from '../rating/model/rating-form.model';
 })
 export class StorageHandlerService {
   applicantDetailsDb: Storage;
-  apllicantRatingsDb: Storage;
+  applicantRatingsDb: Storage;
   commonPropertiesDb: Storage;
 
   constructor() {
@@ -22,7 +22,7 @@ export class StorageHandlerService {
       storeName: 'applicants-details',
       driverOrder: ['indexeddb', 'localstorage'],
     });
-    this.apllicantRatingsDb = new Storage({
+    this.applicantRatingsDb = new Storage({
       name: 'digitact',
       storeName: 'applicants-rating',
       driverOrder: ['indexeddb', 'localstorage'],
@@ -40,9 +40,9 @@ export class StorageHandlerService {
    */
 
   async getNextId(): Promise<string> {
-    const val = await this.commonPropertiesDb.get('recentId');
+    const val = await this.commonPropertiesDb.get('recentApplicantId');
     const nextId: number = val ? val + 1 : 1;
-    this.commonPropertiesDb.set('recentId', nextId);
+    this.commonPropertiesDb.set('recentApplicantId', nextId);
     return nextId.toString();
   }
 
