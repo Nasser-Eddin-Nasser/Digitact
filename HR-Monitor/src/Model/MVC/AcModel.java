@@ -1,4 +1,4 @@
-package Model;
+package Model.MVC;
 
 public class AcModel {
     public boolean checkAuthentication(String userName, String password) {
