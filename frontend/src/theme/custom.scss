@@ -145,3 +145,12 @@ ion-item.item-has-focus {
     border-color: var(--ion-color-tertiary);
   }
 }
+
+/*
+  Classes that can be applied to Popovers.
+*/
+.popover-width-350 {
+  --width: 350px;
+  // Make sure the Popover doesn't get too large.
+  --max-width: 90%;
+}

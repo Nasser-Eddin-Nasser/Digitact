@@ -22,7 +22,9 @@
     "import-blacklist": [
       true,
       "rxjs/Rx",
-      {"@angular/forms": ["FormArray", "FormControl", "FormGroup"]}
+      {"@angular/forms": ["FormArray", "FormControl", "FormGroup"]},
+      {"@ionic/angular": ["AlertController","LoadingController", "ToastController"]},
+      {"@ionic/core": ["AlertOptions", "LoadingOptions", "ToastOptions"]}
     ],
     "interface-name": false,
     "jsdoc-format": [

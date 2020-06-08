@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-searchbar [formControl]="searchInput"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="main-items">
+      <ion-toolbar>
+        <ion-segment [formControl]="segmentFilter">
+          <ion-segment-button [value]="SEGMENT_FILTER_VALUES.All">
+            All
+          </ion-segment-button>
+          <ion-segment-button [value]="SEGMENT_FILTER_VALUES.Selected">
+            Selected
+          </ion-segment-button>
+        </ion-segment></ion-toolbar
+      >
+
+      <div class="no-items" *ngIf="filteredFormItems.length < 1">
+        <ion-icon name="search-outline"></ion-icon>
+        <p>No items match your selection</p>
+      </div>
+
+      <ion-list class="ion-margin-bottom" *ngIf="filteredFormItems.length > 0">
+        <ion-item
+          *ngFor="let formItem of filteredFormItems"
+          (click)="showItemPopover(formItem, $event)"
+        >
+          <ng-container *ngIf="formItem.disabled">
+            <ion-icon
+              slot="start"
+              name="ellipse-outline"
+              color="medium"
+            ></ion-icon>
+            <ion-label color="medium">{{
+              formItem.controls.name.value
+            }}</ion-label>
+          </ng-container>
+
+          <ng-container *ngIf="!formItem.disabled">
+            <ion-icon
+              slot="start"
+              name="checkmark-circle-outline"
+              color="secondary"
+            ></ion-icon>
+            <ion-label color="secondary">
+              <span>{{ formItem.controls.name.value }}</span>
+              <div>
+                <app-stars
+                  [filledStars]="formItem.controls.rating.value"
+                ></app-stars>
+              </div>
+            </ion-label>
+          </ng-container>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div class="bottom-content" *ngIf="searchInput.value">
+      <span>
+        Not found what you were looking for? You can also add your search term
+        ("{{ searchInput.value }}") to the list.
+      </span>
+      <div class="add-to-list-button-container ion-margin-top">
+        <ion-button color="primary" (click)="addSearchTermToList()">
+          Add to list
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>
