@@ -34,11 +34,11 @@ export class StorageHandlerService {
    * @param value Conatains the FormsData field objects
    * @returns Promise of forms data object
    */
-  async addItem(
+  async addItem<T>(
     dbObject: Storage,
     key: string,
     value: DeepPartial<FormsData> | DeepPartial<RatingForm>
-  ): Promise<FormsData | RatingForm> {
+  ): Promise<T> {
     await dbObject.ready();
     const item = await dbObject.set(key, value);
     return item;
@@ -46,13 +46,11 @@ export class StorageHandlerService {
 
   /**
    * Used to get an item from the storage
+   * @param dbObject The storage object
    * @param key Unique key for the item
    * @returns Promise of forms data object
    */
-  async getItem(
-    dbObject: Storage,
-    key: string
-  ): Promise<FormsData | RatingForm> {
+  async getItem<T>(dbObject: Storage, key: string): Promise<T> {
     await dbObject.ready();
     const item = await dbObject.get(key);
     return item;
@@ -60,10 +58,11 @@ export class StorageHandlerService {
 
   /**
    * Used to get all items from the storage
+   * @param dbObject The storage object
    * @returns Promise of array of forms data object
    */
-  async getAllItems(dbObject: Storage): Promise<FormsData[] | RatingForm[]> {
-    const items: Array<FormsData> | Array<RatingForm> = [];
+  async getAllItems<T>(dbObject: Storage): Promise<Array<T>> {
+    const items: Array<T> = [];
     await dbObject.ready();
     await dbObject.forEach((value) => {
       items.push(value);
@@ -73,6 +72,7 @@ export class StorageHandlerService {
 
   /**
    * Used to delete an item from the storage
+   * @param dbObject The storage object
    * @param key Unique key for the item
    * @returns Promise of void
    */
@@ -87,6 +87,7 @@ export class StorageHandlerService {
 
   /**
    * Used to delete all items in the storage
+   * @param dbObject The storage object
    * @returns Promise of void
    */
   async deleteAllItems(dbObject: Storage): Promise<void> {
@@ -96,21 +97,22 @@ export class StorageHandlerService {
 
   /**
    * Used to update an existing item in the storage
+   * @param dbObject The storage object
    * @param key Unique key for the item
    * @param value Conatains the FormsData field objects to update
    * @returns Promise of forms data object
    */
-  async updateItem(
+  updateItem<T>(
     dbObject: Storage,
     key: string,
     value: DeepPartial<FormsData | RatingForm>
-  ): Promise<FormsData | RatingForm> {
-    await dbObject.ready();
-    const item = await dbObject.get(key);
+  ): Promise<T> {
+    dbObject.ready();
+    const item = dbObject.get(key);
     if (!item) {
       return undefined;
     }
-    const data = await dbObject.set(key, value);
+    const data = dbObject.set(key, value);
     return data;
   }
 }
