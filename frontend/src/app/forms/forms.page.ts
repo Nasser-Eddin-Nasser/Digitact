@@ -56,6 +56,7 @@ export class FormsPage implements OnInit, OnDestroy {
   formsData = new FormGroup<FormsData>({
     id: new FormControl(''),
     isRated: new FormControl(0),
+    submittedTime: new FormControl(''),
     basicInfo: new FormGroup<BasicInfo>({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
@@ -106,6 +107,7 @@ export class FormsPage implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.formsData.controls.id.disable();
     this.formsData.controls.isRated.disable();
+    this.formsData.controls.submittedTime.disable();
 
     const routerSubscription = this.activatedRoute.queryParams.subscribe(
       (params) => {
@@ -219,7 +221,14 @@ export class FormsPage implements OnInit, OnDestroy {
     )
       .replace(/\s+/g, '_')
       .toLowerCase();
+    const time = new Date().toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: 'numeric',
+      minute: 'numeric',
+    });
     this.formsData.controls.id.setValue(key);
+    this.formsData.controls.submittedTime.setValue(time);
+
     this.storage.addItem(
       this.storage.applicantDetailsDb,
       key,
