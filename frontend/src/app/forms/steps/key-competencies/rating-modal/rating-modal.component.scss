@@ -1,0 +1,30 @@
+.container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.main-items {
+  flex-grow: 1;
+}
+.bottom-content {
+  flex-grow: 0;
+  margin-top: 2rem;
+  padding: 0.5rem 1.5rem;
+}
+
+.no-items {
+  color: var(--ion-color-medium);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+.no-items ion-icon {
+  font-size: 50px;
+}
+
+.add-to-list-button-container {
+  display: flex;
+  justify-content: center;
+}

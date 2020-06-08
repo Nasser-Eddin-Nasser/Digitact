@@ -56,8 +56,7 @@ interface ControlUniquenessItem {
 /**
  * A hint for the typechecker that we want to use a FormControl instead of a FormArray here.
  */
-export type UseControl<T extends string[] | number[]> = T &
-  ControlUniquenessItem;
+export type UseControl<T extends [] | {}> = T & ControlUniquenessItem;
 
 export type FormValue<T> = {
   // Remove the "ControlUniquenessItem" and make everything optional.
@@ -112,9 +111,7 @@ type InitialValueOrInitialValueAndDisabled<T> =
  * A wrapper around Angular's FormControl.
  * For an example, see comment on the FormGroup wrapper class.
  */
-export class FormControl<
-  T extends string | string[] | number | number[]
-> extends AngularFormControl {
+export class FormControl<T> extends AngularFormControl {
   readonly value: T;
   readonly valueChanges: Observable<T>;
 
