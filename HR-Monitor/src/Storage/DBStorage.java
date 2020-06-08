@@ -1,42 +1,44 @@
 package Storage;
 
 import Database.Connector;
-import Model.User.Applicant;
-import Model.User.User;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import Database.Method;
+import Model.User.ApplicantUI;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBStorage {
-    private static List<User> users;
-    private static Connection connection = null;
+    private static List<ApplicantUI> users;
+    // True if receiver should wait
+    private static boolean transfer = false;
 
-    public static List<User> getStorage() {
+    public static List<ApplicantUI> getStorage() {
         updateStorage();
+        while (!transfer) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        transfer = false;
         return users;
     }
 
     private static void updateStorage() {
-        users = getUsers();
-    }
-
-    private static ArrayList<User> getUsers() {
-        ArrayList<User> users = new ArrayList<>();
-        Connector db = new Connector();
         try {
-            connection = db.getConnection();
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("select * from users;");
-            while (rs.next()) {
-                User user = new Applicant(rs.getString(3), rs.getString(4));
-                users.add(user);
-            }
-        } catch (SQLException e) {
+            getApplicants();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        return users;
+    }
+
+    private static void getApplicants() throws IOException {
+        Connector.sendGetHttp(Method.getApplicants);
+    }
+
+    public static void setUsers(List<ApplicantUI> users) {
+        DBStorage.users = new ArrayList<>(users);
+        transfer = true;
     }
 }
