@@ -47,3 +47,17 @@ h3 {
   font-size: 64px;
   color: lightgray;
 }
+
+#notification-button {
+  position: relative;
+  overflow: visible !important;
+}
+
+#notifications-badge {
+  background-color: red;
+  position: absolute;
+  top: 15px;
+  right: -5px;
+  border-radius: 100%;
+  font-size: 25px;
+}

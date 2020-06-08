@@ -1,11 +1,21 @@
 <ion-header class="ion-no-border ion-padding">
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button style="min-height: 100px;" (click)="goToApplications()">
+      <ion-button
+        id="notification-button"
+        style="min-height: 100px;"
+        (click)="goToApplications()"
+      >
         <ion-icon
           class="custom-icon"
           name="file-tray-stacked-outline"
         ></ion-icon>
+        <ion-badge
+          id="notifications-badge"
+          color="danger"
+          *ngIf="applicationSize"
+          >{{applicationSize}}</ion-badge
+        >
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
