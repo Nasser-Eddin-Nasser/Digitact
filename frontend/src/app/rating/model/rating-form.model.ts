@@ -1,10 +1,12 @@
 /**
  * @description
- *    This model hold the applicant score view related fields.
+ *    This model holds the HR rating related fields with id
  */
 
 export interface RatingForm {
+  id: string;
   applicantScore: ApplicantScore;
+  impressionInfo: ImpressionInfo;
 }
 
 export interface ApplicantScore {
@@ -12,4 +14,8 @@ export interface ApplicantScore {
   motivation: number;
   selfAssurance: number;
   personalImpression: number;
+}
+
+export interface ImpressionInfo {
+  impression: string;
 }

@@ -6,10 +6,14 @@
 import { UseControl } from '../common/forms/forms';
 
 export interface FormsData {
+  id: string;
+  isRated: number;
+  submittedTime: string;
   basicInfo: BasicInfo;
   contactInfo: ContactInfo;
   educationInfo: EducationInfo;
   fieldDesignationInfo: FieldDesignationInfo;
+  profilePicture: ProfilePicture;
   keyCompetencies: KeyCompetencies;
 }
 
@@ -40,6 +44,10 @@ export interface EducationInfoEntry {
 export interface FieldDesignationInfo {
   field: UseControl<string[]>;
   designation: UseControl<string[]>;
+}
+
+export interface ProfilePicture {
+  pictureBase64: string;
 }
 
 export interface KeyCompetencies {

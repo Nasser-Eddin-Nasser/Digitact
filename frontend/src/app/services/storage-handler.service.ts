@@ -6,12 +6,45 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
 import { FormsData } from '../model/forms-data.model';
+import { RatingForm } from '../rating/model/rating-form.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StorageHandlerService {
-  constructor(private storage: Storage) {}
+  applicantDetailsDb: Storage;
+  applicantRatingsDb: Storage;
+  commonPropertiesDb: Storage;
+
+  constructor() {
+    this.applicantDetailsDb = new Storage({
+      name: 'digitact',
+      storeName: 'applicants-details',
+      driverOrder: ['indexeddb', 'localstorage'],
+    });
+    this.applicantRatingsDb = new Storage({
+      name: 'digitact',
+      storeName: 'applicants-rating',
+      driverOrder: ['indexeddb', 'localstorage'],
+    });
+    this.commonPropertiesDb = new Storage({
+      name: 'digitact',
+      storeName: 'common-properties',
+      driverOrder: ['indexeddb', 'localstorage'],
+    });
+  }
+
+  /**
+   * Used to generate next Id
+   * @returns Promise of string containing next id
+   */
+
+  async getNextId(): Promise<string> {
+    const val = await this.commonPropertiesDb.get('recentApplicantId');
+    const nextId: number = val ? val + 1 : 1;
+    this.commonPropertiesDb.set('recentApplicantId', nextId);
+    return nextId.toString();
+  }
 
   /**
    * Used to create and and add an item in the storage
@@ -19,87 +52,86 @@ export class StorageHandlerService {
    * @param value Conatains the FormsData field objects
    * @returns Promise of forms data object
    */
-  addItem(key: string, value: DeepPartial<FormsData>): Promise<FormsData> {
-    return this.storage.ready().then(() => {
-      return this.storage.set(key, value).then((item) => {
-        return item;
-      });
-    });
+  async addItem<T>(
+    dbObject: Storage,
+    key: string,
+    value: DeepPartial<FormsData> | DeepPartial<RatingForm>
+  ): Promise<T> {
+    await dbObject.ready();
+    const item = await dbObject.set(key, value);
+    return item;
   }
 
   /**
    * Used to get an item from the storage
+   * @param dbObject The storage object
    * @param key Unique key for the item
    * @returns Promise of forms data object
    */
-  getItem(key: string): Promise<FormsData> {
-    return this.storage.ready().then(() => {
-      return this.storage.get(key).then((item) => {
-        return item;
-      });
-    });
+  async getItem<T>(dbObject: Storage, key: string): Promise<T> {
+    await dbObject.ready();
+    const item = await dbObject.get(key);
+    return item;
   }
 
   /**
    * Used to get all items from the storage
+   * @param dbObject The storage object
    * @returns Promise of array of forms data object
    */
-  getAllItems(): Promise<FormsData[]> {
-    const items: Array<FormsData> = [];
-    return this.storage.ready().then(() => {
-      return this.storage
-        .forEach((value) => {
-          items.push(value);
-        })
-        .then(() => {
-          return items;
-        });
+  async getAllItems<T>(dbObject: Storage): Promise<Array<T>> {
+    const items: Array<T> = [];
+    await dbObject.ready();
+    await dbObject.forEach((value) => {
+      items.push(value);
     });
+    return items;
   }
 
   /**
    * Used to delete an item from the storage
+   * @param dbObject The storage object
    * @param key Unique key for the item
    * @returns Promise of void
    */
-  deleteItem(key: string): Promise<void> {
-    return this.storage.ready().then(() => {
-      return this.storage.get(key).then((item) => {
-        if (!item) {
-          return undefined;
-        }
-        return this.storage.remove(key);
-      });
-    });
+  async deleteItem(dbObject: Storage, key: string): Promise<void> {
+    await dbObject.ready();
+    const item = await dbObject.get(key);
+    if (!item) {
+      return undefined;
+    }
+    return dbObject.remove(key);
   }
 
   /**
    * Used to delete all items in the storage
+   * @param dbObject The storage object
    * @returns Promise of void
    */
-  deleteAllItems(): Promise<void> {
-    return this.storage.ready().then(() => {
-      return this.storage.clear();
-    });
+  async deleteAllItems(dbObject: Storage): Promise<void> {
+    await dbObject.ready();
+    return dbObject.clear();
   }
 
   /**
    * Used to update an existing item in the storage
+   * @param dbObject The storage object
    * @param key Unique key for the item
    * @param value Conatains the FormsData field objects to update
    * @returns Promise of forms data object
    */
-  updateItem(key: string, value: DeepPartial<FormsData>): Promise<FormsData> {
-    return this.storage.ready().then(() => {
-      return this.storage.get(key).then((item) => {
-        if (!item) {
-          return undefined;
-        }
-        return this.storage.set(key, value).then((data) => {
-          return data;
-        });
-      });
-    });
+  updateItem<T>(
+    dbObject: Storage,
+    key: string,
+    value: DeepPartial<FormsData | RatingForm>
+  ): Promise<T> {
+    dbObject.ready();
+    const item = dbObject.get(key);
+    if (!item) {
+      return undefined;
+    }
+    const data = dbObject.set(key, value);
+    return data;
   }
 }
 

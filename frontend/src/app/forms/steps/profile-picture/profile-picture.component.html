@@ -1,0 +1,31 @@
+<div class="main-description">
+  <h1>Picture</h1>
+</div>
+<div
+  *ngIf="
+    formsData.controls.profilePicture.controls.pictureBase64.invalid;
+    else elseBlock
+  "
+>
+  <span class="description">
+    Add a picture of yourself by tapping on the image icon.
+  </span>
+  <button (click)="takePicture()" class="custom-button">
+    <ion-icon name="person"></ion-icon>
+  </button>
+</div>
+<ng-template #elseBlock>
+  <span class="description">
+    Good job! If you want to take another picture, just delete the actual
+    picture by sliding on it and take another one.
+  </span>
+  <ion-item class="ion-no-padding" lines="none">
+    <img
+      [src]="formsData.controls.profilePicture.controls.pictureBase64.value"
+      class="profile-picture"
+    />
+  </ion-item>
+  <button (click)="deletePictureEntry()" class="trash-button">
+    <ion-icon name="trash-outline" class="trash-icon"></ion-icon>
+  </button>
+</ng-template>
