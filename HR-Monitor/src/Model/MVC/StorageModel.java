@@ -15,4 +15,8 @@ public class StorageModel {
             return DBStorage.getStorage();
         }
     }
+
+    public ApplicantUI getApplicantByID(long id) {
+        return DBStorage.getApplicantByID(id);
+    }
 }
