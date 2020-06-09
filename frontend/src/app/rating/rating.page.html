@@ -6,6 +6,16 @@
       </ion-button>
     </ion-buttons>
 
+    <ion-title class="ion-text-center">
+      <ng-container *ngIf="currentStep !== HR_RATING_STEP.Finalize">
+        Step {{currentStepIndex + 1}} / {{HR_RATING_STEP_ARR.length - 1}}
+      </ng-container>
+
+      <ng-container *ngIf="currentStep === HR_RATING_STEP.Finalize">
+        Finalize
+      </ng-container>
+    </ion-title>
+
     <ion-buttons slot="end">
       <ion-button>
         <ion-menu-button slot="end" id="hr-side-menu">
@@ -14,18 +24,48 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+  <ion-progress-bar value="{{progressPercentage}}"></ion-progress-bar>
 </ion-header>
 
-<app-hr-side-menu [ratingForm]="ratingForm"></app-hr-side-menu>
+<app-hr-side-menu
+  [ratingForm]="ratingForm"
+  [currentStep]="currentStep"
+></app-hr-side-menu>
 
 <ion-content>
   <div class="main-container with-bottom-buttons">
     <div class="content">
-      <app-applicant-score [ratingForm]="ratingForm"></app-applicant-score>
+      <ng-container [ngSwitch]="currentStep">
+        <app-applicant-score
+          [ratingForm]="ratingForm"
+          *ngSwitchCase="HR_RATING_STEP.ApplicantRating"
+        ></app-applicant-score>
+        <app-impression-page
+          [ratingForm]="ratingForm"
+          *ngSwitchCase="HR_RATING_STEP.ImpressionInformation"
+        ></app-impression-page>
+        <app-finalize-page
+          [ratingForm]="ratingForm"
+          *ngSwitchCase="HR_RATING_STEP.Finalize"
+        ></app-finalize-page>
+      </ng-container>
     </div>
 
     <div class="buttons-container">
-      <button class="fancy-button">
+      <ng-container *ngIf="currentStep === HR_RATING_STEP.Finalize">
+        <button
+          class="fancy-button"
+          [disabled]="!ratingForm.valid"
+          (click)="finalize()"
+        >
+          Finalize
+        </button>
+      </ng-container>
+      <button
+        class="fancy-button"
+        (click)="navigateToNextStep()"
+        *ngIf="currentStep !== HR_RATING_STEP.Finalize"
+      >
         Continue
       </button>
     </div>
