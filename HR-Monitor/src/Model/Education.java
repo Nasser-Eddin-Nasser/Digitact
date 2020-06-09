@@ -67,4 +67,6 @@ public class Education {
     public void setGraduation_date(String graduation_date) {
         this.graduation_date = graduation_date;
     }
+
+    public Long getId() {  return id;  }
 }
