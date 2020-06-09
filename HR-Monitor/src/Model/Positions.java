@@ -64,23 +64,18 @@ public class Positions {
         return internship_Working_Student;
     }
 
-   public String toString(){
-    String res="";
-    if(consultant_Business_Consultant)
-        res += "consultant_Business_Consultant, ";
+    public String toString() {
+        String res = "";
+        if (consultant_Business_Consultant) res += "consultant_Business_Consultant, ";
 
-       if(Consultant_SAP)
-           res += "Consultant_SAP, ";
+        if (Consultant_SAP) res += "Consultant_SAP, ";
 
-       if(internship_Working_Student)
-           res += "internship_Working_Student, ";
+        if (internship_Working_Student) res += "internship_Working_Student, ";
 
-       if(iT_Consultant_Artificial_Intelligence)
-           res += "iT_Consultant_Artificial_Intelligence, ";
+        if (iT_Consultant_Artificial_Intelligence) res += "iT_Consultant_Artificial_Intelligence, ";
 
-       if(iT_Consultant_Informationsmanagement)
-           res += "iT_Consultant_Informationsmanagement, ";
+        if (iT_Consultant_Informationsmanagement) res += "iT_Consultant_Informationsmanagement, ";
 
-    return res.substring(0, res.length()-2);
+        return res.substring(0, res.length() - 2);
     }
 }

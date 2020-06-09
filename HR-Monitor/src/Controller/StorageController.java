@@ -1,11 +1,11 @@
 package Controller;
 
-import Model.Degree;
 import Model.Education;
 import Model.MVC.StorageModel;
 import Model.User.ApplicantUI;
+import java.io.IOException;
+import java.util.List;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
-import javafx.beans.property.ReadOnlyLongProperty;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
@@ -17,9 +17,6 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.List;
 
 public class StorageController {
     StorageModel model;
@@ -55,7 +52,7 @@ public class StorageController {
         getTable();
     }
 
-    public void showEduInfo(long id){
+    public void showEduInfo(long id) {
         Stage stageEduInfo = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/eduInfoView.fxml"));
         loader.setController(this);
@@ -70,14 +67,13 @@ public class StorageController {
         stageEduInfo.setScene(scene);
         stageEduInfo.show();
         getTableEducation(id);
-
     }
 
     private ObservableList<Education> getTableEducation(long id) {
         ApplicantUI app = model.getApplicantByID(id);
         System.out.println("---------");
         ;
-        app.getEducations().forEach(x->System.out.println(x.getUniversity() ) );
+        app.getEducations().forEach(x -> System.out.println(x.getUniversity()));
         observableListEducationTableView = educationTable.getItems();
         observableListEducationTableView.clear();
         observableListEducationTableView.addAll(app.getEducations());
@@ -88,30 +84,31 @@ public class StorageController {
     public Pane getPane() {
         return root;
     }
-    public void setFactoriesAndComparatorsForEducationTableColumns   (){
-         universityCol.setCellValueFactory (
-                 education -> new  ReadOnlyStringWrapper( education.getValue().getUniversity() ) );
-         subjectCol .setCellValueFactory (
-                 education -> new  ReadOnlyStringWrapper( education.getValue().getSubject() ) );
-          degreeCol .setCellValueFactory (
-                  education -> new ReadOnlyStringWrapper( education.getValue().getDegree().toString() ) );
-        gradeCol.setCellValueFactory (
-                education -> new  ReadOnlyDoubleWrapper( education.getValue().getGrade() ) );
-         dateCol.setCellValueFactory (
-                 education -> new  ReadOnlyStringWrapper( education.getValue().getGraduation_date() ) );
+
+    public void setFactoriesAndComparatorsForEducationTableColumns() {
+        universityCol.setCellValueFactory(
+                education -> new ReadOnlyStringWrapper(education.getValue().getUniversity()));
+        subjectCol.setCellValueFactory(
+                education -> new ReadOnlyStringWrapper(education.getValue().getSubject()));
+        degreeCol.setCellValueFactory(
+                education ->
+                        new ReadOnlyStringWrapper(education.getValue().getDegree().toString()));
+        gradeCol.setCellValueFactory(
+                education -> new ReadOnlyDoubleWrapper(education.getValue().getGrade()));
+        dateCol.setCellValueFactory(
+                education -> new ReadOnlyStringWrapper(education.getValue().getGraduation_date()));
     }
 
     public void setFactoriesAndComparatorsForTableColumns() {
-        idCol.setCellValueFactory(
-               user -> new ReadOnlyLongWrapper(user.getValue().getID()));
+        idCol.setCellValueFactory(user -> new ReadOnlyLongWrapper(user.getValue().getID()));
         firstNameCol.setCellValueFactory(
                 user -> new ReadOnlyStringWrapper(user.getValue().getFirstName()));
         lastNameCol.setCellValueFactory(
                 user -> new ReadOnlyStringWrapper(user.getValue().getLastName()));
         positionCol.setCellValueFactory(
-                user -> new ReadOnlyStringWrapper(user.getValue().getPositions().toString() ) );
+                user -> new ReadOnlyStringWrapper(user.getValue().getPositions().toString()));
         industryCol.setCellValueFactory(
-                user -> new ReadOnlyStringWrapper(user.getValue().getIndustries().toString() ) );
+                user -> new ReadOnlyStringWrapper(user.getValue().getIndustries().toString()));
     }
 
     public ObservableList<ApplicantUI> getTable() {
@@ -121,20 +118,22 @@ public class StorageController {
         observableListTableView.clear();
         observableListTableView.addAll(db);
         setFactoriesAndComparatorsForTableColumns();
-        idCol.setVisible ( false );
+        idCol.setVisible(false);
         return observableListTableView;
     }
 
     private void AddClickFunctionToUserTable() {
-        userTable.setRowFactory( e -> {
-            TableRow<ApplicantUI> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                    ApplicantUI rowData = row.getItem();
-                    showEduInfo(rowData.getID() );
-                }
-            });
-            return row ;
-        });
+        userTable.setRowFactory(
+                e -> {
+                    TableRow<ApplicantUI> row = new TableRow<>();
+                    row.setOnMouseClicked(
+                            event -> {
+                                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                                    ApplicantUI rowData = row.getItem();
+                                    showEduInfo(rowData.getID());
+                                }
+                            });
+                    return row;
+                });
     }
 }

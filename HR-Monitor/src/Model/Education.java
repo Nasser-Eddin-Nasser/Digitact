@@ -68,5 +68,7 @@ public class Education {
         this.graduation_date = graduation_date;
     }
 
-    public Long getId() {  return id;  }
+    public Long getId() {
+        return id;
+    }
 }

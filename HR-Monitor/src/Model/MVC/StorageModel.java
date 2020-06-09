@@ -1,7 +1,6 @@
 package Model.MVC;
 
 import Main.App;
-import Model.Education;
 import Model.User.ApplicantUI;
 import Storage.DBStorage;
 import Storage.Dummy;
@@ -18,6 +17,6 @@ public class StorageModel {
     }
 
     public ApplicantUI getApplicantByID(long id) {
-            return DBStorage.getApplicantByID(id);
+        return DBStorage.getApplicantByID(id);
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 public class Dummy {
     public static List<ApplicantUI> DB;
 
-    public static List<Education> EduDB ;
+    public static List<Education> EduDB;
 
     public Dummy() {
         DB = new LinkedList<ApplicantUI>();
