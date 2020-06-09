@@ -145,6 +145,17 @@ ion-item.item-has-focus {
     border-color: var(--ion-color-tertiary);
   }
 }
+/**
+ * Customization of the alert in the dropdownmenu of the finalize-page
+*/
+.custom-alert-button-colors {
+  .color-primary {
+    color: var(--ion-color-tertiary);
+  }
+  .color-secondary {
+    color: var(--ion-color-secondary);
+  }
+}
 
 /*
   Classes that can be applied to Popovers.

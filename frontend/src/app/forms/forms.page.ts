@@ -56,6 +56,9 @@ export class FormsPage implements OnInit, OnDestroy {
    * Data of the entire form.
    */
   formsData = new FormGroup<FormsData>({
+    id: new FormControl(''),
+    isRated: new FormControl(0),
+    submittedTime: new FormControl(''),
     basicInfo: new FormGroup<BasicInfo>({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
@@ -113,6 +116,10 @@ export class FormsPage implements OnInit, OnDestroy {
    * In this method route change is observed and handling is done.
    */
   ngOnInit(): void {
+    this.formsData.controls.id.disable();
+    this.formsData.controls.isRated.disable();
+    this.formsData.controls.submittedTime.disable();
+
     const routerSubscription = this.activatedRoute.queryParams.subscribe(
       (params) => {
         /*
@@ -216,15 +223,23 @@ export class FormsPage implements OnInit, OnDestroy {
    * "Submit" the form: Store the value in our persistent storage and navigate to the confirmation page.
    */
   submit(): void {
-    const key = (
-      this.formsData.value.basicInfo.firstName +
-      '-' +
-      this.formsData.value.basicInfo.lastName +
-      '-' +
-      Math.floor(Math.random() * 1000000).toString()
-    ).replace(/\s+/g, '_');
-    this.storage.addItem(key, this.formsData.value);
-    this.router.navigate(['/forms', 'confirmation']);
+    const time = new Date().toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: 'numeric',
+      minute: 'numeric',
+    });
+    this.formsData.controls.submittedTime.setValue(time);
+
+    this.storage.getNextId().then((key) => {
+      this.formsData.controls.id.setValue(key);
+
+      this.storage.addItem<FormsData>(
+        this.storage.applicantDetailsDb,
+        key,
+        this.formsData.getRawValue()
+      );
+      this.router.navigate(['/forms', 'confirmation'], { state: { id: key } });
+    });
   }
 
   /**
