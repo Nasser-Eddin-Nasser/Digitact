@@ -10,6 +10,7 @@ export enum ApplicationStep {
   ProfilePicture = 'profile-picture',
   EducationInformation = 'education-information',
   FieldDesignationPreference = 'field-designation-preference',
+  KeyCompetencies = 'key-competencies',
   Submit = 'submit',
 }
 
