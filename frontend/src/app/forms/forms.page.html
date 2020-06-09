@@ -44,6 +44,11 @@
           *ngSwitchCase="APPLICATION_STEP.ContactInformation"
         >
         </form-contact-info>
+        <form-profile-picture
+          [formsData]="formsData"
+          *ngSwitchCase="APPLICATION_STEP.ProfilePicture"
+        >
+        </form-profile-picture>
         <form-field-designation-page
           [formsData]="formsData"
           *ngSwitchCase="APPLICATION_STEP.FieldDesignationPreference"

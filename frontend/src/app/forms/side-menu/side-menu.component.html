@@ -33,6 +33,18 @@
         <ng-container
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
+            step: APPLICATION_STEP.ProfilePicture,
+            displayName: 'Profile Picture',
+            isValid:
+              formsData.controls.profilePicture.controls.pictureBase64.valid,
+            isActive: currentStep === APPLICATION_STEP.ProfilePicture
+          }"
+        >
+        </ng-container>
+
+        <ng-container
+          [ngTemplateOutlet]="menuItem"
+          [ngTemplateOutletContext]="{
             step: APPLICATION_STEP.EducationInformation,
             displayName: 'Education Information',
             isValid: formsData.controls.educationInfo.valid,
