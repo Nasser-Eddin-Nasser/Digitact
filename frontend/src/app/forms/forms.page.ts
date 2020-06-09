@@ -17,6 +17,7 @@ import {
   EducationInfo,
   FieldDesignationInfo,
   FormsData,
+  KeyCompetencies,
   ProfilePicture,
 } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
@@ -75,6 +76,12 @@ export class FormsPage implements OnInit, OnDestroy {
     }),
     profilePicture: new FormGroup<ProfilePicture>({
       pictureBase64: new FormControl('', Validators.required),
+    }),
+    keyCompetencies: new FormGroup<KeyCompetencies>({
+      languages: new FormControl([], Validators.required),
+      professionalSoftware: new FormControl([]),
+      databases: new FormControl([]),
+      programmingLanguagesAndFrameworks: new FormControl([]),
     }),
   });
 
