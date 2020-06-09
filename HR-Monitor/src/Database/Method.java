@@ -1,7 +1,8 @@
 package Database;
 
 public enum Method {
-    getApplicants("getApplicants");
+    getApplicants("getApplicants"),
+    getAllEducationInfo("getAllEducationInfo");
 
     private final String name;
 
