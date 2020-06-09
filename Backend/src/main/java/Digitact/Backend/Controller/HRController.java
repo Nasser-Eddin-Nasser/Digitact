@@ -25,7 +25,7 @@ public class HRController {
         return new ArrayList<User>(dataRepository.getApplicants());
     }
 
-    @GetMapping("/getAllEducationsInfo")
+    @GetMapping("/getAllEducationInfo")
     public List<Education> getFullEducationsInfo() {
         return new ArrayList<Education>(educationRepository.getAllEducationsInfo());
     }
