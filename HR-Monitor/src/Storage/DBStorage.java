@@ -1,42 +1,68 @@
 package Storage;
 
 import Database.Connector;
-import Model.User.Applicant;
-import Model.User.User;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import Database.Method;
+import Model.Education;
+import Model.User.ApplicantUI;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DBStorage {
-    private static List<User> users;
-    private static Connection connection = null;
+    private static List<ApplicantUI> users;
+    private static List<Education> eduInfo;
+    private static List<Education> selected;
+    // True if receiver should wait
+    private static boolean transfer = false;
 
-    public static List<User> getStorage() {
+    public static List<ApplicantUI> getStorage() {
         updateStorage();
+        while (!transfer) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        transfer = false;
         return users;
+    }
+
+    public static ApplicantUI getApplicantByID(long id) {
+
+        return DBStorage.users
+                .stream()
+                .filter(x -> x.getID() == id)
+                .collect(Collectors.toList())
+                .get(0);
     }
 
     private static void updateStorage() {
-        users = getUsers();
-    }
-
-    private static ArrayList<User> getUsers() {
-        ArrayList<User> users = new ArrayList<>();
-        Connector db = new Connector();
         try {
-            connection = db.getConnection();
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("select * from users;");
-            while (rs.next()) {
-                User user = new Applicant(rs.getString(3), rs.getString(4));
-                users.add(user);
-            }
-        } catch (SQLException e) {
+            getApplicants();
+            // getAllEducationInfo();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        return users;
+    }
+
+    private static void getApplicants() throws IOException {
+        Connector.sendGetHttp(Method.getApplicants);
+    }
+
+    private static void getAllEducationInfo() throws IOException {
+        Connector.sendGetHttp(Method.getAllEducationInfo);
+    }
+
+    public static void setUsers(List<ApplicantUI> users) {
+        DBStorage.users = new ArrayList<>(users);
+        transfer = true;
+    }
+
+    public static void setEduInfo(List<Education> eduInfo) {
+        DBStorage.eduInfo = new ArrayList<>(eduInfo);
+        // System.out.println(eduInfo.size());
+        transfer = true;
     }
 }

@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.AcModel;
+import Model.MVC.AcModel;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
