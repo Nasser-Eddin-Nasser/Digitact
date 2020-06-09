@@ -42,3 +42,23 @@ h3 {
 .logo-square {
   fill: var(--ion-color-secondary);
 }
+
+.custom-icon {
+  font-size: 40px;
+  color: var(--ion-color-light-shade);
+}
+
+.notification-button {
+  position: relative;
+  overflow: visible !important;
+  min-height: 40px;
+}
+
+.notifications-badge {
+  background-color: var(--ion-color-secondary);
+  position: absolute;
+  top: 0px;
+  right: -5px;
+  border-radius: 50%;
+  font-size: 15px;
+}
