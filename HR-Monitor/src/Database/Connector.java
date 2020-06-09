@@ -25,6 +25,20 @@ public class Connector {
                     in.close();
                 }
                 break;
+            case getAllEducationInfo:
+                BufferedReader im = null;
+                try {
+                    URLConnection uc = bes_url.openConnection();
+                    im = new BufferedReader(new InputStreamReader(uc.getInputStream()));
+                    String inputLine;
+                    if ((inputLine = im.readLine()) != null) {
+                        Util.JSONTools.convertJSONToEduInfo(inputLine);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    im.close();
+                }
             default:
                 break;
         }
