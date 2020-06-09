@@ -13,6 +13,7 @@ export interface FormsData {
   contactInfo: ContactInfo;
   educationInfo: EducationInfo;
   fieldDesignationInfo: FieldDesignationInfo;
+  profilePicture: ProfilePicture;
   keyCompetencies: KeyCompetencies;
 }
 
@@ -43,6 +44,10 @@ export interface EducationInfoEntry {
 export interface FieldDesignationInfo {
   field: UseControl<string[]>;
   designation: UseControl<string[]>;
+}
+
+export interface ProfilePicture {
+  pictureBase64: string;
 }
 
 export interface KeyCompetencies {
