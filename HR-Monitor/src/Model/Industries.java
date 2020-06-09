@@ -67,23 +67,18 @@ public class Industries {
         this.public_Sector = public_Sector;
     }
 
-    public String toString(){
-        String res="";
-        if(automotive)
-            res += "automotive, ";
+    public String toString() {
+        String res = "";
+        if (automotive) res += "automotive, ";
 
-        if(finance)
-            res += "finance, ";
+        if (finance) res += "finance, ";
 
-        if(commerce)
-            res += "commerce, ";
+        if (commerce) res += "commerce, ";
 
-        if(pharma_Helthcare)
-            res += "pharma_Helthcare, ";
+        if (pharma_Helthcare) res += "pharma_Helthcare, ";
 
-        if(public_Sector)
-            res += "public_Sector, ";
+        if (public_Sector) res += "public_Sector, ";
 
-        return res.substring(0, res.length()-2);
+        return res.substring(0, res.length() - 2);
     }
 }

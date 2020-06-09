@@ -7,7 +7,7 @@ import Model.Positions;
 import java.util.List;
 
 public class ApplicantUI {
-    private long  id;
+    private long id;
     private String firstName;
     private String lastName;
     private List<Education> educations;
@@ -63,5 +63,7 @@ public class ApplicantUI {
         return lastName;
     }
 
-    public Long getID() { return id; }
+    public Long getID() {
+        return id;
+    }
 }
