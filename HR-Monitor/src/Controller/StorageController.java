@@ -3,8 +3,6 @@ package Controller;
 import Model.Education;
 import Model.MVC.StorageModel;
 import Model.User.ApplicantUI;
-import java.io.IOException;
-import java.util.List;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -17,6 +15,9 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.List;
 
 public class StorageController {
     StorageModel model;
@@ -70,9 +71,7 @@ public class StorageController {
     }
 
     private ObservableList<Education> getTableEducation(long id) {
-        ApplicantUI app = model.getApplicantByID(id);
-        System.out.println("---------");
-        ;
+        ApplicantUI app = model.getApplicantByID(id); 
         app.getEducations().forEach(x -> System.out.println(x.getUniversity()));
         observableListEducationTableView = educationTable.getItems();
         observableListEducationTableView.clear();
