@@ -3,6 +3,8 @@ package Controller;
 import Model.Education;
 import Model.MVC.StorageModel;
 import Model.User.ApplicantUI;
+import java.io.IOException;
+import java.util.List;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -16,43 +18,28 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.List;
-
 public class StorageController {
     StorageModel model;
     // Create a TableView with a list of persons
-    @FXML
-    TableView<ApplicantUI> userTable;
+    @FXML TableView<ApplicantUI> userTable;
     private ObservableList<ApplicantUI> observableListTableView;
 
-    @FXML
-    TableView<Education> educationTable;
+    @FXML TableView<Education> educationTable;
     private ObservableList<Education> observableListEducationTableView;
 
     Stage stage;
-    @FXML
-    TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
-    @FXML
-    TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
-    @FXML
-    TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
-    @FXML
-    TableColumn<ApplicantUI, String> positionCol = new TableColumn<>("position");
-    @FXML
-    TableColumn<ApplicantUI, String> industryCol = new TableColumn<>("industry");
+    @FXML TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
+    @FXML TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
+    @FXML TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
+    @FXML TableColumn<ApplicantUI, String> positionCol = new TableColumn<>("position");
+    @FXML TableColumn<ApplicantUI, String> industryCol = new TableColumn<>("industry");
 
     // Education table
-    @FXML
-    TableColumn<Education, String> universityCol = new TableColumn<>("university");
-    @FXML
-    TableColumn<Education, String> subjectCol = new TableColumn<>("subject");
-    @FXML
-    TableColumn<Education, String> degreeCol = new TableColumn<>("degree");
-    @FXML
-    TableColumn<Education, Number> gradeCol = new TableColumn<>("grade");
-    @FXML
-    TableColumn<Education, String> dateCol = new TableColumn<>("date");
+    @FXML TableColumn<Education, String> universityCol = new TableColumn<>("university");
+    @FXML TableColumn<Education, String> subjectCol = new TableColumn<>("subject");
+    @FXML TableColumn<Education, String> degreeCol = new TableColumn<>("degree");
+    @FXML TableColumn<Education, Number> gradeCol = new TableColumn<>("grade");
+    @FXML TableColumn<Education, String> dateCol = new TableColumn<>("date");
 
     Pane root;
 
