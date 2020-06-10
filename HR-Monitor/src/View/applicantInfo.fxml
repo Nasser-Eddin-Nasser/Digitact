@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+
+<SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+
+   <items>
+<!--  -->
+      <SplitPane dividerPositions="0.3394648829431438" prefHeight="200.0">
+
+        <items>
+
+           <ImageView fx:id="img" fitHeight="238.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                 <Image url="@../Style/welcomescreen.png" />
+              </image>
+           </ImageView>
+
+           <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="160.0" prefWidth="250.0">
+              <items>
+                 <TitledPane animated="false" collapsible="false" prefHeight="71.0" prefWidth="392.0" text="Basic Info">
+                    <content>
+                       <TableView fx:id="basicInfoTblFX" prefHeight="200.0" prefWidth="200.0">
+                          <columns>
+                             <TableColumn fx:id="firstNameFX" prefWidth="75.0" text="First Name" />
+                             <TableColumn fx:id="lastNameFX" prefWidth="75.0" text="Last Name" />
+                             <TableColumn fx:id="eMailFX" prefWidth="75.0" text="E-mail" />
+                             <TableColumn fx:id="pNumberFX" prefWidth="75.0" text="Phone Number" />
+                             <TableColumn fx:id="linkedInFX" prefWidth="75.0" text="LinkedIn" />
+                             <TableColumn prefWidth="75.0" text="Xing" fx:id="xingFX" />
+
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                       </TableView>
+                    </content>
+                 </TitledPane>
+                 <TitledPane animated="false" collapsible="false" text="Education Info">
+                    <content>
+                       <TableView prefHeight="200.0" prefWidth="200.0">
+                          <columns>
+                             <TableColumn prefWidth="75.0" text="University" />
+                             <TableColumn prefWidth="75.0" text="Subject" />
+                             <TableColumn prefWidth="75.0" text="Degree" />
+                             <TableColumn prefWidth="75.0" text="Grade" />
+                             <TableColumn prefWidth="90.0" text="Graduation Date" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                       </TableView>
+                    </content>
+                     <cursor>
+                        <Cursor fx:constant="NONE" />
+                     </cursor>
+                 </TitledPane>
+
+              </items>
+           </SplitPane>
+
+        </items>
+
+      </SplitPane>
+      
+
+      <TabPane prefHeight="300.0" prefWidth="200.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Information">
+             <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="160.0" prefWidth="250.0">
+                <items>
+                   <TitledPane animated="false" collapsible="false" prefHeight="98.0" prefWidth="569.0" text="Key Competencies">
+                      <content>
+                         <TableView prefHeight="200.0" prefWidth="200.0">
+                            <columns>
+                               <TableColumn prefWidth="75.0" text="Programming Languages" />
+                               <TableColumn prefWidth="75.0" text="Databases" />
+                               <TableColumn prefWidth="75.0" text="Spoken Languages" />
+                            </columns>
+                            <columnResizePolicy>
+                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+                         </TableView>
+                      </content>
+                   </TitledPane>
+                   <TitledPane animated="false" collapsible="false" text="Education Info">
+                      <content>
+                         <TableView prefHeight="300.0" prefWidth="200.0">
+                            <columns>
+                               <TableColumn prefWidth="75.0" text="Position" />
+                               <TableColumn prefWidth="75.0" text="Industries" />
+                            </columns>
+                            <columnResizePolicy>
+                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+                         </TableView>
+                      </content>
+                      <cursor>
+                         <Cursor fx:constant="NONE" />
+                      </cursor>
+                   </TitledPane>
+
+                </items>
+             </SplitPane>
+          </Tab>
+
+          <Tab text="Documents" />
+        </tabs>
+      </TabPane>
+   </items>
+
+
+
+</SplitPane>

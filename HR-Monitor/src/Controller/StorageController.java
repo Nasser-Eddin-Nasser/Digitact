@@ -27,6 +27,9 @@ public class StorageController {
     @FXML TableView<Education> educationTable;
     private ObservableList<Education> observableListEducationTableView;
 
+    @FXML TableView<ApplicantUI> basicInfoTblFX;
+    private ObservableList<ApplicantUI> observableListApplicantTableView;
+
     Stage stage;
     @FXML TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
     @FXML TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
@@ -40,6 +43,15 @@ public class StorageController {
     @FXML TableColumn<Education, String> degreeCol = new TableColumn<>("degree");
     @FXML TableColumn<Education, Number> gradeCol = new TableColumn<>("grade");
     @FXML TableColumn<Education, String> dateCol = new TableColumn<>("date");
+
+
+
+    // Applicant Info new Table
+    @FXML TableColumn<ApplicantUI, Number> idFX = new TableColumn<>("id");
+    @FXML TableColumn<ApplicantUI, String> firstNameFX = new TableColumn<>("firstName");
+    @FXML TableColumn<ApplicantUI, String> lastNameFX = new TableColumn<>("lastName");
+    //@FXML TableColumn<ApplicantUI, String> eMailFX = new TableColumn<>("eMail");
+    //@FXML TableColumn<ApplicantUI, String> pNumberFX = new TableColumn<>("lastName");
 
     Pane root;
 
@@ -65,6 +77,20 @@ public class StorageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        try {
+            Stage stageApplicantInfo = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/applicantInfo.fxml"));
+            loader.setController(this);
+            Scene scene = new Scene(loader.load());
+            stageApplicantInfo.show();
+            stageApplicantInfo.setScene(scene);
+            stageApplicantInfo.show();
+            stageApplicantInfo.setTitle("Applicant Info");
+            getTableApplicant(id);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private ObservableList<Education> getTableEducation(long id) {
@@ -74,6 +100,14 @@ public class StorageController {
         observableListEducationTableView.addAll(app.getEducations());
         setFactoriesAndComparatorsForEducationTableColumns();
         return observableListEducationTableView;
+    }
+    private ObservableList<ApplicantUI> getTableApplicant(long id) {
+        ApplicantUI app = model.getApplicantByID(id);
+        observableListApplicantTableView = basicInfoTblFX.getItems();
+        observableListApplicantTableView.clear();
+        observableListApplicantTableView.addAll(app);
+        setFactoriesAndComparatorsForApplicantTableColumns();
+        return observableListApplicantTableView;
     }
 
     public Pane getPane() {
@@ -92,6 +126,15 @@ public class StorageController {
                 education -> new ReadOnlyDoubleWrapper(education.getValue().getGrade()));
         dateCol.setCellValueFactory(
                 education -> new ReadOnlyStringWrapper(education.getValue().getGraduation_date()));
+
+
+
+    }
+
+    public void setFactoriesAndComparatorsForApplicantTableColumns() {
+        //Applicant Info New Basic Info Table
+        firstNameFX.setCellValueFactory(applicant-> new ReadOnlyStringWrapper(applicant.getValue().getFirstName()));
+        lastNameFX.setCellValueFactory(applicant-> new ReadOnlyStringWrapper(applicant.getValue().getLastName()));
     }
 
     public void setFactoriesAndComparatorsForTableColumns() {
@@ -130,5 +173,6 @@ public class StorageController {
                             });
                     return row;
                 });
+
     }
 }
