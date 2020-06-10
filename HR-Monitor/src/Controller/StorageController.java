@@ -4,28 +4,31 @@ import Model.Education;
 import Model.MVC.StorageModel;
 import Model.User.ApplicantUI;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Application;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.scene.Node;
+import javafx.scene.control.Control;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class StorageController {
+public class StorageController extends Application {
     StorageModel model;
     // Create a TableView with a list of persons
     @FXML TableView<ApplicantUI> userTable;
     private ObservableList<ApplicantUI> observableListTableView;
 
     @FXML TableView<Education> educationTable;
-    private ObservableList<Education> observableListEducationTableView;
 
     Stage stage;
     @FXML TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
@@ -44,36 +47,25 @@ public class StorageController {
     Pane root;
 
     public StorageController(Stage parentStage) throws IOException {
-        model = new StorageModel();
-        stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/storageView.fxml"));
-        loader.setController(this);
-        root = (Pane) loader.load();
-        getTable();
-    }
-
-    public void showEduInfo(long id) {
         try {
-            Stage stageEduInfo = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/eduInfoView.fxml"));
-            loader.setController(this);
-            Scene scene = new Scene(loader.load());
-            stageEduInfo.show();
-            stageEduInfo.setScene(scene);
-            stageEduInfo.show();
-            getTableEducation(id);
-        } catch (IOException e) {
+            start(parentStage);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private ObservableList<Education> getTableEducation(long id) {
-        ApplicantUI app = model.getApplicantByID(id);
-        observableListEducationTableView = educationTable.getItems();
-        observableListEducationTableView.clear();
-        observableListEducationTableView.addAll(app.getEducations());
+    private TableView<Education> educationSubTable(long id) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/eduInfoView.fxml"));
+        loader.setController(this);
+        List<Education> education = new ArrayList<>();
+        education = model.getApplicantByID(id).getEducations();
+        TableView<Education> subTable = new TableView<Education>();
         setFactoriesAndComparatorsForEducationTableColumns();
-        return observableListEducationTableView;
+        subTable.setItems(FXCollections.observableArrayList(education));
+        subTable.getColumns().addAll(universityCol, subjectCol, degreeCol, gradeCol, dateCol);
+        subTable.setStyle("-fx-border-color: #42bff4;"); // add to css
+        subTable.setMinWidth(Control.USE_COMPUTED_SIZE);
+        return subTable;
     }
 
     public Pane getPane() {
@@ -83,15 +75,22 @@ public class StorageController {
     public void setFactoriesAndComparatorsForEducationTableColumns() {
         universityCol.setCellValueFactory(
                 education -> new ReadOnlyStringWrapper(education.getValue().getUniversity()));
+        universityCol.setMinWidth(Control.USE_COMPUTED_SIZE);
+
         subjectCol.setCellValueFactory(
                 education -> new ReadOnlyStringWrapper(education.getValue().getSubject()));
+        subjectCol.setMinWidth(Control.USE_COMPUTED_SIZE);
+
         degreeCol.setCellValueFactory(
                 education ->
                         new ReadOnlyStringWrapper(education.getValue().getDegree().toString()));
+        degreeCol.setMinWidth(Control.USE_COMPUTED_SIZE);
         gradeCol.setCellValueFactory(
                 education -> new ReadOnlyDoubleWrapper(education.getValue().getGrade()));
+        gradeCol.setMinWidth(Control.USE_COMPUTED_SIZE);
         dateCol.setCellValueFactory(
                 education -> new ReadOnlyStringWrapper(education.getValue().getGraduation_date()));
+        dateCol.setMinWidth(Control.USE_COMPUTED_SIZE);
     }
 
     public void setFactoriesAndComparatorsForTableColumns() {
@@ -119,16 +118,57 @@ public class StorageController {
 
     private void AddClickFunctionToUserTable() {
         userTable.setRowFactory(
-                e -> {
-                    TableRow<ApplicantUI> row = new TableRow<>();
-                    row.setOnMouseClicked(
-                            event -> {
-                                if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                                    ApplicantUI rowData = row.getItem();
-                                    showEduInfo(rowData.getID());
+                e ->
+                        new TableRow<ApplicantUI>() {
+                            Node detailsPane;
+
+                            {
+                                selectedProperty()
+                                        .addListener(
+                                                (obs, wasSelected, isNowSelected) -> {
+                                                    if (isNowSelected) {
+                                                        detailsPane =
+                                                                educationSubTable(
+                                                                        getItem().getID());
+                                                        this.getChildren().add(detailsPane);
+                                                    } else {
+                                                        this.getChildren().remove(detailsPane);
+                                                    }
+                                                    this.requestLayout();
+                                                });
+                                this.requestLayout();
+                            }
+
+                            @Override
+                            protected double computePrefHeight(double width) {
+                                if (isSelected()) {
+                                    return super.computePrefHeight(width)
+                                            + detailsPane.prefHeight(20);
+                                } else {
+                                    return super.computePrefHeight(width);
                                 }
-                            });
-                    return row;
-                });
+                            }
+
+                            @Override
+                            protected void layoutChildren() {
+                                super.layoutChildren();
+                                if (isSelected()) {
+                                    double width = getWidth();
+                                    double paneHeight = detailsPane.prefHeight(width);
+                                    detailsPane.resizeRelocate(
+                                            0, getHeight() - paneHeight, width, paneHeight);
+                                }
+                            }
+                        });
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        model = new StorageModel();
+        stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/storageView.fxml"));
+        loader.setController(this);
+        root = (Pane) loader.load();
+        getTable();
     }
 }
