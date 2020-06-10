@@ -53,27 +53,22 @@ public class StorageController {
     }
 
     public void showEduInfo(long id) {
-        Stage stageEduInfo = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/eduInfoView.fxml"));
-        loader.setController(this);
-        Scene scene = null;
         try {
-            scene = new Scene(loader.load());
+            Stage stageEduInfo = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/eduInfoView.fxml"));
+            loader.setController(this);
+            Scene scene = new Scene(loader.load());
+            stageEduInfo.show();
+            stageEduInfo.setScene(scene);
+            stageEduInfo.show();
+            getTableEducation(id);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        stageEduInfo.show();
-        System.out.println("Prints");
-        stageEduInfo.setScene(scene);
-        stageEduInfo.show();
-        getTableEducation(id);
     }
 
     private ObservableList<Education> getTableEducation(long id) {
         ApplicantUI app = model.getApplicantByID(id);
-        System.out.println("---------");
-        ;
-        app.getEducations().forEach(x -> System.out.println(x.getUniversity()));
         observableListEducationTableView = educationTable.getItems();
         observableListEducationTableView.clear();
         observableListEducationTableView.addAll(app.getEducations());
@@ -101,6 +96,7 @@ public class StorageController {
 
     public void setFactoriesAndComparatorsForTableColumns() {
         idCol.setCellValueFactory(user -> new ReadOnlyLongWrapper(user.getValue().getID()));
+        idCol.setVisible(false);
         firstNameCol.setCellValueFactory(
                 user -> new ReadOnlyStringWrapper(user.getValue().getFirstName()));
         lastNameCol.setCellValueFactory(
@@ -112,13 +108,12 @@ public class StorageController {
     }
 
     public ObservableList<ApplicantUI> getTable() {
-        List<ApplicantUI> db = model.getDB();
+        List<ApplicantUI> applicantsList = model.getDB();
         AddClickFunctionToUserTable();
         observableListTableView = userTable.getItems();
         observableListTableView.clear();
-        observableListTableView.addAll(db);
+        observableListTableView.addAll(applicantsList);
         setFactoriesAndComparatorsForTableColumns();
-        idCol.setVisible(false);
         return observableListTableView;
     }
 
