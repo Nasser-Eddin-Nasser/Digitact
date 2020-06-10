@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView fx:id="educationTable" layoutX="14.0" layoutY="14.0" prefHeight="373.0" prefWidth="572.0">
+      <TableView fx:id="educationTable" layoutX="14.0" layoutY="14.0">
         <columns>
-          <TableColumn fx:id="universityCol" prefWidth="141.0" text="Universirty" />
-          <TableColumn fx:id="subjectCol" prefWidth="148.0" text="Subject" />
-            <TableColumn fx:id="degreeCol" prefWidth="101.0" text="Degree" />
-            <TableColumn fx:id="gradeCol" prefWidth="99.0" text="Grade" />
+          <TableColumn fx:id="universityCol" minWidth="-1.0" prefWidth="204.0" text="Universirty" />
+          <TableColumn fx:id="subjectCol" minWidth="-1.0" prefWidth="204.0" text="Subject" />
+            <TableColumn fx:id="degreeCol" minWidth="-1.0" prefWidth="204.0" text="Degree" />
+            <TableColumn fx:id="gradeCol" minWidth="-1.0" prefWidth="204.0" text="Grade" />
             <TableColumn fx:id="dateCol" prefWidth="82.0" text="Date" />
         </columns>
       </TableView>
