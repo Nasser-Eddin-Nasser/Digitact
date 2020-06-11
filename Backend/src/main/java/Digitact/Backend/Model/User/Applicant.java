@@ -5,7 +5,10 @@ import Digitact.Backend.Model.Image.AppImage;
 import Digitact.Backend.Model.Industries;
 import Digitact.Backend.Model.KeyCompetence;
 import Digitact.Backend.Model.Positions;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -20,6 +23,15 @@ public class Applicant extends User {
 
     @Column(name = "phone")
     private String phone;
+
+    @Column(name = "linkedIn")
+    private String linkedIn;
+
+    @Column(name = "xing")
+    private String xing;
+
+    @Column(name = "title")
+    private Title title;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
@@ -136,5 +148,29 @@ public class Applicant extends User {
 
     public void addIndustries(Industries industriesType) {
         this.industries.add(industriesType);
+    }
+
+    public String getLinkedIn() {
+        return linkedIn;
+    }
+
+    public void setLinkedIn(String linkedIn) {
+        this.linkedIn = linkedIn;
+    }
+
+    public String getXing() {
+        return xing;
+    }
+
+    public void setXing(String xing) {
+        this.xing = xing;
+    }
+
+    public Title getTitle() {
+        return title;
+    }
+
+    public void setTitle(Title title) {
+        this.title = title;
     }
 }

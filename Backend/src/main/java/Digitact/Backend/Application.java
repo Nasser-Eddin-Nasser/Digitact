@@ -10,7 +10,6 @@ public class Application {
     // absolute file system path
     public static final String absoluteFileSystemPath =
             "\\\\LENOVO-PC\\Users\\EDDIN\\Desktop\\SS20\\AMOS\\FileSystem\\";
-    public static final String fileSeparator = "-";
     public static final String blockFormat = ".txt";
     public static final long BLOCKSIZE = 1024 * 1024; // 1 MiB
 

@@ -14,7 +14,10 @@ public class ApplicantUI implements IUser {
 
     private String email;
     private String phone;
+    private String linkedIn;
+    private String xing;
 
+    private Title title;
     private List<ImageString> imageList;
     private List<Education> educations;
 
@@ -29,6 +32,9 @@ public class ApplicantUI implements IUser {
             String lastName,
             String email,
             String phone,
+            String linkedIn,
+            String xing,
+            Title title,
             List<ImageString> imageList,
             List<Education> educations,
             List<Industries> industries,
@@ -38,6 +44,9 @@ public class ApplicantUI implements IUser {
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
+        this.xing = xing;
+        this.linkedIn = linkedIn;
+        this.title = title;
         this.imageList = imageList;
         this.educations = educations;
         this.industries = industries;
@@ -75,6 +84,26 @@ public class ApplicantUI implements IUser {
 
     public String getPhone() {
         return phone;
+    }
+
+    public String getLinkedIn() {
+        return linkedIn;
+    }
+
+    public void setLinkedIn(String linkedIn) {
+        this.linkedIn = linkedIn;
+    }
+
+    public String getXing() {
+        return xing;
+    }
+
+    public void setXing(String xing) {
+        this.xing = xing;
+    }
+
+    public Title getTitle() {
+        return title;
     }
 
     @Override

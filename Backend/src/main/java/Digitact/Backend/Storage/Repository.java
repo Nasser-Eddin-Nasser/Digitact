@@ -26,9 +26,11 @@ public class Repository {
         addKeyCompetencesToApplicant(applicant.getKeyCompetencies(), app);
         app.setIndustries(applicant.getIndustries());
         app.setPositions(applicant.getPositions());
+        app.setLinkedIn(applicant.getLinkedIn());
+        app.setXing(applicant.getXing());
+        app.setTitle(applicant.getTitle());
         if (applicant.getImageList() != null) addImagesToApplicant(applicant.getImageList(), app);
         repo.save(app);
-
         return true;
     }
 

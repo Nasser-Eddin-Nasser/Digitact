@@ -22,6 +22,7 @@ public class AppImage {
 
     private String id;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "appImage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     private List<Block> blocks;
