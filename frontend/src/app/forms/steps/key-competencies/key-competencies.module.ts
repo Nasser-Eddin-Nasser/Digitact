@@ -8,7 +8,7 @@ import { KeyCompetenciesComponent } from './key-competencies.component';
 import { ItemPopoverComponent } from './rating-modal/item-popover/item-popover.component';
 import { TrimPipe } from './rating-modal/pipes/trim.pipe';
 import { RatingModalComponent } from './rating-modal/rating-modal.component';
-import { RangeToPipe } from './rating-modal/stars/range-to.pipe';
+import { RangeToPipe } from './rating-modal/stars/pipes/range-to.pipe';
 import { StarsComponent } from './rating-modal/stars/stars.component';
 
 @NgModule({
