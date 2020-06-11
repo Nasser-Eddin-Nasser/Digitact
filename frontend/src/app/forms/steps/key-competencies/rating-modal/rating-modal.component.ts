@@ -114,10 +114,11 @@ export class RatingModalComponent
     }
 
     // Handle the search value.
-    if (this.searchInput.value !== '') {
-      const searchedFor = this.searchInput.value.toLowerCase();
+    if (this.searchInput.value.trim() !== '') {
+      const searchedFor = this.searchInput.value.toLowerCase().trim();
 
       result = result.filter((item) => {
+        // We expect that the already known names don't start/end with a whitespace, so we don't need to trim() here.
         const name = item.controls.name.value.toLowerCase();
         if (name.includes(searchedFor)) {
           return true;

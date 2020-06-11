@@ -67,7 +67,7 @@
     <div class="bottom-content" *ngIf="searchInput.value">
       <span>
         Not found what you were looking for? You can also add your search term
-        ("{{ searchInput.value }}") to the list.
+        ("{{ searchInput.value | trim }}") to the list.
       </span>
       <div class="add-to-list-button-container ion-margin-top">
         <ion-button color="primary" (click)="addSearchTermToList()">
