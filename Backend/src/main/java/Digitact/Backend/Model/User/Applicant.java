@@ -5,7 +5,10 @@ import Digitact.Backend.Model.Image.AppImage;
 import Digitact.Backend.Model.Industries;
 import Digitact.Backend.Model.KeyCompetence;
 import Digitact.Backend.Model.Positions;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -27,11 +30,11 @@ public class Applicant extends User {
 
     @ElementCollection(targetClass = Industries.class)
     @Column(name = "Industries")
-    private List<Industries> industries;
+    private Set<Industries> industries;
 
-    @ElementCollection(targetClass = Industries.class)
+    @ElementCollection(targetClass = Positions.class)
     @Column(name = "Positions")
-    private List<Positions> positions;
+    private Set<Positions> positions;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
@@ -54,8 +57,8 @@ public class Applicant extends User {
         educations = new HashSet<Education>();
         keyCompetencies = new HashSet<KeyCompetence>();
         images = new HashSet<AppImage>();
-        industries = new LinkedList<Industries>();
-        positions = new LinkedList<Positions>();
+        industries = new HashSet<Industries>();
+        positions = new HashSet<Positions>();
     }
 
     public UserRight getUserRight() {
@@ -75,11 +78,11 @@ public class Applicant extends User {
     }
 
     public List<Positions> getPositions() {
-        return positions;
+        return new ArrayList<Positions>(positions);
     }
 
     public void setPositions(List<Positions> positions) {
-        this.positions = positions;
+        positions.forEach(x -> this.positions.add(x));
     }
 
     public void addPosition(Positions position) {
@@ -127,11 +130,11 @@ public class Applicant extends User {
     }
 
     public List<Industries> getIndustries() {
-        return industries;
+        return new ArrayList<Industries>(industries);
     }
 
     public void setIndustries(List<Industries> selectedIndustries) {
-        this.industries = selectedIndustries;
+        selectedIndustries.forEach(x -> this.industries.add(x));
     }
 
     public void addIndustries(Industries industriesType) {

@@ -13,6 +13,7 @@ public class Block {
 
     private String id;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "imageId")
     private AppImage appImage;
