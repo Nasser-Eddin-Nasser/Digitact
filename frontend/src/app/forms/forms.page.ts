@@ -14,6 +14,7 @@ import { FormArray, FormControl, FormGroup } from '../common/forms/forms';
 import {
   BasicInfo,
   ContactInfo,
+  Documents,
   EducationInfo,
   FieldDesignationInfo,
   FormsData,
@@ -85,6 +86,9 @@ export class FormsPage implements OnInit, OnDestroy {
       professionalSoftware: new FormControl([]),
       databases: new FormControl([]),
       programmingLanguagesAndFrameworks: new FormControl([]),
+    }),
+    documents: new FormGroup<Documents>({
+      documentsBase64: new FormArray([], Validators.required),
     }),
   });
 

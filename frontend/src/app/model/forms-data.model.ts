@@ -15,6 +15,7 @@ export interface FormsData {
   fieldDesignationInfo: FieldDesignationInfo;
   profilePicture: ProfilePicture;
   keyCompetencies: KeyCompetencies;
+  documents: Documents;
 }
 
 export interface BasicInfo {
@@ -59,4 +60,8 @@ export interface KeyCompetencies {
 export interface KeyCompetenciesEntry {
   name: string;
   rating: number;
+}
+
+export interface Documents {
+  documentsBase64: string[];
 }
