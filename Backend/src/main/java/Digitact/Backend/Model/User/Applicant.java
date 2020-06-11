@@ -1,95 +1,141 @@
 package Digitact.Backend.Model.User;
 
 import Digitact.Backend.Model.Education;
+import Digitact.Backend.Model.Image.AppImage;
 import Digitact.Backend.Model.Industries;
 import Digitact.Backend.Model.KeyCompetence;
 import Digitact.Backend.Model.Positions;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import javax.persistence.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-// import com.google.common.collect.Lists;
+import javax.persistence.*;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
 public class Applicant extends User {
-    private static final long serialVersionUID = -2343243243242432341L;
+  private static final long serialVersionUID = -2343243243242432341L;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Fetch(FetchMode.JOIN)
-    private Set<Education> educations;
+  @Column(name = "email")
+  private String email;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Fetch(FetchMode.JOIN)
-    private Industries industries;
+  @Column(name = "phone")
+  private String phone;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Fetch(FetchMode.JOIN)
-    private Positions positions;
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @Fetch(FetchMode.JOIN)
+  private Set<Education> educations;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Fetch(FetchMode.JOIN)
-    private Set<KeyCompetence> keyCompetencies;
+  @ElementCollection(targetClass = Industries.class)
+  @Column(name = "Industries")
+  private List<Industries> industries;
 
-    protected Applicant() {
-        super();
-    }
+  @ElementCollection(targetClass = Industries.class)
+  @Column(name = "Positions")
+  private List<Positions> positions;
 
-    /**
-     * @param firstName
-     * @param lastName
-     */
-    public Applicant(String firstName, String lastName) {
-        super(firstName, lastName, UserRight.Applicant);
-        educations = new HashSet<Education>();
-        keyCompetencies = new HashSet<KeyCompetence>();
-    }
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @Fetch(FetchMode.JOIN)
+  private Set<KeyCompetence> keyCompetencies;
 
-    public UserRight getUserRight() {
-        return UserRight.Applicant;
-    }
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @Fetch(FetchMode.JOIN)
+  private Set<AppImage> images;
 
-    public void setEducation(Education education) {
-        educations.add(education);
-    }
+  protected Applicant() {
+    super();
+  }
 
-    public List<Education> getEducations() {
-        return new ArrayList<Education>(educations);
-    }
+  /**
+   * @param firstName
+   * @param lastName
+   */
+  public Applicant(String firstName, String lastName) {
+    super(firstName, lastName, UserRight.Applicant);
+    educations = new HashSet<Education>();
+    keyCompetencies = new HashSet<KeyCompetence>();
+    images = new HashSet<AppImage>();
+    industries = new LinkedList<Industries>();
+    positions = new LinkedList<Positions>();
+  }
 
-    public void setEducations(List<Education> education) {
-        education.forEach(edd -> educations.add(edd));
-    }
+  public UserRight getUserRight() {
+    return UserRight.Applicant;
+  }
 
-    public Industries getIndustries() {
-        return industries;
-    }
+  public void setEducation(Education education) {
+    educations.add(education);
+  }
 
-    public void setIndustries(Industries industries) {
-        this.industries = industries;
-    }
+  public List<Education> getEducations() {
+    return new ArrayList<Education>(educations);
+  }
 
-    public Positions getPositions() {
-        return positions;
-    }
+  public void setEducations(List<Education> education) {
+    education.forEach(edd -> educations.add(edd));
+  }
 
-    public void setPositions(Positions positions) {
-        this.positions = positions;
-    }
+  public List<Positions> getPositions() {
+    return positions;
+  }
 
-    public void addKeyCompetence(KeyCompetence keyCompetence) {
-        keyCompetencies.add(keyCompetence);
-    }
+  public void setPositions(List<Positions> positions) {
+    this.positions = positions;
+  }
 
-    public List<KeyCompetence> getKeyCompetencies() {
-        return new ArrayList<KeyCompetence>(keyCompetencies);
-    }
+  public void addPosition(Positions position) {
+    this.positions.add(position);
+  }
 
-    public void setKeyCompetencies(List<KeyCompetence> keyCompetencies) {
-        keyCompetencies.forEach(comp -> this.keyCompetencies.add(comp));
-    }
+  public void addKeyCompetence(KeyCompetence keyCompetence) {
+    keyCompetencies.add(keyCompetence);
+  }
+
+  public List<KeyCompetence> getKeyCompetencies() {
+    return new ArrayList<KeyCompetence>(keyCompetencies);
+  }
+
+  public void setKeyCompetencies(List<KeyCompetence> keyCompetencies) {
+    keyCompetencies.forEach(comp -> this.keyCompetencies.add(comp));
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getPhone() {
+    return phone;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
+
+  public Set<AppImage> getImages() {
+    return images;
+  }
+
+  public void setImages(Set<AppImage> images) {
+    this.images = images;
+  }
+
+  public void addImage(AppImage image) {
+    this.images.add(image);
+  }
+
+  public List<Industries> getIndustries() {
+    return industries;
+  }
+
+  public void setIndustries(List<Industries> selectedIndustries) {
+    this.industries = selectedIndustries;
+  }
+
+  public void addIndustries(Industries industriesType) {
+    this.industries.add(industriesType);
+  }
 }
