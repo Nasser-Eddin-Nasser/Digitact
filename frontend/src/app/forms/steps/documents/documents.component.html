@@ -1,1 +1,32 @@
-Documents
+<div class="main-description">
+  <h1>Documents</h1>
+
+  In this step, you can take photos of documents you would like to include in
+  your application. For instance, you can take photos of your CV here. This step
+  is optional: If you don't want to add anyting, you can just skip it.
+</div>
+
+<div class="add-icon-container">
+  <ion-icon
+    name="add-circle"
+    color="primary"
+    (click)="takePicture()"
+  ></ion-icon>
+</div>
+
+<div
+  class="thumbnails"
+  *ngIf="
+    formsData.controls.documents.controls.documentsBase64.controls.length > 0
+  "
+>
+  <div
+    class="single-thumbnail-container"
+    *ngFor="
+      let control of formsData.controls.documents.controls.documentsBase64
+        .controls
+    "
+  >
+    <div class="make-square"><img [src]="control.value" /></div>
+  </div>
+</div>
