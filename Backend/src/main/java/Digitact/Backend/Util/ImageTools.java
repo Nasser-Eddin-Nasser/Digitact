@@ -1,4 +1,5 @@
 package Digitact.Backend.Util;
+
 import static Digitact.Backend.Application.*;
 
 import Digitact.Backend.Model.Image.AppImage;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
 public class ImageTools {
     private static int size = (int) BLOCKSIZE; // todo
 
@@ -77,5 +79,4 @@ public class ImageTools {
         }
         return false;
     }
-
 }
