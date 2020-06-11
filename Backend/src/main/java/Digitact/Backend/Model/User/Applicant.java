@@ -1,39 +1,45 @@
 package Digitact.Backend.Model.User;
 
 import Digitact.Backend.Model.Education;
+import Digitact.Backend.Model.Image.AppImage;
 import Digitact.Backend.Model.Industries;
 import Digitact.Backend.Model.KeyCompetence;
 import Digitact.Backend.Model.Positions;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-
-// import com.google.common.collect.Lists;
 
 @Entity
 @Table(name = "users")
 public class Applicant extends User {
     private static final long serialVersionUID = -2343243243242432341L;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "phone")
+    private String phone;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     private Set<Education> educations;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Fetch(FetchMode.JOIN)
-    private Industries industries;
+    @ElementCollection(targetClass = Industries.class)
+    @Column(name = "Industries")
+    private Set<Industries> industries;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Fetch(FetchMode.JOIN)
-    private Positions positions;
+    @ElementCollection(targetClass = Positions.class)
+    @Column(name = "Positions")
+    private Set<Positions> positions;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     private Set<KeyCompetence> keyCompetencies;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
+    private Set<AppImage> images;
 
     protected Applicant() {
         super();
@@ -47,6 +53,9 @@ public class Applicant extends User {
         super(firstName, lastName, UserRight.Applicant);
         educations = new HashSet<Education>();
         keyCompetencies = new HashSet<KeyCompetence>();
+        images = new HashSet<AppImage>();
+        industries = new HashSet<Industries>();
+        positions = new HashSet<Positions>();
     }
 
     public UserRight getUserRight() {
@@ -65,20 +74,16 @@ public class Applicant extends User {
         education.forEach(edd -> educations.add(edd));
     }
 
-    public Industries getIndustries() {
-        return industries;
+    public List<Positions> getPositions() {
+        return new ArrayList<Positions>(positions);
     }
 
-    public void setIndustries(Industries industries) {
-        this.industries = industries;
+    public void setPositions(List<Positions> positions) {
+        positions.forEach(x -> this.positions.add(x));
     }
 
-    public Positions getPositions() {
-        return positions;
-    }
-
-    public void setPositions(Positions positions) {
-        this.positions = positions;
+    public void addPosition(Positions position) {
+        this.positions.add(position);
     }
 
     public void addKeyCompetence(KeyCompetence keyCompetence) {
@@ -91,5 +96,45 @@ public class Applicant extends User {
 
     public void setKeyCompetencies(List<KeyCompetence> keyCompetencies) {
         keyCompetencies.forEach(comp -> this.keyCompetencies.add(comp));
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Set<AppImage> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<AppImage> images) {
+        this.images = images;
+    }
+
+    public void addImage(AppImage image) {
+        this.images.add(image);
+    }
+
+    public List<Industries> getIndustries() {
+        return new ArrayList<Industries>(industries);
+    }
+
+    public void setIndustries(List<Industries> selectedIndustries) {
+        selectedIndustries.forEach(x -> this.industries.add(x));
+    }
+
+    public void addIndustries(Industries industriesType) {
+        this.industries.add(industriesType);
     }
 }
