@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -51,7 +52,7 @@ public class StorageController {
     @FXML TableColumn<ApplicantUI, String> firstNameFX = new TableColumn<>("firstName");
     @FXML TableColumn<ApplicantUI, String> lastNameFX = new TableColumn<>("lastName");
     //@FXML TableColumn<ApplicantUI, String> eMailFX = new TableColumn<>("eMail");
-    //@FXML TableColumn<ApplicantUI, String> pNumberFX = new TableColumn<>("lastName");
+    //@FXML TableColumn<ApplicantUI, String> pNumberFX = new TableColumn<>("phoneNumber");
 
     Pane root;
 
@@ -87,6 +88,7 @@ public class StorageController {
             stageApplicantInfo.setScene(scene);
             stageApplicantInfo.show();
             stageApplicantInfo.setTitle("Applicant Info");
+            stageApplicantInfo.getIcons().add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
             getTableApplicant(id);
         } catch (IOException e) {
             e.printStackTrace();
