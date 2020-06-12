@@ -6,6 +6,7 @@ import { ImageViewerSettings } from './model/image-viewer-settings.model';
 /**
  * A Service that allows displaying an "image viewer" that is able to display multiple images.
  * It is possible for the user to swipe in order to switch between the provided images.
+ * Also, a delete button is shown for every image.
  */
 @Injectable({
   // Make this a Singleton. There might be better approaches, but for now, it works fine.

@@ -41,7 +41,7 @@ export class DocumentsComponent {
         this.handleTakenPicture(result);
       })
       .catch(() => {
-        // It looks like closing the Camera overlay in the webview, rejects the promise
+        // It looks like closing the Camera overlay in the webview rejects the Promise.
       });
   }
 
