@@ -13,6 +13,7 @@ import {
 
 import { FormControl, FormGroup } from '../../../common/forms/forms';
 import { FormsData } from '../../../model/forms-data.model';
+import { ImageViewerService } from '../../image-viewer/image-viewer.service';
 
 @Component({
   selector: 'form-documents',
@@ -20,6 +21,8 @@ import { FormsData } from '../../../model/forms-data.model';
   styleUrls: ['./documents.component.scss'],
 })
 export class DocumentsComponent {
+  constructor(private imageViewerService: ImageViewerService) {}
+
   /**
    * Data of the entire form.
    */
@@ -50,5 +53,17 @@ export class DocumentsComponent {
     this.formsData.controls.documents.controls.documentsBase64.push(
       newFormControl
     );
+  }
+
+  /**
+   * Open the Image Viewer and pre-select an image.
+   *
+   * @param initialImage The index of the image that shall be pre-selected.
+   */
+  openImageViewer(initialImage: number): void {
+    this.imageViewerService.showImageViewer({
+      imagesBase64: this.formsData.controls.documents.controls.documentsBase64,
+      initialImage,
+    });
   }
 }

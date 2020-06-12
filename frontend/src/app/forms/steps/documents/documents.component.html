@@ -24,8 +24,10 @@
     class="single-thumbnail-container"
     *ngFor="
       let control of formsData.controls.documents.controls.documentsBase64
-        .controls
+        .controls;
+      let i = index
     "
+    (click)="openImageViewer(i)"
   >
     <div class="make-square"><img [src]="control.value" /></div>
   </div>

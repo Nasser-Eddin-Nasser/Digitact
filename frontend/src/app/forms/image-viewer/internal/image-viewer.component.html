@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeImageViewer()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides [options]="sliderOptions">
+    <ion-slide *ngFor="let control of providedSettings.imagesBase64.controls">
+      <img [src]="control.value" />
+    </ion-slide>
+  </ion-slides>
+</ion-content>
