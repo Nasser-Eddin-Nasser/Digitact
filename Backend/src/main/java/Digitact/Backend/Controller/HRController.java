@@ -9,10 +9,7 @@ import Digitact.Backend.Util.ImageTools;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /** This is the controller class of the HR */
 @RequestMapping("api/HRController")
@@ -34,8 +31,8 @@ public class HRController {
         return new ArrayList<Education>(educationRepository.getAllEducationsInfo());
     }
 
-    @GetMapping("/getImageById")
-    public String getImageById(@RequestBody String imageId) {
+    @GetMapping(path="/getImageById={imageId}")
+    public String getImageById(@PathVariable String imageId) {
         return ImageTools.combineImage(imageRepository.getImageByID(imageId)).getContent();
     }
 }

@@ -1,6 +1,7 @@
 package Model;
 
 public class Education {
+
     private Long id;
 
     private String university;
@@ -13,7 +14,7 @@ public class Education {
 
     private String graduation_date;
 
-    public Education() {}
+    private Education() {}
 
     public Education(
             String university,
@@ -26,6 +27,7 @@ public class Education {
         this.degree = degree;
         this.grade = grade;
         this.graduation_date = graduation_date;
+        System.out.println(university+" "+subject);
     }
 
     public String getUniversity() {

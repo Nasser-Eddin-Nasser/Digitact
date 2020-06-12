@@ -18,7 +18,6 @@ public class Connector {
                     String inputLine;
                     if ((inputLine = in.readLine()) != null) {
                         Util.JSONTools.convertJSONToApplicant(inputLine);
-                        System.out.println(inputLine);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
