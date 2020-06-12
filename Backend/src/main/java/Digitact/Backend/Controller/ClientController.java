@@ -1,7 +1,11 @@
 package Digitact.Backend.Controller;
 
-import Digitact.Backend.Model.User.*;
+import Digitact.Backend.Model.User.Admin;
+import Digitact.Backend.Model.User.ApplicantUI;
+import Digitact.Backend.Model.User.User;
+import Digitact.Backend.Model.User.UserUI;
 import Digitact.Backend.Storage.IDataRepository;
+import Digitact.Backend.Storage.Repository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,8 +14,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/controller")
 @RestController
 public class ClientController {
-
     @Autowired IDataRepository repository;
+
+    //  @PostMapping("/setImage")
+    //  public String setImage(@RequestBody String image) {
+    //    ImageTool it = new ImageTool(repository);
+    //    it.createAppImage(image, ImageType.CV);
+    //    return "image is created in the database";
+    //  }
 
     /** @return JSON object of the user */
     @GetMapping("/getAll")
@@ -20,22 +30,14 @@ public class ClientController {
     }
 
     /**
-     * @param user - JSON request's user object
+     * @param applicant - JSON request's user object
      *     <p>save the user "Applicant" in the DB using repository
      * @return "Applicant is created in the database"
      */
     @PostMapping("/createApplicant")
-    public String createApplicant(@RequestBody ApplicantUI user) {
-        Applicant app = new Applicant(user.getFirstName(), user.getLastName());
-        user.getEducations().forEach(x -> x.setUser(app));
-        user.getIndustries().setUser(app);
-        user.getPositions().setUser(app);
-        user.getKeyCompetencies().forEach(x -> x.setUser(app));
-        app.setEducations(user.getEducations());
-        app.setIndustries(user.getIndustries());
-        app.setPositions(user.getPositions());
-        app.setKeyCompetencies(user.getKeyCompetencies());
-        repository.save(app);
+    public String createApplicant(@RequestBody ApplicantUI applicant) {
+        Repository myRepos = new Repository(repository); // todo singleton pattern
+        myRepos.storeApplicantOnDB(applicant);
         return "Applicant is created in the database";
     }
 

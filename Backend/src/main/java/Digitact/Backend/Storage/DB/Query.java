@@ -8,4 +8,5 @@ public class Query {
     public static final String getAllEducationsQuery = "SELECT * FROM education";
     public static final String getFullApplicantsInfoQuery =
             "SELECT * FROM users INNER JOIN education on users.id = education.user_id";
+    public static final String getImageByID = "SELECT * FROM images WHERE id = ?1";
 }
