@@ -22,6 +22,11 @@ export class ImageViewerComponent implements OnInit, OnDestroy {
    */
   providedSettings: ImageViewerSettings;
 
+  /**
+   * The index of the currently displayed image.
+   */
+  currentSlideIndex: number;
+
   constructor(
     private alertController: AlertController,
     private imageViewerService: ImageViewerService,
@@ -42,6 +47,8 @@ export class ImageViewerComponent implements OnInit, OnDestroy {
         toggle: true,
       },
     };
+
+    this.currentSlideIndex = this.providedSettings.initialImage;
   }
 
   ngOnDestroy(): void {
@@ -50,6 +57,16 @@ export class ImageViewerComponent implements OnInit, OnDestroy {
 
   closeImageViewer(): void {
     this.navController.pop();
+  }
+
+  /**
+   * Update the index of the currently displayed image.
+   *
+   * This method should also be called when an image was deleted.
+   */
+  async updateCurrentSlideIndex(): Promise<void> {
+    const imageIndex = await this.slider.getActiveIndex();
+    this.currentSlideIndex = imageIndex;
   }
 
   /**
@@ -86,7 +103,17 @@ export class ImageViewerComponent implements OnInit, OnDestroy {
    */
   private async deleteImage(imageIndex: number): Promise<void> {
     this.providedSettings.imagesBase64.removeAt(imageIndex);
-    this.slider.update();
+
+    if (this.providedSettings.imagesBase64.length < 1) {
+      this.closeImageViewer();
+    } else {
+      /*
+        TODO: Not sure if this is the correct way to wait for the slider to update.
+        If the slide numbers don't reliably get updated, we should look for a different solution.
+      */
+      await this.slider.update();
+      this.updateCurrentSlideIndex();
+    }
 
     // Display a success message.
     const toast = await this.toastController.create({
@@ -94,9 +121,5 @@ export class ImageViewerComponent implements OnInit, OnDestroy {
       duration: 3000,
     });
     toast.present();
-
-    if (this.providedSettings.imagesBase64.length < 1) {
-      this.closeImageViewer();
-    }
   }
 }

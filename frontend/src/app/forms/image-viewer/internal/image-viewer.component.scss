@@ -8,7 +8,8 @@ ion-toolbar,
 ion-content {
   --background: #000000;
 }
-ion-header ion-button {
+ion-header ion-button,
+ion-header ion-title {
   --color: #ffffff;
 }
 

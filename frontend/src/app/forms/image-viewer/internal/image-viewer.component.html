@@ -6,6 +6,10 @@
       </ion-button>
     </ion-buttons>
 
+    <ion-title class="ion-text-center">
+      {{ currentSlideIndex + 1 }} / {{ providedSettings.imagesBase64.length }}
+    </ion-title>
+
     <ion-buttons slot="end">
       <ion-button (click)="deleteCurrentImage()">
         <ion-icon name="trash-outline"></ion-icon>
@@ -15,7 +19,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-slides [options]="sliderOptions" #slider>
+  <ion-slides
+    [options]="sliderOptions"
+    #slider
+    (ionSlideDidChange)="updateCurrentSlideIndex()"
+  >
     <ion-slide *ngFor="let control of providedSettings.imagesBase64.controls">
       <img [src]="control.value" />
     </ion-slide>
