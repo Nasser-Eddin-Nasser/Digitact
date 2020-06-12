@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application {
     // TODO  move configurations to Application.properties
     // absolute file system path
-    public static final String absoluteFileSystemPath =
-            "\\\\LENOVO-PC\\Users\\EDDIN\\Desktop\\SS20\\AMOS\\FileSystem\\";
+    public static final String absoluteFileSystemPath = "D:\\Current\\2nd Semester\\AMOS Project\\FileSystem";
+
     public static final String blockFormat = ".txt";
     public static final long BLOCKSIZE = 1024 * 1024; // 1 MiB
 

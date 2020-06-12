@@ -17,6 +17,8 @@ public class JSONTools {
                     mapper.readValue(jsonInput, new TypeReference<List<ApplicantUI>>() {}));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

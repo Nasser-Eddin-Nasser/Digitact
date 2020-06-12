@@ -20,12 +20,12 @@ public class Education {
             String subject,
             Degree degree,
             double grade,
-            String graduation_Date) {
+            String graduation_date) {
         this.university = university;
         this.subject = subject;
         this.degree = degree;
         this.grade = grade;
-        this.graduation_date = graduation_Date;
+        this.graduation_date = graduation_date;
     }
 
     public String getUniversity() {
