@@ -28,6 +28,10 @@ out/
 .classpath
 .project
 
+### Gradle ###
+.gradle
+/build/
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
