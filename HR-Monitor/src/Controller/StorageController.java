@@ -71,12 +71,14 @@ public class StorageController {
     @FXML TableColumn<ApplicantUI, String> pNumberFX = new TableColumn<>("phoneNumber");
     @FXML TableColumn<ApplicantUI, String> linkedInFX = new TableColumn<>("linkedIn");
     @FXML TableColumn<ApplicantUI, String> xingFX = new TableColumn<>("xing");
+
     // 2. Edu Info
     @FXML TableColumn<Education, String> universityFX = new TableColumn<>("university");
     @FXML TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
     @FXML TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
     @FXML TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
     @FXML TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
+    
     // 3. Image
     @FXML private ImageView imgFX;
 
