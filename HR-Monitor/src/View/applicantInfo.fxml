@@ -14,7 +14,7 @@
       <items>
       <!--  -->
          <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="50">
-            <ImageView fx:id="img" fitHeight="238.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgFX" fitHeight="238.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../Style/welcomescreen.png" />
             </image>
@@ -23,10 +23,7 @@
 
 
          <SplitPane orientation="VERTICAL" prefHeight="200.0">
-
            <items>
-
-
               <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="160.0" prefWidth="250.0">
                  <items>
                     <TitledPane animated="false" collapsible="false" prefHeight="71.0" prefWidth="392.0" text="Basic Info">

@@ -1,15 +1,23 @@
 package Controller;
 
+import Database.Connector;
 import Model.Education;
+import Model.Image.AppImage;
 import Model.MVC.StorageModel;
 import Model.User.ApplicantUI;
-import java.io.IOException;
-import java.util.List;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.Optional;
+
+import Util.ImageTools;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,8 +25,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import javax.imageio.ImageIO;
+
+import static Database.Method.getImageById;
 
 public class StorageController {
     StorageModel model;
@@ -67,6 +80,8 @@ public class StorageController {
     @FXML TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
     @FXML TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
     @FXML TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
+    // 3. Image
+    @FXML private ImageView imgFX;
 
     Pane root;
 
@@ -80,7 +95,7 @@ public class StorageController {
     }
 
     public void showApplicantInfo(long id) {
-        /*
+/*
         try {
             Stage stageEduInfo = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/eduInfoView.fxml"));
@@ -89,13 +104,12 @@ public class StorageController {
             stageEduInfo.show();
             stageEduInfo.setScene(scene);
             stageEduInfo.show();
-            getTableEducation(id);
+            //getTableEducation(id);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-         */
-
+ */
         try {
             Stage stageApplicantInfo = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/applicantInfo.fxml"));
@@ -110,10 +124,33 @@ public class StorageController {
                     .add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
             getTableBasicInfo(id);
             getTableEduInfo(id);
+            getImage(id);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    private void getImage(long id) {
+        ApplicantUI app = model.getApplicantByID(id);
+        app.getAppImage().stream().forEach(img-> Connector.sendGetHttp(getImageById, String.valueOf(id),img.getId()));
+        app.getAppImage().stream().forEach(img-> ImageTools.parseImageStringToImage(img));
+        Optional<AppImage> opImg = app.getAppImage().stream().filter(img->img.getType().toString().equals("profilePic")).findAny();
+        if(opImg.isPresent()){
+            try {
+                URL imgURL = getClass().getResource( opImg.get().getPath() );
+                File file = new File(opImg.get().getPath());
+                System.out.println(opImg.get().getPath());
+                System.out.println(file);
+                System.out.println(imgURL);
+                imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null ));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
     /*
        private ObservableList<Education> getTableEducation(long id) {
            ApplicantUI app = model.getApplicantByID(id);
