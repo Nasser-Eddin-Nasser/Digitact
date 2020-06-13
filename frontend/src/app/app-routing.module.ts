@@ -29,10 +29,6 @@ const routes: Routes = [
         (m) => m.ApplicantsPageModule
       ),
   },
-  {
-    path: 'applications-upload',
-    loadChildren: () => import('./applications-upload/applications-upload.module').then( m => m.ApplicationsUploadPageModule)
-  },
 ];
 
 @NgModule({
