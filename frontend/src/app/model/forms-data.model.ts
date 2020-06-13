@@ -11,11 +11,11 @@ export interface FormsData {
   submittedTime: string;
   basicInfo: BasicInfo;
   contactInfo: ContactInfo;
+  profilePicture: ProfilePicture;
+  documents: Documents;
   educationInfo: EducationInfo;
   fieldDesignationInfo: FieldDesignationInfo;
-  profilePicture: ProfilePicture;
   keyCompetencies: KeyCompetencies;
-  documents: Documents;
 }
 
 export interface BasicInfo {
@@ -31,6 +31,14 @@ export interface ContactInfo {
   xing: string;
 }
 
+export interface ProfilePicture {
+  pictureBase64: string;
+}
+
+export interface Documents {
+  documentsBase64: string[];
+}
+
 export interface EducationInfo {
   educationInfoForm: EducationInfoEntry[];
 }
@@ -42,13 +50,10 @@ export interface EducationInfoEntry {
   grade: string;
   graduationYear: string;
 }
+
 export interface FieldDesignationInfo {
   field: UseControl<string[]>;
   designation: UseControl<string[]>;
-}
-
-export interface ProfilePicture {
-  pictureBase64: string;
 }
 
 export interface KeyCompetencies {
@@ -60,8 +65,4 @@ export interface KeyCompetencies {
 export interface KeyCompetenciesEntry {
   name: string;
   rating: number;
-}
-
-export interface Documents {
-  documentsBase64: string[];
 }

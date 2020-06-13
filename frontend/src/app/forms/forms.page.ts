@@ -64,6 +64,7 @@ export class FormsPage implements OnInit, OnDestroy {
     id: new FormControl(''),
     isRated: new FormControl(0),
     submittedTime: new FormControl(''),
+
     basicInfo: new FormGroup<BasicInfo>({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
@@ -75,6 +76,12 @@ export class FormsPage implements OnInit, OnDestroy {
       linkedIn: new FormControl(''),
       xing: new FormControl(''),
     }),
+    profilePicture: new FormGroup<ProfilePicture>({
+      pictureBase64: new FormControl('', Validators.required),
+    }),
+    documents: new FormGroup<Documents>({
+      documentsBase64: new FormArray([]),
+    }),
     educationInfo: new FormGroup<EducationInfo>({
       educationInfoForm: new FormArray([], Validators.required),
     }),
@@ -82,17 +89,11 @@ export class FormsPage implements OnInit, OnDestroy {
       field: new FormControl<string[]>([], Validators.required),
       designation: new FormControl<string[]>([], Validators.required),
     }),
-    profilePicture: new FormGroup<ProfilePicture>({
-      pictureBase64: new FormControl('', Validators.required),
-    }),
     keyCompetencies: new FormGroup<KeyCompetencies>({
       languages: new FormControl([], Validators.required),
       professionalSoftware: new FormControl([]),
       databases: new FormControl([]),
       programmingLanguagesAndFrameworks: new FormControl([]),
-    }),
-    documents: new FormGroup<Documents>({
-      documentsBase64: new FormArray([]),
     }),
   });
 
