@@ -32,7 +32,7 @@ public class AppImage {
 
     @JsonIgnore
     public AppImage(List<Block> blocks) {
-        this.id = this.id = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID().toString();
         this.blocks = blocks;
     }
 
