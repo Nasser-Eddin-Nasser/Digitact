@@ -6,6 +6,13 @@ import { ToastController } from '../../../common/ion-wrappers/toast-controller';
 import { ImageViewerService } from '../image-viewer.service';
 import { ImageViewerSettings } from '../model/image-viewer-settings.model';
 
+/**
+ * Important:
+ * This Component is tightly coupled to the Image Viewer Service
+ * since it gets all of its data from it and must always inform the Service when it gets destroyed.
+ *
+ * This is probably not the most elegant approach, but at least it works for our current use case.
+ */
 @Component({
   templateUrl: './image-viewer.component.html',
   styleUrls: ['./image-viewer.component.scss'],
