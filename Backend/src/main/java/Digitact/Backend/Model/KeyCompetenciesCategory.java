@@ -10,5 +10,6 @@ public enum KeyCompetenciesCategory {
     @JsonProperty("databases")
     Databases,
     @JsonProperty("programmingLanguagesAndFrameworks")
-    ProgrammingLanguagesAndFrameworks
+    ProgrammingLanguagesAndFrameworks,
+    Others
 }
