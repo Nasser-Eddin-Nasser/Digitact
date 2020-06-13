@@ -1,6 +1,6 @@
 /*
  * @description
- *  This module serves as a common place where appplication upload components are handled.
+ *   This module serves as a common place where appplication upload page components are handled.
  */
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
