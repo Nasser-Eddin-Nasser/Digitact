@@ -2,7 +2,6 @@ package Model.Image;
 
 public class AppImage {
 
-
     private String id;
     private ImageType type;
     private String content;
@@ -19,8 +18,8 @@ public class AppImage {
         return content;
     }
 
-    public String getType() {
-        return type.toString();
+    public ImageType getType() {
+        return type;
     }
 
     public String getId() {

@@ -41,12 +41,8 @@ public class Connector {
                     in_1 = new BufferedReader(new InputStreamReader(uc.getInputStream()));
                     String inputLine;
                     if ((inputLine = in_1.readLine()) != null) {
-
-
                         DBStorage.getApplicantByID(Integer.parseInt(params[0])).getAppImage().stream().
                                 filter(x->x.getId().equals(params[1])).collect(Collectors.toList()).get(0).setContent(inputLine);
-
-
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
