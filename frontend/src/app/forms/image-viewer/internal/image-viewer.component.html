@@ -25,6 +25,7 @@
     (ionSlideDidChange)="updateCurrentSlideIndex()"
   >
     <ion-slide *ngFor="let control of providedSettings.imagesBase64.controls">
+      <!-- In case of performance problems: It could help if we resized the image or used some sort of URL for it. For now, we just use the large base64 string here. -->
       <img [src]="control.value" />
     </ion-slide>
   </ion-slides>
