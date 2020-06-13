@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Upload</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="main-container">
+    <div class="content">
+      <div class="main-description custom-style">
+        uploading application
+      </div>
+    </div>
+
+    <div class="buttons-container button-css">
+      <button
+        class="fancy-button align center second-button"
+        (click)="goBack()"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div class="content">
+      <div class="main-description info">
+        Applications are uploading.
+      </div>
+    </div>
+  </div>
+</ion-content>

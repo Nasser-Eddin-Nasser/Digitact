@@ -62,6 +62,6 @@ export class ApplicantsPage implements OnInit {
    * In this method passing of data to the server is done
    */
   sendToHrMonitor(): void {
-    alert('to be implemented');
+    this.navController.navigateForward(['/applications-upload']);
   }
 }
