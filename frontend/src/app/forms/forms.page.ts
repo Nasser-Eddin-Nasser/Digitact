@@ -23,7 +23,11 @@ import {
 } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
 
-import { ApplicationStep, ApplicationStepsArr } from './model/steps.model';
+import {
+  ApplicationStep,
+  ApplicationStepsArr,
+  ApplicationStepsConfig,
+} from './model/steps.model';
 
 @Component({
   selector: 'app-forms',
@@ -88,7 +92,7 @@ export class FormsPage implements OnInit, OnDestroy {
       programmingLanguagesAndFrameworks: new FormControl([]),
     }),
     documents: new FormGroup<Documents>({
-      documentsBase64: new FormArray([], Validators.required),
+      documentsBase64: new FormArray([]),
     }),
   });
 
@@ -257,15 +261,21 @@ export class FormsPage implements OnInit, OnDestroy {
    * Update the value of our progress counter.
    */
   updateProgessStatus(): void {
-    // Don't count the submit page.
-    const totalNumberOfSteps = ApplicationStepsArr.length - 1;
-
     let validSteps = 0;
-    for (const control of Object.values(this.formsData.controls)) {
+    let totalNumberOfRequiredSteps = 0;
+
+    for (const item of Object.values(ApplicationStepsConfig)) {
+      if (!item.useForProgressCalculation) {
+        continue;
+      }
+
+      totalNumberOfRequiredSteps++;
+
+      const control = this.formsData.controls[item.formItemName];
       if (control.valid) {
         validSteps++;
       }
     }
-    this.progressPercentage = validSteps / totalNumberOfSteps;
+    this.progressPercentage = validSteps / totalNumberOfRequiredSteps;
   }
 }
