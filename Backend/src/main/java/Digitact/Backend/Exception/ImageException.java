@@ -1,7 +1,7 @@
 package Digitact.Backend.Exception;
 
-public class BackendServerException extends Exception {
-  public BackendServerException(String message) {
-    super(message);
-  }
+public class ImageException extends Exception {
+    public ImageException(String message) {
+        super(message);
+    }
 }

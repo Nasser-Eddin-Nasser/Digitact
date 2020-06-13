@@ -1,5 +1,6 @@
 package Digitact.Backend.Storage;
 
+import Digitact.Backend.Exception.ImageException;
 import Digitact.Backend.Model.Education;
 import Digitact.Backend.Model.Image.AppImage;
 import Digitact.Backend.Model.Image.ImageString;
@@ -8,6 +9,7 @@ import Digitact.Backend.Model.User.Applicant;
 import Digitact.Backend.Model.User.ApplicantUI;
 import Digitact.Backend.Util.ImageTools;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class Repository {
@@ -19,6 +21,7 @@ public class Repository {
     }
 
     public boolean storeApplicantOnDB(ApplicantUI applicant) {
+        boolean isImageSuccessfullyStored = true;
         Applicant app = new Applicant(applicant.getFirstName(), applicant.getLastName());
         app.setEmail(applicant.getEmail());
         app.setPhone(applicant.getPhone());
@@ -29,18 +32,33 @@ public class Repository {
         app.setLinkedIn(applicant.getLinkedIn());
         app.setXing(applicant.getXing());
         app.setTitle(applicant.getTitle());
-        if (applicant.getImageList() != null) addImagesToApplicant(applicant.getImageList(), app);
-        repo.save(app);
-        return true;
+        boolean hasImages = applicant.getImageList() != null;
+        if (hasImages)
+            isImageSuccessfullyStored = addImagesToApplicant(applicant.getImageList(), app);
+        try {
+            repo.save(app);
+        } catch (Exception e) {
+            return false;
+        }
+        return (hasImages && isImageSuccessfullyStored)
+                || (!hasImages && isImageSuccessfullyStored);
     }
 
-    private void addImagesToApplicant(List<ImageString> imageList, Applicant app) {
+    private boolean addImagesToApplicant(List<ImageString> imageList, Applicant app) {
+        AtomicBoolean isSuccessful = new AtomicBoolean(true);
         imageList.forEach(
                 x -> {
-                    AppImage img = ImageTools.createAppImage(x.getContent(), x.getType()); // todo
+                    AppImage img = null;
+                    try {
+                        img = ImageTools.createAppImage(x.getContent(), x.getType());
+                    } catch (ImageException e) {
+                        isSuccessful.set(false);
+                        return;
+                    }
                     app.addImage(img);
                     img.setUser(app);
                 });
+        return isSuccessful.get();
     }
 
     private void addKeyCompetencesToApplicant(List<KeyCompetence> keyCompetences, Applicant app) {

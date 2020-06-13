@@ -1,7 +1,9 @@
 package Digitact.Backend.Util;
 
-import static Digitact.Backend.Application.*;
+import static Digitact.Backend.ConfigProperties.*;
 
+import Digitact.Backend.ConfigProperties;
+import Digitact.Backend.Exception.ImageException;
 import Digitact.Backend.Model.Image.AppImage;
 import Digitact.Backend.Model.Image.Block;
 import Digitact.Backend.Model.Image.ImageString;
@@ -15,9 +17,11 @@ import java.util.stream.Collectors;
 import javax.xml.bind.DatatypeConverter;
 
 public class ImageTools {
-    private static int size = (int) BLOCKSIZE; // todo
 
-    public static AppImage createAppImage(String imageString, ImageType it) {
+    private static int size = (int) ConfigProperties.BLOCKSIZE;
+    private static int i = 0;
+
+    public static AppImage createAppImage(String imageString, ImageType it) throws ImageException {
         AppImage appImage = new AppImage();
         appImage.createId();
         appImage.setType(it);
@@ -42,23 +46,32 @@ public class ImageTools {
         }
         if (blocks.size() == contents.size()) {
             appImage.setBlocks(blocks);
-        } else { // repeat the process if a block cant be saved correctly TODO add a max repetition
-            createAppImage(imageString, it);
+        } else { // repeat the process if a block cant be saved correctly
+            if (i < Max_Repetition_Try) {
+                try {
+                    ++i;
+                    createAppImage(imageString, it);
+                } catch (Exception e) { // ignore
+                }
+            } else {
+                i = 0;
+                appImage = null;
+            }
         }
         return appImage;
     }
 
-    private static boolean storeBlockInFS(Block block, String content) {
-        File file = new File(absoluteFileSystemPath + block.getID() + blockFormat);
+    private static boolean storeBlockInFS(Block block, String content) throws ImageException {
+        File file = new File(absoluteFileSystemPath + block.getID() + BLOCKFORMAT);
         try {
             if (file.createNewFile()) {
                 boolean successful = writeBlock(file, content);
                 System.out.println("Block Created!");
                 return successful;
             } else System.out.println("Block already exists!");
-
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error while storing Block In FS ");
+            throw new ImageException("Error while storing Block In FS");
         }
         return false;
     }
@@ -101,7 +114,7 @@ public class ImageTools {
         try {
             reader =
                     new BufferedReader(
-                            new FileReader(absoluteFileSystemPath + block.getID() + blockFormat));
+                            new FileReader(absoluteFileSystemPath + block.getID() + BLOCKFORMAT));
             StringBuilder stringBuilder = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {
@@ -110,14 +123,14 @@ public class ImageTools {
 
             content = stringBuilder.toString();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("FileNotFoundException while reading a Block In FS");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("IOException while reading a Block In FS");
         } finally {
             try {
                 reader.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.println("IOException while closing a reader");
             }
         }
         return content;
@@ -134,20 +147,17 @@ public class ImageTools {
                 imageFormat = ".png";
                 break;
             default:
-                imageFormat = ".jpg"; // todo
+                imageFormat = ".jpg";
                 break;
         }
         // convert base64 string to binary data
         byte[] data = DatatypeConverter.parseBase64Binary(imageStrings[1]);
-        String path =
-                absoluteFileSystemPath // todo where to export
-                        + imageString.getType().toString()
-                        + imageFormat; // todo better name like User id
+        String path = absoluteFileSystemPath + imageString.getType().toString() + imageFormat;
         File file = new File(path);
         try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
             outputStream.write(data);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("IOException while parsing a string to image!");
         }
     }
 }

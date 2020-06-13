@@ -37,8 +37,13 @@ public class ClientController {
     @PostMapping("/createApplicant")
     public String createApplicant(@RequestBody ApplicantUI applicant) {
         Repository myRepos = new Repository(repository); // todo singleton pattern
-        myRepos.storeApplicantOnDB(applicant);
-        return "Applicant is created in the database";
+        boolean isSuccessful = myRepos.storeApplicantOnDB(applicant);
+        return (isSuccessful)
+                ? "Applicant is created in the database"
+                : "Error while storing Applicant, some information maybe stored incompletely "; // todo send
+        // status
+        // number is
+        // better
     }
 
     @PostMapping("/createAdmin")
