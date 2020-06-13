@@ -1,22 +1,18 @@
 package Controller;
 
+import static Database.Method.getImageById;
+
 import Database.Connector;
 import Model.Education;
 import Model.Image.AppImage;
 import Model.Image.ImageType;
 import Model.MVC.StorageModel;
 import Model.User.ApplicantUI;
-
+import Util.ImageTools;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import Util.ImageTools;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -32,80 +28,57 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import javax.imageio.ImageIO;
-import javax.swing.text.html.FormSubmitEvent;
-
-import static Database.Method.getImageById;
 
 public class StorageController {
     StorageModel model;
     // Create a TableView with a list of persons
-    @FXML
-    TableView<ApplicantUI> userTable;
+    @FXML TableView<ApplicantUI> userTable;
     private ObservableList<ApplicantUI> observableListTableView;
 
-    //@FXML TableView<Education> educationTable;
-    //private ObservableList<Education> observableListEducationTableView;
+    // @FXML TableView<Education> educationTable;
+    // private ObservableList<Education> observableListEducationTableView;
 
-    @FXML
-    TableView<ApplicantUI> basicInfoTblFX;
+    @FXML TableView<ApplicantUI> basicInfoTblFX;
     private ObservableList<ApplicantUI> observableListBasicInfoTableView;
 
-    @FXML
-    TableView<Education> eduInfoTblFX;
+    @FXML TableView<Education> eduInfoTblFX;
     private ObservableList<Education> observableListEduInfoTableView;
 
     Stage stage;
-    @FXML
-    TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
-    @FXML
-    TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
-    @FXML
-    TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
-    //@FXML TableColumn<ApplicantUI, String> positionCol = new TableColumn<>("position");
-    //@FXML TableColumn<ApplicantUI, String> industryCol = new TableColumn<>("industry");
+    @FXML TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
+    @FXML TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
+    @FXML TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
+    // @FXML TableColumn<ApplicantUI, String> positionCol = new TableColumn<>("position");
+    // @FXML TableColumn<ApplicantUI, String> industryCol = new TableColumn<>("industry");
 
     /*
-    // Education table
-    @FXML TableColumn<Education, String> universityCol = new TableColumn<>("university");
-    @FXML TableColumn<Education, String> subjectCol = new TableColumn<>("subject");
-    @FXML TableColumn<Education, String> degreeCol = new TableColumn<>("degree");
-    @FXML TableColumn<Education, Number> gradeCol = new TableColumn<>("grade");
-    @FXML TableColumn<Education, String> dateCol = new TableColumn<>("date");
+       // Education table
+       @FXML TableColumn<Education, String> universityCol = new TableColumn<>("university");
+       @FXML TableColumn<Education, String> subjectCol = new TableColumn<>("subject");
+       @FXML TableColumn<Education, String> degreeCol = new TableColumn<>("degree");
+       @FXML TableColumn<Education, Number> gradeCol = new TableColumn<>("grade");
+       @FXML TableColumn<Education, String> dateCol = new TableColumn<>("date");
 
- */
+    */
 
     // Applicant Info new Table
     // 1. Basic Info
-    @FXML
-    TableColumn<ApplicantUI, Number> idFX = new TableColumn<>("id");
-    @FXML
-    TableColumn<ApplicantUI, String> firstNameFX = new TableColumn<>("firstName");
-    @FXML
-    TableColumn<ApplicantUI, String> lastNameFX = new TableColumn<>("lastName");
-    @FXML
-    TableColumn<ApplicantUI, String> eMailFX = new TableColumn<>("eMail");
-    @FXML
-    TableColumn<ApplicantUI, String> pNumberFX = new TableColumn<>("phoneNumber");
-    @FXML
-    TableColumn<ApplicantUI, String> linkedInFX = new TableColumn<>("linkedIn");
-    @FXML
-    TableColumn<ApplicantUI, String> xingFX = new TableColumn<>("xing");
+    @FXML TableColumn<ApplicantUI, Number> idFX = new TableColumn<>("id");
+    @FXML TableColumn<ApplicantUI, String> firstNameFX = new TableColumn<>("firstName");
+    @FXML TableColumn<ApplicantUI, String> lastNameFX = new TableColumn<>("lastName");
+    @FXML TableColumn<ApplicantUI, String> eMailFX = new TableColumn<>("eMail");
+    @FXML TableColumn<ApplicantUI, String> pNumberFX = new TableColumn<>("phoneNumber");
+    @FXML TableColumn<ApplicantUI, String> linkedInFX = new TableColumn<>("linkedIn");
+    @FXML TableColumn<ApplicantUI, String> xingFX = new TableColumn<>("xing");
     // 2. Edu Info
-    @FXML
-    TableColumn<Education, String> universityFX = new TableColumn<>("university");
-    @FXML
-    TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
-    @FXML
-    TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
-    @FXML
-    TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
-    @FXML
-    TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
+    @FXML TableColumn<Education, String> universityFX = new TableColumn<>("university");
+    @FXML TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
+    @FXML TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
+    @FXML TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
+    @FXML TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
     // 3. Image
-    @FXML
-    private ImageView imgFX;
+    @FXML private ImageView imgFX;
 
     Pane root;
 
@@ -119,21 +92,21 @@ public class StorageController {
     }
 
     public void showApplicantInfo(long id) {
-/*
-        try {
-            Stage stageEduInfo = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/eduInfoView.fxml"));
-            loader.setController(this);
-            Scene scene = new Scene(loader.load());
-            stageEduInfo.show();
-            stageEduInfo.setScene(scene);
-            stageEduInfo.show();
-            //getTableEducation(id);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        /*
+               try {
+                   Stage stageEduInfo = new Stage();
+                   FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/eduInfoView.fxml"));
+                   loader.setController(this);
+                   Scene scene = new Scene(loader.load());
+                   stageEduInfo.show();
+                   stageEduInfo.setScene(scene);
+                   stageEduInfo.show();
+                   //getTableEducation(id);
+               } catch (IOException e) {
+                   e.printStackTrace();
+               }
 
- */
+        */
         try {
             Stage stageApplicantInfo = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/applicantInfo.fxml"));
@@ -156,17 +129,21 @@ public class StorageController {
 
     private void getImage(long id) {
         ApplicantUI app = model.getApplicantByID(id);
-        List<AppImage> profImgs = app.getAppImage().stream().filter(x -> x.getType().equals(ImageType.profilePic)).collect(Collectors.toList());
+        List<AppImage> profImgs =
+                app.getAppImage()
+                        .stream()
+                        .filter(x -> x.getType().equals(ImageType.profilePic))
+                        .collect(Collectors.toList());
         if (profImgs.size() > 0) {
             try {
-            AppImage img = profImgs.get(0);
-            Connector.sendGetHttp(getImageById, String.valueOf(app.getID()), img.getId());
-            ImageTools.parseImageStringToImage(img);
+                AppImage img = profImgs.get(0);
+                Connector.sendGetHttp(getImageById, String.valueOf(app.getID()), img.getId());
+                ImageTools.parseImageStringToImage(img);
 
                 File file = new File(img.getPath());
                 imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
             } catch (Exception e) {
-              System.err.println("unable to load Image!");
+                System.err.println("unable to load Image!");
             }
         }
     }
@@ -226,7 +203,8 @@ public class StorageController {
         subjectFX.setCellValueFactory(
                 applicant -> new ReadOnlyStringWrapper(applicant.getValue().getSubject()));
         degreeFX.setCellValueFactory(
-                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getDegree().toString()));
+                applicant ->
+                        new ReadOnlyStringWrapper(applicant.getValue().getDegree().toString()));
         gradeFX.setCellValueFactory(
                 applicant -> new ReadOnlyDoubleWrapper(applicant.getValue().getGrade()));
         gradYearFX.setCellValueFactory(
@@ -256,9 +234,9 @@ public class StorageController {
                 user -> new ReadOnlyStringWrapper(user.getValue().getFirstName()));
         lastNameCol.setCellValueFactory(
                 user -> new ReadOnlyStringWrapper(user.getValue().getLastName()));
-        //positionCol.setCellValueFactory(
+        // positionCol.setCellValueFactory(
         // user -> new ReadOnlyStringWrapper(user.getValue().getPositions().toString()));
-        //industryCol.setCellValueFactory(
+        // industryCol.setCellValueFactory(
         // user -> new ReadOnlyStringWrapper(user.getValue().getIndustries().toString()));
     }
 

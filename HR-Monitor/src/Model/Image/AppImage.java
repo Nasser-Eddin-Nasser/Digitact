@@ -29,6 +29,7 @@ public class AppImage {
     public void setContent(String content) {
         this.content = content;
     }
+
     public String getPath() {
         return path;
     }

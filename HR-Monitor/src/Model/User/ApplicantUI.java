@@ -6,23 +6,27 @@ import Model.Industries;
 import Model.KeyCompetence;
 import Model.Positions;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
 
 public class ApplicantUI {
     private long id;
     private String firstName;
     private String lastName;
+
     @JsonProperty("userRight")
     private UserRight userRight;
+
     private String email;
     private String phone;
     private String linkedIn;
     private String xing;
+
     @JsonProperty("title")
     private Title title;
+
     @JsonProperty("educations")
     private List<Education> educations;
+
     private List<Industries> industries;
     private List<Positions> positions;
     private List<KeyCompetence> keyCompetencies;
