@@ -21,6 +21,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -64,6 +65,7 @@ public class StorageController {
 
     // Applicant Info new Table
     // 1. Basic Info
+    /*
     @FXML TableColumn<ApplicantUI, Number> idFX = new TableColumn<>("id");
     @FXML TableColumn<ApplicantUI, String> firstNameFX = new TableColumn<>("firstName");
     @FXML TableColumn<ApplicantUI, String> lastNameFX = new TableColumn<>("lastName");
@@ -71,6 +73,9 @@ public class StorageController {
     @FXML TableColumn<ApplicantUI, String> pNumberFX = new TableColumn<>("phoneNumber");
     @FXML TableColumn<ApplicantUI, String> linkedInFX = new TableColumn<>("linkedIn");
     @FXML TableColumn<ApplicantUI, String> xingFX = new TableColumn<>("xing");
+     */
+
+    @FXML Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX, lblLinkedInFX, lblXingFX;
 
     // 2. Edu Info
     @FXML TableColumn<Education, String> universityFX = new TableColumn<>("university");
@@ -78,7 +83,7 @@ public class StorageController {
     @FXML TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
     @FXML TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
     @FXML TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
-    
+
     // 3. Image
     @FXML private ImageView imgFX;
 
@@ -163,10 +168,17 @@ public class StorageController {
     */
     private ObservableList<ApplicantUI> getTableBasicInfo(long id) {
         ApplicantUI app = model.getApplicantByID(id);
-        observableListBasicInfoTableView = basicInfoTblFX.getItems();
-        observableListBasicInfoTableView.clear();
-        observableListBasicInfoTableView.addAll(app);
-        setFactoriesAndComparatorsForBasicInfoTableColumns();
+        //observableListBasicInfoTableView = basicInfoTblFX.getItems();
+        //observableListBasicInfoTableView.clear();
+        //observableListBasicInfoTableView.addAll(app);
+        //setFactoriesAndComparatorsForBasicInfoTableColumns();
+        lblFNameFX.setText(app.getFirstName());
+        lblLNameFX.setText(app.getLastName());
+        lblEmailFX.setText(app.getEmail());
+        lblPNumberFX.setText(app.getPhone());
+        lblLinkedInFX.setText(app.getLinkedIn());
+        lblXingFX.setText(app.getXing());
+
         return observableListBasicInfoTableView;
     }
 
@@ -212,7 +224,7 @@ public class StorageController {
         gradYearFX.setCellValueFactory(
                 applicant -> new ReadOnlyStringWrapper(applicant.getValue().getGraduation_date()));
     }
-
+/*
     public void setFactoriesAndComparatorsForBasicInfoTableColumns() {
         // Applicant Info New Basic Info Table
         firstNameFX.setCellValueFactory(
@@ -228,6 +240,8 @@ public class StorageController {
         xingFX.setCellValueFactory(
                 applicant -> new ReadOnlyStringWrapper(applicant.getValue().getXing()));
     }
+
+ */
 
     public void setFactoriesAndComparatorsForTableColumns() {
         idCol.setCellValueFactory(user -> new ReadOnlyLongWrapper(user.getValue().getID()));
