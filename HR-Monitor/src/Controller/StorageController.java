@@ -1,7 +1,5 @@
 package Controller;
 
-import static Database.Method.getImageById;
-
 import Database.Connector;
 import Model.Education;
 import Model.Image.AppImage;
@@ -9,10 +7,6 @@ import Model.Image.ImageType;
 import Model.MVC.StorageModel;
 import Model.User.ApplicantUI;
 import Util.ImageTools;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -29,34 +23,54 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
 import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static Database.Method.getImageById;
 
 public class StorageController {
+    Stage stage;
     StorageModel model;
     // Create a TableView with a list of Applicants
-    @FXML TableView<ApplicantUI> userTable;
+    @FXML
+    TableView<ApplicantUI> userTable;
     private ObservableList<ApplicantUI> observableListTableView;
 
-    // Create a TableView with a list of Ecation Info of an Applicant
-    @FXML TableView<Education> eduInfoTblFX;
+    // Create a TableView with a list of Education Info of an Applicant
+    @FXML
+    TableView<Education> eduInfoTblFX;
     private ObservableList<Education> observableListEduInfoTableView;
 
-    Stage stage;
-    @FXML TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
-    @FXML TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
-    @FXML TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
+    // Overview of all Applicants
+    @FXML
+    TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
+    @FXML
+    TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
+    @FXML
+    TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
 
-    // Applicant Info View's Varriables
+    // Applicant Info View's Variables
     // 1. Basic Info
-    @FXML Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX, lblLinkedInFX, lblXingFX;
+    @FXML
+    Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX, lblLinkedInFX, lblXingFX;
     // 2. Edu Info
-    @FXML TableColumn<Education, String> universityFX = new TableColumn<>("university");
-    @FXML TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
-    @FXML TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
-    @FXML TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
-    @FXML TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
-    // 3. Image
-    @FXML private ImageView imgFX;
+    @FXML
+    TableColumn<Education, String> universityFX = new TableColumn<>("university");
+    @FXML
+    TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
+    @FXML
+    TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
+    @FXML
+    TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
+    @FXML
+    TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
+    // 3. Image of the  Applicant
+    @FXML
+    private ImageView imgFX;
 
     Pane root;
 
@@ -70,7 +84,6 @@ public class StorageController {
     }
 
     public void showApplicantInfo(long id) {
-
         try {
             Stage stageApplicantInfo = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/applicantInfo.fxml"));
@@ -78,22 +91,17 @@ public class StorageController {
             Scene scene = new Scene(loader.load());
             stageApplicantInfo.show();
             stageApplicantInfo.setScene(scene);
-            stageApplicantInfo.show();
             stageApplicantInfo.setTitle("Applicant Info");
             stageApplicantInfo
                     .getIcons()
                     .add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
-            getTableBasicInfo(id);
+
+            setTableBasicInfo(id);
             getTableEduInfo(id);
             getImage(id);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        stageEduInfo.show();
-        System.out.println("Prints");
-        stageEduInfo.setScene(scene);
-        stageEduInfo.show();
-        getTableEducation(id);
     }
 
     private void getImage(long id) {
@@ -117,7 +125,7 @@ public class StorageController {
         }
     }
 
-    private void getTableBasicInfo(long id) {
+    private void setTableBasicInfo(long id) {
         ApplicantUI app = model.getApplicantByID(id);
         lblFNameFX.setText(app.getFirstName());
         lblLNameFX.setText(app.getLastName());
@@ -156,6 +164,7 @@ public class StorageController {
 
     public void setFactoriesAndComparatorsForTableColumns() {
         idCol.setCellValueFactory(user -> new ReadOnlyLongWrapper(user.getValue().getID()));
+        idCol.setVisible(false);
         firstNameCol.setCellValueFactory(
                 user -> new ReadOnlyStringWrapper(user.getValue().getFirstName()));
         lastNameCol.setCellValueFactory(
@@ -163,13 +172,12 @@ public class StorageController {
     }
 
     public ObservableList<ApplicantUI> getTable() {
-        List<ApplicantUI> db = model.getDB();
+        List<ApplicantUI> applicantsList = model.getDB();
         AddClickFunctionToUserTable();
         observableListTableView = userTable.getItems();
         observableListTableView.clear();
-        observableListTableView.addAll(db);
+        observableListTableView.addAll(applicantsList);
         setFactoriesAndComparatorsForTableColumns();
-        idCol.setVisible(false);
         return observableListTableView;
     }
 
