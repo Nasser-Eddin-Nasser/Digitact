@@ -29,6 +29,10 @@ const routes: Routes = [
         (m) => m.ApplicantsPageModule
       ),
   },
+  {
+    path: 'privacy',
+    loadChildren: () => import('./privacy/privacy.module').then( m => m.PrivacyPageModule)
+  },
 ];
 
 @NgModule({
