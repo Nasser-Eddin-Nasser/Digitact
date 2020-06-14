@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-details',
@@ -6,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./details.page.scss'],
 })
 export class DetailsPage implements OnInit {
+  constructor(private navigationController: NavController) {}
 
-  constructor() { }
-
-  ngOnInit() {
+  ngOnInit() {}
+  navigateToPolicyPage() {
+    this.navigationController.navigateBack(['/privacy']);
   }
-
 }

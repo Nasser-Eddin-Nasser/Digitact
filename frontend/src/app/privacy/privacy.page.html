@@ -24,13 +24,21 @@
     <ion-item-divider></ion-item-divider>
     <ion-list>
       <ion-item lines="none">
-        <ion-toggle color="primary"></ion-toggle>
+        <ion-toggle
+          color="primary"
+          (ionChange)="togglePrivacyPolicyAcceptance()"
+          [checked]="isChecked"
+        ></ion-toggle>
         <ion-label class="ion-padding-start">Accept privacy policy</ion-label>
       </ion-item>
     </ion-list>
     <ion-item-divider></ion-item-divider>
     <div class="buttons-container">
-      <button class="fancy-button align center" (click)="startApplication()">
+      <button
+        class="fancy-button align center"
+        (click)="startApplication()"
+        [disabled]="!isChecked"
+      >
         Continue
       </button>
 

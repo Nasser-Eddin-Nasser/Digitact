@@ -13,6 +13,8 @@ export class PrivacyPage implements OnInit {
     private router: Router
   ) {}
 
+  isChecked = false;
+
   ngOnInit() {}
 
   navigateToHomePage() {
@@ -25,5 +27,9 @@ export class PrivacyPage implements OnInit {
 
   startApplication(): void {
     this.navigationController.navigateForward(['/forms']);
+  }
+
+  togglePrivacyPolicyAcceptance() {
+    this.isChecked = !this.isChecked;
   }
 }
