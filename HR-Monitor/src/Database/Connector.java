@@ -1,6 +1,8 @@
 package Database;
 
+import Main.Configuration;
 import Storage.DBStorage;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
