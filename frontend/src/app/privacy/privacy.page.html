@@ -8,4 +8,35 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <div class="main-container with-bottom-buttons">
+    <div class="ion-text-justify description">
+      Before we can get started: During the application process, you need to
+      enter some private information. Because of this, please read the Privacy
+      Policy.
+    </div>
+    <div class="ion-no-padding">
+      <button class="round-button align center">
+        Open policy
+      </button>
+    </div>
+
+    <ion-item-divider></ion-item-divider>
+    <ion-list>
+      <ion-item lines="none">
+        <ion-toggle color="primary"></ion-toggle>
+        <ion-label class="ion-padding-start">Accept privacy policy</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-item-divider></ion-item-divider>
+    <div class="buttons-container">
+      <button class="fancy-button align center">
+        Continue
+      </button>
+
+      <button class="fancy-button align center second-button">
+        cancel
+      </button>
+    </div>
+  </div>
+</ion-content>
