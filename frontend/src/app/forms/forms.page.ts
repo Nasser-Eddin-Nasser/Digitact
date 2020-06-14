@@ -11,6 +11,7 @@ import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 import { FormArray, FormControl, FormGroup } from '../common/forms/forms';
+import { AlertController } from '../common/ion-wrappers/alert-controller';
 import {
   BasicInfo,
   ContactInfo,
@@ -39,7 +40,8 @@ export class FormsPage implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private navigationController: NavController,
     private router: Router,
-    private storage: StorageHandlerService
+    private storage: StorageHandlerService,
+    private alertController: AlertController
   ) {}
   /**
    * Make the Steps available in the template.
@@ -255,7 +257,7 @@ export class FormsPage implements OnInit, OnDestroy {
    * Go to the Home page.
    */
   closeForm(): void {
-    this.navigationController.navigateBack(['/home']);
+    this.showClosingAllert();
   }
 
   /**
@@ -278,5 +280,28 @@ export class FormsPage implements OnInit, OnDestroy {
       }
     }
     this.progressPercentage = validSteps / totalNumberOfRequiredSteps;
+  }
+
+  async showClosingAllert(): Promise<void> {
+    const alert = await this.alertController.create({
+      header: 'Close',
+      message: 'Do you really want to cancel your job application?',
+      cssClass: 'custom-alert-button-colors',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+        },
+        {
+          text: 'Yes',
+          cssClass: 'color-secondary',
+          handler: () => {
+            this.navigationController.navigateBack(['/home']);
+          },
+        },
+      ],
+    });
+
+    alert.present();
   }
 }
