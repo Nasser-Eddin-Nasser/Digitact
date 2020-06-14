@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button>
+      <ion-button (click)="navigateToHomePage()">
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -16,7 +16,7 @@
       Policy.
     </div>
     <div class="ion-no-padding">
-      <button class="round-button align center">
+      <button class="round-button align center" (click)="openPolicydetails()">
         Open policy
       </button>
     </div>
@@ -30,11 +30,14 @@
     </ion-list>
     <ion-item-divider></ion-item-divider>
     <div class="buttons-container">
-      <button class="fancy-button align center">
+      <button class="fancy-button align center" (click)="startApplication()">
         Continue
       </button>
 
-      <button class="fancy-button align center second-button">
+      <button
+        class="fancy-button align center second-button"
+        (click)="navigateToHomePage()"
+      >
         cancel
       </button>
     </div>
