@@ -6,13 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /** Main application */
 @SpringBootApplication
 public class Application {
-    // TODO  move configurations to Application.properties
-    // absolute file system path
-    public static final String absoluteFileSystemPath = "D:\\Current\\2nd Semester\\AMOS Project\\FileSystem";
-
-    public static final String blockFormat = ".txt";
-    public static final long BLOCKSIZE = 1024 * 1024; // 1 MiB
-
     /** @param args */
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

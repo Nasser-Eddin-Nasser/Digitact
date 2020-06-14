@@ -89,6 +89,11 @@ public class StorageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        stageEduInfo.show();
+        System.out.println("Prints");
+        stageEduInfo.setScene(scene);
+        stageEduInfo.show();
+        getTableEducation(id);
     }
 
     private void getImage(long id) {
@@ -151,7 +156,6 @@ public class StorageController {
 
     public void setFactoriesAndComparatorsForTableColumns() {
         idCol.setCellValueFactory(user -> new ReadOnlyLongWrapper(user.getValue().getID()));
-        idCol.setVisible(false);
         firstNameCol.setCellValueFactory(
                 user -> new ReadOnlyStringWrapper(user.getValue().getFirstName()));
         lastNameCol.setCellValueFactory(
@@ -159,12 +163,13 @@ public class StorageController {
     }
 
     public ObservableList<ApplicantUI> getTable() {
-        List<ApplicantUI> applicantsList = model.getDB();
+        List<ApplicantUI> db = model.getDB();
         AddClickFunctionToUserTable();
         observableListTableView = userTable.getItems();
         observableListTableView.clear();
-        observableListTableView.addAll(applicantsList);
+        observableListTableView.addAll(db);
         setFactoriesAndComparatorsForTableColumns();
+        idCol.setVisible(false);
         return observableListTableView;
     }
 

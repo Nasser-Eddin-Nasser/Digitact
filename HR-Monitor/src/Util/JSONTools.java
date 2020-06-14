@@ -1,5 +1,6 @@
 package Util;
 
+import Model.Education;
 import Model.User.ApplicantUI;
 import Storage.DBStorage;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,6 +19,17 @@ public class JSONTools {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void convertJSONToEduInfo(String jsonInput) {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        try {
+            DBStorage.setEduInfo(
+                    mapper.readValue(jsonInput, new TypeReference<List<Education>>() {}));
+        } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
     }

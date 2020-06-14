@@ -12,5 +12,6 @@ public enum Industries {
     @JsonProperty("pharma_Helthcare")
     pharma_Helthcare,
     @JsonProperty("public_Sector")
-    public_Sector
+    public_Sector,
+    Others
 }
