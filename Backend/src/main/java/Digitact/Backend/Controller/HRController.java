@@ -31,7 +31,7 @@ public class HRController {
         return new ArrayList<Education>(educationRepository.getAllEducationsInfo());
     }
 
-    @GetMapping(path="/getImageById={imageId}")
+    @GetMapping(path = "/getImageById={imageId}")
     public String getImageById(@PathVariable String imageId) {
         return ImageTools.combineImage(imageRepository.getImageByID(imageId)).getContent();
     }

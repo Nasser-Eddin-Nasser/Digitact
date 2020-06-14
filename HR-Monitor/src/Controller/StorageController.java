@@ -1,5 +1,7 @@
 package Controller;
 
+import static Database.Method.getImageById;
+
 import Database.Connector;
 import Model.Education;
 import Model.Image.AppImage;
@@ -7,6 +9,10 @@ import Model.Image.ImageType;
 import Model.MVC.StorageModel;
 import Model.User.ApplicantUI;
 import Util.ImageTools;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -23,54 +29,35 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static Database.Method.getImageById;
 
 public class StorageController {
     Stage stage;
     StorageModel model;
     // Create a TableView with a list of Applicants
-    @FXML
-    TableView<ApplicantUI> userTable;
+    @FXML TableView<ApplicantUI> userTable;
     private ObservableList<ApplicantUI> observableListTableView;
 
     // Create a TableView with a list of Education Info of an Applicant
-    @FXML
-    TableView<Education> eduInfoTblFX;
+    @FXML TableView<Education> eduInfoTblFX;
     private ObservableList<Education> observableListEduInfoTableView;
 
     // Overview of all Applicants
-    @FXML
-    TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
-    @FXML
-    TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
-    @FXML
-    TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
+    @FXML TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
+    @FXML TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
+    @FXML TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
 
     // Applicant Info View's Variables
     // 1. Basic Info
-    @FXML
-    Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX, lblLinkedInFX, lblXingFX;
+    @FXML Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX, lblLinkedInFX, lblXingFX;
     // 2. Edu Info
-    @FXML
-    TableColumn<Education, String> universityFX = new TableColumn<>("university");
-    @FXML
-    TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
-    @FXML
-    TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
-    @FXML
-    TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
-    @FXML
-    TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
+    @FXML TableColumn<Education, String> universityFX = new TableColumn<>("university");
+    @FXML TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
+    @FXML TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
+    @FXML TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
+    @FXML TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
     // 3. Image of the  Applicant
-    @FXML
-    private ImageView imgFX;
+    @FXML private ImageView imgFX;
 
     Pane root;
 

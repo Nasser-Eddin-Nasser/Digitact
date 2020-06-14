@@ -4,7 +4,6 @@ import Database.Connector;
 import Database.Method;
 import Model.Education;
 import Model.User.ApplicantUI;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
