@@ -6,5 +6,7 @@ public enum ImageType {
     @JsonProperty("profilePic")
     profilePic,
     @JsonProperty("CV")
-    CV;
+    CV,
+    @JsonProperty("Others")
+    Others
 }

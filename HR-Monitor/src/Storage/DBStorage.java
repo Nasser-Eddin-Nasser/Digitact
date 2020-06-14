@@ -4,6 +4,7 @@ import Database.Connector;
 import Database.Method;
 import Model.Education;
 import Model.User.ApplicantUI;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,6 @@ public class DBStorage {
     private static void updateStorage() {
         try {
             getApplicants();
-            // getAllEducationInfo();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,7 +62,6 @@ public class DBStorage {
 
     public static void setEduInfo(List<Education> eduInfo) {
         DBStorage.eduInfo = new ArrayList<>(eduInfo);
-        // System.out.println(eduInfo.size());
         transfer = true;
     }
 }

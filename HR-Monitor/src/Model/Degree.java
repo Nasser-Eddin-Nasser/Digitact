@@ -8,5 +8,7 @@ public enum Degree {
     @JsonProperty("Bachelor")
     Bachelor,
     @JsonProperty("PhD")
-    PhD
+    PhD,
+    @JsonProperty("Others")
+    Others
 }

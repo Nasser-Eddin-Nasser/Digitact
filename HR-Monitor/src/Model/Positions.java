@@ -16,5 +16,7 @@ public enum Positions {
     @JsonProperty("consultant_SAP")
     consultant_SAP,
     @JsonProperty("internship_Working_Student")
-    internship_Working_Student
+    internship_Working_Student,
+    @JsonProperty("Others")
+    Others
 }
