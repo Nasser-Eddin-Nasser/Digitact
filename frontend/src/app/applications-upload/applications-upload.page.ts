@@ -2,11 +2,11 @@
  * @description
  * This page send the applications to the server
  */
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
-import { FormsData } from '../model/forms-data.model';
+import { FormsData, KeyCompetenciesEntry } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
 
 @Component({
@@ -102,26 +102,59 @@ export class ApplicationsUploadPage implements OnInit {
         });
       });
   }
+
   sendPostRequest(inp: FormsData): boolean {
-    console.log(inp);
-    const headers = new Headers();
+    const keyCompetence: Array<{
+      category: string;
+      name: string;
+      rating: number;
+    }> = [];
+
+    Object.entries(inp.keyCompetencies).map(([k, v]) => {
+      v.forEach((x: KeyCompetenciesEntry) => {
+        keyCompetence.push({ category: k, name: x.name, rating: x.rating });
+      });
+    });
+    const formsData = {
+      firstName: inp.basicInfo.firstName,
+      lastName: inp.basicInfo.lastName,
+      phone: inp.contactInfo.phoneNumber,
+      email: inp.contactInfo.eMail,
+      title: inp.basicInfo.salutation,
+      imageList: [
+        {
+          content: inp.profilePicture.pictureBase64,
+          type: 'profilePic',
+        },
+      ],
+      industries: inp.fieldDesignationInfo.field,
+
+      positions: inp.fieldDesignationInfo.designation,
+      // educations: inp.educationInfo.educationInfoForm,
+      keyCompetencies: keyCompetence,
+    };
+    console.log(formsData);
+    const headers = new HttpHeaders();
+
     headers.append('Content-Type', 'application/json');
 
     this.httpClient
-      .post(this.url + '/api/controller/createApplicant', this.jsonData, {
-        responseType: 'text',
-      })
+      .post(
+        this.url + '/api/controller/createApplicant',
+
+        JSON.stringify(formsData),
+        { headers: new HttpHeaders().set('Content-Type', 'application/json') }
+      )
       .subscribe(
-        (data) => {
-          ++this.uploadSize;
-          console.log(data);
-          return true;
+        (response) => {
+          console.log(response);
+          console.log(new Date().getTime());
+          /*if (response.status === 201) {
+            this.uploadSize++;
+          }*/
         },
         (error) => {
-          this.uploadSize++;
-          console.log('hey here');
           console.log(error);
-          return false;
         }
       );
     return true;
