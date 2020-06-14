@@ -1,14 +1,15 @@
 package Util;
 
 import Model.Image.AppImage;
-import java.io.*;
+
 import javax.xml.bind.DatatypeConverter;
+import java.io.*;
+
+import static Main.Configuration.absoluteFileSystemPath;
 
 public class ImageTools {
 
     public static void parseImageStringToImage(AppImage img) {
-        String absoluteFileSystemPath =
-                "D:\\Current\\2nd Semester\\AMOS Project\\Digitact\\HR-Monitor\\src\\ApplicantImages\\";
         String[] imageStrings = img.getContent().split(",");
         String imageFormat;
         switch (imageStrings[0]) { // check image format
@@ -19,17 +20,17 @@ public class ImageTools {
                 imageFormat = ".png";
                 break;
             default:
-                imageFormat = ".jpg"; // todo
+                imageFormat = ".jpg";
                 break;
         }
 
         // convert base64 string to binary data
         byte[] data = DatatypeConverter.parseBase64Binary(imageStrings[1]);
         String path =
-                absoluteFileSystemPath // todo where to export
+                absoluteFileSystemPath
                         + img.getType()
                         + img.getId()
-                        + imageFormat; // todo better name like User id
+                        + imageFormat;
         File file = new File(path);
         img.setPath(path);
         try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
