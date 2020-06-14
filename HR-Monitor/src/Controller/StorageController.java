@@ -33,16 +33,11 @@ import javax.imageio.ImageIO;
 
 public class StorageController {
     StorageModel model;
-    // Create a TableView with a list of persons
+    // Create a TableView with a list of Applicants
     @FXML TableView<ApplicantUI> userTable;
     private ObservableList<ApplicantUI> observableListTableView;
 
-    // @FXML TableView<Education> educationTable;
-    // private ObservableList<Education> observableListEducationTableView;
-
-    @FXML TableView<ApplicantUI> basicInfoTblFX;
-    private ObservableList<ApplicantUI> observableListBasicInfoTableView;
-
+    // Create a TableView with a list of Ecation Info of an Applicant
     @FXML TableView<Education> eduInfoTblFX;
     private ObservableList<Education> observableListEduInfoTableView;
 
@@ -50,40 +45,16 @@ public class StorageController {
     @FXML TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
     @FXML TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
     @FXML TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
-    // @FXML TableColumn<ApplicantUI, String> positionCol = new TableColumn<>("position");
-    // @FXML TableColumn<ApplicantUI, String> industryCol = new TableColumn<>("industry");
 
-    /*
-       // Education table
-       @FXML TableColumn<Education, String> universityCol = new TableColumn<>("university");
-       @FXML TableColumn<Education, String> subjectCol = new TableColumn<>("subject");
-       @FXML TableColumn<Education, String> degreeCol = new TableColumn<>("degree");
-       @FXML TableColumn<Education, Number> gradeCol = new TableColumn<>("grade");
-       @FXML TableColumn<Education, String> dateCol = new TableColumn<>("date");
-
-    */
-
-    // Applicant Info new Table
+    // Applicant Info View's Varriables
     // 1. Basic Info
-    /*
-    @FXML TableColumn<ApplicantUI, Number> idFX = new TableColumn<>("id");
-    @FXML TableColumn<ApplicantUI, String> firstNameFX = new TableColumn<>("firstName");
-    @FXML TableColumn<ApplicantUI, String> lastNameFX = new TableColumn<>("lastName");
-    @FXML TableColumn<ApplicantUI, String> eMailFX = new TableColumn<>("eMail");
-    @FXML TableColumn<ApplicantUI, String> pNumberFX = new TableColumn<>("phoneNumber");
-    @FXML TableColumn<ApplicantUI, String> linkedInFX = new TableColumn<>("linkedIn");
-    @FXML TableColumn<ApplicantUI, String> xingFX = new TableColumn<>("xing");
-     */
-
     @FXML Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX, lblLinkedInFX, lblXingFX;
-
     // 2. Edu Info
     @FXML TableColumn<Education, String> universityFX = new TableColumn<>("university");
     @FXML TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
     @FXML TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
     @FXML TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
     @FXML TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
-
     // 3. Image
     @FXML private ImageView imgFX;
 
@@ -99,21 +70,7 @@ public class StorageController {
     }
 
     public void showApplicantInfo(long id) {
-        /*
-               try {
-                   Stage stageEduInfo = new Stage();
-                   FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/eduInfoView.fxml"));
-                   loader.setController(this);
-                   Scene scene = new Scene(loader.load());
-                   stageEduInfo.show();
-                   stageEduInfo.setScene(scene);
-                   stageEduInfo.show();
-                   //getTableEducation(id);
-               } catch (IOException e) {
-                   e.printStackTrace();
-               }
 
-        */
         try {
             Stage stageApplicantInfo = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/applicantInfo.fxml"));
@@ -155,31 +112,14 @@ public class StorageController {
         }
     }
 
-    /*
-       private ObservableList<Education> getTableEducation(long id) {
-           ApplicantUI app = model.getApplicantByID(id);
-           observableListEducationTableView = educationTable.getItems();
-           observableListEducationTableView.clear();
-           observableListEducationTableView.addAll(app.getEducations());
-           setFactoriesAndComparatorsForEducationTableColumns();
-           return observableListEducationTableView;
-       }
-
-    */
-    private ObservableList<ApplicantUI> getTableBasicInfo(long id) {
+    private void getTableBasicInfo(long id) {
         ApplicantUI app = model.getApplicantByID(id);
-        //observableListBasicInfoTableView = basicInfoTblFX.getItems();
-        //observableListBasicInfoTableView.clear();
-        //observableListBasicInfoTableView.addAll(app);
-        //setFactoriesAndComparatorsForBasicInfoTableColumns();
         lblFNameFX.setText(app.getFirstName());
         lblLNameFX.setText(app.getLastName());
         lblEmailFX.setText(app.getEmail());
         lblPNumberFX.setText(app.getPhone());
         lblLinkedInFX.setText(app.getLinkedIn());
         lblXingFX.setText(app.getXing());
-
-        return observableListBasicInfoTableView;
     }
 
     private ObservableList<Education> getTableEduInfo(long id) {
@@ -194,22 +134,6 @@ public class StorageController {
     public Pane getPane() {
         return root;
     }
-    /*
-       public void setFactoriesAndComparatorsForEducationTableColumns() {
-           universityCol.setCellValueFactory(
-                   education -> new ReadOnlyStringWrapper(education.getValue().getUniversity()));
-           subjectCol.setCellValueFactory(
-                   education -> new ReadOnlyStringWrapper(education.getValue().getSubject()));
-           degreeCol.setCellValueFactory(
-                   education ->
-                           new ReadOnlyStringWrapper(education.getValue().getDegree().toString()));
-           gradeCol.setCellValueFactory(
-                   education -> new ReadOnlyDoubleWrapper(education.getValue().getGrade()));
-           dateCol.setCellValueFactory(
-                   education -> new ReadOnlyStringWrapper(education.getValue().getGraduation_date()));
-       }
-
-    */
 
     public void setFactoriesAndComparatorsForEduInfoTableColumns() {
         universityFX.setCellValueFactory(
@@ -224,24 +148,6 @@ public class StorageController {
         gradYearFX.setCellValueFactory(
                 applicant -> new ReadOnlyStringWrapper(applicant.getValue().getGraduation_date()));
     }
-/*
-    public void setFactoriesAndComparatorsForBasicInfoTableColumns() {
-        // Applicant Info New Basic Info Table
-        firstNameFX.setCellValueFactory(
-                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getFirstName()));
-        lastNameFX.setCellValueFactory(
-                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getLastName()));
-        eMailFX.setCellValueFactory(
-                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getEmail()));
-        pNumberFX.setCellValueFactory(
-                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getPhone()));
-        linkedInFX.setCellValueFactory(
-                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getLinkedIn()));
-        xingFX.setCellValueFactory(
-                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getXing()));
-    }
-
- */
 
     public void setFactoriesAndComparatorsForTableColumns() {
         idCol.setCellValueFactory(user -> new ReadOnlyLongWrapper(user.getValue().getID()));
@@ -250,10 +156,6 @@ public class StorageController {
                 user -> new ReadOnlyStringWrapper(user.getValue().getFirstName()));
         lastNameCol.setCellValueFactory(
                 user -> new ReadOnlyStringWrapper(user.getValue().getLastName()));
-        // positionCol.setCellValueFactory(
-        // user -> new ReadOnlyStringWrapper(user.getValue().getPositions().toString()));
-        // industryCol.setCellValueFactory(
-        // user -> new ReadOnlyStringWrapper(user.getValue().getIndustries().toString()));
     }
 
     public ObservableList<ApplicantUI> getTable() {
