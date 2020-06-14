@@ -260,7 +260,7 @@ export class RatingPage implements OnDestroy, OnInit {
     const toast = await this.toastController.create({
       message: 'Applicant information is finalized',
       color: 'success',
-      position: 'top',
+      position: 'bottom',
       duration: 2000,
     });
     toast.present();

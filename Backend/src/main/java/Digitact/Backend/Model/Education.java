@@ -28,8 +28,8 @@ public class Education {
     @Column(name = "grade")
     private double grade;
 
-    @Column(name = "date")
-    private String graduation_date;
+    @Column(name = "year")
+    private String graduationYear;
 
     public Education() {}
 
@@ -43,12 +43,12 @@ public class Education {
             String subject,
             Degree degree,
             double grade,
-            String graduation_Date) {
+            String graduationYear) {
         this.university = university;
         this.subject = subject;
         this.degree = degree;
         this.grade = grade;
-        this.graduation_date = graduation_Date;
+        this.graduationYear = graduationYear;
     }
 
     public String getUniversity() {
@@ -83,12 +83,12 @@ public class Education {
         this.grade = grade;
     }
 
-    public String getGraduation_date() {
-        return graduation_date;
+    public String getGraduationYear() {
+        return graduationYear;
     }
 
-    public void setGraduation_date(String graduation_date) {
-        this.graduation_date = graduation_date;
+    public void setGraduationYear(String graduationYear) {
+        this.graduationYear = graduationYear;
     }
 
     public User getUser() {

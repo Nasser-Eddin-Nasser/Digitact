@@ -23,7 +23,7 @@ export class BasicInfoComponent {
    * The possible salutations, displayed in the dropdown menu.
    */
   salutationsArray = [
-    { value: 'mr', displayName: 'Mr' },
-    { value: 'mrs', displayName: 'Mrs' },
+    { value: 'Mr', displayName: 'Mr' },
+    { value: 'Mrs', displayName: 'Mrs' },
   ];
 }
