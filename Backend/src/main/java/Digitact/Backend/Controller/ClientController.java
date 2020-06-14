@@ -8,6 +8,8 @@ import Digitact.Backend.Storage.IDataRepository;
 import Digitact.Backend.Storage.Repository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /** This is the controller class of the Clients */
@@ -35,15 +37,12 @@ public class ClientController {
      * @return "Applicant is created in the database"
      */
     @PostMapping("/createApplicant")
-    public String createApplicant(@RequestBody ApplicantUI applicant) {
+    public ResponseEntity<String> createApplicant(@RequestBody ApplicantUI applicant) {
         Repository myRepos = new Repository(repository); // todo singleton pattern
         boolean isSuccessful = myRepos.storeApplicantOnDB(applicant);
         return (isSuccessful)
-                ? "Applicant is created in the database"
-                : "Error while storing Applicant, some information maybe stored incompletely "; // todo send
-        // status
-        // number is
-        // better
+                ? new ResponseEntity<String>("Application is successfully saved",HttpStatus.OK)
+                : new ResponseEntity<String>("Application could not be saved. Please try again later.",HttpStatus.INTERNAL_SERVER_ERROR); 
     }
 
     @PostMapping("/createAdmin")

@@ -1,6 +1,7 @@
 .custom-style {
   padding: 1rem;
   margin-top: 15rem;
+  margin-bottom: 0px;
   font-size: 25px;
   font-weight: 500;
 }
@@ -15,4 +16,13 @@
 
 .info {
   padding: 1rem;
+}
+
+.spinner-css {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  transform: scale(1.5);
 }
