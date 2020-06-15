@@ -7,7 +7,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import {
+  IonRouterOutlet,
+  NavController,
+  Platform,
+  ViewDidEnter,
+  ViewWillLeave,
+} from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 
 import { FormArray, FormControl, FormGroup } from '../common/forms/forms';
@@ -35,11 +41,14 @@ import {
   templateUrl: './forms.page.html',
   styleUrls: ['./forms.page.scss'],
 })
-export class FormsPage implements OnInit, OnDestroy {
+export class FormsPage
+  implements OnInit, OnDestroy, ViewDidEnter, ViewWillLeave {
   constructor(
     private activatedRoute: ActivatedRoute,
     private alertController: AlertController,
+    private ionRouterOutlet: IonRouterOutlet,
     private navigationController: NavController,
+    private platform: Platform,
     private router: Router,
     private storage: StorageHandlerService
   ) {}
@@ -167,6 +176,19 @@ export class FormsPage implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     for (const subscription of this.subscriptions) {
       subscription.unsubscribe();
+    }
+  }
+
+  ionViewDidEnter(): void {
+    if (this.platform.is('ios')) {
+      // Disable the router swipe gesture on iOS, because this gesture cannot be properly handled with our Guard.
+      this.ionRouterOutlet.swipeGesture = false;
+    }
+  }
+
+  ionViewWillLeave(): void {
+    if (this.platform.is('ios')) {
+      this.ionRouterOutlet.swipeGesture = true;
     }
   }
 
