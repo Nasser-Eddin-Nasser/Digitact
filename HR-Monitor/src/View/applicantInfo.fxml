@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <VBox prefHeight="5" />
    </top>
@@ -155,6 +155,9 @@
                                                <TableColumn fx:id="gradeFX" prefWidth="98.0" text="Grade" />
                                                <TableColumn fx:id="gradYearFX" prefWidth="102.0" text="Graduation Year" />
                                             </columns>
+                                                <columnResizePolicy>
+                                                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                </columnResizePolicy>
                                          </TableView>
                                       </content>
                                       <cursor>
@@ -170,15 +173,24 @@
                                                <TableColumn fx:id="proSoftFX" prefWidth="143.0" text="Professional Software" />
                                                <TableColumn fx:id="spoLanFX" prefWidth="118.0" resizable="false" text="Spoken Languages" />
                                             </columns>
+                                                <columnResizePolicy>
+                                                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                </columnResizePolicy>
                                          </TableView>
                                       </content>
                                    </TitledPane>
                                    <TitledPane maxHeight="400.0" prefHeight="232.0" prefWidth="682.0" text="Position" wrapText="true">
                                       <content>
-                                         <TableView id="posTable" fx:id="posTable" maxHeight="800.0" minHeight="50.0" prefHeight="250.0" prefWidth="580.0">
+                                         <TableView id="posTable" fx:id="posTable" maxWidth="5000.0">
                                             <columns>
-                                               <TableColumn fx:id="posFX" prefWidth="274.0" text="Position" />
+                                               <TableColumn fx:id="posFX" minWidth="-1.0" prefWidth="700.0" text="Position" />
                                             </columns>
+                                                <cursor>
+                                                   <Cursor fx:constant="DEFAULT" />
+                                                </cursor>
+                                                <columnResizePolicy>
+                                                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                </columnResizePolicy>
                                          </TableView>
 <!--                                         <TableView id="posTable" fx:id="indTable" maxHeight="800.0" minHeight="50.0" prefHeight="250.0" prefWidth="580.0">-->
 <!--                                            <columns>-->
