@@ -5,12 +5,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from './auth-guard';
 import { FormsPage } from './forms.page';
 
 const routes: Routes = [
   {
     path: '',
     component: FormsPage,
+    canDeactivate: [AuthGuard],
   },
   {
     path: 'confirmation',

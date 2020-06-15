@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { AuthGuardService } from './services/auth-guard.service';
-
 const routes: Routes = [
   {
     path: 'home',
@@ -18,7 +16,6 @@ const routes: Routes = [
     path: 'forms',
     loadChildren: () =>
       import('./forms/forms.module').then((m) => m.FormsPageModule),
-    canActivate: [AuthGuardService],
   },
   {
     path: 'rating',

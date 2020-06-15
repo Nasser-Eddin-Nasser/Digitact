@@ -8,7 +8,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { FormArray, FormControl, FormGroup } from '../common/forms/forms';
 import { AlertController } from '../common/ion-wrappers/alert-controller';
@@ -38,10 +38,10 @@ import {
 export class FormsPage implements OnInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
+    private alertController: AlertController,
     private navigationController: NavController,
     private router: Router,
-    private storage: StorageHandlerService,
-    private alertController: AlertController
+    private storage: StorageHandlerService
   ) {}
   /**
    * Make the Steps available in the template.
@@ -122,6 +122,8 @@ export class FormsPage implements OnInit, OnDestroy {
    * Holds all the subscription which will be useful for un subscribing on destroy.
    */
   private subscriptions: Subscription[] = [];
+
+  private hasSubmittedForm = false;
 
   /**
    * In this method route change is observed and handling is done.
@@ -249,7 +251,12 @@ export class FormsPage implements OnInit, OnDestroy {
         key,
         this.formsData.getRawValue()
       );
-      this.router.navigate(['/forms', 'confirmation'], { state: { id: key } });
+
+      this.hasSubmittedForm = true;
+      this.navigationController.navigateRoot(['/forms', 'confirmation'], {
+        animationDirection: 'forward',
+        state: { id: key },
+      });
     });
   }
 
@@ -257,7 +264,7 @@ export class FormsPage implements OnInit, OnDestroy {
    * Go to the Home page.
    */
   closeForm(): void {
-    this.showClosingAllert();
+    this.navigationController.navigateBack(['/home']);
   }
 
   /**
@@ -282,26 +289,46 @@ export class FormsPage implements OnInit, OnDestroy {
     this.progressPercentage = validSteps / totalNumberOfRequiredSteps;
   }
 
-  async showClosingAllert(): Promise<void> {
-    const alert = await this.alertController.create({
-      header: 'Close',
-      message: 'Do you really want to cancel your job application?',
-      cssClass: 'custom-alert-button-colors',
-      buttons: [
-        {
-          text: 'No',
-          role: 'cancel',
-        },
-        {
-          text: 'Yes',
-          cssClass: 'color-secondary',
-          handler: () => {
-            this.navigationController.navigateBack(['/home']);
+  private async showClosingAlert(): Promise<boolean> {
+    const result = new Promise<boolean>(async (resolve) => {
+      const alert = await this.alertController.create({
+        header: 'Close',
+        message: 'Do you really want to cancel your job application?',
+        cssClass: 'custom-alert-button-colors',
+        buttons: [
+          {
+            text: 'No',
+            role: 'cancel',
+            handler: () => {
+              resolve(false);
+            },
           },
-        },
-      ],
-    });
+          {
+            text: 'Yes',
+            cssClass: 'color-secondary',
+            handler: () => {
+              resolve(true);
+            },
+          },
+        ],
+      });
 
-    alert.present();
+      alert.present();
+    });
+    return result;
+  }
+
+  mayLeaveView(): Observable<boolean> | boolean {
+    if (this.hasSubmittedForm) {
+      return true;
+    }
+
+    const result = new Observable<boolean>((observer) => {
+      this.showClosingAlert().then((mayLeave) => {
+        observer.next(mayLeave);
+        observer.complete();
+      });
+    });
+    return result;
   }
 }
