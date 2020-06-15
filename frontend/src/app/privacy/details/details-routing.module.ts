@@ -1,13 +1,17 @@
+/**
+ * @description
+ *   This page has the route path configuration in details  module.
+ */
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { DetailsPage } from './details.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: DetailsPage
-  }
+    component: DetailsPage,
+  },
 ];
 
 @NgModule({

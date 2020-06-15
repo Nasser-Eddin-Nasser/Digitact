@@ -21,12 +21,14 @@
           Open policy
         </button>
       </div>
+    </div>
+    <div class="content">
       <div class="h-line"></div>
       <ion-item lines="none" class="ion-no-padding">
         <ion-toggle
           color="primary"
           (ionChange)="togglePrivacyPolicyAcceptance()"
-          [checked]="isPolicyChecked"
+          [checked]="isPolicyAccepted"
         ></ion-toggle>
         <ion-label primary class="ion-padding-start ion-text-justify">
           I have read and agree to the Privacy Policy.
@@ -34,12 +36,11 @@
       </ion-item>
       <div class="h-line"></div>
     </div>
-
     <div class="buttons-container">
       <button
         class="fancy-button align center"
         (click)="startApplication()"
-        [disabled]="!isPolicyChecked"
+        [disabled]="!isPolicyAccepted"
       >
         Continue
       </button>

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+/*
+  @description
+    This page lists the policy details
+*/
+import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -6,11 +10,12 @@ import { NavController } from '@ionic/angular';
   templateUrl: './details.page.html',
   styleUrls: ['./details.page.scss'],
 })
-export class DetailsPage implements OnInit {
+export class DetailsPage {
   constructor(private navigationController: NavController) {}
-
-  ngOnInit() {}
-  navigateToPolicyPage() {
+  /**
+   * In this method navigation to privacy page is handled
+   */
+  navigateToPolicyPage(): void {
     this.navigationController.navigateBack(['/privacy']);
   }
 }
