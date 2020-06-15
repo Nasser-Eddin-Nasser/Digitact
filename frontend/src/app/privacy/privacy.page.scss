@@ -11,3 +11,21 @@
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
+
+.secondary-button {
+  background: var(--ion-color-medium-tint);
+}
+
+.h-line {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid var(--ion-color-medium-tint);
+  margin: 1em 0;
+  padding: 0;
+}
+
+ion-item ion-label {
+  white-space: normal;
+  padding: 2em;
+}

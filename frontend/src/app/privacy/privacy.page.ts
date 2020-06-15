@@ -13,7 +13,7 @@ export class PrivacyPage implements OnInit {
     private router: Router
   ) {}
 
-  isChecked = false;
+  isPolicyChecked = false;
 
   ngOnInit() {}
 
@@ -30,6 +30,6 @@ export class PrivacyPage implements OnInit {
   }
 
   togglePrivacyPolicyAcceptance() {
-    this.isChecked = !this.isChecked;
+    this.isPolicyChecked = !this.isPolicyChecked;
   }
 }

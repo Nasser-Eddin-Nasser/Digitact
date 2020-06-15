@@ -10,40 +10,43 @@
 
 <ion-content>
   <div class="main-container with-bottom-buttons">
-    <div class="ion-text-justify description">
-      Before we can get started: During the application process, you need to
-      enter some private information. Because of this, please read the Privacy
-      Policy.
-    </div>
-    <div class="ion-no-padding">
-      <button class="round-button align center" (click)="openPolicydetails()">
-        Open policy
-      </button>
-    </div>
-
-    <ion-item-divider></ion-item-divider>
-    <ion-list>
-      <ion-item lines="none">
+    <div class="content">
+      <div class="ion-text-justify description">
+        Before we can get started: During the application process, you need to
+        enter some private information. Because of this, please read the Privacy
+        Policy.
+      </div>
+      <div class="ion-no-padding">
+        <button class="round-button align center" (click)="openPolicydetails()">
+          Open policy
+        </button>
+      </div>
+      <div class="h-line"></div>
+      <ion-item lines="none" class="ion-no-padding">
         <ion-toggle
+          class="ion-no-padding"
           color="primary"
           (ionChange)="togglePrivacyPolicyAcceptance()"
-          [checked]="isChecked"
+          [checked]="isPolicyChecked"
         ></ion-toggle>
-        <ion-label class="ion-padding-start">Accept privacy policy</ion-label>
+        <ion-label primary class="ion-padding-start ion-text-justify">
+          I have read and agree to the Privacy Policy.
+        </ion-label>
       </ion-item>
-    </ion-list>
-    <ion-item-divider></ion-item-divider>
+      <div class="h-line"></div>
+    </div>
+
     <div class="buttons-container">
       <button
         class="fancy-button align center"
         (click)="startApplication()"
-        [disabled]="!isChecked"
+        [disabled]="!isPolicyChecked"
       >
         Continue
       </button>
 
       <button
-        class="fancy-button align center second-button"
+        class="fancy-button align center secondary-button"
         (click)="navigateToHomePage()"
       >
         cancel
