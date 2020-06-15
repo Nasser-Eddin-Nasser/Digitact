@@ -323,9 +323,7 @@ export class FormsPage
   /**
    * Showing an alert message, when leaving a form page.
    *
-   * returning a Promise<boolean>
-   * returning true, if user wants to leave the page.
-   * returning false, if user cancels leaving the page.
+   * @returns A Promise. This Promise will emit true if the user wants to leave the page. Otherwise, false is emitted.
    */
   private async showClosingAlert(): Promise<boolean> {
     const result = new Promise<boolean>(async (resolve) => {
@@ -359,11 +357,7 @@ export class FormsPage
   /**
    * Deciding Function to handle leaving forms page, needed for the Guard
    *
-   * @param hasSubmittedForm Boolean to check, if the applicant wants to leave the forms page by submitting,
-   * if applicant wants to submit, mayLeaveView() return true, so Guard will allow leaving the page.
-   *
-   * returning true = Guard will allow leaving the page.
-   * returning false = Guard will stop leaving the page.
+   * @returns true (either directly or emitted in the Observable) if the view may be left. Otherwise, false is returned (or emitted).
    */
   mayLeaveView(): Observable<boolean> | boolean {
     if (this.hasSubmittedForm) {
