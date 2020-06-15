@@ -115,6 +115,8 @@ export class ApplicationsUploadPage implements OnInit {
         phone: inp.contactInfo.phoneNumber,
         email: inp.contactInfo.eMail,
         title: inp.basicInfo.salutation,
+        linkedIn: inp.contactInfo.linkedIn,
+        xing: inp.contactInfo.xing,
         imageList: images,
         educations: education,
         industries: inp.fieldDesignationInfo.field,
