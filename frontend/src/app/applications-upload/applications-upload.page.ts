@@ -28,81 +28,92 @@ export class ApplicationsUploadPage implements OnInit {
   ) {}
   totalSize = 0;
   uploadSize = 1;
+  isError = false;
   url = 'http://localhost:9090';
 
   ngOnInit(): void {
     this.storage
       .getAllItems<FormsData>(this.storage.applicantDetailsDb)
-      .then((data) => {
+      .then(async (data) => {
         const applicantDetailsList = data.filter((x) => x.isRated === 1);
         this.totalSize = applicantDetailsList.length;
-        applicantDetailsList.forEach(async (x) => {
-          this.sendPostRequest(x);
-        });
+        for (const x of applicantDetailsList) {
+          await this.sendPostRequest(x).then(() => {
+            console.log('coming');
+          });
+        }
       });
   }
 
-  sendPostRequest(inp: FormsData): void {
-    const keyCompetence: Array<{
-      category: string;
-      name: string;
-      rating: number;
-    }> = [];
-    const education: Array<EducationInfoEntry> = [];
-    const images: Array<{ content: string; type: string }> = [];
+  sleep(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 
-    Object.entries(inp.keyCompetencies).map(([k, v]) => {
-      v.forEach((x: KeyCompetenciesEntry) => {
-        keyCompetence.push({ category: k, name: x.name, rating: x.rating });
+  sendPostRequest(inp: FormsData): Promise<void> {
+    return this.sleep(1000).then(() => {
+      const keyCompetence: Array<{
+        category: string;
+        name: string;
+        rating: number;
+      }> = [];
+      const education: Array<EducationInfoEntry> = [];
+      const images: Array<{ content: string; type: string }> = [];
+
+      Object.entries(inp.keyCompetencies).map(([k, v]) => {
+        v.forEach((x: KeyCompetenciesEntry) => {
+          keyCompetence.push({ category: k, name: x.name, rating: x.rating });
+        });
       });
-    });
 
-    Object.values(inp.educationInfo.educationInfoForm).map((v) => {
-      education.push(v);
-    });
+      Object.values(inp.educationInfo.educationInfoForm).map((v) => {
+        education.push(v);
+      });
 
-    images.push({
-      content: inp.profilePicture.pictureBase64,
-      type: 'profilePic',
-    });
+      images.push({
+        content: inp.profilePicture.pictureBase64,
+        type: 'profilePic',
+      });
 
-    const formsData = {
-      firstName: inp.basicInfo.firstName,
-      lastName: inp.basicInfo.lastName,
-      phone: inp.contactInfo.phoneNumber,
-      email: inp.contactInfo.eMail,
-      title: inp.basicInfo.salutation,
-      imageList: images,
-      educations: education,
-      industries: inp.fieldDesignationInfo.field,
-      positions: inp.fieldDesignationInfo.designation,
-      keyCompetencies: keyCompetence,
-    };
+      const formsData = {
+        firstName: inp.basicInfo.firstName,
+        lastName: inp.basicInfo.lastName,
+        phone: inp.contactInfo.phoneNumber,
+        email: inp.contactInfo.eMail,
+        title: inp.basicInfo.salutation,
+        imageList: images,
+        educations: education,
+        industries: inp.fieldDesignationInfo.field,
+        positions: inp.fieldDesignationInfo.designation,
+        keyCompetencies: keyCompetence,
+      };
 
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
+      const headers = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
 
-    this.httpClient
-      .post(this.url + '/api/controller/createApplicant', formsData, {
-        responseType: 'text',
-        observe: 'response',
-      })
-      .subscribe(
-        (response) => {
-          if (response.status === 201) {
-            this.storage.deleteItem(this.storage.applicantDetailsDb, inp.id);
-            this.storage.deleteItem(this.storage.applicantRatingsDb, inp.id);
-            if (this.uploadSize === this.totalSize) {
-              this.completionAlert();
-            } else {
-              this.uploadSize++;
+      this.httpClient
+        .post(this.url + '/api/controller/createApplicant', formsData, {
+          responseType: 'text',
+          observe: 'response',
+        })
+        .subscribe(
+          (response) => {
+            console.log(response);
+            if (response.status === 201) {
+              // this.storage.deleteItem(this.storage.applicantDetailsDb, inp.id);
+              // this.storage.deleteItem(this.storage.applicantRatingsDb, inp.id);
+              if (this.uploadSize === this.totalSize) {
+                this.completionAlert();
+              } else {
+                this.uploadSize++;
+              }
             }
+          },
+          (error) => {
+            this.isError = true;
+            console.log(error);
           }
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+        );
+    });
   }
 
   /**

@@ -26,3 +26,10 @@
   min-height: 50px;
   transform: scale(1.5);
 }
+.success-icon {
+  color: var(--ion-color-success);
+}
+
+.failure-icon {
+  color: var(--ion-color-danger);
+}

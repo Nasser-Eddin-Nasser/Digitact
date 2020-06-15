@@ -15,7 +15,25 @@
       <div class="main-description custom-style">
         uploading application {{uploadSize}}/{{totalSize}}
       </div>
-      <div class="spinner-css"><ion-spinner></ion-spinner></div>
+      <div class="spinner-css">
+        <span *ngIf="uploadSize !== totalSize && isError === false">
+          <ion-spinner></ion-spinner
+        ></span>
+        <span *ngIf="uploadSize === totalSize">
+          <ion-icon
+            name="checkmark-circle-outline"
+            size="large"
+            class="success-icon"
+          ></ion-icon
+        ></span>
+        <span *ngIf="isError === true">
+          <ion-icon
+            name="close-circle-outline"
+            class="failure-icon"
+            size="large"
+          ></ion-icon>
+        </span>
+      </div>
     </div>
 
     <div class="buttons-container button-css">
