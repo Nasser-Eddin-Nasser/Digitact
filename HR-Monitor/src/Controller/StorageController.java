@@ -1,18 +1,13 @@
 package Controller;
 
-import static Database.Method.getImageById;
-
 import Database.Connector;
 import Model.Education;
 import Model.Image.AppImage;
 import Model.Image.ImageType;
 import Model.MVC.StorageModel;
+import Model.Positions;
 import Model.User.ApplicantUI;
 import Util.ImageTools;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -29,35 +24,63 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
 import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static Database.Method.getImageById;
 
 public class StorageController {
     Stage stage;
     StorageModel model;
     // Create a TableView with a list of Applicants
-    @FXML TableView<ApplicantUI> userTable;
+    @FXML
+    TableView<ApplicantUI> userTable;
     private ObservableList<ApplicantUI> observableListTableView;
 
     // Create a TableView with a list of Education Info of an Applicant
-    @FXML TableView<Education> eduInfoTblFX;
+    @FXML
+    TableView<Education> eduInfoTblFX;
     private ObservableList<Education> observableListEduInfoTableView;
 
+    @FXML
+    TableView<Positions> posTable;
+    private ObservableList<Positions> observableListPosTableTableView;
+
+
+    @FXML
+    TableColumn<Positions, String> posFX = new TableColumn<>("Position");
+
     // Overview of all Applicants
-    @FXML TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
-    @FXML TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
-    @FXML TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
+    @FXML
+    TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
+    @FXML
+    TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
+    @FXML
+    TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
 
     // Applicant Info View's Variables
     // 1. Basic Info
-    @FXML Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX, lblLinkedInFX, lblXingFX;
+    @FXML
+    Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX, lblLinkedInFX, lblXingFX;
     // 2. Edu Info
-    @FXML TableColumn<Education, String> universityFX = new TableColumn<>("university");
-    @FXML TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
-    @FXML TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
-    @FXML TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
-    @FXML TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
+    @FXML
+    TableColumn<Education, String> universityFX = new TableColumn<>("university");
+    @FXML
+    TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
+    @FXML
+    TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
+    @FXML
+    TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
+    @FXML
+    TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
     // 3. Image of the  Applicant
-    @FXML private ImageView imgFX;
+    @FXML
+    private ImageView imgFX;
+
 
     Pane root;
 
@@ -82,17 +105,38 @@ public class StorageController {
             stageApplicantInfo
                     .getIcons()
                     .add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
-
-            setTableBasicInfo(id);
-            getTableEduInfo(id);
-            getImage(id);
+            ApplicantUI app = model.getApplicantByID(id);
+            setTableBasicInfo(app);
+            setPositionAndIndustry(app);
+            getTableEduInfo(app);
+            getImage(app);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void getImage(long id) {
-        ApplicantUI app = model.getApplicantByID(id);
+    private void setPositionAndIndustry(ApplicantUI app) {
+        System.out.println(app.getIndustries());
+        System.out.println(app.getPositions());
+        lblFNameFX.setText(app.getFirstName());
+        List<Positions> positionList = app.getPositions();
+        getPositionTable(app.getPositions());
+    }
+
+    private ObservableList<Positions> getPositionTable(List<Positions> positions) {
+        observableListPosTableTableView = posTable.getItems();
+        observableListPosTableTableView.clear();
+        observableListPosTableTableView.addAll(positions);
+        setFactoriesAndComparatorsForPosTableColumns();
+        return observableListPosTableTableView;
+    }
+
+    public void setFactoriesAndComparatorsForPosTableColumns() {
+        posFX.setCellValueFactory(
+                pos -> new ReadOnlyStringWrapper(pos.getValue().toString()));
+    }
+
+    private void getImage(ApplicantUI app) {
         List<AppImage> profImgs =
                 app.getAppImage()
                         .stream()
@@ -101,19 +145,22 @@ public class StorageController {
         if (profImgs.size() > 0) {
             try {
                 AppImage img = profImgs.get(0);
-                Connector.sendGetHttp(getImageById, String.valueOf(app.getID()), img.getId());
-                ImageTools.parseImageStringToImage(img);
-
-                File file = new File(img.getPath());
-                imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
+                setProfileImage(app, img);
             } catch (Exception e) {
                 System.err.println("unable to load Image!");
             }
         }
     }
 
-    private void setTableBasicInfo(long id) {
-        ApplicantUI app = model.getApplicantByID(id);
+    private void setProfileImage(ApplicantUI app, AppImage img) throws IOException {
+        Connector.sendGetHttp(getImageById, String.valueOf(app.getID()), img.getId());
+        ImageTools.parseImageStringToImage(img);
+
+        File file = new File(img.getPath());
+        imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
+    }
+
+    private void setTableBasicInfo(ApplicantUI app) {
         lblFNameFX.setText(app.getFirstName());
         lblLNameFX.setText(app.getLastName());
         lblEmailFX.setText(app.getEmail());
@@ -122,8 +169,7 @@ public class StorageController {
         lblXingFX.setText(app.getXing());
     }
 
-    private ObservableList<Education> getTableEduInfo(long id) {
-        ApplicantUI app = model.getApplicantByID(id);
+    private ObservableList<Education> getTableEduInfo(ApplicantUI app) {
         observableListEduInfoTableView = eduInfoTblFX.getItems();
         observableListEduInfoTableView.clear();
         observableListEduInfoTableView.addAll(app.getEducation());

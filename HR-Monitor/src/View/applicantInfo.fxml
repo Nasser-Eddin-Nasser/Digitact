@@ -152,7 +152,7 @@
                                                <TableColumn fx:id="universityFX" prefWidth="142.0" text="University" />
                                                <TableColumn fx:id="subjectFX" prefWidth="149.0" text="Subject" />
                                                <TableColumn fx:id="degreeFX" prefWidth="89.0" text="Degree" />
-                                               <TableColumn fx:id="gradeFX" prefWidth="98.0" resizable="false" text="Grade" />
+                                               <TableColumn fx:id="gradeFX" prefWidth="98.0" text="Grade" />
                                                <TableColumn fx:id="gradYearFX" prefWidth="102.0" text="Graduation Year" />
                                             </columns>
                                          </TableView>
@@ -173,14 +173,18 @@
                                          </TableView>
                                       </content>
                                    </TitledPane>
-                                   <TitledPane maxHeight="400.0" prefHeight="149.0" prefWidth="582.0" text="Education Info" wrapText="true">
+                                   <TitledPane maxHeight="400.0" prefHeight="232.0" prefWidth="682.0" text="Position" wrapText="true">
                                       <content>
-                                         <TableView maxHeight="800.0" minHeight="50.0" prefHeight="250.0" prefWidth="580.0">
+                                         <TableView id="posTable" fx:id="posTable" maxHeight="800.0" minHeight="50.0" prefHeight="250.0" prefWidth="580.0">
                                             <columns>
                                                <TableColumn fx:id="posFX" prefWidth="274.0" text="Position" />
-                                               <TableColumn fx:id="indFX" prefWidth="306.0" resizable="false" text="Industries" />
                                             </columns>
                                          </TableView>
+<!--                                         <TableView id="posTable" fx:id="indTable" maxHeight="800.0" minHeight="50.0" prefHeight="250.0" prefWidth="580.0">-->
+<!--                                            <columns>-->
+<!--                                               <TableColumn fx:id="indFX" prefWidth="274.0" text="Position" />-->
+<!--                                            </columns>-->
+<!--                                         </TableView>-->
                                       </content>
                                       <cursor>
                                          <Cursor fx:constant="NONE" />
