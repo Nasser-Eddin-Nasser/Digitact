@@ -7,10 +7,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
-import { Subscription } from 'rxjs';
+import {
+  IonRouterOutlet,
+  NavController,
+  Platform,
+  ViewDidEnter,
+  ViewWillLeave,
+} from '@ionic/angular';
+import { Observable, Subscription } from 'rxjs';
 
 import { FormArray, FormControl, FormGroup } from '../common/forms/forms';
+import { AlertController } from '../common/ion-wrappers/alert-controller';
 import {
   BasicInfo,
   ContactInfo,
@@ -34,10 +41,14 @@ import {
   templateUrl: './forms.page.html',
   styleUrls: ['./forms.page.scss'],
 })
-export class FormsPage implements OnInit, OnDestroy {
+export class FormsPage
+  implements OnInit, OnDestroy, ViewDidEnter, ViewWillLeave {
   constructor(
     private activatedRoute: ActivatedRoute,
+    private alertController: AlertController,
+    private ionRouterOutlet: IonRouterOutlet,
     private navigationController: NavController,
+    private platform: Platform,
     private router: Router,
     private storage: StorageHandlerService
   ) {}
@@ -122,6 +133,12 @@ export class FormsPage implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   /**
+   * Boolean used to check, if the applicant wants to leave the forms page by submitting,
+   * if applicant wants to submit, mayLeaveView() returns true, so Guard will allow leaving the page.
+   */
+  private hasSubmittedForm = false;
+
+  /**
    * In this method route change is observed and handling is done.
    */
   ngOnInit(): void {
@@ -163,6 +180,24 @@ export class FormsPage implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     for (const subscription of this.subscriptions) {
       subscription.unsubscribe();
+    }
+  }
+  /**
+   * Disabling swipe gesture in iOS
+   */
+  ionViewDidEnter(): void {
+    if (this.platform.is('ios')) {
+      // Disable the router swipe gesture on iOS, because this gesture cannot be properly handled with our Guard.
+      this.ionRouterOutlet.swipeGesture = false;
+    }
+  }
+
+  /**
+   * Activating swipe gesture in iOS
+   */
+  ionViewWillLeave(): void {
+    if (this.platform.is('ios')) {
+      this.ionRouterOutlet.swipeGesture = true;
     }
   }
 
@@ -247,7 +282,12 @@ export class FormsPage implements OnInit, OnDestroy {
         key,
         this.formsData.getRawValue()
       );
-      this.router.navigate(['/forms', 'confirmation'], { state: { id: key } });
+
+      this.hasSubmittedForm = true;
+      this.navigationController.navigateRoot(['/forms', 'confirmation'], {
+        animationDirection: 'forward',
+        state: { id: key },
+      });
     });
   }
 
@@ -278,5 +318,58 @@ export class FormsPage implements OnInit, OnDestroy {
       }
     }
     this.progressPercentage = validSteps / totalNumberOfRequiredSteps;
+  }
+
+  /**
+   * Showing an alert message, when leaving a form page.
+   *
+   * @returns A Promise. This Promise will emit true if the user wants to leave the page. Otherwise, false is emitted.
+   */
+  private async showClosingAlert(): Promise<boolean> {
+    const result = new Promise<boolean>(async (resolve) => {
+      const alert = await this.alertController.create({
+        header: 'Close',
+        message: 'Do you really want to cancel your job application?',
+        cssClass: 'custom-alert-button-colors',
+        buttons: [
+          {
+            text: 'No',
+            role: 'cancel',
+            handler: () => {
+              resolve(false);
+            },
+          },
+          {
+            text: 'Yes',
+            cssClass: 'color-secondary',
+            handler: () => {
+              resolve(true);
+            },
+          },
+        ],
+      });
+
+      alert.present();
+    });
+    return result;
+  }
+
+  /**
+   * Deciding Function to handle leaving forms page, needed for the Guard
+   *
+   * @returns true (either directly or emitted in the Observable) if the view may be left. Otherwise, false is returned (or emitted).
+   */
+  mayLeaveView(): Observable<boolean> | boolean {
+    if (this.hasSubmittedForm) {
+      return true;
+    }
+
+    const result = new Observable<boolean>((observer) => {
+      this.showClosingAlert().then((mayLeave) => {
+        observer.next(mayLeave);
+        observer.complete();
+      });
+    });
+    return result;
   }
 }
