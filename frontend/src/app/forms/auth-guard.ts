@@ -1,3 +1,9 @@
+/**
+ * @description
+ *   This page handles the basic operation of the Guard.
+ *
+ */
+
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -13,6 +19,9 @@ import { FULL_IMAGE_VIEWER_PATH } from './router-constants';
   providedIn: 'root',
 })
 export class AuthGuard implements CanDeactivate<FormsPage> {
+  /**
+   * CanDeactivate method of the Guard to pretend going back to home page accidently without a warning
+   */
   canDeactivate(
     component: FormsPage,
     _currentRoute: ActivatedRouteSnapshot,

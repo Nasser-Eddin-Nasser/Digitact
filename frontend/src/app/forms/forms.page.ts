@@ -132,6 +132,10 @@ export class FormsPage
    */
   private subscriptions: Subscription[] = [];
 
+  /**
+   * Boolean used to check, if the applicant wants to leave the forms page by submitting,
+   * if applicant wants to submit, mayLeaveView() returns true, so Guard will allow leaving the page.
+   */
   private hasSubmittedForm = false;
 
   /**
@@ -178,7 +182,9 @@ export class FormsPage
       subscription.unsubscribe();
     }
   }
-
+  /**
+   * Disabling swipe gesture in iOS
+   */
   ionViewDidEnter(): void {
     if (this.platform.is('ios')) {
       // Disable the router swipe gesture on iOS, because this gesture cannot be properly handled with our Guard.
@@ -186,6 +192,9 @@ export class FormsPage
     }
   }
 
+  /**
+   * Activating swipe gesture in iOS
+   */
   ionViewWillLeave(): void {
     if (this.platform.is('ios')) {
       this.ionRouterOutlet.swipeGesture = true;
@@ -311,6 +320,13 @@ export class FormsPage
     this.progressPercentage = validSteps / totalNumberOfRequiredSteps;
   }
 
+  /**
+   * Showing an alert message, when leaving a form page.
+   *
+   * returning a Promise<boolean>
+   * returning true, if user wants to leave the page.
+   * returning false, if user cancels leaving the page.
+   */
   private async showClosingAlert(): Promise<boolean> {
     const result = new Promise<boolean>(async (resolve) => {
       const alert = await this.alertController.create({
@@ -340,6 +356,15 @@ export class FormsPage
     return result;
   }
 
+  /**
+   * Deciding Function to handle leaving forms page, needed for the Guard
+   *
+   * @param hasSubmittedForm Boolean to check, if the applicant wants to leave the forms page by submitting,
+   * if applicant wants to submit, mayLeaveView() return true, so Guard will allow leaving the page.
+   *
+   * returning true = Guard will allow leaving the page.
+   * returning false = Guard will stop leaving the page.
+   */
   mayLeaveView(): Observable<boolean> | boolean {
     if (this.hasSubmittedForm) {
       return true;
