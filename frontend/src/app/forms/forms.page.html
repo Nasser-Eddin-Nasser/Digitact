@@ -49,6 +49,10 @@
           *ngSwitchCase="APPLICATION_STEP.ProfilePicture"
         >
         </form-profile-picture>
+        <form-documents
+          [formsData]="formsData"
+          *ngSwitchCase="APPLICATION_STEP.Documents"
+        ></form-documents>
         <form-field-designation-page
           [formsData]="formsData"
           *ngSwitchCase="APPLICATION_STEP.FieldDesignationPreference"

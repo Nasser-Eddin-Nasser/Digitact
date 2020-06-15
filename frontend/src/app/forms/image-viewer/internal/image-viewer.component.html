@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeImageViewer()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">
+      {{ currentSlideIndex + 1 }} / {{ providedSettings.imagesBase64.length }}
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="deleteCurrentImage()">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides
+    [options]="sliderOptions"
+    #slider
+    (ionSlideDidChange)="updateCurrentSlideIndex()"
+  >
+    <ion-slide *ngFor="let control of providedSettings.imagesBase64.controls">
+      <!-- In case of performance problems: It could help if we resized the image or used some sort of URL for it. For now, we just use the large base64 string here. -->
+      <img [src]="control.value" />
+    </ion-slide>
+  </ion-slides>
+</ion-content>

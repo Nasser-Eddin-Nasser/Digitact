@@ -19,6 +19,14 @@ const routes: Routes = [
         (m) => m.ConfirmationPageModule
       ),
   },
+  // Important: Do not route to the Image Viewer on your own. Instead, please use the provided Service for that.
+  {
+    path: 'image-viewer',
+    loadChildren: () =>
+      import('./image-viewer/image-viewer.module').then(
+        (m) => m.ImageViewerModule
+      ),
+  },
 ];
 
 @NgModule({
