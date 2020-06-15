@@ -7,11 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
 import { ToastController } from '../common/ion-wrappers/toast-controller';
-import {
-  EducationInfoEntry,
-  FormsData,
-  KeyCompetenciesEntry,
-} from '../model/forms-data.model';
+import { FormsData, KeyCompetenciesEntry } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
 
 @Component({
@@ -47,7 +43,7 @@ export class ApplicationsUploadPage implements OnInit {
    */
   errorMessage: string;
   /**
-   * URL of the host.
+   * URL of the server host.
    */
   url = 'http://localhost:9090';
 
@@ -60,9 +56,9 @@ export class ApplicationsUploadPage implements OnInit {
       .then(async (data) => {
         const applicantDetailsList = data.filter((x) => x.isRated === 1);
         this.totalSize = applicantDetailsList.length;
-        for (const x of applicantDetailsList) {
+        for (const applicantData of applicantDetailsList) {
           if (!this.isError) {
-            await this.sendPostRequest(x);
+            await this.sendPostRequest(applicantData);
           }
         }
       });
@@ -83,7 +79,7 @@ export class ApplicationsUploadPage implements OnInit {
         name: string;
         rating: number;
       }> = [];
-      const education: Array<EducationInfoEntry> = [];
+
       const images: Array<{ content: string; type: string }> = [];
       /**
        * key competencies are mapped according json format required by server.
@@ -94,17 +90,14 @@ export class ApplicationsUploadPage implements OnInit {
         });
       });
       /**
-       * education information are mapped according json format required by server.
-       */
-      Object.values(inp.educationInfo.educationInfoForm).map((v) => {
-        education.push(v);
-      });
-      /**
-       * picture of applicant is mapped according json format required by server.
+       * picture of applicant and documents is mapped according json format required by server.
        */
       images.push({
         content: inp.profilePicture.pictureBase64,
         type: 'profilePic',
+      });
+      inp.documents.documentsBase64.forEach((x) => {
+        images.push({ content: x, type: 'CV' });
       });
       /**
        * complete json structure is formed here to send to server.
@@ -118,7 +111,7 @@ export class ApplicationsUploadPage implements OnInit {
         linkedIn: inp.contactInfo.linkedIn,
         xing: inp.contactInfo.xing,
         imageList: images,
-        educations: education,
+        educations: inp.educationInfo.educationInfoForm,
         industries: inp.fieldDesignationInfo.field,
         positions: inp.fieldDesignationInfo.designation,
         keyCompetencies: keyCompetence,
@@ -150,10 +143,7 @@ export class ApplicationsUploadPage implements OnInit {
           },
           (error) => {
             this.isError = true;
-            if (error.status === 0) {
-              this.errorMessage =
-                'Cannot connect to server at the moment. Please try again later.';
-            } else if (error.status === 500) {
+            if (error.status === 500) {
               this.errorMessage =
                 this.totalSize -
                 this.uploadSize +
@@ -161,6 +151,9 @@ export class ApplicationsUploadPage implements OnInit {
                 ' Application could not be saved due to ' +
                 error.error +
                 '. Please try again later.';
+            } else {
+              this.errorMessage =
+                'Cannot connect to server at the moment. Please try again later.';
             }
           }
         );
