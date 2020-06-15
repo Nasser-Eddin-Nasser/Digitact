@@ -36,81 +36,77 @@ export class ApplicationsUploadPage implements OnInit {
       .then((data) => {
         const applicantDetailsList = data.filter((x) => x.isRated === 1);
         this.totalSize = applicantDetailsList.length;
-        this.sendPostRequest(applicantDetailsList);
+        applicantDetailsList.forEach(async (x) => {
+          this.sendPostRequest(x);
+        });
       });
   }
 
-  sendPostRequest(x: FormsData[]): void {
-    x.forEach((inp) => {
-      const keyCompetence: Array<{
-        category: string;
-        name: string;
-        rating: number;
-      }> = [];
-      const education: Array<EducationInfoEntry> = [];
-      const images: Array<{ content: string; type: string }> = [];
+  sendPostRequest(inp: FormsData): void {
+    const keyCompetence: Array<{
+      category: string;
+      name: string;
+      rating: number;
+    }> = [];
+    const education: Array<EducationInfoEntry> = [];
+    const images: Array<{ content: string; type: string }> = [];
 
-      Object.entries(inp.keyCompetencies).map(([k, v]) => {
-        v.forEach((x: KeyCompetenciesEntry) => {
-          keyCompetence.push({ category: k, name: x.name, rating: x.rating });
-        });
+    Object.entries(inp.keyCompetencies).map(([k, v]) => {
+      v.forEach((x: KeyCompetenciesEntry) => {
+        keyCompetence.push({ category: k, name: x.name, rating: x.rating });
       });
-
-      Object.values(inp.educationInfo.educationInfoForm).map((v) => {
-        education.push(v);
-      });
-
-      images.push({
-        content: inp.profilePicture.pictureBase64,
-        type: 'profilePic',
-      });
-
-      const formsData = {
-        firstName: inp.basicInfo.firstName,
-        lastName: inp.basicInfo.lastName,
-        phone: inp.contactInfo.phoneNumber,
-        email: inp.contactInfo.eMail,
-        title: inp.basicInfo.salutation,
-        imageList: images,
-        educations: education,
-        industries: inp.fieldDesignationInfo.field,
-        positions: inp.fieldDesignationInfo.designation,
-        keyCompetencies: keyCompetence,
-      };
-
-      const headers = new HttpHeaders();
-      headers.append('Content-Type', 'application/json');
-
-      this.httpClient
-        .post(
-          this.url + '/api/controller/createApplicant',
-
-          formsData,
-          {
-            responseType: 'text',
-            observe: 'response',
-            headers,
-          }
-        )
-        .subscribe(
-          (response) => {
-            if (response.status === 201) {
-              if (this.uploadSize === this.totalSize) {
-                this.completionAlert();
-              } else {
-                this.uploadSize++;
-              }
-            }
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
     });
+
+    Object.values(inp.educationInfo.educationInfoForm).map((v) => {
+      education.push(v);
+    });
+
+    images.push({
+      content: inp.profilePicture.pictureBase64,
+      type: 'profilePic',
+    });
+
+    const formsData = {
+      firstName: inp.basicInfo.firstName,
+      lastName: inp.basicInfo.lastName,
+      phone: inp.contactInfo.phoneNumber,
+      email: inp.contactInfo.eMail,
+      title: inp.basicInfo.salutation,
+      imageList: images,
+      educations: education,
+      industries: inp.fieldDesignationInfo.field,
+      positions: inp.fieldDesignationInfo.designation,
+      keyCompetencies: keyCompetence,
+    };
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+
+    this.httpClient
+      .post(this.url + '/api/controller/createApplicant', formsData, {
+        responseType: 'text',
+        observe: 'response',
+      })
+      .subscribe(
+        (response) => {
+          if (response.status === 201) {
+            this.storage.deleteItem(this.storage.applicantDetailsDb, inp.id);
+            this.storage.deleteItem(this.storage.applicantRatingsDb, inp.id);
+            if (this.uploadSize === this.totalSize) {
+              this.completionAlert();
+            } else {
+              this.uploadSize++;
+            }
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   /**
-   * In this method confirmation alert is displayed to notify the application completion
+   * In this method confirmation alert is displayed to notify the applications uplooad to server
    */
   async completionAlert(): Promise<void> {
     const toast = await this.toastController.create({

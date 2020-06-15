@@ -3,6 +3,7 @@
  *    This page holds the apllications to be finalized and sent to HR
  */
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 import { FormsData } from '../model/forms-data.model';
@@ -20,18 +21,21 @@ export class ApplicantsPage implements OnInit {
 
   constructor(
     private navController: NavController,
-    private storage: StorageHandlerService
+    private storage: StorageHandlerService,
+    private router: ActivatedRoute
   ) {}
 
   /**
    * In this method all the applications stored in the local DB are fetched
    */
   ngOnInit(): void {
-    this.storage
-      .getAllItems<FormsData>(this.storage.applicantDetailsDb)
-      .then((data) => {
-        this.fetchApplications(data);
-      });
+    this.router.params.subscribe(() => {
+      this.storage
+        .getAllItems<FormsData>(this.storage.applicantDetailsDb)
+        .then((data) => {
+          this.fetchApplications(data);
+        });
+    });
   }
 
   /**
