@@ -106,21 +106,7 @@ export class RatingPage implements OnDestroy, OnInit {
       )
       .then((applicantData) => {
         if (applicantData) {
-          this.ratingForm.controls.applicantScore.controls.rhetoric.setValue(
-            applicantData.applicantScore.rhetoric
-          );
-          this.ratingForm.controls.applicantScore.controls.motivation.setValue(
-            applicantData.applicantScore.motivation
-          );
-          this.ratingForm.controls.applicantScore.controls.personalImpression.setValue(
-            applicantData.applicantScore.personalImpression
-          );
-          this.ratingForm.controls.applicantScore.controls.selfAssurance.setValue(
-            applicantData.applicantScore.selfAssurance
-          );
-          this.ratingForm.controls.impressionInfo.controls.impression.setValue(
-            applicantData.impressionInfo.impression
-          );
+          this.ratingForm.patchValue(applicantData);
         }
       });
     const routerSubscription = this.activatedRoute.queryParams.subscribe(
