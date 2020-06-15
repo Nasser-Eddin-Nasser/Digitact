@@ -10,8 +10,8 @@
 </ion-header>
 
 <ion-content>
-  <span *ngIf="countFinalized !== 0">
-    <div class="main-container info">
+  <div class="main-container info">
+    <span *ngIf="countFinalized !== 0">
       <div class="content">
         <div class="main-description info-content">
           <h1>Finalized</h1>
@@ -28,11 +28,9 @@
           </button>
         </div>
       </div>
-    </div>
-  </span>
+    </span>
 
-  <span *ngIf="countNotFinalized !== 0">
-    <div class="main-container info">
+    <span *ngIf="countNotFinalized !== 0">
       <div class="content">
         <div class="main-description info-content">
           <h1>Not Finished</h1>
@@ -40,16 +38,16 @@
           the applicant but not been rated by HR staff.
         </div>
       </div>
-    </div>
 
-    <div class="list-item">
       <ion-list
         *ngFor="
     let data of notFinishedEntry"
       >
         <ion-item (click)="goToRating(data.id)" class="ion-no-padding">
           <ion-label>
-            <h1>{{data.basicInfo.firstName }} {{ data.basicInfo.lastName}}</h1>
+            <h1>
+              {{data.basicInfo.firstName }} {{ data.basicInfo.lastName}}
+            </h1>
             <p>
               <ion-icon name="time-outline"></ion-icon>
               {{data.submittedTime}}
@@ -57,16 +55,14 @@
           </ion-label>
         </ion-item>
       </ion-list>
-    </div>
-  </span>
+    </span>
 
-  <span *ngIf="countNotFinalized === 0 && countFinalized === 0">
-    <div class="main-container info">
+    <span *ngIf="countNotFinalized === 0 && countFinalized === 0">
       <div class="content">
         <div class="main-description info-content">
           No application is submitted or finalized
         </div>
       </div>
-    </div>
-  </span>
+    </span>
+  </div>
 </ion-content>
