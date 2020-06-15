@@ -16,17 +16,15 @@
         uploading application {{uploadSize}}/{{totalSize}}
       </div>
       <div class="spinner-css">
-        <span *ngIf="uploadSize !== totalSize && isError === false">
-          <ion-spinner></ion-spinner
-        ></span>
-        <span *ngIf="uploadSize === totalSize">
+        <span *ngIf="!isSuccess && !isError"> <ion-spinner></ion-spinner></span>
+        <span *ngIf="isSuccess">
           <ion-icon
             name="checkmark-circle-outline"
             size="large"
             class="success-icon"
           ></ion-icon
         ></span>
-        <span *ngIf="isError === true">
+        <span *ngIf="isError">
           <ion-icon
             name="close-circle-outline"
             class="failure-icon"
@@ -48,9 +46,20 @@
 
   <div class="main-container">
     <div class="content">
-      <div class="main-description info">
-        Applications are uploading.
-      </div>
+      <span *ngIf="!isError">
+        <div class="main-description upload-info">
+          {{uploadSize - 1}} application has successfully been uploaded to the
+          server.
+        </div>
+      </span>
+      <span *ngIf="isError">
+        <span *ngIf="uploadSize>1" class="upload-info">
+          {{uploadSize-1}} Application saved successfully.
+        </span>
+        <div class="main-description error-info">
+          {{errorMessage}}
+        </div>
+      </span>
     </div>
   </div>
 </ion-content>

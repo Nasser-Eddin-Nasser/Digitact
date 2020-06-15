@@ -42,7 +42,7 @@ public class ClientController {
         boolean isSuccessful = myRepos.storeApplicantOnDB(applicant);
         return (isSuccessful)
                 ? new ResponseEntity<String>("Application is successfully saved",HttpStatus.CREATED)
-                : new ResponseEntity<String>("Application could not be saved. Please try again later.",HttpStatus.INTERNAL_SERVER_ERROR); 
+                : new ResponseEntity<String>("images save path not found",HttpStatus.INTERNAL_SERVER_ERROR); 
     }
 
     @PostMapping("/createAdmin")

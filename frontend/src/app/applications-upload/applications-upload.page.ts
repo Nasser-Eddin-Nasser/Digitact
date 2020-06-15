@@ -26,11 +26,34 @@ export class ApplicationsUploadPage implements OnInit {
     private httpClient: HttpClient,
     private toastController: ToastController
   ) {}
+  /**
+   * The total application size.
+   */
   totalSize = 0;
+  /**
+   * The application size that is being uploaded.
+   */
   uploadSize = 1;
+  /**
+   * To check whether all the applications are uploaded.
+   */
+  isSuccess = false;
+  /**
+   * To check whether there is error during upload.
+   */
   isError = false;
+  /**
+   * To display the error message dynamically.
+   */
+  errorMessage: string;
+  /**
+   * URL of the host.
+   */
   url = 'http://localhost:9090';
 
+  /**
+   * In this method locally stored data are fetched and post request function is called for one application at time.
+   */
   ngOnInit(): void {
     this.storage
       .getAllItems<FormsData>(this.storage.applicantDetailsDb)
@@ -38,17 +61,21 @@ export class ApplicationsUploadPage implements OnInit {
         const applicantDetailsList = data.filter((x) => x.isRated === 1);
         this.totalSize = applicantDetailsList.length;
         for (const x of applicantDetailsList) {
-          await this.sendPostRequest(x).then(() => {
-            console.log('coming');
-          });
+          if (!this.isError) {
+            await this.sendPostRequest(x);
+          }
         }
       });
   }
-
+  /**
+   * In this method timeout of 1 second is speified to have a better readability of the application upload.
+   */
   sleep(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
-
+  /**
+   * In this method a post request is made to the server.
+   */
   sendPostRequest(inp: FormsData): Promise<void> {
     return this.sleep(1000).then(() => {
       const keyCompetence: Array<{
@@ -58,22 +85,30 @@ export class ApplicationsUploadPage implements OnInit {
       }> = [];
       const education: Array<EducationInfoEntry> = [];
       const images: Array<{ content: string; type: string }> = [];
-
+      /**
+       * key competencies are mapped according json format required by server.
+       */
       Object.entries(inp.keyCompetencies).map(([k, v]) => {
         v.forEach((x: KeyCompetenciesEntry) => {
           keyCompetence.push({ category: k, name: x.name, rating: x.rating });
         });
       });
-
+      /**
+       * education information are mapped according json format required by server.
+       */
       Object.values(inp.educationInfo.educationInfoForm).map((v) => {
         education.push(v);
       });
-
+      /**
+       * picture of applicant is mapped according json format required by server.
+       */
       images.push({
         content: inp.profilePicture.pictureBase64,
         type: 'profilePic',
       });
-
+      /**
+       * complete json structure is formed here to send to server.
+       */
       const formsData = {
         firstName: inp.basicInfo.firstName,
         lastName: inp.basicInfo.lastName,
@@ -89,7 +124,10 @@ export class ApplicationsUploadPage implements OnInit {
 
       const headers = new HttpHeaders();
       headers.append('Content-Type', 'application/json');
-
+      /**
+       * post request is made here and based on response locally stored data is deleted
+       * error and success messages are shown wherever necessary
+       */
       this.httpClient
         .post(this.url + '/api/controller/createApplicant', formsData, {
           responseType: 'text',
@@ -97,11 +135,11 @@ export class ApplicationsUploadPage implements OnInit {
         })
         .subscribe(
           (response) => {
-            console.log(response);
             if (response.status === 201) {
-              // this.storage.deleteItem(this.storage.applicantDetailsDb, inp.id);
-              // this.storage.deleteItem(this.storage.applicantRatingsDb, inp.id);
+              this.storage.deleteItem(this.storage.applicantDetailsDb, inp.id);
+              this.storage.deleteItem(this.storage.applicantRatingsDb, inp.id);
               if (this.uploadSize === this.totalSize) {
+                this.isSuccess = true;
                 this.completionAlert();
               } else {
                 this.uploadSize++;
@@ -110,7 +148,18 @@ export class ApplicationsUploadPage implements OnInit {
           },
           (error) => {
             this.isError = true;
-            console.log(error);
+            if (error.status === 0) {
+              this.errorMessage =
+                'Cannot connect to server at the moment. Please try again later.';
+            } else if (error.status === 500) {
+              this.errorMessage =
+                this.totalSize -
+                this.uploadSize +
+                1 +
+                ' Application could not be saved due to ' +
+                error.error +
+                '. Please try again later.';
+            }
           }
         );
     });
@@ -118,6 +167,7 @@ export class ApplicationsUploadPage implements OnInit {
 
   /**
    * In this method confirmation alert is displayed to notify the applications uplooad to server
+   * TimeOut for navigation is set to display the toast on current page and then navigate
    */
   async completionAlert(): Promise<void> {
     const toast = await this.toastController.create({
@@ -127,7 +177,9 @@ export class ApplicationsUploadPage implements OnInit {
       duration: 2000,
     });
     toast.present();
-    this.goBack();
+    setTimeout(() => {
+      this.goBack();
+    }, 2000);
   }
 
   /**

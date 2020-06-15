@@ -14,8 +14,10 @@
   padding-top: 0;
 }
 
-.info {
+.upload-info,
+.error-info {
   padding: 1rem;
+  font-size: 20px;
 }
 
 .spinner-css {
@@ -30,6 +32,7 @@
   color: var(--ion-color-success);
 }
 
-.failure-icon {
+.failure-icon,
+.error-info {
   color: var(--ion-color-danger);
 }

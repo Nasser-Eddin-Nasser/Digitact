@@ -27,7 +27,3 @@ jobs:
       run: chmod +x  ./Backend/gradlew
     - name: Build with Gradle
       run: ./Backend/gradlew build
-    - uses: actions/upload-artifact@v1
-      with:
-        name: build-result-backend
-        path: ./Backend/build 
