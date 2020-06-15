@@ -45,6 +45,17 @@
         <ng-container
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
+            step: APPLICATION_STEP.Documents,
+            displayName: 'Documents',
+            isValid: formsData.controls.documents.valid,
+            isActive: currentStep === APPLICATION_STEP.Documents
+          }"
+        >
+        </ng-container>
+
+        <ng-container
+          [ngTemplateOutlet]="menuItem"
+          [ngTemplateOutletContext]="{
             step: APPLICATION_STEP.EducationInformation,
             displayName: 'Education Information',
             isValid: formsData.controls.educationInfo.valid,
