@@ -4,6 +4,7 @@ import Database.Connector;
 import Model.Education;
 import Model.Image.AppImage;
 import Model.Image.ImageType;
+import Model.Industries;
 import Model.MVC.StorageModel;
 import Model.Positions;
 import Model.User.ApplicantUI;
@@ -50,10 +51,14 @@ public class StorageController {
     TableView<Positions> posTable;
     private ObservableList<Positions> observableListPosTableTableView;
 
+    @FXML
+    TableView<Industries> indTable;
+    private ObservableList<Industries> observableListIndTableTableView;
 
     @FXML
     TableColumn<Positions, String> posFX = new TableColumn<>("Position");
-
+    @FXML
+    TableColumn<Industries, String> indFX = new TableColumn<>("Industry");
     // Overview of all Applicants
     @FXML
     TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
@@ -115,12 +120,25 @@ public class StorageController {
         }
     }
 
+//    TableView<Industries> indTable;
+//    private ObservableList<Industries> observableListIndTableTableView;
+
     private void setPositionAndIndustry(ApplicantUI app) {
-        System.out.println(app.getIndustries());
-        System.out.println(app.getPositions());
-        lblFNameFX.setText(app.getFirstName());
-        List<Positions> positionList = app.getPositions();
         getPositionTable(app.getPositions());
+        getIndTable(app.getIndustries());
+    }
+
+    private ObservableList<Industries> getIndTable(List<Industries> industries) {
+        observableListIndTableTableView = indTable.getItems();
+        observableListIndTableTableView.clear();
+        observableListIndTableTableView.addAll(industries);
+        setFactoriesAndComparatorsForIndTableColumns();
+        return observableListIndTableTableView;
+    }
+
+    public void setFactoriesAndComparatorsForIndTableColumns() {
+        indFX.setCellValueFactory(
+                ind -> new ReadOnlyStringWrapper(ind.getValue().toString()));
     }
 
     private ObservableList<Positions> getPositionTable(List<Positions> positions) {
