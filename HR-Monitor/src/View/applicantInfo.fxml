@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="600.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <VBox prefHeight="5" />
    </top>
@@ -140,14 +140,14 @@
                        </content>
                     </TitledPane>
                      -->
-                    <TabPane prefHeight="458.0" prefWidth="582.0" rotateGraphic="true" tabClosingPolicy="UNAVAILABLE">
+                    <TabPane maxHeight="800.0" prefHeight="500.0" prefWidth="582.0" rotateGraphic="true" tabClosingPolicy="UNAVAILABLE">
                        <tabs>
                           <Tab text="Information">
                              <SplitPane dividerPositions="0.2358974358974359, 0.6128205128205129, 0.5" orientation="VERTICAL" prefHeight="160.0" prefWidth="250.0">
                                 <items>
-                                   <TitledPane maxHeight="1000.0" prefHeight="89.0" prefWidth="582.0" text="Education Info" wrapText="true">
+                                   <TitledPane maxHeight="200.0" minHeight="100.0" prefHeight="200.0" prefWidth="582.0" text="Education Info" wrapText="true">
                                       <content>
-                                         <TableView fx:id="eduInfoTblFX" maxHeight="500.0" minHeight="50.0" prefHeight="150.0" prefWidth="580.0">
+                                         <TableView fx:id="eduInfoTblFX" maxHeight="500.0" minHeight="100.0" prefHeight="0.0" prefWidth="610.0">
                                             <columns>
                                                <TableColumn fx:id="universityFX" prefWidth="142.0" text="University" />
                                                <TableColumn fx:id="subjectFX" prefWidth="149.0" text="Subject" />
@@ -167,9 +167,9 @@
                                          <Cursor fx:constant="NONE" />
                                       </cursor>
                                    </TitledPane>
-                                   <TitledPane prefHeight="141.0" prefWidth="582.0" text="Key Competencies" wrapText="true">
+                                   <TitledPane minHeight="125.0" prefHeight="141.0" prefWidth="582.0" text="Key Competencies" wrapText="true">
                                       <content>
-                                         <TableView maxHeight="600.0" minHeight="50.0" prefHeight="400.0" prefWidth="580.0">
+                                         <TableView maxHeight="600.0" minHeight="0.0" prefHeight="201.0" prefWidth="610.0">
                                             <columns>
                                                <TableColumn fx:id="proL_frameWFX" minWidth="50.0" prefWidth="178.0" text="Programming Languages &amp; Frameworks" />
                                                <TableColumn fx:id="dbFX" prefWidth="141.0" text="Databases" />
@@ -185,9 +185,9 @@
                                          </TableView>
                                       </content>
                                    </TitledPane>
-                                   <TitledPane maxHeight="400.0" prefHeight="141.0" prefWidth="682.0" text="Position" wrapText="true">
+                                   <TitledPane maxHeight="500.0" minHeight="150.0" prefHeight="453.0" prefWidth="612.0" text="Position" wrapText="true">
                                       <content>
-                                         <TableView id="posTable" fx:id="posTable" maxWidth="5000.0" prefHeight="98.0" prefWidth="610.0">
+                                         <TableView id="posTable" fx:id="posTable" maxHeight="600.0" maxWidth="5000.0" prefHeight="200.0" prefWidth="610.0">
                                             <columns>
                                                <TableColumn fx:id="posFX" minWidth="-1.0" prefWidth="700.0" text="Position" />
                                             </columns>
@@ -208,9 +208,9 @@
                                          <Cursor fx:constant="NONE" />
                                       </cursor>
                                    </TitledPane>
-                                   <TitledPane maxHeight="400.0" prefHeight="134.0" prefWidth="612.0" text="Industry" wrapText="true">
+                                   <TitledPane maxHeight="200.0" minHeight="100.0" prefHeight="100.0" prefWidth="612.0" text="Industry" wrapText="true">
                                       <content>
-                                         <TableView id="posTable" fx:id="indTable" maxWidth="5000.0" minHeight="50.0">
+                                         <TableView id="posTable" fx:id="indTable" maxWidth="5000.0" minHeight="100.0" prefHeight="200.0" prefWidth="610.0">
                                             <columns>
                                                <TableColumn id="indFX" fx:id="indFX" minWidth="-1.0" prefWidth="700.0" text="Industry" />
                                             </columns>
