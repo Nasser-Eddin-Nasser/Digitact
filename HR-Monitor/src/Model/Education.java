@@ -1,6 +1,7 @@
 package Model;
 
 public class Education {
+
     private Long id;
 
     private String university;
@@ -13,19 +14,20 @@ public class Education {
 
     private String graduation_date;
 
-    public Education() {}
+    private Education() {}
 
     public Education(
             String university,
             String subject,
             Degree degree,
             double grade,
-            String graduation_Date) {
+            String graduation_date) {
         this.university = university;
         this.subject = subject;
         this.degree = degree;
         this.grade = grade;
-        this.graduation_date = graduation_Date;
+        this.graduation_date = graduation_date;
+        System.out.println(university + " " + subject);
     }
 
     public String getUniversity() {

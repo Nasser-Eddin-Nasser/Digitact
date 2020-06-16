@@ -2,6 +2,7 @@ package Database;
 
 public enum Method {
     getApplicants("getApplicants"),
+    getImageById("getImageById"),
     getAllEducationInfo("getAllEducationInfo");
 
     private final String name;

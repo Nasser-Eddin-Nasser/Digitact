@@ -32,8 +32,6 @@
                     <columns>
                         <TableColumn fx:id="firstNameCol" minWidth="-1.0" prefWidth="204.0" text="First Name" />
                         <TableColumn fx:id="lastNameCol" prefWidth="79.0" text="Last Name" />
-                        <TableColumn fx:id="positionCol" prefWidth="79.0" text="position" />
-                        <TableColumn fx:id="industryCol" prefWidth="79.0" text="industry" />
                     </columns>
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
