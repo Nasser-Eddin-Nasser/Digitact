@@ -3,20 +3,17 @@ package Model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum Positions {
-    @JsonProperty("consultant_Business_Consultant")
+    @JsonProperty("Consultant")
     consultant_Business_Consultant,
-    @JsonProperty("iT_Consultant_Informationsmanagement")
+    @JsonProperty("ITConsultantInformationsmanagement")
     iT_Consultant_Informationsmanagement,
-    @JsonProperty("iT_Consultant_Java_JEE")
+    @JsonProperty("ITConsultantJavaJEE")
     iT_Consultant_Java_JEE,
-    @JsonProperty("iT_Consultant_Data_Science")
+    @JsonProperty("ITConsultantDataScienceArtificialIntelligence")
     iT_Consultant_Data_Science,
-    @JsonProperty("iT_Consultant_Artificial_Intelligence")
-    iT_Consultant_Artificial_Intelligence,
-    @JsonProperty("consultant_SAP")
+    @JsonProperty("ConsultantSAP")
     consultant_SAP,
-    @JsonProperty("internship_Working_Student")
+    @JsonProperty("InternshipWorkingStudent")
     internship_Working_Student,
-    @JsonProperty("Others")
     Others
 }

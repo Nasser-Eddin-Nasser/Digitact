@@ -3,16 +3,15 @@ package Model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum Industries {
-    @JsonProperty("automotive")
+    @JsonProperty("Automotive")
     automotive,
-    @JsonProperty("finance")
+    @JsonProperty("Finance")
     finance,
-    @JsonProperty("commerce")
+    @JsonProperty("Commerce")
     commerce,
-    @JsonProperty("pharma_Helthcare")
+    @JsonProperty("PharmaHealthcare")
     pharma_Helthcare,
-    @JsonProperty("public_Sector")
+    @JsonProperty("PublicSector")
     public_Sector,
-    @JsonProperty("Others")
     Others
 }
