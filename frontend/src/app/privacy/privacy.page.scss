@@ -1,0 +1,31 @@
+.round-button {
+  font-size: 18px;
+  color: var(--ion-color-primary-contrast);
+  background: var(--ion-color-primary);
+  padding: 1rem;
+  border-radius: 1000px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  width: 100%;
+  outline: none;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.secondary-button {
+  background: var(--ion-color-medium-tint);
+}
+
+.h-line {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid var(--ion-color-light-shade);
+  margin: 1em 0;
+  padding: 0;
+}
+
+ion-item ion-label {
+  white-space: normal;
+  padding: 2em;
+}

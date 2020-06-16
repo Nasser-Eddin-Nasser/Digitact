@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
+import { FULL_IMAGE_VIEWER_PATH } from '../router-constants';
+
 import { ImageViewerSettings } from './model/image-viewer-settings.model';
 
 /**
@@ -28,7 +30,7 @@ export class ImageViewerService {
   showImageViewer(settings: ImageViewerSettings): void {
     this.setSettings(settings);
 
-    this.navController.navigateForward(['/forms', 'image-viewer']);
+    this.navController.navigateForward(FULL_IMAGE_VIEWER_PATH);
   }
 
   private setSettings(settings: ImageViewerSettings): void {
