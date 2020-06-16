@@ -48,7 +48,7 @@ public class AcController {
     }
 
     @FXML
-    public void onShowView() { // todo bad code!!
+    public void onShowView() {
         stage.setHeight(viewLoginHeight);
         stage.setWidth(viewLoginWidth);
         stage.setScene(viewLogin);

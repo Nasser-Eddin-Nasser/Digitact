@@ -1,45 +1,91 @@
 package Controller;
 
+import Database.Connector;
 import Model.Education;
+import Model.Image.AppImage;
+import Model.Image.ImageType;
+import Model.Industries;
 import Model.MVC.StorageModel;
+import Model.Positions;
 import Model.User.ApplicantUI;
-import java.io.IOException;
-import java.util.List;
+import Util.ImageTools;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static Database.Method.getImageById;
+
 public class StorageController {
+    Stage stage;
     StorageModel model;
-    // Create a TableView with a list of persons
-    @FXML TableView<ApplicantUI> userTable;
+    // Create a TableView with a list of Applicants
+    @FXML
+    TableView<ApplicantUI> userTable;
     private ObservableList<ApplicantUI> observableListTableView;
 
-    @FXML TableView<Education> educationTable;
-    private ObservableList<Education> observableListEducationTableView;
+    // Create a TableView with a list of Education Info of an Applicant
+    @FXML
+    TableView<Education> eduInfoTblFX;
+    private ObservableList<Education> observableListEduInfoTableView;
 
-    Stage stage;
-    @FXML TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
-    @FXML TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
-    @FXML TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
-    @FXML TableColumn<ApplicantUI, String> positionCol = new TableColumn<>("position");
-    @FXML TableColumn<ApplicantUI, String> industryCol = new TableColumn<>("industry");
+    @FXML
+    TableView<Positions> posTable;
+    private ObservableList<Positions> observableListPosTableTableView;
 
-    // Education table
-    @FXML TableColumn<Education, String> universityCol = new TableColumn<>("university");
-    @FXML TableColumn<Education, String> subjectCol = new TableColumn<>("subject");
-    @FXML TableColumn<Education, String> degreeCol = new TableColumn<>("degree");
-    @FXML TableColumn<Education, Number> gradeCol = new TableColumn<>("grade");
-    @FXML TableColumn<Education, String> dateCol = new TableColumn<>("date");
+    @FXML
+    TableView<Industries> indTable;
+    private ObservableList<Industries> observableListIndTableTableView;
+
+    @FXML
+    TableColumn<Positions, String> posFX = new TableColumn<>("Position");
+    @FXML
+    TableColumn<Industries, String> indFX = new TableColumn<>("Industry");
+    // Overview of all Applicants
+    @FXML
+    TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
+    @FXML
+    TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
+    @FXML
+    TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
+
+    // Applicant Info View's Variables
+    // 1. Basic Info
+    @FXML
+    Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX, lblLinkedInFX, lblXingFX;
+    // 2. Edu Info
+    @FXML
+    TableColumn<Education, String> universityFX = new TableColumn<>("university");
+    @FXML
+    TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
+    @FXML
+    TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
+    @FXML
+    TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
+    @FXML
+    TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
+    // 3. Image of the  Applicant
+    @FXML
+    private ImageView imgFX;
+
 
     Pane root;
 
@@ -52,73 +98,137 @@ public class StorageController {
         getTable();
     }
 
-    public void showEduInfo(long id) {
-        Stage stageEduInfo = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/eduInfoView.fxml"));
-        loader.setController(this);
-        Scene scene = null;
+    public void showApplicantInfo(long id) {
         try {
-            scene = new Scene(loader.load());
+            Stage stageApplicantInfo = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/applicantInfo.fxml"));
+            loader.setController(this);
+            Scene scene = new Scene(loader.load());
+            stageApplicantInfo.show();
+            stageApplicantInfo.setScene(scene);
+            stageApplicantInfo.setTitle("Applicant Info");
+            stageApplicantInfo
+                    .getIcons()
+                    .add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
+            ApplicantUI app = model.getApplicantByID(id);
+            setTableBasicInfo(app);
+            setPositionAndIndustry(app);
+            getTableEduInfo(app);
+            getImage(app);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        stageEduInfo.show();
-        System.out.println("Prints");
-        stageEduInfo.setScene(scene);
-        stageEduInfo.show();
-        getTableEducation(id);
     }
 
-    private ObservableList<Education> getTableEducation(long id) {
-        ApplicantUI app = model.getApplicantByID(id);
-        System.out.println("---------");
-        ;
-        app.getEducations().forEach(x -> System.out.println(x.getUniversity()));
-        observableListEducationTableView = educationTable.getItems();
-        observableListEducationTableView.clear();
-        observableListEducationTableView.addAll(app.getEducations());
-        setFactoriesAndComparatorsForEducationTableColumns();
-        return observableListEducationTableView;
+//    TableView<Industries> indTable;
+//    private ObservableList<Industries> observableListIndTableTableView;
+
+    private void setPositionAndIndustry(ApplicantUI app) {
+        getPositionTable(app.getPositions());
+        getIndTable(app.getIndustries());
+    }
+
+    private ObservableList<Industries> getIndTable(List<Industries> industries) {
+        observableListIndTableTableView = indTable.getItems();
+        observableListIndTableTableView.clear();
+        observableListIndTableTableView.addAll(industries);
+        setFactoriesAndComparatorsForIndTableColumns();
+        return observableListIndTableTableView;
+    }
+
+    public void setFactoriesAndComparatorsForIndTableColumns() {
+        indFX.setCellValueFactory(
+                ind -> new ReadOnlyStringWrapper(ind.getValue().toString()));
+    }
+
+    private ObservableList<Positions> getPositionTable(List<Positions> positions) {
+        observableListPosTableTableView = posTable.getItems();
+        observableListPosTableTableView.clear();
+        observableListPosTableTableView.addAll(positions);
+        setFactoriesAndComparatorsForPosTableColumns();
+        return observableListPosTableTableView;
+    }
+
+    public void setFactoriesAndComparatorsForPosTableColumns() {
+        posFX.setCellValueFactory(
+                pos -> new ReadOnlyStringWrapper(pos.getValue().toString()));
+    }
+
+    private void getImage(ApplicantUI app) {
+        List<AppImage> profImgs =
+                app.getAppImage()
+                        .stream()
+                        .filter(x -> x.getType().equals(ImageType.profilePic))
+                        .collect(Collectors.toList());
+        if (profImgs.size() > 0) {
+            try {
+                AppImage img = profImgs.get(0);
+                setProfileImage(app, img);
+            } catch (Exception e) {
+                System.err.println("unable to load Image!");
+            }
+        }
+    }
+
+    private void setProfileImage(ApplicantUI app, AppImage img) throws IOException {
+        Connector.sendGetHttp(getImageById, String.valueOf(app.getID()), img.getId());
+        ImageTools.parseImageStringToImage(img);
+
+        File file = new File(img.getPath());
+        imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
+    }
+
+    private void setTableBasicInfo(ApplicantUI app) {
+        lblFNameFX.setText(app.getFirstName());
+        lblLNameFX.setText(app.getLastName());
+        lblEmailFX.setText(app.getEmail());
+        lblPNumberFX.setText(app.getPhone());
+        lblLinkedInFX.setText(app.getLinkedIn());
+        lblXingFX.setText(app.getXing());
+    }
+
+    private ObservableList<Education> getTableEduInfo(ApplicantUI app) {
+        observableListEduInfoTableView = eduInfoTblFX.getItems();
+        observableListEduInfoTableView.clear();
+        observableListEduInfoTableView.addAll(app.getEducation());
+        setFactoriesAndComparatorsForEduInfoTableColumns();
+        return observableListEduInfoTableView;
     }
 
     public Pane getPane() {
         return root;
     }
 
-    public void setFactoriesAndComparatorsForEducationTableColumns() {
-        universityCol.setCellValueFactory(
-                education -> new ReadOnlyStringWrapper(education.getValue().getUniversity()));
-        subjectCol.setCellValueFactory(
-                education -> new ReadOnlyStringWrapper(education.getValue().getSubject()));
-        degreeCol.setCellValueFactory(
-                education ->
-                        new ReadOnlyStringWrapper(education.getValue().getDegree().toString()));
-        gradeCol.setCellValueFactory(
-                education -> new ReadOnlyDoubleWrapper(education.getValue().getGrade()));
-        dateCol.setCellValueFactory(
-                education -> new ReadOnlyStringWrapper(education.getValue().getGraduation_date()));
+    public void setFactoriesAndComparatorsForEduInfoTableColumns() {
+        universityFX.setCellValueFactory(
+                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getUniversity()));
+        subjectFX.setCellValueFactory(
+                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getSubject()));
+        degreeFX.setCellValueFactory(
+                applicant ->
+                        new ReadOnlyStringWrapper(applicant.getValue().getDegree().toString()));
+        gradeFX.setCellValueFactory(
+                applicant -> new ReadOnlyDoubleWrapper(applicant.getValue().getGrade()));
+        gradYearFX.setCellValueFactory(
+                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getGraduation_date()));
     }
 
     public void setFactoriesAndComparatorsForTableColumns() {
         idCol.setCellValueFactory(user -> new ReadOnlyLongWrapper(user.getValue().getID()));
+        idCol.setVisible(false);
         firstNameCol.setCellValueFactory(
                 user -> new ReadOnlyStringWrapper(user.getValue().getFirstName()));
         lastNameCol.setCellValueFactory(
                 user -> new ReadOnlyStringWrapper(user.getValue().getLastName()));
-        positionCol.setCellValueFactory(
-                user -> new ReadOnlyStringWrapper(user.getValue().getPositions().toString()));
-        industryCol.setCellValueFactory(
-                user -> new ReadOnlyStringWrapper(user.getValue().getIndustries().toString()));
     }
 
     public ObservableList<ApplicantUI> getTable() {
-        List<ApplicantUI> db = model.getDB();
+        List<ApplicantUI> applicantsList = model.getDB();
         AddClickFunctionToUserTable();
         observableListTableView = userTable.getItems();
         observableListTableView.clear();
-        observableListTableView.addAll(db);
+        observableListTableView.addAll(applicantsList);
         setFactoriesAndComparatorsForTableColumns();
-        idCol.setVisible(false);
         return observableListTableView;
     }
 
@@ -130,7 +240,7 @@ public class StorageController {
                             event -> {
                                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                                     ApplicantUI rowData = row.getItem();
-                                    showEduInfo(rowData.getID());
+                                    showApplicantInfo(rowData.getID());
                                 }
                             });
                     return row;
