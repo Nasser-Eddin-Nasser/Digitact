@@ -17,9 +17,9 @@ export class EducationInfoEntryComponent {
   constructor(public modalController: ModalController) {}
 
   degreeTypeArray = [
-    { value: 'master', displayName: 'Master' },
-    { value: 'bachelor', displayName: 'Bachelor' },
-    { value: 'school', displayName: 'School' },
+    { value: 'Master', displayName: 'Master' },
+    { value: 'Bachelor', displayName: 'Bachelor' },
+    { value: 'School', displayName: 'School' },
   ];
 
   @Input() education: FormGroup<EducationInfoEntry>;

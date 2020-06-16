@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="navigateToHomePage()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="main-container with-bottom-buttons">
+    <div class="content">
+      <div class="ion-text-justify description">
+        Before we can get started: During the application process, you need to
+        enter some private information. Because of this, please read the Privacy
+        Policy.
+      </div>
+      <div class="ion-no-padding">
+        <button class="round-button align center" (click)="openPolicydetails()">
+          Open policy
+        </button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="h-line"></div>
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-toggle
+          color="primary"
+          (ionChange)="togglePrivacyPolicyAcceptance()"
+          [checked]="isPolicyAccepted"
+        ></ion-toggle>
+        <ion-label primary class="ion-padding-start ion-text-justify">
+          I have read and agree to the Privacy Policy.
+        </ion-label>
+      </ion-item>
+      <div class="h-line"></div>
+    </div>
+    <div class="buttons-container">
+      <button
+        class="fancy-button align center"
+        (click)="startApplication()"
+        [disabled]="!isPolicyAccepted"
+      >
+        Continue
+      </button>
+
+      <button
+        class="fancy-button align center secondary-button"
+        (click)="navigateToHomePage()"
+      >
+        cancel
+      </button>
+    </div>
+  </div>
+</ion-content>

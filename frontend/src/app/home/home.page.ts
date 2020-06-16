@@ -33,7 +33,7 @@ export class HomePage implements OnInit {
    * In this method navigation to application form is handled.
    */
   startApplication(): void {
-    this.navController.navigateForward(['/forms']);
+    this.navController.navigateForward(['/privacy']);
   }
   /**
    * In this method navigation to operation on submitted and finalized applications is handled.

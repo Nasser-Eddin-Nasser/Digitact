@@ -1,0 +1,37 @@
+.add-icon-container {
+  text-align: center;
+  font-size: 80px;
+}
+
+.thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+}
+.single-thumbnail-container {
+  width: 50%;
+}
+.single-thumbnail-container {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.single-thumbnail-container:nth-child(2n + 1) {
+  padding-right: 0.5rem;
+}
+.single-thumbnail-container:nth-child(2n) {
+  padding-left: 0.5rem;
+}
+.make-square {
+  // A trick to make the element square (1:1 aspect ratio).
+  padding-top: 100%;
+  position: relative;
+}
+.make-square img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
