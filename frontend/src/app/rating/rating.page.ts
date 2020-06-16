@@ -99,6 +99,16 @@ export class RatingPage implements OnDestroy, OnInit {
    */
   ngOnInit(): void {
     this.ratingForm.controls.id.disable();
+    this.storage
+      .getItem<RatingForm>(
+        this.storage.applicantRatingsDb,
+        this.ratingForm.controls.id.value
+      )
+      .then((applicantData) => {
+        if (applicantData) {
+          this.ratingForm.patchValue(applicantData);
+        }
+      });
     const routerSubscription = this.activatedRoute.queryParams.subscribe(
       (params) => {
         /*
@@ -121,6 +131,11 @@ export class RatingPage implements OnDestroy, OnInit {
           Of course, there is still room for performance improvement (since we will call the following method really often).
           But for now, it should be fine.
         */
+        this.storage.updateItem(
+          this.storage.applicantRatingsDb,
+          this.ratingForm.controls.id.value,
+          this.ratingForm.getRawValue()
+        );
         this.updateProgessStatus();
       }
     );
@@ -243,11 +258,6 @@ export class RatingPage implements OnDestroy, OnInit {
           this.storage.applicantDetailsDb,
           this.ratingForm.controls.id.value,
           applicantData
-        );
-        this.storage.addItem<RatingForm>(
-          this.storage.applicantRatingsDb,
-          this.ratingForm.controls.id.value,
-          this.ratingForm.getRawValue()
         );
       });
 
