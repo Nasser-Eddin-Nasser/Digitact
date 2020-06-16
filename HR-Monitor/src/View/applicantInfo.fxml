@@ -147,7 +147,7 @@
                                 <items>
                                    <TitledPane maxHeight="200.0" minHeight="100.0" prefHeight="200.0" prefWidth="582.0" text="Education Info" wrapText="true">
                                       <content>
-                                         <TableView fx:id="eduInfoTblFX" maxHeight="500.0" minHeight="100.0" prefHeight="0.0" prefWidth="610.0">
+                                         <TableView fx:id="eduInfoTblFX" maxHeight="500.0" minHeight="50.0" prefHeight="0.0" prefWidth="610.0">
                                             <columns>
                                                <TableColumn fx:id="universityFX" prefWidth="142.0" text="University" />
                                                <TableColumn fx:id="subjectFX" prefWidth="149.0" text="Subject" />
@@ -208,9 +208,9 @@
                                          <Cursor fx:constant="NONE" />
                                       </cursor>
                                    </TitledPane>
-                                   <TitledPane maxHeight="200.0" minHeight="100.0" prefHeight="100.0" prefWidth="612.0" text="Industry" wrapText="true">
+                                   <TitledPane maxHeight="700.0" minHeight="100.0" prefHeight="100.0" prefWidth="612.0" text="Industry" wrapText="true">
                                       <content>
-                                         <TableView id="posTable" fx:id="indTable" maxWidth="5000.0" minHeight="100.0" prefHeight="200.0" prefWidth="610.0">
+                                         <TableView id="posTable" fx:id="indTable" maxHeight="1000.0" maxWidth="5000.0" minHeight="100.0" prefHeight="200.0" prefWidth="610.0">
                                             <columns>
                                                <TableColumn id="indFX" fx:id="indFX" minWidth="-1.0" prefWidth="700.0" text="Industry" />
                                             </columns>
