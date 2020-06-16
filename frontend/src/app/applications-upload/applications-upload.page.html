@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Upload</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="main-container">
+    <div class="content">
+      <div class="main-description custom-style">
+        uploading application {{uploadSize}}/{{totalSize}}
+      </div>
+      <div class="spinner-css">
+        <span *ngIf="!isSuccess && !isError"> <ion-spinner></ion-spinner></span>
+        <span *ngIf="isSuccess">
+          <ion-icon
+            name="checkmark-circle-outline"
+            size="large"
+            class="success-icon"
+          ></ion-icon
+        ></span>
+        <span *ngIf="isError">
+          <ion-icon
+            name="close-circle-outline"
+            class="failure-icon"
+            size="large"
+          ></ion-icon>
+        </span>
+      </div>
+    </div>
+
+    <div class="buttons-container button-css">
+      <button
+        class="fancy-button align center second-button"
+        (click)="goBack()"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div class="content">
+      <span *ngIf="!isError">
+        <div class="main-description upload-info">
+          {{uploadSize - 1}} application has successfully been uploaded to the
+          server.
+        </div>
+      </span>
+      <span *ngIf="isError">
+        <span *ngIf="uploadSize>1" class="upload-info">
+          {{uploadSize-1}} Application saved successfully.
+        </span>
+        <div class="main-description error-info">
+          {{errorMessage}}
+        </div>
+      </span>
+    </div>
+  </div>
+</ion-content>
