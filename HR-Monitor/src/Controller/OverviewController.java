@@ -89,7 +89,7 @@ public class OverviewController {
 
     Pane root;
 
-    public OverviewController(Stage parentStage) throws IOException {
+    public OverviewController(/*Stage parentStage*/) throws IOException {
         model = new OverviewModel();
         stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/storageView.fxml"));

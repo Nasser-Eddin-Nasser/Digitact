@@ -36,6 +36,6 @@ public class StandardController {
     private void loadMenu() {}
 
     private Pane loadContent() throws IOException {
-        return new OverviewController(this.stage).getPane();
+        return new OverviewController().getPane();
     }
 }
