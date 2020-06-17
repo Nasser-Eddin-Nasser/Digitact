@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Bloom?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<Pane fx:id="pane" cache="true" cacheHint="SPEED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #202c47;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="pane" cache="true" cacheHint="SPEED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #202c47;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Button id="loginButton" fx:id="login" layoutX="300.0" layoutY="325.0" mnemonicParsing="false" onAction="#onLogin" prefHeight="33.0" prefWidth="135.0" style="-fx-border-color: #ecf0f1; -fx-background-color: #222D41;" text="Login" textFill="#ecf0f1" />
+        <Button id="loginButton" fx:id="login" layoutX="265.0" layoutY="326.0" mnemonicParsing="false" onAction="#onLogin" prefHeight="33.0" prefWidth="135.0" style="-fx-border-color: #ecf0f1; -fx-background-color: #222D41;" text="Login" textFill="#ecf0f1" />
+        <Button id="loginButton" fx:id="createAccount" layoutX="424.0" layoutY="326.0" mnemonicParsing="false" onAction="#onCreateAccount" prefHeight="33.0" prefWidth="135.0" style="-fx-border-color: #ecf0f1; -fx-background-color: #222D41;" text="Create Account" textFill="#ecf0f1" />
 
         <Label layoutX="290.0" layoutY="175.0" style="-fx-text-fill: #ecf0f1;" text="USERNAME:" />
         <Label layoutX="291.0" layoutY="226.0" style="-fx-text-fill: #ecf0f1;" text="PASSWORD:" />
