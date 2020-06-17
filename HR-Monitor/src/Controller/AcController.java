@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.MVC.AcModel;
-import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,20 +10,31 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class AcController {
-    /** Initial Login Window after program start */
+    /**
+     * Initial Login Window after program start
+     */
     private Scene viewLogin;
-    /** the stage, which holds the program */
+    /**
+     * the stage, which holds the program
+     */
     private Stage stage;
-    /** boundaries of the login-view */
+    /**
+     * boundaries of the login-view
+     */
     private double viewLoginHeight;
 
     private double viewLoginWidth;
 
-    @FXML private Button login;
-    @FXML private PasswordField myPasswordField;
+    @FXML
+    private Button login;
+    @FXML
+    private PasswordField myPasswordField;
 
-    @FXML private TextField myUserNameTextField;
+    @FXML
+    private TextField myUserNameTextField;
     private AcModel model;
 
     /**
@@ -32,11 +42,22 @@ public class AcController {
      *
      * @throws IOException Loading of corresponding FXML files failed
      */
-    public AcController() throws IOException { // todo bad code!!
+    public AcController() throws IOException {
         model = new AcModel();
+        stage = new Stage();
+        setscene();
+
+    }
+
+    public AcController(Stage stage, AcModel model) throws IOException {
+        this.model = model;
+        this.stage = stage;
+        setscene();
+    }
+
+    private void setscene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/login.fxml"));
         loader.setController(this);
-        stage = new Stage();
         viewLogin = new Scene(loader.load());
         viewLoginHeight = viewLogin.getHeight();
         viewLoginWidth = viewLogin.getWidth();
@@ -47,13 +68,6 @@ public class AcController {
         stage.show();
     }
 
-    @FXML
-    public void onShowView() {
-        stage.setHeight(viewLoginHeight);
-        stage.setWidth(viewLoginWidth);
-        stage.setScene(viewLogin);
-        stage.setTitle("Login");
-    }
 
     @FXML
     private void onLogin() {
@@ -67,6 +81,15 @@ public class AcController {
 
         } catch (IllegalArgumentException | IOException e) {
             System.err.println(e);
+        }
+    }
+
+    @FXML
+    private void onCreateAccount() { 
+        try {
+            new CreateAccountController(stage, model);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
