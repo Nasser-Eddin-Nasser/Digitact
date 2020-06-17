@@ -4,5 +4,6 @@ public enum Degree {
     Master,
     Bachelor,
     PhD,
+    School,
     Others
 }

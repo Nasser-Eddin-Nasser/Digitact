@@ -1,0 +1,18 @@
+/*
+  In this file, we are not using Ionic's color variables.
+  The reason: We want this Image Viewer to look the same, no matter if Dark Mode is turned on or off,
+  or if someone has adjusted other settings regarding the global css variables.
+*/
+
+ion-toolbar,
+ion-content {
+  --background: #000000;
+}
+ion-header ion-button,
+ion-header ion-title {
+  --color: #ffffff;
+}
+
+ion-slides {
+  height: 100%;
+}
