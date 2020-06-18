@@ -19,6 +19,7 @@ import { Observable, Subscription } from 'rxjs';
 import { FormArray, FormControl, FormGroup } from '../common/forms/forms';
 import { AlertController } from '../common/ion-wrappers/alert-controller';
 import {
+  AdditionalInfo,
   BasicInfo,
   ContactInfo,
   Documents,
@@ -105,6 +106,9 @@ export class FormsPage
       professionalSoftware: new FormControl([]),
       databases: new FormControl([]),
       programmingLanguagesAndFrameworks: new FormControl([]),
+    }),
+    additionalInfo: new FormGroup<AdditionalInfo>({
+      additionalInfo: new FormControl(''),
     }),
   });
 

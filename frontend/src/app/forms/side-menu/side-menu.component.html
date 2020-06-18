@@ -84,6 +84,16 @@
           }"
         ></ng-container>
 
+        <ng-container
+          [ngTemplateOutlet]="menuItem"
+          [ngTemplateOutletContext]="{
+            step: APPLICATION_STEP.AdditionalInformation,
+            displayName: 'Additional Information',
+            isValid: formsData.controls.additionalInfo.valid,
+            isActive: currentStep === APPLICATION_STEP.AdditionalInformation
+          }"
+        ></ng-container>
+
         <ion-menu-toggle>
           <ion-item
             (click)="navigateToStep(APPLICATION_STEP.Submit)"

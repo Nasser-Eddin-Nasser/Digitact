@@ -14,6 +14,7 @@ export enum ApplicationStep {
   EducationInformation = 'education-information',
   FieldDesignationPreference = 'field-designation-preference',
   KeyCompetencies = 'key-competencies',
+  AdditionalInformation = 'additional-information',
   Submit = 'submit',
 }
 
@@ -54,6 +55,9 @@ export const ApplicationStepsConfig: ApplicationStepsConfig = {
   [ApplicationStep.KeyCompetencies]: {
     useForProgressCalculation: true,
     formItemName: 'keyCompetencies',
+  },
+  [ApplicationStep.AdditionalInformation]: {
+    useForProgressCalculation: false,
   },
   [ApplicationStep.Submit]: {
     useForProgressCalculation: false,

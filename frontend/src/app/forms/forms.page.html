@@ -68,7 +68,11 @@
           *ngSwitchCase="APPLICATION_STEP.KeyCompetencies"
         >
         </form-key-competencies>
-
+        <form-additional-info
+          [formsData]="formsData"
+          *ngSwitchCase="APPLICATION_STEP.AdditionalInformation"
+        >
+        </form-additional-info>
         <form-submit-page
           [formsData]="formsData"
           *ngSwitchCase="APPLICATION_STEP.Submit"
