@@ -26,7 +26,11 @@
   >
     <ion-slide *ngFor="let control of providedSettings.imagesBase64.controls">
       <!-- In case of performance problems: It could help if we resized the image or used some sort of URL for it. For now, we just use the large base64 string here. -->
-      <img [src]="control.value" />
+      <!--<img [src]="control.value" />-->
+
+      <app-base64-image [base64String]="control.value">
+        <ion-spinner style="--color: #ffffff;"></ion-spinner>
+      </app-base64-image>
     </ion-slide>
   </ion-slides>
 </ion-content>
