@@ -7,7 +7,7 @@ import Model.Education;
 import Model.Image.AppImage;
 import Model.Image.ImageType;
 import Model.Industries;
-import Model.MVC.StorageModel;
+import Model.MVC.OverviewModel;
 import Model.Positions;
 import Model.User.ApplicantUI;
 import Util.ImageTools;
@@ -33,9 +33,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
-public class StorageController {
+public class OverviewController {
     Stage stage;
-    StorageModel model;
+    OverviewModel model;
     // Create a TableView with a list of Applicants
     @FXML TableView<ApplicantUI> userTable;
     private ObservableList<ApplicantUI> observableListTableView;
@@ -75,8 +75,8 @@ public class StorageController {
 
     Pane root;
 
-    public StorageController(Stage parentStage) throws IOException {
-        model = new StorageModel();
+    public OverviewController(/*Stage parentStage*/ ) throws IOException {
+        model = new OverviewModel();
         stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/storageView.fxml"));
         loader.setController(this);

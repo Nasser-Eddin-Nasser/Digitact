@@ -3,7 +3,10 @@ package Database;
 public enum Method {
     getApplicants("getApplicants"),
     getImageById("getImageById"),
-    getAllEducationInfo("getAllEducationInfo");
+    getAllEducationInfo("getAllEducationInfo"),
+    getAdminByUserName("getAdminByUserName"),
+    createAdminAccount("createAdminAccount"),
+    getAdminUserNames("getAdminUserNames");
 
     private final String name;
 
