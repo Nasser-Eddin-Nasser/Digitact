@@ -52,9 +52,6 @@ export class ImageViewerComponent implements OnInit, OnDestroy, ViewDidEnter {
   }
 
   ngOnInit(): void {
-    window.setTimeout(() => {
-      this.slider.update();
-    }, 10000);
     this.providedSettings = this.imageViewerService.getProvidedSettings();
 
     // Initialize the Slider Options.
