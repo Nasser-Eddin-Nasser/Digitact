@@ -32,6 +32,8 @@
     "@ionic/angular": "^5.2.1",
     "@ionic/pwa-elements": "^1.5.2",
     "@ionic/storage": "^2.2.0",
+    "@ngx-translate/core": "^12.1.2",
+    "@ngx-translate/http-loader": "^5.0.0",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.1",
     "tslib": "^1.13.0",
