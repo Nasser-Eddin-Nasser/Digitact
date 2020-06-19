@@ -24,11 +24,22 @@
     #slider
     (ionSlideDidChange)="updateCurrentSlideIndex()"
   >
-    <ion-slide *ngFor="let control of providedSettings.imagesBase64.controls">
-      <!-- In case of performance problems: It could help if we resized the image or used some sort of URL for it. For now, we just use the large base64 string here. -->
-      <!--<img [src]="control.value" />-->
+    <ion-slide
+      *ngFor="
+        let control of providedSettings.imagesBase64.controls;
+        let i = index
+      "
+    >
+      <!-- 
+        The class "swiper-zoom-target" is important here: It tells Swiper that we want to zoom this item. Usually, only img elements (and some others) are supported.
 
-      <app-base64-image [base64String]="control.value">
+        To make sure the performance is still good with many images, we only actually render the Component that is currently visible.
+      -->
+      <app-base64-image
+        [base64String]="control.value"
+        class="swiper-zoom-target"
+        *ngIf="i === currentSlideIndex && viewDidEnter"
+      >
         <ion-spinner style="--color: #ffffff;"></ion-spinner>
       </app-base64-image>
     </ion-slide>

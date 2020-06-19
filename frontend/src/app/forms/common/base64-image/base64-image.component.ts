@@ -41,10 +41,10 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
   ) {}
 
   ngAfterViewInit(): void {
-    // Just give it a loong timeout so that the browser may focus on other things meanwhile.
+    // Just give it a long timeout so that the browser can focus on other things meanwhile.
     window.setTimeout(() => {
       this.processImage();
-    }, 500);
+    }, 200);
   }
 
   ngOnDestroy(): void {
