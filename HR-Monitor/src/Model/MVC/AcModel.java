@@ -1,19 +1,45 @@
 package Model.MVC;
 
+import Model.User.Admin;
+import Storage.DBStorage;
+
 public class AcModel {
     public static boolean isPasswordValid(String text) {
-        return true;
+        return text.length() > 3;
     }
 
     public boolean checkAuthentication(String userName, String password) {
-        return userName.equals("admin") && password.equals("123");
+        if (DBStorage.isUserNameInUse(userName)) {
+            getAdmin(userName);
+            Admin admin = DBStorage.getCurrentAdmin();
+            return admin.getPassword().equals(Util.PasswordTools.encryptString(password));
+        }
+        return false;
     }
 
-    public void createNewAccount(String userName, String password, String firstName, String lastName, String adminID, String passHint, String email) {
-        System.out.println(userName + " - " + password + " - " + adminID + " - " + firstName + " - " + lastName + " - " + passHint + " - " + email);
+    public void getAdmin(String userName) {
+        DBStorage.getAdminByUserName(userName);
     }
 
-    public boolean isUserNameValid(String newUserName) { //no duplication
-        return true;
+    public void createNewAccount(
+            String userName,
+            String password,
+            String firstName,
+            String lastName,
+            String passHint,
+            String email) {
+        DBStorage.createAdmin(
+                new Admin(
+                        firstName,
+                        lastName,
+                        userName,
+                        email,
+                        passHint,
+                        Util.PasswordTools.encryptString(password)));
+    }
+
+    // todo better method name
+    public boolean isUserNameValid(String newUserName) { // no duplication
+        return !DBStorage.isUserNameInUse(newUserName);
     }
 }
