@@ -3,5 +3,16 @@
         "welcomeMessage":"Welcome to Consileon",
         "welcomeTagline":"We make the difference",
         "applyNow":"Apply Now"
+    },
+    "formsPage":{
+        "currentStep":"Step {{currentStep}} / {{totalSteps}}",
+        "submit":"Submit",
+        "continue":"Continue",
+        "pageExitWarningMessage":"Do you really want to cancel your job application?"
+    },
+    "commonLables":{
+        "no":"No",
+        "yes":"Yes",
+        "close":"Close"
     }
 }

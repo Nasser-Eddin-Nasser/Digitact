@@ -24,8 +24,8 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.translate.addLangs(['en', 'de']);
-      this.translate.setDefaultLang('de');
-      this.translate.use('de');
+      this.translate.setDefaultLang('en');
+      this.translate.use('en');
     });
   }
 }

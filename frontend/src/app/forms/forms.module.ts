@@ -20,6 +20,7 @@ import { FieldDesignationPageComponent } from './steps/field-designation-page/fi
 import { KeyCompetenciesModule } from './steps/key-competencies/key-competencies.module';
 import { ProfilePictureComponent } from './steps/profile-picture/profile-picture.component';
 import { SubmitPageComponent } from './steps/submit-page/submit-page.component';
+import { SharedModule } from '../shared.module';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { SubmitPageComponent } from './steps/submit-page/submit-page.component';
     ReactiveFormsModule,
     DocumentsModule,
     KeyCompetenciesModule,
+    SharedModule,
   ],
   declarations: [
     FormsPage,
