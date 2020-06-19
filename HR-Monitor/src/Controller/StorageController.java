@@ -1,5 +1,7 @@
 package Controller;
 
+import static Database.Method.getImageById;
+
 import Database.Connector;
 import Model.Education;
 import Model.Image.AppImage;
@@ -9,83 +11,67 @@ import Model.MVC.StorageModel;
 import Model.Positions;
 import Model.User.ApplicantUI;
 import Util.ImageTools;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static Database.Method.getImageById;
 
 public class StorageController {
     Stage stage;
     StorageModel model;
     // Create a TableView with a list of Applicants
-    @FXML
-    TableView<ApplicantUI> userTable;
+    @FXML TableView<ApplicantUI> userTable;
     private ObservableList<ApplicantUI> observableListTableView;
 
     // Create a TableView with a list of Education Info of an Applicant
-    @FXML
-    TableView<Education> eduInfoTblFX;
+    @FXML TableView<Education> eduInfoTblFX;
     private ObservableList<Education> observableListEduInfoTableView;
 
-    @FXML
-    TableView<Positions> posTable;
+    @FXML TableView<Positions> posTable;
     private ObservableList<Positions> observableListPosTableTableView;
 
-    @FXML
-    TableView<Industries> indTable;
+    @FXML TableView<Industries> indTable;
     private ObservableList<Industries> observableListIndTableTableView;
 
-    @FXML
-    TableColumn<Positions, String> posFX = new TableColumn<>("Position");
-    @FXML
-    TableColumn<Industries, String> indFX = new TableColumn<>("Industry");
+    @FXML TableColumn<Positions, String> posFX = new TableColumn<>("Position");
+    @FXML TableColumn<Industries, String> indFX = new TableColumn<>("Industry");
     // Overview of all Applicants
-    @FXML
-    TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
-    @FXML
-    TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
-    @FXML
-    TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
+    @FXML TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
+    @FXML TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
+    @FXML TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
 
     // Applicant Info View's Variables
     // 1. Basic Info
-    @FXML
-    Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX, lblLinkedInFX, lblXingFX;
+    @FXML Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX;
+    @FXML Hyperlink hplLinkedInFX, hplXingFX;
     // 2. Edu Info
-    @FXML
-    TableColumn<Education, String> universityFX = new TableColumn<>("university");
-    @FXML
-    TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
-    @FXML
-    TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
-    @FXML
-    TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
-    @FXML
-    TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
+    @FXML TableColumn<Education, String> universityFX = new TableColumn<>("university");
+    @FXML TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
+    @FXML TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
+    @FXML TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
+    @FXML TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
     // 3. Image of the  Applicant
-    @FXML
-    private ImageView imgFX;
 
+    // Additional Info
+    @FXML Label lblAddInfo;
+    private ImageView imgFX;
 
     Pane root;
 
@@ -120,8 +106,8 @@ public class StorageController {
         }
     }
 
-//    TableView<Industries> indTable;
-//    private ObservableList<Industries> observableListIndTableTableView;
+    //    TableView<Industries> indTable;
+    //    private ObservableList<Industries> observableListIndTableTableView;
 
     private void setPositionAndIndustry(ApplicantUI app) {
         getPositionTable(app.getPositions());
@@ -137,8 +123,7 @@ public class StorageController {
     }
 
     public void setFactoriesAndComparatorsForIndTableColumns() {
-        indFX.setCellValueFactory(
-                ind -> new ReadOnlyStringWrapper(ind.getValue().toString()));
+        indFX.setCellValueFactory(ind -> new ReadOnlyStringWrapper(ind.getValue().getIndustry()));
     }
 
     private ObservableList<Positions> getPositionTable(List<Positions> positions) {
@@ -150,8 +135,7 @@ public class StorageController {
     }
 
     public void setFactoriesAndComparatorsForPosTableColumns() {
-        posFX.setCellValueFactory(
-                pos -> new ReadOnlyStringWrapper(pos.getValue().toString()));
+        posFX.setCellValueFactory(pos -> new ReadOnlyStringWrapper(pos.getValue().getPosition()));
     }
 
     private void getImage(ApplicantUI app) {
@@ -183,8 +167,45 @@ public class StorageController {
         lblLNameFX.setText(app.getLastName());
         lblEmailFX.setText(app.getEmail());
         lblPNumberFX.setText(app.getPhone());
-        lblLinkedInFX.setText(app.getLinkedIn());
-        lblXingFX.setText(app.getXing());
+        lblAddInfo.setText(app.getAdditionalInfo());
+        hplLinkedInFX.setText(app.getLinkedIn());
+        hplXingFX.setText(app.getXing());
+        profAccountLinkActions();
+    }
+
+    void profAccountLinkActions() {
+        hplLinkedInFX.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        try {
+                            java.awt.Desktop.getDesktop()
+                                    .browse(
+                                            URI.create(
+                                                    "https://www.linkedin.com/in/"
+                                                            + hplLinkedInFX.getText()));
+
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                });
+        hplXingFX.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        try {
+                            java.awt.Desktop.getDesktop()
+                                    .browse(
+                                            URI.create(
+                                                    "https://www.xing.com/profile/"
+                                                            + hplXingFX.getText()));
+
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                });
     }
 
     private ObservableList<Education> getTableEduInfo(ApplicantUI app) {
