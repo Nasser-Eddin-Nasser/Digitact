@@ -14,6 +14,7 @@ import { RatingPage } from './rating.page';
 import { ApplicantScoreComponent } from './steps/applicant-score/applicant-score.component';
 import { FinalizePageComponent } from './steps/finalize-page/finalize-page.component';
 import { ImpressionPageComponent } from './steps/impression-page/impression-page.component';
+import { SharedModule } from '../shared.module';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { ImpressionPageComponent } from './steps/impression-page/impression-page
     ReactiveFormsModule,
     IonicModule,
     RatingPageRoutingModule,
+    SharedModule,
   ],
   declarations: [
     RatingPage,

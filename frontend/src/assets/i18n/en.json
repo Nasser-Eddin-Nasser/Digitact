@@ -4,8 +4,9 @@
         "yes":"Yes",
         "close":"Close",
         "continue":"Continue",
-        "cancel":"Cancel"
-
+        "cancel":"Cancel",
+        "finalize":"Finalize",
+        "currentStep":"Step {{currentStep}} / {{totalSteps}}"
     },
     "homePage":{
         "welcomeMessage":"Welcome to Consileon",
@@ -13,7 +14,6 @@
         "applyNow":"Apply Now"
     },
     "formsPage":{
-        "currentStep":"Step {{currentStep}} / {{totalSteps}}",
         "submit":"Submit",
         "pageExitWarningMessage":"Do you really want to cancel your job application?"
     },
@@ -41,6 +41,22 @@
         "serverConnectionErrorMessage":"Cannot connect to server at the moment. Please try again later.",
         "applicantUploadedSUccessMessage":"Applicantions are successfully uploaded",
         "nApplicantsFailedToUploadMessage":"{{failedCount}} application could not be saved due to {{errorMessage}} . Please try again later."
+    },
+    "hrSideMenu":{
+        "applicantRating":"Applicant Rating",
+        "impression":"Impression",
+        "progress":"Progress"
+    },
+    "ratingPage":{
+        "finalizeConfirmationMessage":"Do you really want to finalize this form? It wont be possible to edit later.",
+        "applicationFinalizedNotification":"Applicant information is finalized",
+        "rhetoricScore":"Rhetoric:{{score}}",
+        "motivationScore":"Motivation:{{score}}",
+        "selfAssurance":"Self-Assurance:{{score}}",
+        "personalImpression":"Personal Impression:{{score}}",
+        "finalizeApplicantMessage":"All the information about the applicant is taken. You need to finalize this form to send data to the HR monitor and it will not be possible to edit information later.",
+        "fillRequiredFieldsToFinalizeMessage":"You can finalize this form as soon as you fill all the required fields. By opening the right menu, you can see where you still need to fill the form.",
+        "addImpressionMessage":"Please write a few lines about your personal impression on the applicant. Also, if you want to add/mention anything else you can do it here."
     }
     
 }
