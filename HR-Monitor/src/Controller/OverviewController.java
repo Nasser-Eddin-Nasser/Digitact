@@ -71,7 +71,7 @@ public class OverviewController {
 
     // Additional Info
     @FXML Label lblAddInfo;
-    private ImageView imgFX;
+    @FXML private ImageView imgFX;
 
     Pane root;
 
@@ -102,7 +102,7 @@ public class OverviewController {
             getTableEduInfo(app);
             getImage(app);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("unable to load Image!");
         }
     }
 
@@ -149,7 +149,7 @@ public class OverviewController {
                 AppImage img = profImgs.get(0);
                 setProfileImage(app, img);
             } catch (Exception e) {
-                System.err.println("unable to load Image!");
+                e.printStackTrace();
             }
         }
     }
@@ -159,6 +159,7 @@ public class OverviewController {
         ImageTools.parseImageStringToImage(img);
 
         File file = new File(img.getPath());
+
         imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
     }
 

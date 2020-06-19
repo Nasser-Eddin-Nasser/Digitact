@@ -82,7 +82,6 @@ public class Connector {
             String inputLine;
             if ((inputLine = in_1.readLine()) != null) {
                 Util.JSONTools.convertJSONToAdmin(inputLine);
-                System.out.println(inputLine);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -177,7 +176,6 @@ public class Connector {
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
                 }
-                System.out.println(response.toString());
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();

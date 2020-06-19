@@ -87,7 +87,7 @@ public class ApplicantUI {
     }
 
     public void setEducation(List<Education> education) {
-        System.out.println("Here");
+
         this.educations = education;
     }
 

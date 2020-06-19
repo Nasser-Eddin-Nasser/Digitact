@@ -27,7 +27,6 @@ public class Education {
         this.degree = degree;
         this.grade = grade;
         this.graduation_date = graduation_date;
-        System.out.println(university + " " + subject);
     }
 
     public String getUniversity() {
