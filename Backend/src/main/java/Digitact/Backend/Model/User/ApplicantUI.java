@@ -25,6 +25,8 @@ public class ApplicantUI implements IUser {
     private List<Positions> positions;
     private List<KeyCompetence> keyCompetencies;
 
+    private String additionalInfo;
+
     protected ApplicantUI() {}
 
     public ApplicantUI(
@@ -39,7 +41,8 @@ public class ApplicantUI implements IUser {
             List<Education> educations,
             List<Industries> industries,
             List<Positions> positions,
-            List<KeyCompetence> keyCompetencies) {
+            List<KeyCompetence> keyCompetencies,
+            String additionalInfo) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -52,6 +55,7 @@ public class ApplicantUI implements IUser {
         this.industries = industries;
         this.positions = positions;
         this.keyCompetencies = keyCompetencies;
+        this.additionalInfo = additionalInfo;
     }
 
     public List<Positions> getPositions() {
@@ -104,6 +108,14 @@ public class ApplicantUI implements IUser {
 
     public Title getTitle() {
         return title;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String impression) {
+        this.additionalInfo = impression;
     }
 
     @Override
