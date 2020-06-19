@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.MVC.AcModel;
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,38 +9,25 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
-
 public class CreateAccountController {
-    @FXML
-    private ComboBox<String> admins;
-    @FXML
-    private TextField passwordHint;
-    @FXML
-    private TextField email;
-    @FXML
-    private Label checkValidityPassword;
+    @FXML private ComboBox<String> admins;
+    @FXML private TextField passwordHint;
+    @FXML private TextField email;
+    @FXML private Label checkValidityPassword;
 
-    @FXML
-    private Label checkValidityUserName;
+    @FXML private Label checkValidityUserName;
 
-    @FXML
-    private Label checkPassword;
-    @FXML
-    private TextField firstNameTextField;
+    @FXML private Label checkPassword;
 
-    @FXML
-    private TextField lastNameTextField;
+    @FXML private Label checkValidityEmail;
+    @FXML private TextField firstNameTextField;
 
-    @FXML
-    private PasswordField newPasswordField;
+    @FXML private TextField lastNameTextField;
 
-    @FXML
-    private PasswordField confirmPasswordField;
-    @FXML
-    private TextField userNameTextField;
+    @FXML private PasswordField newPasswordField;
 
+    @FXML private PasswordField confirmPasswordField;
+    @FXML private TextField userNameTextField;
 
     private AcModel model;
 
@@ -65,20 +53,33 @@ public class CreateAccountController {
         alert.setTitle("Create Account Error");
         alert.setHeaderText("Registration was not possible due to: ");
         if (onCheckNewUserName(userNameTextField.getText())) {
-            if (onCheckConfirmPassword(
-                    newPasswordField.getText(), confirmPasswordField.getText())) {
-                if (!passwordHint.getText().contains(newPasswordField.getText())) {
-                    if (!handleCreateAccountOverToModel()) {
+            if (onCheckEmail(email.getText())) {
+                if (onCheckConfirmPassword(
+                        newPasswordField.getText(), confirmPasswordField.getText())) {
+                    if (!passwordHint.getText().contains(newPasswordField.getText())
+                            && passwordHint.getText() != null
+                            && passwordHint.getText().length() > 0) {
+                        if (!handleCreateAccountOverToModel()) {
+                            alert.setContentText("A password must be at least 4 characters!");
+                            alert.showAndWait();
+                        }
+                        // back
+                        Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                        alert1.setTitle("Create new Account!");
+                        alert1.setContentText("Your Account has been created! ");
+                        alert1.showAndWait();
+                        onShowView();
+                    } else {
                         alert.setContentText(
-                                "A password must be at least 8 characters long and contain one number, one upper-case letter and one lower-case letter!");
+                                "Your password hint must not contain your password & not empty!");
                         alert.showAndWait();
                     }
                 } else {
-                    alert.setContentText("Your password hint must not contain your password!");
+                    alert.setContentText("Incongruent passwords!");
                     alert.showAndWait();
                 }
             } else {
-                alert.setContentText("Incongruent passwords!");
+                alert.setContentText("Your Email must contain @ and .!");
                 alert.showAndWait();
             }
         } else {
@@ -95,7 +96,6 @@ public class CreateAccountController {
                     newPasswordField.getText(),
                     firstNameTextField.getText(),
                     lastNameTextField.getText(),
-                    admins.getValue(),
                     passwordHint.getText(),
                     email.getText());
             return true;
@@ -119,11 +119,11 @@ public class CreateAccountController {
 
     private boolean onCheckNewUserName(String newUserName) {
         if (newUserName == null || newUserName.length() == 0) {
-            checkValidityUserName.setText("X"); // todo change to icons
+            checkValidityUserName.setText("X");
             return false;
         }
         if (model.isUserNameValid(newUserName)) {
-            checkValidityUserName.setText("OK");
+            checkValidityUserName.setText("✔");
             return true;
         }
         checkValidityUserName.setText("X");
@@ -138,11 +138,29 @@ public class CreateAccountController {
     private boolean onCheckPasswordComplexity(String password) {
         if (password != null && password.length() > 0) {
             if (AcModel.isPasswordValid(password)) {
-                checkPassword.setText("OK");
+                checkPassword.setText("✔");
                 return true;
             }
         }
         checkPassword.setText("X");
+        return false;
+    }
+
+    @FXML
+    public boolean onCheckEmail() {
+        return onCheckEmail(email.getText());
+    }
+
+    private boolean onCheckEmail(String email) {
+        if (email == null || email.length() == 0) {
+            checkValidityEmail.setText("X");
+            return false;
+        }
+        if (email.contains("@") && email.contains(".")) {
+            checkValidityEmail.setText("✔");
+            return true;
+        }
+        checkValidityEmail.setText("X");
         return false;
     }
 
@@ -160,17 +178,10 @@ public class CreateAccountController {
             return false;
         }
         if (newPassword.equals(confirmPassword)) {
-            checkValidityPassword.setText("OK");
+            checkValidityPassword.setText("✔");
             return true;
         }
         checkValidityPassword.setText("X");
         return false;
     }
-
-    @FXML
-    public void onInformAdmin() {
-
-    }
-
-
 }
