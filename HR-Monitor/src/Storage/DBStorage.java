@@ -89,7 +89,7 @@ public class DBStorage {
     }
 
     public static List<String> getAdminUserNames() {
-        if (adminUserNames == null) getAdminsFromBES();
+        getAdminsFromBES();
         return DBStorage.adminUserNames;
     }
 
@@ -98,6 +98,7 @@ public class DBStorage {
     }
 
     public static boolean isUserNameInUse(String newUserName) {
+        getAdminsFromBES();
         return adminUserNames.contains(newUserName);
     }
 }
