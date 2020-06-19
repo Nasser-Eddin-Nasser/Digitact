@@ -41,6 +41,10 @@
             <Image url="@../Style/Logo/Logo-idea-2-blackbg--logo.png" />
          </image>
       </ImageView>
+      <Label layoutX="397.0" layoutY="258.0" onMouseClicked="#showHint" text="Forgot password?" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
 
 
     </children>
