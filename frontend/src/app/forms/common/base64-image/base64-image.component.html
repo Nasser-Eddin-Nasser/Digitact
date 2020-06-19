@@ -2,6 +2,13 @@
   <ng-content></ng-content>
 </div>
 
-<div class="image-container" *ngIf="processedImage">
-  <img [src]="processedImage.templateObjectUrl" />
+<div
+  class="image-container"
+  [class.swiper-zoom-container]="isZoomableSlideImage"
+  *ngIf="processedImage"
+>
+  <img
+    [src]="processedImage.templateObjectUrl"
+    [class.swiper-zoom-target]="isZoomableSlideImage"
+  />
 </div>

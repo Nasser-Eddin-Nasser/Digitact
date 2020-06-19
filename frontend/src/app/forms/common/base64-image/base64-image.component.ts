@@ -45,6 +45,12 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
   @Input()
   makeThumbnail = false;
 
+  /**
+   * Is this image used within an ion-slides element where zooming is possible?
+   */
+  @Input()
+  isZoomableSlideImage = false;
+
   processedImage: ProcessedImage;
 
   constructor(
