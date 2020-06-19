@@ -10,12 +10,15 @@ import { IonicModule } from '@ionic/angular';
 import { ApplicationsUploadPageRoutingModule } from './applications-upload-routing.module';
 import { ApplicationsUploadPage } from './applications-upload.page';
 
+import { SharedModule } from '../shared.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ApplicationsUploadPageRoutingModule,
+    SharedModule,
   ],
   declarations: [ApplicationsUploadPage],
 })

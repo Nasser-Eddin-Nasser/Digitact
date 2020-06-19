@@ -23,6 +23,24 @@
         "agreePrivacyMessage":"I have read and agree to the Privacy Policy.",
         "privacyPolicy":"Privacy Policy",
         "dummyText":"This is the text of the Privacy Policy"
+    },
+    "applicantsPage":{
+        "applications":"Applications",
+        "finalized":"Finalized",
+        "finalizedByHrMessage":"{{finalizedCount}} applications has been finalized by HR staff to be sent to HR monitor.",
+        "sendToServer":"Send To Server",
+        "notFinished":"Not Finished",
+        "yetToRateMessage":"This list includes all the applications that have been submitted by the applicant but not been rated by HR staff.",
+        "noApplicantsMessage":"No application is submitted or finalized"
+    },
+    "applicantsUploadPage":{
+        "upload":"Upload",
+        "uploadingProgressMessage":"uploading application {{uploadSize}}/{{totalSize}}",
+        "nApplicationUploadedSuccessMessage":"{{uploadedSize}} application has successfully been uploaded to the server.",
+        "napplicantsSavedMessage":"{{uploadedSize}} Application saved successfully.",
+        "serverConnectionErrorMessage":"Cannot connect to server at the moment. Please try again later.",
+        "applicantUploadedSUccessMessage":"Applicantions are successfully uploaded",
+        "nApplicantsFailedToUploadMessage":"{{failedCount}} application could not be saved due to {{errorMessage}} . Please try again later."
     }
     
 }

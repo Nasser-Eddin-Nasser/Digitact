@@ -9,8 +9,15 @@ import { IonicModule } from '@ionic/angular';
 import { ApplicantsPageRoutingModule } from './applicants-routing.module';
 import { ApplicantsPage } from './applicants.page';
 
+import { SharedModule } from '../shared.module';
+
 @NgModule({
-  imports: [CommonModule, IonicModule, ApplicantsPageRoutingModule],
+  imports: [
+    CommonModule,
+    IonicModule,
+    ApplicantsPageRoutingModule,
+    SharedModule,
+  ],
   declarations: [ApplicantsPage],
 })
 export class ApplicantsPageModule {}
