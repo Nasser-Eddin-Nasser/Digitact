@@ -1,2 +1,7 @@
-<ng-content *ngIf="!processedImage"></ng-content>
-<img [src]="processedImage.templateObjectUrl" *ngIf="processedImage" />
+<div class="loading" *ngIf="!processedImage">
+  <ng-content></ng-content>
+</div>
+
+<div class="image-container" *ngIf="processedImage">
+  <img [src]="processedImage.templateObjectUrl" />
+</div>
