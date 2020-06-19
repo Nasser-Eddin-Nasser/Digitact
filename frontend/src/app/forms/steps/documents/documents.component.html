@@ -30,7 +30,7 @@
     (click)="openImageViewer(i)"
   >
     <div class="make-square">
-      <app-base64-image [base64String]="control.value">
+      <app-base64-image [base64String]="control.value" [makeThumbnail]="true">
         <ion-spinner></ion-spinner>
       </app-base64-image>
     </div>

@@ -28,10 +28,22 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 })
 export class Base64ImageComponent implements AfterViewInit, OnDestroy {
   /**
+   * Currently, when resizing the image, we just resize it to this fixed width.
+   */
+  private readonly THUBMNAIL_WIDTH = 300;
+
+  /**
    * The image as a base64 string. Please note that this Component expects the input not to change.
    */
   @Input()
   base64String: string;
+
+  /**
+   * Should the image get resized, so that it can be better used as a thumbnail?
+   * This is especially useful if you have a large image, but only want to display a small preview of it:
+   */
+  @Input()
+  makeThumbnail = false;
 
   processedImage: ProcessedImage;
 
@@ -64,15 +76,11 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
    */
   private processImage(): void {
     const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
 
     const img = new Image();
     img.src = this.base64String;
     img.onload = () => {
-      canvas.height = img.height;
-      canvas.width = img.width;
-
-      context.drawImage(img, 0, 0);
+      this.drawToCanvas(canvas, img);
 
       canvas.toBlob((result) => {
         const rawObjectUrl = URL.createObjectURL(result);
@@ -87,6 +95,31 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
         this.changeDetectorRef.detectChanges();
       });
     };
+  }
+
+  /**
+   * A helper method for `processImage()` that draws the image to the Canvas.
+   */
+  private drawToCanvas(canvas: HTMLCanvasElement, img: HTMLImageElement): void {
+    const context = canvas.getContext('2d');
+
+    if (!this.makeThumbnail || img.width <= this.THUBMNAIL_WIDTH) {
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      context.drawImage(img, 0, 0);
+      return;
+    }
+
+    const resizeRatio = img.width / this.THUBMNAIL_WIDTH;
+
+    const newWidth = img.width / resizeRatio;
+    const newHeight = img.height / resizeRatio;
+
+    canvas.width = newWidth;
+    canvas.height = newHeight;
+
+    context.drawImage(img, 0, 0, newWidth, newHeight);
   }
 }
 
