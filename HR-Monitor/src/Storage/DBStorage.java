@@ -3,6 +3,7 @@ package Storage;
 import Database.Connector;
 import Database.Method;
 import Model.Education;
+import Model.User.Admin;
 import Model.User.ApplicantUI;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,8 +14,12 @@ public class DBStorage {
     private static List<ApplicantUI> users;
     private static List<Education> eduInfo;
     private static List<Education> selected;
+
+    private static List<String> adminUserNames;
     // True if receiver should wait
     private static boolean transfer = false;
+
+    private static Admin currentAdmin;
 
     public static List<ApplicantUI> getStorage() {
         updateStorage();
@@ -30,7 +35,6 @@ public class DBStorage {
     }
 
     public static ApplicantUI getApplicantByID(long id) {
-
         return DBStorage.users
                 .stream()
                 .filter(x -> x.getID() == id)
@@ -62,5 +66,38 @@ public class DBStorage {
     public static void setEduInfo(List<Education> eduInfo) {
         DBStorage.eduInfo = new ArrayList<>(eduInfo);
         transfer = true;
+    }
+
+    public static void createAdmin(Admin admin) {
+        Connector.sendPutType(Method.createAdminAccount, admin);
+    }
+
+    public static void getAdminByUserName(String userName) {
+        Connector.sendGetHttp(Method.getAdminByUserName, userName);
+    }
+
+    public static void setCurrentAdmin(Admin admin) {
+        currentAdmin = admin;
+    }
+
+    public static Admin getCurrentAdmin() {
+        return currentAdmin;
+    }
+
+    public static void setAdminUserNames(List<String> readValue) {
+        adminUserNames = new ArrayList<>(readValue);
+    }
+
+    public static List<String> getAdminUserNames() {
+        if (adminUserNames == null) getAdminsFromBES();
+        return DBStorage.adminUserNames;
+    }
+
+    private static void getAdminsFromBES() {
+        Connector.sendGetHttp(Method.getAdminUserNames);
+    }
+
+    public static boolean isUserNameInUse(String newUserName) {
+        return adminUserNames.contains(newUserName);
     }
 }
