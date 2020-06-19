@@ -1,4 +1,12 @@
 {
+    "commonLables":{
+        "no":"No",
+        "yes":"Yes",
+        "close":"Close",
+        "continue":"Continue",
+        "cancel":"Cancel"
+
+    },
     "homePage":{
         "welcomeMessage":"Welcome to Consileon",
         "welcomeTagline":"We make the difference",
@@ -7,12 +15,14 @@
     "formsPage":{
         "currentStep":"Step {{currentStep}} / {{totalSteps}}",
         "submit":"Submit",
-        "continue":"Continue",
         "pageExitWarningMessage":"Do you really want to cancel your job application?"
     },
-    "commonLables":{
-        "no":"No",
-        "yes":"Yes",
-        "close":"Close"
+    "privacyPage":{
+        "readPrivacyMessage":"Before we can get started: During the application process, you need toenter some private information. Because of this, please read the Privacy Policy.",
+        "openPrivacy":"Open Privacy",
+        "agreePrivacyMessage":"I have read and agree to the Privacy Policy.",
+        "privacyPolicy":"Privacy Policy",
+        "dummyText":"This is the text of the Privacy Policy"
     }
+    
 }
