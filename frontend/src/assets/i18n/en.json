@@ -6,7 +6,8 @@
         "continue":"Continue",
         "cancel":"Cancel",
         "finalize":"Finalize",
-        "currentStep":"Step {{currentStep}} / {{totalSteps}}"
+        "currentStep":"Step {{currentStep}} / {{totalSteps}}",
+        "save":"Save"
     },
     "homePage":{
         "welcomeMessage":"Welcome to Consileon",
@@ -87,6 +88,19 @@
         "delete":"Delete",
         "deleteConfirmationMessage":"Do you really want to delete this image?",
         "imageDeleteSuccessMessage":"The image has been deleted successfully"
+    },
+    "educationInfo":{
+        "educationInformation":"Education Information",
+        "stepDescription":"Here, you can add your information regarding your education. So: What is your educational background",
+        "degreeYearGradeMessage":"{{degree}}'s degree ({{graduationYear}}, {{grade}})",
+        "schoolOrUniversity":"School/University",
+        "subject":"Subject",
+        "degree":"Degree",
+        "master":"Master",
+        "bachelor":"Bachelor",
+        "school":"School",
+        "grade":"Grade",
+        "gradutaionYear":"Graduation Year"
     }
     
     
