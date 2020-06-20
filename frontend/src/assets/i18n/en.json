@@ -60,7 +60,7 @@
     },
     "basicInfo":{
         "welcome":"Welcome!",
-        "enterNameMessage":"So that we can get to know you better, please provide your first and last name.",
+        "stepDescription":"So that we can get to know you better, please provide your first and last name.",
         "title":"Title",
         "firstName":"First Name",
         "lastName":"Last Name",
@@ -70,16 +70,24 @@
     "contactInfo":{
         "contactInformation":"Contact Information",
         "greetingsMessage":" Nice to meet you, {{name}}!",
-        "fillContactInfoMessage":"So that we can get in touch with you, please fill out the following contact information fields.",
+        "stepDescription":"So that we can get in touch with you, please fill out the following contact information fields.",
         "phoneNumber":"Phone Number",
         "email":"Email",
         "linkedinAccount":"LinkedIn Account",
         "xingAccount":"Xing Account"
     },
     "profilePicture":{
-        "Picture":"Picture",
-        "addPictureMessage":"Add a picture of yourself by tapping on the image icon.",
+        "picture":"Picture",
+        "stepDescription":"Add a picture of yourself by tapping on the image icon.",
         "deleteTakeAnotherPictureMessage":"Good job! If you want to take another picture, just delete the actual picture by sliding on it and take another one."
+    },
+    "documentsUpload":{
+        "documents":"Documents",
+        "stepDescription":"In this step, you can take photos of documents you would like to include in your application. For instance, you can take photos of your CV here. This step is optional: If you don't want to add anyting, you can just skip it.",
+        "delete":"Delete",
+        "deleteConfirmationMessage":"Do you really want to delete this image?",
+        "imageDeleteSuccessMessage":"The image has been deleted successfully"
     }
+    
     
 }
