@@ -6,9 +6,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
+import { SharedModule } from '../../shared.module';
+
 import { ConfirmationPageRoutingModule } from './confirmation-routing.module';
 import { ConfirmationPage } from './confirmation.page';
-import { SharedModule } from '../../shared.module';
+
 @NgModule({
   imports: [
     CommonModule,

@@ -5,11 +5,11 @@
 
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 import { FormGroup } from '../../common/forms/forms';
 import { RatingForm } from '../model/rating-form.model';
 import { hrRatingStep, hrRatingStepArr } from '../model/steps.model';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-side-menu',

@@ -7,9 +7,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
+import { SharedModule } from '../shared.module';
+
 import { PrivacyPageRoutingModule } from './privacy-routing.module';
 import { PrivacyPage } from './privacy.page';
-import { SharedModule } from '../shared.module';
 
 @NgModule({
   imports: [

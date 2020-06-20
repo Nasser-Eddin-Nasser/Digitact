@@ -8,6 +8,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
+import { SharedModule } from '../shared.module';
+
 import { FormsPageRoutingModule } from './forms-routing.module';
 import { FormsPage } from './forms.page';
 import { SideMenuComponent } from './side-menu/side-menu.component';
@@ -20,7 +22,6 @@ import { FieldDesignationPageComponent } from './steps/field-designation-page/fi
 import { KeyCompetenciesModule } from './steps/key-competencies/key-competencies.module';
 import { ProfilePictureComponent } from './steps/profile-picture/profile-picture.component';
 import { SubmitPageComponent } from './steps/submit-page/submit-page.component';
-import { SharedModule } from '../shared.module';
 
 @NgModule({
   imports: [

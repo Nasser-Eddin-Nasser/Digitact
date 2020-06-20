@@ -7,6 +7,7 @@
 */
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 import { FormArray, FormGroup, FormValue } from '../../../common/forms/forms';
@@ -25,7 +26,6 @@ import {
   RatingModalProps,
 } from './rating-modal/rating-modal.component';
 
-import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'form-key-competencies',
   templateUrl: './key-competencies.component.html',

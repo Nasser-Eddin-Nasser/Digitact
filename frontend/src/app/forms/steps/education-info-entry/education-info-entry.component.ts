@@ -4,10 +4,10 @@
  */
 import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 import { FormGroup } from '../../../common/forms/forms';
 import { EducationInfoEntry } from '../../../model/forms-data.model';
-import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'forms-education-info-entry',
   templateUrl: './education-info-entry.component.html',

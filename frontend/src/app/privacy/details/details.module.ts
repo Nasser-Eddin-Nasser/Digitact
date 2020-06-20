@@ -7,9 +7,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
+import { SharedModule } from '../../shared.module';
+
 import { DetailsPageRoutingModule } from './details-routing.module';
 import { DetailsPage } from './details.page';
-import { SharedModule } from '../../shared.module';
 
 @NgModule({
   imports: [

@@ -5,11 +5,11 @@
 
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 import { FormGroup } from '../../common/forms/forms';
 import { FormsData } from '../../model/forms-data.model';
 import { ApplicationStep, ApplicationStepsArr } from '../model/steps.model';
-import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-side-menu',
   templateUrl: './side-menu.component.html',

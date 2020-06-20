@@ -14,8 +14,8 @@ import {
   ViewDidEnter,
   ViewWillLeave,
 } from '@ionic/angular';
-import { Observable, Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable, Subscription } from 'rxjs';
 
 import { FormArray, FormControl, FormGroup } from '../common/forms/forms';
 import { AlertController } from '../common/ion-wrappers/alert-controller';

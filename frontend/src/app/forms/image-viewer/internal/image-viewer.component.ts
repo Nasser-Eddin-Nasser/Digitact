@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, NavController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 import { AlertController } from '../../../common/ion-wrappers/alert-controller';
 import { ToastController } from '../../../common/ion-wrappers/toast-controller';
 import { ImageViewerService } from '../image-viewer.service';
 import { ImageViewerSettings } from '../model/image-viewer-settings.model';
-import { TranslateService } from '@ngx-translate/core';
 /**
  * Important:
  * This Component is tightly coupled to the Image Viewer Service

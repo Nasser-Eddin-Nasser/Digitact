@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 import { FormGroup } from '../../../common/forms/forms';
 import { FormsData } from '../../../model/forms-data.model';
-import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'form-field-designation-page',
   templateUrl: './field-designation-page.component.html',

@@ -5,11 +5,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 import { ToastController } from '../common/ion-wrappers/toast-controller';
 import { FormsData, KeyCompetenciesEntry } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-applications-upload',
