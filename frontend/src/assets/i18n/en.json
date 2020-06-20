@@ -101,6 +101,23 @@
         "school":"School",
         "grade":"Grade",
         "gradutaionYear":"Graduation Year"
+    },
+    "industryAndPositionPreference":{
+        "title":"Industries and Positions",
+        "stepDescription":"So that we can know in which industries and positions you are intrested, please choose from the following.",
+        "industry":"Industry",
+        "position":"Position",
+        "automotive":"Automotive",
+        "finance":"Finance",
+        "commerce":"Commerce",
+        "healthCare":"Pharma/Healthcare",
+        "publicSector":"Public Sector",
+        "businessConsultant":"Consultant/Business Consultant",
+        "itConsultantManagement":"IT-Consultant - Informationsmanagement",
+        "itConsultantJava":"IT-Consultant - Java/JEE",
+        "itConsultantDataScience":"IT-Consultant - Data Science / Artificial Intelligence",
+        "consultantSAP":"Consultant SAP",
+        "internship":"Internship/Working Student"
     }
     
     
