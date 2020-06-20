@@ -57,6 +57,15 @@
         "finalizeApplicantMessage":"All the information about the applicant is taken. You need to finalize this form to send data to the HR monitor and it will not be possible to edit information later.",
         "fillRequiredFieldsToFinalizeMessage":"You can finalize this form as soon as you fill all the required fields. By opening the right menu, you can see where you still need to fill the form.",
         "addImpressionMessage":"Please write a few lines about your personal impression on the applicant. Also, if you want to add/mention anything else you can do it here."
+    },
+    "basicInfo":{
+        "welcome":"Welcome!",
+        "enterNameMessage":"So that we can get to know you better, please provide your first and last name.",
+        "title":"Title",
+        "firstName":"First Name",
+        "lastName":"Last Name",
+        "mr":"Mr",
+        "mrs":"Mrs"
     }
     
 }
