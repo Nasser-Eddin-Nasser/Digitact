@@ -75,6 +75,11 @@
         "email":"Email",
         "linkedinAccount":"LinkedIn Account",
         "xingAccount":"Xing Account"
+    },
+    "profilePicture":{
+        "Picture":"Picture",
+        "addPictureMessage":"Add a picture of yourself by tapping on the image icon.",
+        "deleteTakeAnotherPictureMessage":"Good job! If you want to take another picture, just delete the actual picture by sliding on it and take another one."
     }
     
 }
