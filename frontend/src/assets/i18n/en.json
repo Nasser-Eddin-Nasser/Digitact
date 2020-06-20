@@ -142,8 +142,10 @@
         "noMatchFoundMessage":"No items match your selection",
         "notFoundAddMessage":"Not found what you were looking for? You can also add your search term('{{ searchedTerm }}') to the list.",
         "addToList":"Add to list"    
-    }
+    },
+    "sideMenu":{
+        "progress":"Progress",
+        "description":"If you want to go to a previous step, just click on the element in the list!"
 
-    
-    
+    }
 }
