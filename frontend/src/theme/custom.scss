@@ -102,7 +102,7 @@ ion-item.item-has-focus {
   }
 }
 
-// When using an ion-cotnent element on a page that has no ion-header, then we need to make sure the Safe Area is respected on the top.
+// When using an ion-content element on a page that has no ion-header, then we need to make sure the Safe Area is respected on the top.
 ion-content.without-ion-header {
   --padding-top: var(--ion-safe-area-top);
 }
