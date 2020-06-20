@@ -6,7 +6,9 @@
 
 <ion-list>
   <ion-item class="ion-no-padding">
-    <ion-label color="medium">{{ 'basicInfo.title' | translate }}</ion-label>
+    <ion-label color="medium">{{
+      'basicInfo.salutationTitle' | translate
+    }}</ion-label>
     <ion-select
       [formControl]="formsData.controls.basicInfo.controls.salutation"
       interface="popover"

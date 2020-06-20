@@ -25,6 +25,7 @@ import {
   RatingModalProps,
 } from './rating-modal/rating-modal.component';
 
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'form-key-competencies',
   templateUrl: './key-competencies.component.html',
@@ -63,7 +64,8 @@ export class KeyCompetenciesComponent implements OnInit, OnDestroy {
   constructor(
     private ionRouterOutlet: IonRouterOutlet,
     private modalController: ModalController,
-    private keyCompetenciesFormItemsService: KeyCompetenciesFormItemsService
+    private keyCompetenciesFormItemsService: KeyCompetenciesFormItemsService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -75,22 +77,26 @@ export class KeyCompetenciesComponent implements OnInit, OnDestroy {
 
     this.listItems = [
       {
-        displayName: 'Languages',
+        displayName: this.translate.instant('keyCompetencies.languages'),
         iconName: 'language-outline',
         formItem: this.internalFormsData.controls.languages,
       },
       {
-        displayName: 'Professional Software',
+        displayName: this.translate.instant(
+          'keyCompetencies.professionalSoftware'
+        ),
         iconName: 'desktop-outline',
         formItem: this.internalFormsData.controls.professionalSoftware,
       },
       {
-        displayName: 'Databases',
+        displayName: this.translate.instant('keyCompetencies.database'),
         iconName: 'server-outline',
         formItem: this.internalFormsData.controls.databases,
       },
       {
-        displayName: 'Programming Languages and Frameworks',
+        displayName: this.translate.instant(
+          'keyCompetencies.programmingLanguagesAndFrameworks'
+        ),
         iconName: 'hardware-chip-outline',
         formItem: this.internalFormsData.controls
           .programmingLanguagesAndFrameworks,

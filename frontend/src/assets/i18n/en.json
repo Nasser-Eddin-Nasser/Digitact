@@ -61,16 +61,17 @@
         "addImpressionMessage":"Please write a few lines about your personal impression on the applicant. Also, if you want to add/mention anything else you can do it here."
     },
     "basicInfo":{
+        "title":"Basic Information",
         "welcome":"Welcome!",
         "stepDescription":"So that we can get to know you better, please provide your first and last name.",
-        "title":"Title",
+        "salutationTitle":"Title",
         "firstName":"First Name",
         "lastName":"Last Name",
         "mr":"Mr",
         "mrs":"Mrs"
     },
     "contactInfo":{
-        "contactInformation":"Contact Information",
+        "title":"Contact Information",
         "greetingsMessage":" Nice to meet you, {{name}}!",
         "stepDescription":"So that we can get in touch with you, please fill out the following contact information fields.",
         "phoneNumber":"Phone Number",
@@ -79,19 +80,19 @@
         "xingAccount":"Xing Account"
     },
     "profilePicture":{
-        "picture":"Picture",
+        "title":"Picture",
         "stepDescription":"Add a picture of yourself by tapping on the image icon.",
         "deleteTakeAnotherPictureMessage":"Good job! If you want to take another picture, just delete the actual picture by sliding on it and take another one."
     },
     "documentsUpload":{
-        "documents":"Documents",
+        "title":"Documents",
         "stepDescription":"In this step, you can take photos of documents you would like to include in your application. For instance, you can take photos of your CV here. This step is optional: If you don't want to add anyting, you can just skip it.",
         "delete":"Delete",
         "deleteConfirmationMessage":"Do you really want to delete this image?",
         "imageDeleteSuccessMessage":"The image has been deleted successfully"
     },
     "educationInfo":{
-        "educationInformation":"Education Information",
+        "title":"Education Information",
         "stepDescription":"Here, you can add your information regarding your education. So: What is your educational background",
         "degreeYearGradeMessage":"{{degree}}'s degree ({{graduationYear}}, {{grade}})",
         "schoolOrUniversity":"School/University",
@@ -128,7 +129,21 @@
         "title":"Submit",
         "stepDescription":"That's it! You can now submit your application and hand the device back to our team.",
         "fillMandatoryFieldsToSubmitMessage":"You can submit the form as soon as you have filled out all required fields. By opening the right menu, you can see where you still need to enter some data."
+    },
+    "keyCompetencies":{
+        "title":"Key Competencies",
+        "stepDescription":"Now, please select and rate your key competencies. We expect you to add at least one entry to 'Languages' in order to complete this step.",
+        "languages":"Languages",
+        "professionalSoftware":"Professional Software",
+        "database":"Databases",
+        "programmingLanguagesAndFrameworks":"Programming Languages and Frameworks",
+        "all":"All",
+        "selected":"Selected",
+        "noMatchFoundMessage":"No items match your selection",
+        "notFoundAddMessage":"Not found what you were looking for? You can also add your search term('{{ searchedTerm }}') to the list.",
+        "addToList":"Add to list"    
     }
+
     
     
 }

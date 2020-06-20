@@ -10,9 +10,15 @@ import { TrimPipe } from './rating-modal/pipes/trim.pipe';
 import { RatingModalComponent } from './rating-modal/rating-modal.component';
 import { RangeToPipe } from './rating-modal/stars/pipes/range-to.pipe';
 import { StarsComponent } from './rating-modal/stars/stars.component';
-
+import { SharedModule } from '../../../shared.module';
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    ReactiveFormsModule,
+    SharedModule,
+  ],
   declarations: [
     ItemPopoverComponent,
     KeyCompetenciesComponent,
