@@ -1,19 +1,23 @@
 <div class="main-description">
-  <h1>Contact Information</h1>
+  <h1>{{ 'contactInfo.contactInformation' | translate }}</h1>
 
   <span *ngIf="formsData.controls.basicInfo.controls.firstName.valid">
-    Nice to meet you,
-    {{ formsData.controls.basicInfo.controls.firstName.value }}!<br />
+    {{
+      'contactInfo.greetingsMessage'
+        | translate
+          : { name: formsData.controls.basicInfo.controls.firstName.value }
+    }}<br />
   </span>
   <span>
-    So that we can get in touch with you, please fill out the following contact
-    information fields.
+    {{ 'contactInfo.fillContactInfoMessage' | translate }}
   </span>
 </div>
 
 <ion-list>
   <ion-item class="ion-no-padding">
-    <ion-label position="floating" color="medium">Phone Number</ion-label>
+    <ion-label position="floating" color="medium">
+      {{ 'contactInfo.phoneNumber' | translate }}</ion-label
+    >
     <ion-input
       type="tel"
       [formControl]="formsData.controls.contactInfo.controls.phoneNumber"
@@ -21,7 +25,9 @@
   </ion-item>
 
   <ion-item class="ion-no-padding">
-    <ion-label position="floating" color="medium">Email</ion-label>
+    <ion-label position="floating" color="medium">{{
+      'contactInfo.email' | translate
+    }}</ion-label>
     <ion-input
       type="email"
       [formControl]="formsData.controls.contactInfo.controls.eMail"
@@ -29,7 +35,9 @@
   </ion-item>
 
   <ion-item class="ion-no-padding">
-    <ion-label position="floating" color="medium">LinkedIn Account</ion-label>
+    <ion-label position="floating" color="medium">{{
+      'contactInfo.linkedinAccount' | translate
+    }}</ion-label>
     <ion-input
       type="url"
       [formControl]="formsData.controls.contactInfo.controls.linkedIn"
@@ -37,7 +45,9 @@
   </ion-item>
 
   <ion-item class="ion-no-padding">
-    <ion-label position="floating" color="medium">Xing Account</ion-label>
+    <ion-label position="floating" color="medium">{{
+      'contactInfo.xingAccount' | translate
+    }}</ion-label>
     <ion-input
       type="url"
       [formControl]="formsData.controls.contactInfo.controls.xing"

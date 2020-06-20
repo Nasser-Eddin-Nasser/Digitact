@@ -66,6 +66,15 @@
         "lastName":"Last Name",
         "mr":"Mr",
         "mrs":"Mrs"
+    },
+    "contactInfo":{
+        "contactInformation":"Contact Information",
+        "greetingsMessage":" Nice to meet you, {{name}}!",
+        "fillContactInfoMessage":"So that we can get in touch with you, please fill out the following contact information fields.",
+        "phoneNumber":"Phone Number",
+        "email":"Email",
+        "linkedinAccount":"LinkedIn Account",
+        "xingAccount":"Xing Account"
     }
     
 }
