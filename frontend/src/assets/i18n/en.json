@@ -7,7 +7,8 @@
         "cancel":"Cancel",
         "finalize":"Finalize",
         "currentStep":"Step {{currentStep}} / {{totalSteps}}",
-        "save":"Save"
+        "save":"Save",
+        "quit":"Quit"
     },
     "homePage":{
         "welcomeMessage":"Welcome to Consileon",
@@ -118,6 +119,15 @@
         "itConsultantDataScience":"IT-Consultant - Data Science / Artificial Intelligence",
         "consultantSAP":"Consultant SAP",
         "internship":"Internship/Working Student"
+    },
+    "confirmationPage":{
+        "done":"Done",
+        "stepDescription":"The application has been submitted. The following steps need to be performed by the HR staff (either now or later)."
+    },
+    "submitData":{
+        "title":"Submit",
+        "stepDescription":"That's it! You can now submit your application and hand the device back to our team.",
+        "fillMandatoryFieldsToSubmitMessage":"You can submit the form as soon as you have filled out all required fields. By opening the right menu, you can see where you still need to enter some data."
     }
     
     

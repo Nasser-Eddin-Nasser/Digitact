@@ -8,9 +8,14 @@ import { IonicModule } from '@ionic/angular';
 
 import { ConfirmationPageRoutingModule } from './confirmation-routing.module';
 import { ConfirmationPage } from './confirmation.page';
-
+import { SharedModule } from '../../shared.module';
 @NgModule({
-  imports: [CommonModule, IonicModule, ConfirmationPageRoutingModule],
+  imports: [
+    CommonModule,
+    IonicModule,
+    ConfirmationPageRoutingModule,
+    SharedModule,
+  ],
   declarations: [ConfirmationPage],
 })
 export class ConfirmationPageModule {}
