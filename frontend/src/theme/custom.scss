@@ -102,6 +102,11 @@ ion-item.item-has-focus {
   }
 }
 
+// When using an ion-cotnent element on a page that has no ion-header, then we need to make sure the Safe Area is respected on the top.
+ion-content.without-ion-header {
+  --padding-top: var(--ion-safe-area-top);
+}
+
 /*
   If you want to have some buttons at the bottom of the page, use the following structure:
 
