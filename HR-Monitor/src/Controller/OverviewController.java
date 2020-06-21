@@ -232,7 +232,7 @@ public class OverviewController {
         gradeFX.setCellValueFactory(
                 applicant -> new ReadOnlyDoubleWrapper(applicant.getValue().getGrade()));
         gradYearFX.setCellValueFactory(
-                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getGraduation_date()));
+                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getGraduationYear()));
     }
 
     public void setFactoriesAndComparatorsForTableColumns() {
