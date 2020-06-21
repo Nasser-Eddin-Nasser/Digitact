@@ -1,6 +1,7 @@
 package Main;
 
 import Controller.AcController;
+import Controller.OverviewController;
 import Util.Util;
 import javafx.stage.Stage;
 
@@ -10,8 +11,7 @@ public class App extends javafx.application.Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        AcController acController = new AcController();
-        acController.onShowView();
+        new AcController();
     }
 
     public static void main(String[] args) {

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_hr-monitor" default="compile.module.hr-monitor">
+  <dirname property="module.hr-monitor.basedir" file="${ant.file.module_hr-monitor}"/>
+  
+  <property name="module.jdk.home.hr-monitor" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.hr-monitor" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.hr-monitor" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.hr-monitor" value="-encoding UTF-8 -source 11 -target 11 ${compiler.args}"/>
+  
+  <property name="hr-monitor.output.dir" value="${module.hr-monitor.basedir}/out/production/HR-Monitor"/>
+  <property name="hr-monitor.testoutput.dir" value="${module.hr-monitor.basedir}/out/test/HR-Monitor"/>
+  
+  <path id="hr-monitor.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="hr-monitor.module.production.classpath">
+    <path refid="${module.jdk.classpath.hr-monitor}"/>
+    <path refid="library.lib2.classpath"/>
+    <path refid="library.lib.classpath"/>
+    <path refid="library.lib1.classpath"/>
+    <fileset dir="${basedir}/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="hr-monitor.runtime.production.module.classpath">
+    <pathelement location="${hr-monitor.output.dir}"/>
+    <path refid="library.lib2.classpath"/>
+    <path refid="library.lib.classpath"/>
+    <path refid="library.lib1.classpath"/>
+    <fileset dir="${basedir}/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="hr-monitor.module.classpath">
+    <path refid="${module.jdk.classpath.hr-monitor}"/>
+    <pathelement location="${hr-monitor.output.dir}"/>
+    <path refid="library.lib2.classpath"/>
+    <path refid="library.lib.classpath"/>
+    <path refid="library.lib1.classpath"/>
+    <fileset dir="${basedir}/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="hr-monitor.runtime.module.classpath">
+    <pathelement location="${hr-monitor.testoutput.dir}"/>
+    <pathelement location="${hr-monitor.output.dir}"/>
+    <path refid="library.lib2.classpath"/>
+    <path refid="library.lib.classpath"/>
+    <path refid="library.lib1.classpath"/>
+    <fileset dir="${basedir}/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.hr-monitor">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.hr-monitor">
+    <patternset refid="excluded.from.module.hr-monitor"/>
+  </patternset>
+  
+  <path id="hr-monitor.module.sourcepath">
+    <dirset dir="${module.hr-monitor.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.hr-monitor" depends="compile.module.hr-monitor.production,compile.module.hr-monitor.tests" description="Compile module HR-Monitor"/>
+  
+  <target name="compile.module.hr-monitor.production" depends="register.custom.compilers" description="Compile module HR-Monitor; production classes">
+    <mkdir dir="${hr-monitor.output.dir}"/>
+    <javac2 destdir="${hr-monitor.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.hr-monitor}/javac">
+      <compilerarg line="${compiler.args.hr-monitor}"/>
+      <bootclasspath refid="hr-monitor.module.bootclasspath"/>
+      <classpath refid="hr-monitor.module.production.classpath"/>
+      <src refid="hr-monitor.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.hr-monitor"/>
+    </javac2>
+    
+    <copy todir="${hr-monitor.output.dir}">
+      <fileset dir="${module.hr-monitor.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.hr-monitor.tests" depends="register.custom.compilers,compile.module.hr-monitor.production" description="compile module HR-Monitor; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.hr-monitor" description="cleanup module">
+    <delete dir="${hr-monitor.output.dir}"/>
+    <delete dir="${hr-monitor.testoutput.dir}"/>
+  </target>
+</project>

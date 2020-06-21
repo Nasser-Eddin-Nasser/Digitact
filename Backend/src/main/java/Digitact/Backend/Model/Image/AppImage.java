@@ -77,4 +77,20 @@ public class AppImage {
     public void setType(ImageType type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        System.out.println("to string " + id);
+        return String.format(
+                "sql id "
+                        + sqlId
+                        + " id "
+                        + id
+                        + "  blocks.size()  "
+                        + blocks.size()
+                        + " user.getId()  "
+                        + user.getId()
+                        + " type  "
+                        + type);
+    }
 }
