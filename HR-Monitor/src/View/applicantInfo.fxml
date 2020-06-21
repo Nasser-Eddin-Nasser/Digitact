@@ -22,7 +22,7 @@
                   <Image url="@../Style/welcomescreen.png" />
                </image>
             </ImageView>
-               <TitledPane animated="false" collapsible="true" maxHeight="1000.0" prefHeight="592.0" prefWidth="200.0" text="Basic Info">
+               <TitledPane animated="false" collapsible="false" maxHeight="1000.0" prefHeight="592.0" prefWidth="200.0" text="Basic Info">
                   <GridPane prefHeight="283.0" prefWidth="198.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -110,10 +110,10 @@
                      </children>
                   </GridPane>
                </TitledPane>
-               <TitledPane animated="false" collapsible="true" maxHeight="1000.0" prefHeight="592.0" prefWidth="200.0" text="Additional Info">
+               <TitledPane animated="false" collapsible="false" maxHeight="1000.0" prefHeight="592.0" prefWidth="200.0" text="Additional Info">
                      <content>
                         <GridPane prefHeight="283.0" prefWidth="198.0">
-                           <Label fx:id="lblAddInfo" alignment="TOP_LEFT" text="Label" />
+                           <Label fx:id="lblAddInfo" alignment="TOP_LEFT" />
                            <columnConstraints>
                               <ColumnConstraints />
                            </columnConstraints>
@@ -160,7 +160,7 @@
                           <Tab text="Information">
                              <SplitPane dividerPositions="0.2358974358974359, 0.6128205128205129" orientation="VERTICAL" prefHeight="160.0" prefWidth="250.0">
                                 <items>
-                                   <TitledPane maxHeight="400.0" minHeight="100.0" prefHeight="200.0" text="Education Info" wrapText="true">
+                                   <TitledPane collapsible="false" maxHeight="400.0" minHeight="100.0" prefHeight="200.0" text="Education Info" wrapText="true">
                                       <content>
                                          <TableView fx:id="eduInfoTblFX" maxHeight="500.0" prefHeight="0.0">
                                             <columns>
@@ -182,7 +182,7 @@
                                          <Cursor fx:constant="NONE" />
                                       </cursor>
                                    </TitledPane>
-                                   <TitledPane maxHeight="400.0" minHeight="150.0" prefHeight="141.0" text="Key Competencies" wrapText="true">
+                                   <TitledPane collapsible="false" maxHeight="400.0" minHeight="150.0" prefHeight="141.0" text="Key Competencies" wrapText="true">
                                       <content>
                                          <TableView maxHeight="1000.0" prefHeight="201.0">
                                             <columns>
@@ -201,7 +201,7 @@
                                       </content>
                                    </TitledPane>
 
-                                   <TitledPane maxHeight="600.0" minHeight="150.0" prefHeight="453.0" text="Application Info" wrapText="true">
+                                   <TitledPane collapsible="false" maxHeight="600.0" minHeight="150.0" prefHeight="453.0" text="Application Info" wrapText="true">
                                       <SplitPane dividerPositions="0.41598360655737704" maxWidth="5000.0" prefHeight="219.0">
                                       <items>
                                          <TableView id="posTable" fx:id="posTable" maxHeight="600.0" maxWidth="2000.0" minWidth="300.0" prefHeight="219.0" prefWidth="600">

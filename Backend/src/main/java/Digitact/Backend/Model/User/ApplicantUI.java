@@ -114,8 +114,8 @@ public class ApplicantUI implements IUser {
         return additionalInfo;
     }
 
-    public void setAdditionalInfo(String impression) {
-        this.additionalInfo = impression;
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 
     @Override
