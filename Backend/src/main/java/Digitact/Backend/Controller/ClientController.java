@@ -41,8 +41,10 @@ public class ClientController {
         Repository myRepos = new Repository(repository); // todo singleton pattern
         boolean isSuccessful = myRepos.storeApplicantOnDB(applicant);
         return (isSuccessful)
-                ? new ResponseEntity<String>("Application is successfully saved",HttpStatus.CREATED)
-                : new ResponseEntity<String>("images save path not found",HttpStatus.INTERNAL_SERVER_ERROR); 
+                ? new ResponseEntity<String>(
+                        "Application is successfully saved", HttpStatus.CREATED)
+                : new ResponseEntity<String>(
+                        "images save path not found", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @PostMapping("/createAdmin")

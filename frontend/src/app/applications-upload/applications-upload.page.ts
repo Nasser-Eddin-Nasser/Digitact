@@ -115,6 +115,7 @@ export class ApplicationsUploadPage implements OnInit {
         industries: inp.fieldDesignationInfo.field,
         positions: inp.fieldDesignationInfo.designation,
         keyCompetencies: keyCompetence,
+        additionalInfo: inp.additionalInfo.additionalInfo,
       };
 
       const headers = new HttpHeaders();
