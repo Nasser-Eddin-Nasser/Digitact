@@ -21,6 +21,7 @@ class ImageToolsTest {
 
   @BeforeEach
   void setUp() {
+    ConfigProperties.testEnvironment = true;
     defaultFileSystem = System.getProperty("user.dir") + "\\tmpFS";
     ImageTools it = new ImageTools();
     content = "data:image/jpeg;base64,aaa";
@@ -31,6 +32,7 @@ class ImageToolsTest {
   @AfterEach
   void tearDown() {
     /*remove the tmp fs*/
+    ConfigProperties.testEnvironment = false;
     deleteFolder(defaultFileSystem);
   }
 
@@ -50,6 +52,7 @@ class ImageToolsTest {
 
   @Test
   void createAppImageWithoutFileSystemLeadsToException() {
+    ConfigProperties.testAbsoluteFileSystemPath = "\\xxxx\\xxx";
     boolean thrown = false;
     try {
       ImageTools.createAppImage(content, ImageType.profilePic);
@@ -61,7 +64,7 @@ class ImageToolsTest {
 
   @Test
   void createAppImageWitFileSystemLeads() {
-    ConfigProperties.absoluteFileSystemPath = defaultFileSystem + "\\";
+    ConfigProperties.testAbsoluteFileSystemPath = defaultFileSystem + "\\";
     System.out.println("Working Directory = " + System.getProperty("user.dir"));
     boolean thrown = false;
     try {
