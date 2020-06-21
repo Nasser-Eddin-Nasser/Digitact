@@ -8,10 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class ApplicationTests {
-  @Autowired private ClientController cc;
+    @Autowired private ClientController cc;
 
-  @Test
-  void contextLoads() {
-    Assertions.assertThat(cc).isNotNull();
-  }
+    @Test
+    void contextLoads() {
+        Assertions.assertThat(cc).isNotNull();
+    }
 }

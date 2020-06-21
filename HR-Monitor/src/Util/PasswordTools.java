@@ -4,7 +4,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class PasswordTools {
-    
 
     public static String encryptString(String password) {
         MessageDigest messageDigest = null;
