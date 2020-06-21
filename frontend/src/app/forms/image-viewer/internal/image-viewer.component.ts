@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { IonSlides, NavController } from '@ionic/angular';
+import { IonSlides, NavController, ViewDidEnter } from '@ionic/angular';
 
 import { AlertController } from '../../../common/ion-wrappers/alert-controller';
 import { ToastController } from '../../../common/ion-wrappers/toast-controller';
@@ -17,7 +17,7 @@ import { ImageViewerSettings } from '../model/image-viewer-settings.model';
   templateUrl: './image-viewer.component.html',
   styleUrls: ['./image-viewer.component.scss'],
 })
-export class ImageViewerComponent implements OnInit, OnDestroy {
+export class ImageViewerComponent implements OnInit, OnDestroy, ViewDidEnter {
   @ViewChild('slider')
   private slider: IonSlides;
 
@@ -34,12 +34,22 @@ export class ImageViewerComponent implements OnInit, OnDestroy {
    */
   currentSlideIndex: number;
 
+  /**
+   * Has the view been fully loaded (so has the ionViewDidEnter lifecycle hook fired)?
+   * Important: We only set this property once (when the view is loaded for the very first time).
+   */
+  viewDidEnter = false;
+
   constructor(
     private alertController: AlertController,
     private imageViewerService: ImageViewerService,
     private navController: NavController,
     private toastController: ToastController
   ) {}
+
+  ionViewDidEnter(): void {
+    this.viewDidEnter = true;
+  }
 
   ngOnInit(): void {
     this.providedSettings = this.imageViewerService.getProvidedSettings();

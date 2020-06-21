@@ -106,7 +106,13 @@ export class RatingPage implements OnDestroy, OnInit {
       )
       .then((applicantData) => {
         if (applicantData) {
-          this.ratingForm.patchValue(applicantData);
+          /*
+            Usually, you can just use patchValue in order to set the value of the form.
+            However, the ion-range element has issues with null values (they become NaN).
+            Because of this, we need to "repair" the values first.
+          */
+          const filtered = this.removeNullValuesRec(applicantData);
+          this.ratingForm.patchValue(filtered);
         }
       });
     const routerSubscription = this.activatedRoute.queryParams.subscribe(
@@ -149,6 +155,47 @@ export class RatingPage implements OnDestroy, OnInit {
     for (const subscription of this.subscriptions) {
       subscription.unsubscribe();
     }
+  }
+
+  /**
+   * This helper function removes null/undefined entries from a given object or array.
+   * This happens recursively.
+   */
+  // tslint:disable-next-line: no-any
+  private removeNullValuesRec(input: any): any {
+    // This is equal to `input === undefined || input === null`.
+    if (input == undefined) {
+      return undefined;
+    }
+
+    if (Array.isArray(input)) {
+      const newArray = [];
+      for (const item of input) {
+        const filtered = this.removeNullValuesRec(item);
+        if (filtered == undefined) {
+          continue;
+        }
+        newArray.push(filtered);
+      }
+
+      return newArray;
+    }
+
+    if (typeof input === 'object') {
+      // tslint:disable-next-line: no-any
+      const newObject: any = {};
+      for (const [key, value] of Object.entries(input)) {
+        const filtered = this.removeNullValuesRec(value);
+        if (filtered == undefined) {
+          continue;
+        }
+        newObject[key] = filtered;
+      }
+
+      return newObject;
+    }
+
+    return input;
   }
 
   /**
