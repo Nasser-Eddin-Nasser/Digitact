@@ -1,9 +1,14 @@
-<h1>Applicant Rating</h1>
+<h1>{{ 'hrSideMenu.applicantRating' | translate }}</h1>
 
 <ion-list lines="none">
   <ion-list-header>
-    Rhetoric:
-    {{ ratingForm.controls.applicantScore.controls.rhetoric.value }}
+    {{
+      'ratingPage.rhetoricScore'
+        | translate
+          : {
+              score: ratingForm.controls.applicantScore.controls.rhetoric.value
+            }
+    }}
   </ion-list-header>
   <ion-item class="rating">
     <ion-range
@@ -17,8 +22,14 @@
   </ion-item>
 
   <ion-list-header>
-    Motivation:
-    {{ ratingForm.controls.applicantScore.controls.motivation.value }}
+    {{
+      'ratingPage.motivationScore'
+        | translate
+          : {
+              score:
+                ratingForm.controls.applicantScore.controls.motivation.value
+            }
+    }}
   </ion-list-header>
   <ion-item class="rating">
     <ion-range
@@ -32,8 +43,14 @@
   </ion-item>
 
   <ion-list-header>
-    Self-Assurance:
-    {{ ratingForm.controls.applicantScore.controls.selfAssurance.value }}
+    {{
+      'ratingPage.selfAssurance'
+        | translate
+          : {
+              score:
+                ratingForm.controls.applicantScore.controls.selfAssurance.value
+            }
+    }}
   </ion-list-header>
   <ion-item class="rating">
     <ion-range
@@ -47,8 +64,15 @@
   </ion-item>
 
   <ion-list-header>
-    Personal Impression:
-    {{ ratingForm.controls.applicantScore.controls.personalImpression.value }}
+    {{
+      'ratingPage.personalImpression'
+        | translate
+          : {
+              score:
+                ratingForm.controls.applicantScore.controls.personalImpression
+                  .value
+            }
+    }}
   </ion-list-header>
   <ion-item class="rating">
     <ion-range

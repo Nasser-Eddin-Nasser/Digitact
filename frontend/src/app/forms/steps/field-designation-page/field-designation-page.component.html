@@ -1,13 +1,14 @@
 <div class="main-description">
-  <h1>Industries and Positions</h1>
+  <h1>{{ 'industryAndPositionPreference.title' | translate }}</h1>
   <span>
-    So that we can know in which industries and positions you are intrested,
-    please choose from the following.
+    {{ 'industryAndPositionPreference.stepDescription' | translate }}
   </span>
 </div>
 
 <ion-item class="ion-no-padding form-item">
-  <ion-label color="medium">Industry</ion-label>
+  <ion-label color="medium">{{
+    'industryAndPositionPreference.industry' | translate
+  }}</ion-label>
   <ion-select
     multiple
     [formControl]="formsData.controls.fieldDesignationInfo.controls.field"
@@ -23,7 +24,9 @@
 </ion-item>
 
 <ion-item class="ion-no-padding form-item">
-  <ion-label color="medium">Position</ion-label>
+  <ion-label color="medium">{{
+    'industryAndPositionPreference.position' | translate
+  }}</ion-label>
   <ion-select
     multiple
     [formControl]="formsData.controls.fieldDesignationInfo.controls.designation"

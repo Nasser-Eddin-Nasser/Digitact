@@ -1,0 +1,151 @@
+{
+    "commonLables":{
+        "no":"No",
+        "yes":"Yes",
+        "close":"Close",
+        "continue":"Continue",
+        "cancel":"Cancel",
+        "finalize":"Finalize",
+        "currentStep":"Step {{currentStep}} / {{totalSteps}}",
+        "save":"Save",
+        "quit":"Quit"
+    },
+    "homePage":{
+        "welcomeMessage":"Welcome to Consileon",
+        "welcomeTagline":"We make the difference",
+        "applyNow":"Apply Now"
+    },
+    "formsPage":{
+        "submit":"Submit",
+        "pageExitWarningMessage":"Do you really want to cancel your job application?"
+    },
+    "privacyPage":{
+        "readPrivacyMessage":"Before we can get started: During the application process, you need to enter some private information. Because of this, please read the Privacy Policy.",
+        "openPrivacy":"Open Privacy",
+        "agreePrivacyMessage":"I have read and agree to the Privacy Policy.",
+        "privacyPolicy":"Privacy Policy",
+        "dummyText":"This is the text of the Privacy Policy"
+    },
+    "applicantsPage":{
+        "applications":"Applications",
+        "finalized":"Finalized",
+        "finalizedByHrMessage":"{{finalizedCount}} applications has been finalized by HR staff to be sent to HR monitor.",
+        "sendToServer":"Send To Server",
+        "notFinished":"Not Finished",
+        "yetToRateMessage":"This list includes all the applications that have been submitted by the applicant but not been rated by HR staff.",
+        "noApplicantsMessage":"No application is submitted or finalized"
+    },
+    "applicantsUploadPage":{
+        "upload":"Upload",
+        "uploadingProgressMessage":"uploading application {{uploadSize}}/{{totalSize}}",
+        "nApplicationUploadedSuccessMessage":"{{uploadedSize}} application has successfully been uploaded to the server.",
+        "napplicantsSavedMessage":"{{uploadedSize}} Application saved successfully.",
+        "serverConnectionErrorMessage":"Cannot connect to server at the moment. Please try again later.",
+        "applicantUploadedSUccessMessage":"Applicantions are successfully uploaded",
+        "nApplicantsFailedToUploadMessage":"{{failedCount}} application could not be saved due to {{errorMessage}}. Please try again later."
+    },
+    "hrSideMenu":{
+        "applicantRating":"Applicant Rating",
+        "impression":"Impression",
+        "progress":"Progress"
+    },
+    "ratingPage":{
+        "finalizeConfirmationMessage":"Do you really want to finalize this form? It wont be possible to edit later.",
+        "applicationFinalizedNotification":"Applicant information is finalized",
+        "rhetoricScore":"Rhetoric:{{score}}",
+        "motivationScore":"Motivation:{{score}}",
+        "selfAssurance":"Self-Assurance:{{score}}",
+        "personalImpression":"Personal Impression:{{score}}",
+        "finalizeApplicantMessage":"All the information about the applicant is taken. You need to finalize this form to send data to the HR monitor and it will not be possible to edit information later.",
+        "fillRequiredFieldsToFinalizeMessage":"You can finalize this form as soon as you fill all the required fields. By opening the right menu, you can see where you still need to fill the form.",
+        "addImpressionMessage":"Please write a few lines about your personal impression on the applicant. Also, if you want to add/mention anything else you can do it here."
+    },
+    "basicInfo":{
+        "title":"Basic Information",
+        "welcome":"Welcome!",
+        "stepDescription":"So that we can get to know you better, please provide your first and last name.",
+        "salutationTitle":"Title",
+        "firstName":"First Name",
+        "lastName":"Last Name",
+        "mr":"Mr",
+        "mrs":"Mrs"
+    },
+    "contactInfo":{
+        "title":"Contact Information",
+        "greetingsMessage":"Nice to meet you, {{name}}!",
+        "stepDescription":"So that we can get in touch with you, please fill out the following contact information fields.",
+        "phoneNumber":"Phone Number",
+        "email":"Email",
+        "linkedinAccount":"LinkedIn Account",
+        "xingAccount":"Xing Account"
+    },
+    "profilePicture":{
+        "title":"Picture",
+        "stepDescription":"Add a picture of yourself by tapping on the image icon.",
+        "deleteTakeAnotherPictureMessage":"Good job! If you want to take another picture, just delete the actual picture and take another one."
+    },
+    "documentsUpload":{
+        "title":"Documents",
+        "stepDescription":"In this step, you can take photos of documents you would like to include in your application. For instance, you can take photos of your CV here. This step is optional: If you don't want to add anyting, you can just skip it.",
+        "delete":"Delete",
+        "deleteConfirmationMessage":"Do you really want to delete this image?",
+        "imageDeleteSuccessMessage":"The image has been deleted successfully"
+    },
+    "educationInfo":{
+        "title":"Education Information",
+        "stepDescription":"Here, you can add your information regarding your education. So: What is your educational background",
+        "degreeYearGradeMessage":"{{degree}}'s degree ({{graduationYear}}, {{grade}})",
+        "schoolOrUniversity":"School/University",
+        "subject":"Subject",
+        "degree":"Degree",
+        "master":"Master",
+        "bachelor":"Bachelor",
+        "school":"School",
+        "grade":"Grade",
+        "gradutaionYear":"Graduation Year"
+    },
+    "industryAndPositionPreference":{
+        "title":"Industries and Positions",
+        "stepDescription":"So that we can know in which industries and positions you are intrested, please choose from the following.",
+        "industry":"Industry",
+        "position":"Position",
+        "automotive":"Automotive",
+        "finance":"Finance",
+        "commerce":"Commerce",
+        "healthCare":"Pharma/Healthcare",
+        "publicSector":"Public Sector",
+        "businessConsultant":"Consultant/Business Consultant",
+        "itConsultantManagement":"IT-Consultant - Information Management",
+        "itConsultantJava":"IT-Consultant - Java/JEE",
+        "itConsultantDataScience":"IT-Consultant - Data Science / Artificial Intelligence",
+        "consultantSAP":"Consultant SAP",
+        "internship":"Internship/Working Student"
+    },
+    "confirmationPage":{
+        "done":"Done",
+        "stepDescription":"The application has been submitted. The following steps need to be performed by the HR staff (either now or later)."
+    },
+    "submitData":{
+        "title":"Submit",
+        "stepDescription":"That's it! You can now submit your application and hand the device back to our team.",
+        "fillMandatoryFieldsToSubmitMessage":"You can submit the form as soon as you have filled out all required fields. By opening the right menu, you can see where you still need to enter some data."
+    },
+    "keyCompetencies":{
+        "title":"Key Competencies",
+        "stepDescription":"Now, please select and rate your key competencies. We expect you to add at least one entry to 'Languages' in order to complete this step.",
+        "languages":"Languages",
+        "professionalSoftware":"Professional Software",
+        "database":"Databases",
+        "programmingLanguagesAndFrameworks":"Programming Languages and Frameworks",
+        "all":"All",
+        "selected":"Selected",
+        "noMatchFoundMessage":"No items match your selection",
+        "notFoundAddMessage":"Not found what you were looking for? You can also add your search term('{{ searchedTerm }}') to the list.",
+        "addToList":"Add to list"    
+    },
+    "sideMenu":{
+        "progress":"Progress",
+        "description":"If you want to go to a previous step, just click on the element in the list!"
+
+    }
+}

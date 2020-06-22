@@ -1,14 +1,11 @@
 <div class="main-description">
-  <h1>Submit</h1>
+  <h1>{{ 'submitData.title' | translate }}</h1>
 
   <span *ngIf="formsData.valid">
-    That's it! You can now submit your application and hand the device back to
-    our team.
+    {{ 'submitData.stepDescription' | translate }}
   </span>
 
   <span *ngIf="!formsData.valid">
-    You can submit the form as soon as you have filled out all required fields.
-    By opening the right menu, you can see where you still need to enter some
-    data.
+    {{ 'submitData.fillMandatoryFieldsToSubmitMessage' | translate }}
   </span>
 </div>

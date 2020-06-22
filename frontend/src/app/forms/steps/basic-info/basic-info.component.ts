@@ -3,16 +3,17 @@
     This component renders the basic information step view and its actions.
 */
 import { Component, Input } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 import { FormGroup } from '../../../common/forms/forms';
 import { FormsData } from '../../../model/forms-data.model';
-
 @Component({
   selector: 'form-basic-info',
   templateUrl: './basic-info.component.html',
   styleUrls: ['./basic-info.component.scss'],
 })
 export class BasicInfoComponent {
+  constructor(private translate: TranslateService) {}
   /**
    * Data of the entire form.
    */
@@ -23,7 +24,7 @@ export class BasicInfoComponent {
    * The possible salutations, displayed in the dropdown menu.
    */
   salutationsArray = [
-    { value: 'Mr', displayName: 'Mr' },
-    { value: 'Mrs', displayName: 'Mrs' },
+    { value: 'Mr', displayName: this.translate.instant('basicInfo.mr') },
+    { value: 'Mrs', displayName: this.translate.instant('basicInfo.mrs') },
   ];
 }
