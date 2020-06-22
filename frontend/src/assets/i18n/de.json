@@ -141,11 +141,36 @@
         "selected":"Ausgewählt",
         "noMatchFoundMessage":"Es wurde Kein passender Eintrag gefunden",
         "notFoundAddMessage":"Nicht gefunden was du gesucht hast. Du kannst auch deinen Suchbegriff ('{{ searchedTerm }}') in die Liste aufnehmen.",
-        "addToList":"Zur Liste hinzufügen"    
+        "addToList":"Zur Liste hinzufügen",
+        "rating": "Bewertung: ",
+        "ratingMessage": "Bitte bewerte deine Fertigkeiten von 1 (nicht gut) bis 5 (exzellent).",
+        "searchItemErrorMessage": " kann nicht hinzugefügt werden, weil es entweder bereits in der Liste vorhanden oder kein gültiger Name ist.",
+        "searchAllertHeader": "Zur liste hinzufügen",
+        "searchAllertMessage": "Willst du wirklich {{searchItem}} zur Liste hinzufügen?",
+        "LANGUAGE_ITEMS": [
+            "Arabisch",
+            "Chinesisch",
+            "Tschechisch",
+            "Englisch",
+            "Finnisch",
+            "Französich",
+            "Deutsch",
+            "Griechisch",
+            "Ungarisch",
+            "Italienisch",
+            "Japanisch",
+            "Koreanisch",
+            "Norwegisch",
+            "Polnisch",
+            "Portugisisch",
+            "Russisch",
+            "Spanisch",
+            "Swedisch",
+            "Türkisch"
+  ]
     },
     "sideMenu":{
         "progress":"Fortschritt",
         "description":"Wenn du zu einem vorherigen Schritt zurück willst, klicke auf den entsprechenden Eintrag in der Liste!"
-
     }
 }
