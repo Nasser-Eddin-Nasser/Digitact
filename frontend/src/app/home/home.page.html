@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border ion-padding">
   <ion-toolbar>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" class="toolbar-buttons">
       <ion-button class="notification-button" (click)="goToApplications()">
         <ion-icon
           class="custom-icon"
@@ -12,6 +12,12 @@
           *ngIf="applicationSize"
           >{{applicationSize}}</ion-badge
         >
+      </ion-button>
+      <ion-button
+        class="notification-button ion-margin-top"
+        (click)="openLanguagePicker($event)"
+      >
+        <ion-icon class="custom-icon" name="settings-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
