@@ -6,7 +6,7 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title class="ion-text-center">
+    <ion-title color="primary" class="ion-text-center">
       <ng-container *ngIf="currentStep !== HR_RATING_STEP.Finalize">
         {{'commonLables.currentStep' | translate:{ currentStep: currentStepIndex
         + 1,totalSteps: HR_RATING_STEP_ARR.length - 1} }}

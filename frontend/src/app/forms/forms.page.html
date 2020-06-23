@@ -6,7 +6,7 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title class="ion-text-center">
+    <ion-title color="primary" class="ion-text-center">
       <ng-container *ngIf="currentStep !== APPLICATION_STEP.Submit">
         {{'commonLables.currentStep' | translate:{ currentStep:
         currentStepIndex+1,totalSteps: APPLICATION_STEP_ARR.length-1} }}
