@@ -6,3 +6,30 @@
   align-items: center;
   display: flex;
 }
+
+.education-entry > ion-label {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+.education-entry-title {
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: var(--ion-color-primary);
+  margin-bottom: 5px;
+}
+.education-entry p.with-icon {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 500;
+}
+.education-entry p.with-icon ion-icon {
+  margin-right: 0.5rem;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.education-entry p.with-icon span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
