@@ -16,7 +16,8 @@
     "homePage":{
         "welcomeMessage":"Willkommen bei Consileon",
         "welcomeTagline":"Wir machen den Unterschied",
-        "applyNow":"Jetzt Bewerben"
+        "applyNow":"Jetzt Bewerben",
+        "language":"Sprache"
     },
     "formsPage":{
         "submit":"Bestätigen",
