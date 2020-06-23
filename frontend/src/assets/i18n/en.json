@@ -20,7 +20,7 @@
         "pageExitWarningMessage":"Do you really want to cancel your job application?"
     },
     "privacyPage":{
-        "readPrivacyMessage":"Before we can get started: During the application process, you need toenter some private information. Because of this, please read the Privacy Policy.",
+        "readPrivacyMessage":"Before we can get started: During the application process, you need to enter some private information. Because of this, please read the Privacy Policy.",
         "openPrivacy":"Open Privacy",
         "agreePrivacyMessage":"I have read and agree to the Privacy Policy.",
         "privacyPolicy":"Privacy Policy",
@@ -42,7 +42,7 @@
         "napplicantsSavedMessage":"{{uploadedSize}} Application saved successfully.",
         "serverConnectionErrorMessage":"Cannot connect to server at the moment. Please try again later.",
         "applicantUploadedSUccessMessage":"Applicantions are successfully uploaded",
-        "nApplicantsFailedToUploadMessage":"{{failedCount}} application could not be saved due to {{errorMessage}} . Please try again later."
+        "nApplicantsFailedToUploadMessage":"{{failedCount}} application could not be saved due to {{errorMessage}}. Please try again later."
     },
     "hrSideMenu":{
         "applicantRating":"Applicant Rating",
@@ -72,7 +72,7 @@
     },
     "contactInfo":{
         "title":"Contact Information",
-        "greetingsMessage":" Nice to meet you, {{name}}!",
+        "greetingsMessage":"Nice to meet you, {{name}}!",
         "stepDescription":"So that we can get in touch with you, please fill out the following contact information fields.",
         "phoneNumber":"Phone Number",
         "email":"Email",
@@ -82,7 +82,7 @@
     "profilePicture":{
         "title":"Picture",
         "stepDescription":"Add a picture of yourself by tapping on the image icon.",
-        "deleteTakeAnotherPictureMessage":"Good job! If you want to take another picture, just delete the actual picture by sliding on it and take another one."
+        "deleteTakeAnotherPictureMessage":"Good job! If you want to take another picture, just delete the actual picture and take another one."
     },
     "documentsUpload":{
         "title":"Documents",
@@ -115,7 +115,7 @@
         "healthCare":"Pharma/Healthcare",
         "publicSector":"Public Sector",
         "businessConsultant":"Consultant/Business Consultant",
-        "itConsultantManagement":"IT-Consultant - Informationsmanagement",
+        "itConsultantManagement":"IT-Consultant - Information Management",
         "itConsultantJava":"IT-Consultant - Java/JEE",
         "itConsultantDataScience":"IT-Consultant - Data Science / Artificial Intelligence",
         "consultantSAP":"Consultant SAP",
@@ -140,8 +140,34 @@
         "all":"All",
         "selected":"Selected",
         "noMatchFoundMessage":"No items match your selection",
-        "notFoundAddMessage":"Not found what you were looking for? You can also add your search term('{{ searchedTerm }}') to the list.",
-        "addToList":"Add to list"    
+        "notFoundAddMessage":"Not found what you were looking for? You can also add your search term({{ searchedTerm }}) to the list.",
+        "addToList":"Add to list",    
+        "rating" : "Rating: ",
+        "ratingMessage": "Please rate your skills from 1 (not good) to 5 (excellent).",   
+        "searchItemErrorMessage": " cannot be added because it is already part of the list or it is not a valid name.",
+        "searchAllertHeader": "Add to list",
+        "searchAllertMessage": "Do you really want to add {{searchTerm}} to the list?",
+        "LANGUAGE_ITEMS": [
+            "Arabic",
+            "Chinese",
+            "Czech",
+            "English",
+            "Finnish",
+            "French",
+            "German",
+            "Greek",
+            "Hungarian",
+            "Italian",
+            "Japanese",
+            "Korean",
+            "Norwegian",
+            "Polish",
+            "Portuguese",
+            "Russian",
+            "Spanish",
+            "Swedish",
+            "Turkish"
+  ]
     },
     "sideMenu":{
         "progress":"Progress",

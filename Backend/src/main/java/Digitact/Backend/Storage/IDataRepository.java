@@ -1,8 +1,8 @@
 package Digitact.Backend.Storage;
 
-import static Digitact.Backend.Storage.DB.Query.getApplicantQuery;
-import static Digitact.Backend.Storage.DB.Query.getFullApplicantsInfoQuery;
+import static Digitact.Backend.Storage.DB.Query.*;
 
+import Digitact.Backend.Model.User.Admin;
 import Digitact.Backend.Model.User.Applicant;
 import Digitact.Backend.Model.User.User;
 import java.util.Collection;
@@ -19,6 +19,12 @@ public interface IDataRepository extends JpaRepository<User, Long> {
     @Query(value = getApplicantQuery, nativeQuery = true)
     Collection<Applicant> getApplicants();
 
+    @Query(value = getAdminQuery, nativeQuery = true)
+    Collection<Admin> getAdmins();
+
     @Query(value = getFullApplicantsInfoQuery, nativeQuery = true)
     Collection<Applicant> getFullApplicantsInfo();
+
+    @Query(value = getAdminByUserName, nativeQuery = true)
+    Admin getAdminByUserName(String userName);
 }

@@ -6,7 +6,7 @@ import Storage.DBStorage;
 import Storage.Dummy;
 import java.util.List;
 
-public class StorageModel {
+public class OverviewModel {
 
     public List<ApplicantUI> getDB() {
         if (App.DEVELOPMENT_ENVIRONMENT) {

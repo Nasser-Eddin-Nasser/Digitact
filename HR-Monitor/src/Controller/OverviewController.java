@@ -1,14 +1,20 @@
 package Controller;
 
+import static Database.Method.getImageById;
+
 import Database.Connector;
 import Model.Education;
 import Model.Image.AppImage;
 import Model.Image.ImageType;
 import Model.Industries;
-import Model.MVC.StorageModel;
+import Model.MVC.OverviewModel;
 import Model.Positions;
 import Model.User.ApplicantUI;
 import Util.ImageTools;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -25,72 +31,48 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 
-import static Database.Method.getImageById;
-
-public class StorageController {
+public class OverviewController {
     Stage stage;
-    StorageModel model;
+    OverviewModel model;
     // Create a TableView with a list of Applicants
-    @FXML
-    TableView<ApplicantUI> userTable;
+    @FXML TableView<ApplicantUI> userTable;
     private ObservableList<ApplicantUI> observableListTableView;
 
     // Create a TableView with a list of Education Info of an Applicant
-    @FXML
-    TableView<Education> eduInfoTblFX;
+    @FXML TableView<Education> eduInfoTblFX;
     private ObservableList<Education> observableListEduInfoTableView;
 
-    @FXML
-    TableView<Positions> posTable;
+    @FXML TableView<Positions> posTable;
     private ObservableList<Positions> observableListPosTableTableView;
 
-    @FXML
-    TableView<Industries> indTable;
+    @FXML TableView<Industries> indTable;
     private ObservableList<Industries> observableListIndTableTableView;
 
-    @FXML
-    TableColumn<Positions, String> posFX = new TableColumn<>("Position");
-    @FXML
-    TableColumn<Industries, String> indFX = new TableColumn<>("Industry");
+    @FXML TableColumn<Positions, String> posFX = new TableColumn<>("Position");
+    @FXML TableColumn<Industries, String> indFX = new TableColumn<>("Industry");
     // Overview of all Applicants
-    @FXML
-    TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
-    @FXML
-    TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
-    @FXML
-    TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
+    @FXML TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
+    @FXML TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
+    @FXML TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
 
     // Applicant Info View's Variables
     // 1. Basic Info
-    @FXML
-    Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX, lblLinkedInFX, lblXingFX;
+    @FXML Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX, lblLinkedInFX, lblXingFX;
     // 2. Edu Info
-    @FXML
-    TableColumn<Education, String> universityFX = new TableColumn<>("university");
-    @FXML
-    TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
-    @FXML
-    TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
-    @FXML
-    TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
-    @FXML
-    TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
+    @FXML TableColumn<Education, String> universityFX = new TableColumn<>("university");
+    @FXML TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
+    @FXML TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
+    @FXML TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
+    @FXML TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
     // 3. Image of the  Applicant
-    @FXML
-    private ImageView imgFX;
-
+    @FXML private ImageView imgFX;
 
     Pane root;
 
-    public StorageController(Stage parentStage) throws IOException {
-        model = new StorageModel();
+    public OverviewController(/*Stage parentStage*/ ) throws IOException {
+        model = new OverviewModel();
         stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/storageView.fxml"));
         loader.setController(this);
@@ -120,8 +102,8 @@ public class StorageController {
         }
     }
 
-//    TableView<Industries> indTable;
-//    private ObservableList<Industries> observableListIndTableTableView;
+    //    TableView<Industries> indTable;
+    //    private ObservableList<Industries> observableListIndTableTableView;
 
     private void setPositionAndIndustry(ApplicantUI app) {
         getPositionTable(app.getPositions());
@@ -137,8 +119,7 @@ public class StorageController {
     }
 
     public void setFactoriesAndComparatorsForIndTableColumns() {
-        indFX.setCellValueFactory(
-                ind -> new ReadOnlyStringWrapper(ind.getValue().toString()));
+        indFX.setCellValueFactory(ind -> new ReadOnlyStringWrapper(ind.getValue().toString()));
     }
 
     private ObservableList<Positions> getPositionTable(List<Positions> positions) {
@@ -150,8 +131,7 @@ public class StorageController {
     }
 
     public void setFactoriesAndComparatorsForPosTableColumns() {
-        posFX.setCellValueFactory(
-                pos -> new ReadOnlyStringWrapper(pos.getValue().toString()));
+        posFX.setCellValueFactory(pos -> new ReadOnlyStringWrapper(pos.getValue().toString()));
     }
 
     private void getImage(ApplicantUI app) {

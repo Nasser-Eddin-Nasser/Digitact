@@ -36,11 +36,11 @@ public class Repository {
         if (hasImages)
             isImageSuccessfullyStored = addImagesToApplicant(applicant.getImageList(), app);
         if (isImageSuccessfullyStored) {
-	        try {
-	            repo.save(app);
-	        } catch (Exception e) {
-	            return false;
-	        }
+            try {
+                repo.save(app);
+            } catch (Exception e) {
+                return false;
+            }
         }
         return (hasImages && isImageSuccessfullyStored)
                 || (!hasImages && isImageSuccessfullyStored);

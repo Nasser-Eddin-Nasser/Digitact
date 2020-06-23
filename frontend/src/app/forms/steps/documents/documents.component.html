@@ -28,8 +28,9 @@
     (click)="openImageViewer(i)"
   >
     <div class="make-square">
-      <!-- In case of performance problems: It could help if we resized the image or used some sort of URL for it. For now, we just use the large base64 string here. -->
-      <img [src]="control.value" />
+      <app-base64-image [base64String]="control.value" [makeThumbnail]="true">
+        <ion-spinner></ion-spinner>
+      </app-base64-image>
     </div>
   </div>
 </div>

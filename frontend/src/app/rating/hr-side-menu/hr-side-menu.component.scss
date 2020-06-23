@@ -1,12 +1,20 @@
 .side-menu-container {
   padding: 2rem;
+  margin-top: var(--ion-safe-area-top);
+  margin-right: var(--ion-safe-area-right);
+  margin-bottom: var(--ion-safe-area-bottom);
 }
-.side-menu-heading {
+.side-menu-headline {
   margin-top: 0;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 ion-item {
   // A "hack" to make sure the element is aligned completely to the left.
   --ion-safe-area-left: 0;
+}
+ion-label {
+  font-size: 20px !important;
+  font-weight: 500;
+  letter-spacing: 3px;
 }
