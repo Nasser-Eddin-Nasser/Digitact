@@ -1,14 +1,15 @@
-/**
- *  @description
- *   This component renders the education information step view and its actions.
- */
+/*
+  @description
+    This component renders the education information step view and its actions.
+*/
 import { Component, Input } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
 
 import { FormControl, FormGroup } from '../../../common/forms/forms';
 import { EducationInfoEntry, FormsData } from '../../../model/forms-data.model';
-import { EducationInfoEntryComponent } from '../education-info-entry/education-info-entry.component';
+
+import { EducationInfoEntryModalComponent } from './education-info-entry/education-info-entry.component';
 
 @Component({
   selector: 'form-education-info',
@@ -37,7 +38,7 @@ export class EducationInfoComponent {
     });
 
     const modal = await this.modalController.create({
-      component: EducationInfoEntryComponent,
+      component: EducationInfoEntryModalComponent,
       componentProps: {
         education: educationInfoAdd,
       },
@@ -96,7 +97,7 @@ export class EducationInfoComponent {
     });
 
     const modal = await this.modalController.create({
-      component: EducationInfoEntryComponent,
+      component: EducationInfoEntryModalComponent,
       componentProps: {
         education: educationInfoMod,
       },

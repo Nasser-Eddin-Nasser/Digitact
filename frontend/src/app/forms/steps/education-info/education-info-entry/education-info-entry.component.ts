@@ -1,19 +1,19 @@
-/**
- *  @description
- *   This component renders the education information form add and modify.
- */
+/*
+  @description
+    This component renders the education information form add and modify.
+*/
 import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { FormGroup } from '../../../common/forms/forms';
-import { EducationInfoEntry } from '../../../model/forms-data.model';
+import { FormGroup } from '../../../../common/forms/forms';
+import { EducationInfoEntry } from '../../../../model/forms-data.model';
+
 @Component({
-  selector: 'forms-education-info-entry',
   templateUrl: './education-info-entry.component.html',
   styleUrls: ['./education-info-entry.component.scss'],
 })
-export class EducationInfoEntryComponent {
+export class EducationInfoEntryModalComponent {
   constructor(
     public modalController: ModalController,
     private translate: TranslateService
@@ -34,7 +34,8 @@ export class EducationInfoEntryComponent {
     },
   ];
 
-  @Input() education: FormGroup<EducationInfoEntry>;
+  @Input()
+  education: FormGroup<EducationInfoEntry>;
 
   /**
    *  save and close the education info form
