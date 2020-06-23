@@ -13,6 +13,7 @@ import { SharedModule } from '../shared.module';
 import { FormsPageRoutingModule } from './forms-routing.module';
 import { FormsPage } from './forms.page';
 import { SideMenuComponent } from './side-menu/side-menu.component';
+import { AdditionalInfoComponent } from './steps/additional-info/additional-info.component';
 import { BasicInfoComponent } from './steps/basic-info/basic-info.component';
 import { ContactInfoComponent } from './steps/contact-info/contact-info.component';
 import { DocumentsModule } from './steps/documents/documents.module';
@@ -44,6 +45,7 @@ import { SubmitPageComponent } from './steps/submit-page/submit-page.component';
     EducationInfoEntryComponent,
     FieldDesignationPageComponent,
     ProfilePictureComponent,
+    AdditionalInfoComponent,
   ],
 })
 export class FormsPageModule {}
