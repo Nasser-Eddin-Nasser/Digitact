@@ -8,7 +8,10 @@
   </ion-toolbar>
 
   <ion-toolbar>
-    <ion-searchbar [formControl]="searchInput"></ion-searchbar>
+    <ion-searchbar
+      [formControl]="searchInput"
+      placeholder="{{ 'commonLables.search' | translate }}"
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 

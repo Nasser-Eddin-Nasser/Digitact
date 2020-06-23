@@ -60,6 +60,7 @@ export class SideMenuComponent {
       'industryAndPositionPreference.title'
     ),
     keyCompetencies: this.translate.instant('keyCompetencies.title'),
+    additionalInfo: this.translate.instant('additionalInfo.title'),
     submit: this.translate.instant('submitData.title'),
   };
 

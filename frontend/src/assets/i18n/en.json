@@ -8,7 +8,10 @@
         "finalize":"Finalize",
         "currentStep":"Step {{currentStep}} / {{totalSteps}}",
         "save":"Save",
-        "quit":"Quit"
+        "quit":"Quit",
+        "add":"Add",
+        "okay":"Ok",
+        "search":"Search"
     },
     "homePage":{
         "welcomeMessage":"Welcome to Consileon",
@@ -52,10 +55,10 @@
     "ratingPage":{
         "finalizeConfirmationMessage":"Do you really want to finalize this form? It wont be possible to edit later.",
         "applicationFinalizedNotification":"Applicant information is finalized",
-        "rhetoricScore":"Rhetoric:{{score}}",
-        "motivationScore":"Motivation:{{score}}",
-        "selfAssurance":"Self-Assurance:{{score}}",
-        "personalImpression":"Personal Impression:{{score}}",
+        "rhetoricScore":"Rhetoric",
+        "motivationScore":"Motivation",
+        "selfAssurance":"Self-Assurance",
+        "personalImpression":"Personal Impression",
         "finalizeApplicantMessage":"All the information about the applicant is taken. You need to finalize this form to send data to the HR monitor and it will not be possible to edit information later.",
         "fillRequiredFieldsToFinalizeMessage":"You can finalize this form as soon as you fill all the required fields. By opening the right menu, you can see where you still need to fill the form.",
         "addImpressionMessage":"Please write a few lines about your personal impression on the applicant. Also, if you want to add/mention anything else you can do it here."
@@ -144,9 +147,9 @@
         "addToList":"Add to list",    
         "rating" : "Rating: ",
         "ratingMessage": "Please rate your skills from 1 (not good) to 5 (excellent).",   
-        "searchItemErrorMessage": " cannot be added because it is already part of the list or it is not a valid name.",
-        "searchAllertHeader": "Add to list",
-        "searchAllertMessage": "Do you really want to add {{searchTerm}} to the list?",
+        "searchItemErrorMessage": "'{{searchedTerm}}' cannot be added because it is already part of the list or it is not a valid name.",
+        "searchAlertMessage": "Do you really want to add '{{searchedTerm}}' to the list?",
+        "addedToListMessage":"'{{searchedTerm}}' has been added to the list.",
         "LANGUAGE_ITEMS": [
             "Arabic",
             "Chinese",
@@ -169,9 +172,13 @@
             "Turkish"
   ]
     },
+
+    "additionalInfo":{
+        "title":"Additional Information",
+        "stepDescription":"Here you can add additional information that you want to include in the application."
+    },
     "sideMenu":{
         "progress":"Progress",
         "description":"If you want to go to a previous step, just click on the element in the list!"
-
     }
 }

@@ -8,7 +8,10 @@
         "finalize":"Fertig stellen",
         "currentStep":"Schritt {{currentStep}} / {{totalSteps}}",
         "save":"Speichern",
-        "quit":"Schließen"
+        "quit":"Schließen",
+        "add":"Hinzufügen",
+        "okay":"in Ordnung",
+        "search":"Suche" 
     },
     "homePage":{
         "welcomeMessage":"Willkommen bei Consileon",
@@ -52,10 +55,10 @@
     "ratingPage":{
         "finalizeConfirmationMessage":"Soll die Bewerbung abgeschlossen werden? Eine Bearbeitung zu einem späteren Zeitpunkt ist nicht mehr möglich.",
         "applicationFinalizedNotification":"Die Informationen zur Bewerbung sind abgeschlossen.",
-        "rhetoricScore":"Rhetorik:{{score}}",
-        "motivationScore":"Motivation:{{score}}",
-        "selfAssurance":"Selbstsicherheit:{{score}}",
-        "personalImpression":"Persönlicher Eindruck:{{score}}",
+        "rhetoricScore":"Rhetorik",
+        "motivationScore":"Motivation",
+        "selfAssurance":"Selbstsicherheit",
+        "personalImpression":"Persönlicher Eindruck",
         "finalizeApplicantMessage":"Alle Informationen über den Antragsteller werden aufgenommen. Sie müssen dieses Formular abschließen, um die Daten an den HR-Monitor zu senden. Es ist nicht möglich, die Informationen später zu bearbeiten.",
         "fillRequiredFieldsToFinalizeMessage":"Sie können dieses Formular abschließen, sobald Sie alle erforderlichen Felder ausgefüllt haben. Wenn Sie das rechte Menü öffnen, können Sie sehen, wo Sie das Formular noch ausfüllen müssen.",
         "addImpressionMessage":"Bitte schreiben Sie ein paar Zeilen über Ihren persönlichen Eindruck zum Bewerber. Wenn Sie noch etwas hinzufügen oder ergänzen möchten, können Sie dies an dieser Stelle erledigen."
@@ -144,9 +147,9 @@
         "addToList":"Zur Liste hinzufügen",
         "rating": "Bewertung: ",
         "ratingMessage": "Bitte bewerte deine Fertigkeiten von 1 (nicht gut) bis 5 (exzellent).",
-        "searchItemErrorMessage": " kann nicht hinzugefügt werden, weil es entweder bereits in der Liste vorhanden oder kein gültiger Name ist.",
-        "searchAllertHeader": "Zur liste hinzufügen",
-        "searchAllertMessage": "Willst du wirklich {{searchItem}} zur Liste hinzufügen?",
+        "searchItemErrorMessage": "'{{searchedTerm}}' kann nicht hinzugefügt werden, weil es entweder bereits in der Liste vorhanden oder kein gültiger Name ist.",
+        "searchAlertMessage": "Willst du wirklich '{{searchedTerm}}' zur Liste hinzufügen?",
+        "addedToListMessage":"'{{searchedTerm}}' wurde der Liste hinzugefügt.",
         "LANGUAGE_ITEMS": [
             "Arabisch",
             "Chinesisch",
@@ -168,6 +171,10 @@
             "Schwedisch",
             "Türkisch"
   ]
+    },
+    "additionalInfo":{
+        "title":"zusätzliche Information",
+        "stepDescription":"Hier können Sie zusätzliche Informationen hinzufügen, die Sie in die Anwendung aufnehmen möchten."
     },
     "sideMenu":{
         "progress":"Fortschritt",

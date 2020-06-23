@@ -2,13 +2,8 @@
 
 <ion-list lines="none">
   <ion-list-header>
-    {{
-      'ratingPage.rhetoricScore'
-        | translate
-          : {
-              score: ratingForm.controls.applicantScore.controls.rhetoric.value
-            }
-    }}
+    {{ 'ratingPage.rhetoricScore' | translate }}
+    : {{ ratingForm.controls.applicantScore.controls.rhetoric.value }}
   </ion-list-header>
   <ion-item class="rating">
     <ion-range
@@ -22,14 +17,8 @@
   </ion-item>
 
   <ion-list-header>
-    {{
-      'ratingPage.motivationScore'
-        | translate
-          : {
-              score:
-                ratingForm.controls.applicantScore.controls.motivation.value
-            }
-    }}
+    {{ 'ratingPage.motivationScore' | translate }}
+    : {{ ratingForm.controls.applicantScore.controls.motivation.value }}
   </ion-list-header>
   <ion-item class="rating">
     <ion-range
@@ -43,14 +32,8 @@
   </ion-item>
 
   <ion-list-header>
-    {{
-      'ratingPage.selfAssurance'
-        | translate
-          : {
-              score:
-                ratingForm.controls.applicantScore.controls.selfAssurance.value
-            }
-    }}
+    {{ 'ratingPage.selfAssurance' | translate }}
+    : {{ ratingForm.controls.applicantScore.controls.selfAssurance.value }}
   </ion-list-header>
   <ion-item class="rating">
     <ion-range
@@ -64,15 +47,8 @@
   </ion-item>
 
   <ion-list-header>
-    {{
-      'ratingPage.personalImpression'
-        | translate
-          : {
-              score:
-                ratingForm.controls.applicantScore.controls.personalImpression
-                  .value
-            }
-    }}
+    {{ 'ratingPage.personalImpression' | translate }}
+    : {{ ratingForm.controls.applicantScore.controls.personalImpression.value }}
   </ion-list-header>
   <ion-item class="rating">
     <ion-range

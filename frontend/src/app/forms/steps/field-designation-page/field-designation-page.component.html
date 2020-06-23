@@ -13,6 +13,8 @@
     multiple
     [formControl]="formsData.controls.fieldDesignationInfo.controls.field"
     [interfaceOptions]="{ cssClass: 'custom-alert' }"
+    okText="{{ 'commonLables.okay' | translate }}"
+    cancelText="{{ 'commonLables.cancel' | translate }}"
   >
     <ion-select-option
       *ngFor="let field of industryArray"
@@ -31,6 +33,8 @@
     multiple
     [formControl]="formsData.controls.fieldDesignationInfo.controls.designation"
     [interfaceOptions]="{ cssClass: 'custom-alert' }"
+    okText="{{ 'commonLables.okay' | translate }}"
+    cancelText="{{ 'commonLables.cancel' | translate }}"
   >
     <ion-select-option
       *ngFor="let designation of positionsArray"

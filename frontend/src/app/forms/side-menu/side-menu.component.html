@@ -87,7 +87,7 @@
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
             step: APPLICATION_STEP.AdditionalInformation,
-            displayName: 'Additional Information',
+            displayName: displayNames.additionalInfo,
             isValid: formsData.controls.additionalInfo.valid,
             isActive: currentStep === APPLICATION_STEP.AdditionalInformation
           }"
