@@ -113,6 +113,8 @@ public class OverviewController {
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setTitle("Logout");
 			alert.setHeaderText("Do you want to logout? ");
+			((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+			((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
 			alert.showAndWait();
 			if (alert.getResult().getText().equals("OK")) {
 				new AcController();
