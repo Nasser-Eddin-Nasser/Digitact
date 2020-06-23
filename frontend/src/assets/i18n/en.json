@@ -149,28 +149,7 @@
         "ratingMessage": "Please rate your skills from 1 (not good) to 5 (excellent).",   
         "searchItemErrorMessage": "'{{searchedTerm}}' cannot be added because it is already part of the list or it is not a valid name.",
         "searchAlertMessage": "Do you really want to add '{{searchedTerm}}' to the list?",
-        "addedToListMessage":"'{{searchedTerm}}' has been added to the list.",
-        "LANGUAGE_ITEMS": [
-            "Arabic",
-            "Chinese",
-            "Czech",
-            "English",
-            "Finnish",
-            "French",
-            "German",
-            "Greek",
-            "Hungarian",
-            "Italian",
-            "Japanese",
-            "Korean",
-            "Norwegian",
-            "Polish",
-            "Portuguese",
-            "Russian",
-            "Spanish",
-            "Swedish",
-            "Turkish"
-  ]
+        "addedToListMessage":"'{{searchedTerm}}' has been added to the list."
     },
 
     "additionalInfo":{
