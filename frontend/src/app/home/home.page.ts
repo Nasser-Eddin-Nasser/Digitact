@@ -46,6 +46,11 @@ export class HomePage implements OnInit {
     this.navController.navigateRoot(['/applicants']);
   }
 
+  /**
+   * This method is used to initiate popover language chooser component.
+   * @param ev : Hold the mouse event objcet
+   */
+
   async openLanguagePicker(ev: MouseEvent): Promise<void> {
     const popover = await this.popoverController.create({
       component: LanguagePickerComponent,

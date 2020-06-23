@@ -10,7 +10,7 @@
         "save":"Speichern",
         "quit":"Schließen",
         "add":"Hinzufügen",
-        "okay":"in Ordnung",
+        "okay":"In Ordnung",
         "search":"Suche" 
     },
     "homePage":{
@@ -152,8 +152,8 @@
         "addedToListMessage":"'{{searchedTerm}}' wurde der Liste hinzugefügt."
     },
     "additionalInfo":{
-        "title":"zusätzliche Information",
-        "stepDescription":"Hier können Sie zusätzliche Informationen hinzufügen, die Sie in die Anwendung aufnehmen möchten."
+        "title":"Zusätzliche Information",
+        "stepDescription":"Hier kannst du zusätzliche Informationen angeben"
     },
     "sideMenu":{
         "progress":"Fortschritt",
