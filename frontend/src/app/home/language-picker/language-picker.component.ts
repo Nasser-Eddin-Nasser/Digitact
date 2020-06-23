@@ -20,7 +20,7 @@ export class LanguagePickerComponent {
    */
   supportedLanguages = [
     { localeCode: 'en', displayName: 'English', isChosen: false },
-    { localeCode: 'de', displayName: 'Duetsch', isChosen: false },
+    { localeCode: 'de', displayName: 'Deutsch', isChosen: false },
   ];
 
   /**
