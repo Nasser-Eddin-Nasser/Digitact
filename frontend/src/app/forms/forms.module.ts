@@ -8,6 +8,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
+import { SharedModule } from '../shared.module';
+
 import { FormsPageRoutingModule } from './forms-routing.module';
 import { FormsPage } from './forms.page';
 import { SideMenuComponent } from './side-menu/side-menu.component';
@@ -31,6 +33,7 @@ import { SubmitPageComponent } from './steps/submit-page/submit-page.component';
     ReactiveFormsModule,
     DocumentsModule,
     KeyCompetenciesModule,
+    SharedModule,
   ],
   declarations: [
     FormsPage,

@@ -8,6 +8,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 import { FormControl, FormGroup } from '../common/forms/forms';
@@ -35,7 +36,8 @@ export class RatingPage implements OnDestroy, OnInit {
     private router: Router,
     private alertController: AlertController,
     private toastController: ToastController,
-    private storage: StorageHandlerService
+    private storage: StorageHandlerService,
+    private translate: TranslateService
   ) {}
 
   /**
@@ -270,18 +272,17 @@ export class RatingPage implements OnDestroy, OnInit {
    */
   async finalize(): Promise<void> {
     const alert = await this.alertController.create({
-      header: 'Finalize',
-      message:
-        'Do you really want to finalize this form? It wont be possible to edit later.',
+      header: this.translate.instant('commonLables.finalize'),
+      message: this.translate.instant('ratingPage.finalizeConfirmationMessage'),
       cssClass: 'custom-alert-button-colors',
       buttons: [
         {
-          text: 'Cancel',
+          text: this.translate.instant('commonLables.cancel'),
           cssClass: 'color-primary',
         },
 
         {
-          text: 'Finalize',
+          text: this.translate.instant('commonLables.finalize'),
           cssClass: 'color-secondary',
           handler: () => this.finalizeApplicant(),
         },
@@ -315,7 +316,9 @@ export class RatingPage implements OnDestroy, OnInit {
    */
   async completionAlert(): Promise<void> {
     const toast = await this.toastController.create({
-      message: 'Applicant information is finalized',
+      message: this.translate.instant(
+        'ratingPage.applicationFinalizedNotification'
+      ),
       color: 'success',
       position: 'bottom',
       duration: 2000,

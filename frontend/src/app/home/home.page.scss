@@ -62,3 +62,12 @@ h3 {
   border-radius: 50%;
   font-size: 15px;
 }
+
+.toolbar-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar-buttons > * {
+  margin: 10px;
+}

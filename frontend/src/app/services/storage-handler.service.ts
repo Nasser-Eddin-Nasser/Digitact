@@ -32,6 +32,11 @@ export class StorageHandlerService {
       storeName: 'common-properties',
       driverOrder: ['indexeddb', 'localstorage'],
     });
+    this.commonPropertiesDb.get('chosenLocale').then((locale) => {
+      if (!locale) {
+        this.commonPropertiesDb.set('chosenLocale', 'de');
+      }
+    });
   }
 
   /**
@@ -55,7 +60,7 @@ export class StorageHandlerService {
   async addItem<T>(
     dbObject: Storage,
     key: string,
-    value: DeepPartial<FormsData> | DeepPartial<RatingForm>
+    value: DeepPartial<FormsData> | DeepPartial<RatingForm> | string
   ): Promise<T> {
     await dbObject.ready();
     const item = await dbObject.set(key, value);
@@ -123,7 +128,7 @@ export class StorageHandlerService {
   updateItem<T>(
     dbObject: Storage,
     key: string,
-    value: DeepPartial<FormsData | RatingForm>
+    value: DeepPartial<FormsData | RatingForm> | string
   ): Promise<T> {
     dbObject.ready();
     const item = dbObject.get(key);

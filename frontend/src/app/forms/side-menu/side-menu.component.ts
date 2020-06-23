@@ -5,18 +5,22 @@
 
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 import { FormGroup } from '../../common/forms/forms';
 import { FormsData } from '../../model/forms-data.model';
 import { ApplicationStep, ApplicationStepsArr } from '../model/steps.model';
-
 @Component({
   selector: 'app-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss'],
 })
 export class SideMenuComponent {
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private translate: TranslateService
+  ) {}
 
   /**
    * Make the Steps available in the template.
@@ -45,6 +49,20 @@ export class SideMenuComponent {
    */
   @Input()
   currentStep: ApplicationStep;
+
+  displayNames = {
+    basicInfo: this.translate.instant('basicInfo.title'),
+    contactInfo: this.translate.instant('contactInfo.title'),
+    profilePicture: this.translate.instant('profilePicture.title'),
+    documentsUpload: this.translate.instant('documentsUpload.title'),
+    educationInfo: this.translate.instant('educationInfo.title'),
+    industryAndPositionPreference: this.translate.instant(
+      'industryAndPositionPreference.title'
+    ),
+    keyCompetencies: this.translate.instant('keyCompetencies.title'),
+    additionalInfo: this.translate.instant('additionalInfo.title'),
+    submit: this.translate.instant('submitData.title'),
+  };
 
   /**
    * Update the "step" query paremeter.

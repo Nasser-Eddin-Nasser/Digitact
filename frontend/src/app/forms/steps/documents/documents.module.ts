@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
+import { SharedModule } from '../../../shared.module';
 import { FormsCommonModule } from '../../common/forms-common.module';
 
 import { DocumentsComponent } from './documents.component';
@@ -14,6 +15,7 @@ import { DocumentsComponent } from './documents.component';
     IonicModule,
     ReactiveFormsModule,
     FormsCommonModule,
+    SharedModule,
   ],
   declarations: [DocumentsComponent],
   exports: [DocumentsComponent],
