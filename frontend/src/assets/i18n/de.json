@@ -149,28 +149,7 @@
         "ratingMessage": "Bitte bewerte deine Fertigkeiten von 1 (nicht gut) bis 5 (exzellent).",
         "searchItemErrorMessage": "'{{searchedTerm}}' kann nicht hinzugefügt werden, weil es entweder bereits in der Liste vorhanden oder kein gültiger Name ist.",
         "searchAlertMessage": "Willst du wirklich '{{searchedTerm}}' zur Liste hinzufügen?",
-        "addedToListMessage":"'{{searchedTerm}}' wurde der Liste hinzugefügt.",
-        "LANGUAGE_ITEMS": [
-            "Arabisch",
-            "Chinesisch",
-            "Tschechisch",
-            "Englisch",
-            "Finnisch",
-            "Französich",
-            "Deutsch",
-            "Griechisch",
-            "Ungarisch",
-            "Italienisch",
-            "Japanisch",
-            "Koreanisch",
-            "Norwegisch",
-            "Polnisch",
-            "Portugisisch",
-            "Russisch",
-            "Spanisch",
-            "Schwedisch",
-            "Türkisch"
-  ]
+        "addedToListMessage":"'{{searchedTerm}}' wurde der Liste hinzugefügt."
     },
     "additionalInfo":{
         "title":"zusätzliche Information",
