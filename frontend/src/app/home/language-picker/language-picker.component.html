@@ -1,4 +1,7 @@
 <ion-content>
+  <ion-list-header class="ion-no-margin">
+    <h2>{{ 'homePage.language' | translate }}</h2>
+  </ion-list-header>
   <ion-list *ngFor="let language of supportedLanguages">
     <ion-item (click)="switchLanguage(language.localeCode)">
       {{ language.displayName }}
