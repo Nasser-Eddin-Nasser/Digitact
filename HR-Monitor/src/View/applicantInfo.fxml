@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="600.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="600.0" prefWidth="830.0" stylesheets="@../Style/stylesheet.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <VBox prefHeight="5" />
    </top>
@@ -38,74 +38,74 @@
                         <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="102.0" text="First Name" textAlignment="CENTER">
+                        <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="102.0" text="First Name" textAlignment="CENTER" textFill="WHITE">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
-                        <Label prefHeight="33.0" prefWidth="103.0" text="Last Name" textAlignment="CENTER" GridPane.rowIndex="1">
+                        <Label prefHeight="33.0" prefWidth="103.0" text="Last Name" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="1">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
-                        <Label contentDisplay="CENTER" prefHeight="33.0" prefWidth="103.0" text="E-mail" textAlignment="CENTER" GridPane.rowIndex="2">
+                        <Label contentDisplay="CENTER" prefHeight="33.0" prefWidth="103.0" text="E-mail" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="2">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
-                        <Label prefHeight="33.0" prefWidth="103.0" text="Phone Number" wrapText="true" GridPane.rowIndex="3">
+                        <Label prefHeight="33.0" prefWidth="103.0" text="Phone Number" textFill="WHITE" wrapText="true" GridPane.rowIndex="3">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
-                        <Label prefHeight="32.0" prefWidth="103.0" text="LinkedIn" GridPane.rowIndex="4">
+                        <Label prefHeight="32.0" prefWidth="103.0" text="LinkedIn" textFill="WHITE" GridPane.rowIndex="4">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
-                        <Label prefHeight="34.0" prefWidth="103.0" text="Xing" GridPane.rowIndex="5">
+                        <Label prefHeight="34.0" prefWidth="103.0" text="Xing" textFill="WHITE" GridPane.rowIndex="5">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
-                        <Label fx:id="lblFNameFX" GridPane.columnIndex="1">
+                        <Label fx:id="lblFNameFX" textFill="WHITE" GridPane.columnIndex="1">
                            <GridPane.margin>
                               <Insets left="10.0" />
                            </GridPane.margin></Label>
-                        <Label fx:id="lblLNameFX" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label fx:id="lblLNameFX" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="10.0" />
                            </GridPane.margin></Label>
-                        <Label fx:id="lblEmailFX" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="lblEmailFX" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <padding>
                               <Insets left="10.0" />
                            </padding></Label>
-                        <Label fx:id="lblPNumberFX" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Label fx:id="lblPNumberFX" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <padding>
                               <Insets left="10.0" />
                            </padding></Label>
-                        <Label GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <Label textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <padding>
                               <Insets left="10.0" />
                            </padding></Label>
-                        <Label GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <Label textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="5">
                            <padding>
                               <Insets left="10.0" />
                            </padding></Label>
-                           <Hyperlink fx:id="hplLinkedInFX" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                           <Hyperlink fx:id="hplXingFX" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                           <Hyperlink fx:id="hplLinkedInFX" text="" textFill="WHITE" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                           <Hyperlink fx:id="hplXingFX" text="" textFill="WHITE" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
                      </children>
                   </GridPane>
@@ -113,7 +113,7 @@
                <TitledPane animated="false" collapsible="false" maxHeight="1000.0" prefHeight="592.0" prefWidth="200.0" text="Additional Info">
                      <content>
                         <GridPane prefHeight="283.0" prefWidth="198.0">
-                           <Label fx:id="lblAddInfo" alignment="TOP_LEFT" />
+                           <Label fx:id="lblAddInfo" alignment="TOP_LEFT" textFill="WHITE" />
                            <columnConstraints>
                               <ColumnConstraints />
                            </columnConstraints>

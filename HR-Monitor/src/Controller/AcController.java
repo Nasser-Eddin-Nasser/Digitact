@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class AcController {
@@ -29,6 +30,9 @@ public class AcController {
     @FXML private TextField myUserNameTextField;
     private AcModel model;
 
+    public static String ADMIN_USERNAME = "";
+
+
     /**
      * This method starts the {@link /View/login.fxml }
      *
@@ -39,6 +43,7 @@ public class AcController {
         model = new AcModel();
         stage = new Stage();
         setscene();
+
     }
 
     public AcController(Stage stage, AcModel model) throws IOException {
@@ -65,6 +70,7 @@ public class AcController {
         try {
             if (model.checkAuthentication(
                     myUserNameTextField.getText(), myPasswordField.getText())) {
+                ADMIN_USERNAME = myUserNameTextField.getText();
                 new StandardController(stage);
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
