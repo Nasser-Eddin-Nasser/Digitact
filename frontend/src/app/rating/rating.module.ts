@@ -8,6 +8,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
+import { SharedModule } from '../shared.module';
+
 import { HrSideMenuComponent } from './hr-side-menu/hr-side-menu.component';
 import { RatingPageRoutingModule } from './rating-routing.module';
 import { RatingPage } from './rating.page';
@@ -22,6 +24,7 @@ import { ImpressionPageComponent } from './steps/impression-page/impression-page
     ReactiveFormsModule,
     IonicModule,
     RatingPageRoutingModule,
+    SharedModule,
   ],
   declarations: [
     RatingPage,

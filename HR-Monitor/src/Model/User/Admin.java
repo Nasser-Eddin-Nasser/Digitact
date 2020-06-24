@@ -10,7 +10,7 @@ public class Admin {
     private String email;
     private String passHint;
 
-    private String password; // todo
+    private String password;
 
     @JsonProperty("userRight")
     private UserRight userRight;

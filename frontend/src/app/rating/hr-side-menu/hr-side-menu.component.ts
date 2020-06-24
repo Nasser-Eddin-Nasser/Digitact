@@ -5,6 +5,7 @@
 
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 import { FormGroup } from '../../common/forms/forms';
 import { RatingForm } from '../model/rating-form.model';
@@ -16,7 +17,11 @@ import { hrRatingStep, hrRatingStepArr } from '../model/steps.model';
   styleUrls: ['./hr-side-menu.component.scss'],
 })
 export class HrSideMenuComponent {
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private translate: TranslateService
+  ) {}
 
   /**
    * Make the Steps available in the template.
@@ -46,6 +51,11 @@ export class HrSideMenuComponent {
   @Input()
   currentStep: hrRatingStep;
 
+  displayMessages = {
+    applicantRating: this.translate.instant('hrSideMenu.applicantRating'),
+    impression: this.translate.instant('hrSideMenu.impression'),
+    finalize: this.translate.instant('commonLables.finalize'),
+  };
   /**
    * Update the "step" query paremeter.
    * You can use this to navigate between the different form steps!

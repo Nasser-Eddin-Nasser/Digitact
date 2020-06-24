@@ -15,7 +15,7 @@
    <SplitPane dividerPositions="0.2644110275689223" prefHeight="520.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
       <items>
       <!--  -->
-         <SplitPane dividerPositions="0.41598360655737704, 0.5" maxWidth="300.0" orientation="VERTICAL" prefHeight="511.0" prefWidth="400.0">
+         <SplitPane dividerPositions="0.41598360655737704, 0.5" maxWidth="400.0" orientation="VERTICAL" prefHeight="511.0" prefWidth="400.0">
             <items>
                <ImageView fx:id="imgFX" fitHeight="238.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -129,7 +129,7 @@
          </SplitPane>
 
 
-         <SplitPane maxWidth="2000.0" orientation="VERTICAL" prefHeight="200.0">
+         <SplitPane orientation="VERTICAL" prefHeight="200.0">
            <items>
               <SplitPane orientation="VERTICAL" prefHeight="470.0" prefWidth="582.0">
                  <items>

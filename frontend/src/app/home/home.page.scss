@@ -15,7 +15,7 @@
   display: flex;
 }
 .logo-and-message {
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 .button-container {
   justify-content: center;
@@ -61,4 +61,13 @@ h3 {
   right: -5px;
   border-radius: 50%;
   font-size: 15px;
+}
+
+.toolbar-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar-buttons > * {
+  margin: 10px;
 }

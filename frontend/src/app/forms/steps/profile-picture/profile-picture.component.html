@@ -1,5 +1,5 @@
 <div class="main-description">
-  <h1>Picture</h1>
+  <h1>{{ 'profilePicture.title' | translate }}</h1>
 </div>
 <div
   *ngIf="
@@ -8,7 +8,7 @@
   "
 >
   <span class="description">
-    Add a picture of yourself by tapping on the image icon.
+    {{ 'profilePicture.stepDescription' | translate }}
   </span>
   <button (click)="takePicture()" class="custom-button">
     <ion-icon name="person"></ion-icon>
@@ -16,8 +16,7 @@
 </div>
 <ng-template #elseBlock>
   <span class="description">
-    Good job! If you want to take another picture, just delete the actual
-    picture by sliding on it and take another one.
+    {{ 'profilePicture.deleteTakeAnotherPictureMessage' | translate }}
   </span>
   <ion-item class="ion-no-padding" lines="none">
     <img

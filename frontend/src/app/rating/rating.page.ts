@@ -8,6 +8,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 import { FormControl, FormGroup } from '../common/forms/forms';
@@ -35,7 +36,8 @@ export class RatingPage implements OnDestroy, OnInit {
     private router: Router,
     private alertController: AlertController,
     private toastController: ToastController,
-    private storage: StorageHandlerService
+    private storage: StorageHandlerService,
+    private translate: TranslateService
   ) {}
 
   /**
@@ -106,7 +108,13 @@ export class RatingPage implements OnDestroy, OnInit {
       )
       .then((applicantData) => {
         if (applicantData) {
-          this.ratingForm.patchValue(applicantData);
+          /*
+            Usually, you can just use patchValue in order to set the value of the form.
+            However, the ion-range element has issues with null values (they become NaN).
+            Because of this, we need to "repair" the values first.
+          */
+          const filtered = this.removeNullValuesRec(applicantData);
+          this.ratingForm.patchValue(filtered);
         }
       });
     const routerSubscription = this.activatedRoute.queryParams.subscribe(
@@ -149,6 +157,47 @@ export class RatingPage implements OnDestroy, OnInit {
     for (const subscription of this.subscriptions) {
       subscription.unsubscribe();
     }
+  }
+
+  /**
+   * This helper function removes null/undefined entries from a given object or array.
+   * This happens recursively.
+   */
+  // tslint:disable-next-line: no-any
+  private removeNullValuesRec(input: any): any {
+    // This is equal to `input === undefined || input === null`.
+    if (input == undefined) {
+      return undefined;
+    }
+
+    if (Array.isArray(input)) {
+      const newArray = [];
+      for (const item of input) {
+        const filtered = this.removeNullValuesRec(item);
+        if (filtered == undefined) {
+          continue;
+        }
+        newArray.push(filtered);
+      }
+
+      return newArray;
+    }
+
+    if (typeof input === 'object') {
+      // tslint:disable-next-line: no-any
+      const newObject: any = {};
+      for (const [key, value] of Object.entries(input)) {
+        const filtered = this.removeNullValuesRec(value);
+        if (filtered == undefined) {
+          continue;
+        }
+        newObject[key] = filtered;
+      }
+
+      return newObject;
+    }
+
+    return input;
   }
 
   /**
@@ -223,18 +272,17 @@ export class RatingPage implements OnDestroy, OnInit {
    */
   async finalize(): Promise<void> {
     const alert = await this.alertController.create({
-      header: 'Finalize',
-      message:
-        'Do you really want to finalize this form? It wont be possible to edit later.',
+      header: this.translate.instant('commonLables.finalize'),
+      message: this.translate.instant('ratingPage.finalizeConfirmationMessage'),
       cssClass: 'custom-alert-button-colors',
       buttons: [
         {
-          text: 'Cancel',
+          text: this.translate.instant('commonLables.cancel'),
           cssClass: 'color-primary',
         },
 
         {
-          text: 'Finalize',
+          text: this.translate.instant('commonLables.finalize'),
           cssClass: 'color-secondary',
           handler: () => this.finalizeApplicant(),
         },
@@ -268,7 +316,9 @@ export class RatingPage implements OnDestroy, OnInit {
    */
   async completionAlert(): Promise<void> {
     const toast = await this.toastController.create({
-      message: 'Applicant information is finalized',
+      message: this.translate.instant(
+        'ratingPage.applicationFinalizedNotification'
+      ),
       color: 'success',
       position: 'bottom',
       duration: 2000,

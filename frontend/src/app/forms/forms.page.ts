@@ -14,6 +14,7 @@ import {
   ViewDidEnter,
   ViewWillLeave,
 } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 
 import { FormArray, FormControl, FormGroup } from '../common/forms/forms';
@@ -51,7 +52,8 @@ export class FormsPage
     private navigationController: NavController,
     private platform: Platform,
     private router: Router,
-    private storage: StorageHandlerService
+    private storage: StorageHandlerService,
+    private translate: TranslateService
   ) {}
   /**
    * Make the Steps available in the template.
@@ -332,19 +334,19 @@ export class FormsPage
   private async showClosingAlert(): Promise<boolean> {
     const result = new Promise<boolean>(async (resolve) => {
       const alert = await this.alertController.create({
-        header: 'Close',
-        message: 'Do you really want to cancel your job application?',
+        header: this.translate.instant('commonLables.close'),
+        message: this.translate.instant('formsPage.pageExitWarningMessage'),
         cssClass: 'custom-alert-button-colors',
         buttons: [
           {
-            text: 'No',
+            text: this.translate.instant('commonLables.no'),
             role: 'cancel',
             handler: () => {
               resolve(false);
             },
           },
           {
-            text: 'Yes',
+            text: this.translate.instant('commonLables.yes'),
             cssClass: 'color-secondary',
             handler: () => {
               resolve(true);

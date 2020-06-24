@@ -6,11 +6,18 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
+import { SharedModule } from '../shared.module';
+
 import { ApplicantsPageRoutingModule } from './applicants-routing.module';
 import { ApplicantsPage } from './applicants.page';
 
 @NgModule({
-  imports: [CommonModule, IonicModule, ApplicantsPageRoutingModule],
+  imports: [
+    CommonModule,
+    IonicModule,
+    ApplicantsPageRoutingModule,
+    SharedModule,
+  ],
   declarations: [ApplicantsPage],
 })
 export class ApplicantsPageModule {}

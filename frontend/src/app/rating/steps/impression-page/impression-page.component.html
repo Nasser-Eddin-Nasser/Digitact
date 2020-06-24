@@ -1,11 +1,12 @@
 <div class="main-description">
-  <h1>Impression</h1>
+  <h1>{{ 'hrSideMenu.impression' | translate }}</h1>
 
-  Please write a few lines about your personal impression on the applicant.
-  Also, if you want to add/mention anything else you can do it here.
+  {{ 'ratingPage.addImpressionMessage' | translate }}
 </div>
 <ion-item class="ion-no-padding">
-  <ion-label position="floating">Impression</ion-label>
+  <ion-label position="floating">
+    {{ 'hrSideMenu.impression' | translate }}</ion-label
+  >
   <ion-textarea
     auto-grow="true"
     [formControl]="ratingForm.controls.impressionInfo.controls.impression"
