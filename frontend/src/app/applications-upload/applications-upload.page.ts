@@ -48,7 +48,7 @@ export class ApplicationsUploadPage implements OnInit {
   /**
    * URL of the server host.
    */
-  url = 'asdasdasd';
+  url = 'http://localhost:9090';
 
   /**
    * In this method locally stored data are fetched and post request function is called for one application at time.

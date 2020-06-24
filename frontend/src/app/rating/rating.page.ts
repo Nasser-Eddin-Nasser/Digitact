@@ -22,7 +22,7 @@ import {
   ImpressionInfo,
   RatingForm,
 } from './model/rating-form.model';
-import { hrRatingStep, hrRatingStepArr } from './model/steps.model';
+import { HRRatingStep, HRRatingStepsArr } from './model/steps.model';
 
 @Component({
   selector: 'app-rating',
@@ -46,7 +46,7 @@ export class RatingPage implements OnDestroy, OnInit {
    * This property is really only used to make the Steps available in the template.
    * In the TS file, you can directly refer to the underlying element.
    */
-  readonly HR_RATING_STEP = hrRatingStep;
+  readonly HR_RATING_STEP = HRRatingStep;
 
   /**
    * Make the Steps Array available in the template.
@@ -54,7 +54,7 @@ export class RatingPage implements OnDestroy, OnInit {
    * This property is really only used to make the Steps available in the template.
    * In the TS file, you can directly refer to the underlying element.
    */
-  readonly HR_RATING_STEP_ARR = hrRatingStepArr;
+  readonly HR_RATING_STEP_ARR = HRRatingStepsArr;
 
   /**
    * This property holds the type safe form group fields for applicant-score view.
@@ -77,7 +77,7 @@ export class RatingPage implements OnDestroy, OnInit {
    *
    * **Important! Do not modify this value directly! Use `setCurrentStep()` instead!**
    */
-  currentStep: hrRatingStep;
+  currentStep: HRRatingStep;
   /**
    * Which step is currently displayed?
    * This is the index in our array of steps.
@@ -212,8 +212,8 @@ export class RatingPage implements OnDestroy, OnInit {
    */
   private handleStep(step: unknown): void {
     // tslint:disable-next-line: no-any
-    if (hrRatingStepArr.includes(step as any)) {
-      this.setCurrentStep(step as hrRatingStep);
+    if (HRRatingStepsArr.includes(step as any)) {
+      this.setCurrentStep(step as HRRatingStep);
       return;
     }
 
@@ -222,7 +222,7 @@ export class RatingPage implements OnDestroy, OnInit {
     }
 
     // A fallback: If a step was requested that we don't know, we simply show the Applicant rating page.
-    this.navigateToStep(hrRatingStep.ApplicantRating);
+    this.navigateToStep(HRRatingStep.ApplicantRating);
   }
 
   /**
@@ -230,16 +230,16 @@ export class RatingPage implements OnDestroy, OnInit {
    *
    * Usually, if you want to change the Step, you should use the Router.
    */
-  private setCurrentStep(step: hrRatingStep): void {
+  private setCurrentStep(step: HRRatingStep): void {
     this.currentStep = step;
-    this.currentStepIndex = hrRatingStepArr.indexOf(step);
+    this.currentStepIndex = HRRatingStepsArr.indexOf(step);
   }
 
   /**
    * Update the "step" query parameter.
    * You can use this to navigate between the different form steps!
    */
-  navigateToStep(step: hrRatingStep): void {
+  navigateToStep(step: HRRatingStep): void {
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
       queryParams: {
@@ -252,8 +252,8 @@ export class RatingPage implements OnDestroy, OnInit {
    * In this method navigation to next step is handled.
    */
   navigateToNextStep(): void {
-    if (this.currentStepIndex < hrRatingStepArr.length - 1) {
-      const step = hrRatingStepArr[this.currentStepIndex + 1];
+    if (this.currentStepIndex < HRRatingStepsArr.length - 1) {
+      const step = HRRatingStepsArr[this.currentStepIndex + 1];
       this.navigateToStep(step);
 
       return;
@@ -331,7 +331,7 @@ export class RatingPage implements OnDestroy, OnInit {
    */
   updateProgessStatus(): void {
     // finalize page is skipped
-    const totalNumberOfSteps = hrRatingStepArr.length - 1;
+    const totalNumberOfSteps = HRRatingStepsArr.length - 1;
     let validSteps = 0;
     for (const control of Object.values(this.ratingForm.controls)) {
       if (control.valid) {
