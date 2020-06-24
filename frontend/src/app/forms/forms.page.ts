@@ -153,10 +153,6 @@ export class FormsPage
    * In this method route change is observed and handling is done.
    */
   ngOnInit(): void {
-    this.formsData.controls.id.disable();
-    this.formsData.controls.isRated.disable();
-    this.formsData.controls.submittedTime.disable();
-
     const routerSubscription = this.activatedRoute.queryParams.subscribe(
       (params) => {
         /*
