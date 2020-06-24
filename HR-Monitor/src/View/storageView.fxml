@@ -29,7 +29,7 @@
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search Applicant:" />
                 <TextField fx:id="searchField" promptText="Last Name" translateX="15.0" />
                 <Pane HBox.hgrow="ALWAYS" />
-            	<Button id="logoutButton" fx:id="logout"  onAction="#onLogout" text="Logout" />        	 
+            	<Button id="logoutButton" fx:id="logout"  onMouseClicked="#onLogout" text="Logout" />        	 
             </items>
         </ToolBar>
     </top>

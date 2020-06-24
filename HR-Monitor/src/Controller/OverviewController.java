@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -25,10 +26,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
@@ -99,7 +102,7 @@ public class OverviewController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/storageView.fxml"));
 		loader.setController(this);
 		root = (Pane) loader.load();
-		getTable();
+		getTable();		
 	}
 
 	@FXML
@@ -108,7 +111,7 @@ public class OverviewController {
 	}
 
 	@FXML
-	private void onLogout() {
+	private void onLogout(InputEvent inp) {
 		try {
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setTitle("Logout");
@@ -116,14 +119,18 @@ public class OverviewController {
 			((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
 			((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
 			alert.showAndWait();
-			if (alert.getResult().getText().equals("OK")) {
-				new AcController();
+			stage.close();
+			if (alert.getResult().getText().equals("OK")) {	
+				final Node source = (Node) inp.getSource();
+			    final Stage stage = (Stage) source.getScene().getWindow();
+			    stage.close();
+			    new AcController();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public void showApplicantInfo(long id) {
 		try {
 			Stage stageApplicantInfo = new Stage();
