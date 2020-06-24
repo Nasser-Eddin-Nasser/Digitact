@@ -17,6 +17,7 @@ export interface FormsData {
   fieldDesignationInfo: FieldDesignationInfo;
   keyCompetencies: KeyCompetencies;
   additionalInfo: AdditionalInfo;
+  workExperienceInfo: WorkExperience;
 }
 
 export interface BasicInfo {
@@ -70,4 +71,17 @@ export interface KeyCompetenciesEntry {
 
 export interface AdditionalInfo {
   additionalInfo: string;
+}
+
+export interface WorkExperience {
+  workExperienceForm: WorkExperienceEntry[];
+}
+
+export interface WorkExperienceEntry {
+  jobTitle: string;
+  company: string;
+  employmentType: string;
+  startDate: string;
+  endDate: string;
+  description: string;
 }
