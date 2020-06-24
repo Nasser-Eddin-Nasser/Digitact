@@ -11,7 +11,7 @@ import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
-import { FormControl, FormGroup } from '../common/forms/forms';
+import { FormControl, FormGroup, FormValue } from '../common/forms/forms';
 import { AlertController } from '../common/ion-wrappers/alert-controller';
 import { ToastController } from '../common/ion-wrappers/toast-controller';
 import { FormsData } from '../model/forms-data.model';
@@ -139,10 +139,10 @@ export class RatingPage implements OnDestroy, OnInit {
           Of course, there is still room for performance improvement (since we will call the following method really often).
           But for now, it should be fine.
         */
-        this.storage.updateItem(
+        this.storage.updateItem<FormValue<RatingForm>>(
           this.storage.applicantRatingsDb,
           this.ratingForm.controls.id.value,
-          this.ratingForm.getRawValue()
+          this.ratingForm.value
         );
         this.updateProgessStatus();
       }

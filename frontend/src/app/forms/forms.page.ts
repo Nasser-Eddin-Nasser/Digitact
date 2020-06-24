@@ -17,7 +17,12 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 
-import { FormArray, FormControl, FormGroup } from '../common/forms/forms';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  FormValue,
+} from '../common/forms/forms';
 import { AlertController } from '../common/ion-wrappers/alert-controller';
 import {
   AdditionalInfo,
@@ -283,10 +288,10 @@ export class FormsPage
     this.storage.getNextId().then((key) => {
       this.formsData.controls.id.setValue(key);
 
-      this.storage.addItem<FormsData>(
+      this.storage.addItem<FormValue<FormsData>>(
         this.storage.applicantDetailsDb,
         key,
-        this.formsData.getRawValue()
+        this.formsData.value
       );
 
       this.hasSubmittedForm = true;
