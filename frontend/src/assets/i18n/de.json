@@ -5,7 +5,7 @@
         "close": "Schließen",
         "continue": "Weiter",
         "cancel": "Abbrechen",
-        "finalize": "Fertig stellen",
+        "finalize": "Abschließen",
         "currentStep": "Schritt {{currentStep}} / {{totalSteps}}",
         "save": "Speichern",
         "quit": "Schließen",
@@ -32,12 +32,12 @@
     },
     "applicantsPage": {
         "applications": "Bewerbungen",
-        "finalized": "Vervollständigt",
-        "finalizedByHrMessage": "{{finalizedCount}} Bewerbungen wurden vom HR-Personal vervollständigt und können an den Server gesendet werden.",
+        "finalized": "Abgeschlossen",
+        "finalizedByHrMessage": "{{finalizedCount}} Bewerbung(en) wurden vom HR-Personal abgeschlossen und können an den Server gesendet werden.",
         "sendToServer": "An den Server senden",
         "notFinished": "Offene Bewerbungen",
-        "yetToRateMessage": "Diese Liste enthält alle Bewerbungen, die vom Bewerber vervollständigt wurden, aber noch nicht durch das HR-Personal bewertet wurden.",
-        "noApplicantsMessage": "Es wurde noch keine Bewerbung bestätigt oder vervollständigt."
+        "yetToRateMessage": "Diese Liste enthält alle Bewerbungen, die vom Bewerber abgesendet, aber noch nicht durch das HR-Personal bewertet wurden.",
+        "noApplicantsMessage": "Es gibt derzeit keine Bewerbungen, die noch bearbeitet oder zum Server geladen werden müssen."
     },
     "applicantsUploadPage": {
         "upload": "Hochladen",
@@ -49,7 +49,7 @@
         "nApplicantsFailedToUploadMessage": "{{failedCount}} Bewerbung konnte aufgrund von folgendem Fehler nich gespeichert werden: {{errorMessage}}. Bitte versuche es zu einem späteren Zeitpunkt noch einmal."
     },
     "hrSideMenu": {
-        "applicantRating": "Bewerbung bewerten",
+        "applicantRating": "Bewerber bewerten",
         "impression": "Eindruck",
         "progress": "Fortschritt"
     },
