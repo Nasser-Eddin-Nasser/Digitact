@@ -138,6 +138,7 @@
         "title":"Key Competencies",
         "stepDescription":"Now, please select and rate your key competencies. We expect you to add at least one entry to 'Languages' in order to complete this step.",
         "languages":"Languages",
+        "businessSkills":"Business Skills",
         "professionalSoftware":"Professional Software",
         "database":"Databases",
         "programmingLanguagesAndFrameworks":"Programming Languages and Frameworks",

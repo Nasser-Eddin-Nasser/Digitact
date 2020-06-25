@@ -45,6 +45,19 @@ export class KeyCompetenciesFormItemsService {
     'Turkish',
   ];
 
+  private readonly BUSINESS_SKILLS_ITEMS = [
+    'Project Management',
+    'SCRUM',
+    'Accounting & Finance',
+    'Controlling',
+    'Production',
+    'Human Resources',
+    'Marketing',
+    'Sales',
+    'Purchasing and Logistics',
+    'Process Design',
+  ];
+
   private readonly PROFESSIONAL_SOFTWARE_ITEMS = [
     'Adobe Photoshop',
     'Adobe InDesign',
@@ -98,6 +111,12 @@ export class KeyCompetenciesFormItemsService {
     const result = new FormGroup<KeyCompetenciesInternal>({
       languages: new FormArray<KeyCompetenciesEntry>(
         this.generateItems(this.LANGUAGE_ITEMS, basis.controls.languages)
+      ),
+      businessSkills: new FormArray<KeyCompetenciesEntry>(
+        this.generateItems(
+          this.BUSINESS_SKILLS_ITEMS,
+          basis.controls.businessSkills
+        )
       ),
       professionalSoftware: new FormArray<KeyCompetenciesEntry>(
         this.generateItems(

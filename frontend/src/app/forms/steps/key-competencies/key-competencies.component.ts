@@ -82,6 +82,11 @@ export class KeyCompetenciesComponent implements OnInit, OnDestroy {
         formItem: this.internalFormsData.controls.languages,
       },
       {
+        displayName: this.translate.instant('keyCompetencies.businessSkills'),
+        iconName: 'business-outline',
+        formItem: this.internalFormsData.controls.businessSkills,
+      },
+      {
         displayName: this.translate.instant(
           'keyCompetencies.professionalSoftware'
         ),

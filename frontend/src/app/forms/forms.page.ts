@@ -110,6 +110,7 @@ export class FormsPage
     }),
     keyCompetencies: new FormGroup<KeyCompetencies>({
       languages: new FormControl([], Validators.required),
+      businessSkills: new FormControl([]),
       professionalSoftware: new FormControl([]),
       databases: new FormControl([]),
       programmingLanguagesAndFrameworks: new FormControl([]),
