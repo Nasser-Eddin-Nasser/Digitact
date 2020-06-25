@@ -12,7 +12,7 @@
     ></ion-icon>
   </div>
   <ion-list>
-    <!-- Sliding item with education information -->
+    <!-- Sliding item with work information -->
     <ion-item-sliding
       *ngFor="
         let data of this.formsData.controls.workExperienceInfo.controls
@@ -20,18 +20,21 @@
         let i = index
       "
     >
-      <ion-item (click)="modifyWorkExperience()" class="ion-no-padding">
+      <ion-item (click)="modifyWorkExperience(data, i)" class="ion-no-padding">
         <ion-label>
           <h1>{{ data.controls.jobTitle.value }}</h1>
           <p>
-            <ion-icon name="easel-outline"></ion-icon>
-            {{ data.controls.company.value }}
+            <ion-icon name="business-outline"></ion-icon>
+            {{ data.controls.company.value }} .
+            {{ data.controls.employmentType.value }}
           </p>
           <p>
-            <ion-icon name="school-outline"></ion-icon>
-            {{ data.controls.employmentType.value }}'s degree ({{
-              data.controls.startDate.value
-            }}, {{ data.controls.endDate.value }})
+            <ion-icon name="calendar-outline"></ion-icon>
+            {{ data.controls.startDate.value }} -
+            <span *ngIf="data.controls.endDate.value === ''">Present</span>
+            <span *ngIf="data.controls.endDate.value !== ''">{{
+              data.controls.endDate.value
+            }}</span>
           </p>
         </ion-label>
       </ion-item>

@@ -1,3 +1,7 @@
+/**
+ *  @description
+ *  This component renders the work information form add and modify.
+ */
 import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
@@ -13,9 +17,9 @@ export class WorkExperienceEntryComponent {
   constructor(public modalController: ModalController) {}
 
   employmentTypeArray = [
-    { value: 'FullTime', displayName: 'Full-Time' },
-    { value: 'PartTime', displayName: 'Part-Time' },
-    { value: 'SelfEmployed', displayName: 'Self-employed' },
+    { value: 'Full-Time', displayName: 'Full-Time' },
+    { value: 'Part-Time', displayName: 'Part-Time' },
+    { value: 'Self-Employed', displayName: 'Self-employed' },
     { value: 'Freelance', displayName: 'Freelance' },
     { value: 'Contract', displayName: 'Contract' },
     { value: 'Internship', displayName: 'Internship' },

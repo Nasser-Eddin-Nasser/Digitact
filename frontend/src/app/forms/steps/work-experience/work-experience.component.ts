@@ -1,3 +1,7 @@
+/**
+ *  @description
+ *  This component renders the work information step view and its actions.
+ */
 import { Component, Input } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
@@ -21,7 +25,7 @@ export class WorkExperienceComponent {
   constructor(public modalController: ModalController) {}
 
   /**
-   * add education info entry
+   * add work info entry
    */
   async addWorkExperience(): Promise<void> {
     const addWorkExp = new FormGroup<WorkExperienceEntry>({
@@ -41,10 +45,14 @@ export class WorkExperienceComponent {
       presentingElement: await this.modalController.getTop(),
     });
     /**
-     * save and cancel of education info form
+     * save and cancel of work info form
      */
     modal.onDidDismiss().then((val) => {
       if (val.data && val.data.canSubmitData) {
+        const startDate = addWorkExp.controls.startDate.value.substr(0, 7);
+        const endDate = addWorkExp.controls.endDate.value.substr(0, 7);
+        addWorkExp.controls.startDate.setValue(startDate);
+        addWorkExp.controls.endDate.setValue(endDate);
         this.formsData.controls.workExperienceInfo.controls.workExperienceForm.push(
           addWorkExp
         );
@@ -53,10 +61,63 @@ export class WorkExperienceComponent {
     return await modal.present();
   }
 
-  modifyWorkExperience(): void {}
+  /**
+   * modify work info entry
+   */
+  async modifyWorkExperience(
+    workdata: FormGroup<WorkExperienceEntry>,
+    index: number
+  ): Promise<void> {
+    const modWorkExp = new FormGroup<WorkExperienceEntry>({
+      jobTitle: new FormControl(
+        workdata.controls.jobTitle.value,
+        Validators.required
+      ),
+      company: new FormControl(
+        workdata.controls.company.value,
+        Validators.required
+      ),
+      employmentType: new FormControl(
+        workdata.controls.employmentType.value,
+        Validators.required
+      ),
+      startDate: new FormControl(
+        workdata.controls.startDate.value,
+        Validators.required
+      ),
+      endDate: new FormControl(workdata.controls.endDate.value),
+      description: new FormControl(workdata.controls.description.value),
+    });
 
+    const modal = await this.modalController.create({
+      component: WorkExperienceEntryComponent,
+      componentProps: {
+        work: modWorkExp,
+      },
+      swipeToClose: true,
+      presentingElement: await this.modalController.getTop(),
+    });
+    /**
+     * save and cancel of work info form
+     */
+    modal.onDidDismiss().then((val) => {
+      if (val.data && val.data.canSubmitData) {
+        const startDate = modWorkExp.controls.startDate.value.substr(0, 7);
+        const endDate = modWorkExp.controls.endDate.value.substr(0, 7);
+        modWorkExp.controls.startDate.setValue(startDate);
+        modWorkExp.controls.endDate.setValue(endDate);
+        this.formsData.controls.workExperienceInfo.controls.workExperienceForm
+          .at(index)
+          .patchValue(modWorkExp.value);
+      }
+    });
+    return await modal.present();
+  }
+  /**
+   * delete work info entry
+   */
   deleteWorkExperience(index: number): void {
-    this.formsData.controls.educationInfo.controls.educationInfoForm.removeAt(
+    this.formsData.controls.workExperienceInfo.controls.workExperienceForm.removeAt(
       index
     );
   }
