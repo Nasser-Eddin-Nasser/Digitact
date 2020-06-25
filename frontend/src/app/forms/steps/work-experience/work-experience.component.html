@@ -1,7 +1,7 @@
 <div class="main-description">
-  <h1>Work Experience</h1>
+  <h1>{{ 'workExperience.title' | translate }}</h1>
 
-  Here, you can add your information regarding your work.
+  {{ 'workExperience.stepDescription' | translate }}
 
   <div class="add-container ion-padding">
     <ion-icon
@@ -11,6 +11,7 @@
       class="plus-icon"
     ></ion-icon>
   </div>
+
   <ion-list>
     <!-- Sliding item with work information -->
     <ion-item-sliding
@@ -20,21 +21,34 @@
         let i = index
       "
     >
-      <ion-item (click)="modifyWorkExperience(data, i)" class="ion-no-padding">
+      <ion-item
+        (click)="modifyWorkExperience(data, i)"
+        class="work-entry ion-no-padding"
+      >
         <ion-label>
-          <h1>{{ data.controls.jobTitle.value }}</h1>
-          <p>
+          <p class="work-entry-title">{{ data.controls.jobTitle.value }}</p>
+          <p class="with-icon">
             <ion-icon name="business-outline"></ion-icon>
-            {{ data.controls.company.value }} .
-            {{ data.controls.employmentType.value }}
+            <span
+              >{{ data.controls.company.value }} .
+              {{
+                'workExperience.employmentTypeValue'
+                  | translate: { empType: data.controls.employmentType.value }
+              }}</span
+            >
           </p>
-          <p>
+
+          <p class="with-icon">
             <ion-icon name="calendar-outline"></ion-icon>
-            {{ data.controls.startDate.value }} -
-            <span *ngIf="data.controls.endDate.value === ''">Present</span>
-            <span *ngIf="data.controls.endDate.value !== ''">{{
-              data.controls.endDate.value
-            }}</span>
+            <span
+              >{{ data.controls.startDate.value }} -
+              <span *ngIf="data.controls.endDate.value === ''">{{
+                'workExperience.present' | translate
+              }}</span>
+              <span *ngIf="data.controls.endDate.value !== ''">{{
+                data.controls.endDate.value
+              }}</span></span
+            >
           </p>
         </ion-label>
       </ion-item>

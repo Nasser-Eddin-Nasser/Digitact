@@ -1,10 +1,14 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="cancel()">Cancel</ion-button>
+      <ion-button (click)="cancel()">{{
+        'commonLables.cancel' | translate
+      }}</ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button [disabled]="!work.valid" (click)="save()">Save</ion-button>
+      <ion-button [disabled]="!work.valid" (click)="save()">{{
+        'commonLables.save' | translate
+      }}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -16,7 +20,7 @@
         <ion-icon slot="start" name="ribbon-outline" size="large"></ion-icon>
         <ion-input
           type="text"
-          placeholder="Title"
+          placeholder="{{ 'workExperience.jobTitle' | translate }}"
           [formControl]="work.controls.jobTitle"
         >
         </ion-input>
@@ -26,18 +30,20 @@
         <ion-icon slot="start" name="business-outline" size="large"></ion-icon>
         <ion-input
           type="text"
-          placeholder="Company"
+          placeholder="{{ 'workExperience.company' | translate }}"
           [formControl]="work.controls.company"
         ></ion-input>
       </ion-item>
 
       <ion-item class="ion-no-padding entry-item">
         <ion-icon slot="start" name="briefcase-outline" size="large"></ion-icon>
-        <ion-label color="medium">Employment Type</ion-label>
+        <ion-label color="medium">{{
+          'workExperience.employmentType' | translate
+        }}</ion-label>
         <ion-select
           slot="end"
           interface="popover"
-          placeholder="Employment Type"
+          placeholder="{{ 'workExperience.employmentType' | translate }}"
           [formControl]="work.controls.employmentType"
         >
           <ion-select-option
@@ -50,7 +56,7 @@
       </ion-item>
 
       <ion-row>
-        <ion-col col-6>
+        <ion-col col-3>
           <ion-item class="ion-no-padding entry-item">
             <ion-icon
               slot="start"
@@ -62,20 +68,20 @@
               pickerFormat="MMMM:YYYY"
               max="2030"
               min="1980"
-              placeholder="Start Date"
+              placeholder="{{ 'workExperience.startDate' | translate }}"
               [formControl]="work.controls.startDate"
               class="ion-no-padding"
             ></ion-datetime>
           </ion-item>
         </ion-col>
-        <ion-col col-6>
+        <ion-col col-3>
           <ion-item class="ion-no-padding entry-item">
             <ion-datetime
               displayFormat="MMM-YYYY"
               pickerFormat="MMMM:YYYY"
               max="2030"
               min="1980"
-              placeholder="End Date"
+              placeholder="{{ 'workExperience.endDate' | translate }}"
               [formControl]="work.controls.endDate"
               class="ion-no-padding"
             ></ion-datetime>
@@ -87,7 +93,7 @@
         <ion-icon slot="start" name="reader-outline" size="large"></ion-icon>
         <ion-textarea
           auto-grow="true"
-          placeholder="Description"
+          placeholder="{{ 'workExperience.description' | translate }}"
           [formControl]="work.controls.description"
         >
         </ion-textarea>

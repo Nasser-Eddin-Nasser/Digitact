@@ -95,6 +95,26 @@
         "deleteConfirmationMessage":"Möchtest du dieses Foto wirklich löschen?",
         "imageDeleteSuccessMessage":"Das Foto wurde erfolgreich gelöscht."
     },
+    "workExperience":{
+        "title":"Arbeitserfahrung",
+        "stepDescription":"Hier kannst du Informationen zu deinem Arbeit angeben.",
+        "jobTitle":"Titel",
+        "company":"Unternehmen",
+        "employmentType":"Beschäftigungsverhältnis",
+        "employmentTypeValue":"{{empType}}",
+        "startDate":"Anfangsdatum",
+        "endDate":"Enddatum",
+        "description":"Beschreibung",
+        "fullTime": "Vollzeit",
+        "partTime": "Teilzeit",
+        "selfEmployed": "Selbstständiger",
+        "freelance": "Freiberuflich",
+        "contract": "Contract",
+        "internship": "Vertrag",
+        "apprenticeship": "Ausbildung",
+        "other": "andere",
+        "present": "Zurzeit"
+    },
     "educationInfo":{
         "title":"Bildung",
         "stepDescription":"Hier kannst du Informationen zu deinem Bildungsweg angeben.",

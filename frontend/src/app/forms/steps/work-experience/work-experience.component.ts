@@ -4,7 +4,7 @@
  */
 import { Component, Input } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { IonRouterOutlet, ModalController } from '@ionic/angular';
 
 import { FormControl, FormGroup } from '../../../common/forms/forms';
 import {
@@ -22,7 +22,10 @@ import { WorkExperienceEntryComponent } from './work-experience-entry/work-exper
 export class WorkExperienceComponent {
   @Input()
   formsData: FormGroup<FormsData>;
-  constructor(public modalController: ModalController) {}
+  constructor(
+    private ionRouterOutlet: IonRouterOutlet,
+    private modalController: ModalController
+  ) {}
 
   /**
    * add work info entry
@@ -42,7 +45,7 @@ export class WorkExperienceComponent {
         work: addWorkExp,
       },
       swipeToClose: true,
-      presentingElement: await this.modalController.getTop(),
+      presentingElement: this.ionRouterOutlet.nativeEl,
     });
     /**
      * save and cancel of work info form
@@ -95,7 +98,7 @@ export class WorkExperienceComponent {
         work: modWorkExp,
       },
       swipeToClose: true,
-      presentingElement: await this.modalController.getTop(),
+      presentingElement: this.ionRouterOutlet.nativeEl,
     });
     /**
      * save and cancel of work info form
