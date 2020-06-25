@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 import { FormArray, FormControl, FormGroup } from '../../../common/forms/forms';
 import {
@@ -23,40 +24,13 @@ import {
  */
 @Injectable()
 export class KeyCompetenciesFormItemsService {
-  private readonly LANGUAGE_ITEMS = [
-    'Arabic',
-    'Chinese',
-    'Czech',
-    'English',
-    'Finnish',
-    'French',
-    'German',
-    'Greek',
-    'Hungarian',
-    'Italian',
-    'Japanese',
-    'Korean',
-    'Norwegian',
-    'Polish',
-    'Portuguese',
-    'Russian',
-    'Spanish',
-    'Swedish',
-    'Turkish',
-  ];
+  private readonly LANGUAGE_ITEMS = this.translate.instant(
+    'keyCompetencies.languageItems'
+  );
 
-  private readonly BUSINESS_SKILLS_ITEMS = [
-    'Project Management',
-    'SCRUM',
-    'Accounting & Finance',
-    'Controlling',
-    'Production',
-    'Human Resources',
-    'Marketing',
-    'Sales',
-    'Purchasing and Logistics',
-    'Process Design',
-  ];
+  private readonly BUSINESS_SKILLS_ITEMS = this.translate.instant(
+    'keyCompetencies.businessSkillsItems'
+  );
 
   private readonly PROFESSIONAL_SOFTWARE_ITEMS = [
     'Adobe Photoshop',
@@ -98,6 +72,8 @@ export class KeyCompetenciesFormItemsService {
     'React Native',
     'Vue',
   ];
+
+  constructor(private translate: TranslateService) {}
 
   /**
    * Generate all form items (so mainly the FormArrays and their content),

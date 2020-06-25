@@ -151,7 +151,40 @@
         "ratingMessage": "Bitte bewerte Deine Fähigkeiten von 1 (nicht gut) bis 5 (exzellent).",
         "searchItemErrorMessage": "\"{{searchedTerm}}\" kann nicht hinzugefügt werden, weil es entweder bereits in der Liste vorhanden oder kein gültiger Name ist.",
         "searchAlertMessage": "Willst Du wirklich \"{{searchedTerm}}\" zur Liste hinzufügen?",
-        "addedToListMessage":"\"{{searchedTerm}}\" wurde der Liste hinzugefügt."
+        "addedToListMessage":"\"{{searchedTerm}}\" wurde der Liste hinzugefügt.",
+        "languageItems": [
+            "Arabisch",
+            "Chinesisch",
+            "Tschechisch",
+            "Englisch",
+            "Finnisch",
+            "Französisch",
+            "Deutsch",
+            "Griechisch",
+            "Ungarisch",
+            "Italienisch",
+            "Japanisch",
+            "Koreanisch",
+            "Norwegisch",
+            "Polnisch",
+            "Portugiesisch",
+            "Russisch",
+            "Spanisch",
+            "Schwedisch",
+            "Türkisch"
+        ],
+        "businessSkillsItems": [
+            "Projektmanagement",
+            "SCRUM",
+            "Rechnungswesen",
+            "Controlling",
+            "Produktion",
+            "Personalmanagement",
+            "Marketing",
+            "Vertrieb",
+            "Einkauf und Logistik",
+            "Prozessdesign"
+        ]
     },
     "additionalInfo":{
         "title":"Zusätzliche Information",
