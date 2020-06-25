@@ -25,7 +25,7 @@
     },
     "privacyPage": {
         "readPrivacyMessage": "Before we can get started: During the application process, you need to enter some private information. Because of this, please read the Privacy Policy.",
-        "openPrivacy": "Open Privacy",
+        "openPrivacy": "Open Privacy Policy",
         "agreePrivacyMessage": "I have read and agree to the Privacy Policy.",
         "privacyPolicy": "Privacy Policy",
         "dummyText": "This is the text of the Privacy Policy"
@@ -97,8 +97,8 @@
     },
     "educationInfo": {
         "title": "Education Information",
-        "stepDescription": "Here, you can add your information regarding your education. So: What is your educational background",
-        "degreeYearGradeMessage": "{{degree}}'s degree ({{graduationYear}}, {{grade}})",
+        "stepDescription": "Here, you can add your information regarding your education. So: Which schools/universities have you visited?",
+        "degreeYearGradeMessage": "Degree: {{degree}} ({{graduationYear}}, {{grade}})",
         "schoolOrUniversity": "School/University",
         "subject": "Subject",
         "degree": "Degree",

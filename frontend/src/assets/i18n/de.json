@@ -97,7 +97,7 @@
     },
     "educationInfo": {
         "title": "Bildung",
-        "stepDescription": "Hier kannst Du Informationen zu Deinem Bildungsweg angeben.",
+        "stepDescription": "Hier kannst Du Informationen zu Deinem Bildungsweg angeben. Also: Welche Schulen oder Universitäten hast Du besucht?",
         "degreeYearGradeMessage": "Abschluss: {{degree}} ({{graduationYear}}, {{grade}})",
         "schoolOrUniversity": "Schule/Universität",
         "subject": "Fach",
