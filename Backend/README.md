@@ -130,5 +130,5 @@ If you want to access the database, you are most likely prompted for a password.
 }
 ```
 
-`KeyCompetenciesCategory` is either `languages`, `professionalSoftware`, `databases` or `programmingLanguagesAndFrameworks`.
+`KeyCompetenciesCategory` is either `languages`, `businessSkills`, `professionalSoftware`, `databases` or `programmingLanguagesAndFrameworks`.
 
