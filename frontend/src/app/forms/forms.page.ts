@@ -151,6 +151,21 @@ export class FormsPage
   private hasSubmittedForm = false;
 
   /**
+   * Used to toggle skip step button.
+   */
+  isSkipStep: boolean[] = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ];
+
+  /**
    * In this method route change is observed and handling is done.
    */
   ngOnInit(): void {
@@ -379,5 +394,19 @@ export class FormsPage
       });
     });
     return result;
+  }
+
+  /**
+   * In this method isSkipStep property is toggled
+   * To-DO: enable() formgroup back, extend if-else cases
+   */
+  toggleSkipStep(step: ApplicationStep): void {
+    this.isSkipStep[this.currentStepIndex] = !this.isSkipStep[
+      this.currentStepIndex
+    ];
+    if (step === this.APPLICATION_STEP.EducationInformation) {
+      this.formsData.controls.educationInfo.disable();
+      console.log('test');
+    }
   }
 }

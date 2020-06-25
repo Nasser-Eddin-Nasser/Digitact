@@ -26,6 +26,33 @@
   <ion-progress-bar value="{{progressPercentage}}"></ion-progress-bar>
 </ion-header>
 
+<div
+  class="custom-skip-item"
+  *ngIf="currentStep !== APPLICATION_STEP.BasicInformation && 
+  currentStep !== APPLICATION_STEP.ProfilePicture && 
+  currentStep !== APPLICATION_STEP.Submit && 
+  currentStep !== APPLICATION_STEP.ContactInformation"
+>
+  <ion-item lines="none">
+    <ion-label> Skip this Step</ion-label>
+    <ion-toggle
+      slot="start"
+      color="primary"
+      class="custom-toggle"
+      (ionChange)="toggleSkipStep(currentStep)"
+      [checked]="isSkipStep[currentStepIndex]"
+    ></ion-toggle>
+  </ion-item>
+</div>
+
+<button
+  class="top-button"
+  (click)="navigateToNextStep()"
+  *ngIf="currentStep !== APPLICATION_STEP.Submit && this.isSkipStep[currentStepIndex]"
+>
+  {{'commonLables.continue' | translate}}
+</button>
+
 <app-side-menu
   [formsData]="formsData"
   [currentStep]="currentStep"
@@ -33,7 +60,10 @@
 
 <ion-content>
   <div class="main-container with-bottom-buttons">
-    <div class="content">
+    <div
+      class="content"
+      [class.custom-skip]="this.isSkipStep[currentStepIndex]"
+    >
       <ng-container [ngSwitch]="currentStep">
         <form-basic-info
           [formsData]="formsData"
@@ -96,7 +126,7 @@
       <button
         class="fancy-button"
         (click)="navigateToNextStep()"
-        *ngIf="currentStep !== APPLICATION_STEP.Submit"
+        *ngIf="currentStep !== APPLICATION_STEP.Submit && !this.isSkipStep[currentStepIndex]"
       >
         {{'commonLables.continue' | translate}}
       </button>
