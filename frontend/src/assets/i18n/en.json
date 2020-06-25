@@ -54,14 +54,15 @@
         "progress": "Progress"
     },
     "ratingPage": {
+        "applicantRatingDescription": "Please provide your insights on the applicant by providing a rating between 1 (not good) and 5 (excellent).",
         "finalizeConfirmationMessage": "Do you really want to finalize this form? It wont be possible to edit later.",
         "applicationFinalizedNotification": "Applicant information is finalized",
         "rhetoricScore": "Rhetoric",
         "motivationScore": "Motivation",
         "selfAssurance": "Self-Assurance",
         "personalImpression": "Personal Impression",
-        "finalizeApplicantMessage": "All the information about the applicant is taken. You need to finalize this form to send data to the HR monitor and it will not be possible to edit information later.",
-        "fillRequiredFieldsToFinalizeMessage": "You can finalize this form as soon as you fill all the required fields. By opening the right menu, you can see where you still need to fill the form.",
+        "finalizeApplicantMessage": "All changes are saved automatically. So, you can simply leave this form and continue editing it later. If you want to send the data to the server, you have to \"finalize\" this form. That means that it won't be possible to edit the content anymore.",
+        "fillRequiredFieldsToFinalizeMessage": "You can finalize this form as soon as you have filled all the required fields. By opening the right menu, you can see where you still need to fill the form.",
         "addImpressionMessage": "Please write a few lines about your personal impression on the applicant. Also, if you want to add/mention anything else you can do it here."
     },
     "basicInfo": {

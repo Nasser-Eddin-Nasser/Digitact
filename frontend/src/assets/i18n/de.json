@@ -54,13 +54,14 @@
         "progress": "Fortschritt"
     },
     "ratingPage": {
+        "applicantRatingDescription": "Bitte gib' uns einen Einblick, wie gut sich der Bewerber präsentiert hat. Nutze hierfür eine Skala von 1 (nicht gut) bis 5 (exzellent).",
         "finalizeConfirmationMessage": "Soll die Bewerbung abgeschlossen werden? Eine Bearbeitung zu einem späteren Zeitpunkt ist nicht mehr möglich.",
         "applicationFinalizedNotification": "Die Informationen zur Bewerbung sind abgeschlossen.",
         "rhetoricScore": "Rhetorik",
         "motivationScore": "Motivation",
         "selfAssurance": "Selbstsicherheit",
         "personalImpression": "Persönlicher Eindruck",
-        "finalizeApplicantMessage": "Alle Informationen über den Bewerber wurden aufgenommen. Du musst dieses Formular abschließen, um die Daten an den Server senden zu können. Es ist nicht möglich, die Informationen später zu bearbeiten.",
+        "finalizeApplicantMessage": "Alle Änderungen werden automatisch gespeichert. Du kannst dieses Formular also einfach verlassen und später an dieser Stelle weitermachen. Wenn Du die Daten an den Server senden möchtest, musst Du das Formular \"abschließen\". Das bedeutet, dass es später nicht mehr möglich sein wird, Änderungen durchzuführen.",
         "fillRequiredFieldsToFinalizeMessage": "Du kannst dieses Formular abschließen, sobald Du alle erforderlichen Felder ausgefüllt hast. Wenn Du das rechte Menü öffnest, kannst Du sehen, wo noch Angaben fehlen.",
         "addImpressionMessage": "Bitte schreibe ein paar Zeilen über Deinen persönlichen Eindruck zum Bewerber. Wenn Du noch etwas hinzufügen oder ergänzen möchtest, kannst Du dies an dieser Stelle erledigen."
     },
