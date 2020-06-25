@@ -21,6 +21,7 @@ import { FieldDesignationPageComponent } from './steps/field-designation-page/fi
 import { KeyCompetenciesModule } from './steps/key-competencies/key-competencies.module';
 import { ProfilePictureComponent } from './steps/profile-picture/profile-picture.component';
 import { SubmitPageComponent } from './steps/submit-page/submit-page.component';
+import { WorkExperienceEntryComponent } from './steps/work-experience/work-experience-entry/work-experience-entry.component';
 import { WorkExperienceComponent } from './steps/work-experience/work-experience.component';
 
 @NgModule({
@@ -45,6 +46,7 @@ import { WorkExperienceComponent } from './steps/work-experience/work-experience
     ProfilePictureComponent,
     AdditionalInfoComponent,
     WorkExperienceComponent,
+    WorkExperienceEntryComponent,
   ],
 })
 export class FormsPageModule {}

@@ -43,10 +43,12 @@ export class WorkExperienceComponent {
     /**
      * save and cancel of education info form
      */
-    modal.onDidDismiss().then(() => {
-      this.formsData.controls.workExperienceInfo.controls.workExperienceForm.push(
-        addWorkExp
-      );
+    modal.onDidDismiss().then((val) => {
+      if (val.data && val.data.canSubmitData) {
+        this.formsData.controls.workExperienceInfo.controls.workExperienceForm.push(
+          addWorkExp
+        );
+      }
     });
     return await modal.present();
   }

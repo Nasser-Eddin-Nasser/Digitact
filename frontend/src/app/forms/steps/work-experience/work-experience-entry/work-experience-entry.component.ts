@@ -1,14 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+
+import { FormGroup } from '../../../../common/forms/forms';
+import { WorkExperienceEntry } from '../../../../model/forms-data.model';
 
 @Component({
   selector: 'app-work-experience-entry',
   templateUrl: './work-experience-entry.component.html',
   styleUrls: ['./work-experience-entry.component.scss'],
 })
-export class WorkExperienceEntryComponent implements OnInit {
+export class WorkExperienceEntryComponent {
+  constructor(public modalController: ModalController) {}
 
-  constructor() { }
+  employmentTypeArray = [
+    { value: 'FullTime', displayName: 'Full-Time' },
+    { value: 'PartTime', displayName: 'Part-Time' },
+    { value: 'SelfEmployed', displayName: 'Self-employed' },
+    { value: 'Freelance', displayName: 'Freelance' },
+    { value: 'Contract', displayName: 'Contract' },
+    { value: 'Internship', displayName: 'Internship' },
+    { value: 'Apprenticeship', displayName: 'Apprenticeship' },
+  ];
 
-  ngOnInit() {}
+  @Input() work: FormGroup<WorkExperienceEntry>;
 
+  /**
+   *  save and close the work experience info form
+   */
+  save(): void {
+    this.modalController.dismiss({
+      canSubmitData: true,
+    });
+  }
+
+  /**
+   * not save and close the work experience info form
+   */
+  cancel(): void {
+    this.modalController.dismiss({
+      canSubmitData: false,
+    });
+  }
 }
