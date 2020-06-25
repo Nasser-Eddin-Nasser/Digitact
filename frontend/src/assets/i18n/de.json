@@ -16,15 +16,15 @@
     "homePage": {
         "welcomeMessage": "Willkommen bei Consileon",
         "welcomeTagline": "Wir machen den Unterschied",
-        "applyNow": "Jetzt Bewerben",
+        "applyNow": "Jetzt bewerben",
         "language": "Sprache"
     },
     "formsPage": {
-        "submit": "Bestätigen",
-        "pageExitWarningMessage": "Willst du deine Bewerbung wirklich abbrechen?"
+        "submit": "Absenden",
+        "pageExitWarningMessage": "Willst Du Deine Bewerbung wirklich abbrechen?"
     },
     "privacyPage": {
-        "readPrivacyMessage": "Bevor wir loslegen: Während deiner Bewerbung werden einige private Informationen benötigt. Lese deswegen bitte die Datenschutzerklärung durch.",
+        "readPrivacyMessage": "Bevor wir loslegen: Während Deiner Bewerbung werden einige private Informationen benötigt. Lese deswegen bitte die Datenschutzerklärung durch.",
         "openPrivacy": "Datenschutzerklärung öffnen",
         "agreePrivacyMessage": "Ich habe die Datenschutzerklärung gelesen und akzeptiere sie.",
         "privacyPolicy": "Datenschutzerklärung",
@@ -33,10 +33,10 @@
     "applicantsPage": {
         "applications": "Bewerbungen",
         "finalized": "Vervollständigt",
-        "finalizedByHrMessage": "{{finalizedCount}} Bewerbungen wurden vom HR Personal vervollständigt und können an den HR Monitor gesendet werden.",
+        "finalizedByHrMessage": "{{finalizedCount}} Bewerbungen wurden vom HR-Personal vervollständigt und können an den Server gesendet werden.",
         "sendToServer": "An den Server senden",
         "notFinished": "Offene Bewerbungen",
-        "yetToRateMessage": "Diese Liste enthält alle Bewerbungen, die vom Berwerber vervollständigt wurden, aber noch nicht durch das HR Personal bewertet wurden.",
+        "yetToRateMessage": "Diese Liste enthält alle Bewerbungen, die vom Bewerber vervollständigt wurden, aber noch nicht durch das HR-Personal bewertet wurden.",
         "noApplicantsMessage": "Es wurde noch keine Bewerbung bestätigt oder vervollständigt."
     },
     "applicantsUploadPage": {
@@ -60,57 +60,57 @@
         "motivationScore": "Motivation",
         "selfAssurance": "Selbstsicherheit",
         "personalImpression": "Persönlicher Eindruck",
-        "finalizeApplicantMessage": "Alle Informationen über den Antragsteller werden aufgenommen. Sie müssen dieses Formular abschließen, um die Daten an den HR-Monitor zu senden. Es ist nicht möglich, die Informationen später zu bearbeiten.",
-        "fillRequiredFieldsToFinalizeMessage": "Sie können dieses Formular abschließen, sobald Sie alle erforderlichen Felder ausgefüllt haben. Wenn Sie das rechte Menü öffnen, können Sie sehen, wo Sie das Formular noch ausfüllen müssen.",
-        "addImpressionMessage": "Bitte schreiben Sie ein paar Zeilen über Ihren persönlichen Eindruck zum Bewerber. Wenn Sie noch etwas hinzufügen oder ergänzen möchten, können Sie dies an dieser Stelle erledigen."
+        "finalizeApplicantMessage": "Alle Informationen über den Bewerber wurden aufgenommen. Du musst dieses Formular abschließen, um die Daten an den Server senden zu können. Es ist nicht möglich, die Informationen später zu bearbeiten.",
+        "fillRequiredFieldsToFinalizeMessage": "Du kannst dieses Formular abschließen, sobald Du alle erforderlichen Felder ausgefüllt hast. Wenn Du das rechte Menü öffnest, kannst Du sehen, wo noch Angaben fehlen.",
+        "addImpressionMessage": "Bitte schreibe ein paar Zeilen über Deinen persönlichen Eindruck zum Bewerber. Wenn Du noch etwas hinzufügen oder ergänzen möchtest, kannst Du dies an dieser Stelle erledigen."
     },
     "basicInfo": {
-        "title": "Basis Informationen",
+        "title": "Basis-Informationen",
         "welcome": "Willkommen!",
-        "stepDescription": "Damit wir Dich besser kennenlernen können, gib deinen Vor- und Nachnamen an.",
-        "salutationTitle": "Titel",
+        "stepDescription": "Damit wir Dich besser kennenlernen können, gib' bitte Deinen Vor- und Nachnamen an.",
+        "salutationTitle": "Anrede",
         "firstName": "Vorname",
         "lastName": "Nachname",
         "mr": "Herr",
         "mrs": "Frau"
     },
     "contactInfo": {
-        "title": "Kontakt Informationen",
-        "greetingsMessage": "Schön dich kennenzulernen, {{name}}!",
-        "stepDescription": "Bitte fülle die weiteren Kontakt Informationen aus.",
+        "title": "Kontakt-Informationen",
+        "greetingsMessage": "Schön Dich kennenzulernen, {{name}}!",
+        "stepDescription": "Bitte fülle die weiteren Kontakt-Informationen aus.",
         "phoneNumber": "Telefonnummer",
         "email": "Email",
-        "linkedinAccount": "LinkedIn Account",
-        "xingAccount": "Xing Account"
+        "linkedinAccount": "LinkedIn-Account",
+        "xingAccount": "Xing-Account"
     },
     "profilePicture": {
         "title": "Profilbild",
-        "stepDescription": "Füge ein Profilbild von dir hinzu. Klicke hierfür auf das Bild-Symbol.",
-        "deleteTakeAnotherPictureMessage": "Gut gemacht! Wenn du ein anderes Bild aufnehmen möchtest, lösche das Bild über den Papierkorb-Button und nehme ein Neues auf."
+        "stepDescription": "Füge ein Profilbild von Dir hinzu. Klicke hierfür auf das Bild-Symbol.",
+        "deleteTakeAnotherPictureMessage": "Gut gemacht! Wenn Du ein anderes Bild aufnehmen möchtest, lösche das Bild über den Papierkorb-Button und nehme ein Neues auf."
     },
     "documentsUpload": {
         "title": "Dokumente",
-        "stepDescription": "In diesem Schritt kannst du Fotos von Dokumenten aufnehmen, die du deiner Bewerbung gerne hinzufügen möchtest. Zum Beispiel kannst du hier ein Foto von deinem Lebenslauf machen. Wenn du keine Dokumente zum hinzufügen hast, kannst du diesen Schritt auch überspringe.",
+        "stepDescription": "In diesem Schritt kannst Du Fotos von Dokumenten aufnehmen, die Du Deiner Bewerbung gerne hinzufügen möchtest. Zum Beispiel kannst Du hier ein Foto von Deinem Lebenslauf machen. Wenn Du keine Dokumente zum Hinzufügen hast, kannst Du diesen Schritt auch überspringen.",
         "delete": "Löschen",
-        "deleteConfirmationMessage": "Möchtest du dieses Foto wirklich löschen?",
+        "deleteConfirmationMessage": "Möchtest Du dieses Foto wirklich löschen?",
         "imageDeleteSuccessMessage": "Das Foto wurde erfolgreich gelöscht."
     },
     "educationInfo": {
         "title": "Bildung",
-        "stepDescription": "Hier kannst du Informationen zu deinem Bildungsweg angeben.",
-        "degreeYearGradeMessage": "Abschluss: {{degree}}, ({{graduationYear}}, {{grade}})",
+        "stepDescription": "Hier kannst Du Informationen zu Deinem Bildungsweg angeben.",
+        "degreeYearGradeMessage": "Abschluss: {{degree}} ({{graduationYear}}, {{grade}})",
         "schoolOrUniversity": "Schule/Universität",
         "subject": "Fach",
         "degree": "Abschluss",
         "master": "Master",
         "bachelor": "Bachelor",
-        "school": "Schule/Universität",
+        "school": "Schule",
         "grade": "Note",
         "gradutaionYear": "Abschlussjahr"
     },
     "industryAndPositionPreference": {
         "title": "Branchen und Stellen",
-        "stepDescription": "Bitte wähle aus den folgenden Optionen welche Interessen du in den Bereichen Branchen und Stellen hast.",
+        "stepDescription": "Bitte wähle aus den folgenden Optionen, welche Interessen Du in den Bereichen Branchen und Stellen hast.",
         "industry": "Branchen",
         "position": "Stellen",
         "automotive": "Automobil",
@@ -127,12 +127,12 @@
     },
     "confirmationPage": {
         "done": "Fertig",
-        "stepDescription": "Der Antrag wurde eingereicht. Die folgenden Schritte müssen von den Mitarbeitern der Personalabteilung durchgeführt werden (entweder jetzt oder später)"
+        "stepDescription": "Der Antrag wurde eingereicht. Die folgenden Schritte müssen von den Mitarbeitern der Personalabteilung durchgeführt werden (entweder jetzt oder später)."
     },
     "submitData": {
-        "title": "Bestätigen",
-        "stepDescription": "Geschafft! Du kannst deine Bewerbung jetzt einreichen und das Gerät an unser Team zurückgeben.",
-        "fillMandatoryFieldsToSubmitMessage": "Du kannst das Formular abschicken, sobald du alle Pflichtfelder ausgefüllt hast. Wenn du das rechte Menü öffnest, kannst du sehen, wo du noch einige Daten eingeben musst."
+        "title": "Absenden",
+        "stepDescription": "Geschafft! Du kannst Deine Bewerbung jetzt absenden und das Gerät an unser Team zurückgeben.",
+        "fillMandatoryFieldsToSubmitMessage": "Du kannst das Formular absenden, sobald Du alle Pflichtfelder ausgefüllt hast. Wenn Du das rechte Menü öffnest, kannst Du sehen, wo noch Angaben fehlen."
     },
     "keyCompetencies": {
         "title": "Kompetenzen",
@@ -188,10 +188,10 @@
     },
     "additionalInfo": {
         "title": "Zusätzliche Information",
-        "stepDescription": "Hier kannst du zusätzliche Informationen angeben"
+        "stepDescription": "Hier kannst Du zusätzliche Informationen angeben"
     },
     "sideMenu": {
         "progress": "Fortschritt",
-        "description": "Wenn du zu einem vorherigen Schritt zurück willst, klicke auf den entsprechenden Eintrag in der Liste!"
+        "description": "Wenn Du zu einem vorherigen Schritt wechseln willst, dann klicke einfach auf den entsprechenden Eintrag in der Liste!"
     }
 }
