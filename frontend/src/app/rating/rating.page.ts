@@ -8,9 +8,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
-import { FormControl, FormGroup } from '../common/forms/forms';
+import { FormControl, FormGroup, FormValue } from '../common/forms/forms';
 import { AlertController } from '../common/ion-wrappers/alert-controller';
 import { ToastController } from '../common/ion-wrappers/toast-controller';
 import { FormsData } from '../model/forms-data.model';
@@ -21,7 +22,7 @@ import {
   ImpressionInfo,
   RatingForm,
 } from './model/rating-form.model';
-import { hrRatingStep, hrRatingStepArr } from './model/steps.model';
+import { HRRatingStep, HRRatingStepsArr } from './model/steps.model';
 
 @Component({
   selector: 'app-rating',
@@ -35,7 +36,8 @@ export class RatingPage implements OnDestroy, OnInit {
     private router: Router,
     private alertController: AlertController,
     private toastController: ToastController,
-    private storage: StorageHandlerService
+    private storage: StorageHandlerService,
+    private translate: TranslateService
   ) {}
 
   /**
@@ -44,7 +46,7 @@ export class RatingPage implements OnDestroy, OnInit {
    * This property is really only used to make the Steps available in the template.
    * In the TS file, you can directly refer to the underlying element.
    */
-  readonly HR_RATING_STEP = hrRatingStep;
+  readonly HR_RATING_STEP = HRRatingStep;
 
   /**
    * Make the Steps Array available in the template.
@@ -52,7 +54,7 @@ export class RatingPage implements OnDestroy, OnInit {
    * This property is really only used to make the Steps available in the template.
    * In the TS file, you can directly refer to the underlying element.
    */
-  readonly HR_RATING_STEP_ARR = hrRatingStepArr;
+  readonly HR_RATING_STEP_ARR = HRRatingStepsArr;
 
   /**
    * This property holds the type safe form group fields for applicant-score view.
@@ -75,7 +77,7 @@ export class RatingPage implements OnDestroy, OnInit {
    *
    * **Important! Do not modify this value directly! Use `setCurrentStep()` instead!**
    */
-  currentStep: hrRatingStep;
+  currentStep: HRRatingStep;
   /**
    * Which step is currently displayed?
    * This is the index in our array of steps.
@@ -137,10 +139,10 @@ export class RatingPage implements OnDestroy, OnInit {
           Of course, there is still room for performance improvement (since we will call the following method really often).
           But for now, it should be fine.
         */
-        this.storage.updateItem(
+        this.storage.updateItem<FormValue<RatingForm>>(
           this.storage.applicantRatingsDb,
           this.ratingForm.controls.id.value,
-          this.ratingForm.getRawValue()
+          this.ratingForm.value
         );
         this.updateProgessStatus();
       }
@@ -210,8 +212,8 @@ export class RatingPage implements OnDestroy, OnInit {
    */
   private handleStep(step: unknown): void {
     // tslint:disable-next-line: no-any
-    if (hrRatingStepArr.includes(step as any)) {
-      this.setCurrentStep(step as hrRatingStep);
+    if (HRRatingStepsArr.includes(step as any)) {
+      this.setCurrentStep(step as HRRatingStep);
       return;
     }
 
@@ -220,7 +222,7 @@ export class RatingPage implements OnDestroy, OnInit {
     }
 
     // A fallback: If a step was requested that we don't know, we simply show the Applicant rating page.
-    this.navigateToStep(hrRatingStep.ApplicantRating);
+    this.navigateToStep(HRRatingStep.ApplicantRating);
   }
 
   /**
@@ -228,16 +230,16 @@ export class RatingPage implements OnDestroy, OnInit {
    *
    * Usually, if you want to change the Step, you should use the Router.
    */
-  private setCurrentStep(step: hrRatingStep): void {
+  private setCurrentStep(step: HRRatingStep): void {
     this.currentStep = step;
-    this.currentStepIndex = hrRatingStepArr.indexOf(step);
+    this.currentStepIndex = HRRatingStepsArr.indexOf(step);
   }
 
   /**
    * Update the "step" query parameter.
    * You can use this to navigate between the different form steps!
    */
-  navigateToStep(step: hrRatingStep): void {
+  navigateToStep(step: HRRatingStep): void {
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
       queryParams: {
@@ -250,8 +252,8 @@ export class RatingPage implements OnDestroy, OnInit {
    * In this method navigation to next step is handled.
    */
   navigateToNextStep(): void {
-    if (this.currentStepIndex < hrRatingStepArr.length - 1) {
-      const step = hrRatingStepArr[this.currentStepIndex + 1];
+    if (this.currentStepIndex < HRRatingStepsArr.length - 1) {
+      const step = HRRatingStepsArr[this.currentStepIndex + 1];
       this.navigateToStep(step);
 
       return;
@@ -270,18 +272,17 @@ export class RatingPage implements OnDestroy, OnInit {
    */
   async finalize(): Promise<void> {
     const alert = await this.alertController.create({
-      header: 'Finalize',
-      message:
-        'Do you really want to finalize this form? It wont be possible to edit later.',
+      header: this.translate.instant('commonLables.finalize'),
+      message: this.translate.instant('ratingPage.finalizeConfirmationMessage'),
       cssClass: 'custom-alert-button-colors',
       buttons: [
         {
-          text: 'Cancel',
+          text: this.translate.instant('commonLables.cancel'),
           cssClass: 'color-primary',
         },
 
         {
-          text: 'Finalize',
+          text: this.translate.instant('commonLables.finalize'),
           cssClass: 'color-secondary',
           handler: () => this.finalizeApplicant(),
         },
@@ -315,7 +316,9 @@ export class RatingPage implements OnDestroy, OnInit {
    */
   async completionAlert(): Promise<void> {
     const toast = await this.toastController.create({
-      message: 'Applicant information is finalized',
+      message: this.translate.instant(
+        'ratingPage.applicationFinalizedNotification'
+      ),
       color: 'success',
       position: 'bottom',
       duration: 2000,
@@ -328,7 +331,7 @@ export class RatingPage implements OnDestroy, OnInit {
    */
   updateProgessStatus(): void {
     // finalize page is skipped
-    const totalNumberOfSteps = hrRatingStepArr.length - 1;
+    const totalNumberOfSteps = HRRatingStepsArr.length - 1;
     let validSteps = 0;
     for (const control of Object.values(this.ratingForm.controls)) {
       if (control.valid) {

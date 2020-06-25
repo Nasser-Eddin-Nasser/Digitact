@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { SharedModule } from '../../../shared.module';
-import { FormsCommonModule } from '../../common/forms-common.module';
 
-import { DocumentsComponent } from './documents.component';
+import { EducationInfoEntryModalComponent } from './education-info-entry/education-info-entry.component';
+import { EducationInfoComponent } from './education-info.component';
 
 @NgModule({
   imports: [
@@ -14,10 +14,9 @@ import { DocumentsComponent } from './documents.component';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    FormsCommonModule,
     SharedModule,
   ],
-  declarations: [DocumentsComponent],
-  exports: [DocumentsComponent],
+  declarations: [EducationInfoComponent, EducationInfoEntryModalComponent],
+  exports: [EducationInfoComponent],
 })
-export class DocumentsModule {}
+export class EducationInfoModule {}

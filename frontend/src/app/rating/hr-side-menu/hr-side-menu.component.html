@@ -1,14 +1,14 @@
 <ion-menu side="end" contentId="hr-side-menu">
   <ion-content>
     <div class="side-menu-container">
-      <h1 class="side-menu-headline">Progress</h1>
+      <h1 class="side-menu-heading">{{ 'hrSideMenu.progress' | translate }}</h1>
 
       <ion-list lines="none">
         <ng-container
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
             step: HR_RATING_STEP.ApplicantRating,
-            displayName: 'Applicant Rating',
+            displayName: displayMessages.applicantRating,
             isValid: ratingForm.controls.applicantScore.valid,
             isActive: currentStep === HR_RATING_STEP.ApplicantRating
           }"
@@ -17,7 +17,7 @@
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
             step: HR_RATING_STEP.ImpressionInformation,
-            displayName: 'Impression',
+            displayName: displayMessages.impression,
             isValid: ratingForm.controls.impressionInfo.valid,
             isActive: currentStep === HR_RATING_STEP.ImpressionInformation
           }"
@@ -41,7 +41,7 @@
                 currentStep === HR_RATING_STEP.Finalize ? 'tertiary' : 'medium'
               "
             >
-              Finalize
+              {{ displayMessages.finalize }}
             </ion-label>
           </ion-item>
         </ion-menu-toggle>

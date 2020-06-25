@@ -1,14 +1,15 @@
-/**
- *  @description
- *   This component renders the education information step view and its actions.
- */
+/*
+  @description
+    This component renders the education information step view and its actions.
+*/
 import { Component, Input } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { IonRouterOutlet, ModalController } from '@ionic/angular';
 
 import { FormControl, FormGroup } from '../../../common/forms/forms';
 import { EducationInfoEntry, FormsData } from '../../../model/forms-data.model';
-import { EducationInfoEntryComponent } from '../education-info-entry/education-info-entry.component';
+
+import { EducationInfoEntryModalComponent } from './education-info-entry/education-info-entry.component';
 
 @Component({
   selector: 'form-education-info',
@@ -19,10 +20,10 @@ export class EducationInfoComponent {
   @Input()
   formsData: FormGroup<FormsData>;
 
-  /**
-   * Constructor
-   */
-  constructor(public modalController: ModalController) {}
+  constructor(
+    private ionRouterOutlet: IonRouterOutlet,
+    private modalController: ModalController
+  ) {}
 
   /**
    * add education info entry
@@ -35,14 +36,17 @@ export class EducationInfoComponent {
       grade: new FormControl('', Validators.required),
       graduationYear: new FormControl('', Validators.required),
     });
+
     const modal = await this.modalController.create({
-      component: EducationInfoEntryComponent,
+      component: EducationInfoEntryModalComponent,
       componentProps: {
         education: educationInfoAdd,
       },
       swipeToClose: true,
-      presentingElement: await this.modalController.getTop(),
+      // By setting this property, the Modal will be displayed in "card style" on iPhone.
+      presentingElement: this.ionRouterOutlet.nativeEl,
     });
+
     /**
      * save and cancel of education info form
      */
@@ -58,8 +62,10 @@ export class EducationInfoComponent {
         );
       }
     });
+
     return await modal.present();
   }
+
   /**
    * modify education info entry
    */
@@ -91,13 +97,14 @@ export class EducationInfoComponent {
     });
 
     const modal = await this.modalController.create({
-      component: EducationInfoEntryComponent,
+      component: EducationInfoEntryModalComponent,
       componentProps: {
         education: educationInfoMod,
       },
       swipeToClose: true,
       presentingElement: await this.modalController.getTop(),
     });
+
     /**
      * save and cancel of education info form
      */
@@ -115,6 +122,7 @@ export class EducationInfoComponent {
     });
     return await modal.present();
   }
+
   /**
    * delete education info entry
    */

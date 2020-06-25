@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, PopoverController } from '@ionic/angular';
 
 import { FormsData } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
+
+import { LanguagePickerComponent } from './language-picker/language-picker.component';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +17,10 @@ export class HomePage implements OnInit {
   constructor(
     private navController: NavController,
     private storage: StorageHandlerService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private popoverController: PopoverController
   ) {}
+
   /**
    * In this method size of the applications is fetched
    */
@@ -39,6 +43,21 @@ export class HomePage implements OnInit {
    * In this method navigation to operation on submitted and finalized applications is handled.
    */
   goToApplications(): void {
-    this.navController.navigateRoot(['/applicants']);
+    this.navController.navigateForward(['/applicants']);
+  }
+
+  /**
+   * This method is used to initiate popover language chooser component.
+   * @param ev : Hold the mouse event objcet
+   */
+
+  async openLanguagePicker(ev: MouseEvent): Promise<void> {
+    const popover = await this.popoverController.create({
+      component: LanguagePickerComponent,
+      event: ev,
+      componentProps: { page: 'Login' },
+      cssClass: 'popover_class',
+    });
+    return await popover.present();
   }
 }

@@ -1,0 +1,163 @@
+{
+    "commonLables":{
+        "no":"Nein",
+        "yes":"Ja",
+        "close":"Schließen",
+        "continue":"Weiter",
+        "cancel":"Abbrechen",
+        "finalize":"Fertig stellen",
+        "currentStep":"Schritt {{currentStep}} / {{totalSteps}}",
+        "save":"Speichern",
+        "quit":"Schließen",
+        "add":"Hinzufügen",
+        "okay":"In Ordnung",
+        "search":"Suche" 
+    },
+    "homePage":{
+        "welcomeMessage":"Willkommen bei Consileon",
+        "welcomeTagline":"Wir machen den Unterschied",
+        "applyNow":"Jetzt Bewerben",
+        "language":"Sprache"
+    },
+    "formsPage":{
+        "submit":"Bestätigen",
+        "pageExitWarningMessage":"Willst du deine Bewerbung wirklich abbrechen?"
+    },
+    "privacyPage":{
+        "readPrivacyMessage":"Bevor wir loslegen: Während deiner Bewerbung werden einige private Informationen benötigt. Lese deswegen bitte die Datenschutzerklärung durch.",
+        "openPrivacy":"Datenschutzerklärung öffnen",
+        "agreePrivacyMessage":"Ich habe die Datenschutzerklärung gelesen und akzeptiere sie.",
+        "privacyPolicy":"Datenschutzerklärung",
+        "dummyText":"Hier steht die Datenschutzerklärung"
+    },
+    "applicantsPage":{
+        "applications":"Bewerbungen",
+        "finalized":"Vervollständigt",
+        "finalizedByHrMessage":"{{finalizedCount}} Bewerbungen wurden vom HR Personal vervollständigt und können an den HR Monitor gesendet werden.",
+        "sendToServer":"An den Server senden",
+        "notFinished":"Offene Bewerbungen",
+        "yetToRateMessage":"Diese Liste enthält alle Bewerbungen, die vom Berwerber vervollständigt wurden, aber noch nicht durch das HR Personal bewertet wurden.",
+        "noApplicantsMessage":"Es wurde noch keine Bewerbung bestätigt oder vervollständigt."
+    },
+    "applicantsUploadPage":{
+        "upload":"Hochladen",
+        "uploadingProgressMessage":"Bewerbung(en) werden hochgeladen {{uploadSize}}/{{totalSize}}",
+        "nApplicationUploadedSuccessMessage":"{{uploadedSize}} Bewerbung(en) wurden erfolgreich an den Server übermittelt.",
+        "napplicantsSavedMessage":"{{uploadedSize}} Bewerbung(en) erfolgreich gespeichert.",
+        "serverConnectionErrorMessage":"Aktuell ist keine Verbindung zum Server möglich. Bitte versuche es zu einem späteren Zeitpunkt noch einmal.",
+        "applicantUploadedSUccessMessage":"Bewerbung(en) wurden erfolgreich hochgeladen.",
+        "nApplicantsFailedToUploadMessage":"{{failedCount}} Bewerbung konnte aufgrund von folgendem Fehler nich gespeichert werden: {{errorMessage}}. Bitte versuche es zu einem späteren Zeitpunkt noch einmal."
+    },
+    "hrSideMenu":{
+        "applicantRating":"Bewerbung bewerten",
+        "impression":"Eindruck",
+        "progress":"Fortschritt"
+    },
+    "ratingPage":{
+        "finalizeConfirmationMessage":"Soll die Bewerbung abgeschlossen werden? Eine Bearbeitung zu einem späteren Zeitpunkt ist nicht mehr möglich.",
+        "applicationFinalizedNotification":"Die Informationen zur Bewerbung sind abgeschlossen.",
+        "rhetoricScore":"Rhetorik",
+        "motivationScore":"Motivation",
+        "selfAssurance":"Selbstsicherheit",
+        "personalImpression":"Persönlicher Eindruck",
+        "finalizeApplicantMessage":"Alle Informationen über den Antragsteller werden aufgenommen. Sie müssen dieses Formular abschließen, um die Daten an den HR-Monitor zu senden. Es ist nicht möglich, die Informationen später zu bearbeiten.",
+        "fillRequiredFieldsToFinalizeMessage":"Sie können dieses Formular abschließen, sobald Sie alle erforderlichen Felder ausgefüllt haben. Wenn Sie das rechte Menü öffnen, können Sie sehen, wo Sie das Formular noch ausfüllen müssen.",
+        "addImpressionMessage":"Bitte schreiben Sie ein paar Zeilen über Ihren persönlichen Eindruck zum Bewerber. Wenn Sie noch etwas hinzufügen oder ergänzen möchten, können Sie dies an dieser Stelle erledigen."
+    },
+    "basicInfo":{
+        "title":"Basis Informationen",
+        "welcome":"Willkommen!",
+        "stepDescription":"Damit wir Dich besser kennenlernen können, gib deinen Vor- und Nachnamen an.",
+        "salutationTitle":"Titel",
+        "firstName":"Vorname",
+        "lastName":"Nachname",
+        "mr":"Herr",
+        "mrs":"Frau"
+    },
+    "contactInfo":{
+        "title":"Kontakt Informationen",
+        "greetingsMessage":"Schön dich kennenzulernen, {{name}}!",
+        "stepDescription":"Bitte fülle die weiteren Kontakt Informationen aus.",
+        "phoneNumber":"Telefonnummer",
+        "email":"Email",
+        "linkedinAccount":"LinkedIn Account",
+        "xingAccount":"Xing Account"
+    },
+    "profilePicture":{
+        "title":"Profilbild",
+        "stepDescription":"Füge ein Profilbild von dir hinzu. Klicke hierfür auf das Bild-Symbol.",
+        "deleteTakeAnotherPictureMessage":"Gut gemacht! Wenn du ein anderes Bild aufnehmen möchtest, lösche das Bild über den Papierkorb-Button und nehme ein Neues auf."
+    },
+    "documentsUpload":{
+        "title":"Dokumente",
+        "stepDescription":"In diesem Schritt kannst du Fotos von Dokumenten aufnehmen, die du deiner Bewerbung gerne hinzufügen möchtest. Zum Beispiel kannst du hier ein Foto von deinem Lebenslauf machen. Wenn du keine Dokumente zum hinzufügen hast, kannst du diesen Schritt auch überspringe.",
+        "delete":"Löschen",
+        "deleteConfirmationMessage":"Möchtest du dieses Foto wirklich löschen?",
+        "imageDeleteSuccessMessage":"Das Foto wurde erfolgreich gelöscht."
+    },
+    "educationInfo":{
+        "title":"Bildung",
+        "stepDescription":"Hier kannst du Informationen zu deinem Bildungsweg angeben.",
+        "degreeYearGradeMessage":"Abschluss: {{degree}}, ({{graduationYear}}, {{grade}})",
+        "schoolOrUniversity":"Schule/Universität",
+        "subject":"Fach",
+        "degree":"Abschluss",
+        "master":"Master",
+        "bachelor":"Bachelor",
+        "school":"Schule/Universität",
+        "grade":"Note",
+        "gradutaionYear":"Abschlussjahr"
+    },
+    "industryAndPositionPreference":{
+        "title":"Branchen und Stellen",
+        "stepDescription":"Bitte wähle aus den folgenden Optionen welche Interessen du in den Bereichen Branchen und Stellen hast.",
+        "industry":"Branchen",
+        "position":"Stellen",
+        "automotive":"Automobil",
+        "finance":"Finanzen",
+        "commerce":"Handel",
+        "healthCare":"Pharma/Gesundheitswesen",
+        "publicSector":"Öffentlicher Sektor",
+        "businessConsultant":"Consultant/Business Consultant",
+        "itConsultantManagement":"IT-Consultant - Informationsmanagement",
+        "itConsultantJava":"IT-Consultant - Java/JEE",
+        "itConsultantDataScience":"IT-Consultant - Data Science / Artificial Intelligence",
+        "consultantSAP":"Consultant SAP",
+        "internship":"Praktikant/Werkstudent"
+    },
+    "confirmationPage":{
+        "done":"Fertig",
+        "stepDescription":"Der Antrag wurde eingereicht. Die folgenden Schritte müssen von den Mitarbeitern der Personalabteilung durchgeführt werden (entweder jetzt oder später)"
+    },
+    "submitData":{
+        "title":"Bestätigen",
+        "stepDescription":"Geschafft! Du kannst deine Bewerbung jetzt einreichen und das Gerät an unser Team zurückgeben.",
+        "fillMandatoryFieldsToSubmitMessage":"Du kannst das Formular abschicken, sobald du alle Pflichtfelder ausgefüllt hast. Wenn du das rechte Menü öffnest, kannst du sehen, wo du noch einige Daten eingeben musst."
+    },
+    "keyCompetencies":{
+        "title":"Kompetenzen",
+        "stepDescription":"Bitte wähle und bewerte nun deine Kompetenzen. Wir erwarten von dir, dass du mindestens einen Eintrag unter dem Reiter 'Sprachen' hinzufügst, um diesen Schritt abzuschließen.",
+        "languages":"Sprachen",
+        "professionalSoftware":"Software Kenntnisse",
+        "database":"Datenbank Kenntnisse",
+        "programmingLanguagesAndFrameworks":"Programmiersprachen und Frameworks",
+        "all":"Alle",
+        "selected":"Ausgewählt",
+        "noMatchFoundMessage":"Es wurde Kein passender Eintrag gefunden",
+        "notFoundAddMessage":"Nicht gefunden was du gesucht hast. Du kannst auch deinen Suchbegriff ('{{ searchedTerm }}') in die Liste aufnehmen.",
+        "addToList":"Zur Liste hinzufügen",
+        "rating": "Bewertung: ",
+        "ratingMessage": "Bitte bewerte deine Fertigkeiten von 1 (nicht gut) bis 5 (exzellent).",
+        "searchItemErrorMessage": "'{{searchedTerm}}' kann nicht hinzugefügt werden, weil es entweder bereits in der Liste vorhanden oder kein gültiger Name ist.",
+        "searchAlertMessage": "Willst du wirklich '{{searchedTerm}}' zur Liste hinzufügen?",
+        "addedToListMessage":"'{{searchedTerm}}' wurde der Liste hinzugefügt."
+    },
+    "additionalInfo":{
+        "title":"Zusätzliche Information",
+        "stepDescription":"Hier kannst du zusätzliche Informationen angeben"
+    },
+    "sideMenu":{
+        "progress":"Fortschritt",
+        "description":"Wenn du zu einem vorherigen Schritt zurück willst, klicke auf den entsprechenden Eintrag in der Liste!"
+    }
+}

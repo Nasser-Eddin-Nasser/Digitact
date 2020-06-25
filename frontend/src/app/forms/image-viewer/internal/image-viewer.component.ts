@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, NavController, ViewDidEnter } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 import { AlertController } from '../../../common/ion-wrappers/alert-controller';
 import { ToastController } from '../../../common/ion-wrappers/toast-controller';
 import { ImageViewerService } from '../image-viewer.service';
 import { ImageViewerSettings } from '../model/image-viewer-settings.model';
-
 /**
  * Important:
  * This Component is tightly coupled to the Image Viewer Service
@@ -44,7 +44,8 @@ export class ImageViewerComponent implements OnInit, OnDestroy, ViewDidEnter {
     private alertController: AlertController,
     private imageViewerService: ImageViewerService,
     private navController: NavController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private translate: TranslateService
   ) {}
 
   ionViewDidEnter(): void {
@@ -94,16 +95,18 @@ export class ImageViewerComponent implements OnInit, OnDestroy, ViewDidEnter {
     const imageIndex = await this.slider.getActiveIndex();
 
     const alert = await this.alertController.create({
-      header: 'Delete',
-      message: 'Do you really want to delete this image?',
+      header: this.translate.instant('documentsUpload.delete'),
+      message: this.translate.instant(
+        'documentsUpload.deleteConfirmationMessage'
+      ),
       cssClass: 'custom-alert-button-colors',
       buttons: [
         {
-          text: 'Cancel',
+          text: this.translate.instant('commonLables.cancel'),
           role: 'cancel',
         },
         {
-          text: 'Delete',
+          text: this.translate.instant('documentsUpload.delete'),
           cssClass: 'color-secondary',
           handler: () => {
             this.deleteImage(imageIndex);
@@ -134,7 +137,9 @@ export class ImageViewerComponent implements OnInit, OnDestroy, ViewDidEnter {
 
     // Display a success message.
     const toast = await this.toastController.create({
-      message: 'The image has been deleted',
+      message: this.translate.instant(
+        'documentsUpload.imageDeleteSuccessMessage'
+      ),
       duration: 3000,
     });
     toast.present();

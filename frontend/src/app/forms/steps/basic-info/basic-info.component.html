@@ -1,13 +1,14 @@
 <div class="main-description">
-  <h1>Welcome!</h1>
+  <h1>{{ 'basicInfo.welcome' | translate }}</h1>
 
-  So that we can get to know you better, please provide your first and last
-  name.
+  {{ 'basicInfo.stepDescription' | translate }}
 </div>
 
 <ion-list>
   <ion-item class="ion-no-padding">
-    <ion-label color="medium">Title</ion-label>
+    <ion-label color="medium">{{
+      'basicInfo.salutationTitle' | translate
+    }}</ion-label>
     <ion-select
       [formControl]="formsData.controls.basicInfo.controls.salutation"
       interface="popover"
@@ -22,14 +23,18 @@
   </ion-item>
 
   <ion-item class="ion-no-padding">
-    <ion-label position="floating" color="medium">First name</ion-label>
+    <ion-label position="floating" color="medium">{{
+      'basicInfo.firstName' | translate
+    }}</ion-label>
     <ion-input
       [formControl]="formsData.controls.basicInfo.controls.firstName"
     ></ion-input>
   </ion-item>
 
   <ion-item class="ion-no-padding">
-    <ion-label position="floating" color="medium">Last name</ion-label>
+    <ion-label position="floating" color="medium">{{
+      'basicInfo.lastName' | translate
+    }}</ion-label>
     <ion-input
       [formControl]="formsData.controls.basicInfo.controls.lastName"
     ></ion-input>

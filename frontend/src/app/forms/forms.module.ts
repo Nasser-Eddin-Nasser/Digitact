@@ -8,6 +8,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
+import { SharedModule } from '../shared.module';
+
 import { FormsPageRoutingModule } from './forms-routing.module';
 import { FormsPage } from './forms.page';
 import { SideMenuComponent } from './side-menu/side-menu.component';
@@ -15,8 +17,7 @@ import { AdditionalInfoComponent } from './steps/additional-info/additional-info
 import { BasicInfoComponent } from './steps/basic-info/basic-info.component';
 import { ContactInfoComponent } from './steps/contact-info/contact-info.component';
 import { DocumentsModule } from './steps/documents/documents.module';
-import { EducationInfoEntryComponent } from './steps/education-info-entry/education-info-entry.component';
-import { EducationInfoComponent } from './steps/education-info/education-info.component';
+import { EducationInfoModule } from './steps/education-info/education-info.module';
 import { FieldDesignationPageComponent } from './steps/field-designation-page/field-designation-page.component';
 import { KeyCompetenciesModule } from './steps/key-competencies/key-competencies.module';
 import { ProfilePictureComponent } from './steps/profile-picture/profile-picture.component';
@@ -32,7 +33,9 @@ import { WorkExperienceComponent } from './steps/work-experience/work-experience
     IonicModule,
     ReactiveFormsModule,
     DocumentsModule,
+    EducationInfoModule,
     KeyCompetenciesModule,
+    SharedModule,
   ],
   declarations: [
     FormsPage,
@@ -40,8 +43,6 @@ import { WorkExperienceComponent } from './steps/work-experience/work-experience
     SideMenuComponent,
     SubmitPageComponent,
     ContactInfoComponent,
-    EducationInfoComponent,
-    EducationInfoEntryComponent,
     FieldDesignationPageComponent,
     ProfilePictureComponent,
     AdditionalInfoComponent,

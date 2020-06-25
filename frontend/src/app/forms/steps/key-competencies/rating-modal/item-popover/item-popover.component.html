@@ -12,7 +12,7 @@
 
     <ion-buttons slot="end">
       <ion-button (click)="closePopover()">
-        Close
+        {{ 'commonLables.close' | translate }}
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -20,11 +20,12 @@
 
 <ion-content class="ion-padding">
   <div class="description">
-    Please rate your skills from 1 (not good) to 5 (excellent).
+    {{ 'keyCompetencies.ratingMessage' | translate }}
   </div>
 
   <div class="description ion-margin-top">
-    Rating: {{ formItem.controls.rating.value }}
+    {{ 'keyCompetencies.rating' | translate }}
+    {{ formItem.controls.rating.value }}
   </div>
 
   <ion-range
