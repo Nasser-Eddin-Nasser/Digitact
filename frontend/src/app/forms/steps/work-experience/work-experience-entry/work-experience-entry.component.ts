@@ -21,15 +21,15 @@ export class WorkExperienceEntryComponent {
 
   employmentTypeArray = [
     {
-      value: 'Full-Time',
+      value: 'FullTime',
       displayName: this.translate.instant('workExperience.fullTime'),
     },
     {
-      value: 'Part-Time',
+      value: 'PartTime',
       displayName: this.translate.instant('workExperience.partTime'),
     },
     {
-      value: 'Self-Employed',
+      value: 'SelfEmployed',
       displayName: this.translate.instant('workExperience.selfEmployed'),
     },
     {

@@ -5,6 +5,7 @@ import Digitact.Backend.Model.Image.ImageString;
 import Digitact.Backend.Model.Industries;
 import Digitact.Backend.Model.KeyCompetence;
 import Digitact.Backend.Model.Positions;
+import Digitact.Backend.Model.WorkExperience;
 import java.util.List;
 
 public class ApplicantUI implements IUser {
@@ -20,7 +21,7 @@ public class ApplicantUI implements IUser {
     private Title title;
     private List<ImageString> imageList;
     private List<Education> educations;
-
+    private List<WorkExperience> workExperiences;
     private List<Industries> industries;
     private List<Positions> positions;
     private List<KeyCompetence> keyCompetencies;
@@ -39,6 +40,7 @@ public class ApplicantUI implements IUser {
             Title title,
             List<ImageString> imageList,
             List<Education> educations,
+            List<WorkExperience> workExperiences,
             List<Industries> industries,
             List<Positions> positions,
             List<KeyCompetence> keyCompetencies,
@@ -52,6 +54,7 @@ public class ApplicantUI implements IUser {
         this.title = title;
         this.imageList = imageList;
         this.educations = educations;
+        this.workExperiences = workExperiences;
         this.industries = industries;
         this.positions = positions;
         this.keyCompetencies = keyCompetencies;
@@ -64,6 +67,10 @@ public class ApplicantUI implements IUser {
 
     public List<Education> getEducations() {
         return educations;
+    }
+    
+    public List<WorkExperience> getWorkExperiences() {
+        return workExperiences;
     }
 
     public List<KeyCompetence> getKeyCompetencies() {

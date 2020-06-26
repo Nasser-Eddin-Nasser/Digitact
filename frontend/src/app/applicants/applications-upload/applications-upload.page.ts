@@ -114,6 +114,7 @@ export class ApplicationsUploadPage implements OnInit {
         linkedIn: inp.contactInfo.linkedIn,
         xing: inp.contactInfo.xing,
         imageList: images,
+        workExperiences: inp.workExperienceInfo.workExperienceForm,
         educations: inp.educationInfo.educationInfoForm,
         industries: inp.fieldDesignationInfo.field,
         positions: inp.fieldDesignationInfo.designation,
@@ -135,8 +136,8 @@ export class ApplicationsUploadPage implements OnInit {
         .subscribe(
           (response) => {
             if (response.status === 201) {
-              this.storage.deleteItem(this.storage.applicantDetailsDb, inp.id);
-              this.storage.deleteItem(this.storage.applicantRatingsDb, inp.id);
+              // this.storage.deleteItem(this.storage.applicantDetailsDb, inp.id);
+              // this.storage.deleteItem(this.storage.applicantRatingsDb, inp.id);
               if (this.uploadSize === this.totalSize) {
                 this.isSuccess = true;
                 this.completionAlert();

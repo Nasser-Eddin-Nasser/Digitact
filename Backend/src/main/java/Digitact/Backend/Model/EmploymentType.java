@@ -7,5 +7,6 @@ public enum EmploymentType {
     Freelance,
     Contract,
     Internship,
-    Apprenticeship
+    Apprenticeship,
+    Other
 }
