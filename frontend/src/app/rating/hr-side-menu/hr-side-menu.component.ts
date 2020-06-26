@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { FormGroup } from '../../common/forms/forms';
 import { RatingForm } from '../model/rating-form.model';
-import { hrRatingStep, hrRatingStepArr } from '../model/steps.model';
+import { HRRatingStep, HRRatingStepsArr } from '../model/steps.model';
 
 @Component({
   selector: 'app-hr-side-menu',
@@ -29,7 +29,7 @@ export class HrSideMenuComponent {
    * Only access this property in the template.
    * In the TS file, you can directly refer to the underlying element.
    */
-  readonly HR_RATING_STEP = hrRatingStep;
+  readonly HR_RATING_STEP = HRRatingStep;
 
   /**
    * Make the Steps Array available in the template.
@@ -37,7 +37,7 @@ export class HrSideMenuComponent {
    * Only access this property in the template.
    * In the TS file, you can directly refer to the underlying element.
    */
-  readonly HR_RATING_STEP_ARR = hrRatingStepArr;
+  readonly HR_RATING_STEP_ARR = HRRatingStepsArr;
 
   /**
    * Data of the entire form.
@@ -49,7 +49,7 @@ export class HrSideMenuComponent {
    * Which step is currently displayed?
    */
   @Input()
-  currentStep: hrRatingStep;
+  currentStep: HRRatingStep;
 
   displayMessages = {
     applicantRating: this.translate.instant('hrSideMenu.applicantRating'),
@@ -60,7 +60,7 @@ export class HrSideMenuComponent {
    * Update the "step" query paremeter.
    * You can use this to navigate between the different form steps!
    */
-  navigateToStep(step: hrRatingStep): void {
+  navigateToStep(step: HRRatingStep): void {
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
       queryParams: {
