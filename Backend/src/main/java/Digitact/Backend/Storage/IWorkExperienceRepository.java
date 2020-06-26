@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IEducationRepository extends JpaRepository<WorkExperience, Long> {
+public interface IWorkExperienceRepository extends JpaRepository<WorkExperience, Long> {
     List<WorkExperience> findAll();
 
     @Query(value = getWorkExperiencesByUserID, nativeQuery = true)
