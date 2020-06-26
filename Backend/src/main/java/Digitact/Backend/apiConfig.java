@@ -18,7 +18,7 @@ public class apiConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200")
+                        .allowedOrigins(ConfigProperties.absoluteClientURL)
                         .allowedMethods("GET", "POST")
                         .allowCredentials(false)
                         .maxAge(3600);

@@ -160,8 +160,10 @@
                           <Tab text="Information">
                              <SplitPane dividerPositions="0.2358974358974359, 0.6128205128205129" orientation="VERTICAL" prefHeight="160.0" prefWidth="250.0">
                                 <items>
-                                   <TitledPane collapsible="false" maxHeight="400.0" minHeight="100.0" prefHeight="200.0" text="Education Info" wrapText="true">
+
+                                   <TitledPane maxHeight="400.0" minHeight="100.0" prefHeight="200.0" text="Education Info" wrapText="true">
                                       <content>
+                                         
                                          <TableView fx:id="eduInfoTblFX" maxHeight="500.0" prefHeight="0.0">
                                             <columns>
                                                <TableColumn fx:id="universityFX" prefWidth="142.0" text="University" />
@@ -186,8 +188,8 @@
                                       <content>
                                          <TableView maxHeight="1000.0" prefHeight="201.0">
                                             <columns>
-                                               <TableColumn fx:id="proL_frameWFX" minWidth="-1.0" prefWidth="162.0" text="Programming Languages &amp; Frameworks" />
-                                               <TableColumn fx:id="dbFX" minWidth="-1.0" prefWidth="165.0" text="Databases" />
+                                               <TableColumn fx:id="proL_frameWFX" minWidth="-1.0" prefWidth="197.0" text="Programming Languages &amp; Frameworks" />
+                                               <TableColumn fx:id="dbFX" minWidth="-1.0" prefWidth="130.0" text="Databases" />
                                                <TableColumn fx:id="proSoftFX" minWidth="-1.0" prefWidth="137.0" text="Professional Software" />
                                                <TableColumn fx:id="spoLanFX" minWidth="-1.0" prefWidth="142.0" resizable="false" text="Spoken Languages" />
                                             </columns>

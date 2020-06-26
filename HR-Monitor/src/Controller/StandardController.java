@@ -34,7 +34,7 @@ public class StandardController {
         stage.setScene(viewHRStandard);
         this.stage.setResizable(true);
         borderPaneCurrentView.setCenter(loadContent());
-        textMenuLabel.setText(ADMIN_USERNAME);
+        textMenuLabel.setText("user:"+ADMIN_USERNAME);
         //        loadMenu();
         stage.show();
     }
