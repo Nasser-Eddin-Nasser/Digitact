@@ -92,7 +92,7 @@ ion-item.item-has-focus {
 */
 
 .main-container {
-  width: 100%;
+  max-width: variables.$main-container-width-breakpoint;
   max-width: 475px;
   margin-right: auto;
   margin-left: auto;

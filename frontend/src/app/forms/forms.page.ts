@@ -127,7 +127,7 @@ export class FormsPage
    *
    * **Important! Do not modify this value directly! Use `setCurrentStep()` instead!**
    */
-  currentStep: ApplicationStep;
+  currentStep: ApplicationStep = ApplicationStep.BasicInformation;
   /**
    * Which step is currently displayed?
    * This is the index in our array of steps.
