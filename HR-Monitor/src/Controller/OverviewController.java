@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -25,244 +26,269 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 public class OverviewController {
-    Stage stage;
-    OverviewModel model;
-    // Create a TableView with a list of Applicants
-    @FXML TableView<ApplicantUI> userTable;
-    private ObservableList<ApplicantUI> observableListTableView;
+	Stage stage;
+	OverviewModel model;
+	// Create a TableView with a list of Applicants
+	@FXML
+	TableView<ApplicantUI> userTable;
+	private ObservableList<ApplicantUI> observableListTableView;
 
-    // Create a TableView with a list of Education Info of an Applicant
-    @FXML TableView<Education> eduInfoTblFX;
-    private ObservableList<Education> observableListEduInfoTableView;
+	// Create a TableView with a list of Education Info of an Applicant
+	@FXML
+	TableView<Education> eduInfoTblFX;
+	private ObservableList<Education> observableListEduInfoTableView;
 
-    @FXML TableView<Positions> posTable;
-    private ObservableList<Positions> observableListPosTableTableView;
+	@FXML
+	TableView<Positions> posTable;
+	private ObservableList<Positions> observableListPosTableTableView;
 
-    @FXML TableView<Industries> indTable;
-    private ObservableList<Industries> observableListIndTableTableView;
+	@FXML
+	TableView<Industries> indTable;
+	private ObservableList<Industries> observableListIndTableTableView;
 
-    @FXML TableColumn<Positions, String> posFX = new TableColumn<>("Position");
-    @FXML TableColumn<Industries, String> indFX = new TableColumn<>("Industry");
-    // Overview of all Applicants
-    @FXML TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
-    @FXML TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
-    @FXML TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
+	@FXML
+	TableColumn<Positions, String> posFX = new TableColumn<>("Position");
+	@FXML
+	TableColumn<Industries, String> indFX = new TableColumn<>("Industry");
+	// Overview of all Applicants
+	@FXML
+	TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
+	@FXML
+	TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
+	@FXML
+	TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
 
-    // Applicant Info View's Variables
-    // 1. Basic Info
-    @FXML Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX;
-    @FXML Hyperlink hplLinkedInFX, hplXingFX;
-    // 2. Edu Info
-    @FXML TableColumn<Education, String> universityFX = new TableColumn<>("university");
-    @FXML TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
-    @FXML TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
-    @FXML TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
-    @FXML TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
-    // 3. Image of the  Applicant
+	// Applicant Info View's Variables
+	// 1. Basic Info
+	@FXML
+	Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX;
+	@FXML
+	Hyperlink hplLinkedInFX, hplXingFX;
+	// 2. Edu Info
+	@FXML
+	TableColumn<Education, String> universityFX = new TableColumn<>("university");
+	@FXML
+	TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
+	@FXML
+	TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
+	@FXML
+	TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
+	@FXML
+	TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
+	// 3. Image of the Applicant
 
-    // Additional Info
-    @FXML Label lblAddInfo;
-    @FXML private ImageView imgFX;
+	// Additional Info
+	@FXML
+	Label lblAddInfo;
+	@FXML
+	private ImageView imgFX;
 
-    Pane root;
+	Pane root;
 
-    public OverviewController(/*Stage parentStage*/ ) throws IOException {
-        model = new OverviewModel();
-        stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/storageView.fxml"));
-        loader.setController(this);
-        root = (Pane) loader.load();
-        getTable();
-    }
+	public OverviewController(/* Stage parentStage */ ) throws IOException {
+		model = new OverviewModel();
+		stage = new Stage();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/storageView.fxml"));
+		loader.setController(this);
+		root = (Pane) loader.load();
+		getTable();		
+	}
 
-    public void showApplicantInfo(long id) {
-        try {
-            Stage stageApplicantInfo = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/applicantInfo.fxml"));
-            loader.setController(this);
-            Scene scene = new Scene(loader.load());
-            stageApplicantInfo.show();
-            stageApplicantInfo.setScene(scene);
-            stageApplicantInfo.setTitle("Applicant Info");
-            stageApplicantInfo
-                    .getIcons()
-                    .add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
-            ApplicantUI app = model.getApplicantByID(id);
-            setTableBasicInfo(app);
-            setPositionAndIndustry(app);
-            getTableEduInfo(app);
-            getImage(app);
-        } catch (IOException e) {
-            System.err.println("unable to load Image!");
-        }
-    }
+	@FXML
+	private void onRefresh() {
+		getTable();
+	}
 
-    private void setPositionAndIndustry(ApplicantUI app) {
-        getPositionTable(app.getPositions());
-        getIndTable(app.getIndustries());
-    }
+	@FXML
+	private void onLogout(InputEvent inp) {
+		try {
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			alert.setTitle("Logout");
+			alert.setHeaderText("Do you want to logout? ");
+			((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+			((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+			alert.showAndWait();
+			stage.close();
+			if (alert.getResult().getText().equals("OK")) {	
+				final Node source = (Node) inp.getSource();
+			    final Stage stage = (Stage) source.getScene().getWindow();
+			    stage.close();
+			    new AcController();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void showApplicantInfo(long id) {
+		try {
+			Stage stageApplicantInfo = new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/applicantInfo.fxml"));
+			loader.setController(this);
+			Scene scene = new Scene(loader.load());
+			stageApplicantInfo.show();
+			stageApplicantInfo.setScene(scene);
+			stageApplicantInfo.setTitle("Applicant Info");
+			stageApplicantInfo.getIcons().add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
+			ApplicantUI app = model.getApplicantByID(id);
+			setTableBasicInfo(app);
+			setPositionAndIndustry(app);
+			getTableEduInfo(app);
+			getImage(app);
+		} catch (IOException e) {
+			System.err.println("unable to load Image!");
+		}
+	}
 
-    private ObservableList<Industries> getIndTable(List<Industries> industries) {
-        observableListIndTableTableView = indTable.getItems();
-        observableListIndTableTableView.clear();
-        observableListIndTableTableView.addAll(industries);
-        setFactoriesAndComparatorsForIndTableColumns();
-        return observableListIndTableTableView;
-    }
+	private void setPositionAndIndustry(ApplicantUI app) {
+		getPositionTable(app.getPositions());
+		getIndTable(app.getIndustries());
+	}
 
-    public void setFactoriesAndComparatorsForIndTableColumns() {
-        indFX.setCellValueFactory(ind -> new ReadOnlyStringWrapper(ind.getValue().getIndustry()));
-    }
+	private ObservableList<Industries> getIndTable(List<Industries> industries) {
+		observableListIndTableTableView = indTable.getItems();
+		observableListIndTableTableView.clear();
+		observableListIndTableTableView.addAll(industries);
+		setFactoriesAndComparatorsForIndTableColumns();
+		return observableListIndTableTableView;
+	}
 
-    private ObservableList<Positions> getPositionTable(List<Positions> positions) {
-        observableListPosTableTableView = posTable.getItems();
-        observableListPosTableTableView.clear();
-        observableListPosTableTableView.addAll(positions);
-        setFactoriesAndComparatorsForPosTableColumns();
-        return observableListPosTableTableView;
-    }
+	public void setFactoriesAndComparatorsForIndTableColumns() {
+		indFX.setCellValueFactory(ind -> new ReadOnlyStringWrapper(ind.getValue().getIndustry()));
+	}
 
-    public void setFactoriesAndComparatorsForPosTableColumns() {
-        posFX.setCellValueFactory(pos -> new ReadOnlyStringWrapper(pos.getValue().getPosition()));
-    }
+	private ObservableList<Positions> getPositionTable(List<Positions> positions) {
+		observableListPosTableTableView = posTable.getItems();
+		observableListPosTableTableView.clear();
+		observableListPosTableTableView.addAll(positions);
+		setFactoriesAndComparatorsForPosTableColumns();
+		return observableListPosTableTableView;
+	}
 
-    private void getImage(ApplicantUI app) {
-        List<AppImage> profImgs =
-                app.getAppImage()
-                        .stream()
-                        .filter(x -> x.getType().equals(ImageType.profilePic))
-                        .collect(Collectors.toList());
-        if (profImgs.size() > 0) {
-            try {
-                AppImage img = profImgs.get(0);
-                setProfileImage(app, img);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+	public void setFactoriesAndComparatorsForPosTableColumns() {
+		posFX.setCellValueFactory(pos -> new ReadOnlyStringWrapper(pos.getValue().getPosition()));
+	}
 
-    private void setProfileImage(ApplicantUI app, AppImage img) throws IOException {
-        Connector.sendGetHttp(getImageById, String.valueOf(app.getID()), img.getId());
-        ImageTools.parseImageStringToImage(img);
+	private void getImage(ApplicantUI app) {
+		List<AppImage> profImgs = app.getAppImage().stream().filter(x -> x.getType().equals(ImageType.profilePic))
+				.collect(Collectors.toList());
+		if (profImgs.size() > 0) {
+			try {
+				AppImage img = profImgs.get(0);
+				setProfileImage(app, img);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
-        File file = new File(img.getPath());
+	private void setProfileImage(ApplicantUI app, AppImage img) throws IOException {
+		Connector.sendGetHttp(getImageById, String.valueOf(app.getID()), img.getId());
+		ImageTools.parseImageStringToImage(img);
 
-        imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
-    }
+		File file = new File(img.getPath());
 
-    private void setTableBasicInfo(ApplicantUI app) {
-        lblFNameFX.setText(app.getFirstName());
-        lblLNameFX.setText(app.getLastName());
-        lblEmailFX.setText(app.getEmail());
-        lblPNumberFX.setText(app.getPhone());
-        lblAddInfo.setText(app.getAdditionalInfo());
-        hplLinkedInFX.setText(app.getLinkedIn());
-        hplXingFX.setText(app.getXing());
-        profAccountLinkActions();
-    }
+		imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
+	}
 
-    void profAccountLinkActions() {
-        hplLinkedInFX.setOnAction(
-                new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        try {
-                            java.awt.Desktop.getDesktop()
-                                    .browse(
-                                            URI.create(
-                                                    "https://www.linkedin.com/in/"
-                                                            + hplLinkedInFX.getText()));
+	private void setTableBasicInfo(ApplicantUI app) {
+		lblFNameFX.setText(app.getFirstName());
+		lblLNameFX.setText(app.getLastName());
+		lblEmailFX.setText(app.getEmail());
+		lblPNumberFX.setText(app.getPhone());
+		lblAddInfo.setText(app.getAdditionalInfo());
+		hplLinkedInFX.setText(app.getLinkedIn());
+		hplXingFX.setText(app.getXing());
+		profAccountLinkActions();
+	}
 
-                        } catch (IOException ioException) {
-                            ioException.printStackTrace();
-                        }
-                    }
-                });
-        hplXingFX.setOnAction(
-                new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        try {
-                            java.awt.Desktop.getDesktop()
-                                    .browse(
-                                            URI.create(
-                                                    "https://www.xing.com/profile/"
-                                                            + hplXingFX.getText()));
+	void profAccountLinkActions() {
+		hplLinkedInFX.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				try {
+					java.awt.Desktop.getDesktop()
+							.browse(URI.create("https://www.linkedin.com/in/" + hplLinkedInFX.getText()));
 
-                        } catch (IOException ioException) {
-                            ioException.printStackTrace();
-                        }
-                    }
-                });
-    }
+				} catch (IOException ioException) {
+					ioException.printStackTrace();
+				}
+			}
+		});
+		hplXingFX.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				try {
+					java.awt.Desktop.getDesktop()
+							.browse(URI.create("https://www.xing.com/profile/" + hplXingFX.getText()));
 
-    private ObservableList<Education> getTableEduInfo(ApplicantUI app) {
-        observableListEduInfoTableView = eduInfoTblFX.getItems();
-        observableListEduInfoTableView.clear();
-        observableListEduInfoTableView.addAll(app.getEducation());
-        setFactoriesAndComparatorsForEduInfoTableColumns();
-        return observableListEduInfoTableView;
-    }
+				} catch (IOException ioException) {
+					ioException.printStackTrace();
+				}
+			}
+		});
+	}
 
-    public Pane getPane() {
-        return root;
-    }
+	private ObservableList<Education> getTableEduInfo(ApplicantUI app) {
+		observableListEduInfoTableView = eduInfoTblFX.getItems();
+		observableListEduInfoTableView.clear();
+		observableListEduInfoTableView.addAll(app.getEducation());
+		setFactoriesAndComparatorsForEduInfoTableColumns();
+		return observableListEduInfoTableView;
+	}
 
-    public void setFactoriesAndComparatorsForEduInfoTableColumns() {
-        universityFX.setCellValueFactory(
-                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getUniversity()));
-        subjectFX.setCellValueFactory(
-                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getSubject()));
-        degreeFX.setCellValueFactory(
-                applicant ->
-                        new ReadOnlyStringWrapper(applicant.getValue().getDegree().toString()));
-        gradeFX.setCellValueFactory(
-                applicant -> new ReadOnlyDoubleWrapper(applicant.getValue().getGrade()));
-        gradYearFX.setCellValueFactory(
-                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getGraduationYear()));
-    }
+	public Pane getPane() {
+		return root;
+	}
 
-    public void setFactoriesAndComparatorsForTableColumns() {
-        idCol.setCellValueFactory(user -> new ReadOnlyLongWrapper(user.getValue().getID()));
-        idCol.setVisible(false);
-        firstNameCol.setCellValueFactory(
-                user -> new ReadOnlyStringWrapper(user.getValue().getFirstName()));
-        lastNameCol.setCellValueFactory(
-                user -> new ReadOnlyStringWrapper(user.getValue().getLastName()));
-    }
+	public void setFactoriesAndComparatorsForEduInfoTableColumns() {
+		universityFX.setCellValueFactory(applicant -> new ReadOnlyStringWrapper(applicant.getValue().getUniversity()));
+		subjectFX.setCellValueFactory(applicant -> new ReadOnlyStringWrapper(applicant.getValue().getSubject()));
+		degreeFX.setCellValueFactory(
+				applicant -> new ReadOnlyStringWrapper(applicant.getValue().getDegree().toString()));
+		gradeFX.setCellValueFactory(applicant -> new ReadOnlyDoubleWrapper(applicant.getValue().getGrade()));
+		gradYearFX
+				.setCellValueFactory(applicant -> new ReadOnlyStringWrapper(applicant.getValue().getGraduationYear()));
+	}
 
-    public ObservableList<ApplicantUI> getTable() {
-        List<ApplicantUI> applicantsList = model.getDB();
-        AddClickFunctionToUserTable();
-        observableListTableView = userTable.getItems();
-        observableListTableView.clear();
-        observableListTableView.addAll(applicantsList);
-        setFactoriesAndComparatorsForTableColumns();
-        return observableListTableView;
-    }
+	public void setFactoriesAndComparatorsForTableColumns() {
+		idCol.setCellValueFactory(user -> new ReadOnlyLongWrapper(user.getValue().getID()));
+		idCol.setVisible(false);
+		firstNameCol.setCellValueFactory(user -> new ReadOnlyStringWrapper(user.getValue().getFirstName()));
+		lastNameCol.setCellValueFactory(user -> new ReadOnlyStringWrapper(user.getValue().getLastName()));
+	}
 
-    private void AddClickFunctionToUserTable() {
-        userTable.setRowFactory(
-                e -> {
-                    TableRow<ApplicantUI> row = new TableRow<>();
-                    row.setOnMouseClicked(
-                            event -> {
-                                if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                                    ApplicantUI rowData = row.getItem();
-                                    showApplicantInfo(rowData.getID());
-                                }
-                            });
-                    return row;
-                });
-    }
+	public ObservableList<ApplicantUI> getTable() {
+		List<ApplicantUI> applicantsList = model.getDB();
+		AddClickFunctionToUserTable();
+		observableListTableView = userTable.getItems();
+		observableListTableView.clear();
+		observableListTableView.addAll(applicantsList);
+		setFactoriesAndComparatorsForTableColumns();
+		return observableListTableView;
+	}
+
+	private void AddClickFunctionToUserTable() {
+		userTable.setRowFactory(e -> {
+			TableRow<ApplicantUI> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					ApplicantUI rowData = row.getItem();
+					showApplicantInfo(rowData.getID());
+				}
+			});
+			return row;
+		});
+	}
 }
