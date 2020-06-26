@@ -1,5 +1,6 @@
 package Digitact.Backend.Model.User;
 
+import Digitact.Backend.Model.WorkExperience;
 import Digitact.Backend.Model.Education;
 import Digitact.Backend.Model.Image.AppImage;
 import Digitact.Backend.Model.Industries;
@@ -40,6 +41,10 @@ public class Applicant extends User {
     @Fetch(FetchMode.JOIN)
     private Set<Education> educations;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
+    private Set<WorkExperience> workExperiences;
+
     @ElementCollection(targetClass = Industries.class)
     @Column(name = "Industries")
     private Set<Industries> industries;
@@ -71,6 +76,8 @@ public class Applicant extends User {
         images = new HashSet<AppImage>();
         industries = new HashSet<Industries>();
         positions = new HashSet<Positions>();
+        workExperiences = new HashSet<WorkExperience>();
+
     }
 
     public UserRight getUserRight() {
@@ -87,6 +94,18 @@ public class Applicant extends User {
 
     public void setEducations(List<Education> education) {
         education.forEach(edd -> educations.add(edd));
+    }
+
+    public void setWorkExperience(WorkExperience workExperience) {
+        workExperiences.add(workExperience);
+    }
+
+    public List<WorkExperience> getWorkExperiences() {
+        return new ArrayList<WorkExperience>(workExperiences);
+    }
+
+    public void setWorkExperiences(List<WorkExperience> workExperience) {
+        workExperience.forEach(wex -> workExperiences.add(wex));
     }
 
     public List<Positions> getPositions() {
