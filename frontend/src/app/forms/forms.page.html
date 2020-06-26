@@ -26,33 +26,6 @@
   <ion-progress-bar value="{{progressPercentage}}"></ion-progress-bar>
 </ion-header>
 
-<div
-  class="custom-skip-item"
-  *ngIf="currentStep !== APPLICATION_STEP.BasicInformation && 
-  currentStep !== APPLICATION_STEP.ProfilePicture && 
-  currentStep !== APPLICATION_STEP.Submit && 
-  currentStep !== APPLICATION_STEP.ContactInformation"
->
-  <ion-item lines="none">
-    <ion-label> Skip this Step</ion-label>
-    <ion-toggle
-      slot="start"
-      color="primary"
-      class="custom-toggle"
-      (ionChange)="toggleSkipStep(currentStep)"
-      [checked]="isSkipStep[currentStepIndex]"
-    ></ion-toggle>
-  </ion-item>
-</div>
-
-<button
-  class="top-button"
-  (click)="navigateToNextStep()"
-  *ngIf="currentStep !== APPLICATION_STEP.Submit && this.isSkipStep[currentStepIndex]"
->
-  {{'commonLables.continue' | translate}}
-</button>
-
 <app-side-menu
   [formsData]="formsData"
   [currentStep]="currentStep"
@@ -61,8 +34,31 @@
 <ion-content>
   <div class="main-container with-bottom-buttons">
     <div
+      class="skip-step-toggle"
+      [class.is-active]="this.isSkipped[currentStep].value"
+      *ngIf="APPLICATION_STEPS_CONFIG[currentStep].maySkipStep"
+    >
+      <ion-item lines="none">
+        <ion-label> Skip this Step</ion-label>
+        <ion-toggle
+          slot="start"
+          color="primary"
+          [formControl]="isSkipped[currentStep]"
+        ></ion-toggle>
+      </ion-item>
+    </div>
+
+    <button
+      class="fancy-button"
+      (click)="navigateToNextStep()"
+      *ngIf="this.isSkipped[currentStep].value"
+    >
+      {{'commonLables.continue' | translate}}
+    </button>
+
+    <div
       class="content"
-      [class.custom-skip]="this.isSkipStep[currentStepIndex]"
+      [class.custom-skip]="this.isSkipped[currentStep].value"
     >
       <ng-container [ngSwitch]="currentStep">
         <form-basic-info
@@ -126,7 +122,7 @@
       <button
         class="fancy-button"
         (click)="navigateToNextStep()"
-        *ngIf="currentStep !== APPLICATION_STEP.Submit && !this.isSkipStep[currentStepIndex]"
+        *ngIf="currentStep !== APPLICATION_STEP.Submit && !this.isSkipped[currentStep].value"
       >
         {{'commonLables.continue' | translate}}
       </button>

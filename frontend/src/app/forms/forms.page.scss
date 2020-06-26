@@ -1,3 +1,5 @@
+@use '../../theme/variables.scss';
+
 ion-progress-bar {
   height: 10px;
 }
@@ -7,27 +9,19 @@ ion-progress-bar {
   pointer-events: none;
 }
 
-.custom-skip-item {
+.skip-step-toggle {
   display: flex;
   justify-content: flex-end;
-  font-size: 15px;
 }
-.custom-toggle {
-  --handle-height: 30px;
-  height: 30px;
+@media (min-width: variables.$main-container-width-breakpoint) {
+  .skip-step-toggle {
+    justify-content: center;
+  }
 }
-
-.top-button {
-  font-size: 26px;
-  color: var(--ion-color-secondary-contrast);
-  background: var(--ion-color-secondary);
-  padding: 1rem;
-  border-radius: 1000px 0 1000px 1000px;
+.skip-step-toggle ion-label {
   font-weight: 500;
-  letter-spacing: 4px;
-  outline: none;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  margin-right: 1.5rem;
-  margin-left: 1.5rem;
+  color: var(--ion-color-medium);
+}
+.skip-step-toggle.is-active ion-label {
+  color: var(--ion-color-primary);
 }

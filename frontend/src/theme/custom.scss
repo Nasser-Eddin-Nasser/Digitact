@@ -1,3 +1,5 @@
+@use './variables';
+
 // Use Roboto both for Android and iOS.
 html.md,
 html.ios {
@@ -96,7 +98,7 @@ ion-item.item-has-focus {
   margin-left: auto;
   padding: 1.5rem;
 }
-@media (min-width: 450px) {
+@media (min-width: variables.$main-container-width-breakpoint) {
   .main-container .main-description {
     text-align: center;
   }
