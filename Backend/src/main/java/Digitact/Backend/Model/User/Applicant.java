@@ -54,7 +54,7 @@ public class Applicant extends User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
-    private Set<AppImage> images;
+    private List<AppImage> images;
 
     protected Applicant() {
         super();
@@ -68,7 +68,7 @@ public class Applicant extends User {
         super(firstName, lastName, UserRight.Applicant);
         educations = new HashSet<Education>();
         keyCompetencies = new HashSet<KeyCompetence>();
-        images = new HashSet<AppImage>();
+        images = new ArrayList<AppImage>();
         industries = new HashSet<Industries>();
         positions = new HashSet<Positions>();
     }
@@ -129,11 +129,11 @@ public class Applicant extends User {
         this.phone = phone;
     }
 
-    public Set<AppImage> getImages() {
+    public List<AppImage> getImages() {
         return images;
     }
 
-    public void setImages(Set<AppImage> images) {
+    public void setImages(List<AppImage> images) {
         this.images = images;
     }
 

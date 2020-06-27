@@ -1,12 +1,10 @@
 package Model.User;
 
-import Model.Education;
+import Model.*;
 import Model.Image.AppImage;
-import Model.Industries;
-import Model.KeyCompetence;
-import Model.Positions;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ApplicantUI {
     private long id;
@@ -92,7 +90,17 @@ public class ApplicantUI {
     }
 
     public List<KeyCompetence> getKeyCompetencies() {
+
         return keyCompetencies;
+    }
+
+    public List<KeyCompetence> getKeyCompetencies(KeyCompetenciesCategory competanceCatogory) {
+        List<KeyCompetence> selectedKeyCompetences =
+                keyCompetencies
+                        .stream()
+                        .filter(x -> x.getCategory() == competanceCatogory)
+                        .collect(Collectors.toList());
+        return selectedKeyCompetences;
     }
 
     public String getFirstName() {

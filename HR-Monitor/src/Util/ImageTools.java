@@ -28,6 +28,7 @@ public class ImageTools {
         String path = absoluteFileSystemPath + img.getType() + img.getId() + imageFormat;
         File file = new File(path);
         img.setPath(path);
+
         try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
             outputStream.write(data);
         } catch (IOException e) {
