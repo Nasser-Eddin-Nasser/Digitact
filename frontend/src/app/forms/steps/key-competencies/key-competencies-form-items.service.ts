@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 import { FormArray, FormControl, FormGroup } from '../../../common/forms/forms';
 import {
@@ -23,27 +24,13 @@ import {
  */
 @Injectable()
 export class KeyCompetenciesFormItemsService {
-  private readonly LANGUAGE_ITEMS = [
-    'Arabic',
-    'Chinese',
-    'Czech',
-    'English',
-    'Finnish',
-    'French',
-    'German',
-    'Greek',
-    'Hungarian',
-    'Italian',
-    'Japanese',
-    'Korean',
-    'Norwegian',
-    'Polish',
-    'Portuguese',
-    'Russian',
-    'Spanish',
-    'Swedish',
-    'Turkish',
-  ];
+  private readonly LANGUAGE_ITEMS = this.translate.instant(
+    'keyCompetencies.languageItems'
+  );
+
+  private readonly BUSINESS_SKILLS_ITEMS = this.translate.instant(
+    'keyCompetencies.businessSkillsItems'
+  );
 
   private readonly PROFESSIONAL_SOFTWARE_ITEMS = [
     'Adobe Photoshop',
@@ -86,6 +73,8 @@ export class KeyCompetenciesFormItemsService {
     'Vue',
   ];
 
+  constructor(private translate: TranslateService) {}
+
   /**
    * Generate all form items (so mainly the FormArrays and their content),
    * based on the "basis" provided as parameter.
@@ -98,6 +87,12 @@ export class KeyCompetenciesFormItemsService {
     const result = new FormGroup<KeyCompetenciesInternal>({
       languages: new FormArray<KeyCompetenciesEntry>(
         this.generateItems(this.LANGUAGE_ITEMS, basis.controls.languages)
+      ),
+      businessSkills: new FormArray<KeyCompetenciesEntry>(
+        this.generateItems(
+          this.BUSINESS_SKILLS_ITEMS,
+          basis.controls.businessSkills
+        )
       ),
       professionalSoftware: new FormArray<KeyCompetenciesEntry>(
         this.generateItems(

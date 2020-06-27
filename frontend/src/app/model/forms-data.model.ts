@@ -60,6 +60,7 @@ export interface FieldDesignationInfo {
 
 export interface KeyCompetencies {
   languages: UseControl<KeyCompetenciesEntry[]>;
+  businessSkills: UseControl<KeyCompetenciesEntry[]>;
   professionalSoftware: UseControl<KeyCompetenciesEntry[]>;
   databases: UseControl<KeyCompetenciesEntry[]>;
   programmingLanguagesAndFrameworks: UseControl<KeyCompetenciesEntry[]>;
