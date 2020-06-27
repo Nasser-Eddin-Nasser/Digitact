@@ -7,6 +7,9 @@ import org.springframework.web.servlet.config.annotation.ContentNegotiationConfi
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import static Digitact.Backend.ConfigProperties.absoluteClientURL_ionic;
+import static Digitact.Backend.ConfigProperties.absoluteClientURL_ng;
+
 /** @descriptions This class is configure client with server */
 @Configuration
 public class apiConfig {
@@ -18,7 +21,7 @@ public class apiConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200", "http://localhost:8100")
+                        .allowedOrigins(absoluteClientURL_ng, absoluteClientURL_ionic)
                         .allowedMethods("GET", "POST")
                         .allowCredentials(false)
                         .maxAge(3600);
@@ -31,3 +34,4 @@ public class apiConfig {
         };
     }
 }
+
