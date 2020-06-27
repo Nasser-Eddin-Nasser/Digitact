@@ -4,6 +4,7 @@ import static Database.Method.getImageById;
 
 import Database.Connector;
 import Model.Education;
+import Model.WorkExperience;
 import Model.Image.AppImage;
 import Model.Image.ImageType;
 import Model.Industries;
@@ -50,6 +51,10 @@ public class OverviewController {
 	private ObservableList<Education> observableListEduInfoTableView;
 
 	@FXML
+	TableView<WorkExperience> workInfoTblFX;
+	private ObservableList<WorkExperience> observableListWorkExpInfoTableView;
+	
+	@FXML
 	TableView<Positions> posTable;
 	private ObservableList<Positions> observableListPosTableTableView;
 
@@ -86,6 +91,19 @@ public class OverviewController {
 	TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
 	@FXML
 	TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
+	// 2. work Info
+	@FXML
+	TableColumn<WorkExperience, String> jobTitleFX = new TableColumn<>("jobTitle");
+	@FXML
+	TableColumn<WorkExperience, String> companyFX = new TableColumn<>("company");
+	@FXML
+	TableColumn<WorkExperience, String> employmentTypeFX = new TableColumn<>("employmentType");
+	@FXML
+	TableColumn<WorkExperience, String> startDateFX = new TableColumn<>("startDate");
+	@FXML
+	TableColumn<WorkExperience, String> endDateFX = new TableColumn<>("endDate");
+	@FXML
+	TableColumn<WorkExperience, String> descriptionFX = new TableColumn<>("description");
 	// 3. Image of the Applicant
 
 	// Additional Info
@@ -145,6 +163,7 @@ public class OverviewController {
 			setTableBasicInfo(app);
 			setPositionAndIndustry(app);
 			getTableEduInfo(app);
+			getTableWorkExpInfo(app);
 			getImage(app);
 		} catch (IOException e) {
 			System.err.println("unable to load Image!");
@@ -247,6 +266,14 @@ public class OverviewController {
 		setFactoriesAndComparatorsForEduInfoTableColumns();
 		return observableListEduInfoTableView;
 	}
+	
+	private ObservableList<WorkExperience> getTableWorkExpInfo(ApplicantUI app) {
+		observableListWorkExpInfoTableView = workInfoTblFX.getItems();
+		observableListWorkExpInfoTableView.clear();
+		observableListWorkExpInfoTableView.addAll(app.getWorkExperience());
+		setFactoriesAndComparatorsForWorkExpInfoTableColumns();
+		return observableListWorkExpInfoTableView;
+	}
 
 	public Pane getPane() {
 		return root;
@@ -260,6 +287,17 @@ public class OverviewController {
 		gradeFX.setCellValueFactory(applicant -> new ReadOnlyDoubleWrapper(applicant.getValue().getGrade()));
 		gradYearFX
 				.setCellValueFactory(applicant -> new ReadOnlyStringWrapper(applicant.getValue().getGraduationYear()));
+	}
+	
+	public void setFactoriesAndComparatorsForWorkExpInfoTableColumns() {
+		jobTitleFX.setCellValueFactory(applicant -> new ReadOnlyStringWrapper(applicant.getValue().getJobTitle()));
+		companyFX.setCellValueFactory(applicant -> new ReadOnlyStringWrapper(applicant.getValue().getCompany()));
+		employmentTypeFX.setCellValueFactory(
+				applicant -> new ReadOnlyStringWrapper(applicant.getValue().getEmploymentType().toString()));
+		startDateFX.setCellValueFactory(applicant -> new ReadOnlyStringWrapper(applicant.getValue().getStartDate()));
+		endDateFX
+				.setCellValueFactory(applicant -> new ReadOnlyStringWrapper(applicant.getValue().getEndDate()));
+		descriptionFX.setCellValueFactory(applicant -> new ReadOnlyStringWrapper(applicant.getValue().getDescription()));	
 	}
 
 	public void setFactoriesAndComparatorsForTableColumns() {

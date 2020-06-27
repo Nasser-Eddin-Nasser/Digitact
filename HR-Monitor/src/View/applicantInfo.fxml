@@ -175,14 +175,14 @@
                                 <items>
                                        <TitledPane collapsible="false" maxHeight="400.0" minHeight="100.0" prefHeight="200.0" text="Work Experience" wrapText="true">
                                           <content>
-                                             <TableView fx:id="eduInfoTblFX1" maxHeight="500.0" prefHeight="0.0">
+                                             <TableView fx:id="workInfoTblFX" maxHeight="500.0" prefHeight="0.0">
                                                 <columns>
-                                                   <TableColumn fx:id="universityFX1" prefWidth="142.0" text="Title" />
-                                                   <TableColumn fx:id="subjectFX1" prefWidth="149.0" text="Company" />
-                                                   <TableColumn fx:id="degreeFX1" prefWidth="89.0" text="Employment Type" />
-                                                   <TableColumn fx:id="gradeFX1" prefWidth="98.0" text="Start Date" />
-                                                   <TableColumn fx:id="gradYearFX1" prefWidth="102.0" text="End Date" />
-                                                   <TableColumn fx:id="gradYearFX11" prefWidth="102.0" text="Description" />
+                                                   <TableColumn fx:id="jobTitleFX" prefWidth="142.0" text="Title" />
+                                                   <TableColumn fx:id="companyFX" prefWidth="149.0" text="Company" />
+                                                   <TableColumn fx:id="employmentTypeFX" prefWidth="89.0" text="Employment Type" />
+                                                   <TableColumn fx:id="startDateFX" prefWidth="98.0" text="Start Date" />
+                                                   <TableColumn fx:id="endDateFX" prefWidth="102.0" text="End Date" />
+                                                   <TableColumn fx:id="descriptionFX" prefWidth="102.0" text="Description" />
                                                 </columns>
                                                 <columnResizePolicy>
                                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
