@@ -4,8 +4,6 @@ import Controller.AcController;
 import Util.Util;
 import javafx.stage.Stage;
 
-import static Main.Configuration.absoluteFileSystemPath;
-
 public class App extends javafx.application.Application {
 
     public static final boolean DEVELOPMENT_ENVIRONMENT = false;
