@@ -7,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { FormValue } from '../common/forms/forms';
-import { ToastController } from '../common/ion-wrappers/toast-controller';
-import { FormsData, KeyCompetenciesEntry } from '../model/forms-data.model';
-import { StorageHandlerService } from '../services/storage-handler.service';
+import { FormValue } from '../../common/forms/forms';
+import { ToastController } from '../../common/ion-wrappers/toast-controller';
+import { FormsData, KeyCompetenciesEntry } from '../../model/forms-data.model';
+import { StorageHandlerService } from '../../services/storage-handler.service';
 
 @Component({
   selector: 'app-applications-upload',
@@ -70,14 +70,13 @@ export class ApplicationsUploadPage implements OnInit {
   /**
    * In this method timeout of 1 second is speified to have a better readability of the application upload.
    */
-  private sleep(ms: number): Promise<void> {
+  sleep(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
-
   /**
    * In this method a post request is made to the server.
    */
-  private sendPostRequest(inp: FormValue<FormsData>): Promise<void> {
+  sendPostRequest(inp: FormValue<FormsData>): Promise<void> {
     /*
        TODO: The values are all optional.
        So, we should make sure that, if a value doesn't exist, this is handled appropriately.
@@ -87,7 +86,6 @@ export class ApplicationsUploadPage implements OnInit {
     /*
       TODO: The "HR part" (so the rating of the applicant) is currently not getting sent to the server.
     */
-
     return this.sleep(1000).then(() => {
       const keyCompetence: Array<{
         category: string;
@@ -126,6 +124,7 @@ export class ApplicationsUploadPage implements OnInit {
         linkedIn: inp.contactInfo.linkedIn,
         xing: inp.contactInfo.xing,
         imageList: images,
+        workExperiences: inp.workExperienceInfo.workExperienceForm,
         educations: inp.educationInfo.educationInfoForm,
         industries: inp.fieldDesignationInfo.field,
         positions: inp.fieldDesignationInfo.designation,
@@ -147,8 +146,8 @@ export class ApplicationsUploadPage implements OnInit {
         .subscribe(
           (response) => {
             if (response.status === 201) {
-              this.storage.deleteItem(this.storage.applicantDetailsDb, inp.id);
-              this.storage.deleteItem(this.storage.applicantRatingsDb, inp.id);
+              // this.storage.deleteItem(this.storage.applicantDetailsDb, inp.id);
+              // this.storage.deleteItem(this.storage.applicantRatingsDb, inp.id);
               if (this.uploadSize === this.totalSize) {
                 this.isSuccess = true;
                 this.completionAlert();

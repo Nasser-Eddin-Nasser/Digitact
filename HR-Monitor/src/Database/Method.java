@@ -6,7 +6,8 @@ public enum Method {
     getAllEducationInfo("getAllEducationInfo"),
     getAdminByUserName("getAdminByUserName"),
     createAdminAccount("createAdminAccount"),
-    getAdminUserNames("getAdminUserNames");
+    getAdminUserNames("getAdminUserNames"),
+	getAllWorkExperienceInfo("getAllWorkExperienceInfo");
 
     private final String name;
 
