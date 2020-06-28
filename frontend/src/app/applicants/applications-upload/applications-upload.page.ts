@@ -70,13 +70,13 @@ export class ApplicationsUploadPage implements OnInit {
   /**
    * In this method timeout of 1 second is speified to have a better readability of the application upload.
    */
-  sleep(ms: number): Promise<void> {
+  private sleep(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
   /**
    * In this method a post request is made to the server.
    */
-  sendPostRequest(inp: FormValue<FormsData>): Promise<void> {
+  private sendPostRequest(inp: FormValue<FormsData>): Promise<void> {
     /*
        TODO: The values are all optional.
        So, we should make sure that, if a value doesn't exist, this is handled appropriately.
@@ -146,8 +146,8 @@ export class ApplicationsUploadPage implements OnInit {
         .subscribe(
           (response) => {
             if (response.status === 201) {
-              // this.storage.deleteItem(this.storage.applicantDetailsDb, inp.id);
-              // this.storage.deleteItem(this.storage.applicantRatingsDb, inp.id);
+              this.storage.deleteItem(this.storage.applicantDetailsDb, inp.id);
+              this.storage.deleteItem(this.storage.applicantRatingsDb, inp.id);
               if (this.uploadSize === this.totalSize) {
                 this.isSuccess = true;
                 this.completionAlert();
