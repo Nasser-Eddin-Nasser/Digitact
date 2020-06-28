@@ -277,19 +277,18 @@ export class FormsPage
     theToggleFormControl: FormControl<boolean>
   ): Promise<void> {
     const alert = await this.alertController.create({
-      header: 'Skip',
-      message:
-        'Do you really want to skip this step? Please only do this if the data asked for in this step are part of the documents you took a photo of.',
+      header: this.translate.instant('skipStep.skip'),
+      message: this.translate.instant('skipStep.skipMessage'),
       buttons: [
         {
-          text: 'Cancel',
+          text: this.translate.instant('commonLables.cancel'),
           role: 'cancel',
           handler: () => {
             theToggleFormControl.setValue(false);
           },
         },
         {
-          text: 'Skip',
+          text: this.translate.instant('skipStep.skip'),
           handler: () => {
             // Nothing to do here, since the toggle is automatically toggled.
           },

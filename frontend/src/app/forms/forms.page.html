@@ -39,7 +39,7 @@
       *ngIf="APPLICATION_STEPS_CONFIG[currentStep].maySkipStep"
     >
       <ion-item lines="none">
-        <ion-label> Skip this Step</ion-label>
+        <ion-label>{{'skipStep.skipStep' | translate}}</ion-label>
         <ion-toggle
           slot="start"
           color="primary"

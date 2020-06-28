@@ -178,7 +178,7 @@ export class ApplicationsUploadPage implements OnInit {
   }
 
   /**
-   * In this method confirmation alert is displayed to notify the applications uplooad to server
+   * In this method confirmation alert is displayed to notify the applications upload to server
    * TimeOut for navigation is set to display the toast on current page and then navigate
    */
   async completionAlert(): Promise<void> {
