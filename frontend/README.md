@@ -51,3 +51,5 @@ npm run all-checks
 You don't want to create pages (or similar) manually? The Ionic CLI can generate them for you! See https://ionicframework.com/docs/cli/commands/generate
 
 Angular is also able to generate some files, but since we are using Ionic, you should first check whether the Ionic CLI provides an equivalent command for that.
+
+If you want to update the app icon or splash screen image, then you need to create lots of different image sizes. We recommend using https://github.com/ionic-team/cordova-res: This CLI tool generates all necessary sizes based on one single image. Important: Since our application is using Capacitor, you need to make sure to use the appropriate CLI flags. The cordova-res documentation covers in more detail.
