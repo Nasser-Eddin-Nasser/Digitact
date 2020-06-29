@@ -12,7 +12,7 @@ public class Education {
 
     private double grade;
 
-    private String graduation_date;
+    private String graduationYear;
 
     private Education() {}
 
@@ -26,8 +26,7 @@ public class Education {
         this.subject = subject;
         this.degree = degree;
         this.grade = grade;
-        this.graduation_date = graduation_date;
-        System.out.println(university + " " + subject);
+        this.graduationYear = graduationYear;
     }
 
     public String getUniversity() {
@@ -62,12 +61,12 @@ public class Education {
         this.grade = grade;
     }
 
-    public String getGraduation_date() {
-        return graduation_date;
+    public String getGraduationYear() {
+        return graduationYear;
     }
 
-    public void setGraduation_date(String graduation_date) {
-        this.graduation_date = graduation_date;
+    public void setGraduationYear(String graduationYear) {
+        this.graduationYear = graduationYear;
     }
 
     public Long getId() {

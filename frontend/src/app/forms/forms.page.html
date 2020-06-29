@@ -6,13 +6,14 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title class="ion-text-center">
+    <ion-title color="primary" class="ion-text-center">
       <ng-container *ngIf="currentStep !== APPLICATION_STEP.Submit">
-        Step {{currentStepIndex + 1}} / {{APPLICATION_STEP_ARR.length - 1}}
+        {{'commonLables.currentStep' | translate:{ currentStep:
+        currentStepIndex+1,totalSteps: APPLICATION_STEP_ARR.length-1} }}
       </ng-container>
 
       <ng-container *ngIf="currentStep === APPLICATION_STEP.Submit">
-        Submit
+        {{'formsPage.submit' | translate}}
       </ng-container>
     </ion-title>
 
@@ -68,7 +69,11 @@
           *ngSwitchCase="APPLICATION_STEP.KeyCompetencies"
         >
         </form-key-competencies>
-
+        <form-additional-info
+          [formsData]="formsData"
+          *ngSwitchCase="APPLICATION_STEP.AdditionalInformation"
+        >
+        </form-additional-info>
         <form-submit-page
           [formsData]="formsData"
           *ngSwitchCase="APPLICATION_STEP.Submit"
@@ -84,7 +89,7 @@
           [disabled]="!formsData.valid"
           (click)="submit()"
         >
-          Submit
+          {{'formsPage.submit' | translate}}
         </button>
       </ng-container>
 
@@ -93,7 +98,7 @@
         (click)="navigateToNextStep()"
         *ngIf="currentStep !== APPLICATION_STEP.Submit"
       >
-        Continue
+        {{'commonLables.continue' | translate}}
       </button>
     </div>
   </div>

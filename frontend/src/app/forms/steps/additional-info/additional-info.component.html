@@ -1,0 +1,14 @@
+<div class="main-description">
+  <h1>{{ 'additionalInfo.title' | translate }}</h1>
+  {{ 'additionalInfo.stepDescription' | translate }}
+</div>
+<ion-item class="ion-no-padding">
+  <ion-label position="floating">{{
+    'additionalInfo.title' | translate
+  }}</ion-label>
+  <ion-textarea
+    auto-grow="true"
+    [formControl]="formsData.controls.additionalInfo.controls.additionalInfo"
+  >
+  </ion-textarea>
+</ion-item>

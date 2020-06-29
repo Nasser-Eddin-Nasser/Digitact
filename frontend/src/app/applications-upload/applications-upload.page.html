@@ -5,7 +5,7 @@
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Upload</ion-title>
+    <ion-title>{{'applicantsUploadPage.upload' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,7 +13,8 @@
   <div class="main-container">
     <div class="content">
       <div class="main-description custom-style">
-        uploading application {{uploadSize}}/{{totalSize}}
+        {{'applicantsUploadPage.uploadingProgressMessage' |
+        translate:{uploadSize:uploadSize,totalSize:totalSize} }}
       </div>
       <div class="spinner-css">
         <span *ngIf="!isSuccess && !isError"> <ion-spinner></ion-spinner></span>
@@ -39,7 +40,7 @@
         class="fancy-button align center second-button"
         (click)="goBack()"
       >
-        Cancel
+        {{'commonLables.cancel' | translate}}
       </button>
     </div>
   </div>
@@ -48,13 +49,14 @@
     <div class="content">
       <span *ngIf="!isError">
         <div class="main-description upload-info">
-          {{uploadSize - 1}} application has successfully been uploaded to the
-          server.
+          {{'applicantsUploadPage.nApplicationUploadedSuccessMessage' |
+          translate:{uploadedSize:uploadSize-1} }}
         </div>
       </span>
       <span *ngIf="isError">
         <span *ngIf="uploadSize>1" class="upload-info">
-          {{uploadSize-1}} Application saved successfully.
+          {{'applicantsUploadPage.napplicantsSavedMessage' |
+          translate:{uploadedSize:uploadSize-1} }}
         </span>
         <div class="main-description error-info">
           {{errorMessage}}

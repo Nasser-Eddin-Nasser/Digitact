@@ -4,14 +4,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum Industries {
     @JsonProperty("Automotive")
-    automotive,
+    automotive("Automotive"),
     @JsonProperty("Finance")
-    finance,
+    finance("Finance"),
     @JsonProperty("Commerce")
-    commerce,
+    commerce("Commerce"),
     @JsonProperty("PharmaHealthcare")
-    pharma_Helthcare,
+    pharma_Helthcare("Pharma Healthcare"),
     @JsonProperty("PublicSector")
-    public_Sector,
-    Others
+    public_Sector("Public Sector"),
+    Others("Others");
+
+    private final String industry;
+
+    private Industries(String industry) {
+        this.industry = industry;
+    }
+
+    public String getIndustry() {
+        return industry;
+    }
 }

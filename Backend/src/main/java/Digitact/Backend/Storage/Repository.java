@@ -32,6 +32,7 @@ public class Repository {
         app.setLinkedIn(applicant.getLinkedIn());
         app.setXing(applicant.getXing());
         app.setTitle(applicant.getTitle());
+        app.setAdditionalInfo(applicant.getAdditionalInfo());
         boolean hasImages = applicant.getImageList() != null;
         if (hasImages)
             isImageSuccessfullyStored = addImagesToApplicant(applicant.getImageList(), app);

@@ -33,6 +33,9 @@ public class Applicant extends User {
     @Column(name = "title")
     private Title title;
 
+    @Column(name = "additionalInfo")
+    private String additionalInfo;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     private Set<Education> educations;
@@ -172,5 +175,13 @@ public class Applicant extends User {
 
     public void setTitle(Title title) {
         this.title = title;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 }

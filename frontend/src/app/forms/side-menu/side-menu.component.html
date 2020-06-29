@@ -2,10 +2,9 @@
   <ion-content>
     <div class="side-menu-container">
       <div class="side-menu-headline">
-        <h1>Progress</h1>
+        <h1>{{ 'sideMenu.progress' | translate }}</h1>
         <div class="description">
-          If you want to go to a previous step, just click on the element in the
-          list!
+          {{ 'sideMenu.description' | translate }}
         </div>
       </div>
 
@@ -14,7 +13,7 @@
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
             step: APPLICATION_STEP.BasicInformation,
-            displayName: 'Basic Information',
+            displayName: displayNames.basicInfo,
             isValid: formsData.controls.basicInfo.valid,
             isActive: currentStep === APPLICATION_STEP.BasicInformation
           }"
@@ -24,7 +23,7 @@
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
             step: APPLICATION_STEP.ContactInformation,
-            displayName: 'Contact Information',
+            displayName: displayNames.contactInfo,
             isValid: formsData.controls.contactInfo.valid,
             isActive: currentStep === APPLICATION_STEP.ContactInformation
           }"
@@ -34,7 +33,7 @@
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
             step: APPLICATION_STEP.ProfilePicture,
-            displayName: 'Profile Picture',
+            displayName: displayNames.profilePicture,
             isValid:
               formsData.controls.profilePicture.controls.pictureBase64.valid,
             isActive: currentStep === APPLICATION_STEP.ProfilePicture
@@ -46,7 +45,7 @@
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
             step: APPLICATION_STEP.Documents,
-            displayName: 'Documents',
+            displayName: displayNames.documentsUpload,
             isValid: formsData.controls.documents.valid,
             isActive: currentStep === APPLICATION_STEP.Documents
           }"
@@ -57,7 +56,7 @@
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
             step: APPLICATION_STEP.EducationInformation,
-            displayName: 'Education Information',
+            displayName: displayNames.educationInfo,
             isValid: formsData.controls.educationInfo.valid,
             isActive: currentStep === APPLICATION_STEP.EducationInformation
           }"
@@ -67,7 +66,7 @@
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
             step: APPLICATION_STEP.FieldDesignationPreference,
-            displayName: 'Industries and Positions',
+            displayName: displayNames.industryAndPositionPreference,
             isValid: formsData.controls.fieldDesignationInfo.valid,
             isActive:
               currentStep === APPLICATION_STEP.FieldDesignationPreference
@@ -78,9 +77,19 @@
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
             step: APPLICATION_STEP.KeyCompetencies,
-            displayName: 'Key Competencies',
+            displayName: displayNames.keyCompetencies,
             isValid: formsData.controls.keyCompetencies.valid,
             isActive: currentStep === APPLICATION_STEP.KeyCompetencies
+          }"
+        ></ng-container>
+
+        <ng-container
+          [ngTemplateOutlet]="menuItem"
+          [ngTemplateOutletContext]="{
+            step: APPLICATION_STEP.AdditionalInformation,
+            displayName: displayNames.additionalInfo,
+            isValid: formsData.controls.additionalInfo.valid,
+            isActive: currentStep === APPLICATION_STEP.AdditionalInformation
           }"
         ></ng-container>
 
@@ -103,7 +112,7 @@
                 currentStep === APPLICATION_STEP.Submit ? 'tertiary' : 'medium'
               "
             >
-              Submit
+              {{ displayNames.submit }}
             </ion-label>
           </ion-item>
         </ion-menu-toggle>

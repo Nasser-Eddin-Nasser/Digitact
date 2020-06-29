@@ -4,6 +4,7 @@
 */
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 import {
@@ -58,7 +59,8 @@ export class RatingModalComponent
     private modalController: ModalController,
     private popoverController: PopoverController,
     private keyCompetenciesFormItemsService: KeyCompetenciesFormItemsService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -187,7 +189,10 @@ export class RatingModalComponent
 
     if (!mayAdd) {
       const toast = await this.toastController.create({
-        message: `"${searchTerm}" cannot be added because it is already part of the list or it is not a valid name.`,
+        message: this.translate.instant(
+          'keyCompetencies.searchItemErrorMessage',
+          { searchedTerm: searchTerm }
+        ),
         color: 'danger',
         duration: 4000,
       });
@@ -196,15 +201,17 @@ export class RatingModalComponent
     }
 
     const alert = await this.alertController.create({
-      header: 'Add to list',
-      message: `Do you really want to add "${searchTerm}" to the list?`,
+      header: this.translate.instant('keyCompetencies.addToList'),
+      message: this.translate.instant('keyCompetencies.searchAlertMessage', {
+        searchedTerm: searchTerm,
+      }),
       buttons: [
         {
-          text: 'Cancel',
+          text: this.translate.instant('commonLables.cancel'),
           role: 'cancel',
         },
         {
-          text: 'Add',
+          text: this.translate.instant('commonLables.add'),
           handler: () => {
             this._addSearchTermToList(searchTerm);
           },
@@ -259,7 +266,9 @@ export class RatingModalComponent
 
     // Display a success message.
     const toast = await this.toastController.create({
-      message: `"${searchTerm}" has been added to the list.`,
+      message: this.translate.instant('keyCompetencies.addedToListMessage', {
+        searchedTerm: searchTerm,
+      }),
       duration: 3000,
     });
     toast.present();

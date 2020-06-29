@@ -1,14 +1,18 @@
-<h1>Applicant Rating</h1>
+<div class="main-description">
+  <h1>{{ 'hrSideMenu.applicantRating' | translate }}</h1>
+
+  {{ 'ratingPage.applicantRatingDescription' | translate }}
+</div>
 
 <ion-list lines="none">
   <ion-list-header>
-    Rhetoric:
-    {{ ratingForm.controls.applicantScore.controls.rhetoric.value }}
+    {{ 'ratingPage.rhetoricScore' | translate }}
+    : {{ ratingForm.controls.applicantScore.controls.rhetoric.value }}
   </ion-list-header>
   <ion-item class="rating">
     <ion-range
       min="1"
-      max="6"
+      max="5"
       step="1"
       snaps="true"
       color="secondary"
@@ -17,13 +21,13 @@
   </ion-item>
 
   <ion-list-header>
-    Motivation:
-    {{ ratingForm.controls.applicantScore.controls.motivation.value }}
+    {{ 'ratingPage.motivationScore' | translate }}
+    : {{ ratingForm.controls.applicantScore.controls.motivation.value }}
   </ion-list-header>
   <ion-item class="rating">
     <ion-range
       min="1"
-      max="6"
+      max="5"
       step="1"
       snaps="true"
       color="secondary"
@@ -32,13 +36,13 @@
   </ion-item>
 
   <ion-list-header>
-    Self-Assurance:
-    {{ ratingForm.controls.applicantScore.controls.selfAssurance.value }}
+    {{ 'ratingPage.selfAssurance' | translate }}
+    : {{ ratingForm.controls.applicantScore.controls.selfAssurance.value }}
   </ion-list-header>
   <ion-item class="rating">
     <ion-range
       min="1"
-      max="6"
+      max="5"
       step="1"
       snaps="true"
       color="secondary"
@@ -47,13 +51,13 @@
   </ion-item>
 
   <ion-list-header>
-    Personal Impression:
-    {{ ratingForm.controls.applicantScore.controls.personalImpression.value }}
+    {{ 'ratingPage.personalImpression' | translate }}
+    : {{ ratingForm.controls.applicantScore.controls.personalImpression.value }}
   </ion-list-header>
   <ion-item class="rating">
     <ion-range
       min="1"
-      max="6"
+      max="5"
       step="1"
       snaps="true"
       color="secondary"

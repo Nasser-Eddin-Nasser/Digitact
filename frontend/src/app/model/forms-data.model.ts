@@ -16,6 +16,7 @@ export interface FormsData {
   educationInfo: EducationInfo;
   fieldDesignationInfo: FieldDesignationInfo;
   keyCompetencies: KeyCompetencies;
+  additionalInfo: AdditionalInfo;
 }
 
 export interface BasicInfo {
@@ -58,6 +59,7 @@ export interface FieldDesignationInfo {
 
 export interface KeyCompetencies {
   languages: UseControl<KeyCompetenciesEntry[]>;
+  businessSkills: UseControl<KeyCompetenciesEntry[]>;
   professionalSoftware: UseControl<KeyCompetenciesEntry[]>;
   databases: UseControl<KeyCompetenciesEntry[]>;
   programmingLanguagesAndFrameworks: UseControl<KeyCompetenciesEntry[]>;
@@ -65,4 +67,8 @@ export interface KeyCompetencies {
 export interface KeyCompetenciesEntry {
   name: string;
   rating: number;
+}
+
+export interface AdditionalInfo {
+  additionalInfo: string;
 }

@@ -1,0 +1,198 @@
+{
+    "commonLables": {
+        "no": "Nein",
+        "yes": "Ja",
+        "close": "Schließen",
+        "continue": "Weiter",
+        "cancel": "Abbrechen",
+        "finalize": "Abschließen",
+        "currentStep": "Schritt {{currentStep}} / {{totalSteps}}",
+        "save": "Speichern",
+        "quit": "Schließen",
+        "add": "Hinzufügen",
+        "okay": "In Ordnung",
+        "search": "Suche" 
+    },
+    "homePage": {
+        "welcomeMessage": "Willkommen bei Consileon",
+        "welcomeTagline": "Wir machen den Unterschied",
+        "applyNow": "Jetzt bewerben",
+        "language": "Sprache"
+    },
+    "formsPage": {
+        "submit": "Absenden",
+        "pageExitWarningMessage": "Willst Du Deine Bewerbung wirklich abbrechen?"
+    },
+    "privacyPage": {
+        "readPrivacyMessage": "Bevor wir loslegen: Während Deiner Bewerbung werden einige private Informationen benötigt. Lese deswegen bitte die Datenschutzerklärung durch.",
+        "openPrivacy": "Datenschutzerklärung öffnen",
+        "agreePrivacyMessage": "Ich habe die Datenschutzerklärung gelesen und akzeptiere sie.",
+        "privacyPolicy": "Datenschutzerklärung",
+        "dummyText": "Hier steht die Datenschutzerklärung"
+    },
+    "applicantsPage": {
+        "applications": "Bewerbungen",
+        "finalized": "Abgeschlossen",
+        "finalizedByHrMessage": "{{finalizedCount}} Bewerbung(en) wurden vom HR-Personal abgeschlossen und können an den Server gesendet werden.",
+        "sendToServer": "An den Server senden",
+        "notFinished": "Offene Bewerbungen",
+        "yetToRateMessage": "Diese Liste enthält alle Bewerbungen, die vom Bewerber abgesendet, aber noch nicht durch das HR-Personal bewertet wurden.",
+        "noApplicantsMessage": "Es gibt derzeit keine Bewerbungen, die noch bearbeitet oder zum Server geladen werden müssen."
+    },
+    "applicantsUploadPage": {
+        "upload": "Hochladen",
+        "uploadingProgressMessage": "Bewerbung(en) werden hochgeladen {{uploadSize}}/{{totalSize}}",
+        "nApplicationUploadedSuccessMessage": "{{uploadedSize}} Bewerbung(en) wurden erfolgreich an den Server übermittelt.",
+        "napplicantsSavedMessage": "{{uploadedSize}} Bewerbung(en) erfolgreich gespeichert.",
+        "serverConnectionErrorMessage": "Aktuell ist keine Verbindung zum Server möglich. Bitte versuche es zu einem späteren Zeitpunkt noch einmal.",
+        "applicantUploadedSUccessMessage": "Bewerbung(en) wurden erfolgreich hochgeladen.",
+        "nApplicantsFailedToUploadMessage": "{{failedCount}} Bewerbung konnte aufgrund von folgendem Fehler nich gespeichert werden: {{errorMessage}}. Bitte versuche es zu einem späteren Zeitpunkt noch einmal."
+    },
+    "hrSideMenu": {
+        "applicantRating": "Bewerber bewerten",
+        "impression": "Eindruck",
+        "progress": "Fortschritt"
+    },
+    "ratingPage": {
+        "applicantRatingDescription": "Bitte gib' uns einen Einblick, wie gut sich der Bewerber präsentiert hat. Nutze hierfür eine Skala von 1 (nicht gut) bis 5 (exzellent).",
+        "finalizeConfirmationMessage": "Soll die Bewerbung abgeschlossen werden? Eine Bearbeitung zu einem späteren Zeitpunkt ist nicht mehr möglich.",
+        "applicationFinalizedNotification": "Die Informationen zur Bewerbung sind abgeschlossen.",
+        "rhetoricScore": "Rhetorik",
+        "motivationScore": "Motivation",
+        "selfAssurance": "Selbstsicherheit",
+        "personalImpression": "Persönlicher Eindruck",
+        "finalizeApplicantMessage": "Alle Änderungen werden automatisch gespeichert. Du kannst dieses Formular also einfach verlassen und später an dieser Stelle weitermachen. Wenn Du die Daten an den Server senden möchtest, musst Du das Formular \"abschließen\". Das bedeutet, dass es später nicht mehr möglich sein wird, Änderungen durchzuführen.",
+        "fillRequiredFieldsToFinalizeMessage": "Du kannst dieses Formular abschließen, sobald Du alle erforderlichen Felder ausgefüllt hast. Wenn Du das rechte Menü öffnest, kannst Du sehen, wo noch Angaben fehlen.",
+        "addImpressionMessage": "Bitte schreibe ein paar Zeilen über Deinen persönlichen Eindruck zum Bewerber. Wenn Du noch etwas hinzufügen oder ergänzen möchtest, kannst Du dies an dieser Stelle erledigen."
+    },
+    "basicInfo": {
+        "title": "Basis-Informationen",
+        "welcome": "Willkommen!",
+        "stepDescription": "Damit wir Dich besser kennenlernen können, gib' bitte Deinen Vor- und Nachnamen an.",
+        "salutationTitle": "Anrede",
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "mr": "Herr",
+        "mrs": "Frau"
+    },
+    "contactInfo": {
+        "title": "Kontakt-Informationen",
+        "greetingsMessage": "Schön Dich kennenzulernen, {{name}}!",
+        "stepDescription": "Bitte fülle die weiteren Kontakt-Informationen aus.",
+        "phoneNumber": "Telefonnummer",
+        "email": "Email",
+        "linkedinAccount": "LinkedIn-Account",
+        "xingAccount": "Xing-Account"
+    },
+    "profilePicture": {
+        "title": "Profilbild",
+        "stepDescription": "Füge ein Profilbild von Dir hinzu. Klicke hierfür auf das Bild-Symbol.",
+        "deleteTakeAnotherPictureMessage": "Gut gemacht! Wenn Du ein anderes Bild aufnehmen möchtest, lösche das Bild über den Papierkorb-Button und nehme ein Neues auf."
+    },
+    "documentsUpload": {
+        "title": "Dokumente",
+        "stepDescription": "In diesem Schritt kannst Du Fotos von Dokumenten aufnehmen, die Du Deiner Bewerbung gerne hinzufügen möchtest. Zum Beispiel kannst Du hier ein Foto von Deinem Lebenslauf machen. Wenn Du keine Dokumente zum Hinzufügen hast, kannst Du diesen Schritt auch überspringen.",
+        "delete": "Löschen",
+        "deleteConfirmationMessage": "Möchtest Du dieses Foto wirklich löschen?",
+        "imageDeleteSuccessMessage": "Das Foto wurde erfolgreich gelöscht."
+    },
+    "educationInfo": {
+        "title": "Bildung",
+        "stepDescription": "Hier kannst Du Informationen zu Deinem Bildungsweg angeben. Also: Welche Schulen oder Universitäten hast Du besucht?",
+        "degreeYearGradeMessage": "Abschluss: {{degree}} ({{graduationYear}}, {{grade}})",
+        "schoolOrUniversity": "Schule/Universität",
+        "subject": "Fach",
+        "degree": "Abschluss",
+        "master": "Master",
+        "bachelor": "Bachelor",
+        "school": "Schule",
+        "grade": "Note",
+        "gradutaionYear": "Abschlussjahr"
+    },
+    "industryAndPositionPreference": {
+        "title": "Branchen und Stellen",
+        "stepDescription": "Bitte wähle aus den folgenden Optionen, welche Interessen Du in den Bereichen Branchen und Stellen hast.",
+        "industry": "Branchen",
+        "position": "Stellen",
+        "automotive": "Automobil",
+        "finance": "Finanzen",
+        "commerce": "Handel",
+        "healthCare": "Pharma/Gesundheitswesen",
+        "publicSector": "Öffentlicher Sektor",
+        "businessConsultant": "Consultant/Business Consultant",
+        "itConsultantManagement": "IT-Consultant - Informationsmanagement",
+        "itConsultantJava": "IT-Consultant - Java/JEE",
+        "itConsultantDataScience": "IT-Consultant - Data Science / Artificial Intelligence",
+        "consultantSAP": "Consultant SAP",
+        "internship": "Praktikant/Werkstudent"
+    },
+    "confirmationPage": {
+        "done": "Fertig",
+        "stepDescription": "Der Antrag wurde eingereicht. Die folgenden Schritte müssen von den Mitarbeitern der Personalabteilung durchgeführt werden (entweder jetzt oder später)."
+    },
+    "submitData": {
+        "title": "Absenden",
+        "stepDescription": "Geschafft! Du kannst Deine Bewerbung jetzt absenden und das Gerät an unser Team zurückgeben.",
+        "fillMandatoryFieldsToSubmitMessage": "Du kannst das Formular absenden, sobald Du alle Pflichtfelder ausgefüllt hast. Wenn Du das rechte Menü öffnest, kannst Du sehen, wo noch Angaben fehlen."
+    },
+    "keyCompetencies": {
+        "title": "Kompetenzen",
+        "stepDescription": "Bitte wähle und bewerte nun Deine Kompetenzen. Wir erwarten von Dir, dass Du mindestens einen Eintrag unter \"Sprachen\" hinzufügst, um diesen Schritt abzuschließen.",
+        "languages": "Sprachen",
+        "businessSkills": "Unternehmerische Fähigkeiten",
+        "professionalSoftware": "Software-Kenntnisse",
+        "database": "Datenbank-Kenntnisse",
+        "programmingLanguagesAndFrameworks": "Programmiersprachen und Frameworks",
+        "all": "Alle",
+        "selected": "Ausgewählt",
+        "noMatchFoundMessage": "Es wurde kein passender Eintrag gefunden",
+        "notFoundAddMessage": "Nicht gefunden, wonach Du gesucht hast? Du kannst auch Deinen Suchbegriff (\"{{ searchedTerm }}\") in die Liste aufnehmen.",
+        "addToList": "Zur Liste hinzufügen",
+        "rating": "Bewertung: ",
+        "ratingMessage": "Bitte bewerte Deine Fähigkeiten von 1 (nicht gut) bis 5 (exzellent).",
+        "searchItemErrorMessage": "\"{{searchedTerm}}\" kann nicht hinzugefügt werden, weil es entweder bereits in der Liste vorhanden oder kein gültiger Name ist.",
+        "searchAlertMessage": "Willst Du wirklich \"{{searchedTerm}}\" zur Liste hinzufügen?",
+        "addedToListMessage":"\"{{searchedTerm}}\" wurde der Liste hinzugefügt.",
+        "languageItems": [
+            "Arabisch",
+            "Chinesisch",
+            "Tschechisch",
+            "Englisch",
+            "Finnisch",
+            "Französisch",
+            "Deutsch",
+            "Griechisch",
+            "Ungarisch",
+            "Italienisch",
+            "Japanisch",
+            "Koreanisch",
+            "Norwegisch",
+            "Polnisch",
+            "Portugiesisch",
+            "Russisch",
+            "Spanisch",
+            "Schwedisch",
+            "Türkisch"
+        ],
+        "businessSkillsItems": [
+            "Projektmanagement",
+            "SCRUM",
+            "Rechnungswesen",
+            "Controlling",
+            "Produktion",
+            "Personalmanagement",
+            "Marketing",
+            "Vertrieb",
+            "Einkauf und Logistik",
+            "Prozessdesign"
+        ]
+    },
+    "additionalInfo": {
+        "title": "Zusätzliche Information",
+        "stepDescription": "Hier kannst Du zusätzliche Informationen angeben"
+    },
+    "sideMenu": {
+        "progress": "Fortschritt",
+        "description": "Wenn Du zu einem vorherigen Schritt wechseln willst, dann klicke einfach auf den entsprechenden Eintrag in der Liste!"
+    }
+}

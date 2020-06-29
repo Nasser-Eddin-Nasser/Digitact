@@ -21,6 +21,8 @@ public class ApplicantUI {
     private String linkedIn;
     private String xing;
 
+    private String additionalInfo;
+
     @JsonProperty("title")
     private Title title;
 
@@ -49,6 +51,7 @@ public class ApplicantUI {
             String linkedIn,
             String xing,
             Title title,
+            String additionalInfo,
             List<Education> educations,
             List<Industries> industries,
             List<Positions> positions,
@@ -68,6 +71,7 @@ public class ApplicantUI {
         this.positions = positions;
         this.keyCompetencies = keyCompetencies;
         this.images = images;
+        this.additionalInfo = additionalInfo;
     }
 
     public List<Industries> getIndustries() {
@@ -83,7 +87,7 @@ public class ApplicantUI {
     }
 
     public void setEducation(List<Education> education) {
-        System.out.println("Here");
+
         this.educations = education;
     }
 
@@ -125,5 +129,9 @@ public class ApplicantUI {
 
     public long getID() {
         return id;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
     }
 }

@@ -7,6 +7,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
+import { SharedModule } from '../shared.module';
+
 import { ApplicationsUploadPageRoutingModule } from './applications-upload-routing.module';
 import { ApplicationsUploadPage } from './applications-upload.page';
 
@@ -16,6 +18,7 @@ import { ApplicationsUploadPage } from './applications-upload.page';
     FormsModule,
     IonicModule,
     ApplicationsUploadPageRoutingModule,
+    SharedModule,
   ],
   declarations: [ApplicationsUploadPage],
 })

@@ -13,6 +13,7 @@ import Model.User.ApplicantUI;
 import Util.ImageTools;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
@@ -20,13 +21,12 @@ import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -59,7 +59,8 @@ public class OverviewController {
 
     // Applicant Info View's Variables
     // 1. Basic Info
-    @FXML Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX, lblLinkedInFX, lblXingFX;
+    @FXML Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX;
+    @FXML Hyperlink hplLinkedInFX, hplXingFX;
     // 2. Edu Info
     @FXML TableColumn<Education, String> universityFX = new TableColumn<>("university");
     @FXML TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
@@ -67,6 +68,9 @@ public class OverviewController {
     @FXML TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
     @FXML TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
     // 3. Image of the  Applicant
+
+    // Additional Info
+    @FXML Label lblAddInfo;
     @FXML private ImageView imgFX;
 
     Pane root;
@@ -98,12 +102,9 @@ public class OverviewController {
             getTableEduInfo(app);
             getImage(app);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("unable to load Image!");
         }
     }
-
-    //    TableView<Industries> indTable;
-    //    private ObservableList<Industries> observableListIndTableTableView;
 
     private void setPositionAndIndustry(ApplicantUI app) {
         getPositionTable(app.getPositions());
@@ -119,7 +120,7 @@ public class OverviewController {
     }
 
     public void setFactoriesAndComparatorsForIndTableColumns() {
-        indFX.setCellValueFactory(ind -> new ReadOnlyStringWrapper(ind.getValue().toString()));
+        indFX.setCellValueFactory(ind -> new ReadOnlyStringWrapper(ind.getValue().getIndustry()));
     }
 
     private ObservableList<Positions> getPositionTable(List<Positions> positions) {
@@ -131,7 +132,7 @@ public class OverviewController {
     }
 
     public void setFactoriesAndComparatorsForPosTableColumns() {
-        posFX.setCellValueFactory(pos -> new ReadOnlyStringWrapper(pos.getValue().toString()));
+        posFX.setCellValueFactory(pos -> new ReadOnlyStringWrapper(pos.getValue().getPosition()));
     }
 
     private void getImage(ApplicantUI app) {
@@ -145,7 +146,7 @@ public class OverviewController {
                 AppImage img = profImgs.get(0);
                 setProfileImage(app, img);
             } catch (Exception e) {
-                System.err.println("unable to load Image!");
+                e.printStackTrace();
             }
         }
     }
@@ -155,6 +156,7 @@ public class OverviewController {
         ImageTools.parseImageStringToImage(img);
 
         File file = new File(img.getPath());
+
         imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
     }
 
@@ -163,8 +165,45 @@ public class OverviewController {
         lblLNameFX.setText(app.getLastName());
         lblEmailFX.setText(app.getEmail());
         lblPNumberFX.setText(app.getPhone());
-        lblLinkedInFX.setText(app.getLinkedIn());
-        lblXingFX.setText(app.getXing());
+        lblAddInfo.setText(app.getAdditionalInfo());
+        hplLinkedInFX.setText(app.getLinkedIn());
+        hplXingFX.setText(app.getXing());
+        profAccountLinkActions();
+    }
+
+    void profAccountLinkActions() {
+        hplLinkedInFX.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        try {
+                            java.awt.Desktop.getDesktop()
+                                    .browse(
+                                            URI.create(
+                                                    "https://www.linkedin.com/in/"
+                                                            + hplLinkedInFX.getText()));
+
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                });
+        hplXingFX.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        try {
+                            java.awt.Desktop.getDesktop()
+                                    .browse(
+                                            URI.create(
+                                                    "https://www.xing.com/profile/"
+                                                            + hplXingFX.getText()));
+
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                });
     }
 
     private ObservableList<Education> getTableEduInfo(ApplicantUI app) {
@@ -190,7 +229,7 @@ public class OverviewController {
         gradeFX.setCellValueFactory(
                 applicant -> new ReadOnlyDoubleWrapper(applicant.getValue().getGrade()));
         gradYearFX.setCellValueFactory(
-                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getGraduation_date()));
+                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getGraduationYear()));
     }
 
     public void setFactoriesAndComparatorsForTableColumns() {

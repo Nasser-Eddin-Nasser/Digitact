@@ -1,12 +1,9 @@
 <div class="main-description">
   <span *ngIf="ratingForm.valid">
-    All the information about the applicant is taken. You need to finalize this
-    form to send data to the HR monitor and it will not be possible to edit
-    information later.
+    {{ 'ratingPage.finalizeApplicantMessage' | translate }}
   </span>
 
   <span *ngIf="!ratingForm.valid">
-    You can finalize this form as soon as you fill all the required fields. By
-    opening the right menu, you can see where you still need to fill the form.
+    {{ 'ratingPage.fillRequiredFieldsToFinalizeMessage' | translate }}
   </span>
 </div>

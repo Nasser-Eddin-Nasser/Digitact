@@ -5,9 +5,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
-import { FormsData } from '../model/forms-data.model';
-import { RatingForm } from '../rating/model/rating-form.model';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -32,6 +29,11 @@ export class StorageHandlerService {
       storeName: 'common-properties',
       driverOrder: ['indexeddb', 'localstorage'],
     });
+    this.commonPropertiesDb.get('chosenLocale').then((locale) => {
+      if (!locale) {
+        this.commonPropertiesDb.set('chosenLocale', 'de');
+      }
+    });
   }
 
   /**
@@ -52,11 +54,7 @@ export class StorageHandlerService {
    * @param value Conatains the FormsData field objects
    * @returns Promise of forms data object
    */
-  async addItem<T>(
-    dbObject: Storage,
-    key: string,
-    value: DeepPartial<FormsData> | DeepPartial<RatingForm>
-  ): Promise<T> {
+  async addItem<T>(dbObject: Storage, key: string, value: T): Promise<T> {
     await dbObject.ready();
     const item = await dbObject.set(key, value);
     return item;
@@ -120,11 +118,7 @@ export class StorageHandlerService {
    * @param value Conatains the FormsData field objects to update
    * @returns Promise of forms data object
    */
-  updateItem<T>(
-    dbObject: Storage,
-    key: string,
-    value: DeepPartial<FormsData | RatingForm>
-  ): Promise<T> {
+  updateItem<T>(dbObject: Storage, key: string, value: T): Promise<T> {
     dbObject.ready();
     const item = dbObject.get(key);
     if (!item) {
@@ -134,7 +128,3 @@ export class StorageHandlerService {
     return data;
   }
 }
-
-type DeepPartial<T> = {
-  [key in keyof T]?: DeepPartial<T[key]>;
-};

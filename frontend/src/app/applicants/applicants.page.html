@@ -5,7 +5,9 @@
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>applications</ion-title>
+    <ion-title color="primary">
+      {{'applicantsPage.applications' | translate}}</ion-title
+    >
   </ion-toolbar>
 </ion-header>
 
@@ -14,9 +16,9 @@
     <span *ngIf="countFinalized !== 0">
       <div class="content">
         <div class="main-description info-content">
-          <h1>Finalized</h1>
-          {{countFinalized}} applications has been finalized by HR staff to be
-          sent to HR monitor.
+          <h1>{{'applicantsPage.finalized' | translate}}</h1>
+          {{'applicantsPage.finalizedByHrMessage' |
+          translate:{finalizedCount:countFinalized} }}
         </div>
         <div class="ion-no-padding">
           <button
@@ -24,7 +26,7 @@
             [disabled]="countFinalized===0"
             (click)="sendToHrMonitor()"
           >
-            Send to server
+            {{'applicantsPage.sendToServer' | translate}}
           </button>
         </div>
       </div>
@@ -33,9 +35,8 @@
     <span *ngIf="countNotFinalized !== 0">
       <div class="content">
         <div class="main-description info-content">
-          <h1>Not Finished</h1>
-          This list includes all the applications that have been submitted by
-          the applicant but not been rated by HR staff.
+          <h1>{{'applicantsPage.notFinished' | translate}}</h1>
+          {{'applicantsPage.yetToRateMessage' | translate}}
         </div>
       </div>
 
@@ -60,7 +61,7 @@
     <span *ngIf="countNotFinalized === 0 && countFinalized === 0">
       <div class="content">
         <div class="main-description info-content">
-          No application is submitted or finalized
+          {{'applicantsPage.noApplicantsMessage' | translate}}
         </div>
       </div>
     </span>

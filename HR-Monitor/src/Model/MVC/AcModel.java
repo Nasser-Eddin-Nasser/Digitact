@@ -38,7 +38,6 @@ public class AcModel {
                         Util.PasswordTools.encryptString(password)));
     }
 
-    // todo better method name
     public boolean isUserNameValid(String newUserName) { // no duplication
         return !DBStorage.isUserNameInUse(newUserName);
     }
