@@ -14,7 +14,7 @@
     <div class="content">
       <div class="main-description custom-style">
         {{'applicantsUploadPage.uploadingProgressMessage' |
-        translate:{uploadSize:uploadSize,totalSize:totalSize} }}
+        translate:{uploadSize:uploadingCount,totalSize:totalSize} }}
       </div>
       <div class="spinner-css">
         <span *ngIf="!isSuccess && !isError"> <ion-spinner></ion-spinner></span>
@@ -50,13 +50,13 @@
       <span *ngIf="!isError">
         <div class="main-description upload-info">
           {{'applicantsUploadPage.nApplicationUploadedSuccessMessage' |
-          translate:{uploadedSize:uploadSize-1} }}
+          translate:{uploadedSize:uploadingCount-1} }}
         </div>
       </span>
       <span *ngIf="isError">
-        <span *ngIf="uploadSize>1" class="upload-info">
+        <span *ngIf="uploadingCount>1" class="upload-info">
           {{'applicantsUploadPage.napplicantsSavedMessage' |
-          translate:{uploadedSize:uploadSize-1} }}
+          translate:{uploadedSize:uploadingCount-1} }}
         </span>
         <div class="main-description error-info">
           {{errorMessage}}
