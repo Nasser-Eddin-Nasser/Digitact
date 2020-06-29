@@ -33,8 +33,6 @@ public class HRController {
         return new ArrayList<Education>(educationRepository.getAllEducationsInfo());
     }
 
-    public static int counter = 0;
-
     @GetMapping(path = "/getImageById={imageId}")
     public String getImageById(@PathVariable String imageId) {
         return ImageTools.combineImage(imageRepository.getImageByID(imageId)).getContent();
