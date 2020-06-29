@@ -6,6 +6,7 @@ import Digitact.Backend.Model.Industries;
 import Digitact.Backend.Model.KeyCompetence;
 import Digitact.Backend.Model.Positions;
 import Digitact.Backend.Model.WorkExperience;
+import Digitact.Backend.Model.HrRating;
 import java.util.List;
 
 public class ApplicantUI implements IUser {
@@ -25,6 +26,7 @@ public class ApplicantUI implements IUser {
     private List<Industries> industries;
     private List<Positions> positions;
     private List<KeyCompetence> keyCompetencies;
+    private HrRating hrRating;
 
     private String additionalInfo;
 
@@ -44,7 +46,8 @@ public class ApplicantUI implements IUser {
             List<Industries> industries,
             List<Positions> positions,
             List<KeyCompetence> keyCompetencies,
-            String additionalInfo) {
+            String additionalInfo,
+            HrRating hrRating) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -59,6 +62,7 @@ public class ApplicantUI implements IUser {
         this.positions = positions;
         this.keyCompetencies = keyCompetencies;
         this.additionalInfo = additionalInfo;
+        this.hrRating = hrRating;
     }
 
     public List<Positions> getPositions() {
@@ -123,6 +127,10 @@ public class ApplicantUI implements IUser {
 
     public void setAdditionalInfo(String additionalInfo) {
         this.additionalInfo = additionalInfo;
+    }
+    
+    public HrRating getHrRating() {
+    	return hrRating;
     }
 
     @Override
