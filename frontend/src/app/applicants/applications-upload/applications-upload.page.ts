@@ -10,8 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormValue } from '../../common/forms/forms';
 import { ToastController } from '../../common/ion-wrappers/toast-controller';
 import { FormsData, KeyCompetenciesEntry } from '../../model/forms-data.model';
+import { RatingForm } from '../../rating/model/rating-form.model';
 import { StorageHandlerService } from '../../services/storage-handler.service';
-
 @Component({
   selector: 'app-applications-upload',
   templateUrl: './applications-upload.page.html',
@@ -56,13 +56,20 @@ export class ApplicationsUploadPage implements OnInit {
   ngOnInit(): void {
     this.storage
       .getAllItems<FormValue<FormsData>>(this.storage.applicantDetailsDb)
-      .then(async (data) => {
+      .then((data) => {
         const applicantDetailsList = data.filter((x) => x.isRated === 1);
         this.totalSize = applicantDetailsList.length;
         for (const applicantData of applicantDetailsList) {
-          if (!this.isError) {
-            await this.sendPostRequest(applicantData);
-          }
+          this.storage
+            .getItem<FormValue<RatingForm>>(
+              this.storage.applicantRatingsDb,
+              applicantData.id
+            )
+            .then(async (applicantHrScore) => {
+              if (!this.isError) {
+                await this.sendPostRequest(applicantData, applicantHrScore);
+              }
+            });
         }
       });
   }
@@ -76,7 +83,13 @@ export class ApplicationsUploadPage implements OnInit {
   /**
    * In this method a post request is made to the server.
    */
-  private sendPostRequest(inp: FormValue<FormsData>): Promise<void> {
+
+  private sendPostRequest(
+    inp: FormValue<FormsData>,
+    hrInp: FormValue<RatingForm>
+  ): Promise<void> {
+    console.log(hrInp.applicantScore);
+
     /*
        TODO: The values are all optional.
        So, we should make sure that, if a value doesn't exist, this is handled appropriately.
@@ -130,6 +143,7 @@ export class ApplicationsUploadPage implements OnInit {
         positions: inp.fieldDesignationInfo.designation,
         keyCompetencies: keyCompetence,
         additionalInfo: inp.additionalInfo.additionalInfo,
+        hrRating: hrInp.applicantScore,
       };
 
       const headers = new HttpHeaders();
@@ -146,8 +160,8 @@ export class ApplicationsUploadPage implements OnInit {
         .subscribe(
           (response) => {
             if (response.status === 201) {
-              this.storage.deleteItem(this.storage.applicantDetailsDb, inp.id);
-              this.storage.deleteItem(this.storage.applicantRatingsDb, inp.id);
+              // this.storage.deleteItem(this.storage.applicantDetailsDb, inp.id);
+              // this.storage.deleteItem(this.storage.applicantRatingsDb, inp.id);
               if (this.uploadSize === this.totalSize) {
                 this.isSuccess = true;
                 this.completionAlert();
@@ -176,10 +190,6 @@ export class ApplicationsUploadPage implements OnInit {
     });
   }
 
-  /**
-   * In this method confirmation alert is displayed to notify the applications uplooad to server
-   * TimeOut for navigation is set to display the toast on current page and then navigate
-   */
   async completionAlert(): Promise<void> {
     const toast = await this.toastController.create({
       message: this.translate.instant(

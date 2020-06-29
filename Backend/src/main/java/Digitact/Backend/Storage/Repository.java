@@ -8,6 +8,7 @@ import Digitact.Backend.Model.KeyCompetence;
 import Digitact.Backend.Model.User.Applicant;
 import Digitact.Backend.Model.User.ApplicantUI;
 import Digitact.Backend.Model.WorkExperience;
+import Digitact.Backend.Model.HrRating;
 import Digitact.Backend.Util.ImageTools;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -29,6 +30,7 @@ public class Repository {
         addEducationInfoToApplicant(applicant.getEducations(), app);
         addWorkExperienceToApplicant(applicant.getWorkExperiences(), app);
         addKeyCompetencesToApplicant(applicant.getKeyCompetencies(), app);
+        app.setHrRating(applicant.getHrRating());
         app.setIndustries(applicant.getIndustries());
         app.setPositions(applicant.getPositions());
         app.setLinkedIn(applicant.getLinkedIn());

@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class HrRating {
 	
 	@JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     public User user;
 
