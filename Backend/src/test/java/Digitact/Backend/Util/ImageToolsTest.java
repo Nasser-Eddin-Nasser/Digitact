@@ -1,30 +1,35 @@
 package Digitact.Backend.Util;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import Digitact.Backend.ConfigProperties;
 import Digitact.Backend.Exception.ImageException;
+import Digitact.Backend.Model.Image.AppImage;
+import Digitact.Backend.Model.Image.Block;
 import Digitact.Backend.Model.Image.ImageString;
 import Digitact.Backend.Model.Image.ImageType;
-import java.io.File;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.util.List;
+
+import static org.junit.Assert.*;
+
 class ImageToolsTest {
 
     ImageString is;
-    String content;
+    String invalidContent;
     String defaultFileSystem;
+    AppImage ai;
+    ImageTools imageTools;
 
     @BeforeEach
     void setUp() {
         ConfigProperties.testEnvironment = true;
         defaultFileSystem = System.getProperty("user.dir") + "\\tmpFS";
-        ImageTools it = new ImageTools();
-        content = "data:image/jpeg;base64,aaa";
-        is = new ImageString(content, ImageType.profilePic);
+        imageTools = new ImageTools();
+        invalidContent = "data:image/jpeg;base64,aaa";
+        is = new ImageString(invalidContent, ImageType.profilePic);
         new File(defaultFileSystem).mkdirs();
     }
 
@@ -54,7 +59,7 @@ class ImageToolsTest {
         ConfigProperties.testAbsoluteFileSystemPath = "\\xxxx\\xxx";
         boolean thrown = false;
         try {
-            ImageTools.createAppImage(content, ImageType.profilePic);
+            imageTools.createAppImage(invalidContent, ImageType.profilePic);
         } catch (ImageException e) {
             thrown = true;
         }
@@ -64,19 +69,114 @@ class ImageToolsTest {
     @Test
     void createAppImageWitFileSystemLeads() {
         ConfigProperties.testAbsoluteFileSystemPath = defaultFileSystem + "\\";
-        System.out.println("Working Directory = " + System.getProperty("user.dir"));
+        setUp(); // it has to be call again in order to set the new FS
         boolean thrown = false;
         try {
-            ImageTools.createAppImage(content, ImageType.profilePic);
+            ai = imageTools.createAppImage(ImageContentString.validImgContent, ImageType.profilePic);
         } catch (ImageException e) {
             thrown = true;
         }
-        assertFalse(false);
+        assertFalse(thrown);
     }
 
     @Test
-    void combineImage() {}
+    void combineImage() {
+        boolean thrown = false;
+        try {
+            ai = ImageTools.createAppImage(ImageContentString.validImgContent, ImageType.profilePic);
+        } catch (ImageException e) {
+            thrown = true;
+        }
+        ImageString is = ImageTools.combineImage(ai);
+        assertEquals(ImageContentString.validImgContent, is.getContent());
+        assertEquals(ai.getType(), is.getType());
+        assertFalse(thrown);
+    }
 
     @Test
-    void parseImageStringToImage() {}
+    void combineVeryLongImage() {
+        boolean thrown = false;
+        StringBuilder veryLongImageContent = getLongString();
+        try {
+            ai = ImageTools.createAppImage(veryLongImageContent.toString(), ImageType.profilePic);
+        } catch (ImageException e) {
+            thrown = true;
+        }
+        ImageString is = ImageTools.combineImage(ai);
+        assertEquals(veryLongImageContent.toString(), is.getContent());
+        assertEquals(ai.getType(), is.getType());
+        assertFalse(thrown);
+    }
+
+    private StringBuilder getLongString() {
+        int imgSize = 1024 * 1024 * 7;
+        StringBuilder veryLongImageContent = new StringBuilder(imgSize);
+        veryLongImageContent.append('1');// first char in the string
+        for (int i = 0; i < imgSize; i++) {
+            veryLongImageContent.append('a');
+        }
+        veryLongImageContent.append('z');// last char in the string
+        return veryLongImageContent;
+    }
+
+
+    @Test
+    void checkIfBlockAreAllCreatedForBigImage() {
+        boolean thrown = false;
+        StringBuilder veryLongImageContent = getLongString();
+        try {
+            ai = ImageTools.createAppImage(veryLongImageContent.toString(), ImageType.profilePic);
+        } catch (ImageException e) {
+            thrown = true;
+        }
+        List<Block> blocks = ai.getBlocks();
+        assertTrue(blocks.size() > 0);
+        //assert all blocks are in the FS
+        for (Block b : blocks) {
+            assertEquals(ai.getId(), b.getAppImage().getId());
+            assertTrue(new File(new File(defaultFileSystem), b.getID() + ConfigProperties.BLOCKFORMAT).exists());
+        }
+        assertFalse(thrown);
+    }
+
+    @Test
+    void checkIfBlockAreAllCreated() {
+        boolean thrown = false;
+        try {
+            ai = ImageTools.createAppImage(ImageContentString.validImgContent, ImageType.profilePic);
+        } catch (ImageException e) {
+            thrown = true;
+        }
+        List<Block> blocks = ai.getBlocks();
+        assertTrue(blocks.size() > 0);
+        //assert all blocks are in the FS
+        for (Block b : blocks) {
+            assertEquals(ai.getId(), b.getAppImage().getId());
+            assertTrue(new File(new File(defaultFileSystem), b.getID() + ConfigProperties.BLOCKFORMAT).exists());
+        }
+        assertFalse(thrown);
+    }
+
+    @Test
+    void parseImageStringToImage() {
+        boolean thrown = false;
+        try {
+            ai = ImageTools.createAppImage(ImageContentString.validImgContent, ImageType.profilePic);
+        } catch (ImageException e) {
+            thrown = true;
+        }
+        List<Block> blocks = ai.getBlocks();
+        assertTrue(blocks.size() > 0);
+        //assert all blocks are in the FS
+        for (Block b : blocks) {
+            assertEquals(ai.getId(), b.getAppImage().getId());
+            assertTrue(new File(new File(defaultFileSystem), b.getID() + ConfigProperties.BLOCKFORMAT).exists());
+        }
+        assertFalse(thrown);
+        imageTools.parseImageStringToImage(new ImageString(ImageContentString.validImgContent, ImageType.profilePic));
+        assertTrue(new File(new File(defaultFileSystem), ImageType.profilePic + ".jpeg").exists());
+
+    }
+
+
 }
