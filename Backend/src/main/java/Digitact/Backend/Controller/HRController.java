@@ -41,8 +41,6 @@ public class HRController {
         return new ArrayList<WorkExperience>(workExperieinceRepository.getAllWorkExperiencesInfo());
     }
 
-    public static int counter = 0;
-
     @GetMapping(path = "/getImageById={imageId}")
     public String getImageById(@PathVariable String imageId) {
         return ImageTools.combineImage(imageRepository.getImageByID(imageId)).getContent();

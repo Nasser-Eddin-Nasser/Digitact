@@ -18,13 +18,6 @@ import org.springframework.web.bind.annotation.*;
 public class ClientController {
     @Autowired IDataRepository repository;
 
-    //  @PostMapping("/setImage")
-    //  public String setImage(@RequestBody String image) {
-    //    ImageTool it = new ImageTool(repository);
-    //    it.createAppImage(image, ImageType.CV);
-    //    return "image is created in the database";
-    //  }
-
     /** @return JSON object of the user */
     @GetMapping("/getAll")
     public List<User> getAll() {
@@ -38,7 +31,7 @@ public class ClientController {
      */
     @PostMapping("/createApplicant")
     public ResponseEntity<String> createApplicant(@RequestBody ApplicantUI applicant) {
-        Repository myRepos = new Repository(repository); // todo singleton pattern
+        Repository myRepos = new Repository(repository);
         boolean isSuccessful = myRepos.storeApplicantOnDB(applicant);
         return (isSuccessful)
                 ? new ResponseEntity<String>(
