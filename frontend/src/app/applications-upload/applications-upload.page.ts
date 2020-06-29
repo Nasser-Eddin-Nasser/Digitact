@@ -79,12 +79,6 @@ export class ApplicationsUploadPage implements OnInit {
    */
   private sendPostRequest(inp: FormValue<FormsData>): Promise<void> {
     /*
-       TODO: The values are all optional.
-       So, we should make sure that, if a value doesn't exist, this is handled appropriately.
-       This doesn't have to be done for all entries (e.g. the first name always exists, even though it is typed here as an optional thing).
-       But we should at least make sure that we have covered all truly optional ones.
-    */
-    /*
       TODO: The "HR part" (so the rating of the applicant) is currently not getting sent to the server.
     */
 
@@ -108,10 +102,10 @@ export class ApplicationsUploadPage implements OnInit {
        * picture of applicant and documents is mapped according json format required by server.
        */
       images.push({
-        content: inp.profilePicture.pictureBase64,
+        content: inp.profilePicture?.pictureBase64,
         type: 'profilePic',
       });
-      inp.documents.documentsBase64.forEach((x) => {
+      inp.documents?.documentsBase64?.forEach((x) => {
         images.push({ content: x, type: 'CV' });
       });
       /**
@@ -132,6 +126,14 @@ export class ApplicationsUploadPage implements OnInit {
         keyCompetencies: keyCompetence,
         additionalInfo: inp.additionalInfo.additionalInfo,
       };
+
+      // The server expects all keys to exist. We need to explicitly set the value to null so that is is actually submitted.
+      for (const [key, value] of Object.entries(formsData)) {
+        if (value === undefined || value === null) {
+          // tslint:disable-next-line: no-null-keyword no-any
+          (formsData as any)[key] = null;
+        }
+      }
 
       const headers = new HttpHeaders();
       headers.append('Content-Type', 'application/json');
