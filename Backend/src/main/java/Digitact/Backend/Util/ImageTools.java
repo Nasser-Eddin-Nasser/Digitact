@@ -1,22 +1,21 @@
 package Digitact.Backend.Util;
 
+import static Digitact.Backend.ConfigProperties.BLOCKFORMAT;
+import static Digitact.Backend.ConfigProperties.Max_Repetition_Try;
+
 import Digitact.Backend.ConfigProperties;
 import Digitact.Backend.Exception.ImageException;
 import Digitact.Backend.Model.Image.AppImage;
 import Digitact.Backend.Model.Image.Block;
 import Digitact.Backend.Model.Image.ImageString;
 import Digitact.Backend.Model.Image.ImageType;
-
-import javax.xml.bind.DatatypeConverter;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static Digitact.Backend.ConfigProperties.BLOCKFORMAT;
-import static Digitact.Backend.ConfigProperties.Max_Repetition_Try;
+import javax.xml.bind.DatatypeConverter;
 
 public class ImageTools {
     private static String myAbsoluteFileSystemPath = ConfigProperties.absoluteFileSystemPath;
@@ -88,7 +87,6 @@ public class ImageTools {
                 System.err.println("Error while storing Block In FS ");
                 throw new ImageException("Error while storing Block In FS");
             }
-
         }
         return false;
     }

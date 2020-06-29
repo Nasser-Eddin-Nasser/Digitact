@@ -1,19 +1,18 @@
 package Digitact.Backend.Util;
 
+import static org.junit.Assert.*;
+
 import Digitact.Backend.ConfigProperties;
 import Digitact.Backend.Exception.ImageException;
 import Digitact.Backend.Model.Image.AppImage;
 import Digitact.Backend.Model.Image.Block;
 import Digitact.Backend.Model.Image.ImageString;
 import Digitact.Backend.Model.Image.ImageType;
+import java.io.File;
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.File;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 class ImageToolsTest {
 
@@ -72,7 +71,9 @@ class ImageToolsTest {
         setUp(); // it has to be call again in order to set the new FS
         boolean thrown = false;
         try {
-            ai = imageTools.createAppImage(ImageContentString.validImgContent, ImageType.profilePic);
+            ai =
+                    imageTools.createAppImage(
+                            ImageContentString.validImgContent, ImageType.profilePic);
         } catch (ImageException e) {
             thrown = true;
         }
@@ -83,7 +84,9 @@ class ImageToolsTest {
     void combineImage() {
         boolean thrown = false;
         try {
-            ai = ImageTools.createAppImage(ImageContentString.validImgContent, ImageType.profilePic);
+            ai =
+                    ImageTools.createAppImage(
+                            ImageContentString.validImgContent, ImageType.profilePic);
         } catch (ImageException e) {
             thrown = true;
         }
@@ -111,14 +114,13 @@ class ImageToolsTest {
     private StringBuilder getLongString() {
         int imgSize = 1024 * 1024 * 7;
         StringBuilder veryLongImageContent = new StringBuilder(imgSize);
-        veryLongImageContent.append('1');// first char in the string
+        veryLongImageContent.append('1'); // first char in the string
         for (int i = 0; i < imgSize; i++) {
             veryLongImageContent.append('a');
         }
-        veryLongImageContent.append('z');// last char in the string
+        veryLongImageContent.append('z'); // last char in the string
         return veryLongImageContent;
     }
-
 
     @Test
     void checkIfBlockAreAllCreatedForBigImage() {
@@ -131,10 +133,12 @@ class ImageToolsTest {
         }
         List<Block> blocks = ai.getBlocks();
         assertTrue(blocks.size() > 0);
-        //assert all blocks are in the FS
+        // assert all blocks are in the FS
         for (Block b : blocks) {
             assertEquals(ai.getId(), b.getAppImage().getId());
-            assertTrue(new File(new File(defaultFileSystem), b.getID() + ConfigProperties.BLOCKFORMAT).exists());
+            assertTrue(
+                    new File(new File(defaultFileSystem), b.getID() + ConfigProperties.BLOCKFORMAT)
+                            .exists());
         }
         assertFalse(thrown);
     }
@@ -143,16 +147,20 @@ class ImageToolsTest {
     void checkIfBlockAreAllCreated() {
         boolean thrown = false;
         try {
-            ai = ImageTools.createAppImage(ImageContentString.validImgContent, ImageType.profilePic);
+            ai =
+                    ImageTools.createAppImage(
+                            ImageContentString.validImgContent, ImageType.profilePic);
         } catch (ImageException e) {
             thrown = true;
         }
         List<Block> blocks = ai.getBlocks();
         assertTrue(blocks.size() > 0);
-        //assert all blocks are in the FS
+        // assert all blocks are in the FS
         for (Block b : blocks) {
             assertEquals(ai.getId(), b.getAppImage().getId());
-            assertTrue(new File(new File(defaultFileSystem), b.getID() + ConfigProperties.BLOCKFORMAT).exists());
+            assertTrue(
+                    new File(new File(defaultFileSystem), b.getID() + ConfigProperties.BLOCKFORMAT)
+                            .exists());
         }
         assertFalse(thrown);
     }
@@ -161,22 +169,24 @@ class ImageToolsTest {
     void parseImageStringToImage() {
         boolean thrown = false;
         try {
-            ai = ImageTools.createAppImage(ImageContentString.validImgContent, ImageType.profilePic);
+            ai =
+                    ImageTools.createAppImage(
+                            ImageContentString.validImgContent, ImageType.profilePic);
         } catch (ImageException e) {
             thrown = true;
         }
         List<Block> blocks = ai.getBlocks();
         assertTrue(blocks.size() > 0);
-        //assert all blocks are in the FS
+        // assert all blocks are in the FS
         for (Block b : blocks) {
             assertEquals(ai.getId(), b.getAppImage().getId());
-            assertTrue(new File(new File(defaultFileSystem), b.getID() + ConfigProperties.BLOCKFORMAT).exists());
+            assertTrue(
+                    new File(new File(defaultFileSystem), b.getID() + ConfigProperties.BLOCKFORMAT)
+                            .exists());
         }
         assertFalse(thrown);
-        imageTools.parseImageStringToImage(new ImageString(ImageContentString.validImgContent, ImageType.profilePic));
+        imageTools.parseImageStringToImage(
+                new ImageString(ImageContentString.validImgContent, ImageType.profilePic));
         assertTrue(new File(new File(defaultFileSystem), ImageType.profilePic + ".jpeg").exists());
-
     }
-
-
 }

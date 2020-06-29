@@ -1,11 +1,11 @@
 package Digitact.Backend.Model;
 
+import static org.junit.Assert.assertFalse;
+
 import Digitact.Backend.Model.User.Applicant;
 import Digitact.Backend.Model.User.User;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.Assert.assertFalse;
 
 class EducationTest {
 

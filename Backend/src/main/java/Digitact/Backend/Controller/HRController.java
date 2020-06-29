@@ -8,29 +8,21 @@ import Digitact.Backend.Storage.IDataRepository;
 import Digitact.Backend.Storage.IEducationRepository;
 import Digitact.Backend.Storage.IImageRepository;
 import Digitact.Backend.Util.ImageTools;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-/**
- * This is the controller class of the HR
- */
+/** This is the controller class of the HR */
 @RequestMapping("api/HRController")
 @RestController
 public class HRController {
-    @Autowired
-    IDataRepository dataRepository;
-    @Autowired
-    IEducationRepository educationRepository;
-    @Autowired
-    IImageRepository imageRepository;
+    @Autowired IDataRepository dataRepository;
+    @Autowired IEducationRepository educationRepository;
+    @Autowired IImageRepository imageRepository;
 
-    /**
-     * @return JSON object of the applicants
-     */
+    /** @return JSON object of the applicants */
     @GetMapping("/getApplicants")
     public List<User> getApplicants() {
         return new ArrayList<User>(dataRepository.getApplicants());
@@ -41,15 +33,12 @@ public class HRController {
         return new ArrayList<Education>(educationRepository.getAllEducationsInfo());
     }
 
-
     @GetMapping(path = "/getImageById={imageId}")
     public String getImageById(@PathVariable String imageId) {
         return ImageTools.combineImage(imageRepository.getImageByID(imageId)).getContent();
     }
 
-    /**
-     * @return JSON object of the admins
-     */
+    /** @return JSON object of the admins */
     @GetMapping("/getAdmins")
     public List<User> getAdmins() {
         return new ArrayList<User>(dataRepository.getAdmins());

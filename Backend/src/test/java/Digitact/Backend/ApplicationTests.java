@@ -1,20 +1,18 @@
 package Digitact.Backend;
 
+import static org.junit.Assert.assertTrue;
+
 import Digitact.Backend.Controller.ClientController;
+import java.io.IOException;
+import java.net.Socket;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.IOException;
-import java.net.Socket;
-
-import static org.junit.Assert.assertTrue;
-
 @SpringBootTest
 class ApplicationTests {
-    @Autowired
-    private ClientController cc;
+    @Autowired private ClientController cc;
 
     @Test
     void contextLoads() {
