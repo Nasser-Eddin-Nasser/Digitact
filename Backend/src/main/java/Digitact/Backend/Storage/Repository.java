@@ -30,7 +30,7 @@ public class Repository {
         addEducationInfoToApplicant(applicant.getEducations(), app);
         addWorkExperienceToApplicant(applicant.getWorkExperiences(), app);
         addKeyCompetencesToApplicant(applicant.getKeyCompetencies(), app);
-        app.setHrRating(applicant.getHrRating());
+        addHrRatingToApplicant(applicant.getHrRating(), app);
         app.setIndustries(applicant.getIndustries());
         app.setPositions(applicant.getPositions());
         app.setLinkedIn(applicant.getLinkedIn());
@@ -81,5 +81,10 @@ public class Repository {
     private void addWorkExperienceToApplicant(List<WorkExperience> workExperienceList, Applicant app) {
     	workExperienceList.forEach(x -> x.setUser(app));
         app.setWorkExperiences(workExperienceList);
+    }
+   
+    private void addHrRatingToApplicant(HrRating hrRating, Applicant app) {
+    	hrRating.setUser(app);
+        app.setHrRating(hrRating);
     }
 }

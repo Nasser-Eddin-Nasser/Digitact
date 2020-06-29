@@ -88,7 +88,15 @@ export class ApplicationsUploadPage implements OnInit {
     inp: FormValue<FormsData>,
     hrInp: FormValue<RatingForm>
   ): Promise<void> {
-    console.log(hrInp.applicantScore);
+    console.log(hrInp);
+    // const hr = { ...hrInp.applicantScore };
+    const hr = {
+      rhetoric: hrInp.applicantScore.rhetoric,
+      motivation: hrInp.applicantScore.motivation,
+      selfAssurance: hrInp.applicantScore.selfAssurance,
+      personalImpression: hrInp.applicantScore.personalImpression,
+      impression: hrInp.impressionInfo.impression,
+    };
 
     /*
        TODO: The values are all optional.
@@ -143,7 +151,7 @@ export class ApplicationsUploadPage implements OnInit {
         positions: inp.fieldDesignationInfo.designation,
         keyCompetencies: keyCompetence,
         additionalInfo: inp.additionalInfo.additionalInfo,
-        hrRating: hrInp.applicantScore,
+        hrRating: hr,
       };
 
       const headers = new HttpHeaders();
