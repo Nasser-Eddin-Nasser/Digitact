@@ -6,26 +6,25 @@ import Digitact.Backend.Model.User.User;
 import Digitact.Backend.Model.User.UserUI;
 import Digitact.Backend.Storage.IDataRepository;
 import Digitact.Backend.Storage.Repository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-/** This is the controller class of the Clients */
+import java.util.List;
+
+/**
+ * This is the controller class of the Clients
+ */
 @RequestMapping("api/controller")
 @RestController
 public class ClientController {
-    @Autowired IDataRepository repository;
+    @Autowired
+    IDataRepository repository;
 
-    //  @PostMapping("/setImage")
-    //  public String setImage(@RequestBody String image) {
-    //    ImageTool it = new ImageTool(repository);
-    //    it.createAppImage(image, ImageType.CV);
-    //    return "image is created in the database";
-    //  }
-
-    /** @return JSON object of the user */
+    /**
+     * @return JSON object of the user
+     */
     @GetMapping("/getAll")
     public List<User> getAll() {
         return repository.findAll();
@@ -33,18 +32,18 @@ public class ClientController {
 
     /**
      * @param applicant - JSON request's user object
-     *     <p>save the user "Applicant" in the DB using repository
+     *                  <p>save the user "Applicant" in the DB using repository
      * @return "Applicant is created in the database"
      */
     @PostMapping("/createApplicant")
     public ResponseEntity<String> createApplicant(@RequestBody ApplicantUI applicant) {
-        Repository myRepos = new Repository(repository); // todo singleton pattern
+        Repository myRepos = new Repository(repository);
         boolean isSuccessful = myRepos.storeApplicantOnDB(applicant);
         return (isSuccessful)
                 ? new ResponseEntity<String>(
-                        "Application is successfully saved", HttpStatus.CREATED)
+                "Application is successfully saved", HttpStatus.CREATED)
                 : new ResponseEntity<String>(
-                        "images save path not found", HttpStatus.INTERNAL_SERVER_ERROR);
+                "images save path not found", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @PostMapping("/createAdmin")
