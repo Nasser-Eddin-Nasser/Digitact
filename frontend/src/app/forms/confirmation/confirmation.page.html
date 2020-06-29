@@ -1,24 +1,23 @@
-<ion-content>
+<ion-content class="without-ion-header">
   <div class="main-container with-bottom-buttons">
     <div class="content">
       <div class="main-description">
-        <h1>Done</h1>
+        <h1>{{'confirmationPage.done' | translate}}</h1>
 
-        The application has been submitted. The following steps need to be
-        performed by the HR staff (either now or later).
+        {{'confirmationPage.stepDescription' | translate}}
       </div>
     </div>
 
     <div class="buttons-container">
       <button class="fancy-button align center" (click)="navigateToNextPage()">
-        Continue
+        {{'commonLables.continue' | translate}}
       </button>
 
       <button
         class="fancy-button align center second-button"
         (click)="quitPage()"
       >
-        Quit
+        {{'commonLables.quit' | translate}}
       </button>
     </div>
   </div>

@@ -6,13 +6,14 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title class="ion-text-center">
+    <ion-title color="primary" class="ion-text-center">
       <ng-container *ngIf="currentStep !== HR_RATING_STEP.Finalize">
-        Step {{currentStepIndex + 1}} / {{HR_RATING_STEP_ARR.length - 1}}
+        {{'commonLables.currentStep' | translate:{ currentStep: currentStepIndex
+        + 1,totalSteps: HR_RATING_STEP_ARR.length - 1} }}
       </ng-container>
 
       <ng-container *ngIf="currentStep === HR_RATING_STEP.Finalize">
-        Finalize
+        {{'commonLables.finalize' | translate}}
       </ng-container>
     </ion-title>
 
@@ -58,7 +59,7 @@
           [disabled]="!ratingForm.valid"
           (click)="finalize()"
         >
-          Finalize
+          {{'commonLables.finalize' | translate}}
         </button>
       </ng-container>
       <button
@@ -66,7 +67,7 @@
         (click)="navigateToNextStep()"
         *ngIf="currentStep !== HR_RATING_STEP.Finalize"
       >
-        Continue
+        {{'commonLables.continue' | translate}}
       </button>
     </div>
   </div>

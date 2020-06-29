@@ -106,9 +106,6 @@ public class OverviewController {
         }
     }
 
-    //    TableView<Industries> indTable;
-    //    private ObservableList<Industries> observableListIndTableTableView;
-
     private void setPositionAndIndustry(ApplicantUI app) {
         getPositionTable(app.getPositions());
         getIndTable(app.getIndustries());

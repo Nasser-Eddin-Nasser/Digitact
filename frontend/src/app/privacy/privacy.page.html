@@ -12,13 +12,11 @@
   <div class="main-container with-bottom-buttons">
     <div class="content">
       <div class="ion-text-justify description">
-        Before we can get started: During the application process, you need to
-        enter some private information. Because of this, please read the Privacy
-        Policy.
+        {{'privacyPage.readPrivacyMessage' | translate}}
       </div>
       <div class="ion-no-padding">
         <button class="round-button align center" (click)="openPolicydetails()">
-          Open policy
+          {{'privacyPage.openPrivacy' | translate}}
         </button>
       </div>
     </div>
@@ -31,7 +29,7 @@
           [checked]="isPolicyAccepted"
         ></ion-toggle>
         <ion-label primary class="ion-padding-start ion-text-justify">
-          I have read and agree to the Privacy Policy.
+          {{'privacyPage.agreePrivacyMessage' | translate}}
         </ion-label>
       </ion-item>
       <div class="h-line"></div>
@@ -42,14 +40,14 @@
         (click)="startApplication()"
         [disabled]="!isPolicyAccepted"
       >
-        Continue
+        {{'commonLables.continue' | translate}}
       </button>
 
       <button
         class="fancy-button align center secondary-button"
         (click)="navigateToHomePage()"
       >
-        cancel
+        {{'commonLables.cancel' | translate}}
       </button>
     </div>
   </div>

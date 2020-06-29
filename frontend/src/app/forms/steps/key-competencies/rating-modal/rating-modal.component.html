@@ -1,12 +1,17 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button (click)="closeModal()">Close</ion-button>
+      <ion-button (click)="closeModal()">{{
+        'commonLables.close' | translate
+      }}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 
   <ion-toolbar>
-    <ion-searchbar [formControl]="searchInput"></ion-searchbar>
+    <ion-searchbar
+      [formControl]="searchInput"
+      placeholder="{{ 'commonLables.search' | translate }}"
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -16,17 +21,17 @@
       <ion-toolbar>
         <ion-segment [formControl]="segmentFilter">
           <ion-segment-button [value]="SEGMENT_FILTER_VALUES.All">
-            All
+            {{ 'keyCompetencies.all' | translate }}
           </ion-segment-button>
           <ion-segment-button [value]="SEGMENT_FILTER_VALUES.Selected">
-            Selected
+            {{ 'keyCompetencies.selected' | translate }}
           </ion-segment-button>
         </ion-segment></ion-toolbar
       >
 
       <div class="no-items" *ngIf="filteredFormItems.length < 1">
         <ion-icon name="search-outline"></ion-icon>
-        <p>No items match your selection</p>
+        <p>{{ 'keyCompetencies.noMatchFoundMessage' | translate }}</p>
       </div>
 
       <ion-list class="ion-margin-bottom" *ngIf="filteredFormItems.length > 0">
@@ -66,12 +71,14 @@
 
     <div class="bottom-content" *ngIf="searchInput.value">
       <span>
-        Not found what you were looking for? You can also add your search term
-        ("{{ searchInput.value | trim }}") to the list.
+        {{
+          'keyCompetencies.notFoundAddMessage'
+            | translate: { searchedTerm: searchInput.value | trim }
+        }}
       </span>
       <div class="add-to-list-button-container ion-margin-top">
         <ion-button color="primary" (click)="addSearchTermToList()">
-          Add to list
+          {{ 'keyCompetencies.addToList' | translate }}
         </ion-button>
       </div>
     </div>

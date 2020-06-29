@@ -5,7 +5,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
+import { FormValue } from '../common/forms/forms';
 import { ToastController } from '../common/ion-wrappers/toast-controller';
 import { FormsData, KeyCompetenciesEntry } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
@@ -20,7 +22,8 @@ export class ApplicationsUploadPage implements OnInit {
     private navController: NavController,
     private storage: StorageHandlerService,
     private httpClient: HttpClient,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private translate: TranslateService
   ) {}
   /**
    * The total application size.
@@ -52,7 +55,7 @@ export class ApplicationsUploadPage implements OnInit {
    */
   ngOnInit(): void {
     this.storage
-      .getAllItems<FormsData>(this.storage.applicantDetailsDb)
+      .getAllItems<FormValue<FormsData>>(this.storage.applicantDetailsDb)
       .then(async (data) => {
         const applicantDetailsList = data.filter((x) => x.isRated === 1);
         this.totalSize = applicantDetailsList.length;
@@ -63,16 +66,28 @@ export class ApplicationsUploadPage implements OnInit {
         }
       });
   }
+
   /**
    * In this method timeout of 1 second is speified to have a better readability of the application upload.
    */
-  sleep(ms: number): Promise<void> {
+  private sleep(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
+
   /**
    * In this method a post request is made to the server.
    */
-  sendPostRequest(inp: FormsData): Promise<void> {
+  private sendPostRequest(inp: FormValue<FormsData>): Promise<void> {
+    /*
+       TODO: The values are all optional.
+       So, we should make sure that, if a value doesn't exist, this is handled appropriately.
+       This doesn't have to be done for all entries (e.g. the first name always exists, even though it is typed here as an optional thing).
+       But we should at least make sure that we have covered all truly optional ones.
+    */
+    /*
+      TODO: The "HR part" (so the rating of the applicant) is currently not getting sent to the server.
+    */
+
     return this.sleep(1000).then(() => {
       const keyCompetence: Array<{
         category: string;
@@ -145,16 +160,17 @@ export class ApplicationsUploadPage implements OnInit {
           (error) => {
             this.isError = true;
             if (error.status === 500) {
-              this.errorMessage =
-                this.totalSize -
-                this.uploadSize +
-                1 +
-                ' Application could not be saved due to ' +
-                error.error +
-                '. Please try again later.';
+              this.errorMessage = this.translate.instant(
+                'applicantsUploadPage.nApplicantsFailedToUploadMessage',
+                {
+                  failedCount: this.totalSize - this.uploadSize + 1,
+                  errorMessage: error.error,
+                }
+              );
             } else {
-              this.errorMessage =
-                'Cannot connect to server at the moment. Please try again later.';
+              this.errorMessage = this.translate.instant(
+                'applicantsUploadPage.serverConnectionErrorMessage'
+              );
             }
           }
         );
@@ -167,7 +183,9 @@ export class ApplicationsUploadPage implements OnInit {
    */
   async completionAlert(): Promise<void> {
     const toast = await this.toastController.create({
-      message: 'Applicantions are successfully uploaded',
+      message: this.translate.instant(
+        'applicantsUploadPage.applicantUploadedSUccessMessage'
+      ),
       color: 'success',
       position: 'bottom',
       duration: 2000,
