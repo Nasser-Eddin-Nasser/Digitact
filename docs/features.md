@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="images/logo.png" width="150px" alt="digitact logo">
+</p>
+
 # Features
 
 Currently, most of the job applications at job fairs are handled "manually" on paper. Digitact is an app that brings this whole process into the digital era.
