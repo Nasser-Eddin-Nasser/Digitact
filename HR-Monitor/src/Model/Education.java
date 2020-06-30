@@ -21,7 +21,7 @@ public class Education {
             String subject,
             Degree degree,
             double grade,
-            String graduation_date) {
+            String graduationYear) {
         this.university = university;
         this.subject = subject;
         this.degree = degree;

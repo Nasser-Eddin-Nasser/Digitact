@@ -28,6 +28,7 @@ public class ImageTools {
 
     private static int size = (int) ConfigProperties.BLOCKSIZE;
     private static int i = 0;
+    private static int tries = 0;
 
     public static AppImage createAppImage(String imageString, ImageType it) throws ImageException {
         AppImage appImage = new AppImage();
@@ -78,8 +79,14 @@ public class ImageTools {
                 return successful;
             } else System.out.println("Block already exists!");
         } catch (IOException e) {
-            System.err.println("Error while storing Block In FS ");
-            throw new ImageException("Error while storing Block In FS");
+            if (tries < Max_Repetition_Try) {
+                ++tries;
+                storeBlockInFS(block, content);
+            } else {
+                tries = 0;
+                System.err.println("Error while storing Block In FS ");
+                throw new ImageException("Error while storing Block In FS");
+            }
         }
         return false;
     }
