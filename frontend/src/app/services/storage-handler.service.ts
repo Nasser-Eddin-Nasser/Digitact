@@ -226,24 +226,26 @@ export class StorageHandlerService {
    * Used to update an existing item in the storage
    * @param dbObject The storage object
    * @param key Unique key for the item
-   * @param value Conatains the FormsData field objects to update
+   * @param value Conatains value to update
    * @returns Promise of forms data object
    */
-  updateItem<T>(
-    dbObject: Storage,
+  async updateItem<T>(
+    dbObject: Promise<LocalForage>,
     key: string,
-    value: DeepPartial<FormsData | RatingForm> | string
+    value: T
   ): Promise<T> {
-    dbObject.ready();
-    const item = dbObject.get(key);
-    if (!item) {
-      return undefined;
-    }
-    const data = dbObject.set(key, value);
-    return data;
+    return await new Promise((resolve, reject) => {
+      dbObject
+        .then((localForageObject) => {
+          const item = localForageObject.getItem(key);
+          if (!item) {
+            resolve(undefined);
+          }
+          localForageObject.setItem(key, value).then(() => {
+            resolve(value);
+          });
+        })
+        .catch((reason) => reject(reason));
+    });
   }
 }
-
-type DeepPartial<T> = {
-  [key in keyof T]?: DeepPartial<T[key]>;
-};
