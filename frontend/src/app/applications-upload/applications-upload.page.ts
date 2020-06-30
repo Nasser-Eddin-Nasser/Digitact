@@ -102,7 +102,7 @@ export class ApplicationsUploadPage implements OnInit {
        * picture of applicant and documents is mapped according json format required by server.
        */
       images.push({
-        content: inp.profilePicture?.pictureBase64,
+        content: inp.profilePicture.pictureBase64,
         type: 'profilePic',
       });
       inp.documents?.documentsBase64?.forEach((x) => {
@@ -120,11 +120,11 @@ export class ApplicationsUploadPage implements OnInit {
         linkedIn: inp.contactInfo.linkedIn,
         xing: inp.contactInfo.xing,
         imageList: images,
-        educations: inp.educationInfo.educationInfoForm,
-        industries: inp.fieldDesignationInfo.field,
-        positions: inp.fieldDesignationInfo.designation,
+        educations: inp.educationInfo?.educationInfoForm,
+        industries: inp.fieldDesignationInfo?.field,
+        positions: inp.fieldDesignationInfo?.designation,
         keyCompetencies: keyCompetence,
-        additionalInfo: inp.additionalInfo.additionalInfo,
+        additionalInfo: inp.additionalInfo?.additionalInfo,
       };
 
       // The server expects all keys to exist. We need to explicitly set the value to null so that is is actually submitted.
