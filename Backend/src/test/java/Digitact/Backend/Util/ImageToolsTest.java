@@ -17,11 +17,15 @@ class ImageToolsTest {
     ImageString is;
     String content;
     String defaultFileSystem;
+    String SlashSign = "//";
 
     @BeforeEach
     void setUp() {
+        if (ConfigProperties.isWindowsOS) {
+            SlashSign = "\\";
+        }
         ConfigProperties.testEnvironment = true;
-        defaultFileSystem = System.getProperty("user.dir") + "\\tmpFS";
+        defaultFileSystem = System.getProperty("user.dir") + SlashSign + "tmpFS";
         ImageTools it = new ImageTools();
         content = "data:image/jpeg;base64,aaa";
         is = new ImageString(content, ImageType.profilePic);
@@ -50,7 +54,7 @@ class ImageToolsTest {
     }
 
     @Test
-    void createAppImageWithoutFileSystemLeadsToException() {
+    void createAppImageWithoutFileSystemLeadsToExceptionInWindowsOS() {
         ConfigProperties.testAbsoluteFileSystemPath = "\\xxxx\\xxx";
         boolean thrown = false;
         try {
@@ -58,12 +62,13 @@ class ImageToolsTest {
         } catch (ImageException e) {
             thrown = true;
         }
-        assertTrue(thrown);
+        if (ConfigProperties.isWindowsOS) assertTrue(thrown);
+        else assertTrue(!thrown);
     }
 
     @Test
     void createAppImageWitFileSystemLeads() {
-        ConfigProperties.testAbsoluteFileSystemPath = defaultFileSystem + "\\";
+        ConfigProperties.testAbsoluteFileSystemPath = defaultFileSystem + SlashSign;
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
         boolean thrown = false;
         try {
