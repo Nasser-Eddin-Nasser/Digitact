@@ -30,7 +30,6 @@ public class ApplicantUI {
     @JsonProperty("workExperiences")
     private List<WorkExperience> workExperiences;
 
-
     @JsonProperty("hrRating")
     private HrRating hrRating;
 

@@ -1,11 +1,8 @@
 package Model;
 
-
 public class HrRating {
 
-
     private int rhetoric;
-
 
     private int motivation;
 
@@ -16,8 +13,6 @@ public class HrRating {
     private String impression;
 
     public HrRating() {}
-
-
 
     public HrRating(
             int rhetoric,
@@ -71,5 +66,4 @@ public class HrRating {
     public void setImpression(String impression) {
         this.impression = impression;
     }
-
 }
