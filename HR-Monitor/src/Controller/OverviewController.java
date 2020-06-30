@@ -261,7 +261,7 @@ public class OverviewController {
 
         HBox hb = new HBox();
         hb.setAlignment(Pos.CENTER);
-        hb.setPadding(new Insets(50, 50, 50, 50));
+        hb.setPadding(new Insets(25, 25, 25, 25));
         hb.setSpacing(50);
         documentsGridFX.fitToHeightProperty();
         try {
@@ -310,8 +310,8 @@ public class OverviewController {
                 new InvalidationListener() {
                     @Override
                     public void invalidated(Observable arg0) {
-                        imageView.setFitWidth(zoomProperty.get() * 3.5);
-                        imageView.setFitHeight(zoomProperty.get() * 3.5);
+                        imageView.setFitWidth(zoomProperty.get() * 4);
+                        imageView.setFitHeight(zoomProperty.get() * 4);
                     }
                 });
 

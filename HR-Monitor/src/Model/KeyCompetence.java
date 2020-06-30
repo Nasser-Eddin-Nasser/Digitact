@@ -26,6 +26,6 @@ public class KeyCompetence {
 
     @Override
     public String toString() {
-        return this.name + "-" + this.rating;
+        return this.name + " - " + this.rating;
     }
 }
