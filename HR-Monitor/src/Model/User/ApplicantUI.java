@@ -30,6 +30,10 @@ public class ApplicantUI {
     @JsonProperty("workExperiences")
     private List<WorkExperience> workExperiences;
 
+
+    @JsonProperty("hrRating")
+    private HrRating hrRating;
+
     private List<Industries> industries;
     private List<Positions> positions;
     private List<KeyCompetence> keyCompetencies;
@@ -58,7 +62,8 @@ public class ApplicantUI {
             List<Industries> industries,
             List<Positions> positions,
             List<KeyCompetence> keyCompetencies,
-            List<AppImage> images) {
+            List<AppImage> images,
+            HrRating hrRating) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -75,6 +80,7 @@ public class ApplicantUI {
         this.images = images;
         this.additionalInfo = additionalInfo;
         this.workExperiences = workExperiences;
+        this.hrRating = hrRating;
     }
 
     public List<Industries> getIndustries() {
@@ -155,5 +161,13 @@ public class ApplicantUI {
 
     public String getAdditionalInfo() {
         return additionalInfo;
+    }
+
+    public HrRating getHrRating() {
+        return hrRating;
+    }
+
+    public void setHrRating(HrRating hrRating) {
+        this.hrRating = hrRating;
     }
 }

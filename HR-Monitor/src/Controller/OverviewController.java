@@ -37,6 +37,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
@@ -106,6 +107,11 @@ public class OverviewController {
     @FXML TableColumn<KeyCompetence, String> proSoftColFX = new TableColumn<>("name");
     @FXML TableColumn<KeyCompetence, String> spoLanColFX = new TableColumn<>("name");
 
+    @FXML
+    Label txtrheFX, txtMotFX, txtSelfFX, txtPerFX;
+    @FXML
+    TextField txtImpFX;
+
     Pane root;
 
     public OverviewController(/* Stage parentStage */ ) throws IOException {
@@ -161,9 +167,19 @@ public class OverviewController {
             getTableEduInfo(app);
             getImage(app);
             setKeyCompetence(app);
+            setHrRating(app);
         } catch (IOException e) {
             System.err.println("unable to load Image!");
+            e.printStackTrace();
         }
+    }
+
+    private void setHrRating(ApplicantUI app) {
+        txtrheFX.setText("Rhetoric - "+ app.getHrRating().getRhetoric());
+        txtMotFX.setText("Motivation - "+ app.getHrRating().getMotivation());
+        txtSelfFX.setText("Self Assurance - "+ app.getHrRating().getSelfAssurance());
+        txtPerFX.setText("Personal Impression - "+ app.getHrRating().getPersonalImpression());
+        txtImpFX.setText(app.getHrRating().getImpression());
     }
 
     private void setKeyCompetence(ApplicantUI app) {
@@ -471,4 +487,6 @@ public class OverviewController {
                     return row;
                 });
     }
+
+
 }
