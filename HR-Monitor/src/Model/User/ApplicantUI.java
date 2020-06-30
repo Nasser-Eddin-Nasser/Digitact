@@ -26,6 +26,9 @@ public class ApplicantUI {
 
     @JsonProperty("educations")
     private List<Education> educations;
+    
+    @JsonProperty("workExperiences")
+    private List<WorkExperience> workExperiences;
 
     private List<Industries> industries;
     private List<Positions> positions;
@@ -51,6 +54,7 @@ public class ApplicantUI {
             Title title,
             String additionalInfo,
             List<Education> educations,
+            List<WorkExperience> workExperiences,
             List<Industries> industries,
             List<Positions> positions,
             List<KeyCompetence> keyCompetencies,
@@ -70,6 +74,7 @@ public class ApplicantUI {
         this.keyCompetencies = keyCompetencies;
         this.images = images;
         this.additionalInfo = additionalInfo;
+        this.workExperiences = workExperiences;
     }
 
     public List<Industries> getIndustries() {
@@ -87,6 +92,15 @@ public class ApplicantUI {
     public void setEducation(List<Education> education) {
 
         this.educations = education;
+    }
+    
+    public List<WorkExperience> getWorkExperience() {
+        return workExperiences;
+    }
+
+    public void setWorkExperience(List<WorkExperience> workExperience) {
+
+        this.workExperiences = workExperience;
     }
 
     public List<KeyCompetence> getKeyCompetencies() {

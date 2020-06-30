@@ -1,5 +1,7 @@
 package Digitact.Backend;
 
+import static org.junit.Assert.assertTrue;
+
 import Digitact.Backend.Controller.ClientController;
 import java.io.IOException;
 import java.net.Socket;
@@ -24,7 +26,6 @@ class ApplicationTests {
         Socket s = null;
         try {
             s = new Socket("localhost", ConfigProperties.serverPort);
-
             System.out.println(
                     "--------------Port " + ConfigProperties.serverPort + " is not available");
             portavaialble = false;
@@ -41,6 +42,6 @@ class ApplicationTests {
                 }
             }
         }
-        assert (portavaialble);
+        assertTrue(portavaialble);
     }
 }

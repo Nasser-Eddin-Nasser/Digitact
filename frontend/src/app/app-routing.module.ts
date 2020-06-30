@@ -34,13 +34,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./privacy/privacy.module').then((m) => m.PrivacyPageModule),
   },
-  {
-    path: 'applications-upload',
-    loadChildren: () =>
-      import('./applications-upload/applications-upload.module').then(
-        (m) => m.ApplicationsUploadPageModule
-      ),
-  },
 ];
 
 @NgModule({

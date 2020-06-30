@@ -59,6 +59,11 @@
           *ngSwitchCase="APPLICATION_STEP.FieldDesignationPreference"
         >
         </form-field-designation-page>
+        <form-work-experience
+          [formsData]="formsData"
+          *ngSwitchCase="APPLICATION_STEP.WorkExperience"
+        >
+        </form-work-experience>
         <form-education-info
           [formsData]="formsData"
           *ngSwitchCase="APPLICATION_STEP.EducationInformation"

@@ -34,6 +34,7 @@ import {
   FormsData,
   KeyCompetencies,
   ProfilePicture,
+  WorkExperience,
 } from '../model/forms-data.model';
 import { StorageHandlerService } from '../services/storage-handler.service';
 
@@ -100,6 +101,9 @@ export class FormsPage
     }),
     documents: new FormGroup<Documents>({
       documentsBase64: new FormArray([]),
+    }),
+    workExperienceInfo: new FormGroup<WorkExperience>({
+      workExperienceForm: new FormArray([], Validators.required),
     }),
     educationInfo: new FormGroup<EducationInfo>({
       educationInfoForm: new FormArray([], Validators.required),
