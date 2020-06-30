@@ -33,6 +33,12 @@ export class AppComponent {
         .then((locale: string) => {
           if (locale) {
             this.translate.use(locale);
+          } else {
+            this.store.addItem<string>(
+              this.store.commonPropertiesDb,
+              'chosenLocale',
+              'de'
+            );
           }
         });
     });
