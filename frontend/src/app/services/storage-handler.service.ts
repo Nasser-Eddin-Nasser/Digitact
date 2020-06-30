@@ -155,10 +155,16 @@ export class StorageHandlerService {
    * @param key Unique key for the item
    * @returns Promise of forms data object
    */
-  async getItem<T>(dbObject: Storage, key: string): Promise<T> {
-    await dbObject.ready();
-    const item = await dbObject.get(key);
-    return item;
+  async getItem<T>(dbObject: Promise<LocalForage>, key: string): Promise<T> {
+    return await new Promise((resolve, reject) => {
+      dbObject
+        .then((localForageObject) => {
+          localForageObject.getItem(key).then((storedValue: T) => {
+            resolve(storedValue);
+          });
+        })
+        .catch((reason) => reject(reason));
+    });
   }
 
   /**
@@ -166,13 +172,21 @@ export class StorageHandlerService {
    * @param dbObject The storage object
    * @returns Promise of array of forms data object
    */
-  async getAllItems<T>(dbObject: Storage): Promise<Array<T>> {
+  async getAllItems<T>(dbObject: Promise<LocalForage>): Promise<Array<T>> {
     const items: Array<T> = [];
-    await dbObject.ready();
-    await dbObject.forEach((value) => {
-      items.push(value);
+    return await new Promise((resolve, reject) => {
+      dbObject
+        .then((localForageObject) => {
+          localForageObject
+            .iterate((storedValue: T) => {
+              items.push(storedValue);
+            })
+            .then(() => {
+              resolve(items);
+            });
+        })
+        .catch((reason) => reject(reason));
     });
-    return items;
   }
 
   /**
