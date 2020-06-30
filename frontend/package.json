@@ -35,6 +35,7 @@
     "@ionic/storage": "^2.2.0",
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^5.0.0",
+    "cordova-sqlite-storage": "^5.0.0",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.1",
     "tslib": "^1.13.0",
@@ -42,6 +43,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.7",
+    "@angular-devkit/architect": "^0.1000.0",
     "@angular/cli": "~9.1.7",
     "@angular/compiler": "~9.1.9",
     "@angular/compiler-cli": "~9.1.9",
