@@ -21,24 +21,33 @@
         let i = index
       "
     >
-      <ion-item (click)="modifyEducationInfo(data, i)" class="ion-no-padding">
+      <ion-item
+        (click)="modifyEducationInfo(data, i)"
+        class="education-entry ion-no-padding"
+      >
         <ion-label>
-          <h1>{{ data.controls.university.value }}</h1>
-          <p>
-            <ion-icon name="easel-outline"></ion-icon>
-            {{ data.controls.subject.value }}
+          <p class="education-entry-title">
+            {{ data.controls.university.value }}
           </p>
-          <p>
+
+          <p class="with-icon">
+            <ion-icon name="easel-outline"></ion-icon>
+            <span>{{ data.controls.subject.value }}</span>
+          </p>
+
+          <p class="with-icon">
             <ion-icon name="school-outline"></ion-icon>
-            {{
-              'educationInfo.degreeYearGradeMessage'
-                | translate
-                  : {
-                      degree: data.controls.degree.value,
-                      graduationYear: data.controls.graduationYear.value,
-                      grade: data.controls.grade.value
-                    }
-            }}
+            <span>
+              {{
+                'educationInfo.degreeYearGradeMessage'
+                  | translate
+                    : {
+                        degree: data.controls.degree.value,
+                        graduationYear: data.controls.graduationYear.value,
+                        grade: data.controls.grade.value
+                      }
+              }}
+            </span>
           </p>
         </ion-label>
       </ion-item>

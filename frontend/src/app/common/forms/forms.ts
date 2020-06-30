@@ -69,7 +69,7 @@ type MyFormControls<T> = {
 
 type MyGenericFormControl<T> = T extends UseControl<infer U>
   ? FormControl<U>
-  : T extends string | number
+  : T extends string | number | boolean
   ? FormControl<T>
   : T extends (infer V)[]
   ? FormArray<V>

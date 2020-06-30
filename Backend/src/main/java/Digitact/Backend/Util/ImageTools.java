@@ -1,6 +1,7 @@
 package Digitact.Backend.Util;
 
-import static Digitact.Backend.ConfigProperties.*;
+import static Digitact.Backend.ConfigProperties.BLOCKFORMAT;
+import static Digitact.Backend.ConfigProperties.Max_Repetition_Try;
 
 import Digitact.Backend.ConfigProperties;
 import Digitact.Backend.Exception.ImageException;
@@ -17,9 +18,17 @@ import java.util.stream.Collectors;
 import javax.xml.bind.DatatypeConverter;
 
 public class ImageTools {
+    private static String myAbsoluteFileSystemPath = ConfigProperties.absoluteFileSystemPath;
+
+    public ImageTools() {
+        if (ConfigProperties.testEnvironment) {
+            myAbsoluteFileSystemPath = ConfigProperties.testAbsoluteFileSystemPath;
+        }
+    }
 
     private static int size = (int) ConfigProperties.BLOCKSIZE;
     private static int i = 0;
+    private static int tries = 0;
 
     public static AppImage createAppImage(String imageString, ImageType it) throws ImageException {
         AppImage appImage = new AppImage();
@@ -62,7 +71,7 @@ public class ImageTools {
     }
 
     private static boolean storeBlockInFS(Block block, String content) throws ImageException {
-        File file = new File(absoluteFileSystemPath + block.getID() + BLOCKFORMAT);
+        File file = new File(myAbsoluteFileSystemPath + block.getID() + BLOCKFORMAT);
         try {
             if (file.createNewFile()) {
                 boolean successful = writeBlock(file, content);
@@ -70,8 +79,14 @@ public class ImageTools {
                 return successful;
             } else System.out.println("Block already exists!");
         } catch (IOException e) {
-            System.err.println("Error while storing Block In FS ");
-            throw new ImageException("Error while storing Block In FS");
+            if (tries < Max_Repetition_Try) {
+                ++tries;
+                storeBlockInFS(block, content);
+            } else {
+                tries = 0;
+                System.err.println("Error while storing Block In FS ");
+                throw new ImageException("Error while storing Block In FS");
+            }
         }
         return false;
     }
@@ -114,7 +129,7 @@ public class ImageTools {
         try {
             reader =
                     new BufferedReader(
-                            new FileReader(absoluteFileSystemPath + block.getID() + BLOCKFORMAT));
+                            new FileReader(myAbsoluteFileSystemPath + block.getID() + BLOCKFORMAT));
             StringBuilder stringBuilder = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {
@@ -152,7 +167,7 @@ public class ImageTools {
         }
         // convert base64 string to binary data
         byte[] data = DatatypeConverter.parseBase64Binary(imageStrings[1]);
-        String path = absoluteFileSystemPath + imageString.getType().toString() + imageFormat;
+        String path = myAbsoluteFileSystemPath + imageString.getType().toString() + imageFormat;
         File file = new File(path);
         try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
             outputStream.write(data);
