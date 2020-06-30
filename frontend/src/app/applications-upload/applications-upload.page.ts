@@ -93,11 +93,14 @@ export class ApplicationsUploadPage implements OnInit {
       /**
        * key competencies are mapped according json format required by server.
        */
-      Object.entries(inp.keyCompetencies).map(([k, v]) => {
-        v.forEach((x: KeyCompetenciesEntry) => {
-          keyCompetence.push({ category: k, name: x.name, rating: x.rating });
+      if (inp.keyCompetencies) {
+        Object.entries(inp.keyCompetencies).map(([k, v]) => {
+          v.forEach((x: KeyCompetenciesEntry) => {
+            keyCompetence.push({ category: k, name: x.name, rating: x.rating });
+          });
         });
-      });
+      }
+
       /**
        * picture of applicant and documents is mapped according json format required by server.
        */
