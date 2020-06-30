@@ -31,6 +31,7 @@ public class ImageTools {
     private static int tries = 0;
 
     public static AppImage createAppImage(String imageString, ImageType it) throws ImageException {
+
         AppImage appImage = new AppImage();
         appImage.createId();
         appImage.setType(it);
