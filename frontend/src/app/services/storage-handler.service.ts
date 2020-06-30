@@ -115,10 +115,17 @@ export class StorageHandlerService {
    */
 
   async getNextId(): Promise<string> {
-    const val = await this.commonPropertiesDb.get('recentApplicantId');
-    const nextId: number = val ? val + 1 : 1;
-    this.commonPropertiesDb.set('recentApplicantId', nextId);
-    return nextId.toString();
+    return await new Promise((resolve, reject) => {
+      this.commonPropertiesDb
+        .then((localForageObject) => {
+          localForageObject.getItem('recentApplicantId').then((val: number) => {
+            const nextId: number = val ? val + 1 : 1;
+            localForageObject.setItem('recentApplicantId', nextId);
+            resolve(nextId.toString());
+          });
+        })
+        .catch((reason) => reject(reason));
+    });
   }
 
   /**
@@ -128,15 +135,20 @@ export class StorageHandlerService {
    * @returns Promise of forms data object
    */
   async addItem<T>(
-    dbObject: Storage,
+    dbObject: Promise<LocalForage>,
     key: string,
-    value: DeepPartial<FormsData> | DeepPartial<RatingForm> | string
+    value: T
   ): Promise<T> {
-    await dbObject.ready();
-    const item = await dbObject.set(key, value);
-    return item;
+    return await new Promise((resolve, reject) => {
+      dbObject
+        .then((localForageObject) => {
+          localForageObject.setItem(key, value).then((storedValue: T) => {
+            resolve(storedValue);
+          });
+        })
+        .catch((reason) => reject(reason));
+    });
   }
-
   /**
    * Used to get an item from the storage
    * @param dbObject The storage object
