@@ -195,13 +195,20 @@ export class StorageHandlerService {
    * @param key Unique key for the item
    * @returns Promise of void
    */
-  async deleteItem(dbObject: Storage, key: string): Promise<void> {
-    await dbObject.ready();
-    const item = await dbObject.get(key);
-    if (!item) {
-      return undefined;
-    }
-    return dbObject.remove(key);
+  async deleteItem(dbObject: Promise<LocalForage>, key: string): Promise<void> {
+    return await new Promise((resolve, reject) => {
+      dbObject
+        .then((localForageObject) => {
+          const item = localForageObject.getItem(key);
+          if (!item) {
+            resolve();
+          }
+          localForageObject.removeItem(key).then(() => {
+            resolve();
+          });
+        })
+        .catch((reason) => reject(reason));
+    });
   }
 
   /**
@@ -209,9 +216,10 @@ export class StorageHandlerService {
    * @param dbObject The storage object
    * @returns Promise of void
    */
-  async deleteAllItems(dbObject: Storage): Promise<void> {
-    await dbObject.ready();
-    return dbObject.clear();
+  async deleteAllItems(dbObject: Promise<LocalForage>): Promise<void> {
+    return await dbObject.then((localForageObject) => {
+      localForageObject.clear();
+    });
   }
 
   /**
