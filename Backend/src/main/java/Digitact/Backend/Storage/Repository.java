@@ -65,12 +65,16 @@ public class Repository {
     }
 
     private void addKeyCompetencesToApplicant(List<KeyCompetence> keyCompetences, Applicant app) {
-        keyCompetences.forEach(x -> x.setUser(app));
-        app.setKeyCompetencies(keyCompetences);
+        if (keyCompetences != null) {
+            keyCompetences.forEach(x -> x.setUser(app));
+            app.setKeyCompetencies(keyCompetences);
+        }
     }
 
     private void addEducationInfoToApplicant(List<Education> educationList, Applicant app) {
-        educationList.forEach(x -> x.setUser(app));
-        app.setEducations(educationList);
+        if (educationList != null) {
+            educationList.forEach(x -> x.setUser(app));
+            app.setEducations(educationList);
+        }
     }
 }
