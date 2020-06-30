@@ -17,11 +17,7 @@ public class Education {
     private Education() {}
 
     public Education(
-            String university,
-            String subject,
-            Degree degree,
-            double grade,
-            String graduationYear) {
+            String university, String subject, Degree degree, double grade, String graduationYear) {
         this.university = university;
         this.subject = subject;
         this.degree = degree;

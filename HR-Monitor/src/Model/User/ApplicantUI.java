@@ -26,7 +26,7 @@ public class ApplicantUI {
 
     @JsonProperty("educations")
     private List<Education> educations;
-    
+
     @JsonProperty("workExperiences")
     private List<WorkExperience> workExperiences;
 
@@ -93,7 +93,7 @@ public class ApplicantUI {
 
         this.educations = education;
     }
-    
+
     public List<WorkExperience> getWorkExperience() {
         return workExperiences;
     }

@@ -3,9 +3,9 @@ package Storage;
 import Database.Connector;
 import Database.Method;
 import Model.Education;
-import Model.WorkExperience;
 import Model.User.Admin;
 import Model.User.ApplicantUI;
+import Model.WorkExperience;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,7 @@ public class DBStorage {
     private static void getAllEducationInfo() throws IOException {
         Connector.sendGetHttp(Method.getAllEducationInfo);
     }
-    
+
     private static void getAllWorkExperienceInfo() throws IOException {
         Connector.sendGetHttp(Method.getAllWorkExperienceInfo);
     }
@@ -73,7 +73,7 @@ public class DBStorage {
         DBStorage.eduInfo = new ArrayList<>(eduInfo);
         transfer = true;
     }
-    
+
     public static void setWorkInfo(List<WorkExperience> workInfo) {
         DBStorage.workInfo = new ArrayList<>(workInfo);
         transfer = true;

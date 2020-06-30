@@ -1,7 +1,7 @@
 package Model;
 
 public class WorkExperience {
-    
+
     private String jobTitle;
 
     private String company;
@@ -11,13 +11,18 @@ public class WorkExperience {
     private String startDate;
 
     private String endDate;
-    
+
     private String description;
 
     public WorkExperience() {}
 
     public WorkExperience(
-            String jobTitle, String company, EmploymentType employmentType, String startDate, String endDate, String description) {
+            String jobTitle,
+            String company,
+            EmploymentType employmentType,
+            String startDate,
+            String endDate,
+            String description) {
         this.jobTitle = jobTitle;
         this.company = company;
         this.employmentType = employmentType;
@@ -49,7 +54,7 @@ public class WorkExperience {
     public void setEmploymentType(EmploymentType employmentType) {
         this.employmentType = employmentType;
     }
-    
+
     public String getStartDate() {
         return startDate;
     }
@@ -65,7 +70,7 @@ public class WorkExperience {
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
-    
+
     public String getDescription() {
         return description;
     }
@@ -73,5 +78,4 @@ public class WorkExperience {
     public void setDescription(String description) {
         this.description = description;
     }
-
 }
