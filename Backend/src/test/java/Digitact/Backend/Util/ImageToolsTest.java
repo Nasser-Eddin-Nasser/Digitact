@@ -15,18 +15,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ImageToolsTest {
-
+    final boolean isWindowsOS =
+            (System.getProperty("os.name").startsWith("Windows")) ? true : false;
     ImageString is;
     String invalidContent;
     String defaultFileSystem;
+    String SlashSign = "//";
     AppImage ai;
     ImageTools imageTools;
 
     @BeforeEach
     void setUp() {
+        if (isWindowsOS) {
+            SlashSign = "\\";
+        }
         ConfigProperties.testEnvironment = true;
-        defaultFileSystem = System.getProperty("user.dir") + "\\tmpFS";
-        imageTools = new ImageTools();
+        defaultFileSystem = System.getProperty("user.dir") + SlashSign + "tmpFS";
+        ImageTools it = new ImageTools();
         invalidContent = "data:image/jpeg;base64,aaa";
         is = new ImageString(invalidContent, ImageType.profilePic);
         new File(defaultFileSystem).mkdirs();
@@ -54,7 +59,7 @@ class ImageToolsTest {
     }
 
     @Test
-    void createAppImageWithoutFileSystemLeadsToException() {
+    void createAppImageWithoutFileSystemLeadsToExceptionInWindowsOS() {
         ConfigProperties.testAbsoluteFileSystemPath = "\\xxxx\\xxx";
         boolean thrown = false;
         try {
@@ -62,12 +67,14 @@ class ImageToolsTest {
         } catch (ImageException e) {
             thrown = true;
         }
-        assertTrue(thrown);
+        if (isWindowsOS) assertTrue(thrown);
+        else assertTrue(!thrown);
     }
 
     @Test
     void createAppImageWitFileSystemLeads() {
-        ConfigProperties.testAbsoluteFileSystemPath = defaultFileSystem + "\\";
+        ConfigProperties.testAbsoluteFileSystemPath = defaultFileSystem + SlashSign;
+        System.out.println("Working Directory = " + System.getProperty("user.dir"));
         setUp(); // it has to be call again in order to set the new FS
         boolean thrown = false;
         try {

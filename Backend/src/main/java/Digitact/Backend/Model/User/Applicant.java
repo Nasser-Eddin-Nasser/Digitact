@@ -1,12 +1,12 @@
 package Digitact.Backend.Model.User;
 
-import Digitact.Backend.Model.WorkExperience;
 import Digitact.Backend.Model.Education;
+import Digitact.Backend.Model.HrRating;
 import Digitact.Backend.Model.Image.AppImage;
 import Digitact.Backend.Model.Industries;
 import Digitact.Backend.Model.KeyCompetence;
 import Digitact.Backend.Model.Positions;
-import Digitact.Backend.Model.HrRating;
+import Digitact.Backend.Model.WorkExperience;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -61,7 +61,7 @@ public class Applicant extends User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     private Set<AppImage> images;
-    
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     private HrRating hrRating;
@@ -83,7 +83,6 @@ public class Applicant extends User {
         positions = new HashSet<Positions>();
         workExperiences = new HashSet<WorkExperience>();
         hrRating = new HrRating();
-
     }
 
     public UserRight getUserRight() {
@@ -209,12 +208,12 @@ public class Applicant extends User {
     public void setAdditionalInfo(String additionalInfo) {
         this.additionalInfo = additionalInfo;
     }
-    
+
     public void setHrRating(HrRating hrRating) {
-    	this.hrRating = hrRating;
+        this.hrRating = hrRating;
     }
-    
+
     public HrRating getHrRating() {
-    	return hrRating;
+        return hrRating;
     }
 }

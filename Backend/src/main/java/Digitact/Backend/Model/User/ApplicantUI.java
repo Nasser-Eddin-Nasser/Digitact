@@ -1,12 +1,12 @@
 package Digitact.Backend.Model.User;
 
 import Digitact.Backend.Model.Education;
+import Digitact.Backend.Model.HrRating;
 import Digitact.Backend.Model.Image.ImageString;
 import Digitact.Backend.Model.Industries;
 import Digitact.Backend.Model.KeyCompetence;
 import Digitact.Backend.Model.Positions;
 import Digitact.Backend.Model.WorkExperience;
-import Digitact.Backend.Model.HrRating;
 import java.util.List;
 
 public class ApplicantUI implements IUser {
@@ -72,7 +72,7 @@ public class ApplicantUI implements IUser {
     public List<Education> getEducations() {
         return educations;
     }
-    
+
     public List<WorkExperience> getWorkExperiences() {
         return workExperiences;
     }
@@ -128,9 +128,9 @@ public class ApplicantUI implements IUser {
     public void setAdditionalInfo(String additionalInfo) {
         this.additionalInfo = additionalInfo;
     }
-    
+
     public HrRating getHrRating() {
-    	return hrRating;
+        return hrRating;
     }
 
     @Override
