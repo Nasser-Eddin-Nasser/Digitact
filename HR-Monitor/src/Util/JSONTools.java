@@ -1,6 +1,7 @@
 package Util;
 
 import Model.Education;
+import Model.WorkExperience;
 import Model.User.Admin;
 import Model.User.ApplicantUI;
 import Storage.DBStorage;
@@ -43,6 +44,17 @@ public class JSONTools {
         try {
             DBStorage.setEduInfo(
                     mapper.readValue(jsonInput, new TypeReference<List<Education>>() {}));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void convertJSONToWorkuInfo(String jsonInput) {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        try {
+            DBStorage.setWorkInfo(
+                    mapper.readValue(jsonInput, new TypeReference<List<WorkExperience>>() {}));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

@@ -11,4 +11,7 @@ public class Query {
             "SELECT * FROM users INNER JOIN education on users.id = education.user_id";
     public static final String getImageByID = "SELECT * FROM images WHERE id = ?1";
     public static final String getAdminByUserName = "SELECT * FROM users WHERE user_name = ?1";
+    public static final String getWorkExperiencesByUserID = "SELECT * FROM WorkExperience WHERE user_id = ?1";
+    public static final String getAllWorkExperiencesQuery = "SELECT * FROM WorkExperience";
+
 }

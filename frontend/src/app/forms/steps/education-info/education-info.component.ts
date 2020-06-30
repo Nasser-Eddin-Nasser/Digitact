@@ -102,7 +102,7 @@ export class EducationInfoComponent {
         education: educationInfoMod,
       },
       swipeToClose: true,
-      presentingElement: await this.modalController.getTop(),
+      presentingElement: this.ionRouterOutlet.nativeEl,
     });
 
     /**

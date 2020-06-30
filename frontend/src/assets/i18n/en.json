@@ -96,6 +96,26 @@
         "deleteConfirmationMessage": "Do you really want to delete this image?",
         "imageDeleteSuccessMessage": "The image has been deleted successfully"
     },
+    "workExperience":{
+        "title": "Work Experience",
+        "stepDescription": "Here, you can add your information regarding your work.",
+        "jobTitle": "Title",
+        "company": "Company",
+        "employmentType": "Employment Type",
+        "employmentTypeValue": "{{empType}}",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "description": "Description",
+        "fullTime": "Full-Time",
+        "partTime": "Part-Time",
+        "selfEmployed": "Self-Employed",
+        "freelance": "Freelance",
+        "contract": "Contract",
+        "internship": "internship",
+        "apprenticeship": "Apprenticeship",
+        "other": "Other",
+        "present": "Present"
+    },
     "educationInfo": {
         "title": "Education Information",
         "stepDescription": "Here, you can add your information regarding your education. So: Which schools/universities have you visited?",

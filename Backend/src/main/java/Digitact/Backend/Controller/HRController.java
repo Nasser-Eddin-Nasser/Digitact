@@ -1,11 +1,13 @@
 package Digitact.Backend.Controller;
 
 import Digitact.Backend.Model.Education;
+import Digitact.Backend.Model.WorkExperience;
 import Digitact.Backend.Model.User.Admin;
 import Digitact.Backend.Model.User.AdminUI;
 import Digitact.Backend.Model.User.User;
 import Digitact.Backend.Storage.IDataRepository;
 import Digitact.Backend.Storage.IEducationRepository;
+import Digitact.Backend.Storage.IWorkExperienceRepository;
 import Digitact.Backend.Storage.IImageRepository;
 import Digitact.Backend.Util.ImageTools;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class HRController {
     @Autowired IDataRepository dataRepository;
     @Autowired IEducationRepository educationRepository;
     @Autowired IImageRepository imageRepository;
+    @Autowired IWorkExperienceRepository workExperieinceRepository;
 
     /** @return JSON object of the applicants */
     @GetMapping("/getApplicants")
@@ -31,6 +34,11 @@ public class HRController {
     @GetMapping("/getAllEducationInfo")
     public List<Education> getFullEducationsInfo() {
         return new ArrayList<Education>(educationRepository.getAllEducationsInfo());
+    }
+    
+    @GetMapping("/getAllWorkExperiencesInfo")
+    public List<WorkExperience> getAllWorkExperiencesInfo() {
+        return new ArrayList<WorkExperience>(workExperieinceRepository.getAllWorkExperiencesInfo());
     }
 
     @GetMapping(path = "/getImageById={imageId}")
