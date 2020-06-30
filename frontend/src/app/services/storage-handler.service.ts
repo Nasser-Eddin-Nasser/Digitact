@@ -3,38 +3,108 @@
  *  This file handles all the CRUD operations related to ionic storage
  */
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
-
-import { FormsData } from '../model/forms-data.model';
-import { RatingForm } from '../rating/model/rating-form.model';
+import {
+  createInstance,
+  defineDriver,
+  INDEXEDDB,
+  LOCALSTORAGE,
+} from 'localforage';
+import { _driver } from 'localforage-cordovasqlitedriver';
+import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StorageHandlerService {
-  applicantDetailsDb: Storage;
-  applicantRatingsDb: Storage;
-  commonPropertiesDb: Storage;
+  applicantDetailsDb: Promise<LocalForage>;
+  applicantRatingsDb: Promise<LocalForage>;
+  commonPropertiesDb: Promise<LocalForage>;
 
   constructor() {
-    this.applicantDetailsDb = new Storage({
-      name: 'digitact',
-      storeName: 'applicants-details',
-      driverOrder: ['indexeddb', 'localstorage'],
+    const commonPropertiesDbConfig = {
+      name: 'digitactDb',
+      storeName: 'commonProperties',
+      driverOrder: ['sqlite', 'indexeddb', 'localstorage'],
+    };
+
+    this.commonPropertiesDb = new Promise((resolve, reject) => {
+      let db: LocalForage;
+      defineDriver(CordovaSQLiteDriver)
+        .then(() => {
+          db = createInstance(commonPropertiesDbConfig);
+        })
+        .then(() =>
+          db.setDriver(
+            this.getDriverOrder(commonPropertiesDbConfig.driverOrder)
+          )
+        )
+        .then(() => {
+          resolve(db);
+        })
+        .catch((reason) => reject(reason));
     });
-    this.applicantRatingsDb = new Storage({
-      name: 'digitact',
-      storeName: 'applicants-rating',
-      driverOrder: ['indexeddb', 'localstorage'],
+    const applicantDetailsDbConfig = {
+      name: 'digitactDb',
+      storeName: 'applicantsDetails',
+      driverOrder: ['sqlite', 'indexeddb', 'localstorage'],
+    };
+
+    this.applicantDetailsDb = new Promise((resolve, reject) => {
+      let db: LocalForage;
+      defineDriver(CordovaSQLiteDriver)
+        .then(() => {
+          db = createInstance(applicantDetailsDbConfig);
+        })
+        .then(() =>
+          db.setDriver(
+            this.getDriverOrder(applicantDetailsDbConfig.driverOrder)
+          )
+        )
+        .then(() => {
+          resolve(db);
+        })
+        .catch((reason) => reject(reason));
     });
-    this.commonPropertiesDb = new Storage({
-      name: 'digitact',
-      storeName: 'common-properties',
-      driverOrder: ['indexeddb', 'localstorage'],
+
+    const applicantRatingsDbConfig = {
+      name: 'digitactDb',
+      storeName: 'applicantsRating',
+      driverOrder: ['sqlite', 'indexeddb', 'localstorage'],
+    };
+
+    this.applicantRatingsDb = new Promise((resolve, reject) => {
+      let db: LocalForage;
+      defineDriver(CordovaSQLiteDriver)
+        .then(() => {
+          db = createInstance(applicantRatingsDbConfig);
+        })
+        .then(() =>
+          db.setDriver(
+            this.getDriverOrder(applicantRatingsDbConfig.driverOrder)
+          )
+        )
+        .then(() => {
+          resolve(db);
+        })
+        .catch((reason) => reject(reason));
     });
-    this.commonPropertiesDb.get('chosenLocale').then((locale) => {
-      if (!locale) {
-        this.commonPropertiesDb.set('chosenLocale', 'de');
+  }
+
+  /**
+   * Used to get the corresponding storage method keyword used by localforage
+   * @param driveOrder - Holds the prioritised driveer order array
+   * @returns array of strings with corresponding keyword supported by localforage
+   */
+
+  getDriverOrder(driverOrder: string[]): string[] {
+    return driverOrder.map((driver) => {
+      switch (driver) {
+        case 'sqlite':
+          return _driver;
+        case 'indexeddb':
+          return INDEXEDDB;
+        case 'localstorage':
+          return LOCALSTORAGE;
       }
     });
   }
