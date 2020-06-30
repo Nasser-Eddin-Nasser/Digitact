@@ -1,14 +1,14 @@
 package Digitact.Backend.Controller;
 
 import Digitact.Backend.Model.Education;
-import Digitact.Backend.Model.WorkExperience;
 import Digitact.Backend.Model.User.Admin;
 import Digitact.Backend.Model.User.AdminUI;
 import Digitact.Backend.Model.User.User;
+import Digitact.Backend.Model.WorkExperience;
 import Digitact.Backend.Storage.IDataRepository;
 import Digitact.Backend.Storage.IEducationRepository;
-import Digitact.Backend.Storage.IWorkExperienceRepository;
 import Digitact.Backend.Storage.IImageRepository;
+import Digitact.Backend.Storage.IWorkExperienceRepository;
 import Digitact.Backend.Util.ImageTools;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class HRController {
     public List<Education> getFullEducationsInfo() {
         return new ArrayList<Education>(educationRepository.getAllEducationsInfo());
     }
-    
+
     @GetMapping("/getAllWorkExperiencesInfo")
     public List<WorkExperience> getAllWorkExperiencesInfo() {
         return new ArrayList<WorkExperience>(workExperieinceRepository.getAllWorkExperiencesInfo());

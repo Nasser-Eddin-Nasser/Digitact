@@ -7,7 +7,7 @@ class WorkExperienceTest {
 
     @Test
     void createWorkExperience() {
-    	WorkExperience workExperience = new WorkExperience();
+        WorkExperience workExperience = new WorkExperience();
         Assertions.assertThat(workExperience).isNotNull();
     }
 }

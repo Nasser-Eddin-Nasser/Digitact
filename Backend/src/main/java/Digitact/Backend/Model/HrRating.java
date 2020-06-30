@@ -7,8 +7,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "HrRating")
 public class HrRating {
-	
-	@JsonIgnore
+
+    @JsonIgnore
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     public User user;
@@ -28,7 +28,7 @@ public class HrRating {
 
     @Column(name = "personalImpression")
     private int personalImpression;
-    
+
     @Column(name = "impression")
     private String impression;
 
@@ -40,7 +40,11 @@ public class HrRating {
     }
 
     public HrRating(
-            int rhetoric, int motivation, int selfAssurance, int personalImpression, String impression) {
+            int rhetoric,
+            int motivation,
+            int selfAssurance,
+            int personalImpression,
+            String impression) {
         this.rhetoric = rhetoric;
         this.motivation = motivation;
         this.selfAssurance = selfAssurance;
@@ -79,7 +83,7 @@ public class HrRating {
     public void setPersonalImpression(int personalImpression) {
         this.personalImpression = personalImpression;
     }
-    
+
     public String getImpression() {
         return impression;
     }
@@ -95,5 +99,4 @@ public class HrRating {
     public void setUser(User user) {
         this.user = user;
     }
-
 }

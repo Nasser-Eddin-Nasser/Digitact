@@ -10,7 +10,6 @@ public class ConfigProperties {
     public static final long BLOCKSIZE = 1024 * 1024; // 1 MiB
     public static final int Max_Repetition_Try = 5;
     // test configurations
-    public static final boolean isWindowsOS = true;
     public static boolean testEnvironment = false; // it will be dynamically set by the test classes
     public static String testAbsoluteFileSystemPath =
             "xx\\xx\\"; // it will be dynamically set by the test classes
