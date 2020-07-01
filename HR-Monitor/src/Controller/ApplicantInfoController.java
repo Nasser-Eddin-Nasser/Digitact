@@ -35,7 +35,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
@@ -103,6 +105,8 @@ public class ApplicantInfoController {
     // Additional Info
     @FXML Label lblAddInfo;
     @FXML private ImageView imgFX;
+    @FXML StackPane imgstckPFX;
+
 
     // Documents tab
     @FXML ScrollPane documentsGridFX;
@@ -247,6 +251,8 @@ public class ApplicantInfoController {
                 ImageTools.parseImageStringToImage(profImage);
                 File file = new File(profImage.getPath());
                 imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
+                imgFX.fitWidthProperty().bind(imgstckPFX.widthProperty());
+                imgFX.fitHeightProperty().bind(imgstckPFX.heightProperty());
             } catch (Exception e) {
                 e.printStackTrace();
             }
