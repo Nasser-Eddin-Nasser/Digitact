@@ -56,7 +56,7 @@ public class DBStorage {
         Connector.sendGetHttp(Method.getApplicants);
     }
 
-     public static void setUsers(List<ApplicantUI> users) {
+    public static void setUsers(List<ApplicantUI> users) {
         DBStorage.users = new ArrayList<>(users);
         transfer = true;
     }
