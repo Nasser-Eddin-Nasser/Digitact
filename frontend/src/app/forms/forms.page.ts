@@ -170,6 +170,7 @@ export class FormsPage
     [ApplicationStep.ContactInformation]: new FormControl<boolean>(false),
     [ApplicationStep.ProfilePicture]: new FormControl<boolean>(false),
     [ApplicationStep.Documents]: new FormControl<boolean>(false),
+    [ApplicationStep.WorkExperience]: new FormControl<boolean>(false),
     [ApplicationStep.EducationInformation]: new FormControl<boolean>(false),
     [ApplicationStep.FieldDesignationPreference]: new FormControl<boolean>(
       false

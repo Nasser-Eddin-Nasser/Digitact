@@ -52,6 +52,7 @@ export const ApplicationStepsConfig: ApplicationStepsConfig = {
   [ApplicationStep.WorkExperience]: {
     useForProgressCalculation: true,
     formItemName: 'workExperienceInfo',
+    maySkipStep: false,
   },
   [ApplicationStep.EducationInformation]: {
     useForProgressCalculation: true,
