@@ -33,39 +33,49 @@ export const ApplicationStepsConfig: ApplicationStepsConfig = {
   [ApplicationStep.BasicInformation]: {
     useForProgressCalculation: true,
     formItemName: 'basicInfo',
+    maySkipStep: false,
   },
   [ApplicationStep.ContactInformation]: {
     useForProgressCalculation: true,
     formItemName: 'contactInfo',
+    maySkipStep: false,
   },
   [ApplicationStep.ProfilePicture]: {
     useForProgressCalculation: true,
     formItemName: 'profilePicture',
+    maySkipStep: false,
   },
   [ApplicationStep.Documents]: {
     useForProgressCalculation: false,
+    maySkipStep: false,
   },
   [ApplicationStep.WorkExperience]: {
     useForProgressCalculation: true,
     formItemName: 'workExperienceInfo',
+    maySkipStep: false,
   },
   [ApplicationStep.EducationInformation]: {
     useForProgressCalculation: true,
     formItemName: 'educationInfo',
+    maySkipStep: true,
   },
   [ApplicationStep.FieldDesignationPreference]: {
     useForProgressCalculation: true,
     formItemName: 'fieldDesignationInfo',
+    maySkipStep: true,
   },
   [ApplicationStep.KeyCompetencies]: {
     useForProgressCalculation: true,
     formItemName: 'keyCompetencies',
+    maySkipStep: true,
   },
   [ApplicationStep.AdditionalInformation]: {
     useForProgressCalculation: false,
+    maySkipStep: false,
   },
   [ApplicationStep.Submit]: {
     useForProgressCalculation: false,
+    maySkipStep: false,
   },
 };
 
@@ -81,13 +91,16 @@ type ApplicationStepsConfigItem =
 /**
  * An item that should be used for progress calculation.
  */
-interface ConfigItemWithProgress {
+export interface ConfigItemWithProgress {
   useForProgressCalculation: true;
   /**
    * The name of the form item in our large FormGroup.
    */
   formItemName: keyof FormsData;
+
+  maySkipStep: boolean;
 }
-interface ConfigItemWithoutProgress {
+export interface ConfigItemWithoutProgress {
   useForProgressCalculation: false;
+  maySkipStep: false;
 }

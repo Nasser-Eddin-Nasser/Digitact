@@ -93,12 +93,6 @@ export class ApplicationsUploadPage implements OnInit {
           impression: val.impressionInfo.impression,
         };
 
-        /*
-        TODO: The values are all optional.
-        So, we should make sure that, if a value doesn't exist, this is handled appropriately.
-        This doesn't have to be done for all entries (e.g. the first name always exists,even though it is typed here as an optional thing).
-        But we should at least make sure that we have covered all truly optional ones.
-      */
         const keyCompetence: Array<{
           category: string;
           name: string;
@@ -109,11 +103,17 @@ export class ApplicationsUploadPage implements OnInit {
         /**
          * key competencies are mapped according json format required by server.
          */
-        Object.entries(applicantData.keyCompetencies).map(([k, v]) => {
-          v.forEach((x: KeyCompetenciesEntry) => {
-            keyCompetence.push({ category: k, name: x.name, rating: x.rating });
+        if (applicantData.keyCompetencies) {
+          Object.entries(applicantData.keyCompetencies).map(([k, v]) => {
+            v.forEach((x: KeyCompetenciesEntry) => {
+              keyCompetence.push({
+                category: k,
+                name: x.name,
+                rating: x.rating,
+              });
+            });
           });
-        });
+        }
         /**
          * picture of applicant and documents is mapped according json format required by server.
          */
@@ -121,7 +121,7 @@ export class ApplicationsUploadPage implements OnInit {
           content: applicantData.profilePicture.pictureBase64,
           type: 'profilePic',
         });
-        applicantData.documents.documentsBase64.forEach((x) => {
+        applicantData.documents?.documentsBase64?.forEach((x) => {
           images.push({ content: x, type: 'CV' });
         });
         /**
@@ -137,13 +137,21 @@ export class ApplicationsUploadPage implements OnInit {
           xing: applicantData.contactInfo.xing,
           imageList: images,
           workExperiences: applicantData.workExperienceInfo.workExperienceForm,
-          educations: applicantData.educationInfo.educationInfoForm,
-          industries: applicantData.fieldDesignationInfo.field,
-          positions: applicantData.fieldDesignationInfo.designation,
+          educations: applicantData.educationInfo?.educationInfoForm,
+          industries: applicantData.fieldDesignationInfo?.field,
+          positions: applicantData.fieldDesignationInfo?.designation,
           keyCompetencies: keyCompetence,
-          additionalInfo: applicantData.additionalInfo.additionalInfo,
+          additionalInfo: applicantData.additionalInfo?.additionalInfo,
           hrRating: applicantHRScore,
         };
+
+        // The server expects all keys to exist. We need to explicitly set the value to null so that it is actually submitted.
+        for (const [key, value] of Object.entries(formsData)) {
+          if (value === undefined || value === null) {
+            // tslint:disable-next-line: no-null-keyword no-any
+            (formsData as any)[key] = null;
+          }
+        }
 
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');

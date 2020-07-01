@@ -95,7 +95,9 @@ public class Applicant extends User {
     }
 
     public void setEducations(List<Education> education) {
-        education.forEach(edd -> educations.add(edd));
+        if (education != null) {
+            education.forEach(edd -> educations.add(edd));
+        }
     }
 
     public void setWorkExperience(WorkExperience workExperience) {
@@ -115,7 +117,9 @@ public class Applicant extends User {
     }
 
     public void setPositions(List<Positions> positions) {
-        positions.forEach(x -> this.positions.add(x));
+        if (positions != null) {
+            positions.forEach(x -> this.positions.add(x));
+        }
     }
 
     public void addPosition(Positions position) {
@@ -131,7 +135,9 @@ public class Applicant extends User {
     }
 
     public void setKeyCompetencies(List<KeyCompetence> keyCompetencies) {
-        keyCompetencies.forEach(comp -> this.keyCompetencies.add(comp));
+        if (keyCompetencies != null) {
+            keyCompetencies.forEach(comp -> this.keyCompetencies.add(comp));
+        }
     }
 
     public String getEmail() {
@@ -167,7 +173,9 @@ public class Applicant extends User {
     }
 
     public void setIndustries(List<Industries> selectedIndustries) {
-        selectedIndustries.forEach(x -> this.industries.add(x));
+        if (selectedIndustries != null) {
+            selectedIndustries.forEach(x -> this.industries.add(x));
+        }
     }
 
     public void addIndustries(Industries industriesType) {

@@ -215,5 +215,11 @@
     "sideMenu": {
         "progress": "Progress",
         "description": "If you want to go to a previous step, just click on the element in the list!"
+    },
+
+    "skipStep":{
+        "skip": "Skip",
+        "skipMessage": "Do you really want to skip this step? Please only do this if the data asked for in this step are part of the documents you took a photo of.",
+        "skipStep": "Skip this Step"
     }
 }

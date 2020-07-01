@@ -77,6 +77,8 @@ export class FormsPage
    */
   readonly APPLICATION_STEP_ARR = ApplicationStepsArr;
 
+  readonly APPLICATION_STEPS_CONFIG = ApplicationStepsConfig;
+
   /**
    * Data of the entire form.
    */
@@ -129,7 +131,7 @@ export class FormsPage
    *
    * **Important! Do not modify this value directly! Use `setCurrentStep()` instead!**
    */
-  currentStep: ApplicationStep;
+  currentStep: ApplicationStep = ApplicationStep.BasicInformation;
   /**
    * Which step is currently displayed?
    * This is the index in our array of steps.
@@ -153,6 +155,30 @@ export class FormsPage
    * if applicant wants to submit, mayLeaveView() returns true, so Guard will allow leaving the page.
    */
   private hasSubmittedForm = false;
+
+  /**
+   * Allows skipping a step.
+   * Please note that not all pages can be skipped.
+   * But currently, it is the easiest typesafe way to just create FormControls for every page.
+   *
+   * So: In the future, you could attempt to refactor this.
+   */
+  readonly isSkipped: {
+    [key in ApplicationStep]: FormControl<boolean>;
+  } = {
+    [ApplicationStep.BasicInformation]: new FormControl<boolean>(false),
+    [ApplicationStep.ContactInformation]: new FormControl<boolean>(false),
+    [ApplicationStep.ProfilePicture]: new FormControl<boolean>(false),
+    [ApplicationStep.Documents]: new FormControl<boolean>(false),
+    [ApplicationStep.WorkExperience]: new FormControl<boolean>(false),
+    [ApplicationStep.EducationInformation]: new FormControl<boolean>(false),
+    [ApplicationStep.FieldDesignationPreference]: new FormControl<boolean>(
+      false
+    ),
+    [ApplicationStep.KeyCompetencies]: new FormControl<boolean>(false),
+    [ApplicationStep.AdditionalInformation]: new FormControl<boolean>(false),
+    [ApplicationStep.Submit]: new FormControl<boolean>(false),
+  };
 
   /**
    * In this method route change is observed and handling is done.
@@ -184,6 +210,8 @@ export class FormsPage
       }
     );
     this.subscriptions.push(formStatusChangesSubscriptions);
+
+    this.setUpSkipListeners();
   }
 
   /**
@@ -211,6 +239,69 @@ export class FormsPage
     if (this.platform.is('ios')) {
       this.ionRouterOutlet.swipeGesture = true;
     }
+  }
+
+  /**
+   * Create listeners for every single FormControl in `isSkipped`.
+   * When the value changes to `true`, we disable the corresponding form element and show an alert message.
+   * When it changes to `false`, we re-enable the corresponding form element.
+   */
+  private setUpSkipListeners(): void {
+    for (const step of ApplicationStepsArr) {
+      const formControl = this.isSkipped[step];
+
+      const subscription = formControl.valueChanges.subscribe((isChecked) => {
+        const stepConfig = ApplicationStepsConfig[step];
+        if (!stepConfig.maySkipStep) {
+          console.warn(
+            'Tried to change a skip toggle on a page that should not be skipped.'
+          );
+          return;
+        }
+
+        if (isChecked) {
+          this.showSkipStepAlert(formControl);
+        }
+
+        if (isChecked) {
+          this.formsData.controls[stepConfig.formItemName].disable();
+        } else {
+          this.formsData.controls[stepConfig.formItemName].enable();
+        }
+      });
+
+      this.subscriptions.push(subscription);
+    }
+  }
+
+  /**
+   * Show an alert message asking if the user really wanted to skip this step.
+   * (This is actually shown after the toggle has toggled, but that should be alright for now.)
+   */
+  async showSkipStepAlert(
+    theToggleFormControl: FormControl<boolean>
+  ): Promise<void> {
+    const alert = await this.alertController.create({
+      header: this.translate.instant('skipStep.skip'),
+      message: this.translate.instant('skipStep.skipMessage'),
+      buttons: [
+        {
+          text: this.translate.instant('commonLables.cancel'),
+          role: 'cancel',
+          handler: () => {
+            theToggleFormControl.setValue(false);
+          },
+        },
+        {
+          text: this.translate.instant('skipStep.skip'),
+          handler: () => {
+            // Nothing to do here, since the toggle is automatically toggled.
+          },
+        },
+      ],
+    });
+
+    alert.present();
   }
 
   /**
@@ -314,7 +405,7 @@ export class FormsPage
    * Update the value of our progress counter.
    */
   updateProgessStatus(): void {
-    let validSteps = 0;
+    let finishedSteps = 0;
     let totalNumberOfRequiredSteps = 0;
 
     for (const item of Object.values(ApplicationStepsConfig)) {
@@ -325,11 +416,11 @@ export class FormsPage
       totalNumberOfRequiredSteps++;
 
       const control = this.formsData.controls[item.formItemName];
-      if (control.valid) {
-        validSteps++;
+      if (control.valid || control.disabled) {
+        finishedSteps++;
       }
     }
-    this.progressPercentage = validSteps / totalNumberOfRequiredSteps;
+    this.progressPercentage = finishedSteps / totalNumberOfRequiredSteps;
   }
 
   /**

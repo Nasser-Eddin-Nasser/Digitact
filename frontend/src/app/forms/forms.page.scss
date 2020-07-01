@@ -1,3 +1,27 @@
+@use '../../theme/variables.scss';
+
 ion-progress-bar {
   height: 10px;
+}
+
+.custom-skip {
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.skip-step-toggle {
+  display: flex;
+  justify-content: flex-end;
+}
+@media (min-width: variables.$main-container-width-breakpoint) {
+  .skip-step-toggle {
+    justify-content: center;
+  }
+}
+.skip-step-toggle ion-label {
+  font-weight: 500;
+  color: var(--ion-color-medium);
+}
+.skip-step-toggle.is-active ion-label {
+  color: var(--ion-color-primary);
 }

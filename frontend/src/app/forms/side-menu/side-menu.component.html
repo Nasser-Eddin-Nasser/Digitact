@@ -15,6 +15,7 @@
             step: APPLICATION_STEP.BasicInformation,
             displayName: displayNames.basicInfo,
             isValid: formsData.controls.basicInfo.valid,
+            isDisabled: formsData.controls.basicInfo.disabled,
             isActive: currentStep === APPLICATION_STEP.BasicInformation
           }"
         ></ng-container>
@@ -25,6 +26,7 @@
             step: APPLICATION_STEP.ContactInformation,
             displayName: displayNames.contactInfo,
             isValid: formsData.controls.contactInfo.valid,
+            isDisabled: formsData.controls.contactInfo.disabled,
             isActive: currentStep === APPLICATION_STEP.ContactInformation
           }"
         ></ng-container>
@@ -34,8 +36,8 @@
           [ngTemplateOutletContext]="{
             step: APPLICATION_STEP.ProfilePicture,
             displayName: displayNames.profilePicture,
-            isValid:
-              formsData.controls.profilePicture.controls.pictureBase64.valid,
+            isValid: formsData.controls.profilePicture.valid,
+            isDisabled: formsData.controls.profilePicture.disabled,
             isActive: currentStep === APPLICATION_STEP.ProfilePicture
           }"
         >
@@ -47,6 +49,7 @@
             step: APPLICATION_STEP.Documents,
             displayName: displayNames.documentsUpload,
             isValid: formsData.controls.documents.valid,
+            isDisabled: formsData.controls.documents.disabled,
             isActive: currentStep === APPLICATION_STEP.Documents
           }"
         >
@@ -68,6 +71,7 @@
             step: APPLICATION_STEP.EducationInformation,
             displayName: displayNames.educationInfo,
             isValid: formsData.controls.educationInfo.valid,
+            isDisabled: formsData.controls.educationInfo.disabled,
             isActive: currentStep === APPLICATION_STEP.EducationInformation
           }"
         ></ng-container>
@@ -78,6 +82,7 @@
             step: APPLICATION_STEP.FieldDesignationPreference,
             displayName: displayNames.industryAndPositionPreference,
             isValid: formsData.controls.fieldDesignationInfo.valid,
+            isDisabled: formsData.controls.fieldDesignationInfo.disabled,
             isActive:
               currentStep === APPLICATION_STEP.FieldDesignationPreference
           }"
@@ -89,6 +94,7 @@
             step: APPLICATION_STEP.KeyCompetencies,
             displayName: displayNames.keyCompetencies,
             isValid: formsData.controls.keyCompetencies.valid,
+            isDisabled: formsData.controls.keyCompetencies.disabled,
             isActive: currentStep === APPLICATION_STEP.KeyCompetencies
           }"
         ></ng-container>
@@ -99,6 +105,7 @@
             step: APPLICATION_STEP.AdditionalInformation,
             displayName: displayNames.additionalInfo,
             isValid: formsData.controls.additionalInfo.valid,
+            isDisabled: formsData.controls.additionalInfo.disabled,
             isActive: currentStep === APPLICATION_STEP.AdditionalInformation
           }"
         ></ng-container>
@@ -137,13 +144,16 @@
   let-step="step"
   let-displayName="displayName"
   let-isValid="isValid"
+  let-isDisabled="isDisabled"
   let-isActive="isActive"
 >
   <ion-menu-toggle>
     <ion-item (click)="navigateToStep(step)" class="ion-margin-top">
       <ion-icon
         size="large"
-        [name]="isValid ? 'checkmark-circle-outline' : 'ellipse-outline'"
+        [name]="
+          isValid || isDisabled ? 'checkmark-circle-outline' : 'ellipse-outline'
+        "
         [color]="isActive ? 'tertiary' : 'medium'"
       ></ion-icon>
 

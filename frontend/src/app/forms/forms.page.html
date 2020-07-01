@@ -33,7 +33,33 @@
 
 <ion-content>
   <div class="main-container with-bottom-buttons">
-    <div class="content">
+    <div
+      class="skip-step-toggle"
+      [class.is-active]="this.isSkipped[currentStep].value"
+      *ngIf="APPLICATION_STEPS_CONFIG[currentStep].maySkipStep"
+    >
+      <ion-item lines="none">
+        <ion-label>{{'skipStep.skipStep' | translate}}</ion-label>
+        <ion-toggle
+          slot="start"
+          color="primary"
+          [formControl]="isSkipped[currentStep]"
+        ></ion-toggle>
+      </ion-item>
+    </div>
+
+    <button
+      class="fancy-button"
+      (click)="navigateToNextStep()"
+      *ngIf="this.isSkipped[currentStep].value"
+    >
+      {{'commonLables.continue' | translate}}
+    </button>
+
+    <div
+      class="content"
+      [class.custom-skip]="this.isSkipped[currentStep].value"
+    >
       <ng-container [ngSwitch]="currentStep">
         <form-basic-info
           [formsData]="formsData"
@@ -101,7 +127,7 @@
       <button
         class="fancy-button"
         (click)="navigateToNextStep()"
-        *ngIf="currentStep !== APPLICATION_STEP.Submit"
+        *ngIf="currentStep !== APPLICATION_STEP.Submit && !this.isSkipped[currentStep].value"
       >
         {{'commonLables.continue' | translate}}
       </button>

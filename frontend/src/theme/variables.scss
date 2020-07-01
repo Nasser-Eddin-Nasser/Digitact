@@ -210,3 +210,9 @@
     --ion-tab-bar-background: #1f1f1f;
   }
 }
+
+/*
+  Additional variables
+*/
+// When the screen has this width, then the content in the main container will be centered.
+$main-container-width-breakpoint: 450px;
