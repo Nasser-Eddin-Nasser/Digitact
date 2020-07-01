@@ -44,6 +44,7 @@ import static Database.Method.getImageById;
 public class ApplicantInfoController {
     Stage stage;
     OverviewModel model;
+    ApplicantUI app;
 
     // Create a TableView with a list of Education Info of an Applicant
     @FXML
@@ -154,28 +155,28 @@ public class ApplicantInfoController {
 
     public ApplicantInfoController(long id, OverviewModel model) {
         this.model = model;
-        showApplicantInfo(id);
+        app = this.model.getApplicantByID(id);
+        showApplicantInfo();
     }
 
-    public void showApplicantInfo(long id) {
+    public void showApplicantInfo() {
         try {
             createAndSetNewStage();
-            ApplicantUI app = this.model.getApplicantByID(id);
-            setApplicantInfo(app);
+            setApplicantInfo();
         } catch (IOException e) {
             System.err.println("unable to load Image!");
             e.printStackTrace();
         }
     }
 
-    private void setApplicantInfo(ApplicantUI app) {
-        getTableBasicInfo(app);
-        getPositionAndIndustry(app);
-        getTableEduInfo(app);
-        getTableWorkExpInfo(app);
-        getImages(app);
-        setKeyCompetence(app);
-        setHrRating(app);
+    private void setApplicantInfo() {
+        getTableBasicInfo();
+        getPositionAndIndustry();
+        getTableEduInfo();
+        getTableWorkExpInfo();
+        getImages();
+        getKeyCompetence();
+        getHrRating();
     }
 
     private void createAndSetNewStage() throws IOException {
@@ -191,7 +192,7 @@ public class ApplicantInfoController {
                 .add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
     }
 
-    private void setHrRating(ApplicantUI app) {
+    private void getHrRating() {
         txtrheFX.setText("Rhetoric - " + app.getHrRating().getRhetoric());
         txtMotFX.setText("Motivation - " + app.getHrRating().getMotivation());
         txtSelfFX.setText("Self Assurance - " + app.getHrRating().getSelfAssurance());
@@ -199,7 +200,7 @@ public class ApplicantInfoController {
         txtImpFX.setText(app.getHrRating().getImpression());
     }
 
-    private void setKeyCompetence(ApplicantUI app) {
+    private void getKeyCompetence() {
         observableListPLnFWTableView = pLnFWTableFX.getItems();
         observableListBSkillsTableView = bSkillsTableFX.getItems();
         observableListDBTableView = dBTableFX.getItems();
@@ -229,7 +230,7 @@ public class ApplicantInfoController {
                 app.getKeyCompetencies(KeyCompetenciesCategory.Languages));
     }
 
-    private void getPositionAndIndustry(ApplicantUI app) {
+    private void getPositionAndIndustry() {
         getPositionTable(app.getPositions());
         getIndTable(app.getIndustries());
     }
@@ -258,18 +259,18 @@ public class ApplicantInfoController {
         posFX.setCellValueFactory(pos -> new ReadOnlyStringWrapper(pos.getValue().getPosition()));
     }
 
-    private void getImages(ApplicantUI app) {
+    private void getImages() {
         List<AppImage> images = app.getAppImage();
-        setProfPic(app, images);
+        setProfPic(images);
         List<AppImage> docImgs =
                 images.stream()
                         .sequential()
                         .filter(x -> !x.getType().equals(ImageType.profilePic))
                         .collect(Collectors.toList());
-        setDocumentsImage(app, docImgs);
+        setDocumentsImage(docImgs);
     }
 
-    private void setProfPic(ApplicantUI app, List<AppImage> images) {
+    private void setProfPic(List<AppImage> images) {
         AppImage profImage = images.stream()
                 .filter(x -> x.getType().equals(ImageType.profilePic))
                 .findFirst()
@@ -288,7 +289,7 @@ public class ApplicantInfoController {
     }
 
 
-    private void setDocumentsImage(ApplicantUI app, List<AppImage> imageList) {
+    private void setDocumentsImage(List<AppImage> imageList) {
         HBox hb = new HBox();
         hb.setAlignment(Pos.CENTER);
         hb.setPadding(new Insets(25, 25, 25, 25));
@@ -403,7 +404,7 @@ public class ApplicantInfoController {
         moveImage(imageView);
     }
 
-    private void getTableBasicInfo(ApplicantUI app) {
+    private void getTableBasicInfo() {
         lblFNameFX.setText(app.getFirstName());
         lblLNameFX.setText(app.getLastName());
         lblEmailFX.setText(app.getEmail());
@@ -449,7 +450,7 @@ public class ApplicantInfoController {
                 });
     }
 
-    private ObservableList<Education> getTableEduInfo(ApplicantUI app) {
+    private ObservableList<Education> getTableEduInfo() {
         observableListEduInfoTableView = eduInfoTblFX.getItems();
         observableListEduInfoTableView.clear();
         observableListEduInfoTableView.addAll(app.getEducation());
@@ -457,7 +458,7 @@ public class ApplicantInfoController {
         return observableListEduInfoTableView;
     }
 
-    private ObservableList<WorkExperience> getTableWorkExpInfo(ApplicantUI app) {
+    private ObservableList<WorkExperience> getTableWorkExpInfo() {
         observableListWorkExpInfoTableView = workInfoTblFX.getItems();
         observableListWorkExpInfoTableView.clear();
         observableListWorkExpInfoTableView.addAll(app.getWorkExperience());
