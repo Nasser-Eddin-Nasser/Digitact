@@ -3,33 +3,40 @@ package Controller;
 import static Database.Method.getImageById;
 
 import Database.Connector;
-import Model.Education;
+import Model.*;
 import Model.Image.AppImage;
 import Model.Image.ImageType;
-import Model.Industries;
 import Model.MVC.OverviewModel;
-import Model.Positions;
 import Model.User.ApplicantUI;
 import Util.ImageTools;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
-import javafx.beans.property.ReadOnlyDoubleWrapper;
-import javafx.beans.property.ReadOnlyLongWrapper;
-import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
@@ -44,11 +51,29 @@ public class OverviewController {
     @FXML TableView<Education> eduInfoTblFX;
     private ObservableList<Education> observableListEduInfoTableView;
 
+    @FXML TableView<WorkExperience> workInfoTblFX;
+    private ObservableList<WorkExperience> observableListWorkExpInfoTableView;
+
     @FXML TableView<Positions> posTable;
     private ObservableList<Positions> observableListPosTableTableView;
 
     @FXML TableView<Industries> indTable;
     private ObservableList<Industries> observableListIndTableTableView;
+
+    @FXML TableView<KeyCompetence> pLnFWTableFX;
+    private ObservableList<KeyCompetence> observableListPLnFWTableView;
+
+    @FXML TableView<KeyCompetence> bSkillsTableFX;
+    private ObservableList<KeyCompetence> observableListBSkillsTableView;
+
+    @FXML TableView<KeyCompetence> dBTableFX;
+    private ObservableList<KeyCompetence> observableListDBTableView;
+
+    @FXML TableView<KeyCompetence> proSoftTableFX;
+    private ObservableList<KeyCompetence> observableListProSoftTableView;
+
+    @FXML TableView<KeyCompetence> spoLanTableFX;
+    private ObservableList<KeyCompetence> observableListSpoLanTableView;
 
     @FXML TableColumn<Positions, String> posFX = new TableColumn<>("Position");
     @FXML TableColumn<Industries, String> indFX = new TableColumn<>("Industry");
@@ -59,7 +84,7 @@ public class OverviewController {
 
     // Applicant Info View's Variables
     // 1. Basic Info
-    @FXML Label lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX;
+    @FXML TextField lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX;
     @FXML Hyperlink hplLinkedInFX, hplXingFX;
     // 2. Edu Info
     @FXML TableColumn<Education, String> universityFX = new TableColumn<>("university");
@@ -67,21 +92,73 @@ public class OverviewController {
     @FXML TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
     @FXML TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
     @FXML TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
-    // 3. Image of the  Applicant
+
+    // 2. work Info
+    @FXML TableColumn<WorkExperience, String> jobTitleFX = new TableColumn<>("jobTitle");
+    @FXML TableColumn<WorkExperience, String> companyFX = new TableColumn<>("company");
+
+    @FXML
+    TableColumn<WorkExperience, String> employmentTypeFX = new TableColumn<>("employmentType");
+
+    @FXML TableColumn<WorkExperience, String> startDateFX = new TableColumn<>("startDate");
+    @FXML TableColumn<WorkExperience, String> endDateFX = new TableColumn<>("endDate");
+    @FXML TableColumn<WorkExperience, String> descriptionFX = new TableColumn<>("description");
+
+    // 3. Image of the Applicant
 
     // Additional Info
     @FXML Label lblAddInfo;
     @FXML private ImageView imgFX;
 
+    // Documents tab
+    @FXML ScrollPane documentsGridFX;
+    @FXML Tab docTabFX;
+
+    // Key Competencies
+    @FXML TableColumn<KeyCompetence, String> pLnFWColFX = new TableColumn<>("name");
+    @FXML TableColumn<KeyCompetence, String> bSkillsColFX = new TableColumn<>("name");
+    @FXML TableColumn<KeyCompetence, String> dBColFX = new TableColumn<>("name");
+    @FXML TableColumn<KeyCompetence, String> proSoftColFX = new TableColumn<>("name");
+    @FXML TableColumn<KeyCompetence, String> spoLanColFX = new TableColumn<>("name");
+
+    @FXML Label txtrheFX, txtMotFX, txtSelfFX, txtPerFX;
+    @FXML TextField txtImpFX;
+
     Pane root;
 
-    public OverviewController(/*Stage parentStage*/ ) throws IOException {
+    public OverviewController(/* Stage parentStage */ ) throws IOException {
         model = new OverviewModel();
         stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/storageView.fxml"));
         loader.setController(this);
         root = (Pane) loader.load();
         getTable();
+    }
+
+    @FXML
+    private void onRefresh() {
+        getTable();
+    }
+
+    @FXML
+    private void onLogout(InputEvent inp) {
+        try {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Logout");
+            alert.setHeaderText("Do you want to logout? ");
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+            alert.showAndWait();
+            stage.close();
+            if (alert.getResult().getText().equals("OK")) {
+                final Node source = (Node) inp.getSource();
+                final Stage stage = (Stage) source.getScene().getWindow();
+                stage.close();
+                new AcController();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void showApplicantInfo(long id) {
@@ -100,10 +177,52 @@ public class OverviewController {
             setTableBasicInfo(app);
             setPositionAndIndustry(app);
             getTableEduInfo(app);
+            getTableWorkExpInfo(app);
             getImage(app);
+            setKeyCompetence(app);
+            setHrRating(app);
         } catch (IOException e) {
             System.err.println("unable to load Image!");
+            e.printStackTrace();
         }
+    }
+
+    private void setHrRating(ApplicantUI app) {
+        txtrheFX.setText("Rhetoric - " + app.getHrRating().getRhetoric());
+        txtMotFX.setText("Motivation - " + app.getHrRating().getMotivation());
+        txtSelfFX.setText("Self Assurance - " + app.getHrRating().getSelfAssurance());
+        txtPerFX.setText("Personal Impression - " + app.getHrRating().getPersonalImpression());
+        txtImpFX.setText(app.getHrRating().getImpression());
+    }
+
+    private void setKeyCompetence(ApplicantUI app) {
+        observableListPLnFWTableView = pLnFWTableFX.getItems();
+        observableListBSkillsTableView = bSkillsTableFX.getItems();
+        observableListDBTableView = dBTableFX.getItems();
+        observableListProSoftTableView = proSoftTableFX.getItems();
+        observableListSpoLanTableView = spoLanTableFX.getItems();
+
+        observableListPLnFWTableView.clear();
+        observableListBSkillsTableView.clear();
+        observableListDBTableView.clear();
+        observableListProSoftTableView.clear();
+        observableListSpoLanTableView.clear();
+
+        pLnFWColFX.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().toString()));
+        bSkillsColFX.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().toString()));
+        dBColFX.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().toString()));
+        proSoftColFX.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().toString()));
+        spoLanColFX.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().toString()));
+
+        observableListPLnFWTableView.setAll(
+                app.getKeyCompetencies(KeyCompetenciesCategory.ProgrammingLanguagesAndFrameworks));
+        observableListBSkillsTableView.setAll(
+                app.getKeyCompetencies(KeyCompetenciesCategory.BusinessSkills));
+        observableListDBTableView.setAll(app.getKeyCompetencies(KeyCompetenciesCategory.Databases));
+        observableListProSoftTableView.setAll(
+                app.getKeyCompetencies(KeyCompetenciesCategory.ProfessionalSoftware));
+        observableListSpoLanTableView.setAll(
+                app.getKeyCompetencies(KeyCompetenciesCategory.Languages));
     }
 
     private void setPositionAndIndustry(ApplicantUI app) {
@@ -141,10 +260,17 @@ public class OverviewController {
                         .stream()
                         .filter(x -> x.getType().equals(ImageType.profilePic))
                         .collect(Collectors.toList());
+        List<AppImage> docImgs =
+                app.getAppImage()
+                        .stream()
+                        .sequential()
+                        .filter(x -> x.getType().equals(ImageType.CV))
+                        .collect(Collectors.toList());
         if (profImgs.size() > 0) {
             try {
                 AppImage img = profImgs.get(0);
                 setProfileImage(app, img);
+                setDocumentsImage(app, docImgs);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -158,6 +284,115 @@ public class OverviewController {
         File file = new File(img.getPath());
 
         imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
+    }
+
+    private void setDocumentsImage(ApplicantUI app, List<AppImage> imageList) {
+
+        HBox hb = new HBox();
+        hb.setAlignment(Pos.CENTER);
+        hb.setPadding(new Insets(25, 25, 25, 25));
+        hb.setSpacing(50);
+        documentsGridFX.fitToHeightProperty();
+        try {
+            for (int i = 0; i < imageList.size(); i++) {
+
+                AppImage img = imageList.get(i);
+                ImageView imageView = new ImageView();
+                Connector.sendGetHttp(getImageById, String.valueOf(app.getID()), img.getId());
+                ImageTools.parseImageStringToImage(img);
+                File file = new File(img.getPath());
+                imageView.minWidth(-1);
+                imageView.setFitHeight(documentsGridFX.heightProperty().getValue());
+                imageView.setPreserveRatio(true);
+                imageView.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
+                docClick(imageView, file);
+                zoomImage(imageView, documentsGridFX);
+                moveImage(imageView);
+                hb.getChildren().add(imageView);
+            }
+        } catch (IOException e) {
+            System.err.println("Cannot load Documents!");
+        }
+        documentsGridFX.setContent(hb);
+    }
+
+    private void moveImage(ImageView imageView) {
+        AtomicReference<Double> startDragX = new AtomicReference<>((double) 0);
+        AtomicReference<Double> startDragY = new AtomicReference<>((double) 0);
+
+        imageView.setOnMousePressed(
+                e -> {
+                    startDragX.set(e.getSceneX());
+                    startDragY.set(e.getSceneY());
+                });
+
+        imageView.setOnMouseDragged(
+                e -> {
+                    imageView.setTranslateX(e.getSceneX() - startDragX.get());
+                    imageView.setTranslateY(e.getSceneY() - startDragY.get());
+                });
+    }
+
+    private void zoomImage(ImageView imageView, ScrollPane documentsGridFX) {
+        final DoubleProperty zoomProperty = new SimpleDoubleProperty(200);
+        zoomProperty.addListener(
+                new InvalidationListener() {
+                    @Override
+                    public void invalidated(Observable arg0) {
+                        imageView.setFitWidth(zoomProperty.get() * 4);
+                        imageView.setFitHeight(zoomProperty.get() * 4);
+                    }
+                });
+
+        documentsGridFX.addEventFilter(
+                ScrollEvent.ANY,
+                new EventHandler<ScrollEvent>() {
+                    @Override
+                    public void handle(ScrollEvent event) {
+                        if (event.getDeltaY() > 0) {
+                            zoomProperty.set(zoomProperty.get() * 1.1);
+                        } else if (event.getDeltaY() < 0) {
+                            zoomProperty.set(zoomProperty.get() / 1.1);
+                        }
+                    }
+                });
+    }
+
+    private void docClick(ImageView imageView, File file) {
+        imageView.setOnMouseClicked(
+                (event) -> {
+                    if (event.getClickCount() == 2) {
+                        showDocImage(file);
+                    }
+                });
+    }
+
+    private void showDocImage(File imgFile) {
+        Stage stageDocImage = new Stage();
+        ImageView imageView = new ImageView();
+        try {
+            imageView.setImage(SwingFXUtils.toFXImage(ImageIO.read(imgFile), null));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        imageView.setFitWidth(-1);
+        imageView.setPreserveRatio(true);
+        ScrollPane scrollPane = new ScrollPane();
+        VBox vb = new VBox();
+        vb.getChildren().add(imageView);
+        vb.setAlignment(Pos.CENTER);
+        vb.setFillWidth(true);
+        vb.minWidth(-1);
+        scrollPane.setContent(vb);
+        Group root = new Group(scrollPane);
+        Scene scene = new Scene(root);
+        stageDocImage.show();
+        stageDocImage.setTitle("Document");
+        stageDocImage.setFullScreen(true);
+        stageDocImage.setScene(scene);
+
+        zoomImage(imageView, scrollPane);
+        moveImage(imageView);
     }
 
     private void setTableBasicInfo(ApplicantUI app) {
@@ -214,8 +449,33 @@ public class OverviewController {
         return observableListEduInfoTableView;
     }
 
+    private ObservableList<WorkExperience> getTableWorkExpInfo(ApplicantUI app) {
+        observableListWorkExpInfoTableView = workInfoTblFX.getItems();
+        observableListWorkExpInfoTableView.clear();
+        observableListWorkExpInfoTableView.addAll(app.getWorkExperience());
+        setFactoriesAndComparatorsForWorkExpInfoTableColumns();
+        return observableListWorkExpInfoTableView;
+    }
+
     public Pane getPane() {
         return root;
+    }
+
+    public void setFactoriesAndComparatorsForWorkExpInfoTableColumns() {
+        jobTitleFX.setCellValueFactory(
+                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getJobTitle()));
+        companyFX.setCellValueFactory(
+                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getCompany()));
+        employmentTypeFX.setCellValueFactory(
+                applicant ->
+                        new ReadOnlyStringWrapper(
+                                applicant.getValue().getEmploymentType().toString()));
+        startDateFX.setCellValueFactory(
+                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getStartDate()));
+        endDateFX.setCellValueFactory(
+                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getEndDate()));
+        descriptionFX.setCellValueFactory(
+                applicant -> new ReadOnlyStringWrapper(applicant.getValue().getDescription()));
     }
 
     public void setFactoriesAndComparatorsForEduInfoTableColumns() {

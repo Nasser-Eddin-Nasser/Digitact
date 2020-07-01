@@ -11,6 +11,7 @@ export enum ApplicationStep {
   ContactInformation = 'contact-information',
   ProfilePicture = 'profile-picture',
   Documents = 'documents',
+  WorkExperience = 'work-experience',
   EducationInformation = 'education-information',
   FieldDesignationPreference = 'field-designation-preference',
   KeyCompetencies = 'key-competencies',
@@ -47,6 +48,10 @@ export const ApplicationStepsConfig: ApplicationStepsConfig = {
   [ApplicationStep.Documents]: {
     useForProgressCalculation: false,
     maySkipStep: false,
+  },
+  [ApplicationStep.WorkExperience]: {
+    useForProgressCalculation: true,
+    formItemName: 'workExperienceInfo',
   },
   [ApplicationStep.EducationInformation]: {
     useForProgressCalculation: true,

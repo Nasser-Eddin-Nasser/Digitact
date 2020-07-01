@@ -129,6 +129,7 @@ public class Connector {
             if ((inputLine = in.readLine()) != null) {
                 Util.JSONTools.convertJSONToApplicant(inputLine);
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

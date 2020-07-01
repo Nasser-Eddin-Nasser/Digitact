@@ -5,6 +5,7 @@ import Database.Method;
 import Model.Education;
 import Model.User.Admin;
 import Model.User.ApplicantUI;
+import Model.WorkExperience;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class DBStorage {
     private static List<ApplicantUI> users;
     private static List<Education> eduInfo;
     private static List<Education> selected;
+    private static List<WorkExperience> workInfo;
 
     private static List<String> adminUserNames;
     // True if receiver should wait
@@ -58,6 +60,10 @@ public class DBStorage {
         Connector.sendGetHttp(Method.getAllEducationInfo);
     }
 
+    private static void getAllWorkExperienceInfo() throws IOException {
+        Connector.sendGetHttp(Method.getAllWorkExperienceInfo);
+    }
+
     public static void setUsers(List<ApplicantUI> users) {
         DBStorage.users = new ArrayList<>(users);
         transfer = true;
@@ -65,6 +71,11 @@ public class DBStorage {
 
     public static void setEduInfo(List<Education> eduInfo) {
         DBStorage.eduInfo = new ArrayList<>(eduInfo);
+        transfer = true;
+    }
+
+    public static void setWorkInfo(List<WorkExperience> workInfo) {
+        DBStorage.workInfo = new ArrayList<>(workInfo);
         transfer = true;
     }
 

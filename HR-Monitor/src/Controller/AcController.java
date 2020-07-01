@@ -29,6 +29,8 @@ public class AcController {
     @FXML private TextField myUserNameTextField;
     private AcModel model;
 
+    public static String ADMIN_USERNAME = "";
+
     /**
      * This method starts the {@link /View/login.fxml }
      *
@@ -65,6 +67,7 @@ public class AcController {
         try {
             if (model.checkAuthentication(
                     myUserNameTextField.getText(), myPasswordField.getText())) {
+                ADMIN_USERNAME = myUserNameTextField.getText();
                 new StandardController(stage);
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

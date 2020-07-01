@@ -1,12 +1,10 @@
 package Model.User;
 
-import Model.Education;
+import Model.*;
 import Model.Image.AppImage;
-import Model.Industries;
-import Model.KeyCompetence;
-import Model.Positions;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ApplicantUI {
     private long id;
@@ -28,6 +26,12 @@ public class ApplicantUI {
 
     @JsonProperty("educations")
     private List<Education> educations;
+
+    @JsonProperty("workExperiences")
+    private List<WorkExperience> workExperiences;
+
+    @JsonProperty("hrRating")
+    private HrRating hrRating;
 
     private List<Industries> industries;
     private List<Positions> positions;
@@ -53,10 +57,12 @@ public class ApplicantUI {
             Title title,
             String additionalInfo,
             List<Education> educations,
+            List<WorkExperience> workExperiences,
             List<Industries> industries,
             List<Positions> positions,
             List<KeyCompetence> keyCompetencies,
-            List<AppImage> images) {
+            List<AppImage> images,
+            HrRating hrRating) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -72,6 +78,8 @@ public class ApplicantUI {
         this.keyCompetencies = keyCompetencies;
         this.images = images;
         this.additionalInfo = additionalInfo;
+        this.workExperiences = workExperiences;
+        this.hrRating = hrRating;
     }
 
     public List<Industries> getIndustries() {
@@ -91,8 +99,27 @@ public class ApplicantUI {
         this.educations = education;
     }
 
+    public List<WorkExperience> getWorkExperience() {
+        return workExperiences;
+    }
+
+    public void setWorkExperience(List<WorkExperience> workExperience) {
+
+        this.workExperiences = workExperience;
+    }
+
     public List<KeyCompetence> getKeyCompetencies() {
+
         return keyCompetencies;
+    }
+
+    public List<KeyCompetence> getKeyCompetencies(KeyCompetenciesCategory competanceCatogory) {
+        List<KeyCompetence> selectedKeyCompetences =
+                keyCompetencies
+                        .stream()
+                        .filter(x -> x.getCategory() == competanceCatogory)
+                        .collect(Collectors.toList());
+        return selectedKeyCompetences;
     }
 
     public String getFirstName() {
@@ -133,5 +160,13 @@ public class ApplicantUI {
 
     public String getAdditionalInfo() {
         return additionalInfo;
+    }
+
+    public HrRating getHrRating() {
+        return hrRating;
+    }
+
+    public void setHrRating(HrRating hrRating) {
+        this.hrRating = hrRating;
     }
 }

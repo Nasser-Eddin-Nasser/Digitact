@@ -58,6 +58,16 @@
         <ng-container
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
+            step: APPLICATION_STEP.WorkExperience,
+            displayName: 'Work Experience',
+            isValid: formsData.controls.workExperienceInfo.valid,
+            isActive: currentStep === APPLICATION_STEP.WorkExperience
+          }"
+        ></ng-container>
+
+        <ng-container
+          [ngTemplateOutlet]="menuItem"
+          [ngTemplateOutletContext]="{
             step: APPLICATION_STEP.EducationInformation,
             displayName: displayNames.educationInfo,
             isValid: formsData.controls.educationInfo.valid,

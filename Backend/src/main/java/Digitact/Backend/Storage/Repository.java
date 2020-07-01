@@ -2,11 +2,13 @@ package Digitact.Backend.Storage;
 
 import Digitact.Backend.Exception.ImageException;
 import Digitact.Backend.Model.Education;
+import Digitact.Backend.Model.HrRating;
 import Digitact.Backend.Model.Image.AppImage;
 import Digitact.Backend.Model.Image.ImageString;
 import Digitact.Backend.Model.KeyCompetence;
 import Digitact.Backend.Model.User.Applicant;
 import Digitact.Backend.Model.User.ApplicantUI;
+import Digitact.Backend.Model.WorkExperience;
 import Digitact.Backend.Util.ImageTools;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -26,7 +28,9 @@ public class Repository {
         app.setEmail(applicant.getEmail());
         app.setPhone(applicant.getPhone());
         addEducationInfoToApplicant(applicant.getEducations(), app);
+        addWorkExperienceToApplicant(applicant.getWorkExperiences(), app);
         addKeyCompetencesToApplicant(applicant.getKeyCompetencies(), app);
+        addHrRatingToApplicant(applicant.getHrRating(), app);
         app.setIndustries(applicant.getIndustries());
         app.setPositions(applicant.getPositions());
         app.setLinkedIn(applicant.getLinkedIn());
@@ -76,5 +80,18 @@ public class Repository {
             educationList.forEach(x -> x.setUser(app));
             app.setEducations(educationList);
         }
+    }
+
+    private void addWorkExperienceToApplicant(
+            List<WorkExperience> workExperienceList, Applicant app) {
+        if (workExperienceList != null) {
+            workExperienceList.forEach(x -> x.setUser(app));
+            app.setWorkExperiences(workExperienceList);
+        }
+    }
+
+    private void addHrRatingToApplicant(HrRating hrRating, Applicant app) {
+        hrRating.setUser(app);
+        app.setHrRating(hrRating);
     }
 }

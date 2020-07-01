@@ -1,0 +1,67 @@
+<div class="main-description">
+  <h1>{{ 'workExperience.title' | translate }}</h1>
+
+  {{ 'workExperience.stepDescription' | translate }}
+
+  <div class="add-container ion-padding">
+    <ion-icon
+      name="add-circle"
+      color="primary"
+      (click)="addWorkExperience()"
+      class="plus-icon"
+    ></ion-icon>
+  </div>
+
+  <ion-list>
+    <!-- Sliding item with work information -->
+    <ion-item-sliding
+      *ngFor="
+        let data of this.formsData.controls.workExperienceInfo.controls
+          .workExperienceForm.controls;
+        let i = index
+      "
+    >
+      <ion-item
+        (click)="modifyWorkExperience(data, i)"
+        class="work-entry ion-no-padding"
+      >
+        <ion-label>
+          <p class="work-entry-title">{{ data.controls.jobTitle.value }}</p>
+          <p class="with-icon">
+            <ion-icon name="business-outline"></ion-icon>
+            <span
+              >{{ data.controls.company.value }} .
+              {{
+                'workExperience.employmentTypeValue'
+                  | translate: { empType: data.controls.employmentType.value }
+              }}</span
+            >
+          </p>
+
+          <p class="with-icon">
+            <ion-icon name="calendar-outline"></ion-icon>
+            <span
+              >{{ data.controls.startDate.value }} -
+              <span *ngIf="data.controls.endDate.value === ''">{{
+                'workExperience.present' | translate
+              }}</span>
+              <span *ngIf="data.controls.endDate.value !== ''">{{
+                data.controls.endDate.value
+              }}</span></span
+            >
+          </p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option
+          color="danger"
+          expandable
+          (click)="deleteWorkExperience(i)"
+        >
+          <ion-icon name="trash" size="large"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</div>
