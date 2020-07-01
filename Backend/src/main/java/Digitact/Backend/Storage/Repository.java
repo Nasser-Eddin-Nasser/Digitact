@@ -80,8 +80,10 @@ public class Repository {
 
     private void addWorkExperienceToApplicant(
             List<WorkExperience> workExperienceList, Applicant app) {
-        workExperienceList.forEach(x -> x.setUser(app));
-        app.setWorkExperiences(workExperienceList);
+        if (workExperienceList != null) {
+            workExperienceList.forEach(x -> x.setUser(app));
+            app.setWorkExperiences(workExperienceList);
+        }
     }
 
     private void addHrRatingToApplicant(HrRating hrRating, Applicant app) {

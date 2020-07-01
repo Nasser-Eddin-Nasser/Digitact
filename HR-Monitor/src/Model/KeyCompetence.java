@@ -23,4 +23,9 @@ public class KeyCompetence {
     public int getRating() {
         return this.rating;
     }
+
+    @Override
+    public String toString() {
+        return this.name + " - " + this.rating;
+    }
 }

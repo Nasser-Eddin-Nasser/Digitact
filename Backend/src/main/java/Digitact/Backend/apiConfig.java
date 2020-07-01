@@ -1,5 +1,8 @@
 package Digitact.Backend;
 
+import static Digitact.Backend.ConfigProperties.absoluteClientURL_ionic;
+import static Digitact.Backend.ConfigProperties.absoluteClientURL_ng;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -18,7 +21,7 @@ public class apiConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200", "http://localhost:8100")
+                        .allowedOrigins(absoluteClientURL_ng, absoluteClientURL_ionic)
                         .allowedMethods("GET", "POST")
                         .allowCredentials(false)
                         .maxAge(3600);
