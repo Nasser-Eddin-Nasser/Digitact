@@ -55,7 +55,7 @@
     },
     "ratingPage": {
         "applicantRatingDescription": "Please provide your insights on the applicant by providing a rating between 1 (not good) and 5 (excellent).",
-        "finalizeConfirmationMessage": "Do you really want to finalize this form? It wont be possible to edit later.",
+        "finalizeConfirmationMessage": "Do you really want to finalize this form? It won't be possible to edit later.",
         "applicationFinalizedNotification": "Applicant information is finalized",
         "rhetoricScore": "Rhetoric",
         "motivationScore": "Motivation",
