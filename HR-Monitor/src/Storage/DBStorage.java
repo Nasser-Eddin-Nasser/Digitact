@@ -56,14 +56,6 @@ public class DBStorage {
         Connector.sendGetHttp(Method.getApplicants);
     }
 
-    private static void getAllEducationInfo() throws IOException {
-        Connector.sendGetHttp(Method.getAllEducationInfo);
-    }
-
-    private static void getAllWorkExperienceInfo() throws IOException {
-        Connector.sendGetHttp(Method.getAllWorkExperienceInfo);
-    }
-
     public static void setUsers(List<ApplicantUI> users) {
         DBStorage.users = new ArrayList<>(users);
         transfer = true;
