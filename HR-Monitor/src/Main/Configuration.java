@@ -2,5 +2,6 @@ package Main;
 
 public class Configuration {
     public static final String BES_URI = "http://localhost:9090/api/HRController/";
-    public static final String absoluteFileSystemPath = "xx";
+    public static final String absoluteFileSystemPath =
+            "C:\\Users\\EDDIN\\Desktop\\SS20\\AMOS\\FileSystem\\";
 }
