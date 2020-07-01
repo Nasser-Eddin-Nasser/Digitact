@@ -67,6 +67,15 @@ ion-item.item-has-focus {
   --border-color: var(--ion-color-primary);
 }
 
+ion-item.item-interactive.item-select ion-label {
+  --color: var(--ion-color-medium);
+}
+@media (prefers-color-scheme: dark) {
+  ion-item.item-interactive.item-select ion-label {
+    --color: var(--ion-color-step-400);
+  }
+}
+
 /*
   Buttons
 */
