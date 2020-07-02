@@ -3,6 +3,8 @@ package Database;
 import Main.Configuration;
 import Model.User.Admin;
 import Storage.DBStorage;
+import Storage.Token;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,6 +19,17 @@ public class Connector {
     public static void sendGetHttp(Method method, String... params) {
         URL bes_url = null;
         switch (method) {
+            case gutenMorgen:
+                try {
+                    Long besNumber = handelPingReq(new URL(Configuration.BES_URI + method.toString()));
+                    if (besNumber != null) {
+                        DBStorage.setToken(new Token(besNumber));
+                    }
+
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                break;
             case getApplicants:
                 try {
                     handleGetApplicants(new URL(Configuration.BES_URI + method.toString()));
@@ -52,6 +65,28 @@ public class Connector {
             default:
                 break;
         }
+    }
+
+    private static Long handelPingReq(URL url) {
+        BufferedReader in = null;
+        try {
+            URLConnection uc = url.openConnection();
+            in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
+            String inputLine;
+            if ((inputLine = in.readLine()) != null) {
+                return Long.parseLong(inputLine);
+            }
+        } catch (IOException e) {
+            return null;
+        } finally {
+            try {
+                if (in != null)
+                    in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     private static void handleGetAdminUserNames(URL url) {
@@ -171,7 +206,7 @@ public class Connector {
             }
             // read the Response
             try (BufferedReader br =
-                    new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+                         new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
                 StringBuilder response = new StringBuilder();
                 String responseLine = null;
                 while ((responseLine = br.readLine()) != null) {
