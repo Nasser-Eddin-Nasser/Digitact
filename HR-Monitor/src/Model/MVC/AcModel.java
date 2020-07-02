@@ -1,5 +1,7 @@
 package Model.MVC;
 
+import Database.Connector;
+import Database.Method;
 import Model.User.Admin;
 import Storage.DBStorage;
 
@@ -9,12 +11,17 @@ public class AcModel {
     }
 
     public boolean checkAuthentication(String userName, String password) {
+        boolean isValid = false;
         if (DBStorage.isUserNameInUse(userName)) {
             getAdmin(userName);
             Admin admin = DBStorage.getCurrentAdmin();
-            return admin.getPassword().equals(Util.PasswordTools.encryptString(password));
+            isValid = admin.getPassword().equals(Util.PasswordTools.encryptString(password));
+            if (isValid) {
+                DBStorage.getToken().setLoggedinAdmin(admin);
+                Connector.sendPutType(Method.putToken, DBStorage.getToken());
+            }
         }
-        return false;
+        return isValid;
     }
 
     public void getAdmin(String userName) {
