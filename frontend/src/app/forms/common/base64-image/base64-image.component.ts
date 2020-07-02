@@ -107,16 +107,6 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
           templateObjectUrl,
         };
         this.changeDetectorRef.detectChanges();
-
-        /*
-          "Wait" for the image to be actually loaded in the DOM.
-
-          If you experience problems (e.g. timing issues) with the following,
-          you could also add a listener to the actual img element (to listen for the load event) instead.
-        */
-        window.setTimeout(() => {
-          this.imageHasLoaded.emit();
-        }, 0);
       });
     };
   }
@@ -144,6 +134,13 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
     canvas.height = newHeight;
 
     context.drawImage(img, 0, 0, newWidth, newHeight);
+  }
+
+  /**
+   * Called when the img element fires its load event.
+   */
+  onImageLoad(): void {
+    this.imageHasLoaded.emit();
   }
 }
 
