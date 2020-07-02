@@ -6,7 +6,6 @@ import Model.Education;
 import Model.User.Admin;
 import Model.User.ApplicantUI;
 import Model.WorkExperience;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +107,7 @@ public class DBStorage {
     }
 
     public static void setToken(Token token) {
-        DBStorage.token=token;
+        DBStorage.token = token;
     }
 
     public static Token getToken() {

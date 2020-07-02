@@ -4,7 +4,6 @@ import Main.Configuration;
 import Model.User.Admin;
 import Storage.DBStorage;
 import Storage.Token;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,7 +20,8 @@ public class Connector {
         switch (method) {
             case gutenMorgen:
                 try {
-                    Long besNumber = handelPingReq(new URL(Configuration.BES_URI + method.toString()));
+                    Long besNumber =
+                            handelPingReq(new URL(Configuration.BES_URI + method.toString()));
                     if (besNumber != null) {
                         DBStorage.setToken(new Token(besNumber));
                     }
@@ -80,8 +80,7 @@ public class Connector {
             return null;
         } finally {
             try {
-                if (in != null)
-                    in.close();
+                if (in != null) in.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -180,7 +179,8 @@ public class Connector {
         switch (method) {
             case putToken:
                 try {
-                    handlePutTokenToAdmin(new URL(Configuration.BES_URI + method.toString()), token);
+                    handlePutTokenToAdmin(
+                            new URL(Configuration.BES_URI + method.toString()), token);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
@@ -200,11 +200,12 @@ public class Connector {
             http.setRequestProperty("Content-Type", "application/json; utf-8");
             http.setRequestProperty("Accept", "application/json");
             try (OutputStream os = http.getOutputStream()) {
-                String reqBody = token.getBesNumber() + " -//- " + token.getLoggedinAdmin().getUserName();
+                String reqBody =
+                        token.getBesNumber() + " -//- " + token.getLoggedinAdmin().getUserName();
                 byte[] input = reqBody.getBytes("utf-8");
                 os.write(input, 0, input.length);
                 try (BufferedReader br =
-                             new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+                        new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
                     StringBuilder response = new StringBuilder();
                     String responseLine = null;
                     while ((responseLine = br.readLine()) != null) {
@@ -218,7 +219,6 @@ public class Connector {
             e.printStackTrace();
         }
     }
-
 
     public static void sendPutType(Method method, Admin admin) {
         switch (method) {
@@ -250,7 +250,7 @@ public class Connector {
             }
             // read the Response
             try (BufferedReader br =
-                         new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+                    new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
                 StringBuilder response = new StringBuilder();
                 String responseLine = null;
                 while ((responseLine = br.readLine()) != null) {

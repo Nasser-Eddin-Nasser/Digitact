@@ -4,6 +4,7 @@ import Database.Connector;
 import Database.Method;
 import Model.MVC.AcModel;
 import Storage.DBStorage;
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,31 +15,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class AcController {
-    /**
-     * Initial Login Window after program start
-     */
+    /** Initial Login Window after program start */
     private Scene viewLogin;
-    /**
-     * the stage, which holds the program
-     */
+    /** the stage, which holds the program */
     private Stage stage;
-    /**
-     * boundaries of the login-view
-     */
+    /** boundaries of the login-view */
     private double viewLoginHeight;
 
     private double viewLoginWidth;
 
-    @FXML
-    private Button login;
-    @FXML
-    private PasswordField myPasswordField;
+    @FXML private Button login;
+    @FXML private PasswordField myPasswordField;
 
-    @FXML
-    private TextField myUserNameTextField;
+    @FXML private TextField myUserNameTextField;
     private AcModel model;
 
     public static String ADMIN_USERNAME = "";
@@ -101,24 +91,23 @@ public class AcController {
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Connection Error");
-                alert.setHeaderText("Please check your connection with BES then start the Application again!");
+                alert.setHeaderText(
+                        "Please check your connection with BES then start the Application again!");
                 alert.show();
             }
         } catch (IllegalArgumentException | IOException e) {
             System.err.println(e);
         }
-
-
     }
 
-//    @FXML
-//    private void onCreateAccount() {
-//        try {
-//            new CreateAccountController(stage, model);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    //    @FXML
+    //    private void onCreateAccount() {
+    //        try {
+    //            new CreateAccountController(stage, model);
+    //        } catch (IOException e) {
+    //            e.printStackTrace();
+    //        }
+    //    }
 
     @FXML
     private void showHint() {
@@ -133,6 +122,5 @@ public class AcController {
                 alert.show();
             }
         }
-
     }
 }

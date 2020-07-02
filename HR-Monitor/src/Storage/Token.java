@@ -22,6 +22,4 @@ public class Token {
     public Admin getLoggedinAdmin() {
         return loggedinAdmin;
     }
-
-
 }
