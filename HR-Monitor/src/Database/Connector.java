@@ -176,6 +176,50 @@ public class Connector {
         }
     }
 
+    public static void sendPutType(Method method, Token token) {
+        switch (method) {
+            case putToken:
+                try {
+                    handlePutTokenToAdmin(new URL(Configuration.BES_URI + method.toString()), token);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static void handlePutTokenToAdmin(URL url, Token token) {
+        BufferedReader in = null;
+        try {
+            URLConnection uc = url.openConnection();
+            HttpURLConnection http = (HttpURLConnection) uc;
+            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setDoOutput(true);
+            http.setRequestProperty("Content-Type", "application/json; utf-8");
+            http.setRequestProperty("Accept", "application/json");
+            try (OutputStream os = http.getOutputStream()) {
+                String reqBody = token.getBesNumber() + " -//- " + token.getLoggedinAdmin().getUserName();
+                byte[] input = reqBody.getBytes("utf-8");
+                os.write(input, 0, input.length);
+                try (BufferedReader br =
+                             new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+                    StringBuilder response = new StringBuilder();
+                    String responseLine = null;
+                    while ((responseLine = br.readLine()) != null) {
+                        response.append(responseLine.trim());
+                    }
+                }
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public static void sendPutType(Method method, Admin admin) {
         switch (method) {
             case createAdminAccount:
