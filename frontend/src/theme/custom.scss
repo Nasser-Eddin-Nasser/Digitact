@@ -214,6 +214,7 @@ ion-content.without-ion-header {
 @media (prefers-color-scheme: dark) {
   ion-popover {
     --ion-background-color: var(--ion-color-light);
+    --ion-item-background: var(--ion-color-light);
   }
   ion-popover ion-item,
   ion-popover ion-header ion-toolbar {
@@ -230,5 +231,9 @@ ion-content.without-ion-header {
 
   ion-item {
     --color: var(--ion-color-primary);
+  }
+
+  ion-alert.md {
+    --background: var(--ion-color-light);
   }
 }
