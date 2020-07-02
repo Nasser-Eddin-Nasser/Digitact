@@ -38,31 +38,6 @@ public class OverviewController {
         getTable();
     }
 
-    //    @FXML
-    //    private void onRefresh() {
-    //        getTable();
-    //    }
-
-    //    @FXML
-    //    private void onLogout(InputEvent inp) {
-    //        try {
-    //            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    //            alert.setTitle("Logout");
-    //            alert.setHeaderText("Do you want to logout? ");
-    //            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
-    //            ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
-    //            alert.showAndWait();
-    //            stage.close();
-    //            if (alert.getResult().getText().equals("OK")) {
-    //                final Node source = (Node) inp.getSource();
-    //                final Stage stage = (Stage) source.getScene().getWindow();
-    //                stage.close();
-    //                new AcController();
-    //            }
-    //        } catch (IOException e) {
-    //            e.printStackTrace();
-    //        }
-    //    }
 
     public void setFactoriesAndComparatorsForTableColumns() {
         idCol.setCellValueFactory(user -> new ReadOnlyLongWrapper(user.getValue().getID()));
