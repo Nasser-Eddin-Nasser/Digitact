@@ -2,8 +2,10 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   Input,
   OnDestroy,
+  Output,
 } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
@@ -50,6 +52,12 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
    */
   @Input()
   isZoomableSlideImage = false;
+
+  /**
+   * The event is emitted when the image has been fully loaded.
+   */
+  @Output()
+  imageHasLoaded = new EventEmitter<void>();
 
   processedImage: ProcessedImage;
 
@@ -99,6 +107,16 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
           templateObjectUrl,
         };
         this.changeDetectorRef.detectChanges();
+
+        /*
+          "Wait" for the image to be actually loaded in the DOM.
+
+          If you experience problems (e.g. timing issues) with the following,
+          you could also add a listener to the actual img element (to listen for the load event) instead.
+        */
+        window.setTimeout(() => {
+          this.imageHasLoaded.emit();
+        }, 0);
       });
     };
   }

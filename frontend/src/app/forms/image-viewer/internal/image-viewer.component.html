@@ -38,6 +38,7 @@
       <app-base64-image
         [base64String]="control.value"
         [isZoomableSlideImage]="true"
+        (imageHasLoaded)="imageHasLoaded(i)"
         *ngIf="i === currentSlideIndex && viewDidEnter"
       >
         <ion-spinner style="--color: #ffffff;"></ion-spinner>
