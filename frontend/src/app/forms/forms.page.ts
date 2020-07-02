@@ -4,10 +4,11 @@
     event handlers for child to parent communication and parent to child data down.
 */
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  IonContent,
   IonRouterOutlet,
   NavController,
   Platform,
@@ -61,6 +62,13 @@ export class FormsPage
     private storage: StorageHandlerService,
     private translate: TranslateService
   ) {}
+
+  /**
+   * Reference to the (main) ion-content element.
+   */
+  @ViewChild('content')
+  content: IonContent;
+
   /**
    * Make the Steps available in the template.
    *
@@ -337,6 +345,18 @@ export class FormsPage
   private setCurrentStep(step: ApplicationStep): void {
     this.currentStep = step;
     this.currentStepIndex = ApplicationStepsArr.indexOf(step);
+
+    /*
+        When switching to another step, make sure we always scroll to the top.
+        Otherwise, if the previous page was scrolled to the bottom, then we would "inherit" this scroll position.
+
+        We need to wrap this whole statement in an if clause since,
+        when the view loads for the very first time,
+        the content reference may still be undefined.
+      */
+    if (this.content) {
+      this.content.scrollToTop();
+    }
   }
 
   /**
