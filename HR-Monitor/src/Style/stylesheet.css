@@ -38,7 +38,6 @@ ListView .cell {
     -fx-background-color:  #1D1F27;
     -fx-text-fill: #ecf0f1;
 
-
 }
 
 ListView .cell:hover {

@@ -38,7 +38,6 @@ public class OverviewController {
         getTable();
     }
 
-
     public void setFactoriesAndComparatorsForTableColumns() {
         idCol.setCellValueFactory(user -> new ReadOnlyLongWrapper(user.getValue().getID()));
         idCol.setVisible(false);
