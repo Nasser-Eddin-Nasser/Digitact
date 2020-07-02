@@ -42,11 +42,11 @@
               <Label style="-fx-text-fill: #ecf0f1;" text="First name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
               <TextField fx:id="lastNameTextField" prefHeight="26.0" prefWidth="178.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
               <Label style="-fx-text-fill: #ecf0f1;" text="Last name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-              <PasswordField fx:id="confirmPasswordField" onAction="#onCheckConfirmPassword" onKeyReleased="#onCheckConfirmPassword" prefHeight="26.0" prefWidth="178.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
               <TextField fx:id="userNameTextField" onKeyReleased="#onCheckNewUserName" prefHeight="26.0" prefWidth="178.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+              <PasswordField fx:id="newPasswordField" onKeyReleased="#onCheckPasswordComplexity" prefHeight="26.0" prefWidth="178.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+              <PasswordField fx:id="confirmPasswordField" onAction="#onCheckConfirmPassword" onKeyReleased="#onCheckConfirmPassword" prefHeight="26.0" prefWidth="178.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
               <Label style="-fx-text-fill: #ecf0f1;" text="Username" GridPane.columnIndex="1" GridPane.rowIndex="4" />
               <Label style="-fx-text-fill: #ecf0f1;" text="Password" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-              <PasswordField fx:id="newPasswordField" onKeyReleased="#onCheckPasswordComplexity" prefHeight="26.0" prefWidth="178.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
               <Label style="-fx-text-fill: #ecf0f1;" text="Confirm Password" GridPane.columnIndex="1" GridPane.rowIndex="6" />
               <TextField fx:id="passwordHint" prefHeight="25.0" prefWidth="178.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
               <TextField fx:id="email" onKeyReleased="#onCheckEmail" prefHeight="26.0" prefWidth="178.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
