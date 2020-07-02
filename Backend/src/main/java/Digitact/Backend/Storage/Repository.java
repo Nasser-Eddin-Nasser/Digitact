@@ -24,12 +24,12 @@ public class Repository {
   }
 
   public static List<Token> getTokenList() {
-    if (tokenList == null) new ArrayList<Token>();
+    if (tokenList == null) tokenList = new ArrayList<Token>();
     return tokenList;
   }
 
   public static boolean checkTokenValidation(Token token) {
-    if (tokenList != null) new ArrayList<Token>();
+    if (tokenList != null) tokenList = new ArrayList<Token>();
     return tokenList.stream()
             .filter(
                 x ->
@@ -44,8 +44,18 @@ public class Repository {
   }
 
   public static void insertTokenToTokenList(Token token) {
-    if (tokenList == null) new ArrayList<Token>();
+    if (tokenList == null) tokenList = new ArrayList<Token>();
     tokenList.add(token);
+  }
+
+  public static Token getTokenByTokenNumberAndURL(String tokenNumber, String uri) {
+    if (tokenList == null) return null;
+    List<Token> ls =
+        tokenList.stream()
+            .filter(x -> x.getClientURL().equals(uri) && x.getUniqueRandom().equals(tokenNumber))
+            .collect(Collectors.toList());
+
+    return ls.size() > 0 ? ls.get(0) : null;
   }
 
   public boolean storeApplicantOnDB(ApplicantUI applicant) {
