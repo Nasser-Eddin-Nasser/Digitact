@@ -8,13 +8,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="viewNewAccountPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #222D41;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="viewNewAccountPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #222D41;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label layoutX="34.0" layoutY="64.0" style="-fx-text-fill: #ecf0f1;" text="Last name" />
         <Label layoutX="34.0" layoutY="169.0" style="-fx-text-fill: #ecf0f1;" text="Password" />
         <Label layoutX="34.0" layoutY="213.0" style="-fx-text-fill: #ecf0f1;" text="Confirm Password" />
         <Button fx:id="create" layoutX="179.0" layoutY="391.0" mnemonicParsing="false" onAction="#createNewAccount" prefHeight="33.0" prefWidth="178.0" style="-fx-text-fill: #ecf0f1; -fx-background-color: #222D41; -fx-border-color: #ecf0f1;" text="Create" />
-        <Button fx:id="back" layoutX="35.0" layoutY="391.0" mnemonicParsing="false" onAction="#onShowView" prefHeight="33.0" prefWidth="53.0" style="-fx-text-fill: #ecf0f1; -fx-background-color: #222D41; -fx-border-color: #ecf0f1;" text="Back" />
         <Label layoutX="34.0" layoutY="118.0" style="-fx-text-fill: #ecf0f1;" text="Username" />
         <Label layoutX="34.0" layoutY="12.0" style="-fx-text-fill: #ecf0f1;" text="First name" />
         <TextField fx:id="firstNameTextField" layoutX="176.0" layoutY="10.0" prefHeight="26.0" prefWidth="178.0" />
