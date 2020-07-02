@@ -5,7 +5,8 @@ public enum Method {
     getImageById("getImageById"),
     getAdminByUserName("getAdminByUserName"),
     createAdminAccount("createAdminAccount"),
-    getAdminUserNames("getAdminUserNames");
+    getAdminUserNames("getAdminUserNames"),
+    gutenMorgen("gutenMorgen");// it used to ping the BES
     private final String name;
 
     private Method(String s) {
