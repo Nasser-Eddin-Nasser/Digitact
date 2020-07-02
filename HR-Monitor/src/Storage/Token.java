@@ -3,6 +3,7 @@ package Storage;
 import Model.User.Admin;
 
 public class Token {
+
     private final Long besNumber;
     private Admin loggedinAdmin;
 
@@ -12,6 +13,14 @@ public class Token {
 
     public void setLoggedinAdmin(Admin loggedinAdmin) {
         this.loggedinAdmin = loggedinAdmin;
+    }
+
+    public Long getBesNumber() {
+        return besNumber;
+    }
+
+    public Admin getLoggedinAdmin() {
+        return loggedinAdmin;
     }
 
 
