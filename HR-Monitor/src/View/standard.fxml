@@ -13,7 +13,7 @@
     <left>
         <BorderPane maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER">
             <top>
-                <GridPane style="-fx-background-color: #1D1F27;" BorderPane.alignment="CENTER">
+                <GridPane style="-fx-background-color: #272930;" BorderPane.alignment="CENTER">
                     <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
                     </columnConstraints>
