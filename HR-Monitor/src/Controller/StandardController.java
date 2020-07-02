@@ -1,6 +1,9 @@
 package Controller;
 
+import static Controller.AcController.ADMIN_USERNAME;
+
 import Model.MenuItem;
+import java.io.IOException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,32 +18,22 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
-import static Controller.AcController.ADMIN_USERNAME;
-
 public class StandardController {
 
-    /**
-     * the stage, which holds the program
-     */
+    /** the stage, which holds the program */
     private Stage stage;
 
     private Scene viewHRStandard;
-    @FXML
-    private BorderPane borderPaneCurrentView;
-    @FXML
-    private Text textMenuLabel;
+    @FXML private BorderPane borderPaneCurrentView;
+    @FXML private Text textMenuLabel;
 
-    @FXML
-    private ListView<String> listViewMenue;
+    @FXML private ListView<String> listViewMenue;
 
-//    @FXML private Text textMenuLabel;
+    //    @FXML private Text textMenuLabel;
 
-    /**
-     * the current selected MenuItem
-     */
+    /** the current selected MenuItem */
     private MenuItem current;
+
     private ObservableList<String> items;
 
     public StandardController(Stage stage) throws IOException {
@@ -114,7 +107,6 @@ public class StandardController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private Pane loadCreateAccountContent() throws IOException {
@@ -125,59 +117,59 @@ public class StandardController {
         return new OverviewController().getPane();
     }
 
-
-//    /**
-//     * when clicked on an element in the menue, this method will be called This method will set the
-//     * pane for the chosen entry
-//     */
-//    @FXML
-//    public void listViewMenueStudentClick(MouseEvent unused) {
-//        // first get the chosen MenuItem
-//        MenuItem<?> selected = listViewMenue.getSelectionModel().getSelectedItem();
-//        // check if another item was selected. If no other item was selected,
-//        // just cancel.
-//        if (selected == null || current == selected) {
-//            return;
-//        }
-//
-//        // check, if pane
-//        boolean paneMustBeLoaded = !selected.hasLoadedPane();
-//
-//        // get the pane of the chosen MenuItem
-//        Pane pane = selected.getPane();
-//        // check, if a pane is available
-//        if (pane == null) {
-//            // only for the logout-item is no pane available. So when no pane is
-//            // available, choose the last selected item in the menu-list...
-//            listViewMenue.getSelectionModel().select(current);
-//            // ... and view the logout-frame
-//            if (logoutItem == selected) {
-//                viewLogout();
-//            }
-//            if (helpItem == selected) {
-//                openHelp();
-//            }
-//
-//        } else {
-//
-//            /*
-//             * set the pane of the chosen MenuItem in the center of the
-//             * main-Pane
-//             */
-//            borderPaneCurrentView.setCenter(pane);
-//
-//            if (paneMustBeLoaded) {
-//                selected.getController().setStandardController(this);
-//                selected.justLoaded();
-//            }
-//
-//            // tell the controller of the new view, that his view was chosen
-//            selected.setAsCurrent();
-//            // store the selected view as the current view
-//            current.getController().closeAllExtraViews();
-//            current = selected;
-//            bottomMessageBar.clear();
-//        }
-//    }
+    //    /**
+    //     * when clicked on an element in the menue, this method will be called This method will
+    // set the
+    //     * pane for the chosen entry
+    //     */
+    //    @FXML
+    //    public void listViewMenueStudentClick(MouseEvent unused) {
+    //        // first get the chosen MenuItem
+    //        MenuItem<?> selected = listViewMenue.getSelectionModel().getSelectedItem();
+    //        // check if another item was selected. If no other item was selected,
+    //        // just cancel.
+    //        if (selected == null || current == selected) {
+    //            return;
+    //        }
+    //
+    //        // check, if pane
+    //        boolean paneMustBeLoaded = !selected.hasLoadedPane();
+    //
+    //        // get the pane of the chosen MenuItem
+    //        Pane pane = selected.getPane();
+    //        // check, if a pane is available
+    //        if (pane == null) {
+    //            // only for the logout-item is no pane available. So when no pane is
+    //            // available, choose the last selected item in the menu-list...
+    //            listViewMenue.getSelectionModel().select(current);
+    //            // ... and view the logout-frame
+    //            if (logoutItem == selected) {
+    //                viewLogout();
+    //            }
+    //            if (helpItem == selected) {
+    //                openHelp();
+    //            }
+    //
+    //        } else {
+    //
+    //            /*
+    //             * set the pane of the chosen MenuItem in the center of the
+    //             * main-Pane
+    //             */
+    //            borderPaneCurrentView.setCenter(pane);
+    //
+    //            if (paneMustBeLoaded) {
+    //                selected.getController().setStandardController(this);
+    //                selected.justLoaded();
+    //            }
+    //
+    //            // tell the controller of the new view, that his view was chosen
+    //            selected.setAsCurrent();
+    //            // store the selected view as the current view
+    //            current.getController().closeAllExtraViews();
+    //            current = selected;
+    //            bottomMessageBar.clear();
+    //        }
+    //    }
 
 }
