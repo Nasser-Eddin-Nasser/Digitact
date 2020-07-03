@@ -98,7 +98,7 @@
     },
     "workExperience":{
         "title": "Work Experience",
-        "stepDescription": "Here, you can add your information regarding your work.",
+        "stepDescription": "Here, you can add information about your work experience.",
         "jobTitle": "Title",
         "company": "Company",
         "employmentType": "Employment Type",
@@ -118,7 +118,7 @@
     },
     "educationInfo": {
         "title": "Education Information",
-        "stepDescription": "Here, you can add your information regarding your education. So: Which schools/universities have you visited?",
+        "stepDescription": "Here, you can add information about your education. So: Which schools/universities have you visited?",
         "degreeYearGradeMessage": "Degree: {{degree}} ({{graduationYear}}, {{grade}})",
         "schoolOrUniversity": "School/University",
         "subject": "Subject",
@@ -131,7 +131,7 @@
     },
     "industryAndPositionPreference": {
         "title": "Industries and Positions",
-        "stepDescription": "So that we can know in which industries and positions you are intrested, please choose from the following.",
+        "stepDescription": "So that we can know which industries and positions you are intrested in, please choose from the following.",
         "industry": "Industry",
         "position": "Position",
         "automotive": "Automotive",
