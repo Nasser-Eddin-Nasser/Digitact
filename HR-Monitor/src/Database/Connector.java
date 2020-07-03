@@ -4,6 +4,7 @@ import Main.Configuration;
 import Model.User.Admin;
 import Storage.DBStorage;
 import Storage.Token;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -132,6 +133,7 @@ public class Connector {
         BufferedReader in_1 = null;
         try {
             URLConnection uc = bes_url.openConnection();
+            uc.setRequestProperty("AuthToken", DBStorage.getToken().toString());
             in_1 = new BufferedReader(new InputStreamReader(uc.getInputStream()));
             String inputLine;
             if ((inputLine = in_1.readLine()) != null) {
@@ -158,6 +160,7 @@ public class Connector {
         BufferedReader in = null;
         try {
             URLConnection uc = bes_url.openConnection();
+            uc.setRequestProperty("AuthToken", DBStorage.getToken().toString());
             in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
             String inputLine;
             if ((inputLine = in.readLine()) != null) {
@@ -200,12 +203,12 @@ public class Connector {
             http.setRequestProperty("Content-Type", "application/json; utf-8");
             http.setRequestProperty("Accept", "application/json");
             try (OutputStream os = http.getOutputStream()) {
-                String reqBody =
-                        token.getBesNumber() + " -//- " + token.getLoggedinAdmin().getUserName();
+                String reqBody = token.toString();
+//                        token.getBesNumber() + " -//- " + token.getLoggedinAdmin().getUserName();  // Todo
                 byte[] input = reqBody.getBytes("utf-8");
                 os.write(input, 0, input.length);
                 try (BufferedReader br =
-                        new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+                             new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
                     StringBuilder response = new StringBuilder();
                     String responseLine = null;
                     while ((responseLine = br.readLine()) != null) {
@@ -243,6 +246,8 @@ public class Connector {
             http.setDoOutput(true);
             http.setRequestProperty("Content-Type", "application/json; utf-8");
             http.setRequestProperty("Accept", "application/json");
+
+            http.setRequestProperty("AuthToken", DBStorage.getToken().toString());
             try (OutputStream os = http.getOutputStream()) {
                 //   convertAdminToJSON
                 byte[] input = Util.JSONTools.convertAdminToJSON(admin).getBytes("utf-8");
@@ -250,7 +255,7 @@ public class Connector {
             }
             // read the Response
             try (BufferedReader br =
-                    new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+                         new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
                 StringBuilder response = new StringBuilder();
                 String responseLine = null;
                 while ((responseLine = br.readLine()) != null) {
