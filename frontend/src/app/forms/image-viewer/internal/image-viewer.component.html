@@ -38,6 +38,8 @@
       <app-base64-image
         [base64String]="control.value"
         [isZoomableSlideImage]="true"
+        [maxImageWidth]="2000"
+        [maxImageHeight]="2000"
         (imageHasLoaded)="imageHasLoaded(i)"
         *ngIf="i === currentSlideIndex && viewDidEnter"
       >
