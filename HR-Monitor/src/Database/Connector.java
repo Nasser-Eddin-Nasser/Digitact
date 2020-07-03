@@ -1,5 +1,6 @@
 package Database;
 
+import Controller.CreateFirstAccountController;
 import Main.Configuration;
 import Model.User.Admin;
 import Storage.DBStorage;
@@ -240,14 +241,16 @@ public class Connector {
     private static void handleCreateAdmin(URL bes_url, Admin admin) {
         BufferedReader in = null;
         try {
+
             URLConnection uc = bes_url.openConnection();
             HttpURLConnection http = (HttpURLConnection) uc;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
             http.setRequestProperty("Content-Type", "application/json; utf-8");
             http.setRequestProperty("Accept", "application/json");
-
-            http.setRequestProperty("AuthToken", DBStorage.getToken().toString());
+            if (!CreateFirstAccountController.isFirstAccount) {
+                http.setRequestProperty("AuthToken", DBStorage.getToken().toString());
+            }
             try (OutputStream os = http.getOutputStream()) {
                 //   convertAdminToJSON
                 byte[] input = Util.JSONTools.convertAdminToJSON(admin).getBytes("utf-8");
