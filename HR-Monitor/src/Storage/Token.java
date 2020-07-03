@@ -23,7 +23,6 @@ public class Token {
         return loggedinAdmin;
     }
 
-
     public String toString() {
         return getBesNumber() + " -//- " + getLoggedinAdmin().getUserName();
     }

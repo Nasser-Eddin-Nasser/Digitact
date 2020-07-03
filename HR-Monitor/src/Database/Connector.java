@@ -5,7 +5,6 @@ import Main.Configuration;
 import Model.User.Admin;
 import Storage.DBStorage;
 import Storage.Token;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -205,11 +204,12 @@ public class Connector {
             http.setRequestProperty("Accept", "application/json");
             try (OutputStream os = http.getOutputStream()) {
                 String reqBody = token.toString();
-//                        token.getBesNumber() + " -//- " + token.getLoggedinAdmin().getUserName();  // Todo
+                //                        token.getBesNumber() + " -//- " +
+                // token.getLoggedinAdmin().getUserName();  // Todo
                 byte[] input = reqBody.getBytes("utf-8");
                 os.write(input, 0, input.length);
                 try (BufferedReader br =
-                             new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+                        new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
                     StringBuilder response = new StringBuilder();
                     String responseLine = null;
                     while ((responseLine = br.readLine()) != null) {
@@ -258,7 +258,7 @@ public class Connector {
             }
             // read the Response
             try (BufferedReader br =
-                         new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+                    new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
                 StringBuilder response = new StringBuilder();
                 String responseLine = null;
                 while ((responseLine = br.readLine()) != null) {

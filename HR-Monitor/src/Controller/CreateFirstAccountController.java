@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.MVC.AcModel;
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,40 +9,26 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class CreateFirstAccountController {
     public static boolean isFirstAccount = false;
-    @FXML
-    private ComboBox<String> admins;
-    @FXML
-    private TextField passwordHint;
-    @FXML
-    private TextField email;
-    @FXML
-    private Label checkValidityPassword;
+    @FXML private ComboBox<String> admins;
+    @FXML private TextField passwordHint;
+    @FXML private TextField email;
+    @FXML private Label checkValidityPassword;
 
-    @FXML
-    private Label checkValidityUserName;
+    @FXML private Label checkValidityUserName;
 
-    @FXML
-    private Label checkPassword;
+    @FXML private Label checkPassword;
 
-    @FXML
-    private Label checkValidityEmail;
-    @FXML
-    private TextField firstNameTextField;
+    @FXML private Label checkValidityEmail;
+    @FXML private TextField firstNameTextField;
 
-    @FXML
-    private TextField lastNameTextField;
+    @FXML private TextField lastNameTextField;
 
-    @FXML
-    private PasswordField newPasswordField;
+    @FXML private PasswordField newPasswordField;
 
-    @FXML
-    private PasswordField confirmPasswordField;
-    @FXML
-    private TextField userNameTextField;
+    @FXML private PasswordField confirmPasswordField;
+    @FXML private TextField userNameTextField;
 
     private AcModel model;
 
@@ -60,7 +47,6 @@ public class CreateFirstAccountController {
         stage.setResizable(false);
         stage.getIcons().add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
         stage.show();
-
     }
 
     @FXML
