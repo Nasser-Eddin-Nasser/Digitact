@@ -109,7 +109,7 @@ public class HRController {
       @RequestBody AdminUI admin, @RequestHeader HttpHeaders headers, HttpServletRequest request) {
     Admin a = new Admin(admin.getFirstName(), admin.getLastName());
     List<String> tokens = headers.get("authtoken");
-    if (tokens.size() == 1) {
+    if (tokens != null && tokens.size() == 1) {
       String token = tokens.get(0);
       String[] parts = token.split(" -//- ");
       String tokenNumber = parts[0];
@@ -121,15 +121,22 @@ public class HRController {
               tokenNumber, dataRepository.getAdminByUserName(userName), uri);
       Token t = Repository.getTokenByTokenNumberAndURL(tokenNumber, uri); // token in my repo
       if (t.equals(newToken)) {
-        a.setEmail(admin.getEmail());
-        a.setPassHint(admin.getPassHint());
-        a.setUserName(admin.getUserName());
-        a.setPassword(admin.getPassword());
-        dataRepository.save(a);
+        addAdminToDB(admin, a);
         return "Admin created!";
       }
+    } else if (dataRepository.getAdmins().size() == 0) {
+      addAdminToDB(admin, a);
+      return "Admin created!";
     }
     return "access denied!";
+  }
+
+  private void addAdminToDB(@RequestBody AdminUI admin, Admin a) {
+    a.setEmail(admin.getEmail());
+    a.setPassHint(admin.getPassHint());
+    a.setUserName(admin.getUserName());
+    a.setPassword(admin.getPassword());
+    dataRepository.save(a);
   }
 
   @PostMapping(path = "/putToken")
