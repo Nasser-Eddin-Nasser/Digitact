@@ -15,29 +15,28 @@
         {{'privacyPage.readPrivacyMessage' | translate}}
       </div>
       <div class="ion-no-padding">
-        <button class="round-button align center" (click)="openPolicydetails()">
+        <button class="round-button align center" (click)="openPolicyDetails()">
           {{'privacyPage.openPrivacy' | translate}}
         </button>
       </div>
     </div>
+
     <div class="content">
       <div class="h-line"></div>
       <ion-item lines="none" class="ion-no-padding">
-        <ion-toggle
-          (ionChange)="togglePrivacyPolicyAcceptance()"
-          [checked]="isPolicyAccepted"
-        ></ion-toggle>
+        <ion-toggle [formControl]="policyToggle"></ion-toggle>
         <ion-label primary class="ion-padding-start ion-text-justify">
           {{'privacyPage.agreePrivacyMessage' | translate}}
         </ion-label>
       </ion-item>
       <div class="h-line"></div>
     </div>
+
     <div class="buttons-container">
       <button
         class="fancy-button align center"
         (click)="startApplication()"
-        [disabled]="!isPolicyAccepted"
+        [disabled]="!policyToggle.value"
       >
         {{'commonLables.continue' | translate}}
       </button>
