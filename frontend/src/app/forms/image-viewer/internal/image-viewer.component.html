@@ -31,17 +31,19 @@
       "
     >
       <!-- 
-        The class "swiper-zoom-target" is important here: It tells Swiper that we want to zoom this item. Usually, only img elements (and some others) are supported.
-
-        To make sure the performance is still good with many images, we only actually render the Component that is currently visible.
+        To make sure the performance is still good with many images, we don't render all images at once.
+        Instead, we only render the one of the current slide and the previous and next one.
       -->
       <app-base64-image
         [base64String]="control.value"
         [isZoomableSlideImage]="true"
         [maxImageWidth]="2000"
         [maxImageHeight]="2000"
+        [enableImageProcessing]="
+          i >= currentSlideIndex - 1 && i <= currentSlideIndex + 1
+        "
         (imageHasLoaded)="imageHasLoaded(i)"
-        *ngIf="i === currentSlideIndex && viewDidEnter"
+        *ngIf="viewDidEnter"
       >
         <ion-spinner style="--color: #ffffff;"></ion-spinner>
       </app-base64-image>

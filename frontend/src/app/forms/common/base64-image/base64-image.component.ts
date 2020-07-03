@@ -55,10 +55,31 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
   isZoomableSlideImage = false;
 
   /**
+   * Should the image be rendered/processed now?
+   *
+   * If you have a list with many high-resolution images,
+   * but not all of them are visible now (e.g. because you are displaying them in a slider),
+   * then it is recommeded to set this property to `false` at the beginning
+   *  and only to enable it once the image might come into viewport soon.
+   */
+  @Input()
+  set enableImageProcessing(value: boolean) {
+    this._enableImageProcessing = value;
+
+    this.processImageIfNeeded();
+  }
+  get enableImageProcessing(): boolean {
+    return this._enableImageProcessing;
+  }
+  private _enableImageProcessing = true;
+
+  /**
    * The event is emitted when the image has been fully loaded.
    */
   @Output()
   imageHasLoaded = new EventEmitter<void>();
+
+  isCurrentlyProcessingTheImage = false;
 
   processedImage: ProcessedImage;
 
@@ -70,7 +91,7 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     // Just give it a long timeout so that the browser can focus on other things meanwhile.
     window.setTimeout(() => {
-      this.processImage();
+      this.processImageIfNeeded();
     }, 200);
   }
 
@@ -86,10 +107,26 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
     URL.revokeObjectURL(this.processedImage.rawObjectUrl);
   }
 
+  private processImageIfNeeded(): void {
+    if (!this.enableImageProcessing) {
+      return;
+    }
+    if (this.isCurrentlyProcessingTheImage) {
+      return;
+    }
+    if (this.processedImage) {
+      return;
+    }
+
+    this.processImage();
+  }
+
   /**
    * Convert the base64 image to an Object URL.
    */
   private processImage(): void {
+    this.isCurrentlyProcessingTheImage = true;
+
     const canvas = document.createElement('canvas');
 
     const img = new Image();
@@ -107,6 +144,8 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
           rawObjectUrl,
           templateObjectUrl,
         };
+        this.isCurrentlyProcessingTheImage = false;
+
         this.changeDetectorRef.detectChanges();
       });
     };
