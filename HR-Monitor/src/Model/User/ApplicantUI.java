@@ -33,6 +33,9 @@ public class ApplicantUI {
     @JsonProperty("hrRating")
     private HrRating hrRating;
 
+    @JsonProperty("status")
+    private Status status;
+
     private List<Industries> industries;
     private List<Positions> positions;
     private List<KeyCompetence> keyCompetencies;
@@ -62,7 +65,8 @@ public class ApplicantUI {
             List<Positions> positions,
             List<KeyCompetence> keyCompetencies,
             List<AppImage> images,
-            HrRating hrRating) {
+            HrRating hrRating,
+            Status status) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -80,6 +84,7 @@ public class ApplicantUI {
         this.additionalInfo = additionalInfo;
         this.workExperiences = workExperiences;
         this.hrRating = hrRating;
+        this.status = status;
     }
 
     public List<Industries> getIndustries() {
@@ -168,5 +173,13 @@ public class ApplicantUI {
 
     public void setHrRating(HrRating hrRating) {
         this.hrRating = hrRating;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

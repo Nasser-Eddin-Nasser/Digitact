@@ -1,6 +1,7 @@
 package Database;
 
 import Main.Configuration;
+import Model.Status;
 import Model.User.Admin;
 import Storage.DBStorage;
 import java.io.BufferedReader;
@@ -141,6 +142,45 @@ public class Connector {
         }
     }
 
+    public static void changeStatus(long appID, Status status){
+        try {
+            handleChangeStatus(new URL(Configuration.BES_URI + "changeStatus"),appID,status);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void handleChangeStatus(URL url, long appID,Status status) {
+        try {
+            URLConnection uc = url.openConnection();
+            HttpURLConnection http = (HttpURLConnection) uc;
+            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setDoOutput(true);
+            http.setRequestProperty("Content-Type", "application/json; utf-8");
+            http.setRequestProperty("Accept", "application/json");
+            String message = "{ \"appID\":"+appID+",\"status\":\""+status.toString()+"\"}";
+
+            try (OutputStream os = http.getOutputStream()) {
+
+                byte[] input = message.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+            try (BufferedReader br =
+                         new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine = null;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+            }
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void sendPutType(Method method, Admin admin) {
         switch (method) {
             case createAdminAccount:
@@ -150,10 +190,13 @@ public class Connector {
                     e.printStackTrace();
                 }
                 break;
+
             default:
                 break;
         }
     }
+
+
 
     private static void handleCreateAdmin(URL bes_url, Admin admin) {
         BufferedReader in = null;
@@ -163,7 +206,7 @@ public class Connector {
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
             http.setRequestProperty("Content-Type", "application/json; utf-8");
-            http.setRequestProperty("Accept", "application/json");
+            //http.setRequestProperty("Accept", "application/json");
             try (OutputStream os = http.getOutputStream()) {
                 //   convertAdminToJSON
                 byte[] input = Util.JSONTools.convertAdminToJSON(admin).getBytes("utf-8");

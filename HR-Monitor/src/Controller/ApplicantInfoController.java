@@ -1,8 +1,10 @@
 package Controller;
 
 import static Database.Method.getImageById;
+import static Model.Status.*;
 
 import Database.Connector;
+import Main.Configuration;
 import Model.*;
 import Model.Image.AppImage;
 import Model.Image.ImageType;
@@ -11,7 +13,9 @@ import Model.User.ApplicantUI;
 import Util.ImageTools;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -122,6 +126,10 @@ public class ApplicantInfoController {
     @FXML Label txtrheFX, txtMotFX, txtSelfFX, txtPerFX;
     @FXML TextField txtImpFX;
 
+    // Change status
+    @FXML Button btnOFX, btnHRFX, btnDFX;
+    @FXML Label lblStatusFX;
+
     public ApplicantInfoController(long id, OverviewModel model) {
         this.model = model;
         app = this.model.getApplicantByID(id);
@@ -146,6 +154,54 @@ public class ApplicantInfoController {
         getImages();
         getKeyCompetence();
         getHrRating();
+        getStatus();
+        statusListener();
+    }
+
+    private void getStatus() {
+        setStatusLabel(app.getStatus());
+        statusListener();
+    }
+
+    private void setStatusLabel(Status status) {
+        switch(status){
+            case Open:
+                lblStatusFX.setStyle("-fx-background-color: #61d0ee; -fx-background-radius:10 10 10 10");
+                lblStatusFX.setText("Open");
+                break;
+            case Send2HR:
+                lblStatusFX.setStyle("-fx-background-color: #5be14f; -fx-background-radius:10 10 10 10");
+                lblStatusFX.setText("Send to HR");
+                break;
+            case Denied:
+                lblStatusFX.setStyle("-fx-background-color: #ff927e; -fx-background-radius:10 10 10 10");
+                lblStatusFX.setText("Denied");
+                break;
+        }
+    }
+
+
+    public void statusListener(){
+        btnOFX.setOnMouseClicked(
+                (event) -> {
+                    setStatusLabel(Open);
+                    Connector.changeStatus(app.getID(), Open);
+                }
+        );
+        btnHRFX.setOnMouseClicked(
+                (event) -> {
+                    setStatusLabel(Send2HR);
+                    Connector.changeStatus(app.getID(), Send2HR);
+                    lblStatusFX.minWidth(75);
+                }
+        );
+        btnDFX.setOnMouseClicked(
+                (event) -> {
+                    setStatusLabel(Denied);
+                    Connector.changeStatus(app.getID(), Denied);
+
+                }
+        );
     }
 
     private void createAndSetNewStage() throws IOException {
@@ -160,11 +216,11 @@ public class ApplicantInfoController {
     }
 
     private void getHrRating() {
-        txtrheFX.setText("Rhetoric - " + app.getHrRating().getRhetoric());
-        txtMotFX.setText("Motivation - " + app.getHrRating().getMotivation());
-        txtSelfFX.setText("Self Assurance - " + app.getHrRating().getSelfAssurance());
-        txtPerFX.setText("Personal Impression - " + app.getHrRating().getPersonalImpression());
-        txtImpFX.setText(app.getHrRating().getImpression());
+//        txtrheFX.setText("Rhetoric - " + app.getHrRating().getRhetoric());
+//        txtMotFX.setText("Motivation - " + app.getHrRating().getMotivation());
+//        txtSelfFX.setText("Self Assurance - " + app.getHrRating().getSelfAssurance());
+//        txtPerFX.setText("Personal Impression - " + app.getHrRating().getPersonalImpression());
+//        txtImpFX.setText(app.getHrRating().getImpression());
     }
 
     private void getKeyCompetence() {
@@ -467,4 +523,19 @@ public class ApplicantInfoController {
         gradYearFX.setCellValueFactory(
                 applicant -> new ReadOnlyStringWrapper(applicant.getValue().getGraduationYear()));
     }
+
+
 }
+/*
+    @FXML Button btnOFX, btnHRFX, btnDFX;
+    @FXML Label lblStatusFX;
+
+    private void docClick(ImageView imageView, File file) {
+        imageView.setOnMouseClicked(
+                (event) -> {
+                    if (event.getClickCount() == 2) {
+                        showDocImage(file);
+                    }
+                });
+
+ */
