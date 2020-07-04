@@ -1,12 +1,8 @@
 package Digitact.Backend.Model.User;
 
-import Digitact.Backend.Model.Education;
-import Digitact.Backend.Model.HrRating;
+import Digitact.Backend.Model.*;
 import Digitact.Backend.Model.Image.AppImage;
-import Digitact.Backend.Model.Industries;
-import Digitact.Backend.Model.KeyCompetence;
-import Digitact.Backend.Model.Positions;
-import Digitact.Backend.Model.WorkExperience;
+
 import java.util.*;
 import javax.persistence.*;
 import org.hibernate.annotations.Fetch;
@@ -63,6 +59,11 @@ public class Applicant extends User {
     @Fetch(FetchMode.JOIN)
     private HrRating hrRating;
 
+
+
+    @Column(name = "Status")
+    private Status status;
+
     protected Applicant() {
         super();
     }
@@ -80,6 +81,7 @@ public class Applicant extends User {
         positions = new HashSet<Positions>();
         workExperiences = new HashSet<WorkExperience>();
         hrRating = new HrRating();
+        status = Status.denied;
     }
 
     public UserRight getUserRight() {
@@ -220,5 +222,13 @@ public class Applicant extends User {
 
     public HrRating getHrRating() {
         return hrRating;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

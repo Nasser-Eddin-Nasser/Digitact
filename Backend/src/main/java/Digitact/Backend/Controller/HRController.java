@@ -1,14 +1,12 @@
 package Digitact.Backend.Controller;
 
 import Digitact.Backend.Model.Education;
+import Digitact.Backend.Model.StatusUI;
 import Digitact.Backend.Model.User.Admin;
 import Digitact.Backend.Model.User.AdminUI;
 import Digitact.Backend.Model.User.User;
 import Digitact.Backend.Model.WorkExperience;
-import Digitact.Backend.Storage.IDataRepository;
-import Digitact.Backend.Storage.IEducationRepository;
-import Digitact.Backend.Storage.IImageRepository;
-import Digitact.Backend.Storage.IWorkExperienceRepository;
+import Digitact.Backend.Storage.*;
 import Digitact.Backend.Util.ImageTools;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +22,14 @@ public class HRController {
     @Autowired IEducationRepository educationRepository;
     @Autowired IImageRepository imageRepository;
     @Autowired IWorkExperienceRepository workExperieinceRepository;
+    @Autowired IStatusRepository statusRepository;
 
     /** @return JSON object of the applicants */
     @GetMapping("/getApplicants")
     public List<User> getApplicants() {
+
         return new ArrayList<User>(dataRepository.getApplicants());
+
     }
 
     @GetMapping("/getAllEducationInfo")
@@ -44,11 +45,13 @@ public class HRController {
     @GetMapping(path = "/getImageById={imageId}")
     public String getImageById(@PathVariable String imageId) {
         return ImageTools.combineImage(imageRepository.getImageByID(imageId)).getContent();
+
     }
 
     /** @return JSON object of the admins */
     @GetMapping("/getAdmins")
     public List<User> getAdmins() {
+
         return new ArrayList<User>(dataRepository.getAdmins());
     }
 
@@ -65,7 +68,7 @@ public class HRController {
     @GetMapping("/getAdminByUserName={userName}")
     public Admin getAdminByID(@PathVariable String userName) {
         Admin a = dataRepository.getAdminByUserName(userName);
-        System.out.println(a.getEmail());
+
         return a;
     }
 
@@ -79,5 +82,11 @@ public class HRController {
         a.setPassword(admin.getPassword());
         dataRepository.save(a);
         return "Admin created!";
+    }
+
+    @PostMapping(path = "/changeStatus")
+    public String changeStatus(@RequestBody StatusUI status) {
+        statusRepository.setStatus( status.getStatus().getNum(),status.getAppID());
+        return "changed";
     }
 }
