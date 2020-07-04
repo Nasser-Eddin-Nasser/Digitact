@@ -51,6 +51,7 @@ public class AcController {
             }
         } else {
             offlineMode = true;
+            setModelAndStageAndScene();
             System.err.println("Run in offline Mode!");
         }
     }
