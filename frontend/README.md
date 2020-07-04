@@ -48,8 +48,16 @@ npm run all-checks
 
 # Tips
 
+## Creating pages using the CLI
+
 You don't want to create pages (or similar) manually? The Ionic CLI can generate them for you! See https://ionicframework.com/docs/cli/commands/generate
 
 Angular is also able to generate some files, but since we are using Ionic, you should first check whether the Ionic CLI provides an equivalent command for that.
 
+## Generating app icons
+
 If you want to update the app icon or splash screen image, then you need to create lots of different image sizes. We recommend using https://github.com/ionic-team/cordova-res: This CLI tool generates all necessary sizes based on one single image. Important: Since our application is using Capacitor, you need to make sure to use the appropriate CLI flags. The cordova-res documentation covers in more detail.
+
+## Enabling Dark Mode
+
+Our app also has support for Dark Mode. Dark Mode gets enabled when `prefers-color-scheme` is set to `dark`. You don't need to install the app on a real device to try it out: Just like with most of the other features, you can also see how it looks like while developing in your browser. In Chrome, for instance, you can enable Dark Mode in the Developer Tools settings: Here, you can find `Emulate CSS media feature prefers-color-scheme`. If you set it to `dark`, then the app will automatically apply the dark theme.

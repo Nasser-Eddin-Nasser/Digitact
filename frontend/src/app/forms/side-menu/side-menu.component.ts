@@ -55,6 +55,7 @@ export class SideMenuComponent {
     contactInfo: this.translate.instant('contactInfo.title'),
     profilePicture: this.translate.instant('profilePicture.title'),
     documentsUpload: this.translate.instant('documentsUpload.title'),
+    workExperience: this.translate.instant('workExperience.title'),
     educationInfo: this.translate.instant('educationInfo.title'),
     industryAndPositionPreference: this.translate.instant(
       'industryAndPositionPreference.title'

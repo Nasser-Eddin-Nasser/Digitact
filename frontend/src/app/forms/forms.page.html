@@ -1,4 +1,4 @@
-<ion-header class="ion-no-border">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="closeForm()">
@@ -31,7 +31,7 @@
   [currentStep]="currentStep"
 ></app-side-menu>
 
-<ion-content>
+<ion-content #content>
   <div class="main-container with-bottom-buttons">
     <div
       class="skip-step-toggle"
@@ -42,7 +42,6 @@
         <ion-label>{{'skipStep.skipStep' | translate}}</ion-label>
         <ion-toggle
           slot="start"
-          color="primary"
           [formControl]="isSkipped[currentStep]"
         ></ion-toggle>
       </ion-item>

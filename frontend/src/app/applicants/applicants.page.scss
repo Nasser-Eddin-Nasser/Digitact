@@ -5,3 +5,11 @@
 .main-description.info-content {
   margin-bottom: 0.5rem;
 }
+
+.submitted-time {
+  display: flex;
+  align-items: center;
+}
+.submitted-time ion-icon {
+  margin-right: 5px;
+}

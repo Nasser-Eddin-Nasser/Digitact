@@ -1,3 +1,9 @@
 ion-progress-bar {
   height: 10px;
 }
+@media (prefers-color-scheme: dark) {
+  ion-progress-bar {
+    --background: var(--ion-color-light);
+    --progress-background: var(--ion-color-tertiary);
+  }
+}
