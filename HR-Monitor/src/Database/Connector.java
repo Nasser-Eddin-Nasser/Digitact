@@ -241,7 +241,6 @@ public class Connector {
     private static void handleCreateAdmin(URL bes_url, Admin admin) {
         BufferedReader in = null;
         try {
-
             URLConnection uc = bes_url.openConnection();
             HttpURLConnection http = (HttpURLConnection) uc;
             http.setRequestMethod("POST"); // PUT is another valid option

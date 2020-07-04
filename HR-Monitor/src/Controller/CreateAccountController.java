@@ -116,7 +116,6 @@ public class CreateAccountController {
         return false;
     }
 
- 
     @FXML
     public boolean onCheckNewUserName() {
         return onCheckNewUserName(userNameTextField.getText());
