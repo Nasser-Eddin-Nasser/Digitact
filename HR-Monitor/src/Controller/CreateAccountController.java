@@ -116,15 +116,7 @@ public class CreateAccountController {
         return false;
     }
 
-    @FXML
-    public void onShowView() {
-        try {
-            new AcController(stage, model);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+ 
     @FXML
     public boolean onCheckNewUserName() {
         return onCheckNewUserName(userNameTextField.getText());
