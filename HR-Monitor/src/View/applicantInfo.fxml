@@ -365,7 +365,7 @@
                              </SplitPane>
                           </Tab>
 
-                          <Tab fx:id="docTabFX" text="Documents">
+                          <Tab fx:id="docTabFX" onSelectionChanged="#onShowDocuments" text="Documents">
                              <ScrollPane fx:id="documentsGridFX" fitToHeight="true" prefHeight="283.0" prefWidth="198.0">
 
                              </ScrollPane>

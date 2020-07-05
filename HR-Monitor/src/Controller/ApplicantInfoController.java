@@ -191,7 +191,7 @@ public class ApplicantInfoController {
         getPositionAndIndustry();
         getTableEduInfo();
         getTableWorkExpInfo();
-        getImages();
+        getImages(ImageType.profilePic);
         getKeyCompetence();
         getHrRating();
         getStatus();
@@ -208,6 +208,11 @@ public class ApplicantInfoController {
                         new PieChart.Data("Self Assurance " + app.getHrRating().getSelfAssurance(), app.getHrRating().getSelfAssurance()),
                         new PieChart.Data("Personal Impression " + app.getHrRating().getPersonalImpression(), app.getHrRating().getPersonalImpression()));
         chart.setData(pieChartData);
+    }
+
+    @FXML
+    private void onShowDocuments() {
+        getImages(ImageType.CV);
     }
 
     /**
@@ -361,15 +366,18 @@ public class ApplicantInfoController {
         posFX.setCellValueFactory(pos -> new ReadOnlyStringWrapper(pos.getValue().getPosition()));
     }
 
-    private void getImages() {
+    private void getImages(ImageType it) {
         List<AppImage> images = app.getAppImage();
-        setProfPic(images);
-        List<AppImage> docImgs =
-                images.stream()
-                        .sequential()
-                        .filter(x -> !x.getType().equals(ImageType.profilePic))
-                        .collect(Collectors.toList());
-        setDocumentsImage(docImgs);
+        if (it.equals(ImageType.profilePic)) {
+            setProfPic(images);
+        } else {
+            List<AppImage> docImgs =
+                    images.stream()
+                            .sequential()
+                            .filter(x -> !x.getType().equals(ImageType.profilePic))
+                            .collect(Collectors.toList());
+            setDocumentsImage(docImgs);
+        }
     }
 
     private void setProfPic(List<AppImage> images) {
