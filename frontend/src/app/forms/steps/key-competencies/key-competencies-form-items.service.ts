@@ -24,14 +24,6 @@ import {
  */
 @Injectable()
 export class KeyCompetenciesFormItemsService {
-  private readonly LANGUAGE_ITEMS = this.translate.instant(
-    'keyCompetencies.languageItems'
-  );
-
-  private readonly BUSINESS_SKILLS_ITEMS = this.translate.instant(
-    'keyCompetencies.businessSkillsItems'
-  );
-
   private readonly PROFESSIONAL_SOFTWARE_ITEMS = [
     'Adobe Photoshop',
     'Adobe InDesign',
@@ -82,17 +74,24 @@ export class KeyCompetenciesFormItemsService {
   generateAllFormItems(
     basis: FormGroup<KeyCompetencies>
   ): FormGroup<KeyCompetenciesInternal> {
-    // No need to set any Validators here. This needs to be done on the "external" form.
+    /*
+      Items stored in language files should not be set as class field.
+      Otherwise, when switching the language, they will still be in the original language.
+    */
+    const LANGUAGE_ITEMS = this.translate.instant(
+      'keyCompetencies.languageItems'
+    );
+    const BUSINESS_SKILLS_ITEMS = this.translate.instant(
+      'keyCompetencies.businessSkillsItems'
+    );
 
+    // No need to set any Validators here. This needs to be done on the "external" form.
     const result = new FormGroup<KeyCompetenciesInternal>({
       languages: new FormArray<KeyCompetenciesEntry>(
-        this.generateItems(this.LANGUAGE_ITEMS, basis.controls.languages)
+        this.generateItems(LANGUAGE_ITEMS, basis.controls.languages)
       ),
       businessSkills: new FormArray<KeyCompetenciesEntry>(
-        this.generateItems(
-          this.BUSINESS_SKILLS_ITEMS,
-          basis.controls.businessSkills
-        )
+        this.generateItems(BUSINESS_SKILLS_ITEMS, basis.controls.businessSkills)
       ),
       professionalSoftware: new FormArray<KeyCompetenciesEntry>(
         this.generateItems(

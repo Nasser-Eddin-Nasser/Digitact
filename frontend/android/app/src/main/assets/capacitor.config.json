@@ -1,0 +1,8 @@
+{
+  "appId": "de.consileon.digitact",
+  "appName": "digitact",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}
