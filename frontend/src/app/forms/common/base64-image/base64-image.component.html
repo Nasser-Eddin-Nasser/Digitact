@@ -10,5 +10,6 @@
   <img
     [src]="processedImage.templateObjectUrl"
     [class.swiper-zoom-target]="isZoomableSlideImage"
+    (load)="onImageLoad()"
   />
 </div>

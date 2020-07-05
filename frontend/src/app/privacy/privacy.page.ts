@@ -3,8 +3,9 @@
     This page handles the acceptance of privacy policy and navigation to forms
 */
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+
+import { FormControl } from '../common/forms/forms';
 
 @Component({
   selector: 'app-privacy',
@@ -12,41 +13,33 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./privacy.page.scss'],
 })
 export class PrivacyPage {
-  constructor(
-    private navigationController: NavController,
-    private router: Router
-  ) {}
+  constructor(private navigationController: NavController) {}
 
   /**
-   * Used to toggle continue button on acceptance of policy changes.
+   * The FormControl that is attached to our Toggle element.
    */
-  isPolicyAccepted = false;
+  policyToggle = new FormControl<boolean>(false);
 
   /**
-   * In this method navigation to home page is handled
+   * Go (back) to the home page.
    */
   navigateToHomePage(): void {
     this.navigationController.navigateBack(['/home']);
   }
 
   /**
-   * In this method navigation to policy details page is handled
+   * Go to the page that displays the Privacy Policy.
    */
-  openPolicydetails(): void {
-    this.router.navigate(['/privacy/details']);
+  openPolicyDetails(): void {
+    this.navigationController.navigateForward(['/privacy', 'details']);
   }
 
   /**
-   * In this method navigation to forms page is handled
+   * Go to the forms page.
    */
   startApplication(): void {
-    this.navigationController.navigateForward(['/forms']);
-  }
-
-  /**
-   * In this method isPolicyAccepted property is toggled
-   */
-  togglePrivacyPolicyAcceptance(): void {
-    this.isPolicyAccepted = !this.isPolicyAccepted;
+    this.navigationController.navigateRoot(['/forms'], {
+      animationDirection: 'forward',
+    });
   }
 }

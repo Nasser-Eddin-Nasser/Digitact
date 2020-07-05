@@ -1,25 +1,57 @@
 package Digitact.Backend.Storage;
 
 import Digitact.Backend.Exception.ImageException;
-import Digitact.Backend.Model.Education;
-import Digitact.Backend.Model.HrRating;
+import Digitact.Backend.Model.*;
 import Digitact.Backend.Model.Image.AppImage;
 import Digitact.Backend.Model.Image.ImageString;
-import Digitact.Backend.Model.KeyCompetence;
+import Digitact.Backend.Model.User.Admin;
 import Digitact.Backend.Model.User.Applicant;
 import Digitact.Backend.Model.User.ApplicantUI;
-import Digitact.Backend.Model.WorkExperience;
 import Digitact.Backend.Util.ImageTools;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class Repository {
     IDataRepository repo;
+    private static List<Token> tokenList;
 
     @Autowired
     public Repository(IDataRepository repo) {
         if (this.repo == null) this.repo = repo;
+    }
+
+    public static List<Token> getTokenList() {
+        if (tokenList == null) tokenList = new ArrayList<Token>();
+        return tokenList;
+    }
+
+    public static void insertTokenToTokenList(Token token) {
+        if (tokenList == null) tokenList = new ArrayList<Token>();
+        tokenList.add(token);
+    }
+
+    public static Token getTokenByTokenNumberAndURL(String tokenNumber, String uri) {
+        if (tokenList == null) return null;
+        List<Token> ls =
+                tokenList
+                        .stream()
+                        .filter(
+                                x ->
+                                        x.getClientURL().equals(uri)
+                                                && x.getUniqueRandom()
+                                                        .toString()
+                                                        .equals(tokenNumber.toString()))
+                        .collect(Collectors.toList());
+        return ls.size() > 0 ? ls.get(0) : null;
+    }
+
+    public static Token createNewTokenFromTokenString(String tokenNumber, Admin admin, String uri) {
+        Token t = new Token(Long.parseLong(tokenNumber), uri);
+        t.setLoggedinAdmin(admin);
+        return t;
     }
 
     public boolean storeApplicantOnDB(ApplicantUI applicant) {

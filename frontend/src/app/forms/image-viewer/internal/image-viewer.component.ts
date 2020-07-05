@@ -78,6 +78,13 @@ export class ImageViewerComponent implements OnInit, OnDestroy, ViewDidEnter {
   }
 
   /**
+   * Called whenever an image has loaded.
+   */
+  imageHasLoaded(_imageIndex: number): void {
+    this.slider.update();
+  }
+
+  /**
    * Update the index of the currently displayed image.
    *
    * This method should also be called when an image was deleted.

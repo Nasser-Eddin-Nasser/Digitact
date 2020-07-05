@@ -9,6 +9,8 @@ public enum Degree {
     Bachelor,
     @JsonProperty("PhD")
     PhD,
+    @JsonProperty("School")
+    School,
     @JsonProperty("Others")
     Others
 }

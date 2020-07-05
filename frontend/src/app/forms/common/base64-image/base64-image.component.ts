@@ -2,8 +2,10 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   Input,
   OnDestroy,
+  Output,
 } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
@@ -28,28 +30,56 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 })
 export class Base64ImageComponent implements AfterViewInit, OnDestroy {
   /**
-   * Currently, when resizing the image, we just resize it to this fixed width.
-   */
-  private readonly THUBMNAIL_WIDTH = 300;
-
-  /**
    * The image as a base64 string. Please note that this Component expects the input not to change.
    */
   @Input()
   base64String: string;
 
   /**
-   * Should the image get resized, so that it can be better used as a thumbnail?
-   * This is especially useful if you have a large image, but only want to display a small preview of it:
+   * If necessary, downsize the image so that it does not exceed this width (in pixels).
+   * If this property (and `maxImageHeight`) is not set, the image will be rendered in full size.
    */
   @Input()
-  makeThumbnail = false;
+  maxImageWidth: number;
+  /**
+   * If necessary, downsize the image so that it does not exceed this height (in pixels).
+   * If this property (and `maxImageWidth`) is not set, the image will be rendered in full size.
+   */
+  @Input()
+  maxImageHeight: number;
 
   /**
    * Is this image used within an ion-slides element where zooming is possible?
    */
   @Input()
   isZoomableSlideImage = false;
+
+  /**
+   * Should the image be rendered/processed now?
+   *
+   * If you have a list with many high-resolution images,
+   * but not all of them are visible now (e.g. because you are displaying them in a slider),
+   * then it is recommeded to set this property to `false` at the beginning
+   *  and only to enable it once the image might come into viewport soon.
+   */
+  @Input()
+  set enableImageProcessing(value: boolean) {
+    this._enableImageProcessing = value;
+
+    this.processImageIfNeeded();
+  }
+  get enableImageProcessing(): boolean {
+    return this._enableImageProcessing;
+  }
+  private _enableImageProcessing = true;
+
+  /**
+   * The event is emitted when the image has been fully loaded.
+   */
+  @Output()
+  imageHasLoaded = new EventEmitter<void>();
+
+  isCurrentlyProcessingTheImage = false;
 
   processedImage: ProcessedImage;
 
@@ -61,7 +91,7 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     // Just give it a long timeout so that the browser can focus on other things meanwhile.
     window.setTimeout(() => {
-      this.processImage();
+      this.processImageIfNeeded();
     }, 200);
   }
 
@@ -77,10 +107,26 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
     URL.revokeObjectURL(this.processedImage.rawObjectUrl);
   }
 
+  private processImageIfNeeded(): void {
+    if (!this.enableImageProcessing) {
+      return;
+    }
+    if (this.isCurrentlyProcessingTheImage) {
+      return;
+    }
+    if (this.processedImage) {
+      return;
+    }
+
+    this.processImage();
+  }
+
   /**
    * Convert the base64 image to an Object URL.
    */
   private processImage(): void {
+    this.isCurrentlyProcessingTheImage = true;
+
     const canvas = document.createElement('canvas');
 
     const img = new Image();
@@ -98,6 +144,8 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
           rawObjectUrl,
           templateObjectUrl,
         };
+        this.isCurrentlyProcessingTheImage = false;
+
         this.changeDetectorRef.detectChanges();
       });
     };
@@ -109,7 +157,15 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
   private drawToCanvas(canvas: HTMLCanvasElement, img: HTMLImageElement): void {
     const context = canvas.getContext('2d');
 
-    if (!this.makeThumbnail || img.width <= this.THUBMNAIL_WIDTH) {
+    let shouldResize = false;
+    if (this.maxImageWidth && img.width > this.maxImageWidth) {
+      shouldResize = true;
+    }
+    if (this.maxImageHeight && img.height > this.maxImageHeight) {
+      shouldResize = true;
+    }
+
+    if (!shouldResize) {
       canvas.width = img.width;
       canvas.height = img.height;
 
@@ -117,7 +173,16 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    const resizeRatio = img.width / this.THUBMNAIL_WIDTH;
+    let widthResizeRatio = 1;
+    let heightResizeRatio = 1;
+    if (this.maxImageWidth) {
+      widthResizeRatio = img.width / this.maxImageWidth;
+    }
+    if (this.maxImageHeight) {
+      heightResizeRatio = img.height / this.maxImageHeight;
+    }
+
+    const resizeRatio = Math.max(widthResizeRatio, heightResizeRatio);
 
     const newWidth = img.width / resizeRatio;
     const newHeight = img.height / resizeRatio;
@@ -126,6 +191,13 @@ export class Base64ImageComponent implements AfterViewInit, OnDestroy {
     canvas.height = newHeight;
 
     context.drawImage(img, 0, 0, newWidth, newHeight);
+  }
+
+  /**
+   * Called when the img element fires its load event.
+   */
+  onImageLoad(): void {
+    this.imageHasLoaded.emit();
   }
 }
 
