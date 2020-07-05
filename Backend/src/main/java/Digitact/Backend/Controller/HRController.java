@@ -1,7 +1,8 @@
 package Digitact.Backend.Controller;
 
 import Digitact.Backend.Model.Education;
-import Digitact.Backend.Model.StatusUI;
+import Digitact.Backend.Model.HRCommentHolder;
+import Digitact.Backend.Model.StatusHolder;
 import Digitact.Backend.Model.User.Admin;
 import Digitact.Backend.Model.User.AdminUI;
 import Digitact.Backend.Model.User.User;
@@ -22,14 +23,13 @@ public class HRController {
     @Autowired IEducationRepository educationRepository;
     @Autowired IImageRepository imageRepository;
     @Autowired IWorkExperienceRepository workExperieinceRepository;
-    @Autowired IStatusRepository statusRepository;
+    @Autowired IHRInfoRepository ihrInfoRepository;
 
     /** @return JSON object of the applicants */
     @GetMapping("/getApplicants")
     public List<User> getApplicants() {
 
         return new ArrayList<User>(dataRepository.getApplicants());
-
     }
 
     @GetMapping("/getAllEducationInfo")
@@ -45,7 +45,6 @@ public class HRController {
     @GetMapping(path = "/getImageById={imageId}")
     public String getImageById(@PathVariable String imageId) {
         return ImageTools.combineImage(imageRepository.getImageByID(imageId)).getContent();
-
     }
 
     /** @return JSON object of the admins */
@@ -85,8 +84,16 @@ public class HRController {
     }
 
     @PostMapping(path = "/changeStatus")
-    public String changeStatus(@RequestBody StatusUI status) {
-        statusRepository.setStatus( status.getStatus().getNum(),status.getAppID());
+    public String changeStatus(@RequestBody StatusHolder status) {
+        ihrInfoRepository.setStatus(status.getStatus().getNum(), status.getAppID());
+        return "changed";
+    }
+
+    @PostMapping(path = "/postHRComment")
+    public String postHRComments(@RequestBody HRCommentHolder comment) {
+        // statusRepository.setStatus( status.getStatus().getNum(),status.getAppID());
+        System.out.println(comment.getAppID() + " " + comment.getComment());
+        ihrInfoRepository.setHRComment(comment.getComment(), comment.getAppID());
         return "changed";
     }
 }

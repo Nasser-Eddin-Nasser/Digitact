@@ -11,8 +11,8 @@ public enum Status {
     denied(2),
     ;
 
-
     private int num;
+
     Status(int i) {
         num = i;
     }
