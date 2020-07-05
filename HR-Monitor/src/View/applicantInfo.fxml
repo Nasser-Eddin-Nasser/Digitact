@@ -370,6 +370,34 @@
 
                              </ScrollPane>
                           </Tab>
+                              <Tab text="Key Competencies">
+                                 <content>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                       <center>
+                                          <GridPane style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="420.0" minHeight="10.0" prefHeight="35.99999109903972" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="420.0" minHeight="0.0" prefHeight="191.33334859212243" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="345.6666564941406" minHeight="10.0" prefHeight="221.33333333333337" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="328.66678873697913" minHeight="10.0" prefHeight="180.66666666666663" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="242.0001220703125" minHeight="10.0" prefHeight="29.3333740234375" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <PieChart fx:id="pLPieChart" style="-fx-border-color: black;" title="Programming languages" GridPane.rowIndex="1" />
+                                                <PieChart fx:id="bSPieChart" style="-fx-border-color: black;" title="Bussiness Skills" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <PieChart fx:id="dbPieChart" style="-fx-border-color: black;" title="Data Base" GridPane.rowIndex="2" />
+                                                <PieChart fx:id="langPieChart" style="-fx-border-color: black;" title="Languages" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <PieChart fx:id="psPieChart" style="-fx-border-color: black;" title="Professional Software" GridPane.rowIndex="3" />
+                                             </children>
+                                          </GridPane>
+                                       </center>
+                                    </BorderPane>
+                                 </content>
+                              </Tab>
                            <Tab onSelectionChanged="#onShowRating" text="Applicant Ratings">
                               <SplitPane dividerPositions="0.5555555555555556, 0.786910197869102" maxHeight="657.0" minHeight="30.0" orientation="VERTICAL" prefHeight="657.0" prefWidth="650.0">
                                  <items>

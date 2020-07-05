@@ -39,6 +39,7 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -47,6 +48,7 @@ import static Database.Method.getImageById;
 import static Model.Status.*;
 
 public class ApplicantInfoController {
+    private boolean isHRChartLoaded = false;
     Stage stage;
     OverviewModel model;
     ApplicantUI app;
@@ -138,9 +140,20 @@ public class ApplicantInfoController {
     StackPane imgstckPFX;
 
     @FXML
-    PieChart chart;
+    PieChart chart; //hr rating
+    @FXML
+    PieChart pLPieChart;
+
+    @FXML
+    PieChart bSPieChart;
+    @FXML
+    PieChart dbPieChart;
+    @FXML
+    PieChart langPieChart;
     @FXML
     Labeled pieLabel;
+    @FXML
+    PieChart psPieChart;
     // Documents tab
     @FXML
     ScrollPane documentsGridFX;
@@ -180,6 +193,11 @@ public class ApplicantInfoController {
         try {
             createAndSetNewStage();
             setApplicantInfo();
+            getKeyCompetencePieChart(pLPieChart, KeyCompetenciesCategory.ProgrammingLanguagesAndFrameworks);
+            getKeyCompetencePieChart(bSPieChart, KeyCompetenciesCategory.BusinessSkills);
+            getKeyCompetencePieChart(dbPieChart, KeyCompetenciesCategory.Databases);
+            getKeyCompetencePieChart(langPieChart, KeyCompetenciesCategory.Languages);
+            getKeyCompetencePieChart(psPieChart, KeyCompetenciesCategory.ProfessionalSoftware);
         } catch (IOException e) {
             System.err.println("unable to load Image!");
             e.printStackTrace();
@@ -196,26 +214,39 @@ public class ApplicantInfoController {
         getStatus();
     }
 
+
+    private void getKeyCompetencePieChart(PieChart chart, KeyCompetenciesCategory category) {
+        List<PieChart.Data> ls = new ArrayList<PieChart.Data>();
+        app.getKeyCompetencies(category).forEach(x -> ls.add(new PieChart.Data(x.getName() + " " + x.getRating(), x.getRating())));
+        chart.setData(FXCollections.observableArrayList(ls));
+    }
+
+
     private void getPieChart() {
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data(
-                                "Rhetoric " + app.getHrRating().getRhetoric(),
-                                app.getHrRating().getRhetoric()),
-                        new PieChart.Data(
-                                "Motivation " + app.getHrRating().getMotivation(),
-                                app.getHrRating().getMotivation()),
-                        new PieChart.Data(
-                                "Self Assurance " + app.getHrRating().getSelfAssurance(),
-                                app.getHrRating().getSelfAssurance()),
-                        new PieChart.Data(
-                                "Personal Impression " + app.getHrRating().getPersonalImpression(),
-                                app.getHrRating().getPersonalImpression()));
-        chart.setData(pieChartData);
+        if (!isHRChartLoaded) {
+            ObservableList<PieChart.Data> pieChartData =
+                    FXCollections.observableArrayList(
+                            new PieChart.Data(
+                                    "Rhetoric " + app.getHrRating().getRhetoric(),
+                                    app.getHrRating().getRhetoric()),
+                            new PieChart.Data(
+                                    "Motivation " + app.getHrRating().getMotivation(),
+                                    app.getHrRating().getMotivation()),
+                            new PieChart.Data(
+                                    "Self Assurance " + app.getHrRating().getSelfAssurance(),
+                                    app.getHrRating().getSelfAssurance()),
+                            new PieChart.Data(
+                                    "Personal Impression " + app.getHrRating().getPersonalImpression(),
+                                    app.getHrRating().getPersonalImpression()));
+            chart.setData(pieChartData);
+        }
+        isHRChartLoaded = true;
     }
 
     @FXML
     private void onShowDocuments() {
+
+        System.out.println("onShowDocuments");
         getImages(ImageType.CV);
     }
 
