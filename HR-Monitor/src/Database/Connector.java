@@ -142,15 +142,15 @@ public class Connector {
         }
     }
 
-    public static void changeStatus(long appID, Status status){
+    public static void changeStatus(long appID, Status status) {
         try {
-            handleChangeStatus(new URL(Configuration.BES_URI + "changeStatus"),appID,status);
+            handleChangeStatus(new URL(Configuration.BES_URI + "changeStatus"), appID, status);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }
 
-    private static void handleChangeStatus(URL url, long appID,Status status) {
+    private static void handleChangeStatus(URL url, long appID, Status status) {
         try {
             URLConnection uc = url.openConnection();
             HttpURLConnection http = (HttpURLConnection) uc;
@@ -158,7 +158,7 @@ public class Connector {
             http.setDoOutput(true);
             http.setRequestProperty("Content-Type", "application/json; utf-8");
             http.setRequestProperty("Accept", "application/json");
-            String message = "{ \"appID\":"+appID+",\"status\":\""+status.toString()+"\"}";
+            String message = "{ \"appID\":" + appID + ",\"status\":\"" + status.toString() + "\"}";
 
             try (OutputStream os = http.getOutputStream()) {
 
@@ -166,7 +166,7 @@ public class Connector {
                 os.write(input, 0, input.length);
             }
             try (BufferedReader br =
-                         new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+                    new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
                 StringBuilder response = new StringBuilder();
                 String responseLine = null;
                 while ((responseLine = br.readLine()) != null) {
@@ -196,8 +196,6 @@ public class Connector {
         }
     }
 
-
-
     private static void handleCreateAdmin(URL bes_url, Admin admin) {
         BufferedReader in = null;
         try {
@@ -206,7 +204,7 @@ public class Connector {
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
             http.setRequestProperty("Content-Type", "application/json; utf-8");
-            //http.setRequestProperty("Accept", "application/json");
+            // http.setRequestProperty("Accept", "application/json");
             try (OutputStream os = http.getOutputStream()) {
                 //   convertAdminToJSON
                 byte[] input = Util.JSONTools.convertAdminToJSON(admin).getBytes("utf-8");

@@ -370,7 +370,7 @@
 
                              </ScrollPane>
                           </Tab>
-                           <Tab text="Applicant Ratings">
+                           <Tab onSelectionChanged="#onShowRating" text="Applicant Ratings">
                               <SplitPane dividerPositions="0.5555555555555556, 0.786910197869102" maxHeight="657.0" minHeight="30.0" orientation="VERTICAL" prefHeight="657.0" prefWidth="650.0">
                                  <items>
                                     <VBox>
