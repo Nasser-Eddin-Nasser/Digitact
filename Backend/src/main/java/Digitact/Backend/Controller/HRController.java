@@ -1,6 +1,7 @@
 package Digitact.Backend.Controller;
 
 import Digitact.Backend.Model.Education;
+import Digitact.Backend.Model.StatusUI;
 import Digitact.Backend.Model.Token;
 import Digitact.Backend.Model.User.Admin;
 import Digitact.Backend.Model.User.AdminUI;
@@ -25,6 +26,7 @@ public class HRController {
     @Autowired IEducationRepository educationRepository;
     @Autowired IImageRepository imageRepository;
     @Autowired IWorkExperienceRepository workExperieinceRepository;
+    @Autowired IStatusRepository statusRepository;
 
     /** @return JSON object of the applicants */
     @GetMapping("/getApplicants")
@@ -108,6 +110,7 @@ public class HRController {
     /** @return JSON object of the admins */
     @GetMapping("/getAdmins")
     public List<User> getAdmins() {
+
         return new ArrayList<User>(dataRepository.getAdmins());
     }
 
@@ -206,5 +209,11 @@ public class HRController {
         Token token = new Token(UUID.randomUUID().getMostSignificantBits(), uri);
         Repository.insertTokenToTokenList(token);
         return token.getUniqueRandom();
+    }
+
+    @PostMapping(path = "/changeStatus")
+    public String changeStatus(@RequestBody StatusUI status) {
+        statusRepository.setStatus(status.getStatus().getNum(), status.getAppID());
+        return "changed";
     }
 }

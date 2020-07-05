@@ -1,6 +1,7 @@
 package Controller;
 
 import static Database.Method.getImageById;
+import static Model.Status.*;
 
 import Database.Connector;
 import Model.*;
@@ -12,6 +13,7 @@ import Util.ImageTools;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -21,6 +23,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -31,20 +34,24 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 public class ApplicantInfoController {
+    private boolean isHRChartLoaded = false;
     Stage stage;
     OverviewModel model;
     ApplicantUI app;
-
+    Scene scene;
     // Create a TableView with a list of Education Info of an Applicant
     @FXML TableView<Education> eduInfoTblFX;
     private ObservableList<Education> observableListEduInfoTableView;
@@ -103,7 +110,16 @@ public class ApplicantInfoController {
     // Additional Info
     @FXML Label lblAddInfo;
     @FXML private ImageView imgFX;
+    @FXML StackPane imgstckPFX;
 
+    @FXML PieChart chart; // hr rating
+    @FXML PieChart pLPieChart;
+
+    @FXML PieChart bSPieChart;
+    @FXML PieChart dbPieChart;
+    @FXML PieChart langPieChart;
+    @FXML Labeled pieLabel;
+    @FXML PieChart psPieChart;
     // Documents tab
     @FXML ScrollPane documentsGridFX;
     @FXML Tab docTabFX;
@@ -118,6 +134,10 @@ public class ApplicantInfoController {
     @FXML Label txtrheFX, txtMotFX, txtSelfFX, txtPerFX;
     @FXML TextField txtImpFX;
 
+    // Change status
+    @FXML Button btnOFX, btnHRFX, btnDFX;
+    @FXML Label lblStatusFX;
+
     public ApplicantInfoController(long id, OverviewModel model) {
         this.model = model;
         app = this.model.getApplicantByID(id);
@@ -128,6 +148,12 @@ public class ApplicantInfoController {
         try {
             createAndSetNewStage();
             setApplicantInfo();
+            getKeyCompetencePieChart(
+                    pLPieChart, KeyCompetenciesCategory.ProgrammingLanguagesAndFrameworks);
+            getKeyCompetencePieChart(bSPieChart, KeyCompetenciesCategory.BusinessSkills);
+            getKeyCompetencePieChart(dbPieChart, KeyCompetenciesCategory.Databases);
+            getKeyCompetencePieChart(langPieChart, KeyCompetenciesCategory.Languages);
+            getKeyCompetencePieChart(psPieChart, KeyCompetenciesCategory.ProfessionalSoftware);
         } catch (IOException e) {
             System.err.println("unable to load Image!");
             e.printStackTrace();
@@ -139,28 +165,135 @@ public class ApplicantInfoController {
         getPositionAndIndustry();
         getTableEduInfo();
         getTableWorkExpInfo();
-        getImages();
+        getImages(ImageType.profilePic);
         getKeyCompetence();
-        getHrRating();
+        getStatus();
+    }
+
+    private void getKeyCompetencePieChart(PieChart chart, KeyCompetenciesCategory category) {
+        List<PieChart.Data> ls = new ArrayList<PieChart.Data>();
+        app.getKeyCompetencies(category)
+                .forEach(
+                        x ->
+                                ls.add(
+                                        new PieChart.Data(
+                                                x.getName() + " " + x.getRating(), x.getRating())));
+        chart.setData(FXCollections.observableArrayList(ls));
+    }
+
+    private void getPieChart() {
+        if (!isHRChartLoaded) {
+            ObservableList<PieChart.Data> pieChartData =
+                    FXCollections.observableArrayList(
+                            new PieChart.Data(
+                                    "Rhetoric " + app.getHrRating().getRhetoric(),
+                                    app.getHrRating().getRhetoric()),
+                            new PieChart.Data(
+                                    "Motivation " + app.getHrRating().getMotivation(),
+                                    app.getHrRating().getMotivation()),
+                            new PieChart.Data(
+                                    "Self Assurance " + app.getHrRating().getSelfAssurance(),
+                                    app.getHrRating().getSelfAssurance()),
+                            new PieChart.Data(
+                                    "Personal Impression "
+                                            + app.getHrRating().getPersonalImpression(),
+                                    app.getHrRating().getPersonalImpression()));
+            chart.setData(pieChartData);
+        }
+        isHRChartLoaded = true;
+    }
+
+    @FXML
+    private void onShowDocuments() {
+        getImages(ImageType.CV);
+    }
+
+    @FXML
+    private void onShowRating() {
+        statusListener();
+        getPieChart();
+    }
+
+    /**
+     * this method called when the PieChart is hovered so the Value of pie-data will be set on
+     * pieLabel
+     */
+    @FXML
+    private void showPieChartDetails(MouseEvent mouseevent) {
+        for (final PieChart.Data data : chart.getData()) {
+
+            data.getNode()
+                    .addEventHandler(
+                            MouseEvent.MOUSE_ENTERED,
+                            e -> {
+                                pieLabel.setStyle("-fx-font: 12 arial;");
+                                pieLabel.setText(String.valueOf((int) data.getPieValue()));
+                            });
+        }
+    }
+
+    /**
+     * this method called when the PieChart is not hovered (mouse Exited) so the Value of pie-data
+     * will be removed
+     */
+    @FXML
+    private void hidePieChartDetails() {
+        pieLabel.setText("");
+    }
+
+    private void getStatus() {
+        setStatusLabel(app.getStatus());
+        statusListener();
+    }
+
+    private void setStatusLabel(Status status) {
+        switch (status) {
+            case Open:
+                lblStatusFX.setStyle(
+                        "-fx-background-color: #61d0ee; -fx-background-radius:10 10 10 10");
+                lblStatusFX.setText("Open");
+                break;
+            case Send2HR:
+                lblStatusFX.setStyle(
+                        "-fx-background-color: #5be14f; -fx-background-radius:10 10 10 10");
+                lblStatusFX.setText("Send to HR");
+                break;
+            case Denied:
+                lblStatusFX.setStyle(
+                        "-fx-background-color: #ff927e; -fx-background-radius:10 10 10 10");
+                lblStatusFX.setText("Denied");
+                break;
+        }
+    }
+
+    public void statusListener() {
+        btnOFX.setOnMouseClicked(
+                (event) -> {
+                    setStatusLabel(Open);
+                    Connector.changeStatus(app.getID(), Open);
+                });
+        btnHRFX.setOnMouseClicked(
+                (event) -> {
+                    setStatusLabel(Send2HR);
+                    Connector.changeStatus(app.getID(), Send2HR);
+                    lblStatusFX.minWidth(75);
+                });
+        btnDFX.setOnMouseClicked(
+                (event) -> {
+                    setStatusLabel(Denied);
+                    Connector.changeStatus(app.getID(), Denied);
+                });
     }
 
     private void createAndSetNewStage() throws IOException {
         Stage stageApplicantInfo = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/applicantInfo.fxml"));
         loader.setController(this);
-        Scene scene = new Scene(loader.load());
+        scene = new Scene(loader.load());
         stageApplicantInfo.show();
         stageApplicantInfo.setScene(scene);
         stageApplicantInfo.setTitle("Applicant Info");
         stageApplicantInfo.getIcons().add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
-    }
-
-    private void getHrRating() {
-        txtrheFX.setText("Rhetoric - " + app.getHrRating().getRhetoric());
-        txtMotFX.setText("Motivation - " + app.getHrRating().getMotivation());
-        txtSelfFX.setText("Self Assurance - " + app.getHrRating().getSelfAssurance());
-        txtPerFX.setText("Personal Impression - " + app.getHrRating().getPersonalImpression());
-        txtImpFX.setText(app.getHrRating().getImpression());
     }
 
     private void getKeyCompetence() {
@@ -222,15 +355,18 @@ public class ApplicantInfoController {
         posFX.setCellValueFactory(pos -> new ReadOnlyStringWrapper(pos.getValue().getPosition()));
     }
 
-    private void getImages() {
+    private void getImages(ImageType it) {
         List<AppImage> images = app.getAppImage();
-        setProfPic(images);
-        List<AppImage> docImgs =
-                images.stream()
-                        .sequential()
-                        .filter(x -> !x.getType().equals(ImageType.profilePic))
-                        .collect(Collectors.toList());
-        setDocumentsImage(docImgs);
+        if (it.equals(ImageType.profilePic)) {
+            setProfPic(images);
+        } else {
+            List<AppImage> docImgs =
+                    images.stream()
+                            .sequential()
+                            .filter(x -> !x.getType().equals(ImageType.profilePic))
+                            .collect(Collectors.toList());
+            setDocumentsImage(docImgs);
+        }
     }
 
     private void setProfPic(List<AppImage> images) {
@@ -247,6 +383,8 @@ public class ApplicantInfoController {
                 ImageTools.parseImageStringToImage(profImage);
                 File file = new File(profImage.getPath());
                 imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
+                imgFX.fitWidthProperty().bind(imgstckPFX.widthProperty());
+                imgFX.fitHeightProperty().bind(imgstckPFX.heightProperty());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -462,3 +600,16 @@ public class ApplicantInfoController {
                 applicant -> new ReadOnlyStringWrapper(applicant.getValue().getGraduationYear()));
     }
 }
+/*
+   @FXML Button btnOFX, btnHRFX, btnDFX;
+   @FXML Label lblStatusFX;
+
+   private void docClick(ImageView imageView, File file) {
+       imageView.setOnMouseClicked(
+               (event) -> {
+                   if (event.getClickCount() == 2) {
+                       showDocImage(file);
+                   }
+               });
+
+*/
