@@ -278,7 +278,7 @@ export class RatingPage implements OnDestroy, OnInit {
       buttons: [
         {
           text: this.translate.instant('commonLables.cancel'),
-          cssClass: 'color-primary',
+          role: 'cancel',
         },
 
         {

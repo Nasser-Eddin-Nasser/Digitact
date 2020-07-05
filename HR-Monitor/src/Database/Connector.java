@@ -1,9 +1,11 @@
 package Database;
 
+import Controller.CreateFirstAccountController;
 import Main.Configuration;
 import Model.Status;
 import Model.User.Admin;
 import Storage.DBStorage;
+import Storage.Token;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,6 +20,18 @@ public class Connector {
     public static void sendGetHttp(Method method, String... params) {
         URL bes_url = null;
         switch (method) {
+            case gutenMorgen:
+                try {
+                    Long besNumber =
+                            handelPingReq(new URL(Configuration.BES_URI + method.toString()));
+                    if (besNumber != null) {
+                        DBStorage.setToken(new Token(besNumber));
+                    }
+
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                break;
             case getApplicants:
                 try {
                     handleGetApplicants(new URL(Configuration.BES_URI + method.toString()));
@@ -53,6 +67,27 @@ public class Connector {
             default:
                 break;
         }
+    }
+
+    private static Long handelPingReq(URL url) {
+        BufferedReader in = null;
+        try {
+            URLConnection uc = url.openConnection();
+            in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
+            String inputLine;
+            if ((inputLine = in.readLine()) != null) {
+                return Long.parseLong(inputLine);
+            }
+        } catch (IOException e) {
+            return null;
+        } finally {
+            try {
+                if (in != null) in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     private static void handleGetAdminUserNames(URL url) {
@@ -99,6 +134,7 @@ public class Connector {
         BufferedReader in_1 = null;
         try {
             URLConnection uc = bes_url.openConnection();
+            uc.setRequestProperty("AuthToken", DBStorage.getToken().toString());
             in_1 = new BufferedReader(new InputStreamReader(uc.getInputStream()));
             String inputLine;
             if ((inputLine = in_1.readLine()) != null) {
@@ -125,6 +161,7 @@ public class Connector {
         BufferedReader in = null;
         try {
             URLConnection uc = bes_url.openConnection();
+            uc.setRequestProperty("AuthToken", DBStorage.getToken().toString());
             in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
             String inputLine;
             if ((inputLine = in.readLine()) != null) {
@@ -189,6 +226,20 @@ public class Connector {
             e.printStackTrace();
         }
     }
+    public static void sendPutType(Method method, Token token) {
+        switch (method) {
+            case putToken:
+                try {
+                    handlePutTokenToAdmin(
+                            new URL(Configuration.BES_URI + method.toString()), token);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                break;
+        }
+    }
 
     private static void handlePostHRComment(URL url, long appID, String comment) {
         try {
@@ -206,11 +257,40 @@ public class Connector {
                 os.write(input, 0, input.length);
             }
             try (BufferedReader br =
-                    new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+                         new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
                 StringBuilder response = new StringBuilder();
                 String responseLine = null;
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
+                }
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void handlePutTokenToAdmin(URL url, Token token) {
+        BufferedReader in = null;
+        try {
+            URLConnection uc = url.openConnection();
+            HttpURLConnection http = (HttpURLConnection) uc;
+            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setDoOutput(true);
+            http.setRequestProperty("Content-Type", "application/json; utf-8");
+            http.setRequestProperty("Accept", "application/json");
+            try (OutputStream os = http.getOutputStream()) {
+                String reqBody = token.toString();
+                byte[] input = reqBody.getBytes("utf-8");
+                os.write(input, 0, input.length);
+                try (BufferedReader br =
+                             new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+                    StringBuilder response = new StringBuilder();
+                    String responseLine = null;
+                    while ((responseLine = br.readLine()) != null) {
+                        response.append(responseLine.trim());
+                    }
                 }
             }
         } catch (MalformedURLException e) {
@@ -243,7 +323,10 @@ public class Connector {
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
             http.setRequestProperty("Content-Type", "application/json; utf-8");
-            // http.setRequestProperty("Accept", "application/json");
+            http.setRequestProperty("Accept", "application/json");
+            if (!CreateFirstAccountController.isFirstAccount) {
+                http.setRequestProperty("AuthToken", DBStorage.getToken().toString());
+            }
             try (OutputStream os = http.getOutputStream()) {
                 //   convertAdminToJSON
                 byte[] input = Util.JSONTools.convertAdminToJSON(admin).getBytes("utf-8");

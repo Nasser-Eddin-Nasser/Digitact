@@ -59,7 +59,7 @@
           [ngTemplateOutlet]="menuItem"
           [ngTemplateOutletContext]="{
             step: APPLICATION_STEP.WorkExperience,
-            displayName: 'Work Experience',
+            displayName: displayNames.workExperience,
             isValid: formsData.controls.workExperienceInfo.valid,
             isActive: currentStep === APPLICATION_STEP.WorkExperience
           }"

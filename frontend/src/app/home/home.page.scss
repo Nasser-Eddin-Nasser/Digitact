@@ -1,3 +1,46 @@
+ion-header ion-toolbar {
+  // Looks better in Dark Mode.
+  --background: transparent;
+}
+
+.toolbar-buttons {
+  display: flex;
+  flex-direction: column;
+}
+.toolbar-buttons button {
+  padding: 0;
+  margin: 10px;
+  background: transparent;
+  outline: none;
+}
+.toolbar-buttons button ion-icon {
+  font-size: 40px;
+  color: var(--ion-color-light-shade);
+}
+@media (prefers-color-scheme: dark) {
+  .toolbar-buttons button ion-icon {
+    color: var(--ion-color-medium);
+  }
+}
+
+.notification-button {
+  position: relative;
+}
+.notifications-badge {
+  background: var(--ion-color-secondary);
+  color: var(--ion-color-secondary-contrast);
+  position: absolute;
+  top: -3px;
+  right: -5px;
+  border-radius: 1000px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  min-width: 20px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
 .container {
   padding: 1.5rem;
   max-width: 500px;
@@ -41,33 +84,4 @@ h3 {
 }
 .logo-square {
   fill: var(--ion-color-secondary);
-}
-
-.custom-icon {
-  font-size: 40px;
-  color: var(--ion-color-light-shade);
-}
-
-.notification-button {
-  position: relative;
-  overflow: visible !important;
-  min-height: 40px;
-}
-
-.notifications-badge {
-  background-color: var(--ion-color-secondary);
-  position: absolute;
-  top: 0px;
-  right: -5px;
-  border-radius: 50%;
-  font-size: 15px;
-}
-
-.toolbar-buttons {
-  display: flex;
-  flex-direction: column;
-}
-
-.toolbar-buttons > * {
-  margin: 10px;
 }

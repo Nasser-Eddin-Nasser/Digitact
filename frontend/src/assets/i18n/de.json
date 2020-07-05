@@ -10,7 +10,7 @@
         "save": "Speichern",
         "quit": "Schließen",
         "add": "Hinzufügen",
-        "okay": "In Ordnung",
+        "okay": "OK",
         "search": "Suche" 
     },
     "homePage": {
@@ -98,7 +98,7 @@
     },
     "workExperience":{
         "title": "Arbeitserfahrung",
-        "stepDescription": "Hier kannst du Informationen zu deiner Arbeit angeben.",
+        "stepDescription": "Hier kannst Du Informationen zu Deiner Arbeitserfahrung angeben.",
         "jobTitle": "Titel",
         "company": "Unternehmen",
         "employmentType": "Beschäftigungsverhältnis",
@@ -108,12 +108,12 @@
         "description": "Beschreibung",
         "fullTime": "Vollzeit",
         "partTime": "Teilzeit",
-        "selfEmployed": "Selbstständiger",
+        "selfEmployed": "Selbstständig",
         "freelance": "Freiberuflich",
-        "contract": "Contract",
-        "internship": "Vertrag",
+        "contract": "Vertrag",
+        "internship": "Praktikum",
         "apprenticeship": "Ausbildung",
-        "other": "andere",
+        "other": "Andere",
         "present": "Zurzeit"
     },
     "educationInfo": {

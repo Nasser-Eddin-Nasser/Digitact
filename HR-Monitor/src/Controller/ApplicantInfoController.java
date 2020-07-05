@@ -13,7 +13,6 @@ import Util.ImageTools;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -38,11 +37,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import javafx.scene.input.KeyCode;
-
-import javafx.scene.input.MouseEvent;
-
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -169,10 +164,7 @@ public class ApplicantInfoController {
         getKeyCompetence();
         getStatus();
         getHrRating();
-
     }
-
-
 
     private void getPieChart() {
         if (!isHRChartLoaded) {
@@ -261,7 +253,6 @@ public class ApplicantInfoController {
         stageApplicantInfo.getIcons().add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
     }
 
-
     private void getHrRating() {
         txtImpFX.setText(app.getHrRating().getImpression());
         txtImpHRFX.setOnKeyReleased(
@@ -272,7 +263,6 @@ public class ApplicantInfoController {
                 });
         txtImpHRFX.setText(app.getHrComment());
     }
-
 
     private void getKeyCompetence() {
         observableListPLnFWTableView = pLnFWTableFX.getItems();
@@ -368,7 +358,7 @@ public class ApplicantInfoController {
                     e.printStackTrace();
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             // Do nothing
         }
     }
@@ -582,4 +572,3 @@ public class ApplicantInfoController {
                 applicant -> new ReadOnlyStringWrapper(applicant.getValue().getGraduationYear()));
     }
 }
-

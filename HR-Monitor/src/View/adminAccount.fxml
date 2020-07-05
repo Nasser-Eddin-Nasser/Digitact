@@ -6,34 +6,63 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<Pane fx:id="viewNewAccountPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #222D41;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <Label layoutX="34.0" layoutY="64.0" style="-fx-text-fill: #ecf0f1;" text="Last name" />
-        <Label layoutX="34.0" layoutY="169.0" style="-fx-text-fill: #ecf0f1;" text="Password" />
-        <Label layoutX="34.0" layoutY="213.0" style="-fx-text-fill: #ecf0f1;" text="Confirm Password" />
-        <Button fx:id="create" layoutX="179.0" layoutY="391.0" mnemonicParsing="false" onAction="#createNewAccount" prefHeight="33.0" prefWidth="178.0" style="-fx-text-fill: #ecf0f1; -fx-background-color: #222D41; -fx-border-color: #ecf0f1;" text="Create" />
-        <Button fx:id="back" layoutX="35.0" layoutY="391.0" mnemonicParsing="false" onAction="#onShowView" prefHeight="33.0" prefWidth="53.0" style="-fx-text-fill: #ecf0f1; -fx-background-color: #222D41; -fx-border-color: #ecf0f1;" text="Back" />
-        <Label layoutX="34.0" layoutY="118.0" style="-fx-text-fill: #ecf0f1;" text="Username" />
-        <Label layoutX="34.0" layoutY="12.0" style="-fx-text-fill: #ecf0f1;" text="First name" />
-        <TextField fx:id="firstNameTextField" layoutX="176.0" layoutY="10.0" prefHeight="26.0" prefWidth="178.0" />
-        <TextField fx:id="lastNameTextField" layoutX="176.0" layoutY="61.0" prefHeight="26.0" prefWidth="178.0" />
-        <TextField fx:id="userNameTextField" layoutX="176.0" layoutY="109.0" onKeyReleased="#onCheckNewUserName" prefHeight="26.0" prefWidth="178.0" />
-        <PasswordField fx:id="newPasswordField" layoutX="174.0" layoutY="161.0" onKeyReleased="#onCheckPasswordComplexity" prefHeight="26.0" prefWidth="178.0" />
-        <PasswordField fx:id="confirmPasswordField" layoutX="176.0" layoutY="206.0" onAction="#onCheckConfirmPassword" onKeyReleased="#onCheckConfirmPassword" prefHeight="26.0" prefWidth="178.0" />
-        <Label fx:id="checkValidityUserName" layoutX="356.0" layoutY="109.0" prefHeight="26.0" prefWidth="50.0" textFill="WHITE" />
-        <Label fx:id="checkValidityPassword" layoutX="355.0" layoutY="206.0" prefHeight="26.0" prefWidth="26.0" textFill="WHITE" />
-        <Label fx:id="checkPassword" layoutX="355.0" layoutY="161.0" prefHeight="26.0" prefWidth="26.0" textFill="WHITE" />
-        <TextField fx:id="email" layoutX="176.0" layoutY="301.0" onKeyReleased="#onCheckEmail" prefHeight="26.0" prefWidth="178.0" />
-        <Label layoutX="34.0" layoutY="301.0" style="-fx-text-fill: #ecf0f1;" text="Email" />
-        <ImageView fitHeight="105.0" fitWidth="123.0" layoutX="461.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../Style/Logo/Logo-idea-2-blackbg--logo.png" />
-            </image>
-        </ImageView>
-        <Label layoutX="35.0" layoutY="253.0" text="Password Hint" textFill="WHITE" />
-        <TextField fx:id="passwordHint" layoutX="177.0" layoutY="249.0" prefHeight="25.0" prefWidth="178.0" />
-      <Label fx:id="checkValidityEmail" layoutX="357.0" layoutY="305.0" prefHeight="26.0" prefWidth="26.0" textFill="WHITE" />
-    </children>
-</Pane>
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #222D41;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <GridPane alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.6666259765625" minWidth="10.0" prefWidth="51.333309173583984" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.66669082641602" minWidth="10.0" prefWidth="104.66666666666666" />
+            <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="184.66668701171875" minWidth="10.0" prefWidth="184.66668701171875" />
+            <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="95.33331298828125" minWidth="10.0" prefWidth="32.666646321614564" />
+          <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="128.66668701171875" minWidth="10.0" prefWidth="109.33333333333331" />
+            <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="121.333251953125" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+              <TextField fx:id="firstNameTextField" prefHeight="26.0" prefWidth="178.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+              <Label style="-fx-text-fill: #ecf0f1;" text="First name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+              <TextField fx:id="lastNameTextField" prefHeight="26.0" prefWidth="178.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+              <Label style="-fx-text-fill: #ecf0f1;" text="Last name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+              <TextField fx:id="userNameTextField" onKeyReleased="#onCheckNewUserName" prefHeight="26.0" prefWidth="178.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+              <PasswordField fx:id="newPasswordField" onKeyReleased="#onCheckPasswordComplexity" prefHeight="26.0" prefWidth="178.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+              <PasswordField fx:id="confirmPasswordField" onAction="#onCheckConfirmPassword" onKeyReleased="#onCheckConfirmPassword" prefHeight="26.0" prefWidth="178.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+              <Label style="-fx-text-fill: #ecf0f1;" text="Username" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+              <Label style="-fx-text-fill: #ecf0f1;" text="Password" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+              <Label style="-fx-text-fill: #ecf0f1;" text="Confirm Password" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+              <TextField fx:id="passwordHint" prefHeight="25.0" prefWidth="178.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+              <TextField fx:id="email" onKeyReleased="#onCheckEmail" prefHeight="26.0" prefWidth="178.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+              <Label text="Password Hint" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+              <Label style="-fx-text-fill: #ecf0f1;" text="Email" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+              <Label fx:id="checkValidityUserName" prefHeight="26.0" prefWidth="50.0" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+              <Label fx:id="checkValidityPassword" prefHeight="26.0" prefWidth="26.0" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+            <Label fx:id="checkValidityEmail" prefHeight="26.0" prefWidth="26.0" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+              <Label fx:id="checkPassword" prefHeight="26.0" prefWidth="26.0" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+              <Button fx:id="create" mnemonicParsing="false" onAction="#createNewAccount" prefHeight="33.0" prefWidth="178.0" style="-fx-text-fill: #ecf0f1; -fx-background-color: #222D41; -fx-border-color: #ecf0f1;" text="Create" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="10" />
+              <ImageView fitHeight="176.0" fitWidth="212.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" GridPane.rowSpan="4">
+                  <image>
+                      <Image url="@../Style/Logo/Logo-idea-2-blackbg--logo.png" />
+                  </image>
+              </ImageView>
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>

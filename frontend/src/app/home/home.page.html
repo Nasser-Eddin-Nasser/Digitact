@@ -1,24 +1,16 @@
 <ion-header class="ion-no-border ion-padding">
   <ion-toolbar>
     <ion-buttons slot="end" class="toolbar-buttons">
-      <ion-button class="notification-button" (click)="goToApplications()">
-        <ion-icon
-          class="custom-icon"
-          name="file-tray-stacked-outline"
-        ></ion-icon>
-        <ion-badge
-          class="notifications-badge"
-          color="danger"
-          *ngIf="applicationSize"
-          >{{applicationSize}}</ion-badge
+      <button class="notification-button" (click)="goToApplications()">
+        <ion-icon name="file-tray-stacked-outline"></ion-icon>
+
+        <span class="notifications-badge" *ngIf="applicationSize"
+          >{{applicationSize}}</span
         >
-      </ion-button>
-      <ion-button
-        class="notification-button ion-margin-top"
-        (click)="openLanguagePicker($event)"
-      >
-        <ion-icon class="custom-icon" name="settings-outline"></ion-icon>
-      </ion-button>
+      </button>
+      <button (click)="openLanguagePicker($event)">
+        <ion-icon name="settings-outline"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

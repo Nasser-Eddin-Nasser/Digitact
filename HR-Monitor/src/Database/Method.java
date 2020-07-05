@@ -7,7 +7,9 @@ public enum Method {
     createAdminAccount("createAdminAccount"),
     getAdminUserNames("getAdminUserNames"),
     changeStatus("changeStatus"),
-    postHRComment("postHRComment");
+    postHRComment("postHRComment"),
+    gutenMorgen("gutenMorgen"), // it used to ping the BES
+    putToken("putToken");
     private final String name;
 
     private Method(String s) {
