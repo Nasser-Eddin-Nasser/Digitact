@@ -12,16 +12,19 @@ import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
 
-import static Digitact.Backend.Storage.DB.Query.getApplicantQuery;
-import static Digitact.Backend.Storage.DB.Query.setStatusQuery;
+import static Digitact.Backend.Storage.DB.Query.*;
 
 @Repository
-public interface IStatusRepository extends JpaRepository<User, Long> {
+public interface IHRInfoRepository extends JpaRepository<User, Long> {
    List<User> findAll();
 
     @Modifying
     @Transactional
     @Query(value = setStatusQuery, nativeQuery = true)
     int setStatus( Integer status, Long appID);
+    @Modifying
+    @Transactional
+    @Query(value = setHRCommentQuery, nativeQuery = true)
+    int setHRComment( String comment, Long appID);
 
 }

@@ -1,11 +1,11 @@
 package Digitact.Backend.Model;
 
-public class StatusUI {
+public class StatusHolder {
 
     long appID;
     Status status;
 
-    StatusUI(long appID, Status status){
+    StatusHolder(long appID, Status status){
         this.appID = appID;
         this.status = status;
     }
