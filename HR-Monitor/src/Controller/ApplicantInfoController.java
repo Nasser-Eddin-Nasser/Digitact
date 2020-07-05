@@ -13,6 +13,7 @@ import Util.ImageTools;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -37,11 +38,11 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-<<<<<<< HEAD
+
 import javafx.scene.input.KeyCode;
-=======
+
 import javafx.scene.input.MouseEvent;
->>>>>>> upstream/dalex135-BEnHR-Applicant_Status
+
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -115,17 +116,15 @@ public class ApplicantInfoController {
     @FXML private ImageView imgFX;
     @FXML StackPane imgstckPFX;
 
-<<<<<<< HEAD
-=======
     @FXML PieChart chart; // hr rating
     @FXML PieChart pLPieChart;
 
     @FXML PieChart bSPieChart;
     @FXML PieChart dbPieChart;
     @FXML PieChart langPieChart;
-    @FXML Labeled pieLabel;
+
     @FXML PieChart psPieChart;
->>>>>>> upstream/dalex135-BEnHR-Applicant_Status
+
     // Documents tab
     @FXML ScrollPane documentsGridFX;
     @FXML Tab docTabFX;
@@ -154,12 +153,7 @@ public class ApplicantInfoController {
         try {
             createAndSetNewStage();
             setApplicantInfo();
-            getKeyCompetencePieChart(
-                    pLPieChart, KeyCompetenciesCategory.ProgrammingLanguagesAndFrameworks);
-            getKeyCompetencePieChart(bSPieChart, KeyCompetenciesCategory.BusinessSkills);
-            getKeyCompetencePieChart(dbPieChart, KeyCompetenciesCategory.Databases);
-            getKeyCompetencePieChart(langPieChart, KeyCompetenciesCategory.Languages);
-            getKeyCompetencePieChart(psPieChart, KeyCompetenciesCategory.ProfessionalSoftware);
+
         } catch (IOException e) {
             System.err.println("unable to load Image!");
             e.printStackTrace();
@@ -174,20 +168,11 @@ public class ApplicantInfoController {
         getImages(ImageType.profilePic);
         getKeyCompetence();
         getStatus();
-<<<<<<< HEAD
-=======
+        getHrRating();
+
     }
 
-    private void getKeyCompetencePieChart(PieChart chart, KeyCompetenciesCategory category) {
-        List<PieChart.Data> ls = new ArrayList<PieChart.Data>();
-        app.getKeyCompetencies(category)
-                .forEach(
-                        x ->
-                                ls.add(
-                                        new PieChart.Data(
-                                                x.getName() + " " + x.getRating(), x.getRating())));
-        chart.setData(FXCollections.observableArrayList(ls));
-    }
+
 
     private void getPieChart() {
         if (!isHRChartLoaded) {
@@ -220,34 +205,6 @@ public class ApplicantInfoController {
     private void onShowRating() {
         statusListener();
         getPieChart();
-    }
-
-    /**
-     * this method called when the PieChart is hovered so the Value of pie-data will be set on
-     * pieLabel
-     */
-    @FXML
-    private void showPieChartDetails(MouseEvent mouseevent) {
-        for (final PieChart.Data data : chart.getData()) {
-
-            data.getNode()
-                    .addEventHandler(
-                            MouseEvent.MOUSE_ENTERED,
-                            e -> {
-                                pieLabel.setStyle("-fx-font: 12 arial;");
-                                pieLabel.setText(String.valueOf((int) data.getPieValue()));
-                            });
-        }
-    }
-
-    /**
-     * this method called when the PieChart is not hovered (mouse Exited) so the Value of pie-data
-     * will be removed
-     */
-    @FXML
-    private void hidePieChartDetails() {
-        pieLabel.setText("");
->>>>>>> upstream/dalex135-BEnHR-Applicant_Status
     }
 
     private void getStatus() {
@@ -285,10 +242,6 @@ public class ApplicantInfoController {
                 (event) -> {
                     setStatusLabel(Send2HR);
                     Connector.changeStatus(app.getID(), Send2HR);
-<<<<<<< HEAD
-=======
-                    lblStatusFX.minWidth(75);
->>>>>>> upstream/dalex135-BEnHR-Applicant_Status
                 });
         btnDFX.setOnMouseClicked(
                 (event) -> {
@@ -308,27 +261,19 @@ public class ApplicantInfoController {
         stageApplicantInfo.getIcons().add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
     }
 
-<<<<<<< HEAD
-    private void getHrRating() {
-        //        txtrheFX.setText("Rhetoric - " + app.getHrRating().getRhetoric());
-        //        txtMotFX.setText("Motivation - " + app.getHrRating().getMotivation());
-        //        txtSelfFX.setText("Self Assurance - " + app.getHrRating().getSelfAssurance());
-        //        txtPerFX.setText("Personal Impression - " +
-        // app.getHrRating().getPersonalImpression());
 
+    private void getHrRating() {
         txtImpFX.setText(app.getHrRating().getImpression());
         txtImpHRFX.setOnKeyReleased(
                 event -> {
                     if (event.getCode() == KeyCode.ENTER) {
-                        System.out.println("Done");
                         Connector.postHRComment(app.getID(), txtImpHRFX.getText());
                     }
                 });
         txtImpHRFX.setText(app.getHrComment());
     }
 
-=======
->>>>>>> upstream/dalex135-BEnHR-Applicant_Status
+
     private void getKeyCompetence() {
         observableListPLnFWTableView = pLnFWTableFX.getItems();
         observableListBSkillsTableView = bSkillsTableFX.getItems();
@@ -403,24 +348,28 @@ public class ApplicantInfoController {
     }
 
     private void setProfPic(List<AppImage> images) {
-        AppImage profImage =
-                images.stream()
-                        .filter(x -> x.getType().equals(ImageType.profilePic))
-                        .findFirst()
-                        .get();
-        if (profImage != null) {
-            try {
-                if (profImage.getContent() == null)
-                    Connector.sendGetHttp(
-                            getImageById, String.valueOf(app.getID()), profImage.getId());
-                ImageTools.parseImageStringToImage(profImage);
-                File file = new File(profImage.getPath());
-                imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
-                imgFX.fitWidthProperty().bind(imgstckPFX.widthProperty());
-                imgFX.fitHeightProperty().bind(imgstckPFX.heightProperty());
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            AppImage profImage =
+                    images.stream()
+                            .filter(x -> x.getType().equals(ImageType.profilePic))
+                            .findFirst()
+                            .get();
+            if (profImage != null) {
+                try {
+                    if (profImage.getContent() == null)
+                        Connector.sendGetHttp(
+                                getImageById, String.valueOf(app.getID()), profImage.getId());
+                    ImageTools.parseImageStringToImage(profImage);
+                    File file = new File(profImage.getPath());
+                    imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
+                    imgFX.fitWidthProperty().bind(imgstckPFX.widthProperty());
+                    imgFX.fitHeightProperty().bind(imgstckPFX.heightProperty());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+        }catch(Exception e){
+            // Do nothing
         }
     }
 
@@ -633,19 +582,4 @@ public class ApplicantInfoController {
                 applicant -> new ReadOnlyStringWrapper(applicant.getValue().getGraduationYear()));
     }
 }
-<<<<<<< HEAD
-=======
-/*
-   @FXML Button btnOFX, btnHRFX, btnDFX;
-   @FXML Label lblStatusFX;
 
-   private void docClick(ImageView imageView, File file) {
-       imageView.setOnMouseClicked(
-               (event) -> {
-                   if (event.getClickCount() == 2) {
-                       showDocImage(file);
-                   }
-               });
-
-*/
->>>>>>> upstream/dalex135-BEnHR-Applicant_Status
