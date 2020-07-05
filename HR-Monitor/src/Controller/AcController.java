@@ -1,5 +1,7 @@
 package Controller;
 
+import Database.Connector;
+import Database.Method;
 import Model.MVC.AcModel;
 import Storage.DBStorage;
 import java.io.IOException;
@@ -30,6 +32,7 @@ public class AcController {
     private AcModel model;
 
     public static String ADMIN_USERNAME = "";
+    private boolean offlineMode;
 
     /**
      * This method starts the {@link /View/login.fxml }
@@ -37,7 +40,23 @@ public class AcController {
      * @throws IOException Loading of corresponding FXML files failed
      */
     public AcController() throws IOException {
-        DBStorage.getAdminUserNames();
+        // send guten morgen http
+        Connector.sendGetHttp(Method.gutenMorgen);
+        if (DBStorage.getToken() != null) {
+            DBStorage.getAdminUserNames();
+            offlineMode = false;
+            setModelAndStageAndScene();
+            if (DBStorage.getAdminUserNames().size() == 0) {
+                new CreateFirstAccountController(stage, model);
+            }
+        } else {
+            offlineMode = true;
+            setModelAndStageAndScene();
+            System.err.println("Run in offline Mode!");
+        }
+    }
+
+    private void setModelAndStageAndScene() throws IOException {
         model = new AcModel();
         stage = new Stage();
         setscene();
@@ -65,42 +84,51 @@ public class AcController {
     @FXML
     private void onLogin() {
         try {
-            if (model.checkAuthentication(
-                    myUserNameTextField.getText(), myPasswordField.getText())) {
-                ADMIN_USERNAME = myUserNameTextField.getText();
-                new StandardController(stage);
+            if (!offlineMode) {
+                if (model.checkAuthentication(
+                        myUserNameTextField.getText(), myPasswordField.getText())) {
+                    ADMIN_USERNAME = myUserNameTextField.getText();
+                    new StandardController(stage);
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Create Account Error");
+                    alert.setHeaderText("Login was not possible due to: ");
+                    alert.setContentText("UserName or Password WRONG!");
+                    alert.show();
+                }
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Create Account Error");
-                alert.setHeaderText("Login was not possible due to: ");
-                alert.setContentText("UserName or Password WRONG!");
+                alert.setTitle("Connection Error");
+                alert.setHeaderText(
+                        "Please check your connection with BES then start the Application again!");
                 alert.show();
             }
-
         } catch (IllegalArgumentException | IOException e) {
             System.err.println(e);
         }
     }
 
-    @FXML
-    private void onCreateAccount() {
-        try {
-            new CreateAccountController(stage, model);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    //    @FXML
+    //    private void onCreateAccount() {
+    //        try {
+    //            new CreateAccountController(stage, model);
+    //        } catch (IOException e) {
+    //            e.printStackTrace();
+    //        }
+    //    }
 
     @FXML
     private void showHint() {
-        if (myUserNameTextField.getText().length() > 0
-                && !model.isUserNameValid(myUserNameTextField.getText())) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Password Hint");
-            alert.setHeaderText("Your personal password hint:");
-            model.getAdmin(myUserNameTextField.getText());
-            alert.setContentText(DBStorage.getCurrentAdmin().getPassHint());
-            alert.show();
+        if (!offlineMode) {
+            if (myUserNameTextField.getText().length() > 0
+                    && !model.isUserNameValid(myUserNameTextField.getText())) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Password Hint");
+                alert.setHeaderText("Your personal password hint:");
+                model.getAdmin(myUserNameTextField.getText());
+                alert.setContentText(DBStorage.getCurrentAdmin().getPassHint());
+                alert.show();
+            }
         }
     }
 }

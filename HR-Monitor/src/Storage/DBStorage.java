@@ -22,6 +22,7 @@ public class DBStorage {
     private static boolean transfer = false;
 
     private static Admin currentAdmin;
+    private static Token token;
 
     public static List<ApplicantUI> getStorage() {
         updateStorage();
@@ -103,5 +104,13 @@ public class DBStorage {
     public static boolean isUserNameInUse(String newUserName) {
         getAdminsFromBES();
         return adminUserNames.contains(newUserName);
+    }
+
+    public static void setToken(Token token) {
+        DBStorage.token = token;
+    }
+
+    public static Token getToken() {
+        return token;
     }
 }

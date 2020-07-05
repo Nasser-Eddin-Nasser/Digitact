@@ -7,10 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class CreateAccountController {
+public class CreateFirstAccountController {
+    public static boolean isFirstAccount = false;
     @FXML private ComboBox<String> admins;
     @FXML private TextField passwordHint;
     @FXML private TextField email;
@@ -31,26 +31,15 @@ public class CreateAccountController {
     @FXML private TextField userNameTextField;
 
     private AcModel model;
-    private Pane root;
+
     Stage stage;
     private Scene viewCreateAccount;
 
-    public CreateAccountController() throws IOException {
-        this.stage = new Stage();
-        this.model = new AcModel();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/adminAccount.fxml"));
-        loader.setController(this);
-        root = (Pane) loader.load();
-    }
-
-    public Pane getPane() {
-        return root;
-    }
-
-    public CreateAccountController(Stage stage, AcModel model) throws IOException {
+    public CreateFirstAccountController(Stage stage, AcModel model) throws IOException {
+        isFirstAccount = true;
         this.stage = stage;
         this.model = model;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/adminAccount.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/createFirstAccount.fxml"));
         loader.setController(this);
         viewCreateAccount = new Scene(loader.load());
         stage.setTitle("Create Admin Account");
@@ -81,7 +70,7 @@ public class CreateAccountController {
                         alert1.setTitle("Create new Account!");
                         alert1.setContentText("Your Account has been created! ");
                         alert1.showAndWait();
-                        //                        onShowView();
+                        onShowView();
                     } else {
                         alert.setContentText(
                                 "Your password hint must not contain your password & not empty!");
@@ -114,6 +103,15 @@ public class CreateAccountController {
             return true;
         }
         return false;
+    }
+
+    @FXML
+    public void onShowView() {
+        try {
+            new AcController(stage, model);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

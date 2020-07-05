@@ -27,3 +27,20 @@ GridPane {
 BorderPane {
     -fx-background-color: #222D41;
 }
+
+
+ListView {
+    -fx-background-color: #1D1F27;
+}
+
+
+ListView .cell {
+    -fx-background-color:  #1D1F27;
+    -fx-text-fill: #ecf0f1;
+
+}
+
+ListView .cell:hover {
+    -fx-background-color:  #4B4D54;
+    -fx-text-fill: white;
+}
