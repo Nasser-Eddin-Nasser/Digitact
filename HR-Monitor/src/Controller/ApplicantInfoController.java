@@ -259,6 +259,7 @@ public class ApplicantInfoController {
                 event -> {
                     if (event.getCode() == KeyCode.ENTER) {
                         Connector.postHRComment(app.getID(), txtImpHRFX.getText());
+                        app.setHrComment(txtImpHRFX.getText());
                     }
                 });
         txtImpHRFX.setText(app.getHrComment());

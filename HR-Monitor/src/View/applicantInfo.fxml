@@ -376,7 +376,7 @@
                                     </VBox>
                                     <TitledPane collapsible="false" maxHeight="700.0" minHeight="100.0" prefHeight="200.0" text="Comments by the Fairteam Member" wrapText="true">
                                           <content>
-                                             <TextField fx:id="txtImpFX" alignment="TOP_LEFT" prefHeight="135.0" prefWidth="648.0" />
+                                             <TextField fx:id="txtImpFX" alignment="TOP_LEFT" editable="false" prefHeight="135.0" prefWidth="648.0" />
                                           </content></TitledPane>
                                     <TitledPane collapsible="false" maxHeight="700.0" minHeight="100.0" prefHeight="200.0" text="Comments by the HR Member" wrapText="true">
                                           <content>
