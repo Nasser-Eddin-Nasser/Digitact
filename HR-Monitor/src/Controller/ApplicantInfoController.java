@@ -245,8 +245,6 @@ public class ApplicantInfoController {
 
     @FXML
     private void onShowDocuments() {
-
-        System.out.println("onShowDocuments");
         getImages(ImageType.CV);
     }
 
