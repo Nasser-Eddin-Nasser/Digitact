@@ -15,5 +15,4 @@ public class Query {
             "SELECT * FROM WorkExperience WHERE user_id = ?1";
     public static final String getAllWorkExperiencesQuery = "SELECT * FROM WorkExperience";
     public static final String setStatusQuery = "UPDATE users SET status = ?  WHERE id =?";
-
 }

@@ -2,7 +2,6 @@ package Digitact.Backend.Model.User;
 
 import Digitact.Backend.Model.*;
 import Digitact.Backend.Model.Image.AppImage;
-
 import java.util.*;
 import javax.persistence.*;
 import org.hibernate.annotations.Fetch;
@@ -58,8 +57,6 @@ public class Applicant extends User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     private HrRating hrRating;
-
-
 
     @Column(name = "Status")
     private Status status;

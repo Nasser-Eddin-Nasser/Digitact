@@ -29,7 +29,6 @@ public class HRController {
     public List<User> getApplicants() {
 
         return new ArrayList<User>(dataRepository.getApplicants());
-
     }
 
     @GetMapping("/getAllEducationInfo")
@@ -45,7 +44,6 @@ public class HRController {
     @GetMapping(path = "/getImageById={imageId}")
     public String getImageById(@PathVariable String imageId) {
         return ImageTools.combineImage(imageRepository.getImageByID(imageId)).getContent();
-
     }
 
     /** @return JSON object of the admins */
@@ -86,7 +84,7 @@ public class HRController {
 
     @PostMapping(path = "/changeStatus")
     public String changeStatus(@RequestBody StatusUI status) {
-        statusRepository.setStatus( status.getStatus().getNum(),status.getAppID());
+        statusRepository.setStatus(status.getStatus().getNum(), status.getAppID());
         return "changed";
     }
 }
