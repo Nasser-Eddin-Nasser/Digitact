@@ -4,7 +4,6 @@ import static Database.Method.getImageById;
 import static Model.Status.*;
 
 import Database.Connector;
-import Main.Configuration;
 import Model.*;
 import Model.Image.AppImage;
 import Model.Image.ImageType;
@@ -13,9 +12,7 @@ import Model.User.ApplicantUI;
 import Util.ImageTools;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -38,8 +35,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -111,7 +108,6 @@ public class ApplicantInfoController {
     @FXML private ImageView imgFX;
     @FXML StackPane imgstckPFX;
 
-
     // Documents tab
     @FXML ScrollPane documentsGridFX;
     @FXML Tab docTabFX;
@@ -124,10 +120,10 @@ public class ApplicantInfoController {
     @FXML TableColumn<KeyCompetence, String> spoLanColFX = new TableColumn<>("name");
 
     @FXML Label txtrheFX, txtMotFX, txtSelfFX, txtPerFX;
-    @FXML TextField txtImpFX;
+    @FXML TextField txtImpFX, txtImpHRFX;
 
     // Change status
-    @FXML Button btnOFX, btnHRFX, btnDFX;
+    @FXML Label btnOFX, btnHRFX, btnDFX;
     @FXML Label lblStatusFX;
 
     public ApplicantInfoController(long id, OverviewModel model) {
@@ -155,7 +151,6 @@ public class ApplicantInfoController {
         getKeyCompetence();
         getHrRating();
         getStatus();
-        statusListener();
     }
 
     private void getStatus() {
@@ -164,44 +159,41 @@ public class ApplicantInfoController {
     }
 
     private void setStatusLabel(Status status) {
-        switch(status){
+        switch (status) {
             case Open:
-                lblStatusFX.setStyle("-fx-background-color: #61d0ee; -fx-background-radius:10 10 10 10");
+                lblStatusFX.setStyle(
+                        "-fx-background-color: #61d0ee; -fx-background-radius:10 10 10 10");
                 lblStatusFX.setText("Open");
                 break;
             case Send2HR:
-                lblStatusFX.setStyle("-fx-background-color: #5be14f; -fx-background-radius:10 10 10 10");
+                lblStatusFX.setStyle(
+                        "-fx-background-color: #5be14f; -fx-background-radius:10 10 10 10");
                 lblStatusFX.setText("Send to HR");
                 break;
             case Denied:
-                lblStatusFX.setStyle("-fx-background-color: #ff927e; -fx-background-radius:10 10 10 10");
+                lblStatusFX.setStyle(
+                        "-fx-background-color: #ff927e; -fx-background-radius:10 10 10 10");
                 lblStatusFX.setText("Denied");
                 break;
         }
     }
 
-
-    public void statusListener(){
+    public void statusListener() {
         btnOFX.setOnMouseClicked(
                 (event) -> {
                     setStatusLabel(Open);
                     Connector.changeStatus(app.getID(), Open);
-                }
-        );
+                });
         btnHRFX.setOnMouseClicked(
                 (event) -> {
                     setStatusLabel(Send2HR);
                     Connector.changeStatus(app.getID(), Send2HR);
-                    lblStatusFX.minWidth(75);
-                }
-        );
+                });
         btnDFX.setOnMouseClicked(
                 (event) -> {
                     setStatusLabel(Denied);
                     Connector.changeStatus(app.getID(), Denied);
-
-                }
-        );
+                });
     }
 
     private void createAndSetNewStage() throws IOException {
@@ -216,11 +208,21 @@ public class ApplicantInfoController {
     }
 
     private void getHrRating() {
-//        txtrheFX.setText("Rhetoric - " + app.getHrRating().getRhetoric());
-//        txtMotFX.setText("Motivation - " + app.getHrRating().getMotivation());
-//        txtSelfFX.setText("Self Assurance - " + app.getHrRating().getSelfAssurance());
-//        txtPerFX.setText("Personal Impression - " + app.getHrRating().getPersonalImpression());
-//        txtImpFX.setText(app.getHrRating().getImpression());
+        //        txtrheFX.setText("Rhetoric - " + app.getHrRating().getRhetoric());
+        //        txtMotFX.setText("Motivation - " + app.getHrRating().getMotivation());
+        //        txtSelfFX.setText("Self Assurance - " + app.getHrRating().getSelfAssurance());
+        //        txtPerFX.setText("Personal Impression - " +
+        // app.getHrRating().getPersonalImpression());
+
+        txtImpFX.setText(app.getHrRating().getImpression());
+        txtImpHRFX.setOnKeyReleased(
+                event -> {
+                    if (event.getCode() == KeyCode.ENTER) {
+                        System.out.println("Done");
+                        Connector.postHRComment(app.getID(), txtImpHRFX.getText());
+                    }
+                });
+        txtImpHRFX.setText(app.getHrComment());
     }
 
     private void getKeyCompetence() {
@@ -523,19 +525,4 @@ public class ApplicantInfoController {
         gradYearFX.setCellValueFactory(
                 applicant -> new ReadOnlyStringWrapper(applicant.getValue().getGraduationYear()));
     }
-
-
 }
-/*
-    @FXML Button btnOFX, btnHRFX, btnDFX;
-    @FXML Label lblStatusFX;
-
-    private void docClick(ImageView imageView, File file) {
-        imageView.setOnMouseClicked(
-                (event) -> {
-                    if (event.getClickCount() == 2) {
-                        showDocImage(file);
-                    }
-                });
-
- */

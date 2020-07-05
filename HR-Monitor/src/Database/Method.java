@@ -5,7 +5,9 @@ public enum Method {
     getImageById("getImageById"),
     getAdminByUserName("getAdminByUserName"),
     createAdminAccount("createAdminAccount"),
-    getAdminUserNames("getAdminUserNames");
+    getAdminUserNames("getAdminUserNames"),
+    changeStatus("changeStatus"),
+    postHRComment("postHRComment");
     private final String name;
 
     private Method(String s) {

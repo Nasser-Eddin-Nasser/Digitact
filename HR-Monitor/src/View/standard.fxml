@@ -29,7 +29,7 @@
                                 <Font size="12.0" />
                             </font>
                         </Text>
-                        <!--
+
                         <ImageView fx:id="userIcon" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
 
                             <image>
@@ -37,7 +37,7 @@
                             </image>
 
                         </ImageView>
-                         -->
+
                     </children>
                 </GridPane>
             </top>
