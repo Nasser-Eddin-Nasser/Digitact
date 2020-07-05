@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <!--
                             <SplitPane dividerPositions="0.5" orientation="VERTICAL">
@@ -59,7 +77,7 @@
                                       </SplitPane>
                                        -->
 
-<BorderPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../Style/stylesheet.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../Style/stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <VBox prefHeight="5" />
    </top>
@@ -196,9 +214,9 @@
                                 <items>
                                    <TitledPane collapsible="false" maxHeight="700.0" minHeight="100.0" prefHeight="200.0" text="Work Experience" wrapText="true">
                                           <content>
-                                             <TableView fx:id="workInfoTblFX" maxHeight="500.0" prefHeight="0.0" >
+                                             <TableView fx:id="workInfoTblFX" maxHeight="500.0" prefHeight="0.0">
                                                 <columns>
-                                                   <TableColumn fx:id="jobTitleFX" prefWidth="142.0" text="Title"  />
+                                                   <TableColumn fx:id="jobTitleFX" prefWidth="142.0" text="Title" />
                                                    <TableColumn fx:id="companyFX" prefWidth="149.0" text="Company" />
                                                    <TableColumn fx:id="employmentTypeFX" prefWidth="89.0" text="Employment Type" />
                                                    <TableColumn fx:id="startDateFX" prefWidth="98.0" text="Start Date" />
@@ -369,6 +387,12 @@
                                              </padding>
 
                                        </HBox>
+                                          <PieChart id="pieChart" fx:id="chart" onMouseExited="#hidePieChartDetails" onMouseMoved="#showPieChartDetails" title="Hr-Rating" />
+                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Label fx:id="pieLabel" prefHeight="17.0" prefWidth="71.0" />
+                                             </children>
+                                          </HBox>
 
                                     </VBox>
                                     <TitledPane collapsible="false" maxHeight="700.0" minHeight="100.0" prefHeight="200.0" text="Comments by the Fairteam Member // Name can be changed" wrapText="true">
