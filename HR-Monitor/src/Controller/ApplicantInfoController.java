@@ -1,8 +1,5 @@
 package Controller;
 
-import static Database.Method.getImageById;
-import static Model.Status.*;
-
 import Database.Connector;
 import Model.*;
 import Model.Image.AppImage;
@@ -10,12 +7,6 @@ import Model.Image.ImageType;
 import Model.MVC.OverviewModel;
 import Model.User.ApplicantUI;
 import Util.ImageTools;
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.DoubleProperty;
@@ -43,7 +34,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
+
+import static Database.Method.getImageById;
+import static Model.Status.*;
 
 public class ApplicantInfoController {
     Stage stage;
@@ -51,84 +52,123 @@ public class ApplicantInfoController {
     ApplicantUI app;
     Scene scene;
     // Create a TableView with a list of Education Info of an Applicant
-    @FXML TableView<Education> eduInfoTblFX;
+    @FXML
+    TableView<Education> eduInfoTblFX;
     private ObservableList<Education> observableListEduInfoTableView;
 
-    @FXML TableView<WorkExperience> workInfoTblFX;
+    @FXML
+    TableView<WorkExperience> workInfoTblFX;
     private ObservableList<WorkExperience> observableListWorkExpInfoTableView;
 
-    @FXML TableView<Positions> posTable;
+    @FXML
+    TableView<Positions> posTable;
     private ObservableList<Positions> observableListPosTableTableView;
 
-    @FXML TableView<Industries> indTable;
+    @FXML
+    TableView<Industries> indTable;
     private ObservableList<Industries> observableListIndTableTableView;
 
-    @FXML TableView<KeyCompetence> pLnFWTableFX;
+    @FXML
+    TableView<KeyCompetence> pLnFWTableFX;
     private ObservableList<KeyCompetence> observableListPLnFWTableView;
 
-    @FXML TableView<KeyCompetence> bSkillsTableFX;
+    @FXML
+    TableView<KeyCompetence> bSkillsTableFX;
     private ObservableList<KeyCompetence> observableListBSkillsTableView;
 
-    @FXML TableView<KeyCompetence> dBTableFX;
+    @FXML
+    TableView<KeyCompetence> dBTableFX;
     private ObservableList<KeyCompetence> observableListDBTableView;
 
-    @FXML TableView<KeyCompetence> proSoftTableFX;
+    @FXML
+    TableView<KeyCompetence> proSoftTableFX;
     private ObservableList<KeyCompetence> observableListProSoftTableView;
 
-    @FXML TableView<KeyCompetence> spoLanTableFX;
+    @FXML
+    TableView<KeyCompetence> spoLanTableFX;
     private ObservableList<KeyCompetence> observableListSpoLanTableView;
 
-    @FXML TableColumn<Positions, String> posFX = new TableColumn<>("Position");
-    @FXML TableColumn<Industries, String> indFX = new TableColumn<>("Industry");
+    @FXML
+    TableColumn<Positions, String> posFX = new TableColumn<>("Position");
+    @FXML
+    TableColumn<Industries, String> indFX = new TableColumn<>("Industry");
 
     // Applicant Info View's Variables
     // 1. Basic Info
-    @FXML TextField lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX;
-    @FXML Hyperlink hplLinkedInFX, hplXingFX;
+    @FXML
+    TextField lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX;
+    @FXML
+    Hyperlink hplLinkedInFX, hplXingFX;
     // 2. Edu Info
-    @FXML TableColumn<Education, String> universityFX = new TableColumn<>("university");
-    @FXML TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
-    @FXML TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
-    @FXML TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
-    @FXML TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
+    @FXML
+    TableColumn<Education, String> universityFX = new TableColumn<>("university");
+    @FXML
+    TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
+    @FXML
+    TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
+    @FXML
+    TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
+    @FXML
+    TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
 
     // 2. work Info
-    @FXML TableColumn<WorkExperience, String> jobTitleFX = new TableColumn<>("jobTitle");
-    @FXML TableColumn<WorkExperience, String> companyFX = new TableColumn<>("company");
+    @FXML
+    TableColumn<WorkExperience, String> jobTitleFX = new TableColumn<>("jobTitle");
+    @FXML
+    TableColumn<WorkExperience, String> companyFX = new TableColumn<>("company");
 
     @FXML
     TableColumn<WorkExperience, String> employmentTypeFX = new TableColumn<>("employmentType");
 
-    @FXML TableColumn<WorkExperience, String> startDateFX = new TableColumn<>("startDate");
-    @FXML TableColumn<WorkExperience, String> endDateFX = new TableColumn<>("endDate");
-    @FXML TableColumn<WorkExperience, String> descriptionFX = new TableColumn<>("description");
+    @FXML
+    TableColumn<WorkExperience, String> startDateFX = new TableColumn<>("startDate");
+    @FXML
+    TableColumn<WorkExperience, String> endDateFX = new TableColumn<>("endDate");
+    @FXML
+    TableColumn<WorkExperience, String> descriptionFX = new TableColumn<>("description");
 
     // 3. Image of the Applicant
 
     // Additional Info
-    @FXML Label lblAddInfo;
-    @FXML private ImageView imgFX;
-    @FXML StackPane imgstckPFX;
+    @FXML
+    Label lblAddInfo;
+    @FXML
+    private ImageView imgFX;
+    @FXML
+    StackPane imgstckPFX;
 
-    @FXML PieChart chart;
-    @FXML Labeled pieLabel;
+    @FXML
+    PieChart chart;
+    @FXML
+    Labeled pieLabel;
     // Documents tab
-    @FXML ScrollPane documentsGridFX;
-    @FXML Tab docTabFX;
+    @FXML
+    ScrollPane documentsGridFX;
+    @FXML
+    Tab docTabFX;
 
     // Key Competencies
-    @FXML TableColumn<KeyCompetence, String> pLnFWColFX = new TableColumn<>("name");
-    @FXML TableColumn<KeyCompetence, String> bSkillsColFX = new TableColumn<>("name");
-    @FXML TableColumn<KeyCompetence, String> dBColFX = new TableColumn<>("name");
-    @FXML TableColumn<KeyCompetence, String> proSoftColFX = new TableColumn<>("name");
-    @FXML TableColumn<KeyCompetence, String> spoLanColFX = new TableColumn<>("name");
+    @FXML
+    TableColumn<KeyCompetence, String> pLnFWColFX = new TableColumn<>("name");
+    @FXML
+    TableColumn<KeyCompetence, String> bSkillsColFX = new TableColumn<>("name");
+    @FXML
+    TableColumn<KeyCompetence, String> dBColFX = new TableColumn<>("name");
+    @FXML
+    TableColumn<KeyCompetence, String> proSoftColFX = new TableColumn<>("name");
+    @FXML
+    TableColumn<KeyCompetence, String> spoLanColFX = new TableColumn<>("name");
 
-    @FXML Label txtrheFX, txtMotFX, txtSelfFX, txtPerFX;
-    @FXML TextField txtImpFX;
+    @FXML
+    Label txtrheFX, txtMotFX, txtSelfFX, txtPerFX;
+    @FXML
+    TextField txtImpFX;
 
     // Change status
-    @FXML Button btnOFX, btnHRFX, btnDFX;
-    @FXML Label lblStatusFX;
+    @FXML
+    Button btnOFX, btnHRFX, btnDFX;
+    @FXML
+    Label lblStatusFX;
 
     public ApplicantInfoController(long id, OverviewModel model) {
         this.model = model;
@@ -181,7 +221,6 @@ public class ApplicantInfoController {
 
     @FXML
     private void onShowRating() {
-        getHrRating();
         statusListener();
         getPieChart();
     }
