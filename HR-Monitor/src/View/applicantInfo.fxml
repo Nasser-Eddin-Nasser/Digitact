@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <!--
                             <SplitPane dividerPositions="0.5" orientation="VERTICAL">
@@ -59,7 +77,7 @@
                                       </SplitPane>
                                        -->
 
-<BorderPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../Style/stylesheet.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../Style/stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <VBox prefHeight="5" />
    </top>
@@ -347,13 +365,43 @@
                              </SplitPane>
                           </Tab>
 
-                          <Tab fx:id="docTabFX" text="Documents">
+                          <Tab fx:id="docTabFX" onSelectionChanged="#onShowDocuments" text="Documents">
                              <ScrollPane fx:id="documentsGridFX" fitToHeight="true" prefHeight="283.0" prefWidth="198.0">
 
                              </ScrollPane>
                           </Tab>
                            <Tab text="Applicant Ratings">
                               <SplitPane dividerPositions="0.6818873668188736, 0.8432267884322678" maxHeight="657.0" minHeight="30.0" orientation="VERTICAL" prefHeight="657.0" prefWidth="650.0">
+                              <Tab text="Key Competencies">
+                                 <content>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                       <center>
+                                          <GridPane style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="420.0" minHeight="10.0" prefHeight="35.99999109903972" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="420.0" minHeight="0.0" prefHeight="191.33334859212243" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="345.6666564941406" minHeight="10.0" prefHeight="221.33333333333337" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="328.66678873697913" minHeight="10.0" prefHeight="180.66666666666663" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="242.0001220703125" minHeight="10.0" prefHeight="29.3333740234375" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <PieChart fx:id="pLPieChart" style="-fx-border-color: black;" title="Programming languages" GridPane.rowIndex="1" />
+                                                <PieChart fx:id="bSPieChart" style="-fx-border-color: black;" title="Bussiness Skills" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <PieChart fx:id="dbPieChart" style="-fx-border-color: black;" title="Data Base" GridPane.rowIndex="2" />
+                                                <PieChart fx:id="langPieChart" style="-fx-border-color: black;" title="Languages" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <PieChart fx:id="psPieChart" style="-fx-border-color: black;" title="Professional Software" GridPane.rowIndex="3" />
+                                             </children>
+                                          </GridPane>
+                                       </center>
+                                    </BorderPane>
+                                 </content>
+                              </Tab>
+                           <Tab onSelectionChanged="#onShowRating" text="Applicant Ratings">
+                              <SplitPane dividerPositions="0.5555555555555556, 0.786910197869102" maxHeight="657.0" minHeight="30.0" orientation="VERTICAL" prefHeight="657.0" prefWidth="650.0">
                                  <items>
                                     <VBox maxHeight="3000.0" minHeight="100.0">
                                        <HBox alignment="CENTER" spacing="20.0">
@@ -369,6 +417,12 @@
                                              </padding>
 
                                        </HBox>
+                                          <PieChart id="pieChart" fx:id="chart" onMouseExited="#hidePieChartDetails" onMouseMoved="#showPieChartDetails" title="Hr-Rating" />
+                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Label fx:id="pieLabel" prefHeight="17.0" prefWidth="71.0" />
+                                             </children>
+                                          </HBox>
 
                                     </VBox>
                                     <TitledPane collapsible="false" maxHeight="700.0" minHeight="100.0" prefHeight="200.0" text="Comments by the Fairteam Member // Name can be changed" wrapText="true">
