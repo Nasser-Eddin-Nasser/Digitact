@@ -38,7 +38,7 @@ export class ApplicationsUploadPage implements OnInit {
   /**
    * URL of the server host.
    */
-  apiHostUrl = 'https://localhost:9090';
+  apiHostUrl = 'http://localhost:9090';
 
   /**
    * refers to the application that is being processed
