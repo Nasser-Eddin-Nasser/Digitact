@@ -42,11 +42,12 @@
     "applicantsUploadPage": {
         "upload": "Hochladen",
         "uploadingProgressMessage": "Bewerbung(en) werden hochgeladen {{uploadSize}}/{{totalSize}}",
-        "nApplicationUploadedSuccessMessage": "{{uploadedSize}} Bewerbung(en) wurden erfolgreich an den Server übermittelt.",
-        "napplicantsSavedMessage": "{{uploadedSize}} Bewerbung(en) erfolgreich gespeichert.",
-        "serverConnectionErrorMessage": "Aktuell ist keine Verbindung zum Server möglich. Bitte versuche es zu einem späteren Zeitpunkt noch einmal.",
-        "applicantUploadedSUccessMessage": "Bewerbung(en) wurden erfolgreich hochgeladen.",
-        "nApplicantsFailedToUploadMessage": "{{failedCount}} Bewerbung konnte aufgrund von folgendem Fehler nich gespeichert werden: {{errorMessage}}. Bitte versuche es zu einem späteren Zeitpunkt noch einmal."
+        "allApplicantsSavedSuccessMessage":"Alle an den Server gesendeten Bewerberdaten erfolgreich",
+        "allApplicantsFailedMessage":"Aufgrund einiger Fehler wurden nicht alle Bewerberdaten an den Server gesendet. Bitte versuchen Sie es später noch einmal",
+        "partialySentAndFailedMessage":"{{successCount}} Bewerberdaten wurden erfolgreich gesendet, und {{failedCount}} Bewerberdaten konnten nicht an den Server gesendet werden.",
+        "allRequestCancelledMessage":"Alle Bewerberdaten wurden nicht an den Server gesendet, da sie storniert wurden.",
+        "nSucceededRestCancelledMessage":"{{successCount}} Bewerberdaten wurden erfolgreich gesendet. Die übrigen Daten des Antragstellers wurden nicht an den Server gesendet, da sie storniert wurden."
+
     },
     "hrSideMenu": {
         "applicantRating": "Bewerber bewerten",

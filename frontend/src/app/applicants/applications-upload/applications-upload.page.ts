@@ -116,13 +116,13 @@ export class ApplicationsUploadPage implements OnInit {
     } else {
       if (this.succeededAPICount === this.totalFinalizedApplicantsCount) {
         this.statusMessage = this.translate.instant(
-          'applicantsUploadPage.allApplicantsSavedSuccess'
+          'applicantsUploadPage.allApplicantsSavedSuccessMessage'
         );
         this.statusIconName = 'checkmark-circle-outline';
         this.statusIconColor = 'success';
       } else if (this.failedAPICount === this.totalFinalizedApplicantsCount) {
         this.statusMessage = this.translate.instant(
-          'applicantsUploadPage.allApplicantsFailed'
+          'applicantsUploadPage.allApplicantsFailedMessage'
         );
         this.statusIconName = 'close-circle-outline';
         this.statusIconColor = 'danger';
