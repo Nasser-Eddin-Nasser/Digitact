@@ -10,11 +10,13 @@ import { Subscription } from 'rxjs';
 
 import { FormValue } from '../../common/forms/forms';
 import { ToastController } from '../../common/ion-wrappers/toast-controller';
-import { CreateApplicantData, HrRatingEntry, ImagesEntry, KeyCompetencesEntry  } from '../../model/create-applicant-data.model';
 import {
-  FormsData,
-  KeyCompetenciesEntry,
-} from '../../model/forms-data.model';
+  CreateApplicantData,
+  HrRatingEntry,
+  ImagesEntry,
+  KeyCompetencesEntry,
+} from '../../model/create-applicant-data.model';
+import { FormsData, KeyCompetenciesEntry } from '../../model/forms-data.model';
 import { RatingForm } from '../../rating/model/rating-form.model';
 import { StorageHandlerService } from '../../services/storage-handler.service';
 @Component({

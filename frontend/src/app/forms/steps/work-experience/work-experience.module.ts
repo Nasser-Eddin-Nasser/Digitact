@@ -17,7 +17,11 @@ import { WorkExperienceComponent } from './work-experience.component';
     ReactiveFormsModule,
     SharedModule,
   ],
-  declarations: [WorkExperienceComponent, WorkExperienceEntryComponent, GetI18nStringForEmploymentTypePipe],
+  declarations: [
+    WorkExperienceComponent,
+    WorkExperienceEntryComponent,
+    GetI18nStringForEmploymentTypePipe,
+  ],
   exports: [WorkExperienceComponent],
 })
 export class WorkExperienceModule {}

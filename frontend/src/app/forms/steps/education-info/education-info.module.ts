@@ -17,7 +17,11 @@ import { GetI18nStringForDegreePipe } from './pipes/get-i18n-string-for-degree.p
     ReactiveFormsModule,
     SharedModule,
   ],
-  declarations: [EducationInfoComponent, EducationInfoEntryModalComponent, GetI18nStringForDegreePipe],
+  declarations: [
+    EducationInfoComponent,
+    EducationInfoEntryModalComponent,
+    GetI18nStringForDegreePipe,
+  ],
   exports: [EducationInfoComponent],
 })
 export class EducationInfoModule {}

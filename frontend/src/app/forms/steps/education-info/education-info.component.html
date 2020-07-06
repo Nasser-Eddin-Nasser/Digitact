@@ -42,7 +42,8 @@
                 'educationInfo.degreeYearGradeMessage'
                   | translate
                     : {
-                        degree: data.controls.degree.value | getI18NStringForDegree,
+                        degree:
+                          data.controls.degree.value | getI18NStringForDegree,
                         graduationYear: data.controls.graduationYear.value,
                         grade: data.controls.grade.value
                       }
