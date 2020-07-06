@@ -10,14 +10,14 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class GetI18nStringForDegreePipe implements PipeTransform {
   constructor(private translate: TranslateService) {}
-  
+
   transform(degree: string): string {
 
-    let localizedString:string='';
+    let localizedString:string;
     switch(degree){
-        case 'Master': localizedString=this.translate.instant('educationInfo.master');
-        case 'Bachelor': localizedString=this.translate.instant('educationInfo.bachelor');
-        case 'School': localizedString=this.translate.instant('educationInfo.school');
+        case 'Master': {localizedString=this.translate.instant('educationInfo.master');break;}
+        case 'Bachelor': {localizedString=this.translate.instant('educationInfo.bachelor');break;}
+        case 'School': {localizedString=this.translate.instant('educationInfo.school');break;}
     }
     return localizedString;
   }

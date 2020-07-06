@@ -6,17 +6,17 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 import { FormValue } from '../../common/forms/forms';
 import { ToastController } from '../../common/ion-wrappers/toast-controller';
+import { CreateApplicantData, HrRatingEntry, ImagesEntry, KeyCompetencesEntry  } from '../../model/create-applicant-data.model';
 import {
   FormsData,
   KeyCompetenciesEntry,
 } from '../../model/forms-data.model';
 import { RatingForm } from '../../rating/model/rating-form.model';
 import { StorageHandlerService } from '../../services/storage-handler.service';
-import { Subscription } from 'rxjs';
-import { CreateApplicantData, HrRatingEntry, ImagesEntry, KeyCompetencesEntry  } from 'src/app/model/create-applicant-data.model';
 @Component({
   selector: 'app-applications-upload',
   templateUrl: './applications-upload.page.html',
@@ -269,7 +269,7 @@ export class ApplicationsUploadPage implements OnInit {
    * In this method completion notification is displayed
    */
   async completionAlert(): Promise<void> {
-    const message = this.isAPIInProgress
+    const toastMessage = this.isAPIInProgress
       ? this.succeededAPICount
         ? this.translate.instant(
             'applicantsUploadPage.nSucceededRestCancelledMessage',
@@ -280,10 +280,10 @@ export class ApplicationsUploadPage implements OnInit {
           )
       : this.statusMessage;
 
-    const color = this.isAPIInProgress ? 'warning' : this.statusIconColor;
+    const toastColor = this.isAPIInProgress ? 'warning' : this.statusIconColor;
     const toast = await this.toastController.create({
-      message: message,
-      color: color,
+      message: toastMessage,
+      color: toastColor,
       position: 'bottom',
       duration: 2000,
     });

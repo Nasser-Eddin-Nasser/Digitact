@@ -13,16 +13,16 @@ export class GetI18nStringForEmploymentTypePipe implements PipeTransform {
   constructor(private translate: TranslateService) {}
 
   transform(employmentType:string): string {
-    let localizedString:string='';
+    let localizedString:string;
     switch(employmentType){
-      case 'FullTime': localizedString=this.translate.instant('workExperience.fullTime');
-      case 'PartTime': localizedString=this.translate.instant('workExperience.partTime');
-      case 'SelfEmployed': localizedString=this.translate.instant('workExperience.selfEmployed');
-      case 'Freelance': localizedString=this.translate.instant('workExperience.freelance');
-      case 'Contract': localizedString=this.translate.instant('workExperience.contract');
-      case 'Internship': localizedString=this.translate.instant('workExperience.internship');
-      case 'Apprenticeship': localizedString=this.translate.instant('workExperience.apprenticeship');
-      case 'Other': localizedString=this.translate.instant('workExperience.other');
+      case 'FullTime': {localizedString=this.translate.instant('workExperience.fullTime');break;}
+      case 'PartTime': {localizedString=this.translate.instant('workExperience.partTime');break;}
+      case 'SelfEmployed': {localizedString=this.translate.instant('workExperience.selfEmployed');break;}
+      case 'Freelance': {localizedString=this.translate.instant('workExperience.freelance');break;}
+      case 'Contract': {localizedString=this.translate.instant('workExperience.contract');break;}
+      case 'Internship': {localizedString=this.translate.instant('workExperience.internship');break;}
+      case 'Apprenticeship':{ localizedString=this.translate.instant('workExperience.apprenticeship');break;}
+      case 'Other': {localizedString=this.translate.instant('workExperience.other');break;}
       }
     return localizedString;
   }

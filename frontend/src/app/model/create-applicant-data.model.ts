@@ -4,7 +4,8 @@
  */
 
 import { FormValue } from '../common/forms/forms';
-import { WorkExperienceEntry, EducationInfoEntry } from './forms-data.model';
+
+import {EducationInfoEntry, WorkExperienceEntry } from './forms-data.model';
 
     export interface CreateApplicantData {
         firstName: string;
@@ -23,18 +24,18 @@ import { WorkExperienceEntry, EducationInfoEntry } from './forms-data.model';
         additionalInfo: string;
         hrRating: HrRatingEntry;
       }
-      
+
       export interface KeyCompetencesEntry {
         category: string;
         name: string;
         rating: number;
       }
-      
+
       export interface ImagesEntry {
         content: string;
         type: string;
       }
-      
+
       export interface HrRatingEntry {
         rhetoric: number;
         motivation: number;
@@ -42,5 +43,3 @@ import { WorkExperienceEntry, EducationInfoEntry } from './forms-data.model';
         personalImpression: number;
         impression: string;
       }
-      
-
