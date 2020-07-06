@@ -7,6 +7,7 @@ import { SharedModule } from '../../../shared.module';
 
 import { WorkExperienceEntryComponent } from './work-experience-entry/work-experience-entry.component';
 import { WorkExperienceComponent } from './work-experience.component';
+import { GetI18nStringForEmploymentTypePipe } from './pipes/get-i18n-string-for-employment-type.pipe';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { WorkExperienceComponent } from './work-experience.component';
     ReactiveFormsModule,
     SharedModule,
   ],
-  declarations: [WorkExperienceComponent, WorkExperienceEntryComponent],
+  declarations: [WorkExperienceComponent, WorkExperienceEntryComponent, GetI18nStringForEmploymentTypePipe],
   exports: [WorkExperienceComponent],
 })
 export class WorkExperienceModule {}
