@@ -107,7 +107,7 @@ export class FormsPage
       xing: new FormControl(''),
     }),
     profilePicture: new FormGroup<ProfilePicture>({
-      pictureBase64: new FormControl('', Validators.required),
+      pictureBase64: new FormControl(''),
     }),
     documents: new FormGroup<Documents>({
       documentsBase64: new FormArray([]),
