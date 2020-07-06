@@ -370,23 +370,28 @@ public class ApplicantInfoController {
     }
 
     private void setProfPic(List<AppImage> images) {
-        AppImage profImage =
-                images.stream()
-                        .filter(x -> x.getType().equals(ImageType.profilePic))
-                        .findFirst()
-                        .get();
-        if (profImage != null) {
-            try {
-                if (profImage.getContent() == null)
-                    Connector.sendGetHttp(
-                            getImageById, String.valueOf(app.getID()), profImage.getId());
-                ImageTools.parseImageStringToImage(profImage);
-                File file = new File(profImage.getPath());
-                imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
-                imgFX.fitWidthProperty().bind(imgstckPFX.widthProperty());
-                imgFX.fitHeightProperty().bind(imgstckPFX.heightProperty());
-            } catch (Exception e) {
-                e.printStackTrace();
+        AppImage profImage = null;
+        boolean hasProfilePicture = false;
+        for (AppImage img : images) {
+            if (img.getType() == ImageType.profilePic) {
+                hasProfilePicture = true;
+                profImage = img;
+            }
+        }
+        if (hasProfilePicture) {
+            if (profImage != null) {
+                try {
+                    if (profImage.getContent() == null)
+                        Connector.sendGetHttp(
+                                getImageById, String.valueOf(app.getID()), profImage.getId());
+                    ImageTools.parseImageStringToImage(profImage);
+                    File file = new File(profImage.getPath());
+                    imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
+                    imgFX.fitWidthProperty().bind(imgstckPFX.widthProperty());
+                    imgFX.fitHeightProperty().bind(imgstckPFX.heightProperty());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
