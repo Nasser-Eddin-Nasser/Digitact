@@ -32,6 +32,7 @@ export class ApplicationsUploadPage implements OnInit {
     private toastController: ToastController,
     private translate: TranslateService
   ) {}
+
   /**
    * The total application size.
    */
@@ -111,7 +112,7 @@ export class ApplicationsUploadPage implements OnInit {
         'applicantsUploadPage.uploadingProgressMessage',
         {
           uploadSize: this.index + 1,
-          totalApplicantsCount: this.totalFinalizedApplicantsCount,
+          totalSize: this.totalFinalizedApplicantsCount,
         }
       );
       this.sendPostRequest(this.applicantDetailsList[this.index]);
@@ -287,7 +288,7 @@ export class ApplicationsUploadPage implements OnInit {
       message: toastMessage,
       color: toastColor,
       position: 'bottom',
-      duration: 2000,
+      duration: 4000,
     });
     toast.present();
   }

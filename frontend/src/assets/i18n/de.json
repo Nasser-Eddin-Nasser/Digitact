@@ -42,11 +42,11 @@
     "applicantsUploadPage": {
         "upload": "Hochladen",
         "uploadingProgressMessage": "Bewerbung(en) werden hochgeladen {{uploadSize}}/{{totalSize}}",
-        "allApplicantsSavedSuccessMessage":"Alle an den Server gesendeten Bewerberdaten erfolgreich",
-        "allApplicantsFailedMessage":"Aufgrund einiger Fehler wurden nicht alle Bewerberdaten an den Server gesendet. Bitte versuchen Sie es später noch einmal",
-        "partialySentAndFailedMessage":"{{successCount}} Bewerberdaten wurden erfolgreich gesendet, und {{failedCount}} Bewerberdaten konnten nicht an den Server gesendet werden.",
-        "allRequestCancelledMessage":"Alle Bewerberdaten wurden nicht an den Server gesendet, da sie storniert wurden.",
-        "nSucceededRestCancelledMessage":"{{successCount}} Bewerberdaten wurden erfolgreich gesendet. Die übrigen Daten des Antragstellers wurden nicht an den Server gesendet, da sie storniert wurden."
+        "allApplicantsSavedSuccessMessage":"Alle Bewerbung (en) erfolgreich gesendet",
+        "allApplicantsFailedMessage":"Aufgrund einiger Fehler wurde keine der Anwendungen gesendet. Bitte versuchen Sie es später noch einmal",
+        "partialySentAndFailedMessage":"{{successCount}} Anwendung(en) erfolgreich gesendet und {{failedCount}} Anwendung(en) fehlgeschlagen.",
+        "allRequestCancelledMessage":"Keiner der Anträge wurde gesendet, da er storniert wurde.",
+        "nSucceededRestCancelledMessage":"{{successCount}} Anwendung (en) erfolgreich gesendet. Der Rest der Anwendung (en) wurde nicht an den Server gesendet, da er abgebrochen wurde."
 
     },
     "hrSideMenu": {

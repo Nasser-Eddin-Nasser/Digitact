@@ -42,11 +42,11 @@
     "applicantsUploadPage": {
         "upload": "Upload",
         "uploadingProgressMessage": "uploading application {{uploadSize}}/{{totalSize}}",
-        "allApplicantsSavedSuccessMessage":"All applicant(s) data sent to server successfully",
-        "allApplicantsFailedMessage":"Due to some error(s), all the applicant(s) data were not sent to the server. Please try again later",
-        "partialySentAndFailedMessage":"{{succeededCount}} applicant(s) data sent successfully and {{failedCount}} applicant(s) data failed to sent to the server.",
-        "allRequestCancelledMessage":"All applicant(s) data were not sent to the server, as it was cancelled.",
-        "nSucceededRestCancelledMessage":"{{succeededCount}} applicant(s) data sent successfully. Rest of the applicant(s) data were not sent to the server, as it was cancelled."
+        "allApplicantsSavedSuccessMessage":"All application(s) sent successfully",
+        "allApplicantsFailedMessage":"Due to some error(s), none of the application(s) were sent. Please try again later",
+        "partialySentAndFailedMessage":"{{succeededCount}} application(s) sent successfully and {{failedCount}} application(s) failed.",
+        "allRequestCancelledMessage":"None of the application(s) were sent, as it was cancelled.",
+        "nSucceededRestCancelledMessage":"{{succeededCount}} application(s) sent successfully. Rest of the application(s) were not sent to the server, as it was cancelled."
     },
     "hrSideMenu": {
         "applicantRating": "Applicant Rating",
