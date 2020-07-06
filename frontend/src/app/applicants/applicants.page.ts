@@ -25,6 +25,9 @@ export class ApplicantsPage implements OnInit {
     private router: ActivatedRoute
   ) {}
 
+  /**
+   * Boolean that  holds whether promise is resolved or not to load the page content
+   */
   isPromiseResolved = false;
   /**
    * In this method all the applications stored in the local DB are fetched

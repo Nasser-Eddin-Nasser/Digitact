@@ -90,6 +90,10 @@ export class ApplicationsUploadPage implements OnInit {
   statusIconColor: string;
 
   /**
+   * Boolean that  holds whether promise is resolved or not to load the page content
+   */
+  isPromiseResolved = false;
+  /**
    * In this method locally stored data are fetched and post request function is called for one application at time.
    */
   ngOnInit(): void {
@@ -97,6 +101,7 @@ export class ApplicationsUploadPage implements OnInit {
       .getAllItems<FormValue<FormsData>>(this.storage.applicantDetailsDb)
       .then((data) => {
         this.applicantDetailsList = data.filter((x) => x.isRated === 1);
+        this.isPromiseResolved = true;
         this.totalFinalizedApplicantsCount = this.applicantDetailsList.length;
         this.initiateRequests();
       });
