@@ -25,6 +25,7 @@ export class ApplicantsPage implements OnInit {
     private router: ActivatedRoute
   ) {}
 
+  isPromiseResolved = false;
   /**
    * In this method all the applications stored in the local DB are fetched
    */
@@ -33,6 +34,7 @@ export class ApplicantsPage implements OnInit {
       this.storage
         .getAllItems<FormsData>(this.storage.applicantDetailsDb)
         .then((data) => {
+          this.isPromiseResolved = true;
           this.fetchApplications(data);
         });
     });

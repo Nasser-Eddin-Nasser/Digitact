@@ -13,6 +13,9 @@
 
 <ion-content>
   <div class="main-container info">
+    <span *ngIf="!isPromiseResolved; else applicantData" class="spinner-css">
+      <ion-spinner></ion-spinner>
+    </span>
     <span *ngIf="countFinalized !== 0">
       <div class="content">
         <div class="main-description info-content">
@@ -58,12 +61,14 @@
       </ion-list>
     </span>
 
-    <span *ngIf="countNotFinalized === 0 && countFinalized === 0">
-      <div class="content">
-        <div class="main-description info-content">
-          {{'applicantsPage.noApplicantsMessage' | translate}}
+    <ng-template #applicantData>
+      <span *ngIf="countNotFinalized === 0 && countFinalized === 0">
+        <div class="content">
+          <div class="main-description info-content">
+            {{'applicantsPage.noApplicantsMessage' | translate}}
+          </div>
         </div>
-      </div>
-    </span>
+      </span>
+    </ng-template>
   </div>
 </ion-content>
