@@ -61,6 +61,9 @@ public class Applicant extends User {
     @Column(name = "Status")
     private Status status;
 
+    @Column(name = "hrComment")
+    private String hrComment;
+
     protected Applicant() {
         super();
     }
@@ -78,7 +81,8 @@ public class Applicant extends User {
         positions = new HashSet<Positions>();
         workExperiences = new HashSet<WorkExperience>();
         hrRating = new HrRating();
-        status = Status.denied;
+        status = Status.open;
+        hrComment = "";
     }
 
     public UserRight getUserRight() {
@@ -227,5 +231,13 @@ public class Applicant extends User {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public String getHrComment() {
+        return hrComment;
+    }
+
+    public void setHrComment(String hrComment) {
+        this.hrComment = hrComment;
     }
 }

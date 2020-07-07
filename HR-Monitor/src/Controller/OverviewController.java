@@ -26,6 +26,7 @@ public class OverviewController {
     @FXML TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
     @FXML TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
     @FXML TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
+    @FXML TableColumn<ApplicantUI, String> status = new TableColumn<>("status");
 
     Pane root;
 
@@ -45,6 +46,8 @@ public class OverviewController {
                 user -> new ReadOnlyStringWrapper(user.getValue().getFirstName()));
         lastNameCol.setCellValueFactory(
                 user -> new ReadOnlyStringWrapper(user.getValue().getLastName()));
+        status.setCellValueFactory(
+                user -> new ReadOnlyStringWrapper(user.getValue().getStatus().toString()));
     }
 
     public ObservableList<ApplicantUI> getTable() {

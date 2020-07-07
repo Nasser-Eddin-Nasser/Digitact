@@ -41,6 +41,8 @@ public class ApplicantUI {
     private List<KeyCompetence> keyCompetencies;
     private List<AppImage> images;
 
+    private String hrComment;
+
     protected ApplicantUI() {}
 
     public ApplicantUI(String firstName, String lastName) {
@@ -66,7 +68,8 @@ public class ApplicantUI {
             List<KeyCompetence> keyCompetencies,
             List<AppImage> images,
             HrRating hrRating,
-            Status status) {
+            Status status,
+            String hrComment) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -85,6 +88,7 @@ public class ApplicantUI {
         this.workExperiences = workExperiences;
         this.hrRating = hrRating;
         this.status = status;
+        this.hrComment = hrComment;
     }
 
     public List<Industries> getIndustries() {
@@ -181,5 +185,13 @@ public class ApplicantUI {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public String getHrComment() {
+        return hrComment;
+    }
+
+    public void setHrComment(String hrComment) {
+        this.hrComment = hrComment;
     }
 }
