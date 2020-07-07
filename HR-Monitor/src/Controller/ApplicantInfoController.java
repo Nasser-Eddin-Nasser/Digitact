@@ -354,6 +354,7 @@ public class ApplicantInfoController {
     }
 
     private void setProfPic(List<AppImage> images) {
+<<<<<<< HEAD
 
         AppImage profImage;
         try {
@@ -366,6 +367,14 @@ public class ApplicantInfoController {
             profImage = null;
         }
 
+=======
+        AppImage profImage = null;
+        for (AppImage img : images) {
+            if (img.getType() == ImageType.profilePic) {
+                profImage = img;
+            }
+        }
+>>>>>>> 32f89c3bc7ac809177b10b7e24a5a82c1737c55c
         if (profImage != null) {
             try {
                 if (profImage.getContent() == null)
