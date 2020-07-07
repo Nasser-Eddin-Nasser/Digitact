@@ -19,3 +19,10 @@
   min-height: 50px;
   transform: scale(1.5);
 }
+.spinner-css {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform: scale(1.5);
+}

@@ -10,33 +10,38 @@
 </ion-header>
 
 <ion-content>
-  <div class="main-container">
-    <div class="content">
-      <div class="main-description custom-style">
-        {{statusMessage}}
-      </div>
-      <div class="status-icon">
-        <div *ngIf="isAPIInProgress; else completedState">
-          <ion-spinner></ion-spinner>
+  <span *ngIf="!isPromiseResolved; else uploadContent" class="spinner-css">
+    <ion-spinner></ion-spinner>
+  </span>
+  <ng-template #uploadContent>
+    <div class="main-container">
+      <div class="content">
+        <div class="main-description custom-style">
+          {{statusMessage}}
         </div>
+        <div class="status-icon">
+          <div *ngIf="isAPIInProgress; else completedState">
+            <ion-spinner></ion-spinner>
+          </div>
 
-        <ng-template #completedState>
-          <ion-icon
-            name="{{statusIconName}}"
-            size="large"
-            color="{{statusIconColor}}"
-          ></ion-icon
-        ></ng-template>
+          <ng-template #completedState>
+            <ion-icon
+              name="{{statusIconName}}"
+              size="large"
+              color="{{statusIconColor}}"
+            ></ion-icon
+          ></ng-template>
+        </div>
+      </div>
+
+      <div *ngIf="isAPIInProgress">
+        <button
+          class="fancy-button align center second-button"
+          (click)="goBack()"
+        >
+          {{'commonLables.cancel' | translate}}
+        </button>
       </div>
     </div>
-
-    <div *ngIf="isAPIInProgress">
-      <button
-        class="fancy-button align center second-button"
-        (click)="goBack()"
-      >
-        {{'commonLables.cancel' | translate}}
-      </button>
-    </div>
-  </div>
+  </ng-template>
 </ion-content>

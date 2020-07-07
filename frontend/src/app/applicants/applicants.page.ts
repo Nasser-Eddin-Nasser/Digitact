@@ -26,6 +26,10 @@ export class ApplicantsPage implements OnInit {
   ) {}
 
   /**
+   * Boolean that  holds whether promise is resolved or not to load the page content
+   */
+  isPromiseResolved = false;
+  /**
    * In this method all the applications stored in the local DB are fetched
    */
   ngOnInit(): void {
@@ -33,6 +37,7 @@ export class ApplicantsPage implements OnInit {
       this.storage
         .getAllItems<FormsData>(this.storage.applicantDetailsDb)
         .then((data) => {
+          this.isPromiseResolved = true;
           this.fetchApplications(data);
         });
     });
