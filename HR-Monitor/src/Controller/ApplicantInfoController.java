@@ -178,14 +178,18 @@ public class ApplicantInfoController {
             barChartFX.setMaxHeight(5000);
             XYChart.Series series = new XYChart.Series();
 
-            series.getData().add(new XYChart.Data(4, "Rhetoric"));
-            series.getData().add(new XYChart.Data(5, "Motivation"));
-            series.getData().add(new XYChart.Data(3, "Personal Impression"));
-            series.getData().add(new XYChart.Data(2, "Self Assurance"));
+            series.getData().add(new XYChart.Data(app.getHrRating().getRhetoric(), "Rhetoric"));
+            series.getData().add(new XYChart.Data(app.getHrRating().getMotivation(), "Motivation"));
+            series.getData()
+                    .add(
+                            new XYChart.Data(
+                                    app.getHrRating().getPersonalImpression(),
+                                    "Personal Impression"));
+            series.getData()
+                    .add(new XYChart.Data(app.getHrRating().getSelfAssurance(), "Self Assurance"));
 
             barChartFX.getData().add(series);
             barChartFX.setTitle("HR Ratings");
-            System.out.println("This runs");
             hBoxBChartFX.getChildren().add(barChartFX);
         }
         isHRChartLoaded = true;

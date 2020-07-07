@@ -16,14 +16,17 @@
 
 }
 
+.chart-bar{
+    -fx-fill: black;
+}
 
 
-chart-pie-label-line {
+.chart-bar-label-line {
     -fx-stroke: #8b4513;
     -fx-fill: #8b4513;
 }
 
-.chart-pie-label {
+.chart-bar-label {
     -fx-fill: black;
     -fx-font-size: 1em;
 }
@@ -31,9 +34,7 @@ chart-pie-label-line {
    -fx-background-color:  #fafad2;
    -fx-stroke: #daa520;
 }
-Text {
--fx-fill: white;
-}
+
 
 
 GridPane {
