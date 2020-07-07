@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
-<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -355,10 +354,11 @@
                           </Tab>
 
                            <Tab onSelectionChanged="#onShowRating" text="Applicant Ratings">
-                              <SplitPane dividerPositions="0.5555555555555556, 0.786910197869102" maxHeight="657.0" minHeight="30.0" orientation="VERTICAL" prefHeight="657.0" prefWidth="650.0">
+                              <SplitPane dividerPositions="0.6179604261796042, 0.7792998477929984, 0.9406392694063926" maxHeight="5000.0" minHeight="30.0" orientation="VERTICAL" prefHeight="800.0" prefWidth="650.0">
                                  <items>
                                     <VBox maxHeight="3000.0" minHeight="100.0">
-                                       <HBox alignment="CENTER" spacing="20.0">
+                                          <HBox fx:id="hBoxBChartFX" alignment="CENTER" maxHeight="5000.0" prefHeight="344.0" prefWidth="1000.0" />
+                                       <HBox alignment="CENTER" maxHeight="500.0" spacing="20.0">
                                           <Label> Change status</Label>
                                           <Label fx:id="btnOFX" minWidth="75.0" style="-fx-alignment: CENTER;-fx-background-color: #61d0ee; -fx-background-radius:10 10 10 10" text="Open"> Open</Label>
                                           <Label fx:id="btnHRFX" minWidth="75.0" style="-fx-alignment: CENTER;-fx-background-color: #5be14f; -fx-background-radius:10 10 10 10"> Send to HR</Label>
@@ -369,19 +369,20 @@
                                              <padding>
                                                 <Insets bottom="20.0" right="40.0" top="20.0" />
                                              </padding>
-
                                        </HBox>
-                                          <PieChart id="pieChart" fx:id="chart" prefHeight="416.0" prefWidth="650.0" title="Hr-Rating" />
-
                                     </VBox>
-                                    <TitledPane collapsible="false" maxHeight="700.0" minHeight="100.0" prefHeight="200.0" text="Comments by the Fairteam Member" wrapText="true">
+                                    <TitledPane collapsible="false" maxHeight="1000.0" minHeight="100.0" prefHeight="200.0" text="Comments by the Fairteam Member" wrapText="true">
                                           <content>
-                                             <TextField fx:id="txtImpFX" alignment="TOP_LEFT" editable="false" prefHeight="135.0" prefWidth="648.0" />
+                                             <TextField fx:id="txtImpFX" alignment="TOP_LEFT" editable="false" maxHeight="1000.0" prefHeight="135.0" prefWidth="648.0" />
                                           </content></TitledPane>
-                                    <TitledPane collapsible="false" maxHeight="700.0" minHeight="100.0" prefHeight="200.0" text="Comments by the HR Member" wrapText="true">
+                                    <TitledPane collapsible="false" maxHeight="1000.0" minHeight="100.0" prefHeight="200.0" text="Comments by the HR Member" wrapText="true">
                                           <content>
-                                             <TextField fx:id="txtImpHRFX" alignment="TOP_LEFT" prefHeight="115.0" prefWidth="648.0" />
+                                             <TextField fx:id="txtImpHRFX" alignment="TOP_LEFT" maxHeight="1000.0" prefHeight="115.0" prefWidth="648.0" promptText="Add a comment about the Applicant" />
                                           </content></TitledPane>
+                                       <HBox alignment="CENTER" maxHeight="5000.0" prefHeight="35.0" prefWidth="650.0">
+                                          <children>
+                                             <Button fx:id="btnSaveFX" mnemonicParsing="false" text="Save Changes" />
+                                          </children></HBox>
                                  </items>
                               </SplitPane>
 

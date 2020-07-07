@@ -167,7 +167,7 @@ public class Connector {
             if ((inputLine = in.readLine()) != null) {
                 Util.JSONTools.convertJSONToApplicant(inputLine);
             }
-          
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -226,6 +226,7 @@ public class Connector {
             e.printStackTrace();
         }
     }
+
     public static void sendPutType(Method method, Token token) {
         switch (method) {
             case putToken:
@@ -257,7 +258,7 @@ public class Connector {
                 os.write(input, 0, input.length);
             }
             try (BufferedReader br =
-                         new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+                    new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
                 StringBuilder response = new StringBuilder();
                 String responseLine = null;
                 while ((responseLine = br.readLine()) != null) {
@@ -285,7 +286,7 @@ public class Connector {
                 byte[] input = reqBody.getBytes("utf-8");
                 os.write(input, 0, input.length);
                 try (BufferedReader br =
-                             new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+                        new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
                     StringBuilder response = new StringBuilder();
                     String responseLine = null;
                     while ((responseLine = br.readLine()) != null) {

@@ -22,7 +22,6 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -33,7 +32,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -111,15 +110,6 @@ public class ApplicantInfoController {
     @FXML private ImageView imgFX;
     @FXML StackPane imgstckPFX;
 
-    @FXML PieChart chart; // hr rating
-    @FXML PieChart pLPieChart;
-
-    @FXML PieChart bSPieChart;
-    @FXML PieChart dbPieChart;
-    @FXML PieChart langPieChart;
-
-    @FXML PieChart psPieChart;
-
     // Documents tab
     @FXML ScrollPane documentsGridFX;
     @FXML Tab docTabFX;
@@ -138,6 +128,12 @@ public class ApplicantInfoController {
     @FXML Label btnOFX, btnHRFX, btnDFX;
     @FXML Label lblStatusFX;
 
+    // Bar chart - HR Ratings
+    @FXML HBox hBoxBChartFX;
+
+    // Save
+    @FXML Button btnSaveFX;
+
     public ApplicantInfoController(long id, OverviewModel model) {
         this.model = model;
         app = this.model.getApplicantByID(id);
@@ -150,7 +146,7 @@ public class ApplicantInfoController {
             setApplicantInfo();
 
         } catch (IOException e) {
-            System.err.println("unable to load Image!");
+            System.err.println("unable to load Applicant!");
             e.printStackTrace();
         }
     }
@@ -166,24 +162,31 @@ public class ApplicantInfoController {
         getHrRating();
     }
 
-    private void getPieChart() {
+    private void getBarChart() {
         if (!isHRChartLoaded) {
-            ObservableList<PieChart.Data> pieChartData =
-                    FXCollections.observableArrayList(
-                            new PieChart.Data(
-                                    "Rhetoric " + app.getHrRating().getRhetoric(),
-                                    app.getHrRating().getRhetoric()),
-                            new PieChart.Data(
-                                    "Motivation " + app.getHrRating().getMotivation(),
-                                    app.getHrRating().getMotivation()),
-                            new PieChart.Data(
-                                    "Self Assurance " + app.getHrRating().getSelfAssurance(),
-                                    app.getHrRating().getSelfAssurance()),
-                            new PieChart.Data(
-                                    "Personal Impression "
-                                            + app.getHrRating().getPersonalImpression(),
-                                    app.getHrRating().getPersonalImpression()));
-            chart.setData(pieChartData);
+
+            CategoryAxis yAxis = new CategoryAxis();
+            NumberAxis xAxis = new NumberAxis();
+            BarChart<Number, String> barChartFX = new BarChart<Number, String>(xAxis, yAxis);
+            xAxis.upperBoundProperty().setValue(5);
+            xAxis.setLabel("Rating");
+            yAxis.setLabel("Categories");
+            yAxis.setStyle("-fx-tick-label-fill:black");
+            xAxis.setStyle("-fx-tick-label-fill:black");
+            barChartFX.setStyle("-fx-tick-label-fill:black");
+            barChartFX.setLegendVisible(false);
+            barChartFX.setMaxHeight(5000);
+            XYChart.Series series = new XYChart.Series();
+
+            series.getData().add(new XYChart.Data(4, "Rhetoric"));
+            series.getData().add(new XYChart.Data(5, "Motivation"));
+            series.getData().add(new XYChart.Data(3, "Personal Impression"));
+            series.getData().add(new XYChart.Data(2, "Self Assurance"));
+
+            barChartFX.getData().add(series);
+            barChartFX.setTitle("HR Ratings");
+            System.out.println("This runs");
+            hBoxBChartFX.getChildren().add(barChartFX);
         }
         isHRChartLoaded = true;
     }
@@ -196,7 +199,7 @@ public class ApplicantInfoController {
     @FXML
     private void onShowRating() {
         statusListener();
-        getPieChart();
+        getBarChart();
     }
 
     private void getStatus() {
@@ -229,16 +232,19 @@ public class ApplicantInfoController {
                 (event) -> {
                     setStatusLabel(Open);
                     Connector.changeStatus(app.getID(), Open);
+                    app.setStatus(Open);
                 });
         btnHRFX.setOnMouseClicked(
                 (event) -> {
                     setStatusLabel(Send2HR);
                     Connector.changeStatus(app.getID(), Send2HR);
+                    app.setStatus(Send2HR);
                 });
         btnDFX.setOnMouseClicked(
                 (event) -> {
                     setStatusLabel(Denied);
                     Connector.changeStatus(app.getID(), Denied);
+                    app.setStatus(Denied);
                 });
     }
 
@@ -263,6 +269,11 @@ public class ApplicantInfoController {
                     }
                 });
         txtImpHRFX.setText(app.getHrComment());
+        btnSaveFX.setOnMouseClicked(
+                mouseEvent -> {
+                    Connector.postHRComment(app.getID(), txtImpHRFX.getText());
+                    app.setHrComment(txtImpHRFX.getText());
+                });
     }
 
     private void getKeyCompetence() {
@@ -339,28 +350,31 @@ public class ApplicantInfoController {
     }
 
     private void setProfPic(List<AppImage> images) {
+
+        AppImage profImage;
         try {
-            AppImage profImage =
+            profImage =
                     images.stream()
                             .filter(x -> x.getType().equals(ImageType.profilePic))
                             .findFirst()
                             .get();
-            if (profImage != null) {
-                try {
-                    if (profImage.getContent() == null)
-                        Connector.sendGetHttp(
-                                getImageById, String.valueOf(app.getID()), profImage.getId());
-                    ImageTools.parseImageStringToImage(profImage);
-                    File file = new File(profImage.getPath());
-                    imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
-                    imgFX.fitWidthProperty().bind(imgstckPFX.widthProperty());
-                    imgFX.fitHeightProperty().bind(imgstckPFX.heightProperty());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
         } catch (Exception e) {
-            // Do nothing
+            profImage = null;
+        }
+
+        if (profImage != null) {
+            try {
+                if (profImage.getContent() == null)
+                    Connector.sendGetHttp(
+                            getImageById, String.valueOf(app.getID()), profImage.getId());
+                ImageTools.parseImageStringToImage(profImage);
+                File file = new File(profImage.getPath());
+                imgFX.setImage(SwingFXUtils.toFXImage(ImageIO.read(file), null));
+                imgFX.fitWidthProperty().bind(imgstckPFX.widthProperty());
+                imgFX.fitHeightProperty().bind(imgstckPFX.heightProperty());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
