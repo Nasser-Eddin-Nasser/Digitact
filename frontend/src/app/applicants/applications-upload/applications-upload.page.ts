@@ -297,10 +297,12 @@ export class ApplicationsUploadPage implements OnInit {
    * In this method navigation to home is handled.
    */
   goBack(): void {
-    this.completionAlert();
     if (this.isAPIInProgress && this.currentRequest) {
       this.currentRequest.unsubscribe();
     }
-    this.navController.navigateBack(['/applicants']);
+    setTimeout(() => {
+      this.navController.navigateBack(['/applicants']);
+      this.completionAlert();
+    }, 1000);
   }
 }
