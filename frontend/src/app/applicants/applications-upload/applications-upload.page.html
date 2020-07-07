@@ -10,58 +10,38 @@
 </ion-header>
 
 <ion-content>
-  <div class="main-container">
-    <div class="content">
-      <div class="main-description custom-style">
-        {{'applicantsUploadPage.uploadingProgressMessage' |
-        translate:{uploadSize:uploadingCount,totalSize:totalSize} }}
-      </div>
-      <div class="spinner-css">
-        <span *ngIf="!isSuccess && !isError"> <ion-spinner></ion-spinner></span>
-        <span *ngIf="isSuccess">
-          <ion-icon
-            name="checkmark-circle-outline"
-            size="large"
-            class="success-icon"
-          ></ion-icon
-        ></span>
-        <span *ngIf="isError">
-          <ion-icon
-            name="close-circle-outline"
-            class="failure-icon"
-            size="large"
-          ></ion-icon>
-        </span>
-      </div>
-    </div>
-
-    <div class="buttons-container button-css">
-      <button
-        class="fancy-button align center second-button"
-        (click)="goBack()"
-      >
-        {{'commonLables.cancel' | translate}}
-      </button>
-    </div>
-  </div>
-
-  <div class="main-container">
-    <div class="content">
-      <span *ngIf="!isError">
-        <div class="main-description upload-info">
-          {{'applicantsUploadPage.nApplicationUploadedSuccessMessage' |
-          translate:{uploadedSize:uploadingCount-1} }}
+  <span *ngIf="!isPromiseResolved; else uploadContent" class="spinner-css">
+    <ion-spinner></ion-spinner>
+  </span>
+  <ng-template #uploadContent>
+    <div class="main-container">
+      <div class="content">
+        <div class="main-description custom-style">
+          {{statusMessage}}
         </div>
-      </span>
-      <span *ngIf="isError">
-        <span *ngIf="uploadingCount>1" class="upload-info">
-          {{'applicantsUploadPage.napplicantsSavedMessage' |
-          translate:{uploadedSize:uploadingCount-1} }}
-        </span>
-        <div class="main-description error-info">
-          {{errorMessage}}
+        <div class="status-icon">
+          <div *ngIf="isAPIInProgress; else completedState">
+            <ion-spinner></ion-spinner>
+          </div>
+
+          <ng-template #completedState>
+            <ion-icon
+              name="{{statusIconName}}"
+              size="large"
+              color="{{statusIconColor}}"
+            ></ion-icon
+          ></ng-template>
         </div>
-      </span>
+      </div>
+
+      <div *ngIf="isAPIInProgress">
+        <button
+          class="fancy-button align center second-button"
+          (click)="goBack()"
+        >
+          {{'commonLables.cancel' | translate}}
+        </button>
+      </div>
     </div>
-  </div>
+  </ng-template>
 </ion-content>

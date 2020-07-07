@@ -2,13 +2,20 @@
  * @description
  * This page send the applications to the server
  */
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 import { FormValue } from '../../common/forms/forms';
 import { ToastController } from '../../common/ion-wrappers/toast-controller';
+import {
+  CreateApplicantData,
+  HrRatingEntry,
+  ImagesEntry,
+  KeyCompetencesEntry,
+} from '../../model/create-applicant-data.model';
 import { FormsData, KeyCompetenciesEntry } from '../../model/forms-data.model';
 import { RatingForm } from '../../rating/model/rating-form.model';
 import { StorageHandlerService } from '../../services/storage-handler.service';
@@ -25,39 +32,67 @@ export class ApplicationsUploadPage implements OnInit {
     private toastController: ToastController,
     private translate: TranslateService
   ) {}
+
   /**
    * The total application size.
    */
-  totalSize = 0;
-  /**
-   * The application count that is being uploaded.
-   */
-  uploadingCount = 1;
-  /**
-   * To check whether all the applications are uploaded.
-   */
-  isSuccess = false;
-  /**
-   * To check whether there is error during upload.
-   */
-  isError = false;
-  /**
-   * To display the error message dynamically.
-   */
-  errorMessage: string;
+  totalFinalizedApplicantsCount = 0;
+
   /**
    * URL of the server host.
    */
-  url = 'http://localhost:9090';
+  apiHostUrl = 'http://localhost:9090';
+
   /**
    * refers to the application that is being processed
    */
-  index = 0;
+  index = -1;
+
   /**
    * To store all the application from the local database
    */
   applicantDetailsList: FormValue<FormsData>[];
 
+  /**
+   * Holds to subscription object of request under process
+   */
+
+  currentRequest: Subscription;
+
+  /**
+   * Holds count of the API that is succeeded
+   */
+  succeededAPICount = 0;
+
+  /**
+   * Holds count of the API that is failed
+   */
+  failedAPICount = 0;
+
+  /**
+   * Boolean that holds whether APIs are sent or not
+   */
+  isAPIInProgress = true;
+
+  /**
+   * Holds the message to display  based on status
+   */
+  statusMessage: string;
+
+  /**
+   * Holds the icon name to dispaly based on status
+   */
+  statusIconName: string;
+
+  /**
+   * Holds the icon color to dispaly based on status
+   */
+  statusIconColor: string;
+
+  /**
+   * Boolean that  holds whether promise is resolved or not to load the page content
+   */
+  isPromiseResolved = false;
   /**
    * In this method locally stored data are fetched and post request function is called for one application at time.
    */
@@ -66,110 +101,150 @@ export class ApplicationsUploadPage implements OnInit {
       .getAllItems<FormValue<FormsData>>(this.storage.applicantDetailsDb)
       .then((data) => {
         this.applicantDetailsList = data.filter((x) => x.isRated === 1);
-        this.totalSize = this.applicantDetailsList.length;
-        this.sendPostRequest();
+        this.isPromiseResolved = true;
+        this.totalFinalizedApplicantsCount = this.applicantDetailsList.length;
+        this.initiateRequests();
       });
   }
 
   /**
+   * In this method requests are initiated and status properties are updated.
+   */
+  private initiateRequests(): void {
+    this.index++;
+    if (this.index <= this.totalFinalizedApplicantsCount - 1) {
+      this.statusMessage = this.translate.instant(
+        'applicantsUploadPage.uploadingProgressMessage',
+        {
+          uploadSize: this.index + 1,
+          totalSize: this.totalFinalizedApplicantsCount,
+        }
+      );
+      this.sendPostRequest(this.applicantDetailsList[this.index]);
+    } else {
+      if (this.succeededAPICount === this.totalFinalizedApplicantsCount) {
+        this.statusMessage = this.translate.instant(
+          'applicantsUploadPage.allApplicantsSavedSuccessMessage'
+        );
+        this.statusIconName = 'checkmark-circle-outline';
+        this.statusIconColor = 'success';
+      } else if (this.failedAPICount === this.totalFinalizedApplicantsCount) {
+        this.statusMessage = this.translate.instant(
+          'applicantsUploadPage.allApplicantsFailedMessage'
+        );
+        this.statusIconName = 'close-circle-outline';
+        this.statusIconColor = 'danger';
+      } else {
+        this.statusMessage = this.translate.instant(
+          'applicantsUploadPage.partialySentAndFailedMessage',
+          {
+            succeededCount: this.succeededAPICount,
+            failedCount: this.failedAPICount,
+          }
+        );
+        this.statusIconName = 'alert-circle-outline';
+        this.statusIconColor = 'warning';
+      }
+
+      this.isAPIInProgress = false;
+      this.goBack();
+    }
+  }
+
+  private constructPayLoad(
+    applicantData: FormValue<FormsData>,
+    hrRatingData: FormValue<RatingForm>
+  ): CreateApplicantData {
+    const applicantHRScore: HrRatingEntry = {
+      rhetoric: hrRatingData.applicantScore.rhetoric,
+      motivation: hrRatingData.applicantScore.motivation,
+      selfAssurance: hrRatingData.applicantScore.selfAssurance,
+      personalImpression: hrRatingData.applicantScore.personalImpression,
+      impression: hrRatingData.impressionInfo.impression,
+    };
+
+    const keyCompetence: KeyCompetencesEntry[] = [];
+
+    const images: ImagesEntry[] = [];
+    /**
+     * key competencies are mapped according json format required by server.
+     */
+    if (applicantData.keyCompetencies) {
+      Object.entries(applicantData.keyCompetencies).map(([k, v]) => {
+        v.forEach((x: KeyCompetenciesEntry) => {
+          keyCompetence.push({
+            category: k,
+            name: x.name,
+            rating: x.rating,
+          });
+        });
+      });
+    }
+    /**
+     * picture of applicant and documents is mapped according json format required by server.
+     */
+    images.push({
+      content: applicantData.profilePicture.pictureBase64,
+      type: 'profilePic',
+    });
+    applicantData.documents?.documentsBase64?.forEach((x) => {
+      images.push({ content: x, type: 'CV' });
+    });
+    /**
+     * complete json structure is formed here to send to server.
+     */
+    const formsData: CreateApplicantData = {
+      firstName: applicantData.basicInfo.firstName,
+      lastName: applicantData.basicInfo.lastName,
+      phone: applicantData.contactInfo.phoneNumber,
+      email: applicantData.contactInfo.eMail,
+      title: applicantData.basicInfo.salutation,
+      linkedIn: applicantData.contactInfo.linkedIn,
+      xing: applicantData.contactInfo.xing,
+      imageList: images,
+      workExperiences: applicantData.workExperienceInfo?.workExperienceForm,
+      educations: applicantData.educationInfo?.educationInfoForm,
+      industries: applicantData.fieldDesignationInfo?.field,
+      positions: applicantData.fieldDesignationInfo?.designation,
+      keyCompetencies: keyCompetence,
+      additionalInfo: applicantData.additionalInfo?.additionalInfo,
+      hrRating: applicantHRScore,
+    };
+
+    // The server expects all keys to exist. We need to explicitly set the value to null so that it is actually submitted.
+    for (const [key, value] of Object.entries(formsData)) {
+      if (value === undefined || value === null) {
+        // tslint:disable-next-line: no-null-keyword no-any
+        (formsData as any)[key] = null;
+      }
+    }
+    return formsData;
+  }
+  /**
    * In this method a post request is made to the server.
    */
-  private sendPostRequest(): void {
-    const applicantData = this.applicantDetailsList[this.index];
+  private sendPostRequest(applicantData: FormValue<FormsData>): void {
     /**
      * In this method locally stored data HR rating data is fetched and set according to JSON format
      */
+
+    let formsData: CreateApplicantData;
     this.storage
       .getItem<FormValue<RatingForm>>(
         this.storage.applicantRatingsDb,
         applicantData.id
       )
-      .then((val) => {
-        const applicantHRScore = {
-          rhetoric: val.applicantScore.rhetoric,
-          motivation: val.applicantScore.motivation,
-          selfAssurance: val.applicantScore.selfAssurance,
-          personalImpression: val.applicantScore.personalImpression,
-          impression: val.impressionInfo.impression,
-        };
-
-        const keyCompetence: Array<{
-          category: string;
-          name: string;
-          rating: number;
-        }> = [];
-
-        const images: Array<{ content: string; type: string }> = [];
-        /**
-         * key competencies are mapped according json format required by server.
-         */
-        if (applicantData.keyCompetencies) {
-          Object.entries(applicantData.keyCompetencies).map(([k, v]) => {
-            v.forEach((x: KeyCompetenciesEntry) => {
-              keyCompetence.push({
-                category: k,
-                name: x.name,
-                rating: x.rating,
-              });
-            });
-          });
-        }
-        /**
-         * picture of applicant and documents is mapped according json format required by server.
-         */
-        if (
-          applicantData.profilePicture.pictureBase64 !== '' &&
-          applicantData.profilePicture.pictureBase64 !== undefined &&
-          applicantData.profilePicture.pictureBase64 !== null
-        ) {
-          images.push({
-            content: applicantData.profilePicture.pictureBase64,
-            type: 'profilePic',
-          });
-        }
-        applicantData.documents?.documentsBase64?.forEach((x) => {
-          images.push({ content: x, type: 'CV' });
-        });
-        /**
-         * complete json structure is formed here to send to server.
-         */
-        const formsData = {
-          firstName: applicantData.basicInfo.firstName,
-          lastName: applicantData.basicInfo.lastName,
-          phone: applicantData.contactInfo.phoneNumber,
-          email: applicantData.contactInfo.eMail,
-          title: applicantData.basicInfo.salutation,
-          linkedIn: applicantData.contactInfo.linkedIn,
-          xing: applicantData.contactInfo.xing,
-          imageList: images,
-          workExperiences: applicantData.workExperienceInfo.workExperienceForm,
-          educations: applicantData.educationInfo?.educationInfoForm,
-          industries: applicantData.fieldDesignationInfo?.field,
-          positions: applicantData.fieldDesignationInfo?.designation,
-          keyCompetencies: keyCompetence,
-          additionalInfo: applicantData.additionalInfo?.additionalInfo,
-          hrRating: applicantHRScore,
-        };
-
-        // The server expects all keys to exist. We need to explicitly set the value to null so that it is actually submitted.
-        for (const [key, value] of Object.entries(formsData)) {
-          if (value === undefined || value === null) {
-            // tslint:disable-next-line: no-null-keyword no-any
-            (formsData as any)[key] = null;
-          }
-        }
-
-        const headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
-        /**
-         * post request is made here and based on response locally stored data is deleted
-         * error and success messages are shown wherever necessary
-         */
-        this.httpClient
-          .post(this.url + '/api/controller/createApplicant', formsData, {
-            responseType: 'text',
-            observe: 'response',
-          })
+      .then((hrRatingData) => {
+        formsData = this.constructPayLoad(applicantData, hrRatingData);
+        this.currentRequest = this.httpClient
+          .post(
+            this.apiHostUrl + '/api/controller/createApplicant',
+            formsData,
+            {
+              responseType: 'text',
+              observe: 'response',
+            }
+          )
           .subscribe(
             (response) => {
               if (response.status === 201) {
@@ -181,63 +256,53 @@ export class ApplicationsUploadPage implements OnInit {
                   this.storage.applicantRatingsDb,
                   applicantData.id
                 );
-                this.index++;
-                if (this.uploadingCount === this.totalSize) {
-                  this.isSuccess = true;
-                  this.completionAlert();
-                } else {
-                  this.uploadingCount++;
-                }
-                if (this.index <= this.totalSize - 1) {
-                  this.sendPostRequest();
-                }
+                this.succeededAPICount++;
+                this.initiateRequests();
               }
             },
-            (error) => {
-              this.index++;
-              this.isError = true;
-              if (error.status === 500) {
-                this.errorMessage = this.translate.instant(
-                  'applicantsUploadPage.nApplicantsFailedToUploadMessage',
-                  {
-                    failedCount: this.totalSize - this.uploadingCount + 1,
-                    errorMessage: error.error,
-                  }
-                );
-              } else {
-                this.errorMessage = this.translate.instant(
-                  'applicantsUploadPage.serverConnectionErrorMessage'
-                );
-              }
-              if (this.index <= this.totalSize - 1) {
-                this.sendPostRequest();
-              }
+            () => {
+              this.failedAPICount++;
+              this.initiateRequests();
             }
           );
       });
   }
+
   /**
    * In this method completion notification is displayed
    */
   async completionAlert(): Promise<void> {
+    const toastMessage = this.isAPIInProgress
+      ? this.succeededAPICount
+        ? this.translate.instant(
+            'applicantsUploadPage.nSucceededRestCancelledMessage',
+            { succeededCount: this.succeededAPICount }
+          )
+        : this.translate.instant(
+            'applicantsUploadPage.allRequestCancelledMessage'
+          )
+      : this.statusMessage;
+
+    const toastColor = this.isAPIInProgress ? 'warning' : this.statusIconColor;
     const toast = await this.toastController.create({
-      message: this.translate.instant(
-        'applicantsUploadPage.applicantUploadedSUccessMessage'
-      ),
-      color: 'success',
+      message: toastMessage,
+      color: toastColor,
       position: 'bottom',
-      duration: 2000,
+      duration: 4000,
     });
     toast.present();
-    setTimeout(() => {
-      this.goBack();
-    }, 2000);
   }
 
   /**
    * In this method navigation to home is handled.
    */
   goBack(): void {
-    this.navController.navigateBack(['/applicants']);
+    if (this.isAPIInProgress && this.currentRequest) {
+      this.currentRequest.unsubscribe();
+    }
+    setTimeout(() => {
+      this.navController.navigateBack(['/applicants']);
+      this.completionAlert();
+    }, 1000);
   }
 }

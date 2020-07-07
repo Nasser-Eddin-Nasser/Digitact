@@ -33,7 +33,12 @@
               >{{ data.controls.company.value }} .
               {{
                 'workExperience.employmentTypeValue'
-                  | translate: { empType: data.controls.employmentType.value }
+                  | translate
+                    : {
+                        empType:
+                          data.controls.employmentType.value
+                          | getI18NStringForEmploymentType
+                      }
               }}</span
             >
           </p>

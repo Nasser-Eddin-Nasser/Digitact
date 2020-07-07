@@ -7,6 +7,7 @@ import { SharedModule } from '../../../shared.module';
 
 import { EducationInfoEntryModalComponent } from './education-info-entry/education-info-entry.component';
 import { EducationInfoComponent } from './education-info.component';
+import { GetI18nStringForDegreePipe } from './pipes/get-i18n-string-for-degree.pipe';
 
 @NgModule({
   imports: [
@@ -16,7 +17,11 @@ import { EducationInfoComponent } from './education-info.component';
     ReactiveFormsModule,
     SharedModule,
   ],
-  declarations: [EducationInfoComponent, EducationInfoEntryModalComponent],
+  declarations: [
+    EducationInfoComponent,
+    EducationInfoEntryModalComponent,
+    GetI18nStringForDegreePipe,
+  ],
   exports: [EducationInfoComponent],
 })
 export class EducationInfoModule {}
