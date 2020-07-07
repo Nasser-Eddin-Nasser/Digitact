@@ -86,7 +86,7 @@
     },
     "profilePicture": {
         "title": "Picture",
-        "stepDescription": "Add a picture of yourself by tapping on the image icon.",
+        "stepDescription": "Here you can add a picture of yourself by tapping on the image icon.",
         "deleteTakeAnotherPictureMessage": "Good job! If you want to take another picture, just delete the actual picture and take another one."
     },
     "documentsUpload": {

@@ -370,11 +370,12 @@ public class ApplicantInfoController {
     }
 
     private void setProfPic(List<AppImage> images) {
-        AppImage profImage =
-                images.stream()
-                        .filter(x -> x.getType().equals(ImageType.profilePic))
-                        .findFirst()
-                        .get();
+        AppImage profImage = null;
+        for (AppImage img : images) {
+            if (img.getType() == ImageType.profilePic) {
+                profImage = img;
+            }
+        }
         if (profImage != null) {
             try {
                 if (profImage.getContent() == null)
