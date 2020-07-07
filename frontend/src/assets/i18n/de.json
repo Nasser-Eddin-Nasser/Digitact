@@ -87,7 +87,7 @@
     },
     "profilePicture": {
         "title": "Profilbild",
-        "stepDescription": "Füge ein Profilbild von Dir hinzu. Klicke hierfür auf das Bild-Symbol.",
+        "stepDescription": "Hier kannst Du ein Profilbild von Dir hinzufügen. Klicke hierfür auf das Bild-Symbol.",
         "deleteTakeAnotherPictureMessage": "Gut gemacht! Wenn Du ein anderes Bild aufnehmen möchtest, lösche das Bild über den Papierkorb-Button und nehme ein Neues auf."
     },
     "documentsUpload": {

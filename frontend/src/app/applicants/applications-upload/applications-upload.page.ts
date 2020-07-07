@@ -236,11 +236,6 @@ export class ApplicationsUploadPage implements OnInit {
       )
       .then((hrRatingData) => {
         formsData = this.constructPayLoad(applicantData, hrRatingData);
-
-        /**
-         * post request is made here and based on response locally stored data is deleted
-         * error and success messages are shown wherever necessary
-         */
         this.currentRequest = this.httpClient
           .post(
             this.apiHostUrl + '/api/controller/createApplicant',
