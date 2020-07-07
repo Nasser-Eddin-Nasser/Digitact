@@ -6,6 +6,8 @@ public enum Method {
     getAdminByUserName("getAdminByUserName"),
     createAdminAccount("createAdminAccount"),
     getAdminUserNames("getAdminUserNames"),
+    changeStatus("changeStatus"),
+    postHRComment("postHRComment"),
     gutenMorgen("gutenMorgen"), // it used to ping the BES
     putToken("putToken");
     private final String name;

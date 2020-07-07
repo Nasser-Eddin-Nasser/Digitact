@@ -1,6 +1,6 @@
 package Digitact.Backend.Storage;
 
-import static Digitact.Backend.Storage.DB.Query.setStatusQuery;
+import static Digitact.Backend.Storage.DB.Query.*;
 
 import Digitact.Backend.Model.User.User;
 import java.util.List;
@@ -11,11 +11,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IStatusRepository extends JpaRepository<User, Long> {
+public interface IHRInfoRepository extends JpaRepository<User, Long> {
     List<User> findAll();
 
     @Modifying
     @Transactional
     @Query(value = setStatusQuery, nativeQuery = true)
     int setStatus(Integer status, Long appID);
+
+    @Modifying
+    @Transactional
+    @Query(value = setHRCommentQuery, nativeQuery = true)
+    int setHRComment(String comment, Long appID);
 }
