@@ -47,7 +47,9 @@ public class AcController {
             offlineMode = false;
             setModelAndStageAndScene();
             if (DBStorage.getAdminUserNames().size() == 0) {
-                new CreateFirstAccountController(stage, model);
+                //                new CreateFirstAccountController(stage, model);
+                CreateAccountController.isFirstAccount = true;
+                new CreateAccountController(stage, model);
             }
         } else {
             offlineMode = true;

@@ -37,7 +37,7 @@ public class StandardController {
     private ObservableList<String> items;
 
     public StandardController(Stage stage) throws IOException {
-        CreateFirstAccountController.isFirstAccount = false;
+        CreateAccountController.isFirstAccount = false;
         listViewMenue = new ListView();
         this.stage = stage;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/standard.fxml"));

@@ -1,6 +1,6 @@
 package Database;
 
-import Controller.CreateFirstAccountController;
+import Controller.CreateAccountController;
 import Main.Configuration;
 import Model.Status;
 import Model.User.Admin;
@@ -325,7 +325,7 @@ public class Connector {
             http.setDoOutput(true);
             http.setRequestProperty("Content-Type", "application/json; utf-8");
             http.setRequestProperty("Accept", "application/json");
-            if (!CreateFirstAccountController.isFirstAccount) {
+            if (!CreateAccountController.isFirstAccount) {
                 http.setRequestProperty("AuthToken", DBStorage.getToken().toString());
             }
             try (OutputStream os = http.getOutputStream()) {
