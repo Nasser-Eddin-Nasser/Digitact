@@ -46,7 +46,7 @@
         "allApplicantsFailedMessage":"Aufgrund einiger Fehler wurden keine Bewerbungen gesendet. Bitte versuchen Sie es später noch einmal.",
         "partialySentAndFailedMessage":"{{successCount}} Anwendung(en) erfolgreich gesendet und {{failedCount}} Anwendung(en) fehlgeschlagen.",
         "allRequestCancelledMessage":"Keine Bewerbungen gesendet, da der Vorgang abgebrochen wurde.",
-        "nSucceededRestCancelledMessage":"{{successCount}} Anwendung (en) erfolgreich gesendet. Die restliche(n) Bewerbung(en) wurden nicht an den Server gesendet, da der Vorgang abgebrochen wurde."
+        "nSucceededRestCancelledMessage":"{{successCount}} Anwendung(en) erfolgreich gesendet. Die restliche(n) Bewerbung(en) wurden nicht an den Server gesendet, da der Vorgang abgebrochen wurde."
 
     },
     "hrSideMenu": {
