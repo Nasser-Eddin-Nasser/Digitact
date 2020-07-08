@@ -4,6 +4,8 @@ import Database.Connector;
 import Database.Method;
 import Model.MVC.AcModel;
 import Storage.DBStorage;
+import Util.Dictionary.BasicInfoDictionary;
+import Util.Dictionary.IDictionary;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class AcController {
+    IDictionary basicInfoDic = new BasicInfoDictionary();
     /** Initial Login Window after program start */
     private Scene viewLogin;
     /** the stage, which holds the program */
@@ -76,7 +79,8 @@ public class AcController {
         viewLogin = new Scene(loader.load());
         viewLoginHeight = viewLogin.getHeight();
         viewLoginWidth = viewLogin.getWidth();
-        stage.setTitle("Login");
+        //        stage.setTitle( "Login");
+        stage.setTitle(IDictionary.getTranslation(basicInfoDic, "Login"));
         stage.setScene(viewLogin);
         stage.setResizable(false);
         stage.getIcons().add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
