@@ -1,7 +1,11 @@
 package Controller;
 
+import static Controller.AcController.ADMIN_USERNAME;
+
 import Main.Configuration;
 import Model.MenuItem;
+import java.io.File;
+import java.io.IOException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,32 +20,20 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
-
-import static Controller.AcController.ADMIN_USERNAME;
-
 public class StandardController {
 
-    /**
-     * the stage, which holds the program
-     */
+    /** the stage, which holds the program */
     private Stage stage;
 
     private Scene viewHRStandard;
-    @FXML
-    private BorderPane borderPaneCurrentView;
-    @FXML
-    private Text textMenuLabel;
+    @FXML private BorderPane borderPaneCurrentView;
+    @FXML private Text textMenuLabel;
 
-    @FXML
-    private ListView<String> listViewMenue;
+    @FXML private ListView<String> listViewMenue;
 
     //    @FXML private Text textMenuLabel;
 
-    /**
-     * the current selected MenuItem
-     */
+    /** the current selected MenuItem */
     private MenuItem current;
 
     private ObservableList<String> items;
@@ -76,7 +68,7 @@ public class StandardController {
                     f.delete();
                 }
             }
-        } 
+        }
 
         System.out.println("shutdownshutdownshutdownshutdown - shutdown");
     }
