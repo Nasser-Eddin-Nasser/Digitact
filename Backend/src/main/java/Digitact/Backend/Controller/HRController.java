@@ -42,7 +42,7 @@ public class HRController {
 
     private List<User> checkTokenValidationAndGetApplicants(
             List<User> res, List<String> tokens, String uri) {
-        if (tokens!= null && tokens.size() == 1) {
+        if (tokens != null && tokens.size() == 1) {
             String token = tokens.get(0);
             String[] parts = token.split(" -//- ");
             String tokenNumber = parts[0];
@@ -92,7 +92,7 @@ public class HRController {
             String res,
             String uri) {
         List<String> tokens = headers.get("authtoken");
-        if (tokens!= null &&tokens.size() == 1) {
+        if (tokens != null && tokens.size() == 1) {
             String token = tokens.get(0);
             String[] parts = token.split(" -//- ");
             String tokenNumber = parts[0];
@@ -104,8 +104,7 @@ public class HRController {
             if (t != null && t.equals(newToken)) {
                 res = ImageTools.combineImage(imageRepository.getImageByID(imageId)).getContent();
             }
-        }else
-            res="";
+        } else res = "";
         return res;
     }
 
