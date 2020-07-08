@@ -42,7 +42,7 @@ public class HRController {
 
     private List<User> checkTokenValidationAndGetApplicants(
             List<User> res, List<String> tokens, String uri) {
-        if (tokens.size() == 1) {
+        if (tokens!= null && tokens.size() == 1) {
             String token = tokens.get(0);
             String[] parts = token.split(" -//- ");
             String tokenNumber = parts[0];
@@ -80,7 +80,7 @@ public class HRController {
         String uri = getClientURI(request);
         uri = uri.substring(0, uri.length() - ("getImageById=".length() + imageId.length()));
         res = checkTokenValidationAndGetImage(imageId, headers, res, uri);
-        if (res == null) {
+        if (res.equals("")) {
             System.err.println("Access denied! with URI " + uri);
         }
         return res;
@@ -92,7 +92,7 @@ public class HRController {
             String res,
             String uri) {
         List<String> tokens = headers.get("authtoken");
-        if (tokens.size() == 1) {
+        if (tokens!= null &&tokens.size() == 1) {
             String token = tokens.get(0);
             String[] parts = token.split(" -//- ");
             String tokenNumber = parts[0];
@@ -104,7 +104,8 @@ public class HRController {
             if (t != null && t.equals(newToken)) {
                 res = ImageTools.combineImage(imageRepository.getImageByID(imageId)).getContent();
             }
-        }
+        }else
+            res="";
         return res;
     }
 
@@ -221,7 +222,6 @@ public class HRController {
     @PostMapping(path = "/postHRComment")
     public String postHRComments(@RequestBody HRCommentHolder comment) {
         // statusRepository.setStatus( status.getStatus().getNum(),status.getAppID());
-        System.out.println(comment.getAppID() + " " + comment.getComment());
         ihrInfoRepository.setHRComment(comment.getComment(), comment.getAppID());
         return "changed";
     }
