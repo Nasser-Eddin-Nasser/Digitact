@@ -1,34 +1,31 @@
-package Util;
+package Util.Dictionary;
+
+import Model.Language;
+import java.util.Map;
+import java.util.Objects;
 
 public interface IDictionary {
-    public String getEnglish(String german);
-    public String getGerman(String english);
-//    private static Map<String, String> dictionary = new TreeMap<String, String>(); //<English, German>
-//
-//    public static String getGerman(String english) {
-//        init();
-//        return dictionary.get(english);
-//    }
-//
-//    public static String getEnglish(String german) {
-//        init();
-//        return dictionary.entrySet()
-//                .stream()
-//                .filter(entry -> Objects.equals(entry.getValue(), german))
-//                .map(Map.Entry::getKey).findAny().get();
-//    }
-//
-//
-//    private static void init() {
-//        if (dictionary.size() == 0) {
-//            // add all values
-//            dictionary.put("title", "Anrede");
-//            dictionary.put("welcome", "Willkommen");
-//            dictionary.put("firstName", "Vorname");
-//            dictionary.put("lastName", "Nachname");
-//            dictionary.put("mr", "Herr");
-//            dictionary.put("mrs", "Frau");
-//        }
-//    }
+    public static Language LANG = Language.English;
 
+    Map<String, String> getDictionary();
+
+    public static String getTranslation(IDictionary dictionary, String english) {
+        if (LANG.equals(Language.English)) return english;
+        return getGerman(dictionary, english);
+    }
+
+    private static String getGerman(IDictionary dictionary, String english) {
+        return dictionary.getDictionary().get(english);
+    }
+
+    private static String getEnglish(IDictionary dictionary, String german) {
+        return dictionary
+                .getDictionary()
+                .entrySet()
+                .stream()
+                .filter(entry -> Objects.equals(entry.getValue(), german))
+                .map(Map.Entry::getKey)
+                .findAny()
+                .get();
+    }
 }
