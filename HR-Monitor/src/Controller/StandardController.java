@@ -69,8 +69,6 @@ public class StandardController {
                 }
             }
         }
-
-        System.out.println("shutdownshutdownshutdownshutdown - shutdown");
     }
 
     private void loadMenu() {
