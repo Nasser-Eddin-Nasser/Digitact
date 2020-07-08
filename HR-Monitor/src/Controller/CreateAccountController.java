@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.MVC.AcModel;
-import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,25 +9,40 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class CreateAccountController {
-    @FXML private ComboBox<String> admins;
-    @FXML private TextField passwordHint;
-    @FXML private TextField email;
-    @FXML private Label checkValidityPassword;
+    public static boolean isFirstAccount = false;
+    @FXML
+    private ComboBox<String> admins;
+    @FXML
+    private TextField passwordHint;
+    @FXML
+    private TextField email;
+    @FXML
+    private Label checkValidityPassword;
 
-    @FXML private Label checkValidityUserName;
+    @FXML
+    private Label checkValidityUserName;
 
-    @FXML private Label checkPassword;
+    @FXML
+    private Label checkPassword;
 
-    @FXML private Label checkValidityEmail;
-    @FXML private TextField firstNameTextField;
+    @FXML
+    private Label checkValidityEmail;
+    @FXML
+    private TextField firstNameTextField;
 
-    @FXML private TextField lastNameTextField;
+    @FXML
+    private TextField lastNameTextField;
 
-    @FXML private PasswordField newPasswordField;
+    @FXML
+    private PasswordField newPasswordField;
 
-    @FXML private PasswordField confirmPasswordField;
-    @FXML private TextField userNameTextField;
+    @FXML
+    private PasswordField confirmPasswordField;
+    @FXML
+    private TextField userNameTextField;
 
     private AcModel model;
     private Pane root;
@@ -81,7 +95,8 @@ public class CreateAccountController {
                         alert1.setTitle("Create new Account!");
                         alert1.setContentText("Your Account has been created! ");
                         alert1.showAndWait();
-                        //                        onShowView();
+                        if (isFirstAccount)
+                            onShowView();
                     } else {
                         alert.setContentText(
                                 "Your password hint must not contain your password & not empty!");
@@ -99,6 +114,14 @@ public class CreateAccountController {
             alert.setContentText(
                     "Username already taken or forbidden characters used! A username must contain only alphanumeric characters.");
             alert.showAndWait();
+        }
+    }
+
+    public void onShowView() {
+        try {
+            new AcController(stage, model);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

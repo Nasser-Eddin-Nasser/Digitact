@@ -4,7 +4,6 @@ import Database.Connector;
 import Database.Method;
 import Model.MVC.AcModel;
 import Storage.DBStorage;
-import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,20 +14,31 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class AcController {
-    /** Initial Login Window after program start */
+    /**
+     * Initial Login Window after program start
+     */
     private Scene viewLogin;
-    /** the stage, which holds the program */
+    /**
+     * the stage, which holds the program
+     */
     private Stage stage;
-    /** boundaries of the login-view */
+    /**
+     * boundaries of the login-view
+     */
     private double viewLoginHeight;
 
     private double viewLoginWidth;
 
-    @FXML private Button login;
-    @FXML private PasswordField myPasswordField;
+    @FXML
+    private Button login;
+    @FXML
+    private PasswordField myPasswordField;
 
-    @FXML private TextField myUserNameTextField;
+    @FXML
+    private TextField myUserNameTextField;
     private AcModel model;
 
     public static String ADMIN_USERNAME = "";
@@ -47,7 +57,9 @@ public class AcController {
             offlineMode = false;
             setModelAndStageAndScene();
             if (DBStorage.getAdminUserNames().size() == 0) {
-                new CreateFirstAccountController(stage, model);
+//                new CreateFirstAccountController(stage, model);
+                CreateAccountController.isFirstAccount = true;
+                new CreateAccountController(stage, model);
             }
         } else {
             offlineMode = true;
