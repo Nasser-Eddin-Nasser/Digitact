@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application {
     /** @param args */
     public static void main(String[] args) {
+        ConfigProperties.AssertionConfig();
         SpringApplication.run(Application.class, args);
     }
 }

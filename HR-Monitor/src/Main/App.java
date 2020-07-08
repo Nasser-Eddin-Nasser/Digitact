@@ -15,6 +15,7 @@ public class App extends javafx.application.Application {
 
     public static void main(String[] args) {
         if (DEVELOPMENT_ENVIRONMENT) Util.fillDB();
+        Configuration.AssertionConfig();
         launch(args);
     }
 }
