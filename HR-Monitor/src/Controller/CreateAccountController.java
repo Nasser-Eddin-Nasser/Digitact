@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class CreateAccountController {
+    public static boolean isFirstAccount = false;
     @FXML private ComboBox<String> admins;
     @FXML private TextField passwordHint;
     @FXML private TextField email;
@@ -81,7 +82,7 @@ public class CreateAccountController {
                         alert1.setTitle("Create new Account!");
                         alert1.setContentText("Your Account has been created! ");
                         alert1.showAndWait();
-                        //                        onShowView();
+                        if (isFirstAccount) onShowView();
                     } else {
                         alert.setContentText(
                                 "Your password hint must not contain your password & not empty!");
@@ -99,6 +100,14 @@ public class CreateAccountController {
             alert.setContentText(
                     "Username already taken or forbidden characters used! A username must contain only alphanumeric characters.");
             alert.showAndWait();
+        }
+    }
+
+    public void onShowView() {
+        try {
+            new AcController(stage, model);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
