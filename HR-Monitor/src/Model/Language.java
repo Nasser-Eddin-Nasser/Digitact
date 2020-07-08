@@ -1,4 +1,6 @@
 package Model;
 
-public enum language {
+public enum Language {
+    English,
+    German
 }
