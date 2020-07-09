@@ -1,6 +1,5 @@
 package Util.Dictionary;
 
-
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -50,6 +49,28 @@ public class ApplicantInfoDictionary implements IDictionary {
             dictionary.put("Information", "Informationen");
             dictionary.put("Documents", "Dokumente");
             dictionary.put("Applicant Ratings", "Bewerber-Bewertungen");
+
+            dictionary.put("Rating", "Bewertung");
+            dictionary.put("Categories", "Kategorien");
+
+            dictionary.put("Rhetoric", "Rhetorik");
+            dictionary.put("Motivation", "Motivation");
+            dictionary.put("Personal Impression", "Bewertung");
+            dictionary.put("Self Assurance", "Persönlicher Eindruck");
+            dictionary.put("HR Ratings", "HR-Bewertungen");
+
+            dictionary.put("Change status", "Status ändern");
+            dictionary.put("Open", "Öffnen");
+            dictionary.put("Sent to HR", "An HR geschickt");
+            dictionary.put("Denied", "Abgelehnt");
+
+            dictionary.put("Comment by the fair team member", "Kommentar des Messeteam-Mitglieds");
+            dictionary.put("Comment by the HR member", "Kommentar des HR-Mitglieds");
+            dictionary.put(
+                    "Add a comment about the Applicant",
+                    "Einen Kommentar über den Antragsteller hinzufügen");
+
+            dictionary.put("Save Changes", "Änderungen speichern");
         }
     }
 

@@ -11,7 +11,6 @@ import Model.MVC.OverviewModel;
 import Model.User.ApplicantUI;
 import Util.Dictionary.ApplicantInfoDictionary;
 import Util.Dictionary.IDictionary;
-import Util.Dictionary.IDictionary;
 import Util.Dictionary.KeyCompetenciesDictionary;
 import Util.ImageTools;
 import java.io.File;
@@ -152,6 +151,8 @@ public class ApplicantInfoController {
     @FXML TitledPane titleEduInfoFX;
     @FXML TitledPane titleKCompFX;
     @FXML TitledPane titleFoInterestFX;
+    @FXML TitledPane commentFTMem;
+    @FXML TitledPane commentHRMem;
     // Basic Info
     @FXML Label fNameFX;
     @FXML Label lNameFX;
@@ -159,6 +160,8 @@ public class ApplicantInfoController {
     // Tabs
     @FXML Tab infoTabFX;
     @FXML Tab appRatingTabFX;
+
+    @FXML Label changeStatusFX;
 
     IDictionary dictionary;
 
@@ -243,8 +246,8 @@ public class ApplicantInfoController {
             NumberAxis xAxis = new NumberAxis();
             BarChart<Number, String> barChartFX = new BarChart<Number, String>(xAxis, yAxis);
             xAxis.upperBoundProperty().setValue(5);
-            xAxis.setLabel("Rating");
-            yAxis.setLabel("Categories");
+            xAxis.setLabel(IDictionary.getTranslation(dictionary, "Rating"));
+            yAxis.setLabel(IDictionary.getTranslation(dictionary, "Categories"));
             yAxis.setStyle("-fx-tick-label-fill:black");
             xAxis.setStyle("-fx-tick-label-fill:black");
             barChartFX.setStyle("-fx-tick-label-fill:black");
@@ -252,18 +255,29 @@ public class ApplicantInfoController {
             barChartFX.setMaxHeight(5000);
             XYChart.Series series = new XYChart.Series();
 
-            series.getData().add(new XYChart.Data(app.getHrRating().getRhetoric(), "Rhetoric"));
-            series.getData().add(new XYChart.Data(app.getHrRating().getMotivation(), "Motivation"));
+            series.getData()
+                    .add(
+                            new XYChart.Data(
+                                    app.getHrRating().getRhetoric(),
+                                    IDictionary.getTranslation(dictionary, "Rhetoric")));
+            series.getData()
+                    .add(
+                            new XYChart.Data(
+                                    app.getHrRating().getMotivation(),
+                                    IDictionary.getTranslation(dictionary, "Motivation")));
             series.getData()
                     .add(
                             new XYChart.Data(
                                     app.getHrRating().getPersonalImpression(),
-                                    "Personal Impression"));
+                                    IDictionary.getTranslation(dictionary, "Personal Impression")));
             series.getData()
-                    .add(new XYChart.Data(app.getHrRating().getSelfAssurance(), "Self Assurance"));
+                    .add(
+                            new XYChart.Data(
+                                    app.getHrRating().getSelfAssurance(),
+                                    IDictionary.getTranslation(dictionary, "Self Assurance")));
 
             barChartFX.getData().add(series);
-            barChartFX.setTitle("HR Ratings");
+            barChartFX.setTitle(IDictionary.getTranslation(dictionary, "HR Ratings"));
             hBoxBChartFX.getChildren().add(barChartFX);
         }
         isHRChartLoaded = true;
@@ -278,6 +292,22 @@ public class ApplicantInfoController {
     private void onShowRating() {
         statusListener();
         getBarChart();
+        setHeader4AppRating();
+    }
+
+    private void setHeader4AppRating() {
+        changeStatusFX.setText(IDictionary.getTranslation(dictionary, "Change status"));
+        btnOFX.setText(IDictionary.getTranslation(dictionary, "Open"));
+        btnHRFX.setText(IDictionary.getTranslation(dictionary, "Sent to HR"));
+        btnDFX.setText(IDictionary.getTranslation(dictionary, "Denied"));
+
+        commentFTMem.setText(
+                IDictionary.getTranslation(dictionary, "Comment by the fair team member"));
+        commentHRMem.setText(IDictionary.getTranslation(dictionary, "Comment by the HR member"));
+        txtImpHRFX.setPromptText(
+                IDictionary.getTranslation(dictionary, "Add a comment about the Applicant"));
+
+        btnSaveFX.setText(IDictionary.getTranslation(dictionary, "Save Changes"));
     }
 
     private void getStatus() {
@@ -290,17 +320,20 @@ public class ApplicantInfoController {
             case Open:
                 lblStatusFX.setStyle(
                         "-fx-background-color: #61d0ee; -fx-background-radius:10 10 10 10");
-                lblStatusFX.setText("Open");
+                lblStatusFX.setText(IDictionary.getTranslation(dictionary, "Open"));
+                lblStatusFX.minWidth(80);
                 break;
             case Send2HR:
                 lblStatusFX.setStyle(
                         "-fx-background-color: #5be14f; -fx-background-radius:10 10 10 10");
-                lblStatusFX.setText("Send to HR");
+                lblStatusFX.setText(IDictionary.getTranslation(dictionary, "Sent to HR"));
+                lblStatusFX.minWidth(110);
                 break;
             case Denied:
                 lblStatusFX.setStyle(
                         "-fx-background-color: #ff927e; -fx-background-radius:10 10 10 10");
-                lblStatusFX.setText("Denied");
+                lblStatusFX.setText(IDictionary.getTranslation(dictionary, "Denied"));
+                lblStatusFX.minWidth(85);
                 break;
         }
     }
