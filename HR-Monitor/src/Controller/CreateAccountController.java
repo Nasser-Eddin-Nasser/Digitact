@@ -50,14 +50,13 @@ public class CreateAccountController {
     @FXML Button create;
 
     public CreateAccountController() throws IOException {
-
-        SetDictionary();
         this.stage = new Stage();
         this.model = new AcModel();
+        SetDictionary();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/adminAccount.fxml"));
         loader.setController(this);
-        setLabels();
         root = (Pane) loader.load();
+        setLabels();
     }
 
     private void setLabels() {
