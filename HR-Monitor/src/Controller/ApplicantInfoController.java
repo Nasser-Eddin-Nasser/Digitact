@@ -1,5 +1,8 @@
 package Controller;
 
+import static Database.Method.getImageById;
+import static Model.Status.*;
+
 import Database.Connector;
 import Model.*;
 import Model.Image.AppImage;
@@ -11,6 +14,12 @@ import Util.Dictionary.IDictionary;
 import Util.Dictionary.KeyCompetenciesDictionary;
 import Util.Dictionary.PositionsAndIndustriesDictionary;
 import Util.ImageTools;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.DoubleProperty;
@@ -40,17 +49,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
-
-import static Database.Method.getImageById;
-import static Model.Status.*;
 
 public class ApplicantInfoController {
     // Create Dic
@@ -61,127 +60,88 @@ public class ApplicantInfoController {
     ApplicantUI app;
     Scene scene;
     // Create a TableView with a list of Education Info of an Applicant
-    @FXML
-    TableView<Education> eduInfoTblFX;
+    @FXML TableView<Education> eduInfoTblFX;
     private ObservableList<Education> observableListEduInfoTableView;
 
-    @FXML
-    TableView<WorkExperience> workInfoTblFX;
+    @FXML TableView<WorkExperience> workInfoTblFX;
     private ObservableList<WorkExperience> observableListWorkExpInfoTableView;
 
-    @FXML
-    TableView<String> posTable;
+    @FXML TableView<String> posTable;
     private ObservableList<String> observableListPosTableTableView;
 
-    @FXML
-    TableView<String> indTable;
+    @FXML TableView<String> indTable;
     private ObservableList<String> observableListIndTableTableView;
 
-    @FXML
-    TableView<String> pLnFWTableFX;
+    @FXML TableView<String> pLnFWTableFX;
     private ObservableList<String> observableListPLnFWTableView;
 
-    @FXML
-    TableView<String> bSkillsTableFX;
+    @FXML TableView<String> bSkillsTableFX;
     private ObservableList<String> observableListBSkillsTableView;
 
-    @FXML
-    TableView<String> dBTableFX;
+    @FXML TableView<String> dBTableFX;
     private ObservableList<String> observableListDBTableView;
 
-    @FXML
-    TableView<String> proSoftTableFX;
+    @FXML TableView<String> proSoftTableFX;
     private ObservableList<String> observableListProSoftTableView;
 
-    @FXML
-    TableView<String> spoLanTableFX;
+    @FXML TableView<String> spoLanTableFX;
     private ObservableList<String> observableListSpoLanTableView;
 
-    @FXML
-    TableColumn<String, String> posFX = new TableColumn<>("Position");
-    @FXML
-    TableColumn<String, String> indFX = new TableColumn<>("Industry");
+    @FXML TableColumn<String, String> posFX = new TableColumn<>("Position");
+    @FXML TableColumn<String, String> indFX = new TableColumn<>("Industry");
 
     // Applicant Info View's Variables
     // 1. Basic Info
-    @FXML
-    TextField lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX;
-    @FXML
-    Hyperlink hplLinkedInFX, hplXingFX;
+    @FXML TextField lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX;
+    @FXML Hyperlink hplLinkedInFX, hplXingFX;
     // 2. Edu Info
-    @FXML
-    TableColumn<Education, String> universityFX = new TableColumn<>("university");
-    @FXML
-    TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
-    @FXML
-    TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
-    @FXML
-    TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
-    @FXML
-    TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
+    @FXML TableColumn<Education, String> universityFX = new TableColumn<>("university");
+    @FXML TableColumn<Education, String> subjectFX = new TableColumn<>("subject");
+    @FXML TableColumn<Education, String> degreeFX = new TableColumn<>("degree");
+    @FXML TableColumn<Education, Number> gradeFX = new TableColumn<>("grade");
+    @FXML TableColumn<Education, String> gradYearFX = new TableColumn<>("date");
 
     // 2. work Info
-    @FXML
-    TableColumn<WorkExperience, String> jobTitleFX = new TableColumn<>("jobTitle");
-    @FXML
-    TableColumn<WorkExperience, String> companyFX = new TableColumn<>("company");
+    @FXML TableColumn<WorkExperience, String> jobTitleFX = new TableColumn<>("jobTitle");
+    @FXML TableColumn<WorkExperience, String> companyFX = new TableColumn<>("company");
 
     @FXML
     TableColumn<WorkExperience, String> employmentTypeFX = new TableColumn<>("employmentType");
 
-    @FXML
-    TableColumn<WorkExperience, String> startDateFX = new TableColumn<>("startDate");
-    @FXML
-    TableColumn<WorkExperience, String> endDateFX = new TableColumn<>("endDate");
-    @FXML
-    TableColumn<WorkExperience, String> descriptionFX = new TableColumn<>("description");
+    @FXML TableColumn<WorkExperience, String> startDateFX = new TableColumn<>("startDate");
+    @FXML TableColumn<WorkExperience, String> endDateFX = new TableColumn<>("endDate");
+    @FXML TableColumn<WorkExperience, String> descriptionFX = new TableColumn<>("description");
 
     // 3. Image of the Applicant
 
     // Additional Info
-    @FXML
-    Label lblAddInfo;
-    @FXML
-    private ImageView imgFX;
-    @FXML
-    StackPane imgstckPFX;
+    @FXML Label lblAddInfo;
+    @FXML private ImageView imgFX;
+    @FXML StackPane imgstckPFX;
 
     // Documents tab
-    @FXML
-    ScrollPane documentsGridFX;
-    @FXML
-    Tab docTabFX;
+    @FXML ScrollPane documentsGridFX;
+    @FXML Tab docTabFX;
 
     // Key Competencies
-    @FXML
-    TableColumn<String, String> pLnFWColFX = new TableColumn<>("name");
-    @FXML
-    TableColumn<String, String> bSkillsColFX = new TableColumn<>("name");
-    @FXML
-    TableColumn<String, String> dBColFX = new TableColumn<>("name");
-    @FXML
-    TableColumn<String, String> proSoftColFX = new TableColumn<>("name");
-    @FXML
-    TableColumn<String, String> spoLanColFX = new TableColumn<>("name");
+    @FXML TableColumn<String, String> pLnFWColFX = new TableColumn<>("name");
+    @FXML TableColumn<String, String> bSkillsColFX = new TableColumn<>("name");
+    @FXML TableColumn<String, String> dBColFX = new TableColumn<>("name");
+    @FXML TableColumn<String, String> proSoftColFX = new TableColumn<>("name");
+    @FXML TableColumn<String, String> spoLanColFX = new TableColumn<>("name");
 
-    @FXML
-    Label txtrheFX, txtMotFX, txtSelfFX, txtPerFX;
-    @FXML
-    TextField txtImpFX, txtImpHRFX;
+    @FXML Label txtrheFX, txtMotFX, txtSelfFX, txtPerFX;
+    @FXML TextField txtImpFX, txtImpHRFX;
 
     // Change status
-    @FXML
-    Label btnOFX, btnHRFX, btnDFX;
-    @FXML
-    Label lblStatusFX;
+    @FXML Label btnOFX, btnHRFX, btnDFX;
+    @FXML Label lblStatusFX;
 
     // Bar chart - HR Ratings
-    @FXML
-    HBox hBoxBChartFX;
+    @FXML HBox hBoxBChartFX;
 
     // Save
-    @FXML
-    Button btnSaveFX;
+    @FXML Button btnSaveFX;
     IDictionary KCDic;
     IDictionary DEDic;
     IDictionary PIDic;
@@ -197,8 +157,6 @@ public class ApplicantInfoController {
         KCDic = new KeyCompetenciesDictionary();
         DEDic = new DegreeAndEmploymentTypeDictionary();
         PIDic = new PositionsAndIndustriesDictionary();
-
-
     }
 
     public void showApplicantInfo() {
@@ -415,7 +373,11 @@ public class ApplicantInfoController {
     private ObservableList<String> getIndTable(List<Industries> industries) {
         observableListIndTableTableView = indTable.getItems();
         observableListIndTableTableView.clear();
-        observableListIndTableTableView.addAll(industries.stream().map(x -> IDictionary.getTranslation(PIDic, x.getIndustry().toString())).collect(Collectors.toList()));
+        observableListIndTableTableView.addAll(
+                industries
+                        .stream()
+                        .map(x -> IDictionary.getTranslation(PIDic, x.getIndustry().toString()))
+                        .collect(Collectors.toList()));
         setFactoriesAndComparatorsForIndTableColumns();
         return observableListIndTableTableView;
     }
@@ -427,7 +389,11 @@ public class ApplicantInfoController {
     private ObservableList<String> getPositionTable(List<Positions> positions) {
         observableListPosTableTableView = posTable.getItems();
         observableListPosTableTableView.clear();
-        observableListPosTableTableView.addAll(positions.stream().map(x -> IDictionary.getTranslation(PIDic, x.getPosition().toString())).collect(Collectors.toList()));
+        observableListPosTableTableView.addAll(
+                positions
+                        .stream()
+                        .map(x -> IDictionary.getTranslation(PIDic, x.getPosition().toString()))
+                        .collect(Collectors.toList()));
         setFactoriesAndComparatorsForPosTableColumns();
         return observableListPosTableTableView;
     }
@@ -664,7 +630,9 @@ public class ApplicantInfoController {
         employmentTypeFX.setCellValueFactory(
                 applicant ->
                         new ReadOnlyStringWrapper(
-                                IDictionary.getTranslation(DEDic, applicant.getValue().getEmploymentType().toString())));
+                                IDictionary.getTranslation(
+                                        DEDic,
+                                        applicant.getValue().getEmploymentType().toString())));
         startDateFX.setCellValueFactory(
                 applicant -> new ReadOnlyStringWrapper(applicant.getValue().getStartDate()));
         endDateFX.setCellValueFactory(
@@ -680,7 +648,9 @@ public class ApplicantInfoController {
                 applicant -> new ReadOnlyStringWrapper(applicant.getValue().getSubject()));
         degreeFX.setCellValueFactory(
                 applicant ->
-                        new ReadOnlyStringWrapper(IDictionary.getTranslation(DEDic, applicant.getValue().getDegree().toString())));
+                        new ReadOnlyStringWrapper(
+                                IDictionary.getTranslation(
+                                        DEDic, applicant.getValue().getDegree().toString())));
         gradeFX.setCellValueFactory(
                 applicant -> new ReadOnlyDoubleWrapper(applicant.getValue().getGrade()));
         gradYearFX.setCellValueFactory(

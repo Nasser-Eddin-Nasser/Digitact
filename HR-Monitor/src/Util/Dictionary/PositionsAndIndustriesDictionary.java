@@ -14,9 +14,12 @@ public class PositionsAndIndustriesDictionary implements IDictionary {
     public void init() {
         ///////////// Positions
         dictionary.put("Business Consultant", "Consultant/Business Consultant");
-        dictionary.put("IT Consultant - Informationsmanagement", "IT-Consultant - Informationsmanagement");
+        dictionary.put(
+                "IT Consultant - Informationsmanagement", "IT-Consultant - Informationsmanagement");
         dictionary.put("IT Consultant - Java JEE", "IT-Consultant - Java/JEE");
-        dictionary.put("IT Consultant - Data Science", "IT-Consultant - Data Science / Artificial Intelligence");
+        dictionary.put(
+                "IT Consultant - Data Science",
+                "IT-Consultant - Data Science / Artificial Intelligence");
         dictionary.put("Consultant - SAP", "Consultant SAP");
         dictionary.put("Internship/Working Student", "Praktikant/Werkstudent");
         dictionary.put("Others", "Nutzername");
@@ -26,7 +29,6 @@ public class PositionsAndIndustriesDictionary implements IDictionary {
         dictionary.put("Commerce", "Handel");
         dictionary.put("Pharma Healthcare", "Pharma/Gesundheitswesen");
         dictionary.put("Public Sector", "Öffentlicher Sektor");
-
     }
 
     @Override

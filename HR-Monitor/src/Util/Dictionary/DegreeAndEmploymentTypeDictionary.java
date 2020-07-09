@@ -5,9 +5,11 @@ import java.util.TreeMap;
 
 public class DegreeAndEmploymentTypeDictionary implements IDictionary {
     private Map<String, String> dictionary = new TreeMap<String, String>(); // <English, German>
-    public   DegreeAndEmploymentTypeDictionary(){
+
+    public DegreeAndEmploymentTypeDictionary() {
         init();
     }
+
     @Override
     public void init() {
         /////////// EmploymentType
@@ -20,7 +22,7 @@ public class DegreeAndEmploymentTypeDictionary implements IDictionary {
         dictionary.put("Apprenticeship", "Ausbildung");
         dictionary.put("Other", "Andere");
         dictionary.put("present", "Zurzeit");
-////////////////// Degree
+        ////////////////// Degree
         dictionary.put("Master", "Master");
         dictionary.put("Bachelor", "Bachelor");
         dictionary.put("PhD", "PhD");
