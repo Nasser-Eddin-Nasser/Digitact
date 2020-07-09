@@ -9,6 +9,8 @@ import Model.Image.AppImage;
 import Model.Image.ImageType;
 import Model.MVC.OverviewModel;
 import Model.User.ApplicantUI;
+import Util.Dictionary.ApplicantInfoDictionary;
+import Util.Dictionary.IDictionary;
 import Util.ImageTools;
 import java.io.File;
 import java.io.IOException;
@@ -139,6 +141,24 @@ public class ApplicantInfoController {
     // Save
     @FXML Button btnSaveFX;
 
+    //// For translation - Headers
+    // Titled Panes
+    @FXML TitledPane titleBasicInfoFX;
+    @FXML TitledPane titleAddInfoFX;
+    @FXML TitledPane titleWExperienceFX;
+    @FXML TitledPane titleEduInfoFX;
+    @FXML TitledPane titleKCompFX;
+    @FXML TitledPane titleFoInterestFX;
+    // Basic Info
+    @FXML Label fNameFX;
+    @FXML Label lNameFX;
+    @FXML Label phoneNumeberFX;
+    // Tabs
+    @FXML Tab infoTabFX;
+    @FXML Tab appRatingTabFX;
+
+    IDictionary dictionary;
+
     public ApplicantInfoController(long id, OverviewModel model) {
         this.model = model;
         app = this.model.getApplicantByID(id);
@@ -157,6 +177,7 @@ public class ApplicantInfoController {
     }
 
     private void setApplicantInfo() {
+        setHeaders();
         getTableBasicInfo();
         getPositionAndIndustry();
         getTableEduInfo();
@@ -165,6 +186,46 @@ public class ApplicantInfoController {
         getKeyCompetence();
         getStatus();
         getHrRating();
+    }
+
+    private void setHeaders() {
+        dictionary = new ApplicantInfoDictionary();
+        titleBasicInfoFX.setText(IDictionary.getTranslation(dictionary, "Basic Information"));
+        titleAddInfoFX.setText(IDictionary.getTranslation(dictionary, "Additional Information"));
+        titleWExperienceFX.setText(IDictionary.getTranslation(dictionary, "Work Experience"));
+        titleEduInfoFX.setText(IDictionary.getTranslation(dictionary, "Educational Information"));
+        titleKCompFX.setText(IDictionary.getTranslation(dictionary, "Key Competencies"));
+        titleFoInterestFX.setText(IDictionary.getTranslation(dictionary, "Fields of Interest"));
+
+        jobTitleFX.setText(IDictionary.getTranslation(dictionary, "Title"));
+        companyFX.setText(IDictionary.getTranslation(dictionary, "Company"));
+        employmentTypeFX.setText(IDictionary.getTranslation(dictionary, "Employment Type"));
+        startDateFX.setText(IDictionary.getTranslation(dictionary, "Start Date"));
+        endDateFX.setText(IDictionary.getTranslation(dictionary, "End Date"));
+        descriptionFX.setText(IDictionary.getTranslation(dictionary, "Description"));
+
+        universityFX.setText(IDictionary.getTranslation(dictionary, "University"));
+        subjectFX.setText(IDictionary.getTranslation(dictionary, "Subject"));
+        degreeFX.setText(IDictionary.getTranslation(dictionary, "Degree"));
+        gradeFX.setText(IDictionary.getTranslation(dictionary, "Grade"));
+        gradYearFX.setText(IDictionary.getTranslation(dictionary, "Graduation Year"));
+
+        pLnFWColFX.setText(IDictionary.getTranslation(dictionary, "Programming Languages"));
+        bSkillsColFX.setText(IDictionary.getTranslation(dictionary, "Bussiness Skills"));
+        dBColFX.setText(IDictionary.getTranslation(dictionary, "Databases"));
+        proSoftColFX.setText(IDictionary.getTranslation(dictionary, "Professional Software"));
+        spoLanColFX.setText(IDictionary.getTranslation(dictionary, "Spoken Langauges"));
+
+        posFX.setText(IDictionary.getTranslation(dictionary, "Position"));
+        indFX.setText(IDictionary.getTranslation(dictionary, "Industry"));
+
+        fNameFX.setText(IDictionary.getTranslation(dictionary, "First Name"));
+        lNameFX.setText(IDictionary.getTranslation(dictionary, "Second Name"));
+        phoneNumeberFX.setText(IDictionary.getTranslation(dictionary, "Phone Number"));
+
+        infoTabFX.setText(IDictionary.getTranslation(dictionary, "Information"));
+        docTabFX.setText(IDictionary.getTranslation(dictionary, "Documents"));
+        appRatingTabFX.setText(IDictionary.getTranslation(dictionary, "Applicant Ratings"));
     }
 
     private void getBarChart() {
