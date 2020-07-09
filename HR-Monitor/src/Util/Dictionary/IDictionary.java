@@ -5,12 +5,17 @@ import java.util.Map;
 import java.util.Objects;
 
 public interface IDictionary {
-    public static Language LANG = Language.English;
+    public static Language LANG = Language.German;
 
     Map<String, String> getDictionary();
 
     public static String getTranslation(IDictionary dictionary, String english) {
-        if (LANG.equals(Language.English)) return english;
+        if (LANG.equals(Language.English)) {
+            if (english.contains("TITLE-")) // GUI title
+            return english.replace("TITLE-", "");
+            return english;
+        }
+
         return getGerman(dictionary, english);
     }
 
