@@ -183,10 +183,12 @@ export class ApplicationsUploadPage implements OnInit {
     /**
      * picture of applicant and documents is mapped according json format required by server.
      */
-    images.push({
-      content: applicantData.profilePicture.pictureBase64,
-      type: 'profilePic',
-    });
+    if (applicantData.profilePicture?.pictureBase64) {
+      images.push({
+        content: applicantData.profilePicture.pictureBase64,
+        type: 'profilePic',
+      });
+    }
     applicantData.documents?.documentsBase64?.forEach((x) => {
       images.push({ content: x, type: 'CV' });
     });
