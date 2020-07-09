@@ -1,11 +1,12 @@
 package Util.Dictionary;
 
+import static Main.App.LANG;
+
 import Model.Language;
 import java.util.Map;
 import java.util.Objects;
 
 public interface IDictionary {
-    public static Language LANG = Language.German;
 
     Map<String, String> getDictionary();
 
