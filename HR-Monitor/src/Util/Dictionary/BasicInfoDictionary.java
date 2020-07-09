@@ -13,7 +13,6 @@ public class BasicInfoDictionary implements IDictionary {
     private void init() {
         if (dictionary.size() == 0) {
             // add all values
-            dictionary.put("login", "Anmeldung");
             dictionary.put("title", "Anrede");
             dictionary.put("welcome", "Willkommen");
             dictionary.put("firstName", "Vorname");
