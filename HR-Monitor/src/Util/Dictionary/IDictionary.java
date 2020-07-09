@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public interface IDictionary {
+    void init();
 
     Map<String, String> getDictionary();
 
@@ -21,7 +22,8 @@ public interface IDictionary {
     }
 
     private static String getGerman(IDictionary dictionary, String english) {
-        return dictionary.getDictionary().get(english);
+        String res = dictionary.getDictionary().get(english);
+        return res != null ? res : english;
     }
 
     private static String getEnglish(IDictionary dictionary, String german) {

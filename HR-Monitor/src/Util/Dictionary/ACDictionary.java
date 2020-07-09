@@ -10,7 +10,8 @@ public class ACDictionary implements IDictionary {
         init();
     }
 
-    private void init() {
+    @Override
+    public void init() {
         if (dictionary.size() == 0) {
             // add all values
             dictionary.put("TITLE-Login", "Anmeldung"); // login
