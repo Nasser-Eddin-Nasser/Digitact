@@ -11,6 +11,8 @@ import Model.MVC.OverviewModel;
 import Model.User.ApplicantUI;
 import Util.Dictionary.ApplicantInfoDictionary;
 import Util.Dictionary.IDictionary;
+import Util.Dictionary.IDictionary;
+import Util.Dictionary.KeyCompetenciesDictionary;
 import Util.ImageTools;
 import java.io.File;
 import java.io.IOException;
@@ -70,20 +72,20 @@ public class ApplicantInfoController {
     @FXML TableView<Industries> indTable;
     private ObservableList<Industries> observableListIndTableTableView;
 
-    @FXML TableView<KeyCompetence> pLnFWTableFX;
-    private ObservableList<KeyCompetence> observableListPLnFWTableView;
+    @FXML TableView<String> pLnFWTableFX;
+    private ObservableList<String> observableListPLnFWTableView;
 
-    @FXML TableView<KeyCompetence> bSkillsTableFX;
-    private ObservableList<KeyCompetence> observableListBSkillsTableView;
+    @FXML TableView<String> bSkillsTableFX;
+    private ObservableList<String> observableListBSkillsTableView;
 
-    @FXML TableView<KeyCompetence> dBTableFX;
-    private ObservableList<KeyCompetence> observableListDBTableView;
+    @FXML TableView<String> dBTableFX;
+    private ObservableList<String> observableListDBTableView;
 
-    @FXML TableView<KeyCompetence> proSoftTableFX;
-    private ObservableList<KeyCompetence> observableListProSoftTableView;
+    @FXML TableView<String> proSoftTableFX;
+    private ObservableList<String> observableListProSoftTableView;
 
-    @FXML TableView<KeyCompetence> spoLanTableFX;
-    private ObservableList<KeyCompetence> observableListSpoLanTableView;
+    @FXML TableView<String> spoLanTableFX;
+    private ObservableList<String> observableListSpoLanTableView;
 
     @FXML TableColumn<Positions, String> posFX = new TableColumn<>("Position");
     @FXML TableColumn<Industries, String> indFX = new TableColumn<>("Industry");
@@ -122,11 +124,11 @@ public class ApplicantInfoController {
     @FXML Tab docTabFX;
 
     // Key Competencies
-    @FXML TableColumn<KeyCompetence, String> pLnFWColFX = new TableColumn<>("name");
-    @FXML TableColumn<KeyCompetence, String> bSkillsColFX = new TableColumn<>("name");
-    @FXML TableColumn<KeyCompetence, String> dBColFX = new TableColumn<>("name");
-    @FXML TableColumn<KeyCompetence, String> proSoftColFX = new TableColumn<>("name");
-    @FXML TableColumn<KeyCompetence, String> spoLanColFX = new TableColumn<>("name");
+    @FXML TableColumn<String, String> pLnFWColFX = new TableColumn<>("name");
+    @FXML TableColumn<String, String> bSkillsColFX = new TableColumn<>("name");
+    @FXML TableColumn<String, String> dBColFX = new TableColumn<>("name");
+    @FXML TableColumn<String, String> proSoftColFX = new TableColumn<>("name");
+    @FXML TableColumn<String, String> spoLanColFX = new TableColumn<>("name");
 
     @FXML Label txtrheFX, txtMotFX, txtSelfFX, txtPerFX;
     @FXML TextField txtImpFX, txtImpHRFX;
@@ -140,6 +142,7 @@ public class ApplicantInfoController {
 
     // Save
     @FXML Button btnSaveFX;
+    IDictionary KCDic;
 
     //// For translation - Headers
     // Titled Panes
@@ -162,7 +165,12 @@ public class ApplicantInfoController {
     public ApplicantInfoController(long id, OverviewModel model) {
         this.model = model;
         app = this.model.getApplicantByID(id);
+        setDictionary();
         showApplicantInfo();
+    }
+
+    private void setDictionary() {
+        KCDic = new KeyCompetenciesDictionary();
     }
 
     public void showApplicantInfo() {
@@ -358,7 +366,7 @@ public class ApplicantInfoController {
         observableListDBTableView.clear();
         observableListProSoftTableView.clear();
         observableListSpoLanTableView.clear();
-
+        //        IDictionary.getTranslation(KCDic , x.getValue().toString())  )
         pLnFWColFX.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().toString()));
         bSkillsColFX.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().toString()));
         dBColFX.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().toString()));
@@ -366,14 +374,50 @@ public class ApplicantInfoController {
         spoLanColFX.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().toString()));
 
         observableListPLnFWTableView.setAll(
-                app.getKeyCompetencies(KeyCompetenciesCategory.ProgrammingLanguagesAndFrameworks));
+                app.getKeyCompetencies(KeyCompetenciesCategory.ProgrammingLanguagesAndFrameworks)
+                        .stream()
+                        .map(
+                                x ->
+                                        IDictionary.getTranslation(KCDic, x.getName())
+                                                + " - "
+                                                + x.getRating())
+                        .collect(Collectors.toList()));
         observableListBSkillsTableView.setAll(
-                app.getKeyCompetencies(KeyCompetenciesCategory.BusinessSkills));
-        observableListDBTableView.setAll(app.getKeyCompetencies(KeyCompetenciesCategory.Databases));
+                app.getKeyCompetencies(KeyCompetenciesCategory.BusinessSkills)
+                        .stream()
+                        .map(
+                                x ->
+                                        IDictionary.getTranslation(KCDic, x.getName())
+                                                + " - "
+                                                + x.getRating())
+                        .collect(Collectors.toList()));
+        observableListDBTableView.setAll(
+                app.getKeyCompetencies(KeyCompetenciesCategory.Databases)
+                        .stream()
+                        .map(
+                                x ->
+                                        IDictionary.getTranslation(KCDic, x.getName())
+                                                + " - "
+                                                + x.getRating())
+                        .collect(Collectors.toList()));
         observableListProSoftTableView.setAll(
-                app.getKeyCompetencies(KeyCompetenciesCategory.ProfessionalSoftware));
+                app.getKeyCompetencies(KeyCompetenciesCategory.ProfessionalSoftware)
+                        .stream()
+                        .map(
+                                x ->
+                                        IDictionary.getTranslation(KCDic, x.getName())
+                                                + " - "
+                                                + x.getRating())
+                        .collect(Collectors.toList()));
         observableListSpoLanTableView.setAll(
-                app.getKeyCompetencies(KeyCompetenciesCategory.Languages));
+                app.getKeyCompetencies(KeyCompetenciesCategory.Languages)
+                        .stream()
+                        .map(
+                                x ->
+                                        IDictionary.getTranslation(KCDic, x.getName())
+                                                + " - "
+                                                + x.getRating())
+                        .collect(Collectors.toList()));
     }
 
     private void getPositionAndIndustry() {

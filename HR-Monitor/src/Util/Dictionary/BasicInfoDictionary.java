@@ -10,7 +10,8 @@ public class BasicInfoDictionary implements IDictionary {
         init();
     }
 
-    private void init() {
+    @Override
+    public void init() {
         if (dictionary.size() == 0) {
             // add all values
             dictionary.put("title", "Anrede");
