@@ -1,5 +1,7 @@
 package Digitact.Backend;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -15,4 +17,12 @@ public class ConfigProperties {
     public static boolean testEnvironment = false; // it will be dynamically set by the test classes
     public static String testAbsoluteFileSystemPath =
             "xx\\xx\\"; // it will be dynamically set by the test classes
+
+    public static void AssertionConfig() {
+        if (absoluteFileSystemPath.length() < 1
+                || !Files.exists(Paths.get(absoluteFileSystemPath))) {
+            System.err.println("FileSystem doesn't exist");
+            System.exit(0);
+        }
+    }
 }

@@ -2,7 +2,9 @@ package Controller;
 
 import static Controller.AcController.ADMIN_USERNAME;
 
+import Main.Configuration;
 import Model.MenuItem;
+import java.io.File;
 import java.io.IOException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -52,7 +54,21 @@ public class StandardController {
         borderPaneCurrentView.setCenter(loadOverviewTableContent());
         textMenuLabel.setText("user:" + ADMIN_USERNAME);
         loadMenu();
+        stage.setOnCloseRequest(e -> shutdown());
         stage.show();
+    }
+
+    private void shutdown() {
+        File folder = new File(Configuration.absoluteFileSystemPath);
+        File[] files = folder.listFiles();
+        if (files != null) { // some JVMs return null for empty dirs
+            for (File f : files) {
+                if (!f.isDirectory()) {
+                    System.out.println(f.getAbsolutePath());
+                    f.delete();
+                }
+            }
+        }
     }
 
     private void loadMenu() {
@@ -98,6 +114,7 @@ public class StandardController {
             ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
             alert.showAndWait();
             if (alert.getResult().getText().equals("OK")) {
+                shutdown();
                 stage.close();
                 new AcController();
             }

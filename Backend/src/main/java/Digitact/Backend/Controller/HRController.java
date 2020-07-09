@@ -1,13 +1,11 @@
 package Digitact.Backend.Controller;
 
-import Digitact.Backend.Model.Education;
 import Digitact.Backend.Model.HRCommentHolder;
 import Digitact.Backend.Model.StatusHolder;
 import Digitact.Backend.Model.Token;
 import Digitact.Backend.Model.User.Admin;
 import Digitact.Backend.Model.User.AdminUI;
 import Digitact.Backend.Model.User.User;
-import Digitact.Backend.Model.WorkExperience;
 import Digitact.Backend.Storage.*;
 import Digitact.Backend.Util.ImageTools;
 import java.util.ArrayList;
@@ -59,16 +57,6 @@ public class HRController {
             System.err.println("Access denied! with URI " + uri);
         }
         return res;
-    }
-
-    @GetMapping("/getAllEducationInfo")
-    public List<Education> getFullEducationsInfo() { // todo do we need it?
-        return new ArrayList<Education>(educationRepository.getAllEducationsInfo());
-    }
-
-    @GetMapping("/getAllWorkExperiencesInfo")
-    public List<WorkExperience> getAllWorkExperiencesInfo() { // todo do we need it?
-        return new ArrayList<WorkExperience>(workExperieinceRepository.getAllWorkExperiencesInfo());
     }
 
     @GetMapping(path = "/getImageById={imageId}")
@@ -220,7 +208,6 @@ public class HRController {
 
     @PostMapping(path = "/postHRComment")
     public String postHRComments(@RequestBody HRCommentHolder comment) {
-        // statusRepository.setStatus( status.getStatus().getNum(),status.getAppID());
         ihrInfoRepository.setHRComment(comment.getComment(), comment.getAppID());
         return "changed";
     }
