@@ -10,8 +10,10 @@ import Model.Image.ImageType;
 import Model.MVC.OverviewModel;
 import Model.User.ApplicantUI;
 import Util.Dictionary.ApplicantInfoDictionary;
+import Util.Dictionary.DegreeAndEmploymentTypeDictionary;
 import Util.Dictionary.IDictionary;
 import Util.Dictionary.KeyCompetenciesDictionary;
+import Util.Dictionary.PositionsAndIndustriesDictionary;
 import Util.ImageTools;
 import java.io.File;
 import java.io.IOException;
@@ -65,11 +67,11 @@ public class ApplicantInfoController {
     @FXML TableView<WorkExperience> workInfoTblFX;
     private ObservableList<WorkExperience> observableListWorkExpInfoTableView;
 
-    @FXML TableView<Positions> posTable;
-    private ObservableList<Positions> observableListPosTableTableView;
+    @FXML TableView<String> posTable;
+    private ObservableList<String> observableListPosTableTableView;
 
-    @FXML TableView<Industries> indTable;
-    private ObservableList<Industries> observableListIndTableTableView;
+    @FXML TableView<String> indTable;
+    private ObservableList<String> observableListIndTableTableView;
 
     @FXML TableView<String> pLnFWTableFX;
     private ObservableList<String> observableListPLnFWTableView;
@@ -86,8 +88,8 @@ public class ApplicantInfoController {
     @FXML TableView<String> spoLanTableFX;
     private ObservableList<String> observableListSpoLanTableView;
 
-    @FXML TableColumn<Positions, String> posFX = new TableColumn<>("Position");
-    @FXML TableColumn<Industries, String> indFX = new TableColumn<>("Industry");
+    @FXML TableColumn<String, String> posFX = new TableColumn<>("Position");
+    @FXML TableColumn<String, String> indFX = new TableColumn<>("Industry");
 
     // Applicant Info View's Variables
     // 1. Basic Info
@@ -142,6 +144,8 @@ public class ApplicantInfoController {
     // Save
     @FXML Button btnSaveFX;
     IDictionary KCDic;
+    IDictionary DEDic;
+    IDictionary PIDic;
 
     //// For translation - Headers
     // Titled Panes
@@ -174,6 +178,8 @@ public class ApplicantInfoController {
 
     private void setDictionary() {
         KCDic = new KeyCompetenciesDictionary();
+        DEDic = new DegreeAndEmploymentTypeDictionary();
+        PIDic = new PositionsAndIndustriesDictionary();
     }
 
     public void showApplicantInfo() {
@@ -458,28 +464,36 @@ public class ApplicantInfoController {
         getIndTable(app.getIndustries());
     }
 
-    private ObservableList<Industries> getIndTable(List<Industries> industries) {
+    private ObservableList<String> getIndTable(List<Industries> industries) {
         observableListIndTableTableView = indTable.getItems();
         observableListIndTableTableView.clear();
-        observableListIndTableTableView.addAll(industries);
+        observableListIndTableTableView.addAll(
+                industries
+                        .stream()
+                        .map(x -> IDictionary.getTranslation(PIDic, x.getIndustry().toString()))
+                        .collect(Collectors.toList()));
         setFactoriesAndComparatorsForIndTableColumns();
         return observableListIndTableTableView;
     }
 
     public void setFactoriesAndComparatorsForIndTableColumns() {
-        indFX.setCellValueFactory(ind -> new ReadOnlyStringWrapper(ind.getValue().getIndustry()));
+        indFX.setCellValueFactory(ind -> new ReadOnlyStringWrapper(ind.getValue()));
     }
 
-    private ObservableList<Positions> getPositionTable(List<Positions> positions) {
+    private ObservableList<String> getPositionTable(List<Positions> positions) {
         observableListPosTableTableView = posTable.getItems();
         observableListPosTableTableView.clear();
-        observableListPosTableTableView.addAll(positions);
+        observableListPosTableTableView.addAll(
+                positions
+                        .stream()
+                        .map(x -> IDictionary.getTranslation(PIDic, x.getPosition().toString()))
+                        .collect(Collectors.toList()));
         setFactoriesAndComparatorsForPosTableColumns();
         return observableListPosTableTableView;
     }
 
     public void setFactoriesAndComparatorsForPosTableColumns() {
-        posFX.setCellValueFactory(pos -> new ReadOnlyStringWrapper(pos.getValue().getPosition()));
+        posFX.setCellValueFactory(pos -> new ReadOnlyStringWrapper(pos.getValue()));
     }
 
     private void getImages(ImageType it) {
@@ -710,7 +724,9 @@ public class ApplicantInfoController {
         employmentTypeFX.setCellValueFactory(
                 applicant ->
                         new ReadOnlyStringWrapper(
-                                applicant.getValue().getEmploymentType().toString()));
+                                IDictionary.getTranslation(
+                                        DEDic,
+                                        applicant.getValue().getEmploymentType().toString())));
         startDateFX.setCellValueFactory(
                 applicant -> new ReadOnlyStringWrapper(applicant.getValue().getStartDate()));
         endDateFX.setCellValueFactory(
@@ -726,7 +742,9 @@ public class ApplicantInfoController {
                 applicant -> new ReadOnlyStringWrapper(applicant.getValue().getSubject()));
         degreeFX.setCellValueFactory(
                 applicant ->
-                        new ReadOnlyStringWrapper(applicant.getValue().getDegree().toString()));
+                        new ReadOnlyStringWrapper(
+                                IDictionary.getTranslation(
+                                        DEDic, applicant.getValue().getDegree().toString())));
         gradeFX.setCellValueFactory(
                 applicant -> new ReadOnlyDoubleWrapper(applicant.getValue().getGrade()));
         gradYearFX.setCellValueFactory(
