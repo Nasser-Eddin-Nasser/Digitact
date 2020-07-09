@@ -48,6 +48,8 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 public class ApplicantInfoController {
+    // Create Dic
+
     private boolean isHRChartLoaded = false;
     Stage stage;
     OverviewModel model;

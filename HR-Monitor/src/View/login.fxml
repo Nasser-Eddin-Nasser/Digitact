@@ -16,8 +16,8 @@
     <children>
         <Button id="loginButton" fx:id="login" layoutX="348.0" layoutY="301.0" mnemonicParsing="false" onAction="#onLogin" prefHeight="33.0" prefWidth="135.0" style="-fx-border-color: #ecf0f1; -fx-background-color: #222D41;" text="Login" textFill="#ecf0f1" />
 
-        <Label layoutX="290.0" layoutY="175.0" style="-fx-text-fill: #ecf0f1;" text="USERNAME:" />
-        <Label layoutX="291.0" layoutY="226.0" style="-fx-text-fill: #ecf0f1;" text="PASSWORD:" />
+        <Label fx:id="userNameLabel" layoutX="290.0" layoutY="175.0" style="-fx-text-fill: #ecf0f1;" text="USERNAME:" />
+        <Label fx:id="passwordLabel" layoutX="291.0" layoutY="226.0" style="-fx-text-fill: #ecf0f1;" text="PASSWORD:" />
         <TextField fx:id="myUserNameTextField" layoutX="379.0" layoutY="170.0" prefHeight="26.0" prefWidth="135.0" />
         <PasswordField fx:id="myPasswordField" layoutX="379.0" layoutY="221.0" prefHeight="26.0" prefWidth="135.0" />
         <!--        <Hyperlink layoutX="292.0" layoutY="376.0" onAction="#showHint" prefHeight="26.0" prefWidth="135.0" text="Forgot password?" textFill="#ecf0f1" underline="true" />-->
@@ -45,7 +45,7 @@
             <Image url="@../Style/Logo/Logo-idea-2-blackbg--logo.png" />
          </image>
       </ImageView>
-      <Label layoutX="397.0" layoutY="258.0" onMouseClicked="#showHint" text="Forgot password?" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+      <Label fx:id="forgotPasswordLabel" layoutX="397.0" layoutY="258.0" onMouseClicked="#showHint" text="Forgot password?" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
