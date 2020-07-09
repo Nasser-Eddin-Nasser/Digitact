@@ -64,7 +64,6 @@ public class AcController {
 
     private void SetDictionary() {
         acDic = new ACDictionary();
-        System.out.println("im here");
         basicInfoDic = new BasicInfoDictionary();
     }
 
