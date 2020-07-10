@@ -1,9 +1,13 @@
 package Controller;
 
+import static Controller.AcController.ADMIN_USERNAME;
+
 import Main.Configuration;
 import Model.MenuItem;
 import Util.Dictionary.IDictionary;
 import Util.Dictionary.MenuDictionary;
+import java.io.File;
+import java.io.IOException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,32 +22,20 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
-
-import static Controller.AcController.ADMIN_USERNAME;
-
 public class StandardController {
 
-    /**
-     * the stage, which holds the program
-     */
+    /** the stage, which holds the program */
     private Stage stage;
 
     private Scene viewHRStandard;
-    @FXML
-    private BorderPane borderPaneCurrentView;
-    @FXML
-    private Text textMenuLabel;
+    @FXML private BorderPane borderPaneCurrentView;
+    @FXML private Text textMenuLabel;
 
-    @FXML
-    private ListView<String> listViewMenue;
+    @FXML private ListView<String> listViewMenue;
     IDictionary menuDictionary;
     //    @FXML private Text textMenuLabel;
 
-    /**
-     * the current selected MenuItem
-     */
+    /** the current selected MenuItem */
     private MenuItem current;
 
     private ObservableList<String> items;
@@ -84,9 +76,17 @@ public class StandardController {
 
     private void loadMenu() {
         listViewMenue.getItems().removeAll();
-        listViewMenue.getItems().add(IDictionary.getTranslation(menuDictionary, MenuItem.Applicants.getMenuItem()));
-        listViewMenue.getItems().add(IDictionary.getTranslation(menuDictionary, MenuItem.CreateAccount.getMenuItem()));
-        listViewMenue.getItems().add(IDictionary.getTranslation(menuDictionary, MenuItem.Logout.getMenuItem()));
+        listViewMenue
+                .getItems()
+                .add(IDictionary.getTranslation(menuDictionary, MenuItem.Applicants.getMenuItem()));
+        listViewMenue
+                .getItems()
+                .add(
+                        IDictionary.getTranslation(
+                                menuDictionary, MenuItem.CreateAccount.getMenuItem()));
+        listViewMenue
+                .getItems()
+                .add(IDictionary.getTranslation(menuDictionary, MenuItem.Logout.getMenuItem()));
     }
 
     @FXML

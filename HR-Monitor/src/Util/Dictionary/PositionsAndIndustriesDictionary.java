@@ -16,7 +16,8 @@ public class PositionsAndIndustriesDictionary implements IDictionary {
             ///////////// Positions
             dictionary.put("Business Consultant", "Consultant/Business Consultant");
             dictionary.put(
-                    "IT Consultant - Informationsmanagement", "IT-Consultant - Informationsmanagement");
+                    "IT Consultant - Informationsmanagement",
+                    "IT-Consultant - Informationsmanagement");
             dictionary.put("IT Consultant - Java JEE", "IT-Consultant - Java/JEE");
             dictionary.put(
                     "IT Consultant - Data Science",

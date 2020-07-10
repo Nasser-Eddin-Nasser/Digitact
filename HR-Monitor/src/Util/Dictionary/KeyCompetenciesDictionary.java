@@ -22,7 +22,8 @@ public class KeyCompetenciesDictionary implements IDictionary {
             dictionary.put("businessSkills", "Unternehmerische Fähigkeiten");
             dictionary.put("professionalSoftware", "Software-Kenntnisse");
             dictionary.put("database", "Datenbank-Kenntnisse");
-            dictionary.put("programmingLanguagesAndFrameworks", "Programmiersprachen und Frameworks");
+            dictionary.put(
+                    "programmingLanguagesAndFrameworks", "Programmiersprachen und Frameworks");
             ///////////////////////////////////////// languages
             dictionary.put("Arabic", "Arabisch");
             dictionary.put("Chinese", "Chinesisch");

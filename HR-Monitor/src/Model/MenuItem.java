@@ -1,9 +1,9 @@
 package Model;
 
+import static Main.App.LANG;
+
 import Util.Dictionary.IDictionary;
 import Util.Dictionary.MenuDictionary;
-
-import static Main.App.LANG;
 
 public enum MenuItem {
     Applicants("Applicants"),
