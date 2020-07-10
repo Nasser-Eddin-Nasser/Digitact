@@ -7,6 +7,9 @@ import Digitact.Backend.Model.User.UserUI;
 import Digitact.Backend.Storage.IDataRepository;
 import Digitact.Backend.Storage.Repository;
 import java.util.List;
+import java.util.Map;
+import Digitact.Backend.Util.PasswordTools;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,5 +47,32 @@ public class ClientController {
     public String createAdmin(@RequestBody UserUI userUI) {
         repository.save(new Admin(userUI.getFirstName(), userUI.getLastName()));
         return "Admin is created in the database";
+    }
+    /**
+     * This mapping is used when device starts for the first time in a new 
+     * machine to register the device
+     * @param userName
+     * @param password
+     * @return token 
+     */
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody Map<String, String> input) { 
+    	Repository myRepos = new Repository(repository);
+    	boolean isSuccess = false;
+    	try {    		
+	    	Admin admin = repository.getAdminByUserName(input.get("userName"));	    	
+	    	String password = PasswordTools.encryptString(input.get("password"));
+	    	if(admin!=null && admin.getPassword().equals(password)) {
+	    		isSuccess = myRepos.createTokenForDeviceRegistry();
+	    	}
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	return (isSuccess)
+                ? new ResponseEntity<String>(
+                        "Token is created", HttpStatus.CREATED)
+                : new ResponseEntity<String>(
+                        "User name or password is wrong", HttpStatus.UNAUTHORIZED);
     }
 }
