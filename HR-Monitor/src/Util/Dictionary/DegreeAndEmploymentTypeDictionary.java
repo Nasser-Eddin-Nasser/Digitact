@@ -12,6 +12,7 @@ public class DegreeAndEmploymentTypeDictionary implements IDictionary {
 
     @Override
     public void init() {
+        if (dictionary.size() == 0) {
         /////////// EmploymentType
         dictionary.put("FullTime", "Vollzeit");
         dictionary.put("PartTime", "Teilzeit");
@@ -27,7 +28,7 @@ public class DegreeAndEmploymentTypeDictionary implements IDictionary {
         dictionary.put("Bachelor", "Bachelor");
         dictionary.put("PhD", "PhD");
         dictionary.put("School", "Schule");
-    }
+    }}
 
     @Override
     public Map<String, String> getDictionary() {
