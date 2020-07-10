@@ -53,6 +53,18 @@ public class Repository {
         t.setLoggedinAdmin(admin);
         return t;
     }
+    /**
+     * This method is used to check whether user exist and return token after generation
+     * @param userName
+     * @param password
+     * @return token
+     */
+    public boolean createTokenForDeviceRegistry() {
+    	/**
+    	 * model to be created for storing device and token generation to be implemented here
+    	 */
+    	return true;
+    }
 
     public boolean storeApplicantOnDB(ApplicantUI applicant) {
         boolean isImageSuccessfullyStored = true;
