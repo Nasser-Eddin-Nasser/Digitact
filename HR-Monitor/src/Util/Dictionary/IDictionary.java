@@ -1,10 +1,11 @@
 package Util.Dictionary;
 
-import static Main.App.LANG;
-
 import Model.Language;
+
 import java.util.Map;
 import java.util.Objects;
+
+import static Main.App.LANG;
 
 public interface IDictionary {
     void init();
@@ -14,7 +15,7 @@ public interface IDictionary {
     public static String getTranslation(IDictionary dictionary, String english) {
         if (LANG.equals(Language.English)) {
             if (english.contains("TITLE-")) // GUI title
-            return english.replace("TITLE-", "");
+                return english.replace("TITLE-", "");
             return english;
         }
 
@@ -26,7 +27,7 @@ public interface IDictionary {
         return res != null ? res : english;
     }
 
-    private static String getEnglish(IDictionary dictionary, String german) {
+    public static String getEnglish(IDictionary dictionary, String german) {
         return dictionary
                 .getDictionary()
                 .entrySet()
