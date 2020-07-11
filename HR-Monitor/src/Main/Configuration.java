@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 public class Configuration {
     public static final String BES_URI = "http://localhost:9090/api/HRController/";
 
-    public static final String absoluteFileSystemPath = "";
+    public static final String absoluteFileSystemPath = "D:\\\\Masters\\\\2nd Semester\\\\AMOS Project\\\\FileSystem\\\\";
 
     public static void AssertionConfig() {
         if (absoluteFileSystemPath.length() < 1
