@@ -2,6 +2,7 @@ package Controller;
 
 import Model.MVC.OverviewModel;
 import Model.User.ApplicantUI;
+import Util.Dictionary.ApplicantInfoDictionary;
 import Util.Dictionary.BasicInfoDictionary;
 import Util.Dictionary.IDictionary;
 import javafx.beans.property.ReadOnlyLongWrapper;
@@ -25,7 +26,7 @@ public class OverviewController {
     @FXML
     TableView<ApplicantUI> userTable;
     private ObservableList<ApplicantUI> observableListTableView;
-    IDictionary biDic;
+    IDictionary biDic, aiDic;
     // Overview of all Applicants
     @FXML
     TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
@@ -50,6 +51,7 @@ public class OverviewController {
 
     private void setDictionary() {
         biDic = new BasicInfoDictionary();
+        aiDic = new ApplicantInfoDictionary();
     }
 
     public void setFactoriesAndComparatorsForTableColumns() {
@@ -61,7 +63,7 @@ public class OverviewController {
         lastNameCol.setCellValueFactory(
                 user -> new ReadOnlyStringWrapper(user.getValue().getLastName()));
         status.setCellValueFactory(
-                user -> new ReadOnlyStringWrapper(user.getValue().getStatus().toString()));
+                user -> new ReadOnlyStringWrapper(IDictionary.getTranslation(aiDic, user.getValue().getStatus().toString())));
         firstNameCol.setText(IDictionary.getTranslation(biDic, "First Name"));
         lastNameCol.setText(IDictionary.getTranslation(biDic, "Last Name"));
     }
