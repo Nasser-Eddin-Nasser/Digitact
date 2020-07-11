@@ -26,7 +26,7 @@ public interface IDictionary {
         return res != null ? res : english;
     }
 
-    private static String getEnglish(IDictionary dictionary, String german) {
+    public static String getEnglish(IDictionary dictionary, String german) {
         return dictionary
                 .getDictionary()
                 .entrySet()

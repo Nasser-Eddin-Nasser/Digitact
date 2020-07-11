@@ -4,6 +4,8 @@ import static Controller.AcController.ADMIN_USERNAME;
 
 import Main.Configuration;
 import Model.MenuItem;
+import Util.Dictionary.IDictionary;
+import Util.Dictionary.MenuDictionary;
 import java.io.File;
 import java.io.IOException;
 import javafx.collections.ObservableList;
@@ -30,7 +32,7 @@ public class StandardController {
     @FXML private Text textMenuLabel;
 
     @FXML private ListView<String> listViewMenue;
-
+    IDictionary menuDictionary;
     //    @FXML private Text textMenuLabel;
 
     /** the current selected MenuItem */
@@ -39,6 +41,7 @@ public class StandardController {
     private ObservableList<String> items;
 
     public StandardController(Stage stage) throws IOException {
+        menuDictionary = new MenuDictionary();
         CreateAccountController.isFirstAccount = false;
         listViewMenue = new ListView();
         this.stage = stage;
@@ -72,9 +75,18 @@ public class StandardController {
     }
 
     private void loadMenu() {
-        listViewMenue.getItems().add(MenuItem.Applicants.getMenuItem());
-        listViewMenue.getItems().add(MenuItem.CreateAccount.getMenuItem());
-        listViewMenue.getItems().add(MenuItem.Logout.getMenuItem());
+        listViewMenue.getItems().removeAll();
+        listViewMenue
+                .getItems()
+                .add(IDictionary.getTranslation(menuDictionary, MenuItem.Applicants.getMenuItem()));
+        listViewMenue
+                .getItems()
+                .add(
+                        IDictionary.getTranslation(
+                                menuDictionary, MenuItem.CreateAccount.getMenuItem()));
+        listViewMenue
+                .getItems()
+                .add(IDictionary.getTranslation(menuDictionary, MenuItem.Logout.getMenuItem()));
     }
 
     @FXML
