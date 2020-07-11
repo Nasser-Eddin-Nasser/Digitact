@@ -1,9 +1,8 @@
 package Controller;
 
-import static Controller.AcController.ADMIN_USERNAME;
-
 import Main.Configuration;
 import Model.MenuItem;
+import Storage.DBStorage;
 import Util.Dictionary.IDictionary;
 import Util.Dictionary.MenuDictionary;
 import java.io.File;
@@ -55,7 +54,10 @@ public class StandardController {
         stage.setScene(viewHRStandard);
         this.stage.setResizable(true);
         borderPaneCurrentView.setCenter(loadOverviewTableContent());
-        textMenuLabel.setText("user:" + ADMIN_USERNAME);
+        textMenuLabel.setText(
+                IDictionary.getTranslation(menuDictionary, "Hello")
+                        + ": "
+                        + DBStorage.getCurrentAdmin().getFirstName());
         loadMenu();
         stage.setOnCloseRequest(e -> shutdown());
         stage.setFullScreen(true);
@@ -120,10 +122,13 @@ public class StandardController {
     private void logout() {
         try {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Logout");
-            alert.setHeaderText("Do you want to logout? ");
-            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
-            ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+            alert.setTitle(IDictionary.getTranslation(menuDictionary, "Logout"));
+            alert.setHeaderText(
+                    IDictionary.getTranslation(menuDictionary, "Do you want to logout? "));
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK))
+                    .setText(IDictionary.getTranslation(menuDictionary, "Yes"));
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL))
+                    .setText(IDictionary.getTranslation(menuDictionary, "No"));
             alert.showAndWait();
             if (alert.getResult().getText().equals("OK")) {
                 shutdown();

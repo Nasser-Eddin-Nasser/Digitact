@@ -15,8 +15,13 @@ public class MenuDictionary implements IDictionary {
         if (dictionary.size() == 0) {
             /////////////////////// Menu
             dictionary.put("Logout", "Abmelden");
+            dictionary.put("Hello", "Hallo");
             dictionary.put("Applicants", "Bewerber");
             dictionary.put("Create Account", "Konto Erstellen");
+
+            dictionary.put("Do you want to logout? ", "Willst Du dich abmelden? ");
+            dictionary.put("No", "Nein");
+            dictionary.put("Yes", "Ja");
         }
     }
 

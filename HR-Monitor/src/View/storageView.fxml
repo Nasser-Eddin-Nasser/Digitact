@@ -24,7 +24,7 @@
          <children>
                 <TableView fx:id="userTable" style="-fx-border-radius: 0;">
                     <columns>
-                        <TableColumn fx:id="firstNameCol" minWidth="-1.0" prefWidth="204.0" style="-fx-alignment: CENTER;" text="First Name" />
+                        <TableColumn fx:id="firstNameCol" minWidth="-1.0" prefWidth="204.0" style="-fx-alignment: CENTER;" />
                         <TableColumn fx:id="lastNameCol" prefWidth="79.0" style="-fx-alignment: CENTER;" text="Last Name" />
                   <TableColumn fx:id="status" prefWidth="75.0" style="-fx-alignment: CENTER;" text="Status" />
                     </columns>
