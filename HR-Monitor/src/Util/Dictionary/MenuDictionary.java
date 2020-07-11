@@ -15,6 +15,7 @@ public class MenuDictionary implements IDictionary {
         if (dictionary.size() == 0) {
             /////////////////////// Menu
             dictionary.put("Logout", "Abmelden");
+            dictionary.put("Hello", "Hallo");
             dictionary.put("Applicants", "Bewerber");
             dictionary.put("Create Account", "Konto Erstellen");
         }

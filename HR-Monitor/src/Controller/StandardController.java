@@ -4,6 +4,7 @@ import static Controller.AcController.ADMIN_USERNAME;
 
 import Main.Configuration;
 import Model.MenuItem;
+import Storage.DBStorage;
 import Util.Dictionary.IDictionary;
 import Util.Dictionary.MenuDictionary;
 import java.io.File;
@@ -55,7 +56,7 @@ public class StandardController {
         stage.setScene(viewHRStandard);
         this.stage.setResizable(true);
         borderPaneCurrentView.setCenter(loadOverviewTableContent());
-        textMenuLabel.setText("user:" + ADMIN_USERNAME);
+        textMenuLabel.setText(IDictionary.getTranslation(menuDictionary, "Hello" )+": "+ DBStorage.getCurrentAdmin().getFirstName());
         loadMenu();
         stage.setOnCloseRequest(e -> shutdown());
         stage.show();
