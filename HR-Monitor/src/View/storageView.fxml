@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="746.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="746.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <GridPane alignment="CENTER" prefHeight="656.0" prefWidth="831.0" style="-fx-background-color: #ecf0f1;" BorderPane.alignment="TOP_LEFT">
         <columnConstraints>
@@ -29,33 +38,46 @@
    <top>
       <GridPane alignment="CENTER" minWidth="600.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="61.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="273.0" minWidth="10.0" prefWidth="81.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="382.0" minWidth="10.0" prefWidth="194.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.0" minWidth="0.0" prefWidth="77.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.0" minWidth="10.0" prefWidth="50.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="149.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="440.0" minWidth="10.0" prefWidth="195.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="21.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="273.0" minWidth="10.0" prefWidth="58.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="382.0" minWidth="10.0" prefWidth="113.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.0" minWidth="0.0" prefWidth="70.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.0" minWidth="10.0" prefWidth="116.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="70.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="113.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="70.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="455.0" minWidth="10.0" prefWidth="161.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="455.0" minWidth="10.0" prefWidth="80.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" minWidth="10.0" prefWidth="98.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="13.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="10.0" minHeight="9.0" prefHeight="18.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label fx:id="lblName" alignment="CENTER" prefHeight="17.0" prefWidth="209.0" text="Name" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="lblStatus" alignment="CENTER" prefHeight="17.0" prefWidth="212.0" text="Status" textFill="WHITE" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <Label fx:id="lblPosition" alignment="CENTER" prefHeight="17.0" prefWidth="209.0" text="Position" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="lblIndustry" alignment="CENTER" prefHeight="17.0" prefWidth="209.0" text="Industry" textFill="WHITE" GridPane.columnIndex="5" GridPane.rowIndex="2" />
             <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <TextField fx:id="txtNameFX" prefHeight="25.0" prefWidth="205.0" promptText="First name or Last Name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <ComboBox fx:id="cmbPositionFX" prefHeight="25.0" prefWidth="211.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <ComboBox fx:id="txtStatusFX" prefHeight="25.0" prefWidth="209.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-            <ComboBox fx:id="cmbIndustyFX" prefHeight="25.0" prefWidth="210.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-            <Button fx:id="btnFilterFX" mnemonicParsing="false" text="Search" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <Button fx:id="btnFilterFX" mnemonicParsing="false" text="Show" GridPane.columnIndex="10" GridPane.rowIndex="1" />
+            <MenuButton fx:id="mBtnStatusFX" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Status" GridPane.columnIndex="4" GridPane.rowIndex="1">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+            <MenuButton fx:id="mBtnIndustryFX" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" text="Industry" GridPane.columnIndex="6" GridPane.rowIndex="1">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+            <MenuButton fx:id="mBtnPositionFX" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Position" GridPane.columnIndex="8" GridPane.rowIndex="1">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
          </children>
       </GridPane>
    </top>

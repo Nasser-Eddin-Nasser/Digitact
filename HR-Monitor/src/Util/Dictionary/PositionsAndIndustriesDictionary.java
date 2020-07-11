@@ -24,7 +24,7 @@ public class PositionsAndIndustriesDictionary implements IDictionary {
                     "IT-Consultant - Data Science / Artificial Intelligence");
             dictionary.put("Consultant - SAP", "Consultant SAP");
             dictionary.put("Internship/Working Student", "Praktikant/Werkstudent");
-            dictionary.put("Others", "Nutzername");
+            dictionary.put("Others", "Andere");
             ///////////// Positions
             dictionary.put("Automotive", "Automobil");
             dictionary.put("Finance", "Finanzen");
