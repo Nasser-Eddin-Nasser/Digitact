@@ -55,6 +55,7 @@ public class StandardController {
         textMenuLabel.setText("user:" + ADMIN_USERNAME);
         loadMenu();
         stage.setOnCloseRequest(e -> shutdown());
+        stage.setFullScreen(true);
         stage.show();
     }
 
