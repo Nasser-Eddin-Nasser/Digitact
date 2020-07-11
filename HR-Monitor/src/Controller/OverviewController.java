@@ -2,8 +2,8 @@ package Controller;
 
 import Model.MVC.OverviewModel;
 import Model.User.ApplicantUI;
-import java.io.IOException;
-import java.util.List;
+import Util.Dictionary.BasicInfoDictionary;
+import Util.Dictionary.IDictionary;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
@@ -15,39 +15,55 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.List;
+
 public class OverviewController {
     Stage stage;
     OverviewModel model;
     // Create a TableView with a list of Applicants
-    @FXML TableView<ApplicantUI> userTable;
+    @FXML
+    TableView<ApplicantUI> userTable;
     private ObservableList<ApplicantUI> observableListTableView;
-
+    IDictionary biDic;
     // Overview of all Applicants
-    @FXML TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
-    @FXML TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("firstName");
-    @FXML TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("lastName");
-    @FXML TableColumn<ApplicantUI, String> status = new TableColumn<>("status");
+    @FXML
+    TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
+    @FXML
+    TableColumn<ApplicantUI, String> firstNameCol = new TableColumn<>("First Name");
+    @FXML
+    TableColumn<ApplicantUI, String> lastNameCol = new TableColumn<>("Last Name");
+    @FXML
+    TableColumn<ApplicantUI, String> status = new TableColumn<>("Status");
 
     Pane root;
 
-    public OverviewController(/* Stage parentStage */ ) throws IOException {
+    public OverviewController(/* Stage parentStage */) throws IOException {
         model = new OverviewModel();
         stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/storageView.fxml"));
         loader.setController(this);
         root = (Pane) loader.load();
+        setDictionary();
         getTable();
+    }
+
+    private void setDictionary() {
+        biDic = new BasicInfoDictionary();
     }
 
     public void setFactoriesAndComparatorsForTableColumns() {
         idCol.setCellValueFactory(user -> new ReadOnlyLongWrapper(user.getValue().getID()));
         idCol.setVisible(false);
+
         firstNameCol.setCellValueFactory(
                 user -> new ReadOnlyStringWrapper(user.getValue().getFirstName()));
         lastNameCol.setCellValueFactory(
                 user -> new ReadOnlyStringWrapper(user.getValue().getLastName()));
         status.setCellValueFactory(
                 user -> new ReadOnlyStringWrapper(user.getValue().getStatus().toString()));
+        firstNameCol.setText(IDictionary.getTranslation(biDic, "First Name"));
+        lastNameCol.setText(IDictionary.getTranslation(biDic, "Last Name"));
     }
 
     public ObservableList<ApplicantUI> getTable() {

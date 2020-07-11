@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <top>
         <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <items>
@@ -25,7 +33,7 @@
          <children>
                 <TableView fx:id="userTable" style="-fx-border-radius: 0;">
                     <columns>
-                        <TableColumn fx:id="firstNameCol" minWidth="-1.0" prefWidth="204.0" style="-fx-alignment: CENTER;" text="First Name" />
+                        <TableColumn fx:id="firstNameCol" minWidth="-1.0" prefWidth="204.0" style="-fx-alignment: CENTER;" />
                         <TableColumn fx:id="lastNameCol" prefWidth="79.0" style="-fx-alignment: CENTER;" text="Last Name" />
                   <TableColumn fx:id="status" prefWidth="75.0" style="-fx-alignment: CENTER;" text="Status" />
                     </columns>

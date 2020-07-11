@@ -16,8 +16,8 @@ public class BasicInfoDictionary implements IDictionary {
             // add all values
             dictionary.put("title", "Anrede");
             dictionary.put("welcome", "Willkommen");
-            dictionary.put("firstName", "Vorname");
-            dictionary.put("lastName", "Nachname");
+            dictionary.put("First Name", "Vorname");
+            dictionary.put("Last Name", "Nachname");
             dictionary.put("mr", "Herr");
             dictionary.put("mrs", "Frau");
         }
