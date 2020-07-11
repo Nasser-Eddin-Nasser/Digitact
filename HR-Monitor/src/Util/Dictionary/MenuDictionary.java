@@ -22,8 +22,6 @@ public class MenuDictionary implements IDictionary {
             dictionary.put("Do you want to logout? ", "Willst Du dich abmelden? ");
             dictionary.put("No", "Nein");
             dictionary.put("Yes", "Ja");
-
-
         }
     }
 
