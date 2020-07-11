@@ -64,7 +64,6 @@ public class StandardController {
         if (files != null) { // some JVMs return null for empty dirs
             for (File f : files) {
                 if (!f.isDirectory()) {
-                    System.out.println(f.getAbsolutePath());
                     f.delete();
                 }
             }
