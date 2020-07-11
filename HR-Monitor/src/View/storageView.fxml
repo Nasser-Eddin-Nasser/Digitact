@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
-    <top>
-        <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <items>
-                 <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Applicant:" />
-                <TextField fx:id="searchField" promptText="Last Name" translateX="15.0" />
-                <Pane HBox.hgrow="ALWAYS" />
-            </items>
-        </ToolBar>
-    </top>
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="746.0" prefWidth="911.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <GridPane alignment="CENTER" prefHeight="656.0" prefWidth="831.0" style="-fx-background-color: #ecf0f1;" BorderPane.alignment="TOP_LEFT">
         <columnConstraints>
@@ -36,4 +34,37 @@
          </children>
       </GridPane>
    </center>
+   <top>
+      <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="51.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="273.0" minWidth="10.0" prefWidth="133.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="382.0" minWidth="10.0" prefWidth="213.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.0" minWidth="10.0" prefWidth="41.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.0" minWidth="10.0" prefWidth="63.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="105.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="440.0" minWidth="10.0" prefWidth="267.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" minWidth="10.0" prefWidth="55.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="13.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="10.0" minHeight="9.0" prefHeight="18.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="lblName" alignment="CENTER" prefHeight="17.0" prefWidth="209.0" text="Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="lblStatus" alignment="CENTER" prefHeight="17.0" prefWidth="212.0" text="Status" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <Label fx:id="lblPosition" alignment="CENTER" prefHeight="17.0" prefWidth="209.0" text="Position" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="lblIndustry" alignment="CENTER" prefHeight="17.0" prefWidth="209.0" text="Industry" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="txtNameFX" prefHeight="25.0" prefWidth="205.0" promptText="Enter First name or Last Name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cmbPositionFX" prefHeight="25.0" prefWidth="211.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <ComboBox fx:id="txtStatusFX" prefHeight="25.0" prefWidth="209.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cmbIndustyFX" prefHeight="25.0" prefWidth="210.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <Button fx:id="btnFilterFX" mnemonicParsing="false" text="Filter" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+   </top>
 </BorderPane>

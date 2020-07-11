@@ -3,6 +3,7 @@ package Controller;
 import Model.MVC.OverviewModel;
 import Model.User.ApplicantUI;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -52,6 +53,7 @@ public class OverviewController {
 
     public ObservableList<ApplicantUI> getTable() {
         List<ApplicantUI> applicantsList = model.getDB();
+        Collections.reverse(applicantsList);
         AddClickFunctionToUserTable();
         observableListTableView = userTable.getItems();
         observableListTableView.clear();
