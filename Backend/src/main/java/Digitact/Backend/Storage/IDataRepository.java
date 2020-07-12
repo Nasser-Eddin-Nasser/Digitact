@@ -27,4 +27,10 @@ public interface IDataRepository extends JpaRepository<User, Long> {
 
     @Query(value = getAdminByUserName, nativeQuery = true)
     Admin getAdminByUserName(String userName);
+
+    @Query(value = getDeviceIdentfierByDeviceHeader, nativeQuery = true)
+    Long getDeviceIdentfierByDeviceHeader(String deviceHeader);
+
+    @Query(value = getAdminByUserId, nativeQuery = true)
+    Admin getAdminByUserId(long userId);
 }

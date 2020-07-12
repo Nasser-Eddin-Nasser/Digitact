@@ -1,5 +1,9 @@
 package Digitact.Backend.Storage;
 
+import static com.auth0.jwt.algorithms.Algorithm.HMAC256;
+import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
+
+import Digitact.Backend.ConfigProperties.SecurityConstants;
 import Digitact.Backend.Exception.ImageException;
 import Digitact.Backend.Model.*;
 import Digitact.Backend.Model.Image.AppImage;
@@ -8,11 +12,15 @@ import Digitact.Backend.Model.User.Admin;
 import Digitact.Backend.Model.User.Applicant;
 import Digitact.Backend.Model.User.ApplicantUI;
 import Digitact.Backend.Util.ImageTools;
+import com.auth0.jwt.JWT;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 
 public class Repository {
     IDataRepository repo;
@@ -53,17 +61,45 @@ public class Repository {
         t.setLoggedinAdmin(admin);
         return t;
     }
+
     /**
      * This method is used to check whether user exist and return token after generation
-     * @param userName
-     * @param password
+     * @param Admin
      * @return token
      */
-    public boolean createTokenForDeviceRegistry() {
-    	/**
-    	 * model to be created for storing device and token generation to be implemented here
-    	 */
-    	return true;
+    public HttpHeaders createTokenForDeviceRegistry(Admin admin) {
+        /** model to be created for storing device and token generation to be implemented here */
+        HttpHeaders header = new HttpHeaders();
+
+        String deviceToken =
+                JWT.create()
+                        .withSubject(
+                                String.valueOf(admin.getId())
+                                        + UUID.randomUUID().getMostSignificantBits())
+                        .sign(HMAC256(SecurityConstants.SECRET_DEVICE.getBytes()));
+
+        String userToken =
+                JWT.create()
+                        .withSubject(
+                                String.valueOf(admin.getId())
+                                        + UUID.randomUUID().getMostSignificantBits())
+                        .withExpiresAt(
+                                new Date(
+                                        System.currentTimeMillis()
+                                                + SecurityConstants.EXPIRATION_TIME))
+                        .sign(HMAC512(SecurityConstants.SECRET.getBytes()));
+
+        admin.setClientToken(userToken);
+
+        DeviceIdentifier device = new DeviceIdentifier(deviceToken);
+        device.setUser(admin);
+        admin.setDeviceIdentifier(device);
+        repo.save(admin);
+
+        header.add(SecurityConstants.USER_HEADER_STRING, userToken);
+        header.add(SecurityConstants.DEVICE_HEADER_STRING, deviceToken);
+
+        return header;
     }
 
     public boolean storeApplicantOnDB(ApplicantUI applicant) {
