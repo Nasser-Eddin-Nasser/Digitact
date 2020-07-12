@@ -1,5 +1,8 @@
 package Digitact.Backend.Controller;
 
+import static Digitact.Backend.ConfigProperties.SecurityConstants.DEVICE_HEADER_STRING;
+import static Digitact.Backend.ConfigProperties.SecurityConstants.USER_HEADER_STRING;
+
 import Digitact.Backend.Model.User.Admin;
 import Digitact.Backend.Model.User.ApplicantUI;
 import Digitact.Backend.Model.User.User;
@@ -36,24 +39,21 @@ public class ClientController {
     public ResponseEntity<String> createApplicant(
             @RequestHeader HttpHeaders headers, @RequestBody ApplicantUI applicant) {
         Repository myRepos = new Repository(repository);
-        boolean isValid = false;
+        boolean isAuthorized = false;
         try {
-            Long userId =
-                    repository.getDeviceIdentfierByDeviceHeader(
-                            headers.get("deviceauthorization").get(0));
-            if (userId != null) {
-                System.out.println(userId);
-                Admin admin = repository.getAdminByUserId(userId);
-                if (admin != null) {
-                    if (admin.getClientToken().equals(headers.get("userauthorization").get(0))) {
-                        isValid = true;
-                    }
+            Admin admin =
+                    repository.getAdminByUserClientToken(headers.get(USER_HEADER_STRING).get(0));
+            if (admin != null) {
+                if (myRepos.checkJwtTokenValidation(admin.getClientToken())) {
+                    isAuthorized =
+                            repository.getDeviceIdentfierByDeviceHeader(
+                                    headers.get(DEVICE_HEADER_STRING).get(0), admin.getId());
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (isValid) {
+        if (isAuthorized) {
             boolean isSuccessful = myRepos.storeApplicantOnDB(applicant);
             return (isSuccessful)
                     ? new ResponseEntity<String>(
@@ -79,20 +79,23 @@ public class ClientController {
      * @return token
      */
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody Map<String, String> authInput) {
+    public ResponseEntity<?> register(
+            @RequestHeader HttpHeaders headers, @RequestBody Map<String, String> authInput) {
         Repository myRepos = new Repository(repository);
-        HttpHeaders header = new HttpHeaders();
+        HttpHeaders responseHeader = new HttpHeaders();
         try {
             Admin admin = repository.getAdminByUserName(authInput.get("userName"));
             String password = PasswordTools.encryptString(authInput.get("password"));
             if (admin != null && admin.getPassword().equals(password)) {
-                header = myRepos.createTokenForDeviceRegistry(admin);
+                responseHeader = myRepos.createTokenForDeviceRegistry(admin, headers);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (!header.isEmpty()) {
-            return new ResponseEntity<String>("Token is created", header, HttpStatus.CREATED);
+        if (responseHeader.get(DEVICE_HEADER_STRING) != null
+                && responseHeader.get(USER_HEADER_STRING) != null) {
+            return new ResponseEntity<String>(
+                    "Token is created", responseHeader, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<String>(
                     "User name or password is wrong", HttpStatus.UNAUTHORIZED);

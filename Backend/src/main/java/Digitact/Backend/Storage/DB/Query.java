@@ -17,6 +17,7 @@ public class Query {
     public static final String setStatusQuery = "UPDATE users SET status = ?  WHERE id =?";
     public static final String setHRCommentQuery = "UPDATE users SET hr_comment = ?  WHERE id =?";
     public static final String getDeviceIdentfierByDeviceHeader =
-            "SELECT user_id FROM Device_Identifier WHERE device_Identity = ?1";
-    public static final String getAdminByUserId = "SELECT * FROM users WHERE id = ?1";
+            "SELECT CASE WHEN count(*) > 0 THEN true ELSE false END FROM Device_Identifier WHERE device_Identity = ?1 and user_id = ?2";
+    public static final String getAdminByUserClientToken =
+            "SELECT * FROM users WHERE client_token = ?1";
 }
