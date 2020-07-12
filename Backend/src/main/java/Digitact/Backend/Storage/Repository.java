@@ -1,5 +1,6 @@
 package Digitact.Backend.Storage;
 
+import static Digitact.Backend.ConfigProperties.SecurityConstants.DEVICE_HEADER_STRING;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC256;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
@@ -13,6 +14,7 @@ import Digitact.Backend.Model.User.Applicant;
 import Digitact.Backend.Model.User.ApplicantUI;
 import Digitact.Backend.Util.ImageTools;
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,20 +66,28 @@ public class Repository {
 
     /**
      * This method is used to check whether user exist and return token after generation
+     *
      * @param Admin
      * @return token
      */
-    public HttpHeaders createTokenForDeviceRegistry(Admin admin) {
-        /** model to be created for storing device and token generation to be implemented here */
-        HttpHeaders header = new HttpHeaders();
+    public HttpHeaders createTokenForDeviceRegistry(Admin admin, HttpHeaders headers) {
+        HttpHeaders responseHeader = new HttpHeaders();
+        String deviceToken = "";
+        Boolean isExist = false;
 
-        String deviceToken =
-                JWT.create()
-                        .withSubject(
-                                String.valueOf(admin.getId())
-                                        + UUID.randomUUID().getMostSignificantBits())
-                        .sign(HMAC256(SecurityConstants.SECRET_DEVICE.getBytes()));
-
+        if (headers.get(DEVICE_HEADER_STRING) == null) {
+            deviceToken =
+                    JWT.create()
+                            .withSubject(
+                                    String.valueOf(admin.getId())
+                                            + UUID.randomUUID().getMostSignificantBits())
+                            .sign(HMAC256(SecurityConstants.SECRET_DEVICE.getBytes()));
+        } else {
+            deviceToken = headers.get(DEVICE_HEADER_STRING).get(0);
+            isExist =
+                    repo.getDeviceIdentfierByDeviceHeader(
+                            headers.get(DEVICE_HEADER_STRING).get(0), admin.getId());
+        }
         String userToken =
                 JWT.create()
                         .withSubject(
@@ -91,15 +101,39 @@ public class Repository {
 
         admin.setClientToken(userToken);
 
-        DeviceIdentifier device = new DeviceIdentifier(deviceToken);
-        device.setUser(admin);
-        admin.setDeviceIdentifier(device);
+        if (!isExist) {
+            DeviceIdentifier device = new DeviceIdentifier(deviceToken);
+            device.setUser(admin);
+            admin.setDeviceIdentifier(device);
+        }
         repo.save(admin);
 
-        header.add(SecurityConstants.USER_HEADER_STRING, userToken);
-        header.add(SecurityConstants.DEVICE_HEADER_STRING, deviceToken);
+        responseHeader.add(SecurityConstants.USER_HEADER_STRING, userToken);
+        responseHeader.add(SecurityConstants.DEVICE_HEADER_STRING, deviceToken);
 
-        return header;
+        return responseHeader;
+    }
+
+    /**
+     * This method is used to check whether JWT token is valid
+     * @param token
+     * @return boolean
+     */
+    public boolean checkJwtTokenValidation(String token) {
+
+        boolean tokenValid = false;
+
+        JWTVerifier verifier =
+                JWT.require(HMAC512(SecurityConstants.SECRET.getBytes()))
+                        .acceptExpiresAt(SecurityConstants.EXPIRATION_TIME)
+                        .build();
+
+        if (verifier.verify(token).getExpiresAt().compareTo(new Date(System.currentTimeMillis()))
+                > 0) {
+            tokenValid = true;
+        }
+
+        return tokenValid;
     }
 
     public boolean storeApplicantOnDB(ApplicantUI applicant) {
