@@ -27,12 +27,15 @@
         </ion-item>
       </ion-list>
     </div>
-    <ion-label class="ion-text-end ion-padding" color="tertiary"
+    <ion-label
+      class="ion-text-end ion-padding"
+      color="tertiary"
+      (click)="skip()"
       >Skip only for testing
     </ion-label>
 
     <div class="buttons-container">
-      <button class="fancy-button">
+      <button class="fancy-button" (click)="login()">
         {{'loginPage.title' | translate}}
       </button>
     </div>
