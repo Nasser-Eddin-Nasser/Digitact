@@ -43,10 +43,11 @@
         "upload": "Hochladen",
         "uploadingProgressMessage": "Bewerbung(en) werden hochgeladen {{uploadSize}}/{{totalSize}}",
         "allApplicantsSavedSuccessMessage":"Alle Bewerbung (en) erfolgreich gesendet",
-        "allApplicantsFailedMessage":"Aufgrund einiger Fehler wurden keine Bewerbungen gesendet. Bitte versuchen Sie es später noch einmal.",
-        "partialySentAndFailedMessage":"{{successCount}} Anwendung(en) erfolgreich gesendet und {{failedCount}} Anwendung(en) fehlgeschlagen.",
-        "allRequestCancelledMessage":"Keine Bewerbungen gesendet, da der Vorgang abgebrochen wurde.",
-        "nSucceededRestCancelledMessage":"{{successCount}} Bewerbung(en) erfolgreich gesendet. Die restliche(n) Bewerbung(en) wurden nicht an den Server gesendet, da der Vorgang abgebrochen wurde."
+        "allApplicantsFailedMessage": "Aufgrund einiger Fehler wurden keine Bewerbungen gesendet. Bitte versuchen Sie es später noch einmal.",
+        "partialySentAndFailedMessage": "{{successCount}} Anwendung(en) erfolgreich gesendet und {{failedCount}} Anwendung(en) fehlgeschlagen.",
+        "allRequestCancelledMessage": "Keine Bewerbungen gesendet, da der Vorgang abgebrochen wurde.",
+        "nSucceededRestCancelledMessage": "{{successCount}} Bewerbung(en) erfolgreich gesendet. Die restliche(n) Bewerbung(en) wurden nicht an den Server gesendet, da der Vorgang abgebrochen wurde.",
+        "loginToProcessMessage": "Bitte melden Sie sich an, um fortzufahren."
 
     },
     "hrSideMenu": {

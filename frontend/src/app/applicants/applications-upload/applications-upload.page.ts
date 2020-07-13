@@ -2,7 +2,7 @@
  * @description
  * This page send the applications to the server
  */
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -93,10 +93,36 @@ export class ApplicationsUploadPage implements OnInit {
    * Boolean that  holds whether promise is resolved or not to load the page content
    */
   isPromiseResolved = false;
+
+  /**
+   * Holds device token
+   */
+  deviceToken: string;
+
+  /**
+   * Holds user token
+   */
+  userToken: string;
+
+  /**
+   * Boolean that  holds authorization status of the logged in user
+   */
+  isAuthorized = true;
   /**
    * In this method locally stored data are fetched and post request function is called for one application at time.
    */
   ngOnInit(): void {
+    this.storage
+      .getItem(this.storage.commonPropertiesDb, 'deviceToken')
+      .then((token: string) => {
+        this.deviceToken = token;
+      });
+    this.storage
+      .getItem(this.storage.commonPropertiesDb, 'userToken')
+      .then((token: string) => {
+        this.userToken = token;
+      });
+
     this.storage
       .getAllItems<FormValue<FormsData>>(this.storage.applicantDetailsDb)
       .then((data) => {
@@ -111,40 +137,51 @@ export class ApplicationsUploadPage implements OnInit {
    * In this method requests are initiated and status properties are updated.
    */
   private initiateRequests(): void {
-    this.index++;
-    if (this.index <= this.totalFinalizedApplicantsCount - 1) {
-      this.statusMessage = this.translate.instant(
-        'applicantsUploadPage.uploadingProgressMessage',
-        {
-          uploadSize: this.index + 1,
-          totalSize: this.totalFinalizedApplicantsCount,
-        }
-      );
-      this.sendPostRequest(this.applicantDetailsList[this.index]);
-    } else {
-      if (this.succeededAPICount === this.totalFinalizedApplicantsCount) {
+    if (this.isAuthorized) {
+      this.index++;
+      if (this.index <= this.totalFinalizedApplicantsCount - 1) {
         this.statusMessage = this.translate.instant(
-          'applicantsUploadPage.allApplicantsSavedSuccessMessage'
-        );
-        this.statusIconName = 'checkmark-circle-outline';
-        this.statusIconColor = 'success';
-      } else if (this.failedAPICount === this.totalFinalizedApplicantsCount) {
-        this.statusMessage = this.translate.instant(
-          'applicantsUploadPage.allApplicantsFailedMessage'
-        );
-        this.statusIconName = 'close-circle-outline';
-        this.statusIconColor = 'danger';
-      } else {
-        this.statusMessage = this.translate.instant(
-          'applicantsUploadPage.partialySentAndFailedMessage',
+          'applicantsUploadPage.uploadingProgressMessage',
           {
-            succeededCount: this.succeededAPICount,
-            failedCount: this.failedAPICount,
+            uploadSize: this.index + 1,
+            totalSize: this.totalFinalizedApplicantsCount,
           }
         );
-        this.statusIconName = 'alert-circle-outline';
-        this.statusIconColor = 'warning';
+        this.sendPostRequest(this.applicantDetailsList[this.index]);
+      } else {
+        if (this.succeededAPICount === this.totalFinalizedApplicantsCount) {
+          this.statusMessage = this.translate.instant(
+            'applicantsUploadPage.allApplicantsSavedSuccessMessage'
+          );
+          this.statusIconName = 'checkmark-circle-outline';
+          this.statusIconColor = 'success';
+        } else if (this.failedAPICount === this.totalFinalizedApplicantsCount) {
+          this.statusMessage = this.translate.instant(
+            'applicantsUploadPage.allApplicantsFailedMessage'
+          );
+          this.statusIconName = 'close-circle-outline';
+          this.statusIconColor = 'danger';
+        } else {
+          this.statusMessage = this.translate.instant(
+            'applicantsUploadPage.partialySentAndFailedMessage',
+            {
+              succeededCount: this.succeededAPICount,
+              failedCount: this.failedAPICount,
+            }
+          );
+          this.statusIconName = 'alert-circle-outline';
+          this.statusIconColor = 'warning';
+        }
+
+        this.isAPIInProgress = false;
+        this.goBack();
       }
+    } else {
+      this.statusMessage = this.translate.instant(
+        'applicantsUploadPage.loginToProcessMessage'
+      );
+      this.statusIconName = 'close-circle-outline';
+      this.statusIconColor = 'danger';
 
       this.isAPIInProgress = false;
       this.goBack();
@@ -229,7 +266,6 @@ export class ApplicationsUploadPage implements OnInit {
     /**
      * In this method locally stored data HR rating data is fetched and set according to JSON format
      */
-
     let formsData: CreateApplicantData;
     this.storage
       .getItem<FormValue<RatingForm>>(
@@ -243,6 +279,10 @@ export class ApplicationsUploadPage implements OnInit {
             this.apiHostUrl + '/api/controller/createApplicant',
             formsData,
             {
+              headers: new HttpHeaders({
+                deviceauthorization: this.deviceToken,
+                userauthorization: this.userToken,
+              }),
               responseType: 'text',
               observe: 'response',
             }
@@ -262,7 +302,10 @@ export class ApplicationsUploadPage implements OnInit {
                 this.initiateRequests();
               }
             },
-            () => {
+            (error) => {
+              if (error.status === 401) {
+                this.isAuthorized = false;
+              }
               this.failedAPICount++;
               this.initiateRequests();
             }
@@ -274,7 +317,11 @@ export class ApplicationsUploadPage implements OnInit {
    * In this method completion notification is displayed
    */
   async completionAlert(): Promise<void> {
-    const toastMessage = this.isAPIInProgress
+    const toastMessage = !this.isAuthorized
+      ? this.translate.instant('applicantsUploadPage.loginToProcessMessage', {
+          succeededCount: this.succeededAPICount,
+        })
+      : this.isAPIInProgress
       ? this.succeededAPICount
         ? this.translate.instant(
             'applicantsUploadPage.nSucceededRestCancelledMessage',
@@ -303,7 +350,8 @@ export class ApplicationsUploadPage implements OnInit {
       this.currentRequest.unsubscribe();
     }
     setTimeout(() => {
-      this.navController.navigateBack(['/applicants']);
+      const navigationPath = this.isAuthorized ? '/applicants' : '/login';
+      this.navController.navigateBack([navigationPath]);
       this.completionAlert();
     }, 1000);
   }

@@ -43,10 +43,11 @@
         "upload": "Upload",
         "uploadingProgressMessage": "uploading application {{uploadSize}}/{{totalSize}}",
         "allApplicantsSavedSuccessMessage":"All application(s) sent successfully",
-        "allApplicantsFailedMessage":"Due to some error(s), none of the application(s) were sent. Please try again later",
-        "partialySentAndFailedMessage":"{{succeededCount}} application(s) sent successfully and {{failedCount}} application(s) failed.",
-        "allRequestCancelledMessage":"None of the application(s) were sent, as it was cancelled.",
-        "nSucceededRestCancelledMessage":"{{succeededCount}} application(s) sent successfully. Rest of the application(s) were not sent to the server, as it was cancelled."
+        "allApplicantsFailedMessage": "Due to some error(s), none of the application(s) were sent. Please try again later",
+        "partialySentAndFailedMessage": "{{succeededCount}} application(s) sent successfully and {{failedCount}} application(s) failed.",
+        "allRequestCancelledMessage": "None of the application(s) were sent, as it was cancelled.",
+        "nSucceededRestCancelledMessage": "{{succeededCount}} application(s) sent successfully. Rest of the application(s) were not sent to the server, as it was cancelled.",
+        "loginToProcessMessage": "Please login, to proceed further."
     },
     "hrSideMenu": {
         "applicantRating": "Applicant Rating",
