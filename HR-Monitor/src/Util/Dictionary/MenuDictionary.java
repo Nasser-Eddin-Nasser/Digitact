@@ -22,7 +22,7 @@ public class MenuDictionary implements IDictionary {
             dictionary.put("Do you want to logout? ", "Willst Du dich abmelden? ");
             dictionary.put("No", "Nein");
             dictionary.put("Yes", "Ja");
-            dictionary.put("First name or last name","Vorname oder Nachname");
+            dictionary.put("First name or last name", "Vorname oder Nachname");
         }
     }
 

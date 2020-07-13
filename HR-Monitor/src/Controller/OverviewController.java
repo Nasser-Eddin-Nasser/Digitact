@@ -6,7 +6,6 @@ import Model.Positions;
 import Model.Status;
 import Model.User.ApplicantUI;
 import Util.Dictionary.*;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -83,8 +82,8 @@ public class OverviewController {
                                         aiDictionary, user.getValue().getStatus().getStatus())));
         firstNameCol.setText(IDictionary.getTranslation(biDictionary, "First Name"));
         lastNameCol.setText(IDictionary.getTranslation(biDictionary, "Last Name"));
-        txtNameFX.setPromptText(IDictionary.getTranslation(mDictionary,"First name or last name"));
-        mBtnIndustryFX.setText(IDictionary.getTranslation(aiDictionary,"Industry"));
+        txtNameFX.setPromptText(IDictionary.getTranslation(mDictionary, "First name or last name"));
+        mBtnIndustryFX.setText(IDictionary.getTranslation(aiDictionary, "Industry"));
     }
 
     public ObservableList<ApplicantUI> setTable() {
