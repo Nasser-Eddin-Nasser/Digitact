@@ -1,7 +1,12 @@
 <div class="main-description">
   <h1>{{ 'profilePicture.title' | translate }}</h1>
 </div>
-<div *ngIf="!hasPicture; else elseBlock">
+<div
+  *ngIf="
+    this.formsData.controls.profilePicture.controls.pictureBase64.value === '';
+    else elseBlock
+  "
+>
   <span class="description">
     {{ 'profilePicture.stepDescription' | translate }}
   </span>
