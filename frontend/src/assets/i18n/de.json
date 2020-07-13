@@ -221,5 +221,12 @@
         "skip": "Überspringen",
         "skipMessage": "Möchtest Du diesen Schritt wirklich überspringen? Bitte überspringe diesen Schritt nur dann, wenn die hier benötigten Informationen Teil der Dokumente sind, welche Du als Bilder hochgeladen hast.",
         "skipStep": "Schritt überspringen"
+    },
+
+    "loginPage":{
+        "title": "Anmelden",
+        "stepDescription": "Geben Sie die Administratoranmeldeinformationen ein, um das Gerät zu authentifizieren",
+        "userName": "Nutzername",
+        "password": "Passwort"
     }
 }

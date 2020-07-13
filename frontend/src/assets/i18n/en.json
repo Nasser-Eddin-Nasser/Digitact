@@ -221,5 +221,12 @@
         "skip": "Skip",
         "skipMessage": "Do you really want to skip this step? Please only do this if the data asked for in this step are part of the documents you took a photo of.",
         "skipStep": "Skip this Step"
+    },
+
+    "loginPage":{
+        "title": "Register",
+        "stepDescription": "Enter the admin credentials to authenticate the device",
+        "userName": "Username",
+        "password": "Password"
     }
 }
