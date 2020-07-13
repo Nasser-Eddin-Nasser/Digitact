@@ -228,6 +228,7 @@
         "title": "Register",
         "stepDescription": "Enter the admin credentials to authenticate the device",
         "userName": "Username",
-        "password": "Password"
+        "password": "Password",
+        "credentialsDoesnotMatch": "Username / Password does not match. Please enter a valid credentials."
     }
 }

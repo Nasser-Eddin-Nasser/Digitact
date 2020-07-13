@@ -1,7 +1,15 @@
+/**
+ * @description
+ *    This page handles the login action
+ */
+
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { StorageHandlerService } from '../services/storage-handler.service';
 import { NavController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+
+import { ToastController } from '../common/ion-wrappers/toast-controller';
+import { StorageHandlerService } from '../services/storage-handler.service';
 
 @Component({
   selector: 'app-login',
@@ -9,20 +17,39 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
+  /**
+   * String that  holds the user name
+   */
   userName: string;
+
+  /**
+   * String that  holds the password
+   */
   password: string;
+
+  /**
+   * Holds host URL
+   */
   apiHostUrl = 'http://localhost:9090';
 
   constructor(
     private navController: NavController,
     private httpClient: HttpClient,
-    private storage: StorageHandlerService
+    private storage: StorageHandlerService,
+    private toastController: ToastController,
+    private translate: TranslateService
   ) {}
 
+  /**
+   * In this method skip login action is handled
+   */
   skip(): void {
     this.navController.navigateForward(['/home']);
   }
 
+  /**
+   * In this method register API is sent to server
+   */
   login(): void {
     this.httpClient
       .post(
@@ -49,8 +76,16 @@ export class LoginPage {
             this.navController.navigateForward(['/home']);
           }
         },
-        () => {
-          alert('Not autheticated');
+        async () => {
+          const toast = await this.toastController.create({
+            message: this.translate.instant(
+              'loginPage.credentialsDoesnotMatch'
+            ),
+            color: 'danger',
+            position: 'bottom',
+            duration: 4000,
+          });
+          toast.present();
         }
       );
   }
