@@ -3,7 +3,6 @@ package Util;
 import Model.*;
 import Model.User.ApplicantUI;
 import Storage.Dummy;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +19,31 @@ public class Util {
             List<WorkExperience> work = new ArrayList<WorkExperience>(10);
             List<KeyCompetence> kc = new ArrayList<KeyCompetence>(10);
             for (int j = 0; j < 10; j++) {
-                edu.add(new Education("Dummy Uni " + j, "Dummy Info" + j, j > 5 ? Degree.Bachelor : Degree.Master, (Math.random() * (5.0) + 0), "199" + j));
-                work.add(new WorkExperience("Dummy jobTilte " + j, "Dummy Company " + j, j > 5 ? EmploymentType.Apprenticeship : EmploymentType.Internship, "199" + j, "202" + j, "description"));
-                kc.add(new KeyCompetence(KeyCompetenciesCategory.ProgrammingLanguagesAndFrameworks, "java", j));
-                kc.add(new KeyCompetence(KeyCompetenciesCategory.ProgrammingLanguagesAndFrameworks, "c#", j));
+                edu.add(
+                        new Education(
+                                "Dummy Uni " + j,
+                                "Dummy Info" + j,
+                                j > 5 ? Degree.Bachelor : Degree.Master,
+                                (Math.random() * (5.0) + 0),
+                                "199" + j));
+                work.add(
+                        new WorkExperience(
+                                "Dummy jobTilte " + j,
+                                "Dummy Company " + j,
+                                j > 5 ? EmploymentType.Apprenticeship : EmploymentType.Internship,
+                                "199" + j,
+                                "202" + j,
+                                "description"));
+                kc.add(
+                        new KeyCompetence(
+                                KeyCompetenciesCategory.ProgrammingLanguagesAndFrameworks,
+                                "java",
+                                j));
+                kc.add(
+                        new KeyCompetence(
+                                KeyCompetenciesCategory.ProgrammingLanguagesAndFrameworks,
+                                "c#",
+                                j));
             }
             user.setKeyCompetencies(kc);
             user.setEducation(edu);

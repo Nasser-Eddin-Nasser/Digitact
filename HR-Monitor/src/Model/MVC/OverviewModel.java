@@ -1,13 +1,12 @@
 package Model.MVC;
 
+import static Main.App.DEVELOPMENT_ENVIRONMENT;
+
 import Model.User.ApplicantUI;
 import Storage.DBStorage;
 import Storage.Dummy;
-
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static Main.App.DEVELOPMENT_ENVIRONMENT;
 
 public class OverviewModel {
 
@@ -21,7 +20,11 @@ public class OverviewModel {
 
     public ApplicantUI getApplicantByID(long id) {
         if (DEVELOPMENT_ENVIRONMENT)
-            return Dummy.DB.stream().filter(x -> (x.getID() + "").equals(id + "")).collect(Collectors.toList()).get(0);
+            return Dummy.DB
+                    .stream()
+                    .filter(x -> (x.getID() + "").equals(id + ""))
+                    .collect(Collectors.toList())
+                    .get(0);
         return DBStorage.getApplicantByID(id);
     }
 }
