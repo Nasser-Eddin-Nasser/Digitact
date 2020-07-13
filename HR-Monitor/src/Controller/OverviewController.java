@@ -5,10 +5,8 @@ import Model.MVC.OverviewModel;
 import Model.Positions;
 import Model.Status;
 import Model.User.ApplicantUI;
-import Util.Dictionary.ApplicantInfoDictionary;
-import Util.Dictionary.BasicInfoDictionary;
-import Util.Dictionary.IDictionary;
-import Util.Dictionary.PositionsAndIndustriesDictionary;
+import Util.Dictionary.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +27,7 @@ public class OverviewController {
     // Create a TableView with a list of Applicants
     @FXML TableView<ApplicantUI> userTable;
     private ObservableList<ApplicantUI> observableListTableView;
-    IDictionary biDictionary, aiDictionary, pNiDictionary;
+    IDictionary biDictionary, aiDictionary, pNiDictionary, mDictionary;
 
     // Overview of all Applicants
     @FXML TableColumn<ApplicantUI, Number> idCol = new TableColumn<>("id");
@@ -48,6 +46,7 @@ public class OverviewController {
     List<CustomMenuItem> mIPositions = new ArrayList<>();
     List<CustomMenuItem> mIIndustries = new ArrayList<>();
 
+    List<ApplicantUI> filteredApplicantsList;
     List<ApplicantUI> applicantsList;
 
     Pane root;
@@ -66,6 +65,7 @@ public class OverviewController {
         biDictionary = new BasicInfoDictionary();
         aiDictionary = new ApplicantInfoDictionary();
         pNiDictionary = new PositionsAndIndustriesDictionary();
+        mDictionary = new MenuDictionary();
     }
 
     public void setFactoriesAndComparatorsForTableColumns() {
@@ -83,6 +83,8 @@ public class OverviewController {
                                         aiDictionary, user.getValue().getStatus().getStatus())));
         firstNameCol.setText(IDictionary.getTranslation(biDictionary, "First Name"));
         lastNameCol.setText(IDictionary.getTranslation(biDictionary, "Last Name"));
+        txtNameFX.setPromptText(IDictionary.getTranslation(mDictionary,"First name or last name"));
+        mBtnIndustryFX.setText(IDictionary.getTranslation(aiDictionary,"Industry"));
     }
 
     public ObservableList<ApplicantUI> setTable() {
@@ -114,12 +116,12 @@ public class OverviewController {
     private void applyFilters() {
 
         if (txtNameFX.getText().equals("")) {
-            applicantsList = model.getDB();
+            filteredApplicantsList = new ArrayList<>(applicantsList);
 
-            setTable(applicantsList);
+            setTable(filteredApplicantsList);
         } else {
-            applicantsList =
-                    model.getDB()
+            filteredApplicantsList =
+                    (new ArrayList<>(applicantsList))
                             .stream()
                             .filter(
                                     x ->
@@ -132,14 +134,14 @@ public class OverviewController {
                                                                     .toLowerCase())))
                             .collect(Collectors.toList());
 
-            setTable(applicantsList);
+            setTable(filteredApplicantsList);
         }
 
-        List<ApplicantUI> temp = new ArrayList<>();
+        List<ApplicantUI> temp;
 
         if (cBStatus.stream().filter(x -> x.isSelected()).count() != 0) {
             temp =
-                    applicantsList
+                    filteredApplicantsList
                             .stream()
                             .filter(
                                     app ->
@@ -156,13 +158,13 @@ public class OverviewController {
                                                                                                             .getStatus()))))
                             .collect(Collectors.toList());
 
-            applicantsList.clear();
-            applicantsList = new ArrayList<>(temp);
+            filteredApplicantsList.clear();
+            filteredApplicantsList = new ArrayList<>(temp);
             temp.clear();
         }
         if (cBPositions.stream().filter(x -> x.isSelected()).count() != 0) {
             temp =
-                    applicantsList
+                    filteredApplicantsList
                             .stream()
                             .filter(
                                     app ->
@@ -187,14 +189,14 @@ public class OverviewController {
                                                                                                                                     .getPosition())))))
                             .collect(Collectors.toList());
 
-            applicantsList.clear();
-            applicantsList = new ArrayList<>(temp);
+            filteredApplicantsList.clear();
+            filteredApplicantsList = new ArrayList<>(temp);
             temp.clear();
         }
 
         if (cBIndustries.stream().filter(x -> x.isSelected()).count() != 0) {
             temp =
-                    applicantsList
+                    filteredApplicantsList
                             .stream()
                             .filter(
                                     app ->
@@ -219,11 +221,11 @@ public class OverviewController {
                                                                                                                                     .getIndustry())))))
                             .collect(Collectors.toList());
 
-            applicantsList.clear();
-            applicantsList = new ArrayList<>(temp);
+            filteredApplicantsList.clear();
+            filteredApplicantsList = new ArrayList<>(temp);
             temp.clear();
         }
-        setTable(applicantsList);
+        setTable(filteredApplicantsList);
     }
 
     private void setComboBoxes() {
@@ -261,7 +263,7 @@ public class OverviewController {
     }
 
     private List<ApplicantUI> sortApplicants(List<ApplicantUI> applicantList) {
-        Collections.sort(applicantsList, (a1, a2) -> (int) (a2.getID() - a1.getID()));
+        Collections.sort(applicantList, (a1, a2) -> (int) (a2.getID() - a1.getID()));
         return applicantList;
     }
 
