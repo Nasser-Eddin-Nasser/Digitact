@@ -11,7 +11,7 @@ public interface IDictionary {
 
     Map<String, String> getDictionary();
 
-    public static String getTranslation(IDictionary dictionary, String english) {
+    static String getTranslation(IDictionary dictionary, String english) {
         if (LANG.equals(Language.English)) {
             if (english.contains("TITLE-")) // GUI title
             return english.replace("TITLE-", "");
@@ -21,12 +21,12 @@ public interface IDictionary {
         return getGerman(dictionary, english);
     }
 
-    private static String getGerman(IDictionary dictionary, String english) {
+    static String getGerman(IDictionary dictionary, String english) {
         String res = dictionary.getDictionary().get(english);
         return res != null ? res : english;
     }
 
-    public static String getEnglish(IDictionary dictionary, String german) {
+    static String getEnglish(IDictionary dictionary, String german) {
         return dictionary
                 .getDictionary()
                 .entrySet()
