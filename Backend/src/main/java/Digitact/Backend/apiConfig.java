@@ -1,5 +1,7 @@
 package Digitact.Backend;
 
+import static Digitact.Backend.ConfigProperties.SecurityConstants.DEVICE_HEADER_STRING;
+import static Digitact.Backend.ConfigProperties.SecurityConstants.USER_HEADER_STRING;
 import static Digitact.Backend.ConfigProperties.absoluteClientURL_ionic;
 import static Digitact.Backend.ConfigProperties.absoluteClientURL_ng;
 
@@ -22,6 +24,8 @@ public class apiConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins(absoluteClientURL_ng, absoluteClientURL_ionic)
+                        .allowedHeaders(USER_HEADER_STRING, DEVICE_HEADER_STRING)
+                        .exposedHeaders(USER_HEADER_STRING, DEVICE_HEADER_STRING)
                         .allowedMethods("GET", "POST")
                         .allowCredentials(false)
                         .maxAge(3600);

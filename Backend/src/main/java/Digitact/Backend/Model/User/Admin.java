@@ -1,8 +1,12 @@
 package Digitact.Backend.Model.User;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import Digitact.Backend.Model.DeviceIdentifier;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import javax.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "users")
@@ -20,6 +24,13 @@ public class Admin extends User {
 
     @Column(name = "password")
     private String password; // todo
+
+    @Column(name = "clientToken")
+    private String clientToken;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
+    private Set<DeviceIdentifier> deviceIdentifiers;
 
     /**
      * @param firstName
@@ -59,6 +70,28 @@ public class Admin extends User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getClientToken() {
+        return clientToken;
+    }
+
+    public void setClientToken(String clientToken) {
+        this.clientToken = clientToken;
+    }
+
+    public void setDeviceIdentifier(DeviceIdentifier deviceIdentity) {
+        deviceIdentifiers.add(deviceIdentity);
+    }
+
+    public List<DeviceIdentifier> getDeviceIdentifiers() {
+        return new ArrayList<DeviceIdentifier>(deviceIdentifiers);
+    }
+
+    public void setDeviceIdentifiers(List<DeviceIdentifier> deviceIdentity) {
+        if (deviceIdentity != null) {
+            deviceIdentity.forEach(dev -> deviceIdentifiers.add(dev));
+        }
     }
 
     protected Admin() {
