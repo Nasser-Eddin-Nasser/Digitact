@@ -3,8 +3,8 @@
  *    This page handles the login action
  */
 
-import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
