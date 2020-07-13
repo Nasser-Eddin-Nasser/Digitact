@@ -24,21 +24,21 @@ public class ACDictionary implements IDictionary {
             dictionary.put("Confirm Password", "Passwort Bestätigung");
             dictionary.put("Password Hint", "Passwort Hinweis");
             ///////////////////////
-            dictionary.put("Create Account Error", "Kontofehler Erstellung");
+            dictionary.put("Create Account Error", "Fehler bei der Kontoerstellung");
             dictionary.put(
                     "A password must be at least 4 characters",
                     "Ein Passwort muss mindestens 4 Zeichen lang sein");
-            dictionary.put("Create new Account!", "Das Konto wurde Erstellt!");
-            dictionary.put("Your Account has been created!", "Das Konto wurde Erstellt!");
+            dictionary.put("Create new Account!", "Das Konto wurde erstellt!");
+            dictionary.put("Your Account has been created!", "Das Konto wurde erstellt!");
             dictionary.put(
                     "Your password hint must not contain your password & not empty!",
                     "Der Passworthinweis darf das Passwort nicht enthalten und darf nicht leer sein!");
-            dictionary.put("Incongruent passwords!", "Inkongruente Passwörter");
+            dictionary.put("Incongruent passwords!", "Ungleiche Passwörter");
             dictionary.put(
                     "Your Email must contain @ and .!", "Die E-Mail muss @ und . enthalten!");
             dictionary.put(
                     "Username already taken or forbidden characters used! A username must contain only alphanumeric characters.",
-                    "Benutzername ist bereits vergeben oder verbotene Zeichen verwendet! Benutzername darf nur alphanumerische Buchstaben enthalten.");
+                    "Der Benutzername ist bereits vergeben oder es werden verbotene Zeichen verwendet! Der Benutzername darf nur alphanumerische Zeichen enthalten.");
             dictionary.put(
                     "Create Account was not possible due to:",
                     "Kontoerstellung ist nicht möglich:");
@@ -48,14 +48,14 @@ public class ACDictionary implements IDictionary {
             dictionary.put("PASSWORD:", "PASSWORT:"); // Password  Passwort
             dictionary.put("Forgot password?", "Passwort vergessen?"); // Passwort vergessen
             dictionary.put("Your personal password hint:", "Dein persönlicher Passworthinweis:");
-            dictionary.put("Password Hint", "Passwort Hinweis");
+            dictionary.put("Password Hint", "Passworthinweis");
             dictionary.put("Login Error", "Anmeldungsfehler");
             dictionary.put("Login was not possible due to:", "Anmeldung ist nicht möglich:");
-            dictionary.put("UserName or Password WRONG!", "Benutzername oder Passwort Inkorrekt!");
+            dictionary.put("UserName or Password WRONG!", "Benutzername oder Passwort falsch!");
             dictionary.put("Connection Error", "Verbindungsfehler");
             dictionary.put(
                     "Please check your connection with BES then start the Application again!",
-                    "Bitte überprüfst Du die Verbindung mit BES und Start den HR-Monitor!");
+                    "Bitte überprüfe die Verbindung mit BES und starte den HR-Monitor erneut!");
         }
     }
 

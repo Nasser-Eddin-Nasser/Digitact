@@ -14,7 +14,7 @@ public class ApplicantInfoDictionary implements IDictionary {
         if (dictionary.size() == 0) {
             // add all values
             dictionary.put("Basic Information", "Grundlegende Informationen");
-            dictionary.put("Additional Information", "Zusatzinformationen");
+            dictionary.put("Additional Information", "Zusätzliche Informationen");
             dictionary.put("Work Experience", "Berufserfahrung");
             dictionary.put("Educational Information", "Bildungsinformation");
             dictionary.put("Key Competencies", "Schlüsselkompetenzen");
@@ -34,7 +34,7 @@ public class ApplicantInfoDictionary implements IDictionary {
             dictionary.put("Graduation Year", "Abschlussjahr");
 
             dictionary.put("Programming Languages", "Programmiersprachen");
-            dictionary.put("Bussiness Skills", "Geschäftliche Fähigkeiten");
+            dictionary.put("Bussiness Skills", "Unternehmerische Fähigkeiten");
             dictionary.put("Databases", "Datenbanken");
             dictionary.put("Professional Software", "Professionelle Software");
             dictionary.put("Spoken Langauges", "Gesprochene Sprachen");
@@ -55,17 +55,17 @@ public class ApplicantInfoDictionary implements IDictionary {
 
             dictionary.put("Rhetoric", "Rhetorik");
             dictionary.put("Motivation", "Motivation");
-            dictionary.put("Personal Impression", "Bewertung");
-            dictionary.put("Self Assurance", "Persönlicher Eindruck");
+            dictionary.put("Personal Impression", "Persönlicher Eindruck");
+            dictionary.put("Self Assurance", "Selbstsicherheit");
             dictionary.put("HR Ratings", "HR-Bewertungen");
 
             dictionary.put("Change status", "Status ändern");
             dictionary.put("Open", "Öffnen");
-            dictionary.put("Sent to HR", "An HR geschickt");
+            dictionary.put("Sent to HR", "An HR gesendet");
             dictionary.put("Denied", "Abgelehnt");
 
-            dictionary.put("Comment by the fair team member", "Kommentar des Messeteam-Mitglieds");
-            dictionary.put("Comment by the HR member", "Kommentar des HR-Mitglieds");
+            dictionary.put("Comment by the fair team member", "Kommentar des Messeteam-Mitarbeiters");
+            dictionary.put("Comment by the HR member", "Kommentar des HR-Mitarbeiter");
             dictionary.put(
                     "Add a comment about the Applicant",
                     "Einen Kommentar über den Antragsteller hinzufügen");
