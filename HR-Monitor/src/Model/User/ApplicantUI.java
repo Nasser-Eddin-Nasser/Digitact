@@ -3,6 +3,7 @@ package Model.User;
 import Model.*;
 import Model.Image.AppImage;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,12 +39,15 @@ public class ApplicantUI {
 
     private List<Industries> industries;
     private List<Positions> positions;
+
+
     private List<KeyCompetence> keyCompetencies;
     private List<AppImage> images;
 
     private String hrComment;
 
-    protected ApplicantUI() {}
+    protected ApplicantUI() {
+    }
 
     public ApplicantUI(String firstName, String lastName) {
         this.firstName = firstName;
@@ -129,6 +133,10 @@ public class ApplicantUI {
                         .filter(x -> x.getCategory() == competanceCatogory)
                         .collect(Collectors.toList());
         return selectedKeyCompetences;
+    }
+
+    public void setKeyCompetencies(List<KeyCompetence> keyCompetencies) {
+        this.keyCompetencies = keyCompetencies;
     }
 
     public String getFirstName() {

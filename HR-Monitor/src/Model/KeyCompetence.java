@@ -12,6 +12,12 @@ public class KeyCompetence {
 
     public KeyCompetence() {}
 
+    public KeyCompetence(KeyCompetenciesCategory category, String name, int rating) {
+        this.category = category;
+        this.name = name;
+        this.rating = rating;
+    }
+
     public KeyCompetenciesCategory getCategory() {
         return this.category;
     }
