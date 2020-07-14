@@ -76,11 +76,19 @@ export class LoginPage {
             this.navController.navigateForward(['/home']);
           }
         },
-        async () => {
-          const toast = await this.toastController.create({
-            message: this.translate.instant(
+        async (error) => {
+          let toastMessage;
+          if (error.status === 401) {
+            toastMessage = this.translate.instant(
               'loginPage.credentialsDoesnotMatch'
-            ),
+            );
+          } else {
+            toastMessage = this.translate.instant(
+              'loginPage.generalErrorMessage'
+            );
+          }
+          const toast = await this.toastController.create({
+            message: toastMessage,
             color: 'danger',
             position: 'bottom',
             duration: 4000,

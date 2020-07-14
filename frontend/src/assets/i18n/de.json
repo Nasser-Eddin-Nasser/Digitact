@@ -225,10 +225,11 @@
     },
 
     "loginPage":{
-        "title": "Anmelden",
-        "stepDescription": "Geben Sie die Administratoranmeldeinformationen ein, um das Gerät zu authentifizieren",
+        "title": "Anmeldung",
+        "stepDescription": "Geben Sie die Administratoranmeldeinformationen wie im HR-Monitor ein, um das Gerät zu authentifizieren",
         "userName": "Nutzername",
         "password": "Passwort",
-        "credentialsDoesnotMatch": "Benutzername / Passwort stimmt nicht überein. Bitte geben Sie einen gültigen Berechtigungsnachweis ein."
+        "credentialsDoesnotMatch": "Benutzername / Passwort stimmt nicht überein. Bitte geben Sie einen gültigen Berechtigungsnachweis ein.",
+        "generalErrorMessage": "Aufgrund eines Fehlers kann die Anforderung nicht verarbeitet werden. Bitte versuchen Sie es später noch einmal."
     }
 }
