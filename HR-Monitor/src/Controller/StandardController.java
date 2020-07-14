@@ -1,9 +1,10 @@
 package Controller;
 
-import static Controller.AcController.ADMIN_USERNAME;
-
 import Main.Configuration;
 import Model.MenuItem;
+import Storage.DBStorage;
+import Util.Dictionary.IDictionary;
+import Util.Dictionary.MenuDictionary;
 import java.io.File;
 import java.io.IOException;
 import javafx.collections.ObservableList;
@@ -30,7 +31,7 @@ public class StandardController {
     @FXML private Text textMenuLabel;
 
     @FXML private ListView<String> listViewMenue;
-
+    IDictionary menuDictionary;
     //    @FXML private Text textMenuLabel;
 
     /** the current selected MenuItem */
@@ -39,6 +40,7 @@ public class StandardController {
     private ObservableList<String> items;
 
     public StandardController(Stage stage) throws IOException {
+        menuDictionary = new MenuDictionary();
         CreateAccountController.isFirstAccount = false;
         listViewMenue = new ListView();
         this.stage = stage;
@@ -52,9 +54,13 @@ public class StandardController {
         stage.setScene(viewHRStandard);
         this.stage.setResizable(true);
         borderPaneCurrentView.setCenter(loadOverviewTableContent());
-        textMenuLabel.setText("user:" + ADMIN_USERNAME);
+        textMenuLabel.setText(
+                IDictionary.getTranslation(menuDictionary, "Hello")
+                        + ": "
+                        + DBStorage.getCurrentAdmin().getFirstName());
         loadMenu();
         stage.setOnCloseRequest(e -> shutdown());
+        stage.setFullScreen(true);
         stage.show();
     }
 
@@ -64,7 +70,6 @@ public class StandardController {
         if (files != null) { // some JVMs return null for empty dirs
             for (File f : files) {
                 if (!f.isDirectory()) {
-                    System.out.println(f.getAbsolutePath());
                     f.delete();
                 }
             }
@@ -72,9 +77,18 @@ public class StandardController {
     }
 
     private void loadMenu() {
-        listViewMenue.getItems().add(MenuItem.Applicants.getMenuItem());
-        listViewMenue.getItems().add(MenuItem.CreateAccount.getMenuItem());
-        listViewMenue.getItems().add(MenuItem.Logout.getMenuItem());
+        listViewMenue.getItems().removeAll();
+        listViewMenue
+                .getItems()
+                .add(IDictionary.getTranslation(menuDictionary, MenuItem.Applicants.getMenuItem()));
+        listViewMenue
+                .getItems()
+                .add(
+                        IDictionary.getTranslation(
+                                menuDictionary, MenuItem.CreateAccount.getMenuItem()));
+        listViewMenue
+                .getItems()
+                .add(IDictionary.getTranslation(menuDictionary, MenuItem.Logout.getMenuItem()));
     }
 
     @FXML
@@ -108,10 +122,13 @@ public class StandardController {
     private void logout() {
         try {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Logout");
-            alert.setHeaderText("Do you want to logout? ");
-            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
-            ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+            alert.setTitle(IDictionary.getTranslation(menuDictionary, "Logout"));
+            alert.setHeaderText(
+                    IDictionary.getTranslation(menuDictionary, "Do you want to logout? "));
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK))
+                    .setText(IDictionary.getTranslation(menuDictionary, "Yes"));
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL))
+                    .setText(IDictionary.getTranslation(menuDictionary, "No"));
             alert.showAndWait();
             if (alert.getResult().getText().equals("OK")) {
                 shutdown();

@@ -41,8 +41,7 @@ export const ApplicationStepsConfig: ApplicationStepsConfig = {
     maySkipStep: false,
   },
   [ApplicationStep.ProfilePicture]: {
-    useForProgressCalculation: true,
-    formItemName: 'profilePicture',
+    useForProgressCalculation: false,
     maySkipStep: false,
   },
   [ApplicationStep.Documents]: {

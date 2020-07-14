@@ -1,6 +1,9 @@
 package Controller;
 
 import Model.MVC.AcModel;
+import Util.Dictionary.ACDictionary;
+import Util.Dictionary.BasicInfoDictionary;
+import Util.Dictionary.IDictionary;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +14,14 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class CreateAccountController {
+
+    @FXML private Label firstNameLabel;
+    @FXML private Label lastNameLabel;
+    @FXML private Label userNameLabel;
+    @FXML private Label passwordLabel;
+    @FXML private Label confPasswordLabel;
+    @FXML private Label passwodHintLabel;
+
     public static boolean isFirstAccount = false;
     @FXML private ComboBox<String> admins;
     @FXML private TextField passwordHint;
@@ -30,18 +41,37 @@ public class CreateAccountController {
 
     @FXML private PasswordField confirmPasswordField;
     @FXML private TextField userNameTextField;
-
+    IDictionary basicInfoDic;
+    IDictionary acDic;
     private AcModel model;
     private Pane root;
     Stage stage;
     private Scene viewCreateAccount;
+    @FXML Button create;
 
     public CreateAccountController() throws IOException {
         this.stage = new Stage();
         this.model = new AcModel();
+        SetDictionary();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/adminAccount.fxml"));
         loader.setController(this);
         root = (Pane) loader.load();
+        setLabels();
+    }
+
+    private void setLabels() {
+        userNameLabel.setText(IDictionary.getTranslation(acDic, "Username"));
+        passwordLabel.setText(IDictionary.getTranslation(acDic, "Password"));
+        firstNameLabel.setText(IDictionary.getTranslation(acDic, "First name"));
+        lastNameLabel.setText(IDictionary.getTranslation(acDic, "Last name"));
+        confPasswordLabel.setText(IDictionary.getTranslation(acDic, "Confirm Password"));
+        passwodHintLabel.setText(IDictionary.getTranslation(acDic, "Password Hint"));
+        create.setText(IDictionary.getTranslation(acDic, "Login"));
+    }
+
+    private void SetDictionary() {
+        acDic = new ACDictionary();
+        basicInfoDic = new BasicInfoDictionary();
     }
 
     public Pane getPane() {
@@ -49,23 +79,26 @@ public class CreateAccountController {
     }
 
     public CreateAccountController(Stage stage, AcModel model) throws IOException {
+        SetDictionary();
         this.stage = stage;
         this.model = model;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/adminAccount.fxml"));
         loader.setController(this);
         viewCreateAccount = new Scene(loader.load());
-        stage.setTitle("Create Admin Account");
+        stage.setTitle(IDictionary.getTranslation(acDic, "Create Admin Account"));
         stage.setScene(viewCreateAccount);
         stage.setResizable(false);
         stage.getIcons().add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
+        setLabels();
         stage.show();
     }
 
     @FXML
     public void createNewAccount() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Create Account Error");
-        alert.setHeaderText("Registration was not possible due to: ");
+        alert.setTitle(IDictionary.getTranslation(acDic, "Create Account Error"));
+        alert.setHeaderText(
+                IDictionary.getTranslation(acDic, "Create Account was not possible due to:"));
         if (onCheckNewUserName(userNameTextField.getText())) {
             if (onCheckEmail(email.getText())) {
                 if (onCheckConfirmPassword(
@@ -74,31 +107,41 @@ public class CreateAccountController {
                             && passwordHint.getText() != null
                             && passwordHint.getText().length() > 0) {
                         if (!handleCreateAccountOverToModel()) {
-                            alert.setContentText("A password must be at least 4 characters!");
+                            alert.setContentText(
+                                    IDictionary.getTranslation(
+                                            acDic, "A password must be at least 4 characters!"));
                             alert.showAndWait();
                         }
                         // back
                         Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-                        alert1.setTitle("Create new Account!");
-                        alert1.setContentText("Your Account has been created! ");
+                        alert1.setTitle(IDictionary.getTranslation(acDic, "Create new Account!"));
+                        alert1.setContentText(
+                                IDictionary.getTranslation(
+                                        acDic, "Your Account has been created!"));
                         alert1.showAndWait();
                         if (isFirstAccount) onShowView();
                     } else {
                         alert.setContentText(
-                                "Your password hint must not contain your password & not empty!");
+                                IDictionary.getTranslation(
+                                        acDic,
+                                        "Your password hint must not contain your password & not empty!"));
                         alert.showAndWait();
                     }
                 } else {
-                    alert.setContentText("Incongruent passwords!");
+                    alert.setContentText(
+                            IDictionary.getTranslation(acDic, "Incongruent passwords!"));
                     alert.showAndWait();
                 }
             } else {
-                alert.setContentText("Your Email must contain @ and .!");
+                alert.setContentText(
+                        IDictionary.getTranslation(acDic, "Your Email must contain @ and .!"));
                 alert.showAndWait();
             }
         } else {
             alert.setContentText(
-                    "Username already taken or forbidden characters used! A username must contain only alphanumeric characters.");
+                    IDictionary.getTranslation(
+                            acDic,
+                            "Username already taken or forbidden characters used! A username must contain only alphanumeric characters."));
             alert.showAndWait();
         }
     }

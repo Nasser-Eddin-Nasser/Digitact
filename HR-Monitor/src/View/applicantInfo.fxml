@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <!--
                             <SplitPane dividerPositions="0.5" orientation="VERTICAL">
@@ -59,7 +76,7 @@
                                       </SplitPane>
                                        -->
 
-<BorderPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../Style/stylesheet.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../Style/stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <VBox prefHeight="5" />
    </top>
@@ -82,7 +99,7 @@
                   </StackPane>
 
 
-               <TitledPane alignment="CENTER" animated="false" collapsible="false" maxHeight="2000.0" minHeight="200.0" prefHeight="592.0" prefWidth="200.0" text="Basic Information">
+               <TitledPane fx:id="titleBasicInfoFX" alignment="TOP_LEFT" animated="false" collapsible="false" maxHeight="2000.0" minHeight="200.0" prefHeight="592.0" prefWidth="200.0" text="Basic Information">
                   <GridPane alignment="CENTER" prefHeight="283.0" prefWidth="198.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="78.0" />
@@ -98,14 +115,14 @@
                         <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="102.0" text="First Name" textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="fNameFX" contentDisplay="CENTER" prefHeight="17.0" prefWidth="102.0" text="First Name" textAlignment="CENTER" textFill="WHITE">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
-                        <Label prefHeight="33.0" prefWidth="103.0" text="Last Name" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="1">
+                        <Label fx:id="lNameFX" prefHeight="33.0" prefWidth="103.0" text="Last Name" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="1">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
@@ -119,7 +136,7 @@
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
-                        <Label prefHeight="57.0" prefWidth="95.0" text="Phone Number" textFill="WHITE" wrapText="true" GridPane.rowIndex="3">
+                        <Label fx:id="phoneNumeberFX" prefHeight="57.0" prefWidth="95.0" text="Phone Number" textFill="WHITE" wrapText="true" GridPane.rowIndex="3">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
@@ -160,12 +177,12 @@
                                  <Font name="System Bold" size="12.0" />
                               </font>
                            </Label>
-                           <Label fx:id="lblStatusFX" alignment="CENTER" minWidth="75.0" prefHeight="17.0" prefWidth="34.0" style="-fx-background-color: transparent; -fx-background-radius: 10 10 10 10;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                           <Label fx:id="lblStatusFX" alignment="CENTER" minWidth="100.0" prefHeight="17.0" prefWidth="34.0" style="-fx-background-color: transparent; -fx-background-radius: 10 10 10 10;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
                      </children>
                   </GridPane>
                </TitledPane>
-               <TitledPane alignment="CENTER" animated="false" collapsible="false" maxHeight="1000.0" minWidth="100.0" prefHeight="592.0" prefWidth="200.0" text="Additional Information">
+               <TitledPane fx:id="titleAddInfoFX" alignment="TOP_LEFT" animated="false" collapsible="false" maxHeight="1000.0" minWidth="100.0" prefHeight="592.0" prefWidth="200.0" text="Additional Information">
                      <content>
                         <GridPane prefHeight="283.0" prefWidth="198.0">
                            <Label fx:id="lblAddInfo" alignment="TOP_LEFT" prefHeight="112.0" prefWidth="200.0" textFill="WHITE" wrapText="true" />
@@ -191,10 +208,10 @@
 
                     <TabPane prefHeight="500.0" prefWidth="582.0" rotateGraphic="true" tabClosingPolicy="UNAVAILABLE">
                        <tabs>
-                          <Tab text="Information">
+                          <Tab fx:id="infoTabFX" text="Information">
                              <SplitPane dividerPositions="0.2109256449165402, 0.44613050075872535, 0.7040971168437026" orientation="VERTICAL" prefHeight="160.0" prefWidth="250.0">
                                 <items>
-                                   <TitledPane collapsible="false" maxHeight="700.0" minHeight="100.0" prefHeight="200.0" text="Work Experience" wrapText="true">
+                                   <TitledPane fx:id="titleWExperienceFX" collapsible="false" maxHeight="700.0" minHeight="100.0" prefHeight="200.0" text="Work Experience" wrapText="true">
                                           <content>
                                              <TableView fx:id="workInfoTblFX" maxHeight="500.0" prefHeight="0.0">
                                                 <columns>
@@ -217,7 +234,7 @@
                                              <Cursor fx:constant="NONE" />
                                           </cursor>
                                        </TitledPane>
-                                   <TitledPane collapsible="false" maxHeight="700.0" minHeight="100.0" prefHeight="200.0" text="Education Infomation" wrapText="true">
+                                   <TitledPane fx:id="titleEduInfoFX" collapsible="false" maxHeight="700.0" minHeight="100.0" prefHeight="200.0" text="Education Infomation" wrapText="true">
                                       <content>
                                          
                                          <TableView fx:id="eduInfoTblFX" maxHeight="500.0" minHeight="50.0" prefHeight="0.0">
@@ -240,7 +257,7 @@
                                          <Cursor fx:constant="NONE" />
                                       </cursor>
                                    </TitledPane>
-                                   <TitledPane alignment="TOP_LEFT" collapsible="false" maxHeight="700.0" minHeight="150.0" prefHeight="141.0" text="Key Competencies" wrapText="true">
+                                   <TitledPane fx:id="titleKCompFX" alignment="TOP_LEFT" collapsible="false" maxHeight="700.0" minHeight="150.0" prefHeight="141.0" text="Key Competencies" wrapText="true">
                                       <content>
                                          <SplitPane dividerPositions="0.20297029702970298, 0.400990099009901, 0.5825082508250825, 0.7739273927392739" maxWidth="5000.0" prefHeight="179.0" prefWidth="560.0">
                                          <items>
@@ -305,7 +322,7 @@
                                          </SplitPane>
                                       </content>
                                    </TitledPane>
-                                   <TitledPane alignment="TOP_LEFT" collapsible="false" maxHeight="700.0" minHeight="94.0" prefHeight="94.0" prefWidth="613.0" text="Fields of Interest" wrapText="true">
+                                   <TitledPane fx:id="titleFoInterestFX" alignment="TOP_LEFT" collapsible="false" maxHeight="700.0" minHeight="94.0" prefHeight="94.0" prefWidth="613.0" text="Fields of Interest" wrapText="true">
                                       <SplitPane dividerPositions="0.5" maxWidth="5000.0" prefHeight="219.0">
                                       <items>
                                          <TableView id="posTable" fx:id="posTable" maxHeight="600.0" maxWidth="2000.0" minHeight="50.0" minWidth="300.0" prefHeight="219.0" prefWidth="600">
@@ -353,16 +370,16 @@
                              </ScrollPane>
                           </Tab>
 
-                           <Tab onSelectionChanged="#onShowRating" text="Applicant Ratings">
+                           <Tab fx:id="appRatingTabFX" onSelectionChanged="#onShowRating" text="Applicant Ratings">
                               <SplitPane dividerPositions="0.6179604261796042, 0.7792998477929984, 0.9406392694063926" maxHeight="5000.0" minHeight="30.0" orientation="VERTICAL" prefHeight="800.0" prefWidth="650.0">
                                  <items>
                                     <VBox maxHeight="3000.0" minHeight="100.0">
                                           <HBox fx:id="hBoxBChartFX" alignment="CENTER" maxHeight="5000.0" prefHeight="344.0" prefWidth="1000.0" />
                                        <HBox alignment="CENTER" maxHeight="500.0" spacing="20.0">
-                                          <Label> Change status</Label>
-                                          <Label fx:id="btnOFX" minWidth="75.0" style="-fx-alignment: CENTER;-fx-background-color: #61d0ee; -fx-background-radius:10 10 10 10" text="Open"> Open</Label>
-                                          <Label fx:id="btnHRFX" minWidth="75.0" style="-fx-alignment: CENTER;-fx-background-color: #5be14f; -fx-background-radius:10 10 10 10"> Send to HR</Label>
-                                          <Label fx:id="btnDFX" minWidth="75.0" style="-fx-alignment: CENTER;-fx-background-color: #ff927e; -fx-background-radius:10 10 10 10"> Denied</Label>
+                                          <Label fx:id="changeStatusFX" text="Change status"> Change status</Label>
+                                          <Label fx:id="btnOFX" minWidth="80.0" style="-fx-alignment: CENTER;-fx-background-color: #61d0ee; -fx-background-radius:10 10 10 10" text="Open"> Open</Label>
+                                          <Label fx:id="btnHRFX" minWidth="110.0" style="-fx-alignment: CENTER;-fx-background-color: #5be14f; -fx-background-radius:10 10 10 10"> Send to HR</Label>
+                                          <Label fx:id="btnDFX" minWidth="85.0" style="-fx-alignment: CENTER;-fx-background-color: #ff927e; -fx-background-radius:10 10 10 10"> Denied</Label>
                                              <opaqueInsets>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                              </opaqueInsets>
@@ -371,11 +388,11 @@
                                              </padding>
                                        </HBox>
                                     </VBox>
-                                    <TitledPane collapsible="false" maxHeight="1000.0" minHeight="100.0" prefHeight="200.0" text="Comments by the Fairteam Member" wrapText="true">
+                                    <TitledPane fx:id="commentFTMem" collapsible="false" maxHeight="1000.0" minHeight="100.0" prefHeight="200.0" text="Comments by the Fairteam Member" wrapText="true">
                                           <content>
                                              <TextField fx:id="txtImpFX" alignment="TOP_LEFT" editable="false" maxHeight="1000.0" prefHeight="135.0" prefWidth="648.0" />
                                           </content></TitledPane>
-                                    <TitledPane collapsible="false" maxHeight="1000.0" minHeight="100.0" prefHeight="200.0" text="Comments by the HR Member" wrapText="true">
+                                    <TitledPane fx:id="commentHRMem" collapsible="false" maxHeight="1000.0" minHeight="100.0" prefHeight="200.0" text="Comments by the HR Member" wrapText="true">
                                           <content>
                                              <TextField fx:id="txtImpHRFX" alignment="TOP_LEFT" maxHeight="1000.0" prefHeight="115.0" prefWidth="648.0" promptText="Add a comment about the Applicant" />
                                           </content></TitledPane>
