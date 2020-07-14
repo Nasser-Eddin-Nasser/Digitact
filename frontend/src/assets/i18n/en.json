@@ -225,10 +225,11 @@
     },
 
     "loginPage":{
-        "title": "Register",
-        "stepDescription": "Enter the admin credentials to authenticate the device",
+        "title": "Login",
+        "stepDescription": "Enter the admin credentials as in HR monitor to authenticate the device.",
         "userName": "Username",
         "password": "Password",
-        "credentialsDoesnotMatch": "Username / Password does not match. Please enter a valid credentials."
+        "credentialsDoesnotMatch": "Username / Password does not match. Please enter a valid credentials.",
+        "generalErrorMessage": "Due to some error, request cannot be processed. Please try again later."
     }
 }
