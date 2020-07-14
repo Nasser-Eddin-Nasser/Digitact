@@ -20,8 +20,6 @@ export class ProfilePictureComponent {
   @Input()
   formsData: FormGroup<FormsData>;
 
-  hasPicture = false;
-
   takePicture(): void {
     const cameraConfig: CameraOptions = {
       quality: 100,
@@ -35,7 +33,6 @@ export class ProfilePictureComponent {
         this.formsData.controls.profilePicture.controls.pictureBase64.setValue(
           'data:image/jpeg;base64,' + result.base64String
         );
-        this.hasPicture = true;
       })
       .catch(() => {
         // It looks like closing the Camera overlay in the webview, rejects the promise
@@ -46,6 +43,5 @@ export class ProfilePictureComponent {
    */
   deletePictureEntry(): void {
     this.formsData.controls.profilePicture.controls.pictureBase64.setValue('');
-    this.hasPicture = false;
   }
 }

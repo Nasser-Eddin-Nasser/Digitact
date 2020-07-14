@@ -1,15 +1,12 @@
 <div class="main-description">
   <h1>{{ 'profilePicture.title' | translate }}</h1>
 </div>
-<div *ngIf="!hasPicture; else elseBlock">
-  <span class="description">
-    {{ 'profilePicture.stepDescription' | translate }}
-  </span>
-  <button (click)="takePicture()" class="custom-button">
-    <ion-icon name="person"></ion-icon>
-  </button>
-</div>
-<ng-template #elseBlock>
+<div
+  *ngIf="
+    this.formsData.controls.profilePicture.controls.pictureBase64.value;
+    else elseBlock
+  "
+>
   <span class="description">
     {{ 'profilePicture.deleteTakeAnotherPictureMessage' | translate }}
   </span>
@@ -21,5 +18,13 @@
   </ion-item>
   <button (click)="deletePictureEntry()" class="trash-button">
     <ion-icon name="trash-outline" class="trash-icon"></ion-icon>
+  </button>
+</div>
+<ng-template #elseBlock>
+  <span class="description">
+    {{ 'profilePicture.stepDescription' | translate }}
+  </span>
+  <button (click)="takePicture()" class="custom-button">
+    <ion-icon name="person"></ion-icon>
   </button>
 </ng-template>
