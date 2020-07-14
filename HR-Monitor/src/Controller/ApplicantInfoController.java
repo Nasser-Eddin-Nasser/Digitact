@@ -9,11 +9,7 @@ import Model.Image.AppImage;
 import Model.Image.ImageType;
 import Model.MVC.OverviewModel;
 import Model.User.ApplicantUI;
-import Util.Dictionary.ApplicantInfoDictionary;
-import Util.Dictionary.DegreeAndEmploymentTypeDictionary;
-import Util.Dictionary.IDictionary;
-import Util.Dictionary.KeyCompetenciesDictionary;
-import Util.Dictionary.PositionsAndIndustriesDictionary;
+import Util.Dictionary.*;
 import Util.ImageTools;
 import java.io.File;
 import java.io.IOException;
@@ -460,8 +456,8 @@ public class ApplicantInfoController {
     }
 
     private void getPositionAndIndustry() {
-        getPositionTable(app.getPositions());
-        getIndTable(app.getIndustries());
+        if (app.getPositions() != null) getPositionTable(app.getPositions());
+        if (app.getIndustries() != null) getIndTable(app.getIndustries());
     }
 
     private ObservableList<String> getIndTable(List<Industries> industries) {
