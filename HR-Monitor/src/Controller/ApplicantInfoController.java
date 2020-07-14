@@ -384,8 +384,19 @@ public class ApplicantInfoController {
         txtImpHRFX.setText(app.getHrComment());
         btnSaveFX.setOnMouseClicked(
                 mouseEvent -> {
+                    btnSaveFX.setText(IDictionary.getTranslation(dictionary,"Changes saved succesfully!"));
                     Connector.postHRComment(app.getID(), txtImpHRFX.getText());
                     app.setHrComment(txtImpHRFX.getText());
+
+
+                    try {
+
+                        Thread.sleep(1500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    btnSaveFX.setText(IDictionary.getTranslation(dictionary, "Save Changes"));
+
                 });
     }
 

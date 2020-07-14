@@ -40,7 +40,7 @@ public class ApplicantInfoDictionary implements IDictionary {
             dictionary.put("Spoken Langauges", "Gesprochene Sprachen");
 
             dictionary.put("Position", "Position");
-            dictionary.put("Industry", "Industrie");
+            dictionary.put("Industry", "Branchen");
 
             dictionary.put("First Name", "Vorname");
             dictionary.put("Second Name", "Nachname");
@@ -72,6 +72,7 @@ public class ApplicantInfoDictionary implements IDictionary {
                     "Einen Kommentar über den Antragsteller hinzufügen");
 
             dictionary.put("Save Changes", "Änderungen speichern");
+            dictionary.put("Changes saved succesfully!", "Änderungen erfolgreich gespeichert!");
         }
     }
 
