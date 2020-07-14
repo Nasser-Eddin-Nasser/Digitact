@@ -38,6 +38,7 @@ public class ApplicantUI {
 
     private List<Industries> industries;
     private List<Positions> positions;
+
     private List<KeyCompetence> keyCompetencies;
     private List<AppImage> images;
 
@@ -129,6 +130,10 @@ public class ApplicantUI {
                         .filter(x -> x.getCategory() == competanceCatogory)
                         .collect(Collectors.toList());
         return selectedKeyCompetences;
+    }
+
+    public void setKeyCompetencies(List<KeyCompetence> keyCompetencies) {
+        this.keyCompetencies = keyCompetencies;
     }
 
     public String getFirstName() {
