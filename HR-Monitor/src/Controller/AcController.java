@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class AcController {
@@ -78,6 +79,22 @@ public class AcController {
         model = new AcModel();
         stage = new Stage();
         setsceneAndLabels();
+        loginByEnterListener();
+    }
+
+    private void loginByEnterListener() {
+        myUserNameTextField.setOnKeyReleased(
+                event -> {
+                    if (event.getCode() == KeyCode.ENTER) {
+                        onLogin();
+                    }
+                });
+        myPasswordField.setOnKeyReleased(
+                event -> {
+                    if (event.getCode() == KeyCode.ENTER) {
+                        onLogin();
+                    }
+                });
     }
 
     public AcController(Stage stage, AcModel model) throws IOException {

@@ -64,7 +64,8 @@ public class ApplicantInfoDictionary implements IDictionary {
             dictionary.put("Sent to HR", "An HR gesendet");
             dictionary.put("Denied", "Abgelehnt");
 
-            dictionary.put("Comment by the fair team member", "Kommentar des Messeteam-Mitarbeiters");
+            dictionary.put(
+                    "Comment by the fair team member", "Kommentar des Messeteam-Mitarbeiters");
             dictionary.put("Comment by the HR member", "Kommentar des HR-Mitarbeiter");
             dictionary.put(
                     "Add a comment about the Applicant",

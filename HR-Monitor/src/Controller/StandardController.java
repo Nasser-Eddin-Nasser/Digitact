@@ -60,6 +60,7 @@ public class StandardController {
                         + DBStorage.getCurrentAdmin().getFirstName());
         loadMenu();
         stage.setOnCloseRequest(e -> shutdown());
+        stage.setFullScreen(true);
         stage.show();
     }
 
@@ -69,7 +70,6 @@ public class StandardController {
         if (files != null) { // some JVMs return null for empty dirs
             for (File f : files) {
                 if (!f.isDirectory()) {
-                    System.out.println(f.getAbsolutePath());
                     f.delete();
                 }
             }
