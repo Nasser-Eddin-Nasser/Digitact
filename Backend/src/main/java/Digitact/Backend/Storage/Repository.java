@@ -1,6 +1,5 @@
 package Digitact.Backend.Storage;
 
-import static Digitact.Backend.ConfigProperties.SecurityConstants.DEVICE_HEADER_STRING;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC256;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
@@ -70,12 +69,11 @@ public class Repository {
      * @param Admin, headers
      * @return header containing device and header token
      */
-    public HttpHeaders createTokenForDeviceRegistry(Admin admin, HttpHeaders headers) {
+    public HttpHeaders createTokenForDeviceRegistry(Admin admin, String deviceToken) {
         HttpHeaders responseHeader = new HttpHeaders();
-        String deviceToken = "";
         Boolean isExist = false;
 
-        if (headers.get(DEVICE_HEADER_STRING) == null) {
+        if (deviceToken == null || deviceToken.length() == 0) {
             deviceToken =
                     JWT.create()
                             .withSubject(
@@ -83,10 +81,7 @@ public class Repository {
                                             + UUID.randomUUID().getMostSignificantBits())
                             .sign(HMAC256(SecurityConstants.SECRET_DEVICE.getBytes()));
         } else {
-            deviceToken = headers.get(DEVICE_HEADER_STRING).get(0);
-            isExist =
-                    repo.getDeviceIdentfierByDeviceHeader(
-                            headers.get(DEVICE_HEADER_STRING).get(0), admin.getId());
+            isExist = repo.getDeviceIdentfierByDeviceHeader(deviceToken, admin.getId());
         }
         String userToken =
                 JWT.create()

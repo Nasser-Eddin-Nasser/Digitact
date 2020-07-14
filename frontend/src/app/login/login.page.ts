@@ -51,50 +51,59 @@ export class LoginPage {
    * In this method register API is sent to server
    */
   login(): void {
-    this.httpClient
-      .post(
-        this.apiHostUrl + '/api/controller/register',
-        { userName: this.userName, password: this.password },
-        {
-          responseType: 'text',
-          observe: 'response',
+    this.storage
+      .getItem(this.storage.commonPropertiesDb, 'deviceToken')
+      .then((token: string) => {
+        const formData = new FormData();
+        formData.append('userName', this.userName);
+        formData.append('password', this.password);
+        if (token) {
+          formData.append('deviceauthorization', token);
+        } else {
+          formData.append('deviceauthorization', '');
         }
-      )
-      .subscribe(
-        (res) => {
-          if (res.status === 201) {
-            this.storage.addItem(
-              this.storage.commonPropertiesDb,
-              'deviceToken',
-              res.headers.get('deviceauthorization')
-            );
-            this.storage.addItem(
-              this.storage.commonPropertiesDb,
-              'userToken',
-              res.headers.get('userauthorization')
-            );
-            this.navController.navigateForward(['/home']);
-          }
-        },
-        async (error) => {
-          let toastMessage;
-          if (error.status === 401) {
-            toastMessage = this.translate.instant(
-              'loginPage.credentialsDoesnotMatch'
-            );
-          } else {
-            toastMessage = this.translate.instant(
-              'loginPage.generalErrorMessage'
-            );
-          }
-          const toast = await this.toastController.create({
-            message: toastMessage,
-            color: 'danger',
-            position: 'bottom',
-            duration: 4000,
-          });
-          toast.present();
-        }
-      );
+
+        this.httpClient
+          .post(this.apiHostUrl + '/api/controller/register', formData, {
+            responseType: 'text',
+            observe: 'response',
+          })
+          .subscribe(
+            (res) => {
+              if (res.status === 201) {
+                this.storage.addItem(
+                  this.storage.commonPropertiesDb,
+                  'deviceToken',
+                  res.headers.get('deviceauthorization')
+                );
+                this.storage.addItem(
+                  this.storage.commonPropertiesDb,
+                  'userToken',
+                  res.headers.get('userauthorization')
+                );
+                this.navController.navigateForward(['/home']);
+              }
+            },
+            async (error) => {
+              let toastMessage;
+              if (error.status === 401) {
+                toastMessage = this.translate.instant(
+                  'loginPage.credentialsDoesnotMatch'
+                );
+              } else {
+                toastMessage = this.translate.instant(
+                  'loginPage.generalErrorMessage'
+                );
+              }
+              const toast = await this.toastController.create({
+                message: toastMessage,
+                color: 'danger',
+                position: 'bottom',
+                duration: 4000,
+              });
+              toast.present();
+            }
+          );
+      });
   }
 }

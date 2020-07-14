@@ -11,7 +11,6 @@ import Digitact.Backend.Storage.IDataRepository;
 import Digitact.Backend.Storage.Repository;
 import Digitact.Backend.Util.PasswordTools;
 import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -80,14 +79,16 @@ public class ClientController {
      */
     @PostMapping("/register")
     public ResponseEntity<?> register(
-            @RequestHeader HttpHeaders headers, @RequestBody Map<String, String> authInput) {
+            @RequestParam("userName") String userName,
+            @RequestParam("password") String password,
+            @RequestParam("deviceauthorization") String deviceToken) {
         Repository myRepos = new Repository(repository);
         HttpHeaders responseHeader = new HttpHeaders();
         try {
-            Admin admin = repository.getAdminByUserName(authInput.get("userName"));
-            String password = PasswordTools.encryptString(authInput.get("password"));
-            if (admin != null && admin.getPassword().equals(password)) {
-                responseHeader = myRepos.createTokenForDeviceRegistry(admin, headers);
+            Admin admin = repository.getAdminByUserName(userName);
+            String encryptPassword = PasswordTools.encryptString(password);
+            if (admin != null && admin.getPassword().equals(encryptPassword)) {
+                responseHeader = myRepos.createTokenForDeviceRegistry(admin, deviceToken);
             }
         } catch (Exception e) {
             e.printStackTrace();
