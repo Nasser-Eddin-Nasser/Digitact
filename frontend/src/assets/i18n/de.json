@@ -43,10 +43,11 @@
         "upload": "Hochladen",
         "uploadingProgressMessage": "Bewerbung(en) werden hochgeladen {{uploadSize}}/{{totalSize}}",
         "allApplicantsSavedSuccessMessage":"Alle Bewerbung (en) erfolgreich gesendet",
-        "allApplicantsFailedMessage":"Aufgrund einiger Fehler wurden keine Bewerbungen gesendet. Bitte versuchen Sie es später noch einmal.",
-        "partialySentAndFailedMessage":"{{successCount}} Anwendung(en) erfolgreich gesendet und {{failedCount}} Anwendung(en) fehlgeschlagen.",
-        "allRequestCancelledMessage":"Keine Bewerbungen gesendet, da der Vorgang abgebrochen wurde.",
-        "nSucceededRestCancelledMessage":"{{successCount}} Bewerbung(en) erfolgreich gesendet. Die restliche(n) Bewerbung(en) wurden nicht an den Server gesendet, da der Vorgang abgebrochen wurde."
+        "allApplicantsFailedMessage": "Aufgrund einiger Fehler wurden keine Bewerbungen gesendet. Bitte versuchen Sie es später noch einmal.",
+        "partialySentAndFailedMessage": "{{successCount}} Anwendung(en) erfolgreich gesendet und {{failedCount}} Anwendung(en) fehlgeschlagen.",
+        "allRequestCancelledMessage": "Keine Bewerbungen gesendet, da der Vorgang abgebrochen wurde.",
+        "nSucceededRestCancelledMessage": "{{successCount}} Bewerbung(en) erfolgreich gesendet. Die restliche(n) Bewerbung(en) wurden nicht an den Server gesendet, da der Vorgang abgebrochen wurde.",
+        "loginToProcessMessage": "Bitte melden Sie sich an, um fortzufahren."
 
     },
     "hrSideMenu": {
@@ -221,5 +222,14 @@
         "skip": "Überspringen",
         "skipMessage": "Möchtest Du diesen Schritt wirklich überspringen? Bitte überspringe diesen Schritt nur dann, wenn die hier benötigten Informationen Teil der Dokumente sind, welche Du als Bilder hochgeladen hast.",
         "skipStep": "Schritt überspringen"
+    },
+
+    "loginPage":{
+        "title": "Anmeldung",
+        "stepDescription": "Geben Sie die Administratoranmeldeinformationen wie im HR-Monitor ein, um das Gerät zu authentifizieren",
+        "userName": "Nutzername",
+        "password": "Passwort",
+        "credentialsDoesnotMatch": "Benutzername / Passwort stimmt nicht überein. Bitte geben Sie einen gültigen Berechtigungsnachweis ein.",
+        "generalErrorMessage": "Aufgrund eines Fehlers kann die Anforderung nicht verarbeitet werden. Bitte versuchen Sie es später noch einmal."
     }
 }
