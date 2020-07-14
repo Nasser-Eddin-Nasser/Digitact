@@ -67,8 +67,8 @@ public class Repository {
     /**
      * This method is used to check whether user exist and return token after generation
      *
-     * @param Admin
-     * @return token
+     * @param Admin, headers
+     * @return header containing device and header token
      */
     public HttpHeaders createTokenForDeviceRegistry(Admin admin, HttpHeaders headers) {
         HttpHeaders responseHeader = new HttpHeaders();
@@ -116,6 +116,7 @@ public class Repository {
 
     /**
      * This method is used to check whether JWT token is valid
+     *
      * @param token
      * @return boolean
      */

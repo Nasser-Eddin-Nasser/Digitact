@@ -29,7 +29,7 @@ public class ConfigProperties {
     // Security
     public class SecurityConstants {
         public static final String SECRET = "DigitactAPIKey";
-        public static final long EXPIRATION_TIME = 120_000; // 2 mins
+        public static final long EXPIRATION_TIME = 1296_000_000; // 15 days
         public static final String USER_HEADER_STRING = "userAuthorization";
         public static final String SIGN_UP_URL = "/register";
 
