@@ -325,7 +325,7 @@ public class ApplicantInfoController {
     private void notification(String successMessage) {
     	successLabelFX.setVisible(true);
     	if(successMessage != null && successMessage.length() != 0) {
-        	successLabelFX.setText(IDictionary.getTranslation(dictionary, "Changes Saved!"));
+        	successLabelFX.setText(IDictionary.getTranslation(dictionary, "Changes saved succesfully!"));
         }
         else {
         	successLabelFX.setText(IDictionary.getTranslation(dictionary, "Couldn't save! Connection error."));

@@ -73,9 +73,8 @@ public class ApplicantInfoDictionary implements IDictionary {
 
             dictionary.put("Save Changes", "Änderungen speichern");
             
-            dictionary.put("Changes Saved!", "Änderungen gespeichert!");
-            dictionary.put("Couldn't save! Connection error.", "Konnte nicht speichern! Verbindungsfehler.");
             dictionary.put("Changes saved succesfully!", "Änderungen erfolgreich gespeichert!");
+            dictionary.put("Couldn't save! Connection error.", "Konnte nicht speichern! Verbindungsfehler.");
         }
     }
 
