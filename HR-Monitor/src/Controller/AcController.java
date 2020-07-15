@@ -114,14 +114,14 @@ public class AcController {
         stage.setTitle(getTranslation(acDic, "TITLE-Login"));
         stage.setScene(viewLogin);
         stage.setResizable(false);
-        stage.getIcons().add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/Style/Logo/Logo-idea-2-blackbg--logo.png")));
         setLabels();
         stage.show();
         changeLanguage();
     }
 
     private void changeLanguage() {
-        languageChangeFX.setImage(new Image("./Style/" + LANG.toString() + ".gif"));
+        languageChangeFX.setImage(new Image(getClass().getResourceAsStream("/Style/" + LANG.toString() + ".gif")));
         languageChangeFX.setOnMouseClicked(
                 (event) -> {
                     if (LANG == Language.German) {
