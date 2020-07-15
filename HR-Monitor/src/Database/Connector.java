@@ -179,15 +179,18 @@ public class Connector {
         }
     }
 
-    public static void changeStatus(long appID, Status status) {
+    public static String changeStatus(long appID, Status status) {
+    	String message = "";
         try {
-            handleChangeStatus(new URL(Configuration.BES_URI + Method.changeStatus), appID, status);
+            message = handleChangeStatus(new URL(Configuration.BES_URI + Method.changeStatus), appID, status);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        return message;
     }
 
-    private static void handleChangeStatus(URL url, long appID, Status status) {
+    private static String handleChangeStatus(URL url, long appID, Status status) {
+    	StringBuilder response = new StringBuilder();
         try {
             URLConnection uc = url.openConnection();
             HttpURLConnection http = (HttpURLConnection) uc;
@@ -198,13 +201,11 @@ public class Connector {
             String message = "{ \"appID\":" + appID + ",\"status\":\"" + status.toString() + "\"}";
 
             try (OutputStream os = http.getOutputStream()) {
-
                 byte[] input = message.getBytes("utf-8");
                 os.write(input, 0, input.length);
             }
             try (BufferedReader br =
-                    new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
-                StringBuilder response = new StringBuilder();
+                    new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {                
                 String responseLine = null;
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
@@ -216,15 +217,18 @@ public class Connector {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return response.toString();
     }
 
-    public static void postHRComment(long appID, String comment) {
+    public static String postHRComment(long appID, String comment) {
+    	String message = "";
         try {
-            handlePostHRComment(
+        	message = handlePostHRComment(
                     new URL(Configuration.BES_URI + Method.postHRComment), appID, comment);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        return message;
     }
 
     public static void sendPutType(Method method, Token token) {
@@ -242,7 +246,8 @@ public class Connector {
         }
     }
 
-    private static void handlePostHRComment(URL url, long appID, String comment) {
+    private static String handlePostHRComment(URL url, long appID, String comment) {
+    	StringBuilder response = new StringBuilder();
         try {
             URLConnection uc = url.openConnection();
             HttpURLConnection http = (HttpURLConnection) uc;
@@ -259,7 +264,6 @@ public class Connector {
             }
             try (BufferedReader br =
                     new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
-                StringBuilder response = new StringBuilder();
                 String responseLine = null;
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
@@ -270,6 +274,7 @@ public class Connector {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return response.toString();
     }
 
     private static void handlePutTokenToAdmin(URL url, Token token) {

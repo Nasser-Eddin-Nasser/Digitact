@@ -14,9 +14,12 @@ import Util.ImageTools;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+
+import javafx.animation.PauseTransition;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.DoubleProperty;
@@ -162,6 +165,8 @@ public class ApplicantInfoController {
     @FXML Tab appRatingTabFX;
 
     @FXML Label changeStatusFX;
+    
+    @FXML Label successLabelFX;
 
     IDictionary dictionary;
 
@@ -316,6 +321,22 @@ public class ApplicantInfoController {
         setStatusLabel(app.getStatus());
         statusListener();
     }
+    
+    private void notification(String successMessage) {
+    	successLabelFX.setVisible(true);
+    	if(successMessage != null && successMessage.length() != 0) {
+        	successLabelFX.setText(IDictionary.getTranslation(dictionary, "Changes Saved!"));
+        }
+        else {
+        	successLabelFX.setText(IDictionary.getTranslation(dictionary, "Couldn't save! Connection error."));
+        }
+    	PauseTransition visiblePause = new PauseTransition();
+        visiblePause.setDuration(javafx.util.Duration.seconds(2));
+        visiblePause.setOnFinished(
+                event -> successLabelFX.setVisible(false)
+        );
+        visiblePause.play();
+    }
 
     private void setStatusLabel(Status status) {
         switch (status) {
@@ -339,25 +360,29 @@ public class ApplicantInfoController {
                 break;
         }
     }
+    
 
     public void statusListener() {
         btnOFX.setOnMouseClicked(
                 (event) -> {
                     setStatusLabel(Open);
-                    Connector.changeStatus(app.getID(), Open);
+                    String s = Connector.changeStatus(app.getID(), Open);
                     app.setStatus(Open);
+                    notification(s);
                 });
         btnHRFX.setOnMouseClicked(
                 (event) -> {
                     setStatusLabel(Send2HR);
-                    Connector.changeStatus(app.getID(), Send2HR);
-                    app.setStatus(Send2HR);
+                    String s = Connector.changeStatus(app.getID(), Send2HR);
+                    app.setStatus(Send2HR);                   
+                    notification(s);
                 });
         btnDFX.setOnMouseClicked(
                 (event) -> {
                     setStatusLabel(Denied);
-                    Connector.changeStatus(app.getID(), Denied);
+                    String s = Connector.changeStatus(app.getID(), Denied);
                     app.setStatus(Denied);
+                    notification(s);
                 });
     }
 
@@ -384,8 +409,9 @@ public class ApplicantInfoController {
         txtImpHRFX.setText(app.getHrComment());
         btnSaveFX.setOnMouseClicked(
                 mouseEvent -> {
-                    Connector.postHRComment(app.getID(), txtImpHRFX.getText());
-                    app.setHrComment(txtImpHRFX.getText());
+                	String s = Connector.postHRComment(app.getID(), txtImpHRFX.getText());
+                    app.setHrComment(txtImpHRFX.getText());                                     
+                    notification(s);
                 });
     }
 
