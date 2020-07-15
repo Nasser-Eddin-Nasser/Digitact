@@ -39,7 +39,7 @@ public class ApplicantInfoDictionary implements IDictionary {
             dictionary.put("Professional Software", "Professionelle Software");
             dictionary.put("Spoken Langauges", "Gesprochene Sprachen");
 
-            dictionary.put("Position", "Position");
+            dictionary.put("Position", "Stellen");
             dictionary.put("Industry", "Branchen");
 
             dictionary.put("First Name", "Vorname");
