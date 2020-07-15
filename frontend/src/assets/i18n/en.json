@@ -43,10 +43,11 @@
         "upload": "Upload",
         "uploadingProgressMessage": "uploading application {{uploadSize}}/{{totalSize}}",
         "allApplicantsSavedSuccessMessage":"All application(s) sent successfully",
-        "allApplicantsFailedMessage":"Due to some error(s), none of the application(s) were sent. Please try again later",
-        "partialySentAndFailedMessage":"{{succeededCount}} application(s) sent successfully and {{failedCount}} application(s) failed.",
-        "allRequestCancelledMessage":"None of the application(s) were sent, as it was cancelled.",
-        "nSucceededRestCancelledMessage":"{{succeededCount}} application(s) sent successfully. Rest of the application(s) were not sent to the server, as it was cancelled."
+        "allApplicantsFailedMessage": "Due to some error(s), none of the application(s) were sent. Please try again later",
+        "partialySentAndFailedMessage": "{{succeededCount}} application(s) sent successfully and {{failedCount}} application(s) failed.",
+        "allRequestCancelledMessage": "None of the application(s) were sent, as it was cancelled.",
+        "nSucceededRestCancelledMessage": "{{succeededCount}} application(s) sent successfully. Rest of the application(s) were not sent to the server, as it was cancelled.",
+        "loginToProcessMessage": "Please login, to proceed further."
     },
     "hrSideMenu": {
         "applicantRating": "Applicant Rating",
@@ -221,5 +222,14 @@
         "skip": "Skip",
         "skipMessage": "Do you really want to skip this step? Please only do this if the data asked for in this step are part of the documents you took a photo of.",
         "skipStep": "Skip this Step"
+    },
+
+    "loginPage":{
+        "title": "Login",
+        "stepDescription": "Enter the admin credentials as in HR monitor to authenticate the device.",
+        "userName": "Username",
+        "password": "Password",
+        "credentialsDoesnotMatch": "Username / Password does not match. Please enter a valid credentials.",
+        "generalErrorMessage": "Due to some error, request cannot be processed. Please try again later."
     }
 }

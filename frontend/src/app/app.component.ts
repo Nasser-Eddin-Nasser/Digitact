@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Platform } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { StorageHandlerService } from './services/storage-handler.service';
@@ -17,7 +17,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private translate: TranslateService,
-    private store: StorageHandlerService
+    private store: StorageHandlerService,
+    private navController: NavController
   ) {
     this.initializeApp();
   }
@@ -39,6 +40,15 @@ export class AppComponent {
               'chosenLocale',
               'de'
             );
+          }
+        });
+      this.store
+        .getItem(this.store.commonPropertiesDb, 'deviceToken')
+        .then((token: string) => {
+          if (token && token.length) {
+            this.navController.navigateForward(['/home']);
+          } else {
+            this.navController.navigateForward(['/login']);
           }
         });
     });
