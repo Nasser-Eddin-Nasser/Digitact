@@ -87,33 +87,4 @@ The job application is now stored locally on the device. The HR team member may 
 The rating of the applicant is done using a similar UI as in the main job application form.
 
 
-# HR-Monitor
-
-## Create Account Pane
-
-This pane can land in two instances:
-1. Once you start the Backend server initially, the account creation pane appears for HR members to create the first HR-Monitor account. 
-2. The HR member, who already has a user account in the HR-Monitor, can create a new account for another HR member. 
-
-
-## Log-in Pane
-
-This pane can land in two instances:
-1. The HR-Monitor already has user accounts.
-2. After the HR member creates the first HR account.
-
-The HR member can enter the log-in details and access the HR-Monitor. Additionally, the user can select the preferred language of the HR-Monitor.  User can click the English or German flags to change the language. 
-
-
-## Overview Window  
-
-This window shows all the list of applicants in the HR-Monitor. A user can use filters to filter out the applicants. There are four filter inputs: Name(first name or last name), status, industries and positions. 
-
-One table row corresponds to one application. The columns of the table are the applicant's first name, last name and the status of the application. If the HR member needs to check all the information about the applicant, the HR person can double click the corresponding row.
-
-The left side pane consists of three buttons. The first button is named "Applicants". This button refreshes the list of applications (load all the applications from the database). The second button is "Create Account". The final and the third is the "Log out" button.
-
-
-## Applicant Information Window
-
 
