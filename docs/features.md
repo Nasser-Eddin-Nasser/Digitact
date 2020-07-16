@@ -85,6 +85,3 @@ The job application is now stored locally on the device. The HR team member may 
 <img src="images/applicant-rating--first-screen.png" width="250px" style="border: 1px solid #e0e0e0;">
 
 The rating of the applicant is done using a similar UI as in the main job application form.
-
-
-
