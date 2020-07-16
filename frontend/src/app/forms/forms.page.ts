@@ -165,6 +165,11 @@ export class FormsPage
   private hasSubmittedForm = false;
 
   /**
+   * If a skip is stepped, skipAlertShowed = true, if no stepp is skipped till now, it returns false.
+   */
+  private skipAlertShowed = false;
+
+  /**
    * Allows skipping a step.
    * Please note that not all pages can be skipped.
    * But currently, it is the easiest typesafe way to just create FormControls for every page.
@@ -268,7 +273,9 @@ export class FormsPage
         }
 
         if (isChecked) {
-          this.showSkipStepAlert(formControl);
+          if (!this.skipAlertShowed) {
+            this.showSkipStepAlert(formControl);
+          }
         }
 
         if (isChecked) {
@@ -303,7 +310,7 @@ export class FormsPage
         {
           text: this.translate.instant('skipStep.skip'),
           handler: () => {
-            // Nothing to do here, since the toggle is automatically toggled.
+            this.skipAlertShowed = true;
           },
         },
       ],
