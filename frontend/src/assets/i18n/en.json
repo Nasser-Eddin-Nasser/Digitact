@@ -220,7 +220,7 @@
 
     "skipStep":{
         "skip": "Skip",
-        "skipMessage": "Do you really want to skip this step? Please only do this if the data asked for in this step are part of the documents you took a photo of.",
+        "skipMessage": "If you skip this page, no information will be transferred. If possible, please provide all information at your hand - uploading a document is one way to do so.",
         "skipStep": "Skip this Step"
     },
 

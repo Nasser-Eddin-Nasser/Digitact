@@ -220,7 +220,7 @@
 
     "skipStep":{
         "skip": "Überspringen",
-        "skipMessage": "Möchtest Du diesen Schritt wirklich überspringen? Bitte überspringe diesen Schritt nur dann, wenn die hier benötigten Informationen Teil der Dokumente sind, welche Du als Bilder hochgeladen hast.",
+        "skipMessage": "Wenn Du diesen Schritt überspringst, werden keine Informatinen gesendet. Wenn möglich, gebe bitte alle Informationen an. Eine Möglichkeit ist es, ein Dokument hochzuladen.",
         "skipStep": "Schritt überspringen"
     },
 
