@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{'loginPage.title' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="main-container with-bottom-buttons">
+    <div class="contenet">
+      <div class="main-description">
+        <h1>{{'loginPage.title' | translate}}</h1>
+        {{'loginPage.stepDescription' | translate}}
+      </div>
+      <ion-list>
+        <ion-item class="ion-no-padding">
+          <ion-label position="floating">
+            {{'loginPage.userName' | translate}}
+          </ion-label>
+          <ion-input [(ngModel)]="userName"></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-no-padding">
+          <ion-label position="floating">
+            {{'loginPage.password' | translate}}
+          </ion-label>
+          <ion-input type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+      </ion-list>
+    </div>
+    <ion-label
+      class="ion-text-end ion-padding"
+      color="tertiary"
+      (click)="skip()"
+      >Skip only for testing
+    </ion-label>
+
+    <div class="buttons-container">
+      <button class="fancy-button" (click)="login()">
+        {{'loginPage.title' | translate}}
+      </button>
+    </div>
+  </div>
+</ion-content>
