@@ -187,11 +187,11 @@ Once the rating has been completed, you can "finalize" the application. Only fin
 
 <img src="images/landing-page.png" width="250px" style="border: 1px solid #e0e0e0;">
 
-On the home page, there is a button on the right top that indicates the number of submitted applications. 
-
 <img src="images/applications.png" width="250px" style="border: 1px solid #e0e0e0;">
 
 <img src="images/applications-upload--in-progress.png" width="250px" style="border: 1px solid #e0e0e0;">
+
+On the home page, there is a button on the right top that indicates the number of submitted applications. 
 
 Once you click on it, you can see two categories of applications: First, the ones that have been finalized. These are the ones that can be sent to the server. Second, the not yet finished/finalized ones. You can now click on one of the not finished ones in order to change the ratings and to eventually finalize it.
 
