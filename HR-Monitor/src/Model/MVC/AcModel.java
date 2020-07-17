@@ -4,6 +4,7 @@ import Database.Connector;
 import Database.Method;
 import Model.User.Admin;
 import Storage.DBStorage;
+import Util.PasswordTools;
 
 public class AcModel {
     public static boolean isPasswordValid(String text) {
@@ -15,7 +16,11 @@ public class AcModel {
         if (DBStorage.isUserNameInUse(userName)) {
             getAdmin(userName);
             Admin admin = DBStorage.getCurrentAdmin();
-            isValid = admin.getPassword().equals(Util.PasswordTools.encryptString(password));
+            isValid =
+                    PasswordTools.removeSpecialCharacters(admin.getPassword())
+                            .equals(
+                                    PasswordTools.removeSpecialCharacters(
+                                            PasswordTools.encryptString((password))));
             if (isValid) {
                 DBStorage.getToken().setLoggedinAdmin(admin);
                 Connector.sendPutType(Method.putToken, DBStorage.getToken());

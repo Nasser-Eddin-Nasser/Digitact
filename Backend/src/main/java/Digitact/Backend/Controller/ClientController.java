@@ -87,7 +87,9 @@ public class ClientController {
         try {
             Admin admin = repository.getAdminByUserName(userName);
             String encryptPassword = PasswordTools.encryptString(password);
-            if (admin != null && admin.getPassword().equals(encryptPassword)) {
+            encryptPassword = PasswordTools.removeSpecialCharacters(encryptPassword);
+            String pass = PasswordTools.removeSpecialCharacters(admin.getPassword());
+            if (admin != null && (pass).equals(encryptPassword)) {
                 responseHeader = myRepos.createTokenForDeviceRegistry(admin, deviceToken);
             }
         } catch (Exception e) {
