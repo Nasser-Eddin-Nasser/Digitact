@@ -16,4 +16,14 @@ public class PasswordTools {
         }
         return null;
     }
+
+    public static String removeSpecialCharacters(String password) {
+        String resultStr = "";
+        for (int i = 0; i < password.length(); i++) {
+            if (password.charAt(i) > 64 && password.charAt(i) <= 122) {
+                resultStr = resultStr + password.charAt(i);
+            }
+        }
+        return resultStr;
+    }
 }

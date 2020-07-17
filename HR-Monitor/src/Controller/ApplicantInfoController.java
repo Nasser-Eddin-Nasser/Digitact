@@ -394,7 +394,13 @@ public class ApplicantInfoController {
         stageApplicantInfo.show();
         stageApplicantInfo.setScene(scene);
         stageApplicantInfo.setTitle("Applicant Info");
-        stageApplicantInfo.getIcons().add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
+        stageApplicantInfo
+                .getIcons()
+                .add(
+                        new Image(
+                                getClass()
+                                        .getResourceAsStream(
+                                                "/Style/Logo/Logo-idea-2-blackbg--logo.png")));
     }
 
     private void getHrRating() {
