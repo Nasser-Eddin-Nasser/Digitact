@@ -32,6 +32,17 @@ public class Admin extends User {
     @Fetch(FetchMode.JOIN)
     private Set<DeviceIdentifier> deviceIdentifiers;
 
+    public String toString() {
+    return "userName: '"
+        + this.userName
+        + "\n ' password: '"
+        + this.password
+        + "\n passHint: '"
+        + this.passHint
+        + "'";
+    }
+
+
     /**
      * @param firstName
      * @param lastName
