@@ -33,15 +33,14 @@ public class Admin extends User {
     private Set<DeviceIdentifier> deviceIdentifiers;
 
     public String toString() {
-    return "userName: '"
-        + this.userName
-        + "\n ' password: '"
-        + this.password
-        + "\n passHint: '"
-        + this.passHint
-        + "'";
+        return "userName: '"
+                + this.userName
+                + "\n ' password: '"
+                + this.password
+                + "\n passHint: '"
+                + this.passHint
+                + "'";
     }
-
 
     /**
      * @param firstName

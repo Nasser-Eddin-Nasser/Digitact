@@ -52,6 +52,7 @@ public class Admin {
         this.passHint = passHint;
         this.password = password;
     }
+
     public String toString() {
         return "userName: '"
                 + this.userName
@@ -61,6 +62,7 @@ public class Admin {
                 + this.passHint
                 + "'";
     }
+
     public UserRight getUserRight() {
         return UserRight.Admin;
     }

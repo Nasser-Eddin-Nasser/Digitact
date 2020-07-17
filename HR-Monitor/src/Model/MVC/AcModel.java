@@ -16,7 +16,11 @@ public class AcModel {
         if (DBStorage.isUserNameInUse(userName)) {
             getAdmin(userName);
             Admin admin = DBStorage.getCurrentAdmin();
-            isValid = PasswordTools.removeSpecialCharacters(admin.getPassword()).equals(PasswordTools.removeSpecialCharacters(PasswordTools.encryptString((password))));
+            isValid =
+                    PasswordTools.removeSpecialCharacters(admin.getPassword())
+                            .equals(
+                                    PasswordTools.removeSpecialCharacters(
+                                            PasswordTools.encryptString((password))));
             if (isValid) {
                 DBStorage.getToken().setLoggedinAdmin(admin);
                 Connector.sendPutType(Method.putToken, DBStorage.getToken());

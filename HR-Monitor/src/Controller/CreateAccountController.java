@@ -88,7 +88,12 @@ public class CreateAccountController {
         stage.setTitle(IDictionary.getTranslation(acDic, "Create Admin Account"));
         stage.setScene(viewCreateAccount);
         stage.setResizable(false);
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("/Style/Logo/Logo-idea-2-blackbg--logo.png")));
+        stage.getIcons()
+                .add(
+                        new Image(
+                                getClass()
+                                        .getResourceAsStream(
+                                                "/Style/Logo/Logo-idea-2-blackbg--logo.png")));
         setLabels();
         stage.show();
     }
