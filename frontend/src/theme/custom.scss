@@ -207,6 +207,24 @@ ion-content.without-ion-header {
   --max-width: 90%;
 }
 
+.main-heading {
+  font-size: 30px;
+  font-weight: 500;
+}
+.sub-heading {
+  font-size: 25px;
+  font-weight: 450;
+}
+.sub-topic {
+  font-size: 20px;
+  font-weight: 400;
+}
+.topic-content {
+  font-size: 18px;
+  font-weight: 300;
+  text-align: justify;
+}
+
 /*
   Improvements of native Ionic items regarding Dark Mode support.
 */
