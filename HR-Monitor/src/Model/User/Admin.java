@@ -53,6 +53,16 @@ public class Admin {
         this.password = password;
     }
 
+    public String toString() {
+        return "userName: '"
+                + this.userName
+                + "\n ' password: '"
+                + this.password
+                + "\n passHint: '"
+                + this.passHint
+                + "'";
+    }
+
     public UserRight getUserRight() {
         return UserRight.Admin;
     }

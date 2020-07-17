@@ -45,7 +45,6 @@ public class HRController {
             String[] parts = token.split(" -//- ");
             String tokenNumber = parts[0];
             String userName = parts[1];
-
             Token newToken =
                     Repository.createNewTokenFromTokenString(
                             tokenNumber, dataRepository.getAdminByUserName(userName), uri);
