@@ -34,13 +34,23 @@ We use Docker to run our development database.
 - [Download](https://docs.docker.com/docker-for-windows/install/) for Windows 
 - [Download](https://docs.docker.com/docker-for-mac/install/) for Mac
 
+# HTTPS Setup
+
+We are using HTTPS for connection so its important to import and trust the certificate to run the application
+
+- For mac - open keychain access file->import items-> choose keystore.p12 under /Backend/src/main/resources. Then double click on localhost and choose always trust option from the dialog. 
+- For windows - double-click on keystore.p12 file under /Backend/src/main/resources and install it. 
+- Password of certificate is "password"
+- To trust localhost by chrome go to chrome://flags/#allow-insecure-localhost and enable Allow invalid certificates for resources loaded from localhost option.
+
 # How to use
 
 - Install the below in-order
   - JDK 11+ and set environment variables
-  - Install IDE and [set the JDK path](https://www.jetbrains.com/help/idea/sdk.html) if need. 
+  - Install IDE and [set the JDK path](https://www.jetbrains.com/help/idea/sdk.html) if needed
   - Install Docker
 - Clone this project
+- Do HTTPS setup
 - Run `docker-compose up`
 - Go to Digitact/Backend folder in the terminal and run `gradle bootrun`
     or
