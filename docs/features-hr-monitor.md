@@ -1,41 +1,36 @@
 
 # HR-Monitor
 
-HR-Monitor is a tool where HR members can review and monitor the applications which collected in the fair.
+HR-Monitor is a tool where HR members can review and monitor the student applications collected during the job fair.
 
 ## Create Account Pane
 
-This pane can land in two instances:
-1. Once you start the Backend server initially, the account creation pane appears for HR members to create the first HR-Monitor account. 
-2. The HR member, who already has a user account in the HR-Monitor, can create a new account for another HR member. 
+The HR members can create user accounts using this pane. The username should be unique to each HR person and filling all the fields is mandatory.
 
 
 ## Log-in Pane
 
-This pane can land in two instances:
-1. The HR-Monitor already has user accounts.
-2. After the HR member creates the first HR account.
-
-The HR member can enter the log-in details and access the HR-Monitor. Additionally, the user can select the preferred language of the HR-Monitor.  User can click the English or German flags to change the language. 
-
+Here, the HR member can log in to his/her account. The HR person can change the language by simply clicking the flag button. The HR monitor has two language options: German and English.
 
 ## Overview Window  
 
-This window shows all the list of applicants in the HR-Monitor. A user can use filters to filter out the applicants. There are four filter inputs: Name(first name or last name), status, industries and positions. 
+This window consists of a table that shows all the list of applicants. A user can use filters to filter out the applicants. 
+There are four filter inputs: Name(first name or last name), status, industries and positions. 
 
-One table row corresponds to one application. The columns of the table are the applicant's first name, last name and the status of the application. If the HR member needs to check all the information about the applicant, the HR person can double click the corresponding row.
+The table lists the applicant's first name, last name and status. To view the applicant's data in detail, the user has to double click entry of the table.
 
 The left side pane consists of three buttons. The first button is named "Applicants". This button refreshes the list of applications (load all the applications from the database). The second button is "Create Account". The final and the third is the "Log out" button.
 
-
 ## Applicant Information Window
 
-This window has all the details of the applicant and the applicant's preferences.
-In the top left, you could see the profile picture of the applicant. Right below the profile picture, you can see the Basic information and additional information of the applicant.
-This window contains three tabs:
-1. To show the information and preferences of the applicant
-2. To present the documents of the applicant, such as a CV.
-3. To illustrate the ratings and comments, which gave by the fair team member, or to change the status and comments.
+This window has all the details of the application, which was filled by the applicant.
+
+In the top left, you could see the profile picture of the applicant. Right below the profile picture, you can see the Basic information and additional information.
+
+In the main viewing area of this window contains three tabs:
+1. Information and preferences of the applicant.
+2. Documents of the applicant, such as a CV.
+3. Ratings and comments, which gave by the fair team member.
 
 ### Information tab
 
