@@ -21,6 +21,8 @@ public class ApplicantUI {
 
     private String additionalInfo;
 
+
+
     @JsonProperty("title")
     private Title title;
 
@@ -195,7 +197,9 @@ public class ApplicantUI {
     public String getHrComment() {
         return hrComment;
     }
-
+    public Title getTitle() {
+        return title;
+    }
     public void setHrComment(String hrComment) {
         this.hrComment = hrComment;
     }

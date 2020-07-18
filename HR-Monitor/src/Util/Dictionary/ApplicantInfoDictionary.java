@@ -12,6 +12,9 @@ public class ApplicantInfoDictionary implements IDictionary {
 
     public void init() {
         if (dictionary.size() == 0) {
+            dictionary.put("Salutation", "Anrede");
+            dictionary.put("Mr", "Herr");
+            dictionary.put("Mrs", "Frau");
             // add all values
             dictionary.put("Basic Information", "Grundlegende Informationen");
             dictionary.put("Additional Information", "Zusätzliche Informationen");

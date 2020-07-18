@@ -106,6 +106,7 @@
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="10.0" prefWidth="113.0" />
                      </columnConstraints>
                      <rowConstraints>
+                           <RowConstraints maxHeight="70.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="70.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="70.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
@@ -115,61 +116,61 @@
                         <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label fx:id="fNameFX" contentDisplay="CENTER" prefHeight="17.0" prefWidth="102.0" text="First Name" textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="fNameFX" contentDisplay="CENTER" prefHeight="17.0" prefWidth="102.0" text="First Name" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="1">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
-                        <Label fx:id="lNameFX" prefHeight="33.0" prefWidth="103.0" text="Last Name" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="1">
+                        <Label fx:id="lNameFX" prefHeight="33.0" prefWidth="103.0" text="Last Name" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="2">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
-                        <Label contentDisplay="CENTER" prefHeight="33.0" prefWidth="103.0" text="E-mail" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="2">
+                        <Label contentDisplay="CENTER" prefHeight="33.0" prefWidth="103.0" text="E-mail" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="3">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
-                        <Label fx:id="phoneNumeberFX" prefHeight="57.0" prefWidth="95.0" text="Phone Number" textFill="WHITE" wrapText="true" GridPane.rowIndex="3">
+                        <Label fx:id="phoneNumeberFX" prefHeight="57.0" prefWidth="95.0" text="Phone Number" textFill="WHITE" wrapText="true" GridPane.rowIndex="4">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
-                        <Label prefHeight="32.0" prefWidth="103.0" text="LinkedIn" textFill="WHITE" GridPane.rowIndex="4">
+                        <Label prefHeight="32.0" prefWidth="103.0" text="LinkedIn" textFill="WHITE" GridPane.rowIndex="5">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
-                        <Label prefHeight="34.0" prefWidth="103.0" text="Xing" textFill="WHITE" GridPane.rowIndex="5">
+                        <Label prefHeight="34.0" prefWidth="103.0" text="Xing" textFill="WHITE" GridPane.rowIndex="6">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
-                        <TextField fx:id="lblFNameFX" editable="false" prefHeight="25.0" prefWidth="98.0" style="-fx-background-color: transparent; -fx-text-fill: white;" GridPane.columnIndex="1">
+                        <TextField fx:id="lblFNameFX" editable="false" prefHeight="25.0" prefWidth="98.0" style="-fx-background-color: transparent; -fx-text-fill: white;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            </TextField>
-                        <TextField fx:id="lblLNameFX" editable="false" prefHeight="25.0" prefWidth="116.0" style="-fx-background-color: transparent; -fx-text-fill: white;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <TextField fx:id="lblLNameFX" editable="false" prefHeight="25.0" prefWidth="116.0" style="-fx-background-color: transparent; -fx-text-fill: white;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            </TextField>
-                        <TextField fx:id="lblEmailFX" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <TextField fx:id="lblEmailFX" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            </TextField>
-                        <TextField fx:id="lblPNumberFX" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <TextField fx:id="lblPNumberFX" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            </TextField>
 
-                           <Hyperlink fx:id="hplLinkedInFX" text="" textFill="WHITE" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                           <Hyperlink fx:id="hplLinkedInFX" text="" textFill="WHITE" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         
-                           <Hyperlink fx:id="hplXingFX" text="" textFill="WHITE" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                           <Label layoutX="20.0" layoutY="220.0" prefHeight="34.0" prefWidth="103.0" text="Status" textFill="WHITE" GridPane.rowIndex="6">
+                           <Hyperlink fx:id="hplXingFX" text="" textFill="WHITE" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                           <Label layoutX="20.0" layoutY="220.0" prefHeight="34.0" prefWidth="103.0" text="Status" textFill="WHITE" GridPane.rowIndex="7">
                               <padding>
                                  <Insets left="10.0" />
                               </padding>
@@ -177,7 +178,16 @@
                                  <Font name="System Bold" size="12.0" />
                               </font>
                            </Label>
-                           <Label fx:id="lblStatusFX" alignment="CENTER" minWidth="100.0" prefHeight="17.0" prefWidth="34.0" style="-fx-background-color: transparent; -fx-background-radius: 10 10 10 10;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                           <Label fx:id="lblStatusFX" alignment="CENTER" minWidth="100.0" prefHeight="17.0" prefWidth="34.0" style="-fx-background-color: transparent; -fx-background-radius: 10 10 10 10;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                           <Label fx:id="genderFX1" contentDisplay="CENTER" prefHeight="17.0" prefWidth="102.0" text="Title" textAlignment="CENTER" textFill="WHITE">
+                              <padding>
+                                 <Insets left="10.0" />
+                              </padding>
+                              <font>
+                                 <Font name="System Bold" size="12.0" />
+                              </font>
+                           </Label>
+                           <TextField fx:id="lblGenderFX1" editable="false" prefHeight="25.0" prefWidth="98.0" style="-fx-background-color: transparent; -fx-text-fill: white;" GridPane.columnIndex="1" />
 
                      </children>
                   </GridPane>
