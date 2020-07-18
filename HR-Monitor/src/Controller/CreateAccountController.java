@@ -66,7 +66,7 @@ public class CreateAccountController {
         lastNameLabel.setText(IDictionary.getTranslation(acDic, "Last name"));
         confPasswordLabel.setText(IDictionary.getTranslation(acDic, "Confirm Password"));
         passwodHintLabel.setText(IDictionary.getTranslation(acDic, "Password Hint"));
-        create.setText(IDictionary.getTranslation(acDic, "Login"));
+        create.setText(IDictionary.getTranslation(acDic, "Create"));
     }
 
     private void SetDictionary() {

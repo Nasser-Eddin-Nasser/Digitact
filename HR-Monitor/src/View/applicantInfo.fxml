@@ -409,9 +409,9 @@
                                        <HBox alignment="CENTER" maxHeight="5000.0" prefHeight="35.0" prefWidth="650.0">
                                           <children>
                                              <Button fx:id="btnSaveFX" mnemonicParsing="false" text="Save Changes" translateX="125.0" />
-                                             <Label id="successLabel" fx:id="successLabelFX" alignment="BASELINE_RIGHT" layoutX="10.0" minWidth="320.0" prefHeight="26.0" prefWidth="0.0" textAlignment="JUSTIFY" translateX="125.0" visible="false">
+                                             <Label id="successLabel" fx:id="successLabelFX" alignment="BASELINE_RIGHT" layoutX="10.0" minWidth="292.0" prefHeight="27.0" prefWidth="292.0" textAlignment="JUSTIFY" textFill="#3a6107" translateX="125.0" visible="false">
                                                 <font>
-                                                   <Font name="Apple LiSung Light" size="18.0" />
+                                                   <Font name="System Bold" size="14.0" />
                                                 </font>
                                              </Label>
                                           </children></HBox>

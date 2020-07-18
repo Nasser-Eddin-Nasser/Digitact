@@ -450,7 +450,7 @@ public class ApplicantInfoController {
         scene = new Scene(loader.load());
         stageApplicantInfo.show();
         stageApplicantInfo.setScene(scene);
-        stageApplicantInfo.setTitle("Applicant Info");
+        stageApplicantInfo.setTitle( IDictionary.getTranslation( dictionary,"Applicant: ")  + app.getFirstName() +" "+app.getLastName())  ;
         stageApplicantInfo
                 .getIcons()
                 .add(

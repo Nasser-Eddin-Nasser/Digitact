@@ -43,6 +43,7 @@ public class ACDictionary implements IDictionary {
                     "Create Account was not possible due to:",
                     "Kontoerstellung ist nicht möglich:");
             ///////////////////////
+            dictionary.put("Create", "Erstellen");
             dictionary.put("Login", "Anmelden");
             dictionary.put("USERNAME:", "NUTZERNAME:"); // Username Nutzername
             dictionary.put("PASSWORD:", "PASSWORT:"); // Password  Passwort
