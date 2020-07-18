@@ -33,10 +33,15 @@ We are using HTTPS for connection so its important to import and trust the certi
 
 Export certificate
 - Open terminal and go to Digitact directory and run the follwing command
-- keytool -export -keystore Backend/src/main/resources/keystore.p12 -alias tomcat -file myCertificate.crt
+```
+keytool -export -keystore Backend/src/main/resources/keystore.p12 -alias tomcat -file myCertificate.crt
+```
 - myCertificate.crt file will be generated 
+
 Import myCertificate.crt into jdk
-- keytool -importcert -file myCertificate.crt -alias tomcat -keystore $JDK_HOME/jre/lib/security/cacerts
+```
+keytool -importcert -file myCertificate.crt -alias tomcat -keystore $JDK_HOME/jre/lib/security/cacerts
+```
 - Password is "changeit"
 - $JDK_HOME - is the path where jdk is installed in your local machine
 

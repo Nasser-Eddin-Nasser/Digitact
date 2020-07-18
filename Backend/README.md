@@ -41,7 +41,7 @@ We are using HTTPS for connection so its important to import and trust the certi
 - For mac - open keychain access file->import items-> choose keystore.p12 under /Backend/src/main/resources. Then double click on localhost and choose always trust option from the dialog. 
 - For windows - double-click on keystore.p12 file under /Backend/src/main/resources and install it. 
 - Password of certificate is "password"
-- To trust localhost by chrome go to chrome://flags/#allow-insecure-localhost and enable Allow invalid certificates for resources loaded from localhost option.
+- To trust localhost by chrome go to `chrome://flags/#allow-insecure-localhost` and enable Allow invalid certificates for resources loaded from localhost option.
 
 # How to use
 
@@ -53,6 +53,7 @@ We are using HTTPS for connection so its important to import and trust the certi
 - Do HTTPS setup
 - Run `docker-compose up`
 - Go to Digitact/Backend folder in the terminal and run `gradle bootrun`
+
     or
 - Run the Digitact/Backend/Application.java file using your preferred IDE
 
