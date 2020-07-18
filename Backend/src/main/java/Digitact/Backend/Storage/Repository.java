@@ -1,9 +1,9 @@
 package Digitact.Backend.Storage;
 
+import static Digitact.Backend.ConfigProperties.*;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC256;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
-import Digitact.Backend.ConfigProperties.SecurityConstants;
 import Digitact.Backend.Exception.ImageException;
 import Digitact.Backend.Model.*;
 import Digitact.Backend.Model.Image.AppImage;
@@ -79,7 +79,7 @@ public class Repository {
                             .withSubject(
                                     String.valueOf(admin.getId())
                                             + UUID.randomUUID().getMostSignificantBits())
-                            .sign(HMAC256(SecurityConstants.SECRET_DEVICE.getBytes()));
+                            .sign(HMAC256(SECRET_DEVICE.getBytes()));
         } else {
             isExist = repo.getDeviceIdentfierByDeviceHeader(deviceToken, admin.getId());
         }
@@ -88,11 +88,8 @@ public class Repository {
                         .withSubject(
                                 String.valueOf(admin.getId())
                                         + UUID.randomUUID().getMostSignificantBits())
-                        .withExpiresAt(
-                                new Date(
-                                        System.currentTimeMillis()
-                                                + SecurityConstants.EXPIRATION_TIME))
-                        .sign(HMAC512(SecurityConstants.SECRET.getBytes()));
+                        .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                        .sign(HMAC512(SECRET.getBytes()));
 
         admin.setClientToken(userToken);
 
@@ -103,8 +100,8 @@ public class Repository {
         }
         repo.save(admin);
 
-        responseHeader.add(SecurityConstants.USER_HEADER_STRING, userToken);
-        responseHeader.add(SecurityConstants.DEVICE_HEADER_STRING, deviceToken);
+        responseHeader.add(USER_HEADER_STRING, userToken);
+        responseHeader.add(DEVICE_HEADER_STRING, deviceToken);
 
         return responseHeader;
     }
@@ -120,9 +117,7 @@ public class Repository {
         boolean tokenValid = false;
 
         JWTVerifier verifier =
-                JWT.require(HMAC512(SecurityConstants.SECRET.getBytes()))
-                        .acceptExpiresAt(SecurityConstants.EXPIRATION_TIME)
-                        .build();
+                JWT.require(HMAC512(SECRET.getBytes())).acceptExpiresAt(EXPIRATION_TIME).build();
 
         if (verifier.verify(token).getExpiresAt().compareTo(new Date(System.currentTimeMillis()))
                 > 0) {
@@ -206,9 +201,6 @@ public class Repository {
     }
 
     public boolean checkPasswordByUserName(String userName, String pwd) {
-        System.out.println("checkPasswordByUserName   ---   ");
-        System.out.println(userName);
-        System.out.println(pwd);
         return repo.checkPassword(userName, pwd) == null ? false : true;
     }
 }

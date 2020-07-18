@@ -1,9 +1,6 @@
 package Digitact.Backend;
 
-import static Digitact.Backend.ConfigProperties.SecurityConstants.DEVICE_HEADER_STRING;
-import static Digitact.Backend.ConfigProperties.SecurityConstants.USER_HEADER_STRING;
-import static Digitact.Backend.ConfigProperties.absoluteClientURL_ionic;
-import static Digitact.Backend.ConfigProperties.absoluteClientURL_ng;
+import static Digitact.Backend.ConfigProperties.*;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

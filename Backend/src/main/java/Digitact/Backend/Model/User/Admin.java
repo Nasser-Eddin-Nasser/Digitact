@@ -23,7 +23,7 @@ public class Admin extends User {
     private String passHint;
 
     @Column(name = "password")
-    private String password; // todo
+    private String password;
 
     @Column(name = "clientToken")
     private String clientToken;
