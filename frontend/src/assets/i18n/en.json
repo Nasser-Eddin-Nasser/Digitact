@@ -24,7 +24,7 @@
         "pageExitWarningMessage": "Do you really want to cancel your job application?"
     },
     "privacyPage": {
-        "readPrivacyMessage": "Please read and accept the privacy policy to proceed further.",
+        "readPrivacyMessage": "Please read and accept the privacy policy.",
         "openPrivacy": "Open Privacy Policy",
         "agreePrivacyMessage": "I have read and agree to the Privacy Policy.",
         "privacyPolicy": "Privacy Policy"
@@ -32,7 +32,7 @@
     "applicantsPage": {
         "applications": "Applications",
         "finalized": "Finalized",
-        "finalizedByHrMessage": "{{finalizedCount}} application(s) has been finalized by fair team member and to be sent to the server.",
+        "finalizedByHrMessage": "{{finalizedCount}} application(s) are finalized and can be send to the server.",
         "sendToServer": "Send To Server",
         "notFinished": "Not Finished",
         "yetToRateMessage": "This list includes all the submitted applications that are yet to be rated.",
@@ -63,7 +63,7 @@
         "personalImpression": "Personal Impression",
         "finalizeApplicantMessage": "All the changes made are saved automatically. You can edit the data until it is finalized. Click on \"finalize\" in order to send the application to the server.",
         "fillRequiredFieldsToFinalizeMessage": "Fill all the fields, to enable finalize application option. Toggle right menu to see unfilled step(s).",
-        "addImpressionMessage": "Add your personal impression about the applicant or any other additional details in the below field."
+        "addImpressionMessage": "Add your personal impression about the applicant or any other additional details in the field below."
     },
     "basicInfo": {
         "title": "Basic Information",
@@ -86,8 +86,8 @@
     },
     "profilePicture": {
         "title": "Picture",
-        "stepDescription": "Tap on the avatar, to add your profile picture.",
-        "deleteTakeAnotherPictureMessage": "Delete the existing picture, if you want to take an another one."
+        "stepDescription": "Tap on the avatar, to take a profile picture.",
+        "deleteTakeAnotherPictureMessage": "If you want to take another picture, delete the existing one."
     },
     "documentsUpload": {
         "title": "Documents",
@@ -131,7 +131,7 @@
     },
     "industryAndPositionPreference": {
         "title": "Industries and Positions",
-        "stepDescription": "Choose the relevant industries and positions you are interested.",
+        "stepDescription": "Choose the relevant industries and positions you are interested in.",
         "industry": "Industry",
         "position": "Position",
         "automotive": "Automotive",
@@ -210,16 +210,16 @@
 
     "additionalInfo": {
         "title": "Additional Information",
-        "stepDescription": "Add additional information if any, to the application."
+        "stepDescription": "You can provide additional information here."
     },
     "sideMenu": {
         "progress": "Progress",
-        "description": "Click on the repective step, if you want to navigate to it."
+        "description": "Click on the step, you want to edit."
     },
 
     "skipStep":{
         "skip": "Skip",
-        "skipMessage": "Do you want to skip this step? Do it only if the required data is already provided in the attached documents.",
+        "skipMessage": "Do you want to skip this step? Please skip only steps, if the required information is already provided in the attached documents.",
         "skipStep": "Skip this Step"
     },
 
