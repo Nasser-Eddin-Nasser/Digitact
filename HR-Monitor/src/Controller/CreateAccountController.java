@@ -117,7 +117,7 @@ public class CreateAccountController {
                                             acDic, "A password must be at least 4 characters!"));
                             alert.showAndWait();
                         }
-                        // back
+
                         Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                         alert1.setTitle(IDictionary.getTranslation(acDic, "Create new Account!"));
                         alert1.setContentText(

@@ -15,7 +15,6 @@ public class ACDictionary implements IDictionary {
         if (dictionary.size() == 0) {
             // add all values
             dictionary.put("TITLE-Login", "Anmeldung"); // login
-            ///////////////////////
             dictionary.put("Create Admin Account", "Erstellung Administratorkonto");
             dictionary.put("Username", "Nutzername");
             dictionary.put("Password", "Passwort");
@@ -23,7 +22,6 @@ public class ACDictionary implements IDictionary {
             dictionary.put("Last name", "Nachname");
             dictionary.put("Confirm Password", "Passwort Bestätigung");
             dictionary.put("Password Hint", "Passwort Hinweis");
-            ///////////////////////
             dictionary.put("Create Account Error", "Fehler bei der Kontoerstellung");
             dictionary.put(
                     "A password must be at least 4 characters",
@@ -42,12 +40,11 @@ public class ACDictionary implements IDictionary {
             dictionary.put(
                     "Create Account was not possible due to:",
                     "Kontoerstellung ist nicht möglich:");
-            ///////////////////////
             dictionary.put("Create", "Erstellen");
             dictionary.put("Login", "Anmelden");
-            dictionary.put("USERNAME:", "NUTZERNAME:"); // Username Nutzername
-            dictionary.put("PASSWORD:", "PASSWORT:"); // Password  Passwort
-            dictionary.put("Forgot password?", "Passwort vergessen?"); // Passwort vergessen
+            dictionary.put("USERNAME:", "NUTZERNAME:");
+            dictionary.put("PASSWORD:", "PASSWORT:");
+            dictionary.put("Forgot password?", "Passwort vergessen?");
             dictionary.put("Your personal password hint:", "Dein persönlicher Passworthinweis:");
             dictionary.put("Password Hint", "Passworthinweis");
             dictionary.put("Login Error", "Anmeldungsfehler");

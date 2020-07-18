@@ -10,11 +10,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import javax.net.ssl.HttpsURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.stream.Collectors;
+import javax.net.ssl.HttpsURLConnection;
 
 public class Connector {
     public static void sendGetHttp(Method method, String... params) {
@@ -23,7 +23,8 @@ public class Connector {
             case gutenMorgen:
                 try {
                     Long besNumber =
-                            handelPingReq(new URL(Configuration.BES_URI + method.toString()));
+                            handelPingReq(
+                                    new URL(Configuration.Backend_Server_URL + method.toString()));
                     if (besNumber != null) {
                         DBStorage.setToken(new Token(besNumber));
                     }
@@ -34,7 +35,8 @@ public class Connector {
                 break;
             case getApplicants:
                 try {
-                    handleGetApplicants(new URL(Configuration.BES_URI + method.toString()));
+                    handleGetApplicants(
+                            new URL(Configuration.Backend_Server_URL + method.toString()));
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
@@ -42,7 +44,11 @@ public class Connector {
             case getImageById:
                 try {
                     handleGetImageById(
-                            new URL(Configuration.BES_URI + method.toString() + "=" + params[1]),
+                            new URL(
+                                    Configuration.Backend_Server_URL
+                                            + method.toString()
+                                            + "="
+                                            + params[1]),
                             params);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
@@ -51,7 +57,11 @@ public class Connector {
             case getAdminByUserName:
                 try {
                     handleGetAdminByUserName(
-                            new URL(Configuration.BES_URI + method.toString() + "=" + params[0]),
+                            new URL(
+                                    Configuration.Backend_Server_URL
+                                            + method.toString()
+                                            + "="
+                                            + params[0]),
                             params);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
@@ -59,7 +69,8 @@ public class Connector {
                 break;
             case getAdminUserNames:
                 try {
-                    handleGetAdminUserNames(new URL(Configuration.BES_URI + method.toString()));
+                    handleGetAdminUserNames(
+                            new URL(Configuration.Backend_Server_URL + method.toString()));
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
@@ -181,9 +192,13 @@ public class Connector {
     }
 
     public static String changeStatus(long appID, Status status) {
-    	String message = "";
+        String message = "";
         try {
-            message = handleChangeStatus(new URL(Configuration.BES_URI + Method.changeStatus), appID, status);
+            message =
+                    handleChangeStatus(
+                            new URL(Configuration.Backend_Server_URL + Method.changeStatus),
+                            appID,
+                            status);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -191,7 +206,7 @@ public class Connector {
     }
 
     private static String handleChangeStatus(URL url, long appID, Status status) {
-    	StringBuilder response = new StringBuilder();
+        StringBuilder response = new StringBuilder();
         try {
             URLConnection uc = url.openConnection();
             HttpsURLConnection http = (HttpsURLConnection) uc;
@@ -206,7 +221,7 @@ public class Connector {
                 os.write(input, 0, input.length);
             }
             try (BufferedReader br =
-                    new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {                
+                    new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
                 String responseLine = null;
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
@@ -222,10 +237,13 @@ public class Connector {
     }
 
     public static String postHRComment(long appID, String comment) {
-    	String message = "";
+        String message = "";
         try {
-        	message = handlePostHRComment(
-                    new URL(Configuration.BES_URI + Method.postHRComment), appID, comment);
+            message =
+                    handlePostHRComment(
+                            new URL(Configuration.Backend_Server_URL + Method.postHRComment),
+                            appID,
+                            comment);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -237,7 +255,7 @@ public class Connector {
             case putToken:
                 try {
                     handlePutTokenToAdmin(
-                            new URL(Configuration.BES_URI + method.toString()), token);
+                            new URL(Configuration.Backend_Server_URL + method.toString()), token);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
@@ -248,7 +266,7 @@ public class Connector {
     }
 
     private static String handlePostHRComment(URL url, long appID, String comment) {
-    	StringBuilder response = new StringBuilder();
+        StringBuilder response = new StringBuilder();
         try {
             URLConnection uc = url.openConnection();
             HttpsURLConnection http = (HttpsURLConnection) uc;
@@ -311,7 +329,8 @@ public class Connector {
         switch (method) {
             case createAdminAccount:
                 try {
-                    handleCreateAdmin(new URL(Configuration.BES_URI + method.toString()), admin);
+                    handleCreateAdmin(
+                            new URL(Configuration.Backend_Server_URL + method.toString()), admin);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }

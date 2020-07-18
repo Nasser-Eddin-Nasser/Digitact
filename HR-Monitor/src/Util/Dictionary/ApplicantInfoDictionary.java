@@ -76,9 +76,11 @@ public class ApplicantInfoDictionary implements IDictionary {
                     "Einen Kommentar über den Antragsteller hinzufügen");
 
             dictionary.put("Save Changes", "Änderungen speichern");
-            
+
             dictionary.put("Changes saved succesfully!", "Änderungen erfolgreich gespeichert!");
-            dictionary.put("Couldn't save! Connection error.", "Konnte nicht speichern! Verbindungsfehler.");
+            dictionary.put(
+                    "Couldn't save! Connection error.",
+                    "Konnte nicht speichern! Verbindungsfehler.");
         }
     }
 
