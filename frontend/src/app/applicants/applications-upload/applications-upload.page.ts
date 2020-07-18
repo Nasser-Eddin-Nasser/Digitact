@@ -351,7 +351,7 @@ export class ApplicationsUploadPage implements OnInit {
     }
     setTimeout(() => {
       const navigationPath = this.isAuthorized ? '/applicants' : '/login';
-      this.navController.navigateBack([navigationPath]);
+      this.navController.navigateRoot([navigationPath]);
       this.completionAlert();
     }, 1000);
   }
