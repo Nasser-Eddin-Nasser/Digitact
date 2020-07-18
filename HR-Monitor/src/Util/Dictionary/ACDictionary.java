@@ -51,7 +51,7 @@ public class ACDictionary implements IDictionary {
             dictionary.put("Password Hint", "Passworthinweis");
             dictionary.put("Login Error", "Anmeldungsfehler");
             dictionary.put("Login was not possible due to:", "Anmeldung ist nicht möglich:");
-            dictionary.put("UserName or Password WRONG!", "Benutzername oder Passwort falsch!");
+            dictionary.put("Wrong Username or Password!", "Benutzername oder Passwort falsch!");
             dictionary.put("Connection Error", "Verbindungsfehler");
             dictionary.put(
                     "Please check your connection with BES then start the Application again!",

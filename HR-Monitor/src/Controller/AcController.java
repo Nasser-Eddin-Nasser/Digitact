@@ -166,7 +166,7 @@ public class AcController {
 
                     alert.setTitle(getTranslation(acDic, "Login Error"));
                     alert.setHeaderText(getTranslation(acDic, "Login was not possible due to:"));
-                    alert.setContentText(getTranslation(acDic, "UserName or Password WRONG!"));
+                    alert.setContentText(getTranslation(acDic, "Wrong Username or Password!"));
                     alert.show();
                 }
             } else {
