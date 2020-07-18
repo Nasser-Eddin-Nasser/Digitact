@@ -53,7 +53,6 @@ We are using HTTPS for connection so its important to import and trust the certi
 - Do HTTPS setup
 - Run `docker-compose up`
 - Go to Digitact/Backend folder in the terminal and run `gradle bootrun`
-
     or
 - Run the Digitact/Backend/Application.java file using your preferred IDE
 
@@ -69,8 +68,8 @@ https://localhost:9090/api/controller/createApplicant
 Example body of the request (important: send it as JSON)
 ``` json
 {
-  "firstName":"Lionel",
-  "lastName":"Messi"
+  "firstName":"John",
+  "lastName":"Doe"
 }
 ```
 
@@ -85,48 +84,4 @@ Log in using:
 
 If you want to access the database, you are most likely prompted for a password. It is set to `postgres` by default.
 
-
-
-# Create Applicant Restful API
-
-```
-{
-  "firstName": String,
-  "lastName": String,
-  "industries": {
-    "automotive": boolean,
-    "finance": boolean,
-    "commerce": boolean,
-    "pharma_Helthcare": boolean,
-    "public_Sector": boolean
-  },
-  "positions": {
-    "consultant_Business_Consultant": boolean,
-    "iT_Consultant_Informationsmanagement": boolean,
-    "iT_Consultant_Java_JEE": boolean,
-    "iT_Consultant_Data_Science": boolean,
-    "iT_Consultant_Artificial_Intelligence": boolean,
-    "internship_Working_Student": boolean,
-    "consultant_SAP": boolean
-  },
-  "educations": [
-    {
-      "university": String,
-      "subject": String,
-      "degree": String,
-      "grade": double,
-      "graduation_date": String
-    }
-  ],
-  "keyCompetencies": [
-    {
-      "category": KeyCompetenciesCategory,
-      "name": String,
-      "rating": int
-    }
-  ]
-}
-```
-
-`KeyCompetenciesCategory` is either `languages`, `businessSkills`, `professionalSoftware`, `databases` or `programmingLanguagesAndFrameworks`.
 

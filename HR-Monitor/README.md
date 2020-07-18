@@ -43,7 +43,7 @@ Import myCertificate.crt into jdk
 keytool -importcert -file myCertificate.crt -alias tomcat -keystore $JDK_HOME/jre/lib/security/cacerts
 ```
 - Password is "changeit"
-- $JDK_HOME - is the path where jdk is installed in your local machine
+- $JDK_HOME - path where jdk is installed in your local machine
 
 # How to use
 
