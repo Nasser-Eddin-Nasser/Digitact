@@ -28,13 +28,32 @@ We recommend using one of the following IDEs:
 # Postman (optional)
 [Postman](https://www.postman.com/downloads/) is a tool to create GET/POST/... requests. We recommend using it in order to debug the API.
 
+# HTTPS Setup
+We are using HTTPS for connection so its important to import and trust the certificate to run the application
+
+Export certificate
+- Open terminal and go to Digitact directory and run the follwing command
+```
+keytool -export -keystore Backend/src/main/resources/keystore.p12 -alias tomcat -file myCertificate.crt
+```
+- myCertificate.crt file will be generated 
+
+Import myCertificate.crt into jdk
+```
+keytool -importcert -file myCertificate.crt -alias tomcat -keystore $JDK_HOME/jre/lib/security/cacerts
+```
+- Password is "changeit"
+- $JDK_HOME - path where jdk is installed in your local machine
+
 # How to use
 
 - Install the below in-order
 - JDK 1.8 and set environment variables
-- Install IDE and [set the JDK path](https://www.jetbrains.com/help/idea/sdk.html) if needed. 
-- Clone this project.
+- Install IDE and [set the JDK path](https://www.jetbrains.com/help/idea/sdk.html) if needed
+- Clone this project
 - [Start the server](https://github.com/Nasser-Eddin-Nasser/Digitact/blob/master/Backend/README.md)
+- set configurations in HR-Monitor/Main/Configuration.java (absoluteFileSystemPath should be set different than in server)
+- Do HTTPS setup
 - Run the HR-Monitor/Main/App.java file using your preferred IDE
 
 # Test connection
