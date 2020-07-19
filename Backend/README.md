@@ -51,6 +51,7 @@ We are using HTTPS for connection so its important to import and trust the certi
   - Install Docker
 - Clone this project
 - Do HTTPS setup
+- set configurations in Backend/ConfigProperties.java
 - Run `docker-compose up`
 - Go to Digitact/Backend folder in the terminal and run `gradle bootrun`
     or

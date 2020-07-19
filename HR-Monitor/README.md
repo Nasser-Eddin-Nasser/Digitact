@@ -52,6 +52,7 @@ keytool -importcert -file myCertificate.crt -alias tomcat -keystore $JDK_HOME/jr
 - Install IDE and [set the JDK path](https://www.jetbrains.com/help/idea/sdk.html) if needed
 - Clone this project
 - [Start the server](https://github.com/Nasser-Eddin-Nasser/Digitact/blob/master/Backend/README.md)
+- set configurations in HR-Monitor/Main/Configuration.java (absoluteFileSystemPath should be different than in server)
 - Do HTTPS setup
 - Run the HR-Monitor/Main/App.java file using your preferred IDE
 
