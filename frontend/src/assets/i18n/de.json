@@ -64,7 +64,7 @@
         "personalImpression": "Persönlicher Eindruck",
         "finalizeApplicantMessage": "Alle Änderungen werden automatisch gespeichert. Du kannst die Informationen solange ändern, bis die Bewerbung abgeschlossen ist. Klicke auf \"abschließen\", um die Bewerbung an den Server zu senden.",
         "fillRequiredFieldsToFinalizeMessage": "Fülle alle erforderlichen Felder aus, um die Bewerbung abzuschließen. Wenn Du das rechte Menü öffnest, kannst Du sehen, welche Angaben fehlen.",
-        "addImpressionMessage": "Gib deinen persönlichen Eindruck zum Bewerber und optional weitere Informationen hier an."
+        "addImpressionMessage": "Gib Deinen persönlichen Eindruck zum Bewerber und optional weitere Informationen hier an."
     },
     "basicInfo": {
         "title": "Basis-Informationen",
@@ -92,7 +92,7 @@
     },
     "documentsUpload": {
         "title": "Dokumente",
-        "stepDescription": "Über das Plus-Icon kannst Du Bilder von Dokumenten wie z.B. deinem Lebenslauf aufnehmen.",
+        "stepDescription": "Über das Plus-Icon kannst Du Bilder von Dokumenten wie z.B. Deinem Lebenslauf aufnehmen.",
         "delete": "Löschen",
         "deleteConfirmationMessage": "Möchtest Du dieses Foto wirklich löschen?",
         "imageDeleteSuccessMessage": "Das Foto wurde erfolgreich gelöscht."
@@ -119,7 +119,7 @@
     },
     "educationInfo": {
         "title": "Bildung",
-        "stepDescription": "Hier kannst Du deinen schulischen Werdegang angeben.",
+        "stepDescription": "Hier kannst Du Deinen schulischen Werdegang angeben.",
         "degreeYearGradeMessage": "Abschluss: {{degree}} ({{graduationYear}}, {{grade}})",
         "schoolOrUniversity": "Schule/Universität",
         "subject": "Fach",
@@ -154,7 +154,7 @@
     "submitData": {
         "title": "Absenden",
         "stepDescription": "Geschafft! Du kannst Deine Bewerbung jetzt absenden und das Gerät an unser Team zurückgeben.",
-        "fillMandatoryFieldsToSubmitMessage": "Du kannst deine Bewerbung erst absenden, wenn Du alle Pflichtfelder ausgefüllt hast. Im rechten Menü kannst Du sehen, welche Angaben noch fehlen."
+        "fillMandatoryFieldsToSubmitMessage": "Du kannst Deine Bewerbung erst absenden, wenn Du alle Pflichtfelder ausgefüllt hast. Im rechten Menü kannst Du sehen, welche Angaben noch fehlen."
     },
     "keyCompetencies": {
         "title": "Kompetenzen",
@@ -167,7 +167,7 @@
         "all": "Alle",
         "selected": "Ausgewählt",
         "noMatchFoundMessage": "Es wurde kein passender Eintrag gefunden",
-        "notFoundAddMessage": "Nicht gefunden, wonach Du gesucht hast? Du kannst deinen Suchbegriff (\"{{ searchedTerm }}\") in die Liste aufnehmen.",
+        "notFoundAddMessage": "Nicht gefunden, wonach Du gesucht hast? Du kannst Deinen Suchbegriff (\"{{ searchedTerm }}\") in die Liste aufnehmen.",
         "addToList": "Zur Liste hinzufügen",
         "rating": "Bewertung: ",
         "ratingMessage": "Bewerte Deine Fähigkeiten von 1 (nicht gut) bis 5 (exzellent).",
