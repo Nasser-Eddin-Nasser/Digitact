@@ -210,7 +210,7 @@
 
     "additionalInfo": {
         "title": "Additional Information",
-        "stepDescription": "Provide additional information if any, to submit with the aplication."
+        "stepDescription": "Provide additional information if any, to submit with the application."
     },
     "sideMenu": {
         "progress": "Progress",
