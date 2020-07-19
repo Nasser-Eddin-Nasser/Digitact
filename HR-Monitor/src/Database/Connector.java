@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import javax.net.ssl.HttpsURLConnection;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -194,7 +195,7 @@ public class Connector {
     	StringBuilder response = new StringBuilder();
         try {
             URLConnection uc = url.openConnection();
-            HttpsURLConnection http = (HttpsURLConnection) uc;
+            HttpsURLConnection http = ( HttpsURLConnection) uc;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
             http.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -251,7 +252,7 @@ public class Connector {
     	StringBuilder response = new StringBuilder();
         try {
             URLConnection uc = url.openConnection();
-            HttpsURLConnection http = (HttpsURLConnection) uc;
+            HttpsURLConnection http = ( HttpsURLConnection) uc;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
             http.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -282,7 +283,7 @@ public class Connector {
         BufferedReader in = null;
         try {
             URLConnection uc = url.openConnection();
-            HttpsURLConnection http = (HttpsURLConnection) uc;
+            HttpsURLConnection http = ( HttpsURLConnection) uc;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
             http.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -326,7 +327,7 @@ public class Connector {
         BufferedReader in = null;
         try {
             URLConnection uc = bes_url.openConnection();
-            HttpsURLConnection http = (HttpsURLConnection) uc;
+            HttpsURLConnection http = ( HttpsURLConnection) uc;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
             http.setRequestProperty("Content-Type", "application/json; utf-8");
