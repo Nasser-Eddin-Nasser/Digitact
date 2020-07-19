@@ -33,4 +33,7 @@ public interface IDataRepository extends JpaRepository<User, Long> {
 
     @Query(value = getAdminByUserClientToken, nativeQuery = true)
     Admin getAdminByUserClientToken(String userToken);
+
+    @Query(value = checkPassword, nativeQuery = true)
+    Admin checkPassword(String userName, String pwd);
 }
