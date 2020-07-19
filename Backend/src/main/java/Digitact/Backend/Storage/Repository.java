@@ -204,4 +204,11 @@ public class Repository {
         hrRating.setUser(app);
         app.setHrRating(hrRating);
     }
+
+    public boolean checkPasswordByUserName(String userName, String pwd) {
+        System.out.println("checkPasswordByUserName   ---   ");
+        System.out.println(userName);
+        System.out.println(pwd);
+        return repo.checkPassword(userName, pwd) == null ? false : true;
+    }
 }
