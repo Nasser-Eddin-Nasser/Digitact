@@ -7,25 +7,25 @@ HR-Monitor is a tool where HR members can review and monitor the student applica
 
 <img src="images/hr-monitor/HRM-Create_Account.png" width="450px" style="border: 1px solid #e0e0e0;">
 
-The HR members can create user accounts using this pane. The username should be unique to each HR person and filling all the fields is mandatory.
+The HR members can create user accounts here. The username should be unique to each HR person and filling all the fields is mandatory.
 
 
 ## Log-in Pane
 
 <img src="images/hr-monitor/HRM-Login.png" width="350px" style="border: 1px solid #e0e0e0;">
 
-Here, the HR member can log in to his/her account. The HR person can change the language by simply clicking the flag button. The HR monitor has two language options: German and English.
+Here, the HR member can log in to the account. The HR person can change the language by simply clicking the flag button. The HR monitor has two language options: German and English.
 
 ## Overview Window  
 
 <img src="images/hr-monitor/HRM-Overview.png" width="700px" style="border: 1px solid #e0e0e0;">
 
 This window consists of a table that shows all the list of applicants. A user can use filters to filter out the applicants. 
-There are four filter inputs: Name(first name or last name), status, industries and positions. 
+There are four filter inputs: Name(first name or last name or both), status, industries and positions. 
 
-The table lists the applicant's first name, last name and status. To view the applicant's data in detail, the user has to double click entry of the table.
+The table lists the applicant's first name, last name and status. To view the applicant's data in detail, the user has to double click an entry of the table.
 
-The left side pane consists of three buttons. The first button is named "Applicants". This button refreshes the list of applications (load all the applications from the database). The second button is "Create Account". The final and the third is the "Log out" button.
+there are three menu options in the left side if this window. The first option is named "Applicants". This refreshes the list of applications (load all the applications from the database). The second option is "Create Account". The final and the third is the "Log out" option.
 
 ## Applicant Information Window
 
