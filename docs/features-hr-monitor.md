@@ -5,14 +5,20 @@ HR-Monitor is a tool where HR members can review and monitor the student applica
 
 ## Create Account Pane
 
+<img src="images/hr-monitor/HRM-Create_Account.png" width="450px" style="border: 1px solid #e0e0e0;">
+
 The HR members can create user accounts using this pane. The username should be unique to each HR person and filling all the fields is mandatory.
 
 
 ## Log-in Pane
 
+<img src="images/hr-monitor/HRM-Login.png" width="350px" style="border: 1px solid #e0e0e0;">
+
 Here, the HR member can log in to his/her account. The HR person can change the language by simply clicking the flag button. The HR monitor has two language options: German and English.
 
 ## Overview Window  
+
+<img src="images/hr-monitor/HRM-Overview.png" width="700px" style="border: 1px solid #e0e0e0;">
 
 This window consists of a table that shows all the list of applicants. A user can use filters to filter out the applicants. 
 There are four filter inputs: Name(first name or last name), status, industries and positions. 
@@ -34,6 +40,9 @@ In the main viewing area of this window contains three tabs:
 
 ### Information tab
 
+<img src="images/hr-monitor/HRM-Applicant-InfoTab.png" width="600px" style="border: 1px solid #e0e0e0;">
+
+
 The Information tab consists of four tables: 
 1. Work experience
 2. Education information
@@ -42,9 +51,15 @@ The Information tab consists of four tables:
 
 ### Documents tab
 
+<img src="images/hr-monitor/HRM-Applicant-DocumentsTab.png" width="550px" style="border: 1px solid #e0e0e0;">
+
+
 This tab can have images of the application documents, such as CV, transcript, Certificates etc. All the document images are zoomable and moveable. Therefore, HR member can have a closer look at the documents.  
 
 ### Applicant ratings tab
+
+<img src="images/hr-monitor/HRM-Applicant-Ratings.png" width="600px" style="border: 1px solid #e0e0e0;">
+
 
 This tab consists of the following:
 1. Ratings of the applicant which is given by the Fair team member. 
