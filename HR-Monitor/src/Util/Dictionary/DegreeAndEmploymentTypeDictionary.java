@@ -13,7 +13,7 @@ public class DegreeAndEmploymentTypeDictionary implements IDictionary {
     @Override
     public void init() {
         if (dictionary.size() == 0) {
-            /////////// EmploymentType
+            /// EmploymentType
             dictionary.put("FullTime", "Vollzeit");
             dictionary.put("PartTime", "Teilzeit");
             dictionary.put("SelfEmployed", "Selbstständig");
@@ -23,7 +23,7 @@ public class DegreeAndEmploymentTypeDictionary implements IDictionary {
             dictionary.put("Apprenticeship", "Ausbildung");
             dictionary.put("Other", "Andere");
             dictionary.put("present", "Zurzeit");
-            ////////////////// Degree
+            // Degree
             dictionary.put("Master", "Master");
             dictionary.put("Bachelor", "Bachelor");
             dictionary.put("PhD", "PhD");

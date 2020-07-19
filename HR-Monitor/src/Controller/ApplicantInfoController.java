@@ -17,6 +17,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import javafx.animation.PauseTransition;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.DoubleProperty;
@@ -49,8 +50,6 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 public class ApplicantInfoController {
-    // Create Dic
-
     private boolean isHRChartLoaded = false;
     Stage stage;
     OverviewModel model;
@@ -89,7 +88,7 @@ public class ApplicantInfoController {
 
     // Applicant Info View's Variables
     // 1. Basic Info
-    @FXML TextField lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX;
+    @FXML TextField lblFNameFX, lblLNameFX, lblEmailFX, lblPNumberFX, lblGenderFX1;
     @FXML Hyperlink hplLinkedInFX, hplXingFX;
     // 2. Edu Info
     @FXML TableColumn<Education, String> universityFX = new TableColumn<>("university");
@@ -156,12 +155,15 @@ public class ApplicantInfoController {
     // Basic Info
     @FXML Label fNameFX;
     @FXML Label lNameFX;
+    @FXML Label genderFX1;
     @FXML Label phoneNumeberFX;
     // Tabs
     @FXML Tab infoTabFX;
     @FXML Tab appRatingTabFX;
 
     @FXML Label changeStatusFX;
+
+    @FXML Label successLabelFX;
 
     IDictionary dictionary;
 
@@ -176,6 +178,7 @@ public class ApplicantInfoController {
         KCDic = new KeyCompetenciesDictionary();
         DEDic = new DegreeAndEmploymentTypeDictionary();
         PIDic = new PositionsAndIndustriesDictionary();
+        dictionary = new ApplicantInfoDictionary();
     }
 
     public void showApplicantInfo() {
@@ -202,7 +205,6 @@ public class ApplicantInfoController {
     }
 
     private void setHeaders() {
-        dictionary = new ApplicantInfoDictionary();
         titleBasicInfoFX.setText(IDictionary.getTranslation(dictionary, "Basic Information"));
         titleAddInfoFX.setText(IDictionary.getTranslation(dictionary, "Additional Information"));
         titleWExperienceFX.setText(IDictionary.getTranslation(dictionary, "Work Experience"));
@@ -232,6 +234,7 @@ public class ApplicantInfoController {
         posFX.setText(IDictionary.getTranslation(dictionary, "Position"));
         indFX.setText(IDictionary.getTranslation(dictionary, "Industry"));
 
+        genderFX1.setText(IDictionary.getTranslation(dictionary, "Salutation"));
         fNameFX.setText(IDictionary.getTranslation(dictionary, "First Name"));
         lNameFX.setText(IDictionary.getTranslation(dictionary, "Second Name"));
         phoneNumeberFX.setText(IDictionary.getTranslation(dictionary, "Phone Number"));
@@ -317,6 +320,21 @@ public class ApplicantInfoController {
         statusListener();
     }
 
+    private void notification(String successMessage) {
+        successLabelFX.setVisible(true);
+        if (successMessage != null && successMessage.length() != 0) {
+            successLabelFX.setText(
+                    IDictionary.getTranslation(dictionary, "Changes saved succesfully!"));
+        } else {
+            successLabelFX.setText(
+                    IDictionary.getTranslation(dictionary, "Couldn't save! Connection error."));
+        }
+        PauseTransition visiblePause = new PauseTransition();
+        visiblePause.setDuration(javafx.util.Duration.seconds(2));
+        visiblePause.setOnFinished(event -> successLabelFX.setVisible(false));
+        visiblePause.play();
+    }
+
     private void setStatusLabel(Status status) {
         switch (status) {
             case Open:
@@ -344,20 +362,23 @@ public class ApplicantInfoController {
         btnOFX.setOnMouseClicked(
                 (event) -> {
                     setStatusLabel(Open);
-                    Connector.changeStatus(app.getID(), Open);
+                    String s = Connector.changeStatus(app.getID(), Open);
                     app.setStatus(Open);
+                    notification(s);
                 });
         btnHRFX.setOnMouseClicked(
                 (event) -> {
                     setStatusLabel(Send2HR);
-                    Connector.changeStatus(app.getID(), Send2HR);
+                    String s = Connector.changeStatus(app.getID(), Send2HR);
                     app.setStatus(Send2HR);
+                    notification(s);
                 });
         btnDFX.setOnMouseClicked(
                 (event) -> {
                     setStatusLabel(Denied);
-                    Connector.changeStatus(app.getID(), Denied);
+                    String s = Connector.changeStatus(app.getID(), Denied);
                     app.setStatus(Denied);
+                    notification(s);
                 });
     }
 
@@ -368,7 +389,11 @@ public class ApplicantInfoController {
         scene = new Scene(loader.load());
         stageApplicantInfo.show();
         stageApplicantInfo.setScene(scene);
-        stageApplicantInfo.setTitle("Applicant Info");
+        stageApplicantInfo.setTitle(
+                IDictionary.getTranslation(dictionary, "Applicant: ")
+                        + app.getFirstName()
+                        + " "
+                        + app.getLastName());
         stageApplicantInfo
                 .getIcons()
                 .add(
@@ -390,8 +415,9 @@ public class ApplicantInfoController {
         txtImpHRFX.setText(app.getHrComment());
         btnSaveFX.setOnMouseClicked(
                 mouseEvent -> {
-                    Connector.postHRComment(app.getID(), txtImpHRFX.getText());
+                    String s = Connector.postHRComment(app.getID(), txtImpHRFX.getText());
                     app.setHrComment(txtImpHRFX.getText());
+                    notification(s);
                 });
     }
 
@@ -407,7 +433,6 @@ public class ApplicantInfoController {
         observableListDBTableView.clear();
         observableListProSoftTableView.clear();
         observableListSpoLanTableView.clear();
-        //        IDictionary.getTranslation(KCDic , x.getValue().toString())  )
         pLnFWColFX.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().toString()));
         bSkillsColFX.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().toString()));
         dBColFX.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().toString()));
@@ -657,6 +682,7 @@ public class ApplicantInfoController {
     }
 
     private void getTableBasicInfo() {
+        lblGenderFX1.setText(IDictionary.getTranslation(dictionary, app.getTitle().toString()));
         lblFNameFX.setText(app.getFirstName());
         lblLNameFX.setText(app.getLastName());
         lblEmailFX.setText(app.getEmail());
