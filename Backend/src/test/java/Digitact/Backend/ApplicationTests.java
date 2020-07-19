@@ -21,17 +21,12 @@ class ApplicationTests {
 
     @Test
     void portAvailability() {
-        System.out.println("--------------Testing port " + ConfigProperties.serverPort);
         boolean portavaialble;
         Socket s = null;
         try {
             s = new Socket("localhost", ConfigProperties.serverPort);
-            System.out.println(
-                    "--------------Port " + ConfigProperties.serverPort + " is not available");
             portavaialble = false;
         } catch (IOException e) {
-            System.out.println(
-                    "--------------Port " + ConfigProperties.serverPort + " is available");
             portavaialble = true;
         } finally {
             if (s != null) {

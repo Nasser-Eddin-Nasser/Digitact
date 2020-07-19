@@ -80,7 +80,6 @@ public class AppImage {
 
     @Override
     public String toString() {
-        System.out.println("to string " + id);
         return String.format(
                 "sql id "
                         + sqlId

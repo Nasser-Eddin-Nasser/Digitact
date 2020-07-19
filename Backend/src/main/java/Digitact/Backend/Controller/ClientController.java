@@ -1,12 +1,11 @@
 package Digitact.Backend.Controller;
 
-import static Digitact.Backend.ConfigProperties.SecurityConstants.DEVICE_HEADER_STRING;
-import static Digitact.Backend.ConfigProperties.SecurityConstants.USER_HEADER_STRING;
+import static Digitact.Backend.ConfigProperties.DEVICE_HEADER_STRING;
+import static Digitact.Backend.ConfigProperties.USER_HEADER_STRING;
 
 import Digitact.Backend.Model.User.Admin;
 import Digitact.Backend.Model.User.ApplicantUI;
 import Digitact.Backend.Model.User.User;
-import Digitact.Backend.Model.User.UserUI;
 import Digitact.Backend.Storage.IDataRepository;
 import Digitact.Backend.Storage.Repository;
 import Digitact.Backend.Util.PasswordTools;
@@ -64,11 +63,6 @@ public class ClientController {
         }
     }
 
-    @PostMapping("/createAdmin")
-    public String createAdmin(@RequestBody UserUI userUI) {
-        repository.save(new Admin(userUI.getFirstName(), userUI.getLastName()));
-        return "Admin is created in the database";
-    }
     /**
      * This mapping is used when device starts for the first time in a new machine to register the
      * device

@@ -76,9 +76,8 @@ public class ImageTools {
         try {
             if (file.createNewFile()) {
                 boolean successful = writeBlock(file, content);
-                System.out.println("Block Created!");
                 return successful;
-            } else System.out.println("Block already exists!");
+            } else System.err.println("Block already exists!");
         } catch (IOException e) {
             if (tries < Max_Repetition_Try) {
                 ++tries;

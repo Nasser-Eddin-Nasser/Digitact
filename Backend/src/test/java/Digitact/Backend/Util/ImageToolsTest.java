@@ -50,7 +50,6 @@ class ImageToolsTest {
         if (files != null) { // some JVMs return null for empty dirs
             for (File f : files) {
                 if (!f.isDirectory()) {
-                    System.out.println(f.getAbsolutePath());
                     f.delete();
                 }
             }
@@ -74,7 +73,6 @@ class ImageToolsTest {
     @Test
     void createAppImageWitFileSystemLeads() {
         ConfigProperties.testAbsoluteFileSystemPath = defaultFileSystem + SlashSign;
-        System.out.println("Working Directory = " + System.getProperty("user.dir"));
         setUp(); // it has to be call again in order to set the new FS
         boolean thrown = false;
         try {
