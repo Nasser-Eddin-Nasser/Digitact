@@ -53,40 +53,34 @@
           >
         </ion-select>
       </ion-item>
-      <!-- for alignment issue icon is given medium for calender-->
-      <ion-row>
-        <ion-col>
-          <ion-item class="ion-no-padding entry-item">
-            <ion-icon
-              slot="start"
-              name="calendar-outline"
-              size="medium"
-            ></ion-icon>
-            <ion-datetime
-              displayFormat="MMM-YYYY"
-              pickerFormat="MMMM:YYYY"
-              max="2030"
-              min="1980"
-              placeholder="{{ 'workExperience.startDate' | translate }}"
-              [formControl]="work.controls.startDate"
-              class="ion-no-padding"
-            ></ion-datetime>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item class="ion-no-padding entry-item">
-            <ion-datetime
-              displayFormat="MMM-YYYY"
-              pickerFormat="MMMM:YYYY"
-              max="2030"
-              min="1980"
-              placeholder="{{ 'workExperience.endDate' | translate }}"
-              [formControl]="work.controls.endDate"
-              class="ion-no-padding"
-            ></ion-datetime>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+
+      <ion-item class="ion-no-padding entry-item">
+        <ion-icon
+          slot="start"
+          name="calendar-outline"
+          size="large"
+          class="ion-no-padding"
+        ></ion-icon>
+        <ion-datetime
+          displayFormat="MMM-YYYY"
+          pickerFormat="MMMM:YYYY"
+          max="2030"
+          min="1980"
+          placeholder="{{ 'workExperience.startDate' | translate }}"
+          [formControl]="work.controls.startDate"
+          class="ion-no-padding"
+        ></ion-datetime>
+        <ion-datetime
+          displayFormat="MMM-YYYY"
+          pickerFormat="MMMM:YYYY"
+          max="2030"
+          min="1980"
+          placeholder="{{ 'workExperience.endDate' | translate }}"
+          [formControl]="work.controls.endDate"
+          class="ion-no-padding"
+          slot="end"
+        ></ion-datetime>
+      </ion-item>
 
       <ion-item class="ion-no-padding entry-item">
         <ion-icon slot="start" name="reader-outline" size="large"></ion-icon>
