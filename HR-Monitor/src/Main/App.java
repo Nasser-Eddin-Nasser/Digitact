@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 public class App extends javafx.application.Application {
 
-    public static final boolean DEVELOPMENT_ENVIRONMENT = false;
+    public static final boolean DEVELOPMENT_ENVIRONMENT = true;
     public static Language LANG = Language.German;
 
     @Override

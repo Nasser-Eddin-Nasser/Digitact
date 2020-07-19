@@ -7,7 +7,7 @@ public class AdminUI implements IUser {
     private String userName;
     private String email;
     private String passHint;
-    private String password; // todo
+    private String password;
 
     protected AdminUI() {}
 

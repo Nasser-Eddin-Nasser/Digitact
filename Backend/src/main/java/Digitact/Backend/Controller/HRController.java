@@ -98,7 +98,6 @@ public class HRController {
     /** @return JSON object of the admins */
     @GetMapping("/getAdmins")
     public List<User> getAdmins() {
-
         return new ArrayList<User>(dataRepository.getAdmins());
     }
 
