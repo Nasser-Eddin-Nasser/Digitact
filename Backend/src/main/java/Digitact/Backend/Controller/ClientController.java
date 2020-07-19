@@ -37,7 +37,7 @@ public class ClientController {
     public ResponseEntity<String> createApplicant(
             @RequestHeader HttpHeaders headers, @RequestBody ApplicantUI applicant) {
         Repository myRepos = new Repository(repository);
-        boolean isAuthorized = true;
+        boolean isAuthorized = false;
         try {
             Admin admin =
                     repository.getAdminByUserClientToken(headers.get(USER_HEADER_STRING).get(0));
