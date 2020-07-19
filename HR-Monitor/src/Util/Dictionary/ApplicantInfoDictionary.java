@@ -12,6 +12,10 @@ public class ApplicantInfoDictionary implements IDictionary {
 
     public void init() {
         if (dictionary.size() == 0) {
+            dictionary.put("Salutation", "Anrede");
+            dictionary.put("Applicant: ", "Bewerber: ");
+            dictionary.put("Mr", "Herr");
+            dictionary.put("Mrs", "Frau");
             // add all values
             dictionary.put("Basic Information", "Grundlegende Informationen");
             dictionary.put("Additional Information", "Zusätzliche Informationen");
@@ -72,9 +76,11 @@ public class ApplicantInfoDictionary implements IDictionary {
                     "Einen Kommentar über den Antragsteller hinzufügen");
 
             dictionary.put("Save Changes", "Änderungen speichern");
-            
+
             dictionary.put("Changes saved succesfully!", "Änderungen erfolgreich gespeichert!");
-            dictionary.put("Couldn't save! Connection error.", "Konnte nicht speichern! Verbindungsfehler.");
+            dictionary.put(
+                    "Couldn't save! Connection error.",
+                    "Konnte nicht speichern! Verbindungsfehler.");
         }
     }
 
