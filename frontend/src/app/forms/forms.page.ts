@@ -165,9 +165,9 @@ export class FormsPage
   private hasSubmittedForm = false;
 
   /**
-   * If a skip is stepped, skipAlertShowed = true, if no stepp is skipped till now, it returns false.
+   * Has the user ever skipped a step?
    */
-  private skipAlertShowed = false;
+  private skipAlertShown = false;
 
   /**
    * Allows skipping a step.
@@ -273,7 +273,7 @@ export class FormsPage
         }
 
         if (isChecked) {
-          if (!this.skipAlertShowed) {
+          if (!this.skipAlertShown) {
             this.showSkipStepAlert(formControl);
           }
         }
@@ -310,7 +310,7 @@ export class FormsPage
         {
           text: this.translate.instant('skipStep.skip'),
           handler: () => {
-            this.skipAlertShowed = true;
+            this.skipAlertShown = true;
           },
         },
       ],
