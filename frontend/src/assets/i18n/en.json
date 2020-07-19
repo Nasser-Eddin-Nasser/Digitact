@@ -77,7 +77,7 @@
     },
     "contactInfo": {
         "title": "Contact Information",
-        "greetingsMessage": "Hi, {{name}}!",
+        "greetingsMessage": "Hello {{name}}!",
         "stepDescription": "To contact, provide your contact details below.",
         "phoneNumber": "Phone Number",
         "email": "Email",
@@ -214,7 +214,7 @@
     },
     "sideMenu": {
         "progress": "Progress",
-        "description": "Click on the repective step to navigate into it."
+        "description": "Click on the respective step to navigate into it."
     },
 
     "skipStep":{
