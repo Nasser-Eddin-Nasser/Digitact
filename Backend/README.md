@@ -52,6 +52,7 @@ We are using HTTPS for connection so its important to import and trust the certi
 - Clone this project
 - Do HTTPS setup
 - set configurations in Backend/ConfigProperties.java
+- set `spring.jpa.hibernate.ddl-auto =``create-drop` or `update`  or `none` under /Backend/src/main/resource/application.properties
 - Run `docker-compose up`
 - Go to Digitact/Backend folder in the terminal and run `gradle bootrun`
     or
