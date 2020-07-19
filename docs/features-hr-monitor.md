@@ -1,42 +1,43 @@
 
 # HR-Monitor
 
-HR-Monitor is a tool where HR members can review and monitor the student applications collected during the job fair.
+HR-Monitor is a dekstop application where HR members can review and monitor the student applications collected during the job fair.
 
 ## Create Account Pane
 
 <img src="images/hr-monitor/HRM-Create_Account.png" width="450px" style="border: 1px solid #e0e0e0;">
 
-The HR members can create user accounts here. The username should be unique to each HR person and filling all the fields is mandatory.
+The HR members can create user accounts here. The username should be unique to each HR person and filling all the fields are mandatory.
 
 
-## Log-in Pane
+## Login Pane
 
 <img src="images/hr-monitor/HRM-Login.png" width="350px" style="border: 1px solid #e0e0e0;">
 
-Here, the HR member can log in to the account. The HR person can change the language by simply clicking the flag button. The HR monitor has two language options: German and English.
+Here, the HR member can log in to the account. 
+
+He/she can select the language by simply clicking the flag button. The HR monitor has two language options: German and English.
 
 ## Overview Window  
 
 <img src="images/hr-monitor/HRM-Overview.png" width="700px" style="border: 1px solid #e0e0e0;">
 
-This window consists of a table that shows all the list of applicants. A user can use filters to filter out the applicants. 
-There are four filter inputs: Name(first name or last name or both), status, industries and positions. 
+This window consists of a table that shows all the list of applications. A user can filter out the applications with four filter options: Name(first name or last name or both), status, industries and positions. 
 
 The table lists the applicant's first name, last name and status. To view the applicant's data in detail, the user has to double click an entry of the table.
 
-there are three menu options in the left side if this window. The first option is named "Applicants". This refreshes the list of applications (load all the applications from the database). The second option is "Create Account". The final and the third is the "Log out" option.
+There are three menu options on the left side of this window. The first option is "Applicants". This refreshes the list of applications (load all the applications from the database). The second option is "Create Account". The last is the "Log out" option.
 
 ## Applicant Information Window
 
-This window has all the details of the application, which was filled by the applicant.
+This window shows all the details of the application filled by the applicant.
 
-In the top left, you could see the profile picture of the applicant. Right below the profile picture, you can see the Basic information and additional information.
+On the top left, you could see the profile picture of the applicant. Right below the profile picture, the Basic information and additional information are provided.
 
 In the main viewing area of this window contains three tabs:
 1. Information and preferences of the applicant.
 2. Documents of the applicant, such as a CV.
-3. Ratings and comments, which gave by the fair team member.
+3. Ratings and comments given by the fair team member.
 
 ### Information tab
 
@@ -44,25 +45,23 @@ In the main viewing area of this window contains three tabs:
 
 
 The Information tab consists of four tables: 
-1. Work experience
+1. Work experience  
 2. Education information
 3. Key competencies
 4. Fields of interests
 
 ### Documents tab
 
-<img src="images/hr-monitor/HRM-Applicant-DocumentsTab.png" width="550px" style="border: 1px solid #e0e0e0;">
+<img src="images/hr-monitor/HRM-Applicant-DocumentsTab.png" width="600px" style="border: 1px solid #e0e0e0;">
 
-
-This tab can have images of the application documents, such as CV, transcript, Certificates etc. All the document images are zoomable and moveable. Therefore, HR member can have a closer look at the documents.  
+This tab will have images of the documents, such as CV, transcript, Certificates etc. All the document images are zoomable and moveable. Therefore, HR member can have a closer look at the documents.  
 
 ### Applicant ratings tab
 
 <img src="images/hr-monitor/HRM-Applicant-Ratings.png" width="600px" style="border: 1px solid #e0e0e0;">
 
-
 This tab consists of the following:
-1. Ratings of the applicant which is given by the Fair team member. 
-2. Status change - HR member can change the status label after reviewing the application. 
-3. Comment by the Fair team member.
-4. Comment by the HR member - This is an editable field where the HR-Monitor user can add a comment and save the entry by clicking the "save changes" button.
+1. Applicant ratings given by the Fair team member. 
+2. Status - Deault open and HR member can change the status after reviewing the application. 
+3. Comment by the Fair team member(Read-only).
+4. Comment by the HR member - This is an editable field where the user can add a comment and save the entry by clicking the "save changes" button.
