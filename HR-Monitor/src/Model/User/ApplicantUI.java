@@ -196,6 +196,10 @@ public class ApplicantUI {
         return hrComment;
     }
 
+    public Title getTitle() {
+        return title;
+    }
+
     public void setHrComment(String hrComment) {
         this.hrComment = hrComment;
     }

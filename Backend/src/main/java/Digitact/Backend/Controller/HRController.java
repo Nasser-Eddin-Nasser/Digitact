@@ -45,7 +45,6 @@ public class HRController {
             String[] parts = token.split(" -//- ");
             String tokenNumber = parts[0];
             String userName = parts[1];
-
             Token newToken =
                     Repository.createNewTokenFromTokenString(
                             tokenNumber, dataRepository.getAdminByUserName(userName), uri);
@@ -99,7 +98,6 @@ public class HRController {
     /** @return JSON object of the admins */
     @GetMapping("/getAdmins")
     public List<User> getAdmins() {
-
         return new ArrayList<User>(dataRepository.getAdmins());
     }
 

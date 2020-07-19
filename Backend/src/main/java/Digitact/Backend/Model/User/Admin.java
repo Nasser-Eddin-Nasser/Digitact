@@ -23,7 +23,7 @@ public class Admin extends User {
     private String passHint;
 
     @Column(name = "password")
-    private String password; // todo
+    private String password;
 
     @Column(name = "clientToken")
     private String clientToken;
@@ -31,6 +31,16 @@ public class Admin extends User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     private Set<DeviceIdentifier> deviceIdentifiers;
+
+    public String toString() {
+        return "userName: '"
+                + this.userName
+                + "\n ' password: '"
+                + this.password
+                + "\n passHint: '"
+                + this.passHint
+                + "'";
+    }
 
     /**
      * @param firstName

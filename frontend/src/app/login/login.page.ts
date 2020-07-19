@@ -30,7 +30,7 @@ export class LoginPage {
   /**
    * Holds host URL
    */
-  apiHostUrl = 'http://localhost:9090';
+  apiHostUrl = 'https://localhost:9090';
 
   constructor(
     private navController: NavController,

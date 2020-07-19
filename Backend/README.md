@@ -1,10 +1,10 @@
 # Development
 
-
 The following tools were used for development.
 - JDK 11+ (Java Development Kit 11+)
 - IDE: Eclipse or IntelliJ 
 - Java Framework: Springboot
+- Gradle 6.5
 - Postman: Generate JSON requests (for testing purposes)
 - PostgreSQL: Data storage
 - pgAdmin4: Admin console for PostgreSQL
@@ -21,6 +21,10 @@ We recommend using one of the following IDEs:
 - [Eclipse](https://www.eclipse.org/downloads/packages/release/luna/sr2/eclipse-ide-java-developers): Eclipse IDE for Java Developers 
 - [IntelliJ](https://www.jetbrains.com/idea/download/#section=windows): Community, Education or Ultimate edition. Important: Use version 2020.1 or later!
 
+# Gradle
+We use gradle as a build tool
+[Download](https://gradle.org/releases/) gradle
+
 # Postman (optional)
 [Postman](https://www.postman.com/downloads/) is a tool to create GET/POST/... requests. We recommend using it in order to debug the API.
 
@@ -36,8 +40,10 @@ We use Docker to run our development database.
   - JDK 11+ and set environment variables
   - Install IDE and [set the JDK path](https://www.jetbrains.com/help/idea/sdk.html) if need. 
   - Install Docker
-- Clone and pull the code
+- Clone this project
 - Run `docker-compose up`
+- Go to Digitact/Backend folder in the terminal and run `gradle bootrun`
+    or
 - Run the Digitact/Backend/Application.java file using your preferred IDE
 
 # Example
@@ -47,7 +53,7 @@ Execute the following commands in Postman to verify your server is working corre
 
 Send a POST request to the following URL:
 ```
-http://localhost:9090/api/controller/createApplicant
+https://localhost:9090/api/controller/createApplicant
 ```
 Example body of the request (important: send it as JSON)
 ``` json
@@ -55,25 +61,6 @@ Example body of the request (important: send it as JSON)
   "firstName":"Lionel",
   "lastName":"Messi"
 }
-```
-
-## GET request
-
-After you have added at least one applicant using a POST request, you can retrieve them from the following URL:
-
-```
-http://localhost:9090/api/controller/getusers
-```
-
-
-The response should look like this:
-``` json
-[
-  {
-    "firstName": "Lionel",
-    "lastName": "Messi"
-  }
-]
 ```
 
 # pgAdmin4

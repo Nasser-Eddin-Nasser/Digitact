@@ -114,14 +114,20 @@ public class AcController {
         stage.setTitle(getTranslation(acDic, "TITLE-Login"));
         stage.setScene(viewLogin);
         stage.setResizable(false);
-        stage.getIcons().add(new Image("./Style/Logo/Logo-idea-2-blackbg--logo.png"));
+        stage.getIcons()
+                .add(
+                        new Image(
+                                getClass()
+                                        .getResourceAsStream(
+                                                "/Style/Logo/Logo-idea-2-blackbg--logo.png")));
         setLabels();
         stage.show();
         changeLanguage();
     }
 
     private void changeLanguage() {
-        languageChangeFX.setImage(new Image("./Style/" + LANG.toString() + ".gif"));
+        languageChangeFX.setImage(
+                new Image(getClass().getResourceAsStream("/Style/" + LANG.toString() + ".gif")));
         languageChangeFX.setOnMouseClicked(
                 (event) -> {
                     if (LANG == Language.German) {
@@ -160,7 +166,7 @@ public class AcController {
 
                     alert.setTitle(getTranslation(acDic, "Login Error"));
                     alert.setHeaderText(getTranslation(acDic, "Login was not possible due to:"));
-                    alert.setContentText(getTranslation(acDic, "UserName or Password WRONG!"));
+                    alert.setContentText(getTranslation(acDic, "Wrong Username or Password!"));
                     alert.show();
                 }
             } else {

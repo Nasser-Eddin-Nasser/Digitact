@@ -12,12 +12,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #222D41;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <GridPane alignment="CENTER">
+   <left>
+      <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.6666259765625" minWidth="10.0" prefWidth="51.333309173583984" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.66669082641602" minWidth="10.0" prefWidth="104.66666666666666" />
-            <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="184.66668701171875" minWidth="10.0" prefWidth="184.66668701171875" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.66669082641602" minWidth="15.0" prefWidth="120.00004069010416" />
+            <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="184.66668701171875" minWidth="10.0" prefWidth="169.99995930989587" />
             <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="95.33331298828125" minWidth="10.0" prefWidth="32.666646321614564" />
           <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="128.66668701171875" minWidth="10.0" prefWidth="109.33333333333331" />
             <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="121.333251953125" minWidth="10.0" prefWidth="120.0" />
@@ -64,5 +64,5 @@
               </ImageView>
          </children>
       </GridPane>
-   </center>
+   </left>
 </BorderPane>

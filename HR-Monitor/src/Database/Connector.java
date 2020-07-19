@@ -10,11 +10,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.stream.Collectors;
+import javax.net.ssl.HttpsURLConnection;
 
 public class Connector {
     public static void sendGetHttp(Method method, String... params) {
@@ -23,7 +23,8 @@ public class Connector {
             case gutenMorgen:
                 try {
                     Long besNumber =
-                            handelPingReq(new URL(Configuration.BES_URI + method.toString()));
+                            handelPingReq(
+                                    new URL(Configuration.Backend_Server_URL + method.toString()));
                     if (besNumber != null) {
                         DBStorage.setToken(new Token(besNumber));
                     }
@@ -34,7 +35,8 @@ public class Connector {
                 break;
             case getApplicants:
                 try {
-                    handleGetApplicants(new URL(Configuration.BES_URI + method.toString()));
+                    handleGetApplicants(
+                            new URL(Configuration.Backend_Server_URL + method.toString()));
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
@@ -42,7 +44,11 @@ public class Connector {
             case getImageById:
                 try {
                     handleGetImageById(
-                            new URL(Configuration.BES_URI + method.toString() + "=" + params[1]),
+                            new URL(
+                                    Configuration.Backend_Server_URL
+                                            + method.toString()
+                                            + "="
+                                            + params[1]),
                             params);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
@@ -51,7 +57,11 @@ public class Connector {
             case getAdminByUserName:
                 try {
                     handleGetAdminByUserName(
-                            new URL(Configuration.BES_URI + method.toString() + "=" + params[0]),
+                            new URL(
+                                    Configuration.Backend_Server_URL
+                                            + method.toString()
+                                            + "="
+                                            + params[0]),
                             params);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
@@ -59,7 +69,8 @@ public class Connector {
                 break;
             case getAdminUserNames:
                 try {
-                    handleGetAdminUserNames(new URL(Configuration.BES_URI + method.toString()));
+                    handleGetAdminUserNames(
+                            new URL(Configuration.Backend_Server_URL + method.toString()));
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
@@ -117,6 +128,7 @@ public class Connector {
             in_1 = new BufferedReader(new InputStreamReader(uc.getInputStream()));
             String inputLine;
             if ((inputLine = in_1.readLine()) != null) {
+
                 Util.JSONTools.convertJSONToAdmin(inputLine);
             }
         } catch (IOException e) {
@@ -179,18 +191,25 @@ public class Connector {
         }
     }
 
-    public static void changeStatus(long appID, Status status) {
+    public static String changeStatus(long appID, Status status) {
+        String message = "";
         try {
-            handleChangeStatus(new URL(Configuration.BES_URI + Method.changeStatus), appID, status);
+            message =
+                    handleChangeStatus(
+                            new URL(Configuration.Backend_Server_URL + Method.changeStatus),
+                            appID,
+                            status);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        return message;
     }
 
-    private static void handleChangeStatus(URL url, long appID, Status status) {
+    private static String handleChangeStatus(URL url, long appID, Status status) {
+        StringBuilder response = new StringBuilder();
         try {
             URLConnection uc = url.openConnection();
-            HttpURLConnection http = (HttpURLConnection) uc;
+            HttpsURLConnection http = (HttpsURLConnection) uc;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
             http.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -198,13 +217,11 @@ public class Connector {
             String message = "{ \"appID\":" + appID + ",\"status\":\"" + status.toString() + "\"}";
 
             try (OutputStream os = http.getOutputStream()) {
-
                 byte[] input = message.getBytes("utf-8");
                 os.write(input, 0, input.length);
             }
             try (BufferedReader br =
                     new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
-                StringBuilder response = new StringBuilder();
                 String responseLine = null;
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
@@ -216,15 +233,21 @@ public class Connector {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return response.toString();
     }
 
-    public static void postHRComment(long appID, String comment) {
+    public static String postHRComment(long appID, String comment) {
+        String message = "";
         try {
-            handlePostHRComment(
-                    new URL(Configuration.BES_URI + Method.postHRComment), appID, comment);
+            message =
+                    handlePostHRComment(
+                            new URL(Configuration.Backend_Server_URL + Method.postHRComment),
+                            appID,
+                            comment);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        return message;
     }
 
     public static void sendPutType(Method method, Token token) {
@@ -232,7 +255,7 @@ public class Connector {
             case putToken:
                 try {
                     handlePutTokenToAdmin(
-                            new URL(Configuration.BES_URI + method.toString()), token);
+                            new URL(Configuration.Backend_Server_URL + method.toString()), token);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
@@ -242,10 +265,11 @@ public class Connector {
         }
     }
 
-    private static void handlePostHRComment(URL url, long appID, String comment) {
+    private static String handlePostHRComment(URL url, long appID, String comment) {
+        StringBuilder response = new StringBuilder();
         try {
             URLConnection uc = url.openConnection();
-            HttpURLConnection http = (HttpURLConnection) uc;
+            HttpsURLConnection http = (HttpsURLConnection) uc;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
             http.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -259,7 +283,6 @@ public class Connector {
             }
             try (BufferedReader br =
                     new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
-                StringBuilder response = new StringBuilder();
                 String responseLine = null;
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
@@ -270,13 +293,14 @@ public class Connector {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return response.toString();
     }
 
     private static void handlePutTokenToAdmin(URL url, Token token) {
         BufferedReader in = null;
         try {
             URLConnection uc = url.openConnection();
-            HttpURLConnection http = (HttpURLConnection) uc;
+            HttpsURLConnection http = (HttpsURLConnection) uc;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
             http.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -305,7 +329,8 @@ public class Connector {
         switch (method) {
             case createAdminAccount:
                 try {
-                    handleCreateAdmin(new URL(Configuration.BES_URI + method.toString()), admin);
+                    handleCreateAdmin(
+                            new URL(Configuration.Backend_Server_URL + method.toString()), admin);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
@@ -320,7 +345,7 @@ public class Connector {
         BufferedReader in = null;
         try {
             URLConnection uc = bes_url.openConnection();
-            HttpURLConnection http = (HttpURLConnection) uc;
+            HttpsURLConnection http = (HttpsURLConnection) uc;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
             http.setRequestProperty("Content-Type", "application/json; utf-8");

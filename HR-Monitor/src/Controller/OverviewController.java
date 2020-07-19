@@ -84,6 +84,7 @@ public class OverviewController {
         lastNameCol.setText(IDictionary.getTranslation(biDictionary, "Last Name"));
         txtNameFX.setPromptText(IDictionary.getTranslation(mDictionary, "First name or last name"));
         mBtnIndustryFX.setText(IDictionary.getTranslation(aiDictionary, "Industry"));
+        mBtnPositionFX.setText(IDictionary.getTranslation(aiDictionary, "Position"));
     }
 
     public ObservableList<ApplicantUI> setTable() {

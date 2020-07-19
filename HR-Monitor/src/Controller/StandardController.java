@@ -32,7 +32,6 @@ public class StandardController {
 
     @FXML private ListView<String> listViewMenue;
     IDictionary menuDictionary;
-    //    @FXML private Text textMenuLabel;
 
     /** the current selected MenuItem */
     private MenuItem current;
@@ -47,7 +46,6 @@ public class StandardController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/standard.fxml"));
         loader.setController(this);
         viewHRStandard = new Scene(loader.load());
-        viewHRStandard.getStylesheets().add("./Style/stylesheet.css");
         this.stage.setHeight(viewHRStandard.getHeight());
         this.stage.setWidth(viewHRStandard.getWidth());
         this.stage.setTitle("HR Monitor");
