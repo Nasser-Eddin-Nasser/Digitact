@@ -24,30 +24,29 @@
         "pageExitWarningMessage": "Willst Du Deine Bewerbung wirklich abbrechen?"
     },
     "privacyPage": {
-        "readPrivacyMessage": "Bevor wir loslegen: Während Deiner Bewerbung werden einige private Informationen benötigt. Lese deswegen bitte die Datenschutzerklärung durch.",
+        "readPrivacyMessage": "Bitte lese und akzeptiere die Datenschutzerklärung.",
         "openPrivacy": "Datenschutzerklärung öffnen",
         "agreePrivacyMessage": "Ich habe die Datenschutzerklärung gelesen und akzeptiere sie.",
-        "privacyPolicy": "Datenschutzerklärung",
-        "dummyText": "Hier steht die Datenschutzerklärung"
+        "privacyPolicy": "Datenschutzerklärung"
     },
     "applicantsPage": {
         "applications": "Bewerbungen",
         "finalized": "Abgeschlossen",
-        "finalizedByHrMessage": "{{finalizedCount}} Bewerbung(en) wurden vom HR-Personal abgeschlossen und können an den Server gesendet werden.",
+        "finalizedByHrMessage": "{{finalizedCount}} Bewerbung(en) sind abgeschlossen und können an den Server gesendet werden.",
         "sendToServer": "An den Server senden",
         "notFinished": "Offene Bewerbungen",
-        "yetToRateMessage": "Diese Liste enthält alle Bewerbungen, die vom Bewerber abgesendet, aber noch nicht durch das HR-Personal bewertet wurden.",
-        "noApplicantsMessage": "Es gibt derzeit keine Bewerbungen, die noch bearbeitet oder zum Server geladen werden müssen."
+        "yetToRateMessage": "Diese Liste enthält alle eingereichten Bewerbungen, die noch nicht bewertet wurden.",
+        "noApplicantsMessage": "Es gibt derzeit keine Bewerbungen, die noch bearbeitet oder an den Server gesendet werden müssen."
     },
     "applicantsUploadPage": {
         "upload": "Hochladen",
         "uploadingProgressMessage": "Bewerbung(en) werden hochgeladen {{uploadSize}}/{{totalSize}}",
-        "allApplicantsSavedSuccessMessage":"Alle Bewerbung (en) erfolgreich gesendet",
-        "allApplicantsFailedMessage": "Aufgrund einiger Fehler wurden keine Bewerbungen gesendet. Bitte versuchen Sie es später noch einmal.",
+        "allApplicantsSavedSuccessMessage":"Bewerbung(en) erfolgreich gesendet",
+        "allApplicantsFailedMessage": "Aufgrund einiger Fehler wurden keine Bewerbungen gesendet. Bitte versuche es später noch einmal.",
         "partialySentAndFailedMessage": "{{successCount}} Anwendung(en) erfolgreich gesendet und {{failedCount}} Anwendung(en) fehlgeschlagen.",
         "allRequestCancelledMessage": "Keine Bewerbungen gesendet, da der Vorgang abgebrochen wurde.",
         "nSucceededRestCancelledMessage": "{{successCount}} Bewerbung(en) erfolgreich gesendet. Die restliche(n) Bewerbung(en) wurden nicht an den Server gesendet, da der Vorgang abgebrochen wurde.",
-        "loginToProcessMessage": "Bitte melden Sie sich an, um fortzufahren."
+        "loginToProcessMessage": "Bitte melde dich an, um fortzufahren."
 
     },
     "hrSideMenu": {
@@ -56,21 +55,21 @@
         "progress": "Fortschritt"
     },
     "ratingPage": {
-        "applicantRatingDescription": "Bitte gib' uns einen Einblick, wie gut sich der Bewerber präsentiert hat. Nutze hierfür eine Skala von 1 (nicht gut) bis 5 (exzellent).",
+        "applicantRatingDescription": "Bitte gib uns einen Einblick, wie gut sich der Bewerber präsentiert hat. Nutze hierfür eine Skala von 1 (nicht gut) bis 5 (exzellent).",
         "finalizeConfirmationMessage": "Soll die Bewerbung abgeschlossen werden? Eine Bearbeitung zu einem späteren Zeitpunkt ist nicht mehr möglich.",
         "applicationFinalizedNotification": "Die Informationen zur Bewerbung sind abgeschlossen.",
         "rhetoricScore": "Rhetorik",
         "motivationScore": "Motivation",
         "selfAssurance": "Selbstsicherheit",
         "personalImpression": "Persönlicher Eindruck",
-        "finalizeApplicantMessage": "Alle Änderungen werden automatisch gespeichert. Du kannst dieses Formular also einfach verlassen und später an dieser Stelle weitermachen. Wenn Du die Daten an den Server senden möchtest, musst Du das Formular \"abschließen\". Das bedeutet, dass es später nicht mehr möglich sein wird, Änderungen durchzuführen.",
-        "fillRequiredFieldsToFinalizeMessage": "Du kannst dieses Formular abschließen, sobald Du alle erforderlichen Felder ausgefüllt hast. Wenn Du das rechte Menü öffnest, kannst Du sehen, wo noch Angaben fehlen.",
-        "addImpressionMessage": "Bitte schreibe ein paar Zeilen über Deinen persönlichen Eindruck zum Bewerber. Wenn Du noch etwas hinzufügen oder ergänzen möchtest, kannst Du dies an dieser Stelle erledigen."
+        "finalizeApplicantMessage": "Alle Änderungen werden automatisch gespeichert. Du kannst die Informationen solange ändern, bis die Bewerbung abgeschlossen ist. Klicke auf \"abschließen\", um die Bewerbung an den Server zu senden.",
+        "fillRequiredFieldsToFinalizeMessage": "Fülle alle erforderlichen Felder aus, um die Bewerbung abzuschließen. Wenn Du das rechte Menü öffnest, kannst Du sehen, welche Angaben fehlen.",
+        "addImpressionMessage": "Gib Deinen persönlichen Eindruck zum Bewerber und optional weitere Informationen hier an."
     },
     "basicInfo": {
         "title": "Basis-Informationen",
         "welcome": "Willkommen!",
-        "stepDescription": "Damit wir Dich besser kennenlernen können, gib' bitte Deinen Vor- und Nachnamen an.",
+        "stepDescription": "Bitte gib Deinen Vor- und Nachnamen an.",
         "salutationTitle": "Anrede",
         "firstName": "Vorname",
         "lastName": "Nachname",
@@ -79,7 +78,7 @@
     },
     "contactInfo": {
         "title": "Kontakt-Informationen",
-        "greetingsMessage": "Schön Dich kennenzulernen, {{name}}!",
+        "greetingsMessage": "Hallo {{name}}!",
         "stepDescription": "Bitte fülle die weiteren Kontakt-Informationen aus.",
         "phoneNumber": "Telefonnummer",
         "email": "Email",
@@ -88,19 +87,19 @@
     },
     "profilePicture": {
         "title": "Profilbild",
-        "stepDescription": "Hier kannst Du ein Profilbild von Dir hinzufügen. Klicke hierfür auf das Bild-Symbol.",
-        "deleteTakeAnotherPictureMessage": "Gut gemacht! Wenn Du ein anderes Bild aufnehmen möchtest, lösche das Bild über den Papierkorb-Button und nehme ein Neues auf."
+        "stepDescription": "Klicke auf das Bild-Symbol, wenn Du ein Profilbild von dir aufnehmen möchtest.",
+        "deleteTakeAnotherPictureMessage": "Wenn Du ein neues Bild aufnehmen möchtest, lösche das aktuelle Bild."
     },
     "documentsUpload": {
         "title": "Dokumente",
-        "stepDescription": "In diesem Schritt kannst Du Fotos von Dokumenten aufnehmen, die Du Deiner Bewerbung gerne hinzufügen möchtest. Zum Beispiel kannst Du hier ein Foto von Deinem Lebenslauf machen. Wenn Du keine Dokumente zum Hinzufügen hast, kannst Du diesen Schritt auch überspringen.",
+        "stepDescription": "Über das Plus-Icon kannst Du Bilder von Dokumenten wie z.B. Deinem Lebenslauf aufnehmen.",
         "delete": "Löschen",
         "deleteConfirmationMessage": "Möchtest Du dieses Foto wirklich löschen?",
         "imageDeleteSuccessMessage": "Das Foto wurde erfolgreich gelöscht."
     },
     "workExperience":{
-        "title": "Arbeitserfahrung",
-        "stepDescription": "Hier kannst Du Informationen zu Deiner Arbeitserfahrung angeben.",
+        "title": "Berufserfahrung",
+        "stepDescription": "Hier kannst Du Angaben zu Deiner Berufserfahrung machen.",
         "jobTitle": "Titel",
         "company": "Unternehmen",
         "employmentType": "Beschäftigungsverhältnis",
@@ -120,7 +119,7 @@
     },
     "educationInfo": {
         "title": "Bildung",
-        "stepDescription": "Hier kannst Du Informationen zu Deinem Bildungsweg angeben. Also: Welche Schulen oder Universitäten hast Du besucht?",
+        "stepDescription": "Hier kannst Du Deinen schulischen Werdegang angeben.",
         "degreeYearGradeMessage": "Abschluss: {{degree}} ({{graduationYear}}, {{grade}})",
         "schoolOrUniversity": "Schule/Universität",
         "subject": "Fach",
@@ -133,7 +132,7 @@
     },
     "industryAndPositionPreference": {
         "title": "Branchen und Stellen",
-        "stepDescription": "Bitte wähle aus den folgenden Optionen, welche Interessen Du in den Bereichen Branchen und Stellen hast.",
+        "stepDescription": "Bitte wähle Branchen und Stellen, welche dich interessieren.",
         "industry": "Branchen",
         "position": "Stellen",
         "automotive": "Automobil",
@@ -144,22 +143,22 @@
         "businessConsultant": "Consultant/Business Consultant",
         "itConsultantManagement": "IT-Consultant - Informationsmanagement",
         "itConsultantJava": "IT-Consultant - Java/JEE",
-        "itConsultantDataScience": "IT-Consultant - Data Science / Artificial Intelligence",
+        "itConsultantDataScience": "IT-Consultant - Data Science/Artificial Intelligence",
         "consultantSAP": "Consultant SAP",
         "internship": "Praktikant/Werkstudent"
     },
     "confirmationPage": {
         "done": "Fertig",
-        "stepDescription": "Der Antrag wurde eingereicht. Die folgenden Schritte müssen von den Mitarbeitern der Personalabteilung durchgeführt werden (entweder jetzt oder später)."
+        "stepDescription": "Der Antrag wurde eingereicht. Die folgenden Schritte müssen von den Mitarbeitern des Messeteams durchgeführt werden (entweder jetzt oder später)."
     },
     "submitData": {
         "title": "Absenden",
         "stepDescription": "Geschafft! Du kannst Deine Bewerbung jetzt absenden und das Gerät an unser Team zurückgeben.",
-        "fillMandatoryFieldsToSubmitMessage": "Du kannst das Formular absenden, sobald Du alle Pflichtfelder ausgefüllt hast. Wenn Du das rechte Menü öffnest, kannst Du sehen, wo noch Angaben fehlen."
+        "fillMandatoryFieldsToSubmitMessage": "Du kannst Deine Bewerbung erst absenden, wenn Du alle Pflichtfelder ausgefüllt hast. Im rechten Menü kannst Du sehen, welche Angaben noch fehlen."
     },
     "keyCompetencies": {
         "title": "Kompetenzen",
-        "stepDescription": "Bitte wähle und bewerte nun Deine Kompetenzen. Wir erwarten von Dir, dass Du mindestens einen Eintrag unter \"Sprachen\" hinzufügst, um diesen Schritt abzuschließen.",
+        "stepDescription": "Bitte wähle und bewerte nun Deine Kompetenzen. Füge mindestens einen Eintrag unter \"Sprachen\" hinzu, um diesen Schritt abzuschließen.",
         "languages": "Sprachen",
         "businessSkills": "Unternehmerische Fähigkeiten",
         "professionalSoftware": "Software-Kenntnisse",
@@ -168,10 +167,10 @@
         "all": "Alle",
         "selected": "Ausgewählt",
         "noMatchFoundMessage": "Es wurde kein passender Eintrag gefunden",
-        "notFoundAddMessage": "Nicht gefunden, wonach Du gesucht hast? Du kannst auch Deinen Suchbegriff (\"{{ searchedTerm }}\") in die Liste aufnehmen.",
+        "notFoundAddMessage": "Nicht gefunden, wonach Du gesucht hast? Du kannst Deinen Suchbegriff (\"{{ searchedTerm }}\") in die Liste aufnehmen.",
         "addToList": "Zur Liste hinzufügen",
         "rating": "Bewertung: ",
-        "ratingMessage": "Bitte bewerte Deine Fähigkeiten von 1 (nicht gut) bis 5 (exzellent).",
+        "ratingMessage": "Bewerte Deine Fähigkeiten von 1 (nicht gut) bis 5 (exzellent).",
         "searchItemErrorMessage": "\"{{searchedTerm}}\" kann nicht hinzugefügt werden, weil es entweder bereits in der Liste vorhanden oder kein gültiger Name ist.",
         "searchAlertMessage": "Willst Du wirklich \"{{searchedTerm}}\" zur Liste hinzufügen?",
         "addedToListMessage":"\"{{searchedTerm}}\" wurde der Liste hinzugefügt.",
@@ -211,25 +210,30 @@
     },
     "additionalInfo": {
         "title": "Zusätzliche Information",
-        "stepDescription": "Hier kannst Du zusätzliche Informationen angeben"
+        "stepDescription": "Hier kannst Du zusätzliche Informationen angeben."
     },
     "sideMenu": {
         "progress": "Fortschritt",
-        "description": "Wenn Du zu einem vorherigen Schritt wechseln willst, dann klicke einfach auf den entsprechenden Eintrag in der Liste!"
+        "description": "Klicke auf den entsprechenden Schritt in der Liste, um ihn zu bearbeiten!"
     },
 
     "skipStep":{
         "skip": "Überspringen",
-        "skipMessage": "Möchtest Du diesen Schritt wirklich überspringen? Bitte überspringe diesen Schritt nur dann, wenn die hier benötigten Informationen Teil der Dokumente sind, welche Du als Bilder hochgeladen hast.",
+        "skipMessage": "Möchtest Du diesen Schritt wirklich überspringen? Bitte überspringe diesen Schritt nur dann, wenn die benötigten Informationen Teil der Dokumente sind, die Du hinzugefügt hast.",
         "skipStep": "Schritt überspringen"
     },
 
     "loginPage":{
         "title": "Anmeldung",
-        "stepDescription": "Geben Sie die Administratoranmeldeinformationen wie im HR-Monitor ein, um das Gerät zu authentifizieren",
+        "stepDescription": "Geben Sie zur Authentifizierung die Administratoranmeldeinformationen wie im HR-Monitor ein.",
         "userName": "Nutzername",
         "password": "Passwort",
-        "credentialsDoesnotMatch": "Benutzername / Passwort stimmt nicht überein. Bitte geben Sie einen gültigen Berechtigungsnachweis ein.",
+        "credentialsDoesnotMatch": "Benutzername und Passwort stimmen nicht überein. Bitte geben Sie einen gültigen Berechtigungsnachweis ein.",
         "generalErrorMessage": "Aufgrund eines Fehlers kann die Anforderung nicht verarbeitet werden. Bitte versuchen Sie es später noch einmal."
-    }
+    },
+    "policyDetailsPage":{ 
+        "point1" : "<div class=\"main-heading\">1. Datenschutz auf einen Blick</div><div class=\"sub-heading\">Allgemeine Hinweise</div><div class=\"topic-content\">Die folgenden Hinweise geben einen einfachen Überblick darüber,was mit Ihren personenbezogenen Daten geschieht,wenn unsere Applikation digitact nutzen. Personenbezogene Daten sind nach Art. 4 (1) DSGVO alle Daten, mit denen Sie persönlich identifiziert werden können. Detaillierte Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.</div><div class=\"topic-content\">Die Betreiber dieser Applikation nehmen den Schutz Ihrer persönlichen Daten sehr ernst. <br>Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</div><div class=\"sub-heading\">Datenerfassung in unserer Applikation</div><div class=\"sub-topic\">Wer ist verantwortlich für die Datenerfassung in der Applikation?</div><div class=\"topic-content\">Die Datenverarbeitung der Applikation durch <br><br>die Consileon Business Consultancy GmbH,<br>Maximilianstr. 5,<br>76133 Karlsruhe.</div><div class=\"sub-topic\">Wie erfassen wir Ihre Daten?</div><div class=\"topic-content\">Ihre Daten werden zum einen dadurch erhoben,dass Sie uns diese in der Applikation mitteilen. <br>Andere Daten werden nicht erfasst.</div><div class=\"sub-topic\">Wofür nutzen wir Ihre Daten?</div><div class=\"topic-content\">Die Daten werden für ihren Kontakt- und Bewerbungsprozess erhoben.</div><div class=\"sub-topic\">Welche Rechte haben Sie bezüglich Ihrer Daten?</div><div class=\"topic-content\">Sie haben gemäß Kapitel III der DSGVO jederzeit das Recht unentgeltlich Auskunft über Herkunft,Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht,die Berichtigung,Sperrung oder Löschung dieser Daten zu verlangen. Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit unter der im Impressum angegebenen Adresse an uns wenden. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.</div>",
+        "point2" : "<div class=\"main-heading\">2. Allgemeine Hinweise und Pflichtinformationen</div><div class=\"sub-heading\">2.1 Hinweis zur verantwortlichen Stelle und Datenschutzbeauftragtem</div><div class=\"topic-conetent\">Die verantwortliche Stelle für die Datenverarbeitung in dieser Applikation ist:<br><br>Consileon Business Consultancy GmbH<br>Maximilianstr. 5<br>76133 Karlsruhe<br>Vertreten durch Dr. Joachim Schü<br><br>Telefon: +49 721 35460-80<br>Fax: +49 721 35460-89<br>E-Mail: info[at]consileon.de <br>Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.B. Namen, E-Mail-Adressen o. Ä.) entscheidet.<br>Die Datenschutzbeauftragte des Verantwortlichen erreichen Sie unter:<br>natalie.dittrich[at]consileon.de<br>oder schriftlich an die Adresse des Verantwortlichen mit entsprechendem Hinweis „z.H. Datenschutzbeauftragte\"</div>",
+        "point3" : "<div class=\"main-heading\">3. Betroffenen Rechte</div><div class=\"sub-heading\">3.1 Widerruf Ihrer Einwilligung zur Datenverarbeitung</div><div class=\"topic-content\">Viele Datenverarbeitungsvorgänge sind nur mit Ihrer ausdrücklichen Einwilligung möglich. Sie können eine bereits erteilte Einwilligung jederzeit widerrufen. Dazu reicht eine formlose Mitteilung per E-Mail an uns. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.</div><div class=\"sub-heading\">3.2 Beschwerderecht bei der zuständigen Aufsichtsbehörde</div><div class=\"topic-content\">Im Falle datenschutzrechtlicher Verstöße steht dem Betroffenen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.<br>Zuständige Aufsichtsbehörde in datenschutzrechtlichen Fragen ist für die Consileon Business Consultancy GmbH,Maximilianstraße 5,76133 Karlsruhe der Landesdatenschutzbeauftragte Baden-Württembergs. Dieser ist zu erreichen unter <a href=\"https://www.baden-wuerttemberg.datenschutz.de/\">https://www.baden-wuerttemberg.datenschutz.de</a>.<br>Zuständige Aufsichtsbehörde in datenschutzrechtlichen Fragen ist für die Consileon Frankfurt GmbH,Neue Mainzer Straße 74,60311 Frankfurt am Main der Landesdatenschutzbeauftragte Hessens. Dieser ist zu erreichen unter <a href=\"https://datenschutz.hessen.de/\">https://datenschutz.hessen.de</a>.</div><div class=\"sub-heading\">3.3 Recht auf Datenübertragbarkeit</div><div class=\"topic-content\">Sie haben das Recht,Daten,die wir auf Grundlage Ihrer Einwilligung oder in Erfüllung eines Vertrags automatisiert verarbeiten,an sich oder an einen Dritten in einem gängigen,maschinenlesbaren Format aushändigen zu lassen. Sofern Sie die direkte Übertragung der Daten an einen anderen Verantwortlichen verlangen,erfolgt dies nur,soweit es technisch machbar ist.</div><div class=\"sub-heading\">3.4 Auskunft, Sperrung, Löschung</div><div class=\"topic-content\">Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen aus Kapitel III DSGVO jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten,deren Herkunft und Empfänger und den Zweck der Datenverarbeitung und ggf. ein Recht auf unverzügliche Berichtigung,Sperrung oder Löschung dieser Daten. Hierzu sowie zu weiteren Fragen zum Thema personenbezogene Daten können Sie sich jederzeit unter der in der Datenschutzerklärung angegebenen Kontaktinformationen,unter im Impressum angegebenen Adresse oder per E-Mail an <a href=\"mailto:datenschutz[at]consileon.de\"></a>an uns wenden.</div>",
+        "point4" : "<div class=\"main-heading\">4. Widerspruchsrecht</div><div class=\"topic-content\">Sofern Ihre personenbezogenen Daten auf Grundlage von berechtigten Interessen gemäß Art. 6 Abs. 1 S. 1 lit. f DSGVO verarbeitet werden, haben Sie das Recht, gemäß Art. 21 DSGVO Widerspruch gegen die Verarbeitung Ihrer personenbezogenen Daten einzulegen, soweit dafür Gründe vorliegen, die sich aus Ihrer besonderen Situation ergeben oder sich der Widerspruch gegen Direktwerbung richtet. Im letzteren Fall haben Sie ein generelles Widerspruchsrecht, das ohne Angabe einer besonderen Situation von uns umgesetzt wird.</div><div class=\"topic-content\">Möchten Sie von Ihrem Widerrufs- oder Widerspruchsrecht Gebrauch machen, genügt eine E-Mail an <a href=\"mailto:datenschutz@consileon.de\">datenschutz[at]consileon.de</a>.</div>"    }
 }
