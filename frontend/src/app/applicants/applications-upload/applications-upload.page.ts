@@ -41,7 +41,7 @@ export class ApplicationsUploadPage implements OnInit {
   /**
    * URL of the server host.
    */
-  apiHostUrl = 'http://localhost:9090';
+  apiHostUrl = 'https://localhost:9090';
 
   /**
    * refers to the application that is being processed
@@ -351,7 +351,7 @@ export class ApplicationsUploadPage implements OnInit {
     }
     setTimeout(() => {
       const navigationPath = this.isAuthorized ? '/applicants' : '/login';
-      this.navController.navigateBack([navigationPath]);
+      this.navController.navigateRoot([navigationPath]);
       this.completionAlert();
     }, 1000);
   }

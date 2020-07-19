@@ -13,7 +13,7 @@ public class PositionsAndIndustriesDictionary implements IDictionary {
     @Override
     public void init() {
         if (dictionary.size() == 0) {
-            ///////////// Positions
+            //  Positions
             dictionary.put("Business Consultant", "Consultant/Business Consultant");
             dictionary.put(
                     "IT Consultant - Informationsmanagement",
@@ -25,7 +25,7 @@ public class PositionsAndIndustriesDictionary implements IDictionary {
             dictionary.put("Consultant - SAP", "Consultant SAP");
             dictionary.put("Internship/Working Student", "Praktikant/Werkstudent");
             dictionary.put("Others", "Andere");
-            ///////////// Positions
+            //  Positions
             dictionary.put("Automotive", "Automobil");
             dictionary.put("Finance", "Finanzen");
             dictionary.put("Commerce", "Handel");

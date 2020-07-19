@@ -24,19 +24,18 @@
         "pageExitWarningMessage": "Do you really want to cancel your job application?"
     },
     "privacyPage": {
-        "readPrivacyMessage": "Before we can get started: During the application process, you need to enter some private information. Because of this, please read the Privacy Policy.",
+        "readPrivacyMessage": "Please read and accept the privacy policy to start the application.",
         "openPrivacy": "Open Privacy Policy",
         "agreePrivacyMessage": "I have read and agree to the Privacy Policy.",
-        "privacyPolicy": "Privacy Policy",
-        "dummyText": "This is the text of the Privacy Policy"
+        "privacyPolicy": "Privacy Policy"
     },
     "applicantsPage": {
         "applications": "Applications",
         "finalized": "Finalized",
-        "finalizedByHrMessage": "{{finalizedCount}} applications has been finalized by HR staff to be sent to HR monitor.",
+        "finalizedByHrMessage": "{{finalizedCount}} application(s) has been finalized and can be sent to the server.",
         "sendToServer": "Send To Server",
         "notFinished": "Not Finished",
-        "yetToRateMessage": "This list includes all the applications that have been submitted by the applicant but not been rated by HR staff.",
+        "yetToRateMessage": "This list includes all the submitted applications that are yet to be rated.",
         "noApplicantsMessage": "No application is submitted or finalized"
     },
     "applicantsUploadPage": {
@@ -45,7 +44,7 @@
         "allApplicantsSavedSuccessMessage":"All application(s) sent successfully",
         "allApplicantsFailedMessage": "Due to some error(s), none of the application(s) were sent. Please try again later",
         "partialySentAndFailedMessage": "{{succeededCount}} application(s) sent successfully and {{failedCount}} application(s) failed.",
-        "allRequestCancelledMessage": "None of the application(s) were sent, as it was cancelled.",
+        "allRequestCancelledMessage": "None of the application(s) were sent, as it was canceled.",
         "nSucceededRestCancelledMessage": "{{succeededCount}} application(s) sent successfully. Rest of the application(s) were not sent to the server, as it was cancelled.",
         "loginToProcessMessage": "Please login, to proceed further."
     },
@@ -56,20 +55,20 @@
     },
     "ratingPage": {
         "applicantRatingDescription": "Please provide your insights on the applicant by providing a rating between 1 (not good) and 5 (excellent).",
-        "finalizeConfirmationMessage": "Do you really want to finalize this form? It won't be possible to edit later.",
+        "finalizeConfirmationMessage": "Do you really want to finalize this application? It won't be possible to edit later.",
         "applicationFinalizedNotification": "Applicant information is finalized",
         "rhetoricScore": "Rhetoric",
         "motivationScore": "Motivation",
         "selfAssurance": "Self-Assurance",
         "personalImpression": "Personal Impression",
-        "finalizeApplicantMessage": "All changes are saved automatically. So, you can simply leave this form and continue editing it later. If you want to send the data to the server, you have to \"finalize\" this form. That means that it won't be possible to edit the content anymore.",
-        "fillRequiredFieldsToFinalizeMessage": "You can finalize this form as soon as you have filled all the required fields. By opening the right menu, you can see where you still need to fill the form.",
-        "addImpressionMessage": "Please write a few lines about your personal impression on the applicant. Also, if you want to add/mention anything else you can do it here."
+        "finalizeApplicantMessage": "All the changes made are saved automatically. You can edit the data until it is finalized. Click on \"finalize\" in order to send the application to the server.",
+        "fillRequiredFieldsToFinalizeMessage": "Fill all the fields, to enable finalize application option. Toggle right menu to see unfilled step(s).",
+        "addImpressionMessage": "Add your personal impression about the applicant or any other additional details in the field below."
     },
     "basicInfo": {
         "title": "Basic Information",
         "welcome": "Welcome!",
-        "stepDescription": "So that we can get to know you better, please provide your first and last name.",
+        "stepDescription": "To address, provide your first and last name.",
         "salutationTitle": "Title",
         "firstName": "First Name",
         "lastName": "Last Name",
@@ -78,8 +77,8 @@
     },
     "contactInfo": {
         "title": "Contact Information",
-        "greetingsMessage": "Nice to meet you, {{name}}!",
-        "stepDescription": "So that we can get in touch with you, please fill out the following contact information fields.",
+        "greetingsMessage": "Hello {{name}}!",
+        "stepDescription": "To contact, provide your contact details below.",
         "phoneNumber": "Phone Number",
         "email": "Email",
         "linkedinAccount": "LinkedIn Account",
@@ -87,19 +86,19 @@
     },
     "profilePicture": {
         "title": "Picture",
-        "stepDescription": "Here you can add a picture of yourself by tapping on the image icon.",
-        "deleteTakeAnotherPictureMessage": "Good job! If you want to take another picture, just delete the actual picture and take another one."
+        "stepDescription": "Tap on the avatar, to take your profile picture.",
+        "deleteTakeAnotherPictureMessage": "If you want to take another picture, delete the existing one."
     },
     "documentsUpload": {
         "title": "Documents",
-        "stepDescription": "In this step, you can take photos of documents you would like to include in your application. For instance, you can take photos of your CV here. This step is optional: If you don't want to add anyting, you can just skip it.",
+        "stepDescription": "Tap on the plus icon, to attach additional documents like CV, Certificates. Or simply continue to proceed further.",
         "delete": "Delete",
         "deleteConfirmationMessage": "Do you really want to delete this image?",
         "imageDeleteSuccessMessage": "The image has been deleted successfully"
     },
     "workExperience":{
         "title": "Work Experience",
-        "stepDescription": "Here, you can add information about your work experience.",
+        "stepDescription": "Add information about your work experience(s).",
         "jobTitle": "Title",
         "company": "Company",
         "employmentType": "Employment Type",
@@ -119,7 +118,7 @@
     },
     "educationInfo": {
         "title": "Education Information",
-        "stepDescription": "Here, you can add information about your education. So: Which schools/universities have you visited?",
+        "stepDescription": "Add information about your educational background.",
         "degreeYearGradeMessage": "Degree: {{degree}} ({{graduationYear}}, {{grade}})",
         "schoolOrUniversity": "School/University",
         "subject": "Subject",
@@ -132,7 +131,7 @@
     },
     "industryAndPositionPreference": {
         "title": "Industries and Positions",
-        "stepDescription": "So that we can know which industries and positions you are intrested in, please choose from the following.",
+        "stepDescription": "Choose the relevant industries and positions you are interested in.",
         "industry": "Industry",
         "position": "Position",
         "automotive": "Automotive",
@@ -149,16 +148,16 @@
     },
     "confirmationPage": {
         "done": "Done",
-        "stepDescription": "The application has been submitted. The following steps need to be performed by the HR staff (either now or later)."
+        "stepDescription": "The application has been submitted. The following steps need to be performed by the fair team member (either now or later)."
     },
     "submitData": {
         "title": "Submit",
-        "stepDescription": "That's it! You can now submit your application and hand the device back to our team.",
-        "fillMandatoryFieldsToSubmitMessage": "You can submit the form as soon as you have filled out all required fields. By opening the right menu, you can see where you still need to enter some data."
+        "stepDescription": "You are done! You can submit your application now and hand the device back to our team.",
+        "fillMandatoryFieldsToSubmitMessage": "You can submit the application, once all the required fields are filled. Toggle the right menu to see the unfilled step(s)"
     },
     "keyCompetencies": {
         "title": "Key Competencies",
-        "stepDescription": "Now, please select and rate your key competencies. We expect you to add at least one entry to \"Languages\" in order to complete this step.",
+        "stepDescription": "Select and rate your key competencies. Add at least one entry in \"Languages\" field to complete this step.",
         "languages": "Languages",
         "businessSkills": "Business Skills",
         "professionalSoftware": "Professional Software",
@@ -166,12 +165,12 @@
         "programmingLanguagesAndFrameworks": "Programming Languages and Frameworks",
         "all": "All",
         "selected": "Selected",
-        "noMatchFoundMessage": "No items match your selection",
-        "notFoundAddMessage": "Not found what you were looking for? You can also add your search term (\"{{ searchedTerm }}\") to the list.",
+        "noMatchFoundMessage": "No item matched your search",
+        "notFoundAddMessage": "Not found what you are looking for? You can add the search term (\"{{ searchedTerm }}\") to the list.",
         "addToList": "Add to list",    
         "rating": "Rating: ",
-        "ratingMessage": "Please rate your skills from 1 (not good) to 5 (excellent).",   
-        "searchItemErrorMessage": "\"{{searchedTerm}}\" cannot be added because it is already part of the list or it is not a valid name.",
+        "ratingMessage": "Rate your skills from 1 (not good) to 5 (excellent).",   
+        "searchItemErrorMessage": "\"{{searchedTerm}}\" cannot be added as it is not an unique or a valid name.",
         "searchAlertMessage": "Do you really want to add \"{{searchedTerm}}\" to the list?",
         "addedToListMessage": "\"{{searchedTerm}}\" has been added to the list.",
         "languageItems": [
@@ -211,16 +210,16 @@
 
     "additionalInfo": {
         "title": "Additional Information",
-        "stepDescription": "Here you can add additional information that you want to include in the application."
+        "stepDescription": "Provide additional information if any, to submit with the application."
     },
     "sideMenu": {
         "progress": "Progress",
-        "description": "If you want to go to a previous step, just click on the element in the list!"
+        "description": "Click on the respective step to navigate into it."
     },
 
     "skipStep":{
         "skip": "Skip",
-        "skipMessage": "Do you really want to skip this step? Please only do this if the data asked for in this step are part of the documents you took a photo of.",
+        "skipMessage": "Do you want to skip this step? Do it only if the required information is already provided in the attached documents.",
         "skipStep": "Skip this Step"
     },
 
@@ -230,6 +229,15 @@
         "userName": "Username",
         "password": "Password",
         "credentialsDoesnotMatch": "Username / Password does not match. Please enter a valid credentials.",
-        "generalErrorMessage": "Due to some error, request cannot be processed. Please try again later."
+        "generalErrorMessage": "Due to some error, the request cannot be processed. Please try again later."
+    },
+    "policyDetailsPage": {
+        "point1" : "<div class=\"main-heading\">1.Data protection at a glance</div><div class=\"sub-heading\">General notes</div><div class=\"topic-content\">The following notes provide a simple overview of what happens to your personal data when our application uses digitact.According to Art.4(1)DSGVO, personal data are all data with which you can be personally identified.Detailed information on the topic of data protection can be found in our data protection declaration listed under this text.</div><div class=\"topic-content\">The operators of this application take the protection of your personal data very seriously.We treat your personal data confidentially and in accordance with the statutory data protection regulations and this data protection declaration.</div> <div class=\"sub-heading\">Data collection in our application</div><div class=\"sub-topic\">Who is responsible for data acquisition in the application?</div><div class=\"topic-content\">Data processing of the application by <br><br>Consileon Business Consultancy GmbH,<br>Maximilianstr.5,<br>76133 Karlsruhe,Germany.</div> <div class=\"sub-topic\">How do we collect your data?</div><div class=\"topic-content\">One way we collect your data is by letting us know what you have entered into the application.<br>No other data is collected.</div> <div class=\"sub-topic\">What do we use your data for?</div><div class=\"topic-content\">The data is collected for your contact and application process.</div> <div class=\"sub-topic\">What rights do you have regarding your data?</div><div class=\"topic-content\">In accordance with Chapter III of the DSGVO,you have the right to receive information free of charge at any time about the origin,recipient and purpose of your stored personal data.You also have the right to demand the correction,blocking or deletion of this data.You can contact us at any time at the address given in the imprint for this purpose and for further questions on the subject of data protection.Furthermore,you have a right of appeal to the responsible supervisory authority.</div>",
+        "point2" : "<div class=\"main-heading\">2. General information and compulsory information<div> <div class=\"sub-heading\">2.1 Note on the responsible body and data protection officer<div> <div class=\"topic-content\"> The person responsible for data processing in this application is <br><br>Consileon Business Consultancy GmbH <br>Maximilianstr. 5 <br>76133 Karlsruhe <br>Represented by Dr. Joachim Schü <br><br>Phone: +49 721 35460-80 <br>fax: +49 721 35460-89 <br>e-mail: info[at]consileon.de <br><br>Responsible party is the natural or legal person who, alone or jointly with others, decides on the purposes and means of processing personal data (e.g. names, e-mail addresses or similar). <br>You can contact the data protection officer of the entity in charge at [at]consileon.de <br>natalie.dittrich[at]consileon.de <br>or in writing to the address of the data controller with the appropriate reference \"z.H.Datenschutzbeauftragte</div>",
+        "point3" : "<div class=\"main-heading\">3. Rights of data subjects</div><div class=\"sub-heading\">3.1 Revocation of your consent to data processing</div><div class=\"topic-content\">Many data processing operations are only possible with your express consent. You can revoke any consent already given at any time. For this purpose, an informal notification by e-mail to us is sufficient. The legality of the data processing carried out up to the time of revocation remains unaffected by the revocation.</div><div class=\"sub-heading\">3.2 Right of appeal to the competent supervisory authority</div><div class=\"topic-content\">In the event of violations of data protection law, the person concerned has a right of appeal to the competent supervisory authority.<br>For Consileon Business Consultancy GmbH, Maximilianstraße 5, 76133 Karlsruhe, Germany, the state data protection commissioner of Baden-Württemberg is the competent supervisory authority in data protection matters. The commissioner can be reached at<link>https://www.baden-wuerttemberg.datenschutz.de/.<br>For Consileon Frankfurt GmbH, Neue Mainzer Straße 74, 60311 Frankfurt am Main, Germany, the supervisory authority in charge of data protection is the data protection commissioner of the state of Hesse. He can be contacted at<link>https://datenschutz.hessen.de/.</div><div class=\"sub-heading\">3.3 Right to data transferability</div><div class=\"topic-content\">You have the right to have data, which we process automatically on the basis of your consent or in fulfilment of a contract, handed over to you or to a third party in a common, machine-readable format. If you request the direct transfer of the data to another responsible party, this will only take place to the extent that it is technically feasible.</div><div class=\"sub-heading\">3.4 Information, blocking, deletion</div><div class=\"topic-content\">Within the framework of the applicable legal provisions of Chapter III DSGVO, you have the right to obtain information free of charge at any time about your stored personal data, its origin and recipients and the purpose of the data processing and, if applicable, the right to correct, block or delete this data without delay. For this purpose, as well as for any further questions on the subject of personal data, you may contact us at any time at the contact information provided in the data protection declaration, at the address given in the imprint or by e-mail to <a href=\"mailto:datenschutz@consileon.de\">datenschutz[at]consileon.de</a>.</div>",
+        "point4" : "<div class=\"main-heading\">4. Right of objection</div><div class=\"topic-content\">If your personal data are processed on the basis of legitimate interests pursuant to Art. 6, Paragraph 1, Sentence 1, Letter f) DPA, you have the right to object to the processing of your personal data pursuant to Art. 21 DPA, if there are reasons for doing so that arise from your particular situation or if the objection is directed against direct advertising. In the latter case, you have a general right of objection, which will be implemented by us without specifying a special situation.</div><div class=\"topic-content\">If you wish to exercise your right of objection or revocation, simply send an e-mail to <a href=\"mailto:datenschutz@consileon.de\">data protection[at]consileon.de</a>.</div>"
+
     }
+
 }
+

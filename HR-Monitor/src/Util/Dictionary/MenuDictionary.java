@@ -13,7 +13,7 @@ public class MenuDictionary implements IDictionary {
     @Override
     public void init() {
         if (dictionary.size() == 0) {
-            /////////////////////// Menu
+            // Menu
             dictionary.put("Logout", "Abmelden");
             dictionary.put("Hello", "Hallo");
             dictionary.put("Applicants", "Bewerber");
