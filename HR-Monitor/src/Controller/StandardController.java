@@ -54,7 +54,7 @@ public class StandardController {
         borderPaneCurrentView.setCenter(loadOverviewTableContent());
         textMenuLabel.setText(
                 IDictionary.getTranslation(menuDictionary, "Hello")
-                        + ": "
+                        + " "
                         + DBStorage.getCurrentAdmin().getFirstName());
         loadMenu();
         stage.setOnCloseRequest(e -> shutdown());
