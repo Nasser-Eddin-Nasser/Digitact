@@ -1,6 +1,7 @@
 package Database;
 
 public enum Method {
+    createApplicant("createApplicant"),
     getApplicants("getApplicants"),
     getImageById("getImageById"),
     getAdminByUserName("getAdminByUserName"),
@@ -10,6 +11,9 @@ public enum Method {
     postHRComment("postHRComment"),
     gutenMorgen("gutenMorgen"), // it used to ping the BES
     putToken("putToken");
+
+
+
     private final String name;
 
     private Method(String s) {

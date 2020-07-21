@@ -12,6 +12,7 @@ public class OverviewModel {
 
     public List<ApplicantUI> getDB() {
         if (DEVELOPMENT_ENVIRONMENT) {
+             Dummy.DB.addAll(DBStorage.getStorage());
             return Dummy.DB;
         } else {
             return DBStorage.getStorage();

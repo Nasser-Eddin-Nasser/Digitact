@@ -7,7 +7,8 @@ import javafx.stage.Stage;
 
 public class App extends javafx.application.Application {
 
-    public static final boolean DEVELOPMENT_ENVIRONMENT = false;
+    public static final boolean DEVELOPMENT_ENVIRONMENT = true;
+//    public static final boolean DEMO_ENVIRONMENT = true;
     public static Language LANG = Language.German;
 
     @Override
@@ -16,7 +17,8 @@ public class App extends javafx.application.Application {
     }
 
     public static void main(String[] args) {
-
+//        if (DEMO_ENVIRONMENT)
+//            Util.createApplicant();
         if (DEVELOPMENT_ENVIRONMENT) Util.fillDB();
         Configuration.AssertionConfig();
         launch(args);

@@ -34,33 +34,32 @@ public class ClientController {
      * @return "Applicant is created in the database"
      */
     @PostMapping("/createApplicant")
-    public ResponseEntity<String> createApplicant(
-            @RequestHeader HttpHeaders headers, @RequestBody ApplicantUI applicant) {
+    public ResponseEntity<String> createApplicant(  @RequestBody ApplicantUI applicant) {
         Repository myRepos = new Repository(repository);
-        boolean isAuthorized = false;
-        try {
-            Admin admin =
-                    repository.getAdminByUserClientToken(headers.get(USER_HEADER_STRING).get(0));
-            if (admin != null) {
-                if (myRepos.checkJwtTokenValidation(admin.getClientToken())) {
-                    isAuthorized =
-                            repository.getDeviceIdentfierByDeviceHeader(
-                                    headers.get(DEVICE_HEADER_STRING).get(0), admin.getId());
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (isAuthorized) {
+//        boolean isAuthorized = false;
+//        try {
+////            Admin admin =
+////                    repository.getAdminByUserClientToken(headers.get(USER_HEADER_STRING).get(0));
+////            if (admin != null) {
+////                if (myRepos.checkJwtTokenValidation(admin.getClientToken())) {
+////                    isAuthorized =
+////                            repository.getDeviceIdentfierByDeviceHeader(
+////                                    headers.get(DEVICE_HEADER_STRING).get(0), admin.getId());
+////                }
+////            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        if (isAuthorized) {
             boolean isSuccessful = myRepos.storeApplicantOnDB(applicant);
             return (isSuccessful)
                     ? new ResponseEntity<String>(
                             "Application is successfully saved", HttpStatus.CREATED)
                     : new ResponseEntity<String>(
                             "images save path not found", HttpStatus.INTERNAL_SERVER_ERROR);
-        } else {
-            return new ResponseEntity<String>("User is not authorized", HttpStatus.UNAUTHORIZED);
-        }
+//        } else {
+//            return new ResponseEntity<String>("User is not authorized", HttpStatus.UNAUTHORIZED);
+//        }
     }
 
     /**

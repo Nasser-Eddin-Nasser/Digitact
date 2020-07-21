@@ -373,4 +373,38 @@ public class Connector {
             e.printStackTrace();
         }
     }
+
+    public static void sentCreateApplicant(StringBuffer jsonString) {
+        BufferedReader in = null;
+        try {
+            URLConnection uc =   new URL(Configuration.Backend_Server_URL +"createApplicant").openConnection();
+            HttpsURLConnection http = (HttpsURLConnection) uc;
+            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setDoOutput(true);
+            http.setRequestProperty("Content-Type", "application/json; utf-8");
+            http.setRequestProperty("Accept", "application/json");
+//            if (!CreateAccountController.isFirstAccount) {
+//                http.setRequestProperty("AuthToken", DBStorage.getToken().toString());
+//            }
+            try (OutputStream os = http.getOutputStream()) {
+                //   convertAdminToJSON
+                byte[] input = jsonString.toString().getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+            // read the Response
+            try (BufferedReader br =
+                         new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine = null;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
